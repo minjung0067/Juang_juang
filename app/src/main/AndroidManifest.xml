@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.persimmon_tree_proj">
 
-    <uses-permission android:name="android.permission.INTERNET"/> <!--Internet 권한 선언-->
+<!--    <uses-permission android:name="android.permission.INTERNET"/> &lt;!&ndash;Internet 권한 선언&ndash;&gt;-->
 
     <application
         android:allowBackup="true"
@@ -11,14 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Registeractivity"></activity>
-        <activity android:name=".Loginactivity" />
-        <intent-filter><!--Loginactivity를 처음 화면으로 설정-->
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".Registeractivity"/>
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+<!--        <activity android:name=".Registeractivity"/>-->
+<!--        <activity android:name=".Loginactivity"/>-->
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,6 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class Registeractivity extends AppCompatActivity {
