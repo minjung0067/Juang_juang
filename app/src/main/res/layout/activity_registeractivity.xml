@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
-        android:layout_height="106dp"
+        android:layout_height="68dp"
         android:layout_margin="6dp"
         android:layout_weight="0"
         android:gravity="bottom|center"
@@ -19,14 +19,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="287dp"
+        android:layout_height="292dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/editTextPhone"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="30dp"
             android:ems="10"
             android:gravity="center"
@@ -37,7 +37,7 @@
         <EditText
             android:id="@+id/edit_id"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="7dp"
             android:ems="10"
             android:gravity="center"
@@ -48,7 +48,7 @@
         <EditText
             android:id="@+id/edit_pwd"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="7dp"
             android:ems="10"
             android:gravity="center"
@@ -60,7 +60,7 @@
         <EditText
             android:id="@+id/edit_username"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="10dp"
             android:ems="10"
             android:gravity="center"
@@ -74,7 +74,7 @@
         <EditText
             android:id="@+id/edit_birth"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_margin="7dp"
             android:clickable="true"
             android:ems="10"
@@ -90,12 +90,12 @@
         android:id="@+id/checkagree"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:layout_marginTop="40dp"
         android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
         android:height="100dp"
         android:text="전체동의(선택항목포함)"
         android:textColor="#5A5A5A"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,7 +111,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:text="(필수)이용약관"
-            android:textColor="#9E9E9E" />
+            android:textColor="#9E9E9E"
+            android:textSize="10sp" />
 
         <CheckBox
             android:id="@+id/agree2"
@@ -120,7 +121,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:text="(필수) 개인정보 수집 및 이용에 대한 안내"
-            android:textColor="#9E9E9E" />
+            android:textColor="#9E9E9E"
+            android:textSize="10sp" />
 
         <CheckBox
             android:id="@+id/agree3"
@@ -129,7 +131,8 @@
             android:layout_weight="1"
             android:clickable="true"
             android:text="(필수) 이벤트, 광고성 정보 안내"
-            android:textColor="#9E9E9E" />
+            android:textColor="#9E9E9E"
+            android:textSize="10sp" />
     </LinearLayout>
 
     <Button
@@ -139,7 +142,7 @@
         android:layout_gravity="center_horizontal"
         android:background="#FF6100"
         android:text="회원가입"
-        android:layout_margin="40dp"
+        android:layout_margin="3dp"
         android:textColor="#FFFFFF" />
 
 
