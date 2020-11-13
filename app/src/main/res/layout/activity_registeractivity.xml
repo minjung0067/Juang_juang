@@ -26,7 +26,7 @@
         <EditText
             android:id="@+id/editTextPhone"
             android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:ems="10"
             android:gravity="center"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "951554765608",
+    "firebase_url": "https://persimmon-treed.firebaseio.com",
+    "project_id": "persimmon-treed",
+    "storage_bucket": "persimmon-treed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951554765608:android:3227a07684f58f8765961d",
+        "android_client_info": {
+          "package_name": "com.example.persimmon_tree_proj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951554765608-rfvljc607cbcq1blgieh5oashhklfc99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbLBQEHMnuAYfOE2dKOwu8hjXpzhEUlWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951554765608-rfvljc607cbcq1blgieh5oashhklfc99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
