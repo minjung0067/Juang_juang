@@ -1,4 +1,4 @@
-# JuangJunang
+# JuangJuang
 - 2020.09.12 ~ 🧡
 
 ## about Persimmon_tree
