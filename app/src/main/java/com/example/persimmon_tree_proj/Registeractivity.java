@@ -2,6 +2,8 @@ package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,19 +38,23 @@ public class Registeractivity extends AppCompatActivity {
     }
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
             @Override
+
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.btn_register:
+                        signUp();
                         break;
                 }
             }
     };
 
     private void signUp() {
-        String id = ((EditText)findViewById(R.id.edit_id)).getText().toString();
+        String email = ((EditText)findViewById(R.id.edit_id)).getText().toString();
         String password = ((EditText)findViewById(R.id.edit_pwd)).getText().toString();
-        Task<AuthResult> authResultTask = mAuth.createUserWithEmailAndPassword(id, password)
+
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

@@ -42,7 +42,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="아이디"
-            android:inputType="textPassword"
+            android:inputType="textEmailAddress"
             android:textColorHint="#A6A6A6" />
 
         <EditText
