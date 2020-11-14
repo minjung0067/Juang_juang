@@ -1,17 +1,16 @@
 # JuangJuang
 - 2020.09.12 ~ 🧡
 
-## about Persimmon_tree
-  - 전체 흐름도 
-  ![image](https://user-images.githubusercontent.com/62278377/99142290-f9a19c00-2696-11eb-9130-2bb7fc8e8e1d.png)
-
-
 ### Juang Crew 
   [기획팀]
     Bomi Kim & Dawon Kim
-  
   [개발팀]
-  Eunseo Kang & Minjung Lee & Soobin Lee
+    Eunseo Kang & Minjung Lee & Soobin Lee<br>
+
+### about Persimmon_tree
+  - 전체 흐름도 
+  ![image](https://user-images.githubusercontent.com/62278377/99142290-f9a19c00-2696-11eb-9130-2bb7fc8e8e1d.png)
+
 ## Design
 >[1st UI : 로그인, 회원가입, 초대장 기능]
 ![image](https://user-images.githubusercontent.com/62278377/99136278-5c7b3f00-2667-11eb-928f-7f03be28944e.png)
