@@ -1,8 +1,10 @@
-# JuangJunang Crew
+# JuangJunang
+
 
 ## about Persimmon_tree
 
 
+### Juang Crew 
 
 ## Design
 >[1st UI : 로그인, 회원가입, 초대장 기능]
