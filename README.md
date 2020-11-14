@@ -2,6 +2,8 @@
 - 2020.09.12 ~ 🧡
 
 ## about Persimmon_tree
+  - 전체 흐름도 
+  ![image](https://user-images.githubusercontent.com/62278377/99142290-f9a19c00-2696-11eb-9130-2bb7fc8e8e1d.png)
 
 
 ### Juang Crew 
