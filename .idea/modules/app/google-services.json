@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "855060985016",
+    "firebase_url": "https://persimmontreeproj.firebaseio.com",
+    "project_id": "persimmontreeproj",
+    "storage_bucket": "persimmontreeproj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855060985016:android:292983e8bca07dec05f04d",
+        "android_client_info": {
+          "package_name": "com.example.persimmon_tree_proj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855060985016-lvvs1h848e04npg8fu9n9hgatturnnco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.persimmon_tree_proj",
+            "certificate_hash": "eb962aef4eb4a3f95b6ad9ec8fb0eb5874bf48bb"
+          }
+        },
+        {
+          "client_id": "855060985016-be6jnbhsf1aoe5rhu86jsc23q0330vit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb8Zxy_72MGc7D9mu-pQdeGUuIqq3oImw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855060985016-be6jnbhsf1aoe5rhu86jsc23q0330vit.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
