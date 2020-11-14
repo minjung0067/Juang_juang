@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:ems="10"
-            android:gravity="center"
+            android:gravity="left"
             android:hint="전화번호"
             android:inputType="phone"
             android:textColorHint="#A6A6A6" />
@@ -40,7 +40,7 @@
             android:layout_height="40dp"
             android:layout_margin="7dp"
             android:ems="10"
-            android:gravity="center"
+            android:gravity="left"
             android:hint="아이디"
             android:inputType="textEmailAddress"
             android:textColorHint="#A6A6A6" />
@@ -51,7 +51,7 @@
             android:layout_height="40dp"
             android:layout_margin="7dp"
             android:ems="10"
-            android:gravity="center"
+            android:gravity="left"
             android:hint="비밀번호"
             android:inputType="textPassword"
             android:textColor="#FFFFFF"
@@ -63,10 +63,9 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:ems="10"
-            android:gravity="center"
+            android:gravity="left"
             android:hint="이름"
             android:inputType="textPersonName"
-            android:text="이름"
             android:textAllCaps="false"
             android:textColor="#A6A6A6"
             android:textColorHint="#A6A6A6" />
@@ -78,7 +77,7 @@
             android:layout_margin="7dp"
             android:clickable="true"
             android:ems="10"
-            android:gravity="center"
+            android:gravity="left"
             android:hint="생년월일"
             android:inputType="date"
             android:textColorHint="#A6A6A6" />
