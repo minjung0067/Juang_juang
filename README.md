@@ -1,11 +1,12 @@
 # JuangJuang
-- 2020.09.12 ~ 🧡
+- 2020.09.12 ~ 🧡<br>
 
 ### Juang Crew 
   [기획팀]
-    Bomi Kim & Dawon Kim
+    Bomi Kim & Dawon Kim<br>
   [개발팀]
-    Eunseo Kang & Minjung Lee & Soobin Lee<br>
+    Eunseo Kang & Minjung Lee & Soobin Lee<br><br>
+
 
 ### about Persimmon_tree
   - 전체 흐름도 
