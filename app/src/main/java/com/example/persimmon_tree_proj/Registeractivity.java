@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,14 +60,12 @@ public class Registeractivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //성공시 UI
+                            Intent intent = new Intent(Registeractivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            //실패시 UI
+                            Toast.makeText(Registeractivity.this, "등록 에러", Toast.LENGTH_SHORT).show();
+                            return;
                         }
 
                         // ...
