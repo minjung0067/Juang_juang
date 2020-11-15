@@ -6,4 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".familyactivity">
 
+    <Button
+        android:id="@+id/btn_makecode"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="가족 초대장 만들기"
+        app:backgroundTint="#FF5722"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ifnot" />
+
+    <TextView
+        android:id="@+id/txt_ifhave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="초대코드를 받으셨다면,"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="확인"
+        app:backgroundTint="#FF5722"
+        app:layout_constraintEnd_toEndOf="@+id/et_code"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/et_code"
+        app:layout_constraintTop_toBottomOf="@+id/et_code" />
+
+    <EditText
+        android:id="@+id/et_code"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="초대코드 입력"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ifhave" />
+
+    <TextView
+        android:id="@+id/txt_ifnot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="초대코드가 없으시다면"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_ifhave"
+        app:layout_constraintStart_toStartOf="@+id/txt_ifhave"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ok" />
 </androidx.constraintlayout.widget.ConstraintLayout>
