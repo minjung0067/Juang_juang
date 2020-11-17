@@ -1,66 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:outlineSpotShadowColor="#FFFFFF"
     tools:context="com.example.persimmon_tree_proj.log_inactivity">
+
     <ImageView
-            android:id="@+id/imageView"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="80dp"/>
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="80dp" />
 
-        <EditText
-            android:id="@+id/edittext_email"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:ems="10"
-            android:hint="E-mail"
-            android:inputType="textEmailAddress" />
+    ​
 
-        <EditText
-            android:id="@+id/edittext_password"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
-        ​
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#ffffff"
-            android:text="로그인" />
-        ​
-        <Button
-            android:id="@+id/btn_signup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#ffffff"
-            android:text="회원가입" />
+    ​
 
-<!--    소셜 로그인 용 구글 로그인 버튼 -->
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btn_googleSignIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_below="@+id/linearlayout">
-        </com.google.android.gms.common.SignInButton>
-      ​
-</LinearLayout>
+    <!--    소셜 로그인 용 구글 로그인 버튼 -->
+
+    <EditText
+        android:id="@+id/edittext_email"
+        android:layout_width="312dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="84dp"
+        android:ems="10"
+        android:hint="아이디 또는 전화번호"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/edittext_password"
+        android:layout_width="312dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edittext_email"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_email" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="312dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:background="#FF6100"
+        android:text="로그인하기"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_password"
+        app:layout_constraintTop_toBottomOf="@+id/edittext_password" />
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="96dp"
+        android:layout_height="26dp"
+        android:layout_gravity="center"
+        android:background="#FFA73B"
+        android:text="회원가입하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_googleSignIn"
+        android:layout_width="312dp"
+        android:layout_height="53dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:background="#FFFFFF"
+        android:longClickable="false"
+        android:outlineAmbientShadowColor="#FFFFFF"
+        android:screenReaderFocusable="false"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:soundEffectsEnabled="false"
+        android:splitMotionEvents="false"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="가입을 하지 않았는감?"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_signup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="74dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="68dp"
+        android:text="로그인"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    ​
+</androidx.constraintlayout.widget.ConstraintLayout>
