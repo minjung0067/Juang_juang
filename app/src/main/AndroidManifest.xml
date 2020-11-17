@@ -11,18 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".FamilyCheckActivity"></activity>
-        <activity android:name=".familyactivity" />
-        <activity android:name=".CodeActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Loginactivity">
+        <activity android:name="com.example.persimmon_tree_proj.log_inactivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.persimmon_tree_proj.FamilyCheckActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.familyactivity" />
+        <activity android:name="com.example.persimmon_tree_proj.CodeActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.MainActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Registeractivity" />
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.Juang_juang.R;
+
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode;
     private Button btn_ok;
@@ -43,7 +45,6 @@ public class familyactivity extends AppCompatActivity {
 
             }
         });
-
         //버튼 누르면 이걸로 실행
 
-}
+}}

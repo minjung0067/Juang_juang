@@ -10,7 +10,7 @@ public class CodeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_code);
+//        setContentView(R.layout.activity_code);
 
         Intent intent = getIntent();
         String str_code = intent.getStringExtra("str_code"); //family activity
