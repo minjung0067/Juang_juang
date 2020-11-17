@@ -25,11 +25,11 @@ android {
 
 dependencies {
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation platform('com.google.firebase:firebase-bom:25.12.0') //로그인, 소셜로그인 시 사용
 
     // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-auth' //파이어베이스 로그인 관련
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-analytics'
@@ -40,6 +40,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0' //구글플레이 서비스 쓸거다
 
 
 }
