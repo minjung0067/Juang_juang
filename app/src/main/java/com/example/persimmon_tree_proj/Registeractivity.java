@@ -18,12 +18,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Registeractivity extends AppCompatActivity {
     private static final String TAG = "Registeractivity";
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase mDatabase;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextPhone;
+    private EditText editTextBirth;
     private EditText editTextName;
     private Button buttonJoin; //회원가입 버튼
 
@@ -43,10 +47,13 @@ public class Registeractivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeractivity);
-        firebaseAuth = FirebaseAuth.getInstance();
-        editTextEmail = (EditText) findViewById(R.id.editText_email);
+        firebaseAuth = FirebaseAuth.getInstance();  //auth 초기화
+        mDatabase = FirebaseDatabase.getInstance(); //database 초기화
+        editTextEmail = (EditText) findViewById(R.id.editText_id);
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);
         editTextName = (EditText) findViewById(R.id.editText_name);
+        editTextPhone = (EditText) findViewById(R.id.editText_Phone);
+        editTextBirth = (EditText) findViewById(R.id.edit_birth);
 
        //체크박스
         check1 = (CheckBox) findViewById(R.id.check_1);
@@ -55,18 +62,6 @@ public class Registeractivity extends AppCompatActivity {
         checkall = (CheckBox) findViewById(R.id.check_all);
 
         buttonJoin = (Button) findViewById(R.id.btn_join);
-        buttonJoin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
-                    // 이메일과 비밀번호가 공백이 아닌 경우
-                    createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString(), editTextName.getText().toString());
-                } else {
-                    // 이메일과 비밀번호가 공백인 경우
-                    Toast.makeText(Registeractivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
 
     // 첫번째 항 동의
@@ -132,6 +127,14 @@ public class Registeractivity extends AppCompatActivity {
         buttonJoin.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+                if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("") &&!editTextPhone.getText().toString().equals("")
+                        && !editTextName.getText().toString().equals("") &&!editTextBirth.getText().toString().equals("")  )  {
+                    // 모든 칸이 공백이 아닐때
+
+                } else {
+                    // 하나라도 공백이 있는 경우
+                    Toast.makeText(Registeractivity.this, "회원정보를 모두 입력해주세요.", Toast.LENGTH_LONG).show();   //알림 메세지 띄움
+                }
 
             // 전체 약관 체크여부
             if (TERMS_AGREE_4 != 1) {
@@ -163,6 +166,9 @@ public class Registeractivity extends AppCompatActivity {
             }
             // 전체 약관 체크된경우
             else {
+                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString(), editTextPhone.getText().toString(),
+                        editTextBirth.getText().toString(), editTextName.getText().toString());   //새로운 유저 만들기 함수로 넘어감!
+                Toast.makeText(Registeractivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Registeractivity.this, log_inactivity.class);
                 startActivity(intent);
             }
@@ -175,16 +181,22 @@ public class Registeractivity extends AppCompatActivity {
     // 약관 동의 내용 끝
 
 
-    private void createUser(String email, String password, String name) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+    private void createUser(String id, String pwd, final String phone, final String birth, final String name) {
+
+        firebaseAuth.createUserWithEmailAndPassword(id, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 회원가입 성공시
+                            final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
+
+                            UserModel usermodel = new UserModel(name, uid, phone, birth);
+                            // database에 저장
+                            mDatabase.getReference().child("users").child(uid).setValue(name);
                             Toast.makeText(Registeractivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
                             finish();
-                        } else {
+                    } else {
                             // 계정이 중복된 경우
                             Toast.makeText(Registeractivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
                         }
