@@ -71,18 +71,20 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
+
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 안되면 회원가입으로 넘어가게
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
                 FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
                 if (user != null) {   //user 이 null이 아니라면
-                    Intent intent = new Intent(log_inactivity.this, Registeractivity.class);   //회원가입으로 넘어가게함
+                    Intent intent = new Intent(log_inactivity.this, MainActivity.class);   //로그인 된다면 MainActivity로 이동
                     startActivity(intent);
                     finish();
                 } else {
                 }
             }
         };
+
 
         // Google 로그인을 앱에 통합
         // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
@@ -100,6 +102,7 @@ public class log_inactivity extends AppCompatActivity {
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
+
     }
 
     public void loginUser(String email, String password) {
@@ -110,7 +113,7 @@ public class log_inactivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 로그인 성공
                             Toast.makeText(log_inactivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                            firebaseAuth.addAuthStateListener(firebaseAuthListener);   //파이어베이스에 사용자 추가됨
+                            firebaseAuth.addAuthStateListener(firebaseAuthListener);   //파이어베이스에 사용자 추가
                         } else {
                             // 로그인 실패
                             Toast.makeText(log_inactivity.this, "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
