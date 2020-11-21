@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.Juang_juang.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class splash extends AppCompatActivity {
 
@@ -24,6 +26,13 @@ public class splash extends AppCompatActivity {
                 finish();
             }
         },2000); //splash screen 이 등장하는 시간
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            Intent intent = new Intent(splash.this,MainActivity.class);
+        }else{
+            Intent intent = new Intent(splash.this,log_inactivity.class);
+        }
 
     }
     protected void onPause(){
