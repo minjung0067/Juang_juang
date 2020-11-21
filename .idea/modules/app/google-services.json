@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "855060985016-4ml86eqk9uq4m0j53p4hfp6td6b9i2n7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.persimmon_tree_proj",
+            "certificate_hash": "97d9553be14dae25d0fec9b93a12075143cc4aaf"
+          }
+        },
+        {
           "client_id": "855060985016-lvvs1h848e04npg8fu9n9hgatturnnco.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -8,13 +8,6 @@
     android:outlineSpotShadowColor="#FFFFFF"
     tools:context="com.example.persimmon_tree_proj.log_inactivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="80dp" />
 
     ​
 
