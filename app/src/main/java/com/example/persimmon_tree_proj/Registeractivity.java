@@ -148,16 +148,16 @@ public class Registeractivity extends AppCompatActivity {
                             startActivity(new Intent(Registeractivity.this, log_inactivity.class));
                         } else {
 
-                            Toast.makeText(Registeractivity.this, "약관을 체크해주세요", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     } else {
-                        Toast.makeText(Registeractivity.this, "약관을 체크해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                 } else {
-                    Toast.makeText(Registeractivity.this, "약관을 체크해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
