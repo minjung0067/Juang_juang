@@ -18,12 +18,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Registeractivity extends AppCompatActivity {
     private static final String TAG = "Registeractivity";
     private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabase;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextPhone;
@@ -48,7 +52,7 @@ public class Registeractivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registeractivity);
         firebaseAuth = FirebaseAuth.getInstance();  //auth 초기화
-        mDatabase = FirebaseDatabase.getInstance(); //database 초기화
+        mDatabase = FirebaseDatabase.getInstance().getReference(); //database 초기화
         editTextEmail = (EditText) findViewById(R.id.editText_id);
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);
         editTextName = (EditText) findViewById(R.id.editText_name);
@@ -176,26 +180,28 @@ public class Registeractivity extends AppCompatActivity {
 
     });
     }
-
-
     // 약관 동의 내용 끝
 
 
     private void createUser(String id, String pwd, final String phone, final String birth, final String name) {
-
         firebaseAuth.createUserWithEmailAndPassword(id, pwd)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // 회원가입 성공시
-                            final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
+                            // 회원가입 성공
+                                final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
+                                Map<String, Object> childUpdates = new HashMap<>();
+                                Map<String, Object> uservalue = null;
+                                UserModel usermodel = new UserModel(name, uid, phone, birth);
+                                uservalue = usermodel.toMap();
+                                // database에 저장
+                                childUpdates.put("/user/" + name, uservalue);
+                                mDatabase.child("users").child(uid).setValue(usermodel);
+                                mDatabase.updateChildren(childUpdates);
+                                Toast.makeText(Registeractivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                                finish();
 
-                            UserModel usermodel = new UserModel(name, uid, phone, birth);
-                            // database에 저장
-                            mDatabase.getReference().child("users").child(uid).setValue(name);
-                            Toast.makeText(Registeractivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                            finish();
                     } else {
                             // 계정이 중복된 경우
                             Toast.makeText(Registeractivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
