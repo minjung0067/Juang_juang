@@ -85,8 +85,9 @@
 
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkagree"
+
+<CheckBox
+        android:id="@+id/check_all"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_marginLeft="40dp"
@@ -104,7 +105,7 @@
         android:orientation="vertical">
 
         <CheckBox
-            android:id="@+id/agree1"
+            android:id="@+id/check_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,7 +115,7 @@
             android:textSize="10sp" />
 
         <CheckBox
-            android:id="@+id/agree2"
+            android:id="@+id/check_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -124,7 +125,7 @@
             android:textSize="10sp" />
 
         <CheckBox
-            android:id="@+id/agree3"
+            android:id="@+id/check_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
