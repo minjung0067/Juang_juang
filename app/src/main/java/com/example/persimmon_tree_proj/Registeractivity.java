@@ -187,18 +187,18 @@ public class Registeractivity extends AppCompatActivity {
     }
     //회원가입 로직 : id/pwd는 firebase auth에, 나머지 회원정보는 firebase database에 올리는 함수
     private void createUser(String id, String pwd, final String phone, final String birth, final String name) {
-        firebaseAuth.createUserWithEmailAndPassword(id, pwd)  //id와 pwd는 firebase에 auth에 업로드
+        firebaseAuth.createUserWithEmailAndPassword(id, pwd)  //id와 pwd는 firebase auth에 업로드
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {  //auth에 올리는 task
-                        if (task.isSuccessful()) {   //auth에 업로드
+                        if (task.isSuccessful()) {   //auth에 업로드에 성공했다면
                             // 회원가입 성공
                             final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
-                            UserModel usermodel = new UserModel(name, uid, phone, birth);  //usermodel.java에서 새로운 UserModel
-                            mDatabase.child("users").child(uid).setValue(usermodel)
+                            UserModel usermodel = new UserModel(name, uid, phone, birth);  //usermodel.java에서 새로운 UserModel 만듦
+                            mDatabase.child("users").child(uid).setValue(usermodel) //database에 users 안에 usermodel의 내용으로 업로드
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
-                                        public void onSuccess(Void aVoid) { //database에 올리기 성공했는지
+                                        public void onSuccess(Void aVoid) { //database에 올리기 성공했으면
                                             Toast.makeText(Registeractivity.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(Registeractivity.this, log_inactivity.class);   //회원가입 성공했으니 로그인 페이지로 이동
                                             startActivity(intent);
@@ -206,8 +206,7 @@ public class Registeractivity extends AppCompatActivity {
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            //database에 올리기 실패했는지
+                                        public void onFailure(@NonNull Exception e) {  //database에 올리기 실패했으면
                                             Toast.makeText(Registeractivity.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(Registeractivity.this, Registeractivity.class); //회원가입 실패했으니 페이지 다시 로드
                                             startActivity(intent);
