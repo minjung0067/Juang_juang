@@ -30,13 +30,7 @@ public class UserModel {
     public void setUserName(String name) {
         this.name = name;
     }
-//    public String getUid() {
-//        return uid;
-//    }
-//
-//    public void setUid(String uid) {
-//        this.uid = uid;
-//    }
+
     public String getPhone() {
         return phone;
     }
@@ -47,7 +41,7 @@ public class UserModel {
 
 
     public String getBirth() {
-        return phone;
+        return birth;
     }
 
     public void setBirth(String birth) {
