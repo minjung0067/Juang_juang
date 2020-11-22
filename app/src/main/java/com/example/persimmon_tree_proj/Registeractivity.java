@@ -116,9 +116,6 @@ public class Registeractivity extends AppCompatActivity {
                     check2.setChecked(true);
                     check3.setChecked(true);
                     TERMS_AGREE_all = 1;   //모두 동의 체크 변수를 0에서 1로
-                }else if (TERMS_AGREE_1==1 && TERMS_AGREE_2==1 && TERMS_AGREE_3==1){    //필수 약관 모두 체크 되면
-                    checkall.setChecked(true);   //모두 동의 체크란도 자동으로 체크로 바뀌게
-
                 } else {
                     check1.setChecked(false);    //한번에 싹 다 체크 해제
                     check2.setChecked(false);
