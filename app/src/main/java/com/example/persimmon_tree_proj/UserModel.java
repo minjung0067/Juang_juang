@@ -11,7 +11,8 @@ public class UserModel {
     public String uid; //현재 로그인한 사용자
     public String phone;
     public String birth;
-    public UserModel(){
+
+    public UserModel() {
 
     }
     public UserModel(String name, String uid, String phone, String birth){
@@ -21,14 +22,45 @@ public class UserModel {
         this.birth = birth;
     }
 
-    @Exclude
-    public Map<String, Object> toMap() { //해당 child의 값을 입력할 HashMap을 선언
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", uid);
-        result.put("name", name);
-        result.put("phone", phone);
-        result.put("birth", birth);
-        return result;
+
+    public String getUserName() {
+        return name;
     }
 
+    public void setUserName(String name) {
+        this.name = name;
+    }
+//    public String getUid() {
+//        return uid;
+//    }
+//
+//    public void setUid(String uid) {
+//        this.uid = uid;
+//    }
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
+    public String getBirth() {
+        return phone;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + name + '\'' +
+                ", uid ='" + uid + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birth='" + birth + '\'' +
+                '}';
+    }
 }
+
