@@ -192,7 +192,7 @@ public class Registeractivity extends AppCompatActivity {
                             // 회원가입 성공
                             final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
                             UserModel usermodel = new UserModel(name, uid, phone, birth);  //usermodel.java에서 새로운 UserModel 만듦
-                            mDatabase.child("users").child(uid).setValue(usermodel) //database에 users 안에 usermodel의 내용으로 업로드
+                            mDatabase.child("users").child(name).setValue(usermodel) //database에 users 안에 usermodel의 내용으로 업로드
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) { //database에 올리기 성공했으면
