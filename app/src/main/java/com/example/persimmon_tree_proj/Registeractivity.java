@@ -27,7 +27,7 @@ import java.util.Map;
 public class Registeractivity extends AppCompatActivity {
     private static final String TAG = "Registeractivity";
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference mDatabase;
+    private FirebaseDatabase mDatabase;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextPhone;
@@ -50,9 +50,12 @@ public class Registeractivity extends AppCompatActivity {
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registeractivity);
+        setContentView(R.layout.activity_registeractivity); //registeractivity 와 연결
+
         firebaseAuth = FirebaseAuth.getInstance();  //auth 초기화
-        mDatabase = FirebaseDatabase.getInstance().getReference(); //database 초기화
+        mDatabase = FirebaseDatabase.getInstance(); //database 초기화
+
+       //xml 속 id값과 연결 & 변수할당
         editTextEmail = (EditText) findViewById(R.id.editText_id);
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);
         editTextName = (EditText) findViewById(R.id.editText_name);
@@ -63,14 +66,13 @@ public class Registeractivity extends AppCompatActivity {
         check1 = (CheckBox) findViewById(R.id.check_1);
         check2 = (CheckBox) findViewById(R.id.check_2);
         check3 = (CheckBox) findViewById(R.id.check_3);
-        checkall = (CheckBox) findViewById(R.id.check_all);
+        checkall = (CheckBox) findViewById(R.id.check_all);  //모두 체크하는 거
 
-        buttonJoin = (Button) findViewById(R.id.btn_join);
+        buttonJoin = (Button) findViewById(R.id.btn_join);  //회원가입 버튼
 
 
     // 첫번째 항 동의
         check1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {   //체크 안되어있으면
@@ -83,7 +85,6 @@ public class Registeractivity extends AppCompatActivity {
 
     // 두번째 항 동의
         check2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
@@ -96,7 +97,6 @@ public class Registeractivity extends AppCompatActivity {
         );
     // 세번째 항 동의
         check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
@@ -110,16 +110,15 @@ public class Registeractivity extends AppCompatActivity {
 
     // 전체동의
         checkall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (isChecked) {
-                check1.setChecked(true);   //나머지 싹 다 true로 바꾸기
+                check1.setChecked(true);   //싹 다 true로 바꾸기
                 check2.setChecked(true);
                 check3.setChecked(true);
                 TERMS_AGREE_4 = 1;
             } else {
-                check1.setChecked(false);    //나머지 싹 다 체크 해제
+                check1.setChecked(false);    //싹 다 체크 해제
                 check2.setChecked(false);
                 check3.setChecked(false);
                 TERMS_AGREE_4 = 0;
@@ -128,9 +127,9 @@ public class Registeractivity extends AppCompatActivity {
     }
         );
 
-        buttonJoin.setOnClickListener(new View.OnClickListener() {
+        buttonJoin.setOnClickListener(new View.OnClickListener() { //회원가입 버튼을 누르면
         @Override
-        public void onClick(View v) {
+        public void onClick(View v) {  //모든 정보 입력했는지 확인
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("") &&!editTextPhone.getText().toString().equals("")
                         && !editTextName.getText().toString().equals("") &&!editTextBirth.getText().toString().equals("")  )  {
                     // 모든 칸이 공백이 아닐때
