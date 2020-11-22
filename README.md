@@ -18,4 +18,5 @@
 https://miro.com/app/board/o9J_kgAHYG8=/
 
 >[2nd UI : 왔다감]
+![image](https://user-images.githubusercontent.com/62278377/99900771-e2952680-2cf4-11eb-93cf-95919a1e9dc8.png)
 https://miro.com/app/board/o9J_lfNOeMw=/
