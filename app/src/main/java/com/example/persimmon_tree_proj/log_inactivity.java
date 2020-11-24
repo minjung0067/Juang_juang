@@ -106,17 +106,17 @@ public class log_inactivity extends AppCompatActivity {
         //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
         //값을 가져와 id가 edittextmail과 동일하고 edittextpassword와 동일하다면 자동로그인
         if(loginId != null && loginPwd != null){
-            if(loginId.equals(editTextEmail.getText().toString())&&loginPwd.equals(editTextPassword.getText().toString())){
+//            if(loginId.equals(editTextEmail.getText().toString())&&loginPwd.equals(editTextPassword.getText().toString())){
                 Toast.makeText(log_inactivity.this,loginId+"님 자동로그인 입니다.",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(log_inactivity.this,MainActivity.class);
                 //자동로그인이 되었다면, Mainactivity로 바로 이동동
                 startActivity(intent);
                 finish();
             }
-        }
-        //id와 pwd가 null이면 log_inactivity가 보여짐
-        else if(loginId == null && loginPwd == null){
-        }
+//        }
+//        //id와 pwd가 null이면 log_inactivity가 보여짐
+//        else if(loginId == null && loginPwd == null){
+//        }
 
 
 
