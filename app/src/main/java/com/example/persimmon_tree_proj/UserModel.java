@@ -1,16 +1,12 @@
 package com.example.persimmon_tree_proj;
 
-import com.google.firebase.database.Exclude;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class UserModel {
     //사용자의 정보가 담기는 model
     public String name; //사용자 이름
     public String uid; //현재 로그인한 사용자
     public String phone;
     public String birth;
+    public Integer fcode;
 
     public UserModel() {
 
@@ -20,6 +16,7 @@ public class UserModel {
         this.uid = uid;
         this.phone = phone;
         this.birth = birth;
+        this.fcode = fcode;
     }
 
 
@@ -47,6 +44,10 @@ public class UserModel {
     public void setBirth(String birth) {
         this.birth = birth;
     }
+
+    public Integer getFamilyCode(){return fcode;}
+
+    public Integer setFamilyCode(){return fcode;}
     @Override
     public String toString() {
         return "User{" +
@@ -54,6 +55,7 @@ public class UserModel {
                 ", uid ='" + uid + '\'' +
                 ", phone='" + phone + '\'' +
                 ", birth='" + birth + '\'' +
+                ", family code=" + fcode + '\''+
                 '}';
     }
 }
