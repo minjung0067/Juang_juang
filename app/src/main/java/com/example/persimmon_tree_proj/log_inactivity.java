@@ -1,6 +1,7 @@
 package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,8 @@ public class log_inactivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private EditText editTextEmail;   //아이디용
     private EditText editTextPassword;   //비밀번호용
+    private String loginId; //자동 로그인 아이디
+    private String loginPwd; //자동 로그인 비밀번호
     private Button buttonLogIn; //로그인 버튼
     private Button buttonSignUp; //회원가입 버튼
     // 구글로그인 result 상수
@@ -59,12 +62,25 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences auto = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);
+        final SharedPreferences.Editor autoLogin = auto.edit();
+        //자동로그인을 위한 파일명 auto SharedPreference 선언
+        loginId = auto.getString("inputId",null);
+        loginPwd = auto.getString("inputPwd",null);
+        //키 값은 자유, 값은 null
+        //login된 값(설정값을)저장하기 위한 변수
+
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
-                    loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());    //그 email이랑 pwd 갖는 유저로 로그인
+                    loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                    //그 email이랑 pwd 갖는 유저로 로그인
+                    autoLogin.putString("inputId",editTextEmail.getText().toString());
+                    autoLogin.putString("inputPwd",editTextPassword.getText().toString());
+                    autoLogin.commit(); //값 저장
+
                 } else {   //아니라면
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
                 }
@@ -84,6 +100,24 @@ public class log_inactivity extends AppCompatActivity {
                 }
             }
         };
+
+
+
+        //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
+        //값을 가져와 id가 edittextmail과 동일하고 edittextpassword와 동일하다면 자동로그인
+        if(loginId != null && loginPwd != null){
+            if(loginId.equals(editTextEmail.getText().toString())&&loginPwd.equals(editTextPassword.getText().toString())){
+                Toast.makeText(log_inactivity.this,loginId+"님 자동로그인 입니다.",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(log_inactivity.this,MainActivity.class);
+                //자동로그인이 되었다면, Mainactivity로 바로 이동동
+                startActivity(intent);
+                finish();
+            }
+        }
+        //id와 pwd가 null이면 log_inactivity가 보여짐
+        else if(loginId == null && loginPwd == null){
+        }
+
 
 
         // Google 로그인을 앱에 통합

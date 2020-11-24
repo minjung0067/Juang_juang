@@ -26,15 +26,8 @@ public class splash extends AppCompatActivity {
                 finish();
             }
         },2000); //splash screen 이 등장하는 시간
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            Intent intent = new Intent(splash.this,MainActivity.class);
-        }else{
-            Intent intent = new Intent(splash.this,log_inactivity.class);
-        }
-
     }
+
     protected void onPause(){
         super.onPause();
         finish();
