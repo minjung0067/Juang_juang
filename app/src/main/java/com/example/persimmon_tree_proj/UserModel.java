@@ -7,6 +7,7 @@ public class UserModel {
     public String phone;
     public String birth;
     public Integer fcode;
+    public String introduce;
 
     public UserModel() {
 
@@ -17,6 +18,7 @@ public class UserModel {
         this.phone = phone;
         this.birth = birth;
         this.fcode = fcode;
+        this.introduce = introduce;
     }
 
 
@@ -47,7 +49,11 @@ public class UserModel {
 
     public Integer getFamilyCode(){return fcode;}
 
-    public Integer setFamilyCode(){return fcode;}
+    public void setFamilyCode(){this.fcode = fcode; }
+
+    public String getIntroduce(){return introduce;}
+
+    public void setIntroduce(){this.introduce = introduce; }
     @Override
     public String toString() {
         return "User{" +
@@ -55,7 +61,8 @@ public class UserModel {
                 ", uid ='" + uid + '\'' +
                 ", phone='" + phone + '\'' +
                 ", birth='" + birth + '\'' +
-                ", family code=" + fcode + '\''+
+                ", family code='" + fcode + '\''+
+                ", introduce my self ='" +introduce+'\''+
                 '}';
     }
 }
