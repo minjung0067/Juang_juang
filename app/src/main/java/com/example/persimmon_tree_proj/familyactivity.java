@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
@@ -19,7 +21,7 @@ public class familyactivity extends AppCompatActivity {
     //추가해야될 사항 : 파이어베이스에서 가족 코드 주소 가져오기 그걸 str_code(=et_code)와 비교하기
 
     private DatabaseReference mDatabase;
-    mDatabase = FirebaseDatabase.getInstance().getRefence(); //databasereference의 인스턴스 가져오기
+
 
 
     @Override
@@ -32,6 +34,8 @@ public class familyactivity extends AppCompatActivity {
         btn_ok = findViewById(R.id.btn_profileok);
         //findViewById : activity_familyactivity.xml에서 위에 선언한 친구들을 찾아라
         str = et_code.getText().toString(); //str에다가 code넣어줌
+
+        mDatabase = FirebaseDatabase.getInstance().getRefence(); //databasereference의 인스턴스 가져오기
 
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override

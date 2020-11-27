@@ -1,6 +1,7 @@
 package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -197,6 +198,13 @@ public class Registeractivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void aVoid) { //database에 올리기 성공했으면
                                             Toast.makeText(Registeractivity.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
+
+                                            //activity간에 계속 인텐트로 데이터 주고 받는거보다 이름을 파일에 저장하게 되면 접근하기 쉬울거라고 생각해서 이 방식 채택함 근데 추후에 이름 바꾸는 경우 생각안해봄
+                                            SharedPreferences saveprofile = getSharedPreferences("saveprofile",MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
+                                            SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 ditor를 이용하여 값 저장
+                                            editor.putString("name",name);//이름 저장
+                                            editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
+
                                             Intent intent = new Intent(Registeractivity.this, log_inactivity.class);   //회원가입 성공했으니 로그인 페이지로 이동
                                             startActivity(intent);
                                         }

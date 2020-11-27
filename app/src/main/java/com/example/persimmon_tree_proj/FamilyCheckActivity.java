@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,15 +43,19 @@ public class FamilyCheckActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("users");
+                SharedPreferences comefile = getSharedPreferences("saveprofile",MODE_PRIVATE);//저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
+                String name = comefile.getString("name","");//key에 저장된 값이 있는지 확인 없으면 ""반환
                 mDatabase.child("users").child(name).child("introduce").setValue(introduce);  //database에 users안에 본인 이름 name 아래 항목의 introduece의 내용 업로드
                 //mDatabase.child("users").child(name).setValue(usermodel) //database에 users 안에 usermodel의 내용으로 업로드
-                HashMap result = new HashMap<>();  //database 올릴 때 사용
-                result.put("introduce", introduce);
+                //HashMap result = new HashMap<>();  //database 올릴 때 사용
+                //result.put("introduce", introduce);
                 Intent intent = new Intent(getApplicationContext(), familyactivity.class);
                 startActivity(intent);
             }
         });
 
 
+        //만약 초기 프로필 작성이 이미 완료된 사람이라면 바로 main 화면으로 넘기기
+        //if(et_introduce!=null)
     }
 }
