@@ -16,7 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_logout;
+    private Button btn_logout;     //로그아웃 버튼
+    private Button btn_goanswer; //답변하러가기 버튼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit(); //저장
                 Toast.makeText(MainActivity.this,"로그아웃.",Toast.LENGTH_SHORT).show();
                 finish();
+            }
+        });
+
+        Button goanswer = (Button)findViewById(R.id.btn_goanswer); //답변하러가기 버튼
+        goanswer.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Answeactivity로 이동
+                Intent intent = new Intent(MainActivity.this, Answeractivity.class);
+                startActivity(intent);
             }
         });
 
