@@ -76,7 +76,7 @@ public class log_inactivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
                     loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
-                    //그 email이랑 pwd 갖는 유저로 로그인
+                    //inputId와 inputPwd에 이메일, 비밀번호 저장
                     autoLogin.putString("inputId",editTextEmail.getText().toString());
                     autoLogin.putString("inputPwd",editTextPassword.getText().toString());
                     autoLogin.commit(); //값 저장
@@ -105,18 +105,15 @@ public class log_inactivity extends AppCompatActivity {
 
         //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
         //값을 가져와 id가 edittextmail과 동일하고 edittextpassword와 동일하다면 자동로그인
+        //dmstj-파이어베이스와 연결
         if(loginId != null && loginPwd != null){
-//            if(loginId.equals(editTextEmail.getText().toString())&&loginPwd.equals(editTextPassword.getText().toString())){
                 Toast.makeText(log_inactivity.this,loginId+"님 자동로그인 입니다.",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(log_inactivity.this,MainActivity.class);
                 //자동로그인이 되었다면, Mainactivity로 바로 이동동
                 startActivity(intent);
                 finish();
-            }
-//        }
-//        //id와 pwd가 null이면 log_inactivity가 보여짐
-//        else if(loginId == null && loginPwd == null){
-//        }
+          }
+
 
 
 

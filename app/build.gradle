@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.1.0' //구글플레이 서비스 쓸거다
 
 
+
+
 }
 
-apply plugin: 'com.google.gms.google-services'
