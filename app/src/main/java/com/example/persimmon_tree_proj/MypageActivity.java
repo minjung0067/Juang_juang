@@ -16,8 +16,8 @@ public class MypageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        Button answer = (Button)findViewById(R.id.go_back);
-        answer.setOnClickListener(new View.OnClickListener() {
+        Button goback = (Button)findViewById(R.id.go_back);
+        goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this, MainActivity.class);
