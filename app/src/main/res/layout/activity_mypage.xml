@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:clickable="false"
+    app:barrierMargin="0"
     tools:context="com.example.persimmon_tree_proj.MypageActivity">
 
     <ImageButton
@@ -12,8 +15,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/abc_vector_test"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="9dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="9dp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -22,8 +25,8 @@
         android:text="문의 : 013-111-0912"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="678dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="678dp" />
 
     <TextView
         android:id="@+id/textView8"
@@ -33,8 +36,8 @@
         android:text="gammnamooo@gmail.com"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView6"
-        tools:layout_editor_absoluteX="120dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="120dp" />
 
     <TextView
         android:id="@+id/textView9"
@@ -101,4 +104,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
         app:layout_constraintVertical_bias="0.311" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="#FFFFFF"
+        android:fallbackLineSpacing="false"
+        android:hapticFeedbackEnabled="false"
+        android:outlineAmbientShadowColor="#FFFFFF"
+        android:singleLine="false"
+        android:text="프로필"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.769"
+        tools:src="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
