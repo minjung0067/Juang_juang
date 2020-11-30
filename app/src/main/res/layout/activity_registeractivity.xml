@@ -172,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:text="(필수) 이벤트, 광고성 정보 안내"
+                android:text="(선택) 이벤트, 광고성 정보 안내"
                 android:textColor="#9E9E9E"
                 android:textSize="10sp" />
 
