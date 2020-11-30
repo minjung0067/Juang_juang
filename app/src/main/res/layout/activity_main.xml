@@ -94,4 +94,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_answer1" />
 
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="52dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="252dp"
+        app:layout_constraintStart_toEndOf="@+id/title_text"
+        app:srcCompat="@drawable/image"
+        tools:layout_editor_absoluteY="13dp"
+        tools:ignore="MissingConstraints" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
