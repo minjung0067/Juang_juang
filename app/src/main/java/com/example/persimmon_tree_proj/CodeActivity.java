@@ -31,7 +31,7 @@ public class CodeActivity extends AppCompatActivity {
 
 
 
-
+/*
     public TextView makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.textView); //초기화
         FirebaseDatabase database = FirebaseDatabase.getInstance();//파이어베이스의 인스턴스를 가져온다 즉, root를 가져온다고 생각
@@ -98,3 +98,4 @@ public class CodeActivity extends AppCompatActivity {
 
     }
 }
+*/

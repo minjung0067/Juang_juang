@@ -16,10 +16,11 @@ public class GroupFamily {
     public GroupFamily(Integer fcode){
         this.fcode = fcode;
     }
-
+/*
     private void writeGroupFamily(Integer fcode){
         GroupFamily groupFamily = new GroupFamily(fcode);
         mDatabase.child("groups").child(fcode).setValue(group); //데이터 덮어쓰기
     }
 }
+ */
 
