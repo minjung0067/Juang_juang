@@ -82,6 +82,14 @@ public class Registeractivity extends AppCompatActivity {
                 } else {   //이미 체크 되어있으면
                     TERMS_AGREE_1 = 0;    //1을 0으로
                 }
+                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+                    checkall.setChecked(true);
+                    TERMS_AGREE_all = 1;
+                }
+                else {
+                    checkall.setChecked(false);
+                    TERMS_AGREE_all = 0;
+                }
             }
         });
 
@@ -94,6 +102,14 @@ public class Registeractivity extends AppCompatActivity {
                 } else {
                     TERMS_AGREE_2 = 0;
                 }
+                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+                    checkall.setChecked(true);
+                    TERMS_AGREE_all = 1;
+                }
+                else {
+                    checkall.setChecked(false);
+                    TERMS_AGREE_all = 0;
+                }
             }
         });
         // 세번째 항 동의
@@ -105,8 +121,17 @@ public class Registeractivity extends AppCompatActivity {
                 } else {
                     TERMS_AGREE_3 = 0;
                 }
+                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+                    checkall.setChecked(true);
+                    TERMS_AGREE_all = 1;
+                }
+                else {
+                    checkall.setChecked(false);
+                    TERMS_AGREE_all = 0;
+                }
             }
         });
+
 
         // 전체동의
         checkall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -144,21 +169,13 @@ public class Registeractivity extends AppCompatActivity {
                         // 첫번째 약관 체크여부
                         if (TERMS_AGREE_3 == 1) {
                             // 두번째 약관 체크 여부
-                            if (TERMS_AGREE_2 == 1) {
-                                //세번재 약관 체크 여부
                                 if (TERMS_AGREE_1 == 1) {
                                     // 페이저 login 액티비티로 고고
                                     startActivity(new Intent(Registeractivity.this, log_inactivity.class));
                                 } else {
-
                                     Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                            } else {
-                                Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
                         } else {
                             Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                             return;
