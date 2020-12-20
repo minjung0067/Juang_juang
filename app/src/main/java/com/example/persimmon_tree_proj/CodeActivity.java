@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /*package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
@@ -235,4 +233,3 @@ public class CodeActivity extends AppCompatActivity {
 //    }
 //}
 
->>>>>>> d8c27509eca314ca7771a168ed570e7b7b1854e6

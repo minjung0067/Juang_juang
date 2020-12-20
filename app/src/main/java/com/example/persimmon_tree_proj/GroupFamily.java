@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.example.persimmon_tree_proj;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,6 +21,3 @@ public class GroupFamily {
     }
 }
 
-
-
->>>>>>> d8c27509eca314ca7771a168ed570e7b7b1854e6

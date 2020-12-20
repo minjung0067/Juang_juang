@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 package com.example.persimmon_tree_proj;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,4 +63,3 @@ public class familyactivity extends AppCompatActivity {
 
 }}
 
->>>>>>> d8c27509eca314ca7771a168ed570e7b7b1854e6
