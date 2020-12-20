@@ -1,8 +1,10 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,9 +34,9 @@ public class CodeActivity extends AppCompatActivity {
     private String str_code;
 
 
-
     public TextView makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.textView); //초기화
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();//파이어베이스의 인스턴스를 가져온다 즉, root를 가져온다고 생각
         DatabaseReference myRef =database.getReference("groups");//Root밑에있는 groups라는 위치를 참조한다
         myRef.addValueEventListener(new ValueEventListener(){
@@ -54,6 +57,33 @@ public class CodeActivity extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }
         //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
         SharedPreferences comefile = getSharedPreferences("saveprofile",MODE_PRIVATE);//저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
         String name = comefile.getString("name","");//key에 저장된 값이 있는지 확인 없으면 ""반환
@@ -66,18 +96,18 @@ public class CodeActivity extends AppCompatActivity {
 
         }
 
-        if(str_code)
-            SharedPreferences saveprofile = getSharedPreferences("saveprofile",MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
+        if(str_code!=""){
+            SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
             SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
-            editor.putString("fcode",tv_code);//코드 저장
+            editor.putString("fcode", String.valueOf(tv_code));//코드 저장
             editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
 
-            //파이어 베이스에 올리기
             mDatabase.child("users").child(name).child("fcode").setValue(tv_code); //user 이름 개인정보 있는 데이터 베이스에 올리기
             mDatabase.child("groups").setValue(tv_code); //가족 코드 별 group 으로 묶어주는 데이터 베이스에 올리기
             tv_code.setText(str_code);//화면에 code출력하기
 
-        return tv_code;
+            //파이어 베이스에 올리기
+        }
     }
 
     public void share(){//공유하기
@@ -87,12 +117,11 @@ public class CodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
-
-
-//        Intent intent = getIntent();
-//        String str_code = intent.getStringExtra("str_code"); //family activity
-        Integer familycode;
-        mDatabase.child("users").child(familycode).child("fcode").setValue(codelist); //전체 객체를 다 쓰지 않고 하위 항목 업데이트 하는 방식으로 family code 할당하기
+        int familycodee = 0;
+        Intent intent = getIntent();
+        String str_code = intent.getStringExtra("str_code"); //family activity
+        Integer familycode = new Integer(familycodee);
+        mDatabase.child("users").child(String.valueOf(familycode)).child("fcode").setValue(codelist); //전체 객체를 다 쓰지 않고 하위 항목 업데이트 하는 방식으로 family code 할당하기
 
 
 

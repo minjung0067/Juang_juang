@@ -49,8 +49,8 @@ public class FamilyCheckActivity extends AppCompatActivity {
                 //mDatabase.child("users").child(name).setValue(usermodel) //database에 users 안에 usermodel의 내용으로 업로드
                 //HashMap result = new HashMap<>();  //database 올릴 때 사용
                 //result.put("introduce", introduce);
-                Intent intent = new Intent(getApplicationContext(), familyactivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(), familyactivity.class);
+                //startActivity(intent);
             }
         });
 

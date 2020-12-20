@@ -222,7 +222,7 @@ public class Registeractivity extends AppCompatActivity {
                                             editor.putString("name",name);//이름 저장
                                             editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
 
-                                            Intent intent = new Intent(Registeractivity.this, log_inactivity.class);   //회원가입 성공했으니 로그인 페이지로 이동
+                                            Intent intent = new Intent(Registeractivity.this, familyactivity.class);   //회원가입 성공했으니 로그인 페이지로 이동
                                             startActivity(intent);
                                         }
                                     })
