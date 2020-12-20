@@ -20,7 +20,7 @@ public class MypageActivity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, MainActivity.class);
+                Intent intent = new Intent(MypageActivity.this, MakeProfile.class);
                 startActivity(intent);
             }
         });

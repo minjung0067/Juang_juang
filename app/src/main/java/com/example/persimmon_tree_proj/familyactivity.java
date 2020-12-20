@@ -1,4 +1,4 @@
-/*package com.example.persimmon_tree_proj;
+package com.example.persimmon_tree_proj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,15 +43,6 @@ public class familyactivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //만약 가족 코드가 일치한다면
-                if (str == "") //파이어 베이스에서 모든 코드 순회하면서 탐색
-                    Intent intent = new Intent(getApplicationContext(),FamilyCheckActivity.class); // 코드가 맞다면 프로필 초기 설정으로 화면 전환 intent생성
-                    startActivity(intent);//intent넘기기
-                    //초기 프로필 작성 화면으로 화면 전환하기
-
-                //일치하지 않는다면 토스트 띄우기
-                else{
-                    Toast.makeText(getApplicationContext(), "코드가 일치하지 않습니다. 다시 시도 해주세요. ", Toast.LENGTH_LONG.show()); //코드가 일치하지 않는다면 알려주기
-                }
             }
         });
 
@@ -61,14 +52,12 @@ public class familyactivity extends AppCompatActivity {
         btn_makecode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                public void onClick(View v){  //새로운 코드 만들러 가는 부분
-                    Intent intent = new Intent(getApplicationContext(), CodeActivity.class); //코드 생성 xml로 이동
-                    startActivity(intent);
+//                public void onClick(View v){  //새로운 코드 만들러 가는 부분
+//                    Intent intent = new Intent(getApplicationContext(), CodeActivity.class); //코드 생성 xml로 이동
+//                    startActivity(intent);
                 }
-            }
         });
 
         //초대코드 생성 부분 끝
 
 }}
- */
