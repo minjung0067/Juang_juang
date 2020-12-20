@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-package com.example.persimmon_tree_proj;
+/*package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,6 +71,8 @@ public class CodeActivity extends AppCompatActivity {
         //홈으로 가기 만들기
         //코드 생성 후 intent로 profile만드는 xml로 이동하기
 
+/*
+
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
             int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             str_code += Integer.toString(randomNum);
@@ -121,7 +122,7 @@ public class CodeActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("코드 엑티비티", "groups 안에 하위 노드를 읽지 못하였음");
             }
-        }
+        };
     }
 
     public void share(){//공유하기
@@ -129,8 +130,10 @@ public class CodeActivity extends AppCompatActivity {
     }
 
 }
+ */
 
-=======
+
+
 //package com.example.persimmon_tree_proj;
 //
 //import androidx.annotation.NonNull;
@@ -229,4 +232,4 @@ public class CodeActivity extends AppCompatActivity {
 //
 //    }
 //}
->>>>>>> 73bc7b9e5705b78cb740202bb69c465aa78e370f
+

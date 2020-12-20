@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
     private TextView textView; //질문 나오는 textView
-
+    private Spinner spinner; //질문 목록이 있는 spinner
     private ListView listView;
     //array배열을 생성하고 리스트뷰와 연결
     private ArrayAdapter<String> adapter;
     List<Object> Array = new ArrayList<Object>();
+
 
 
     @Override
@@ -52,12 +55,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView =(TextView)findViewById(R.id.txt_question);
-        listView =(ListView)findViewById(R.id.listview_msg);
+        spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
+        listView =(ListView)findViewById(R.id.listview_msg); //answer에 대한 listView
 
         initDatabase();
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
-        mReference = mDatabase.getReference("question");
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                textView.setText(""+parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         mReference = mDatabase.getReference("answer");
         //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
         mReference.addValueEventListener(new ValueEventListener() {
