@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                adapter.clear(); //리스트에 값을 넣기 전 초기화
+                adapter.clear(); //리스트에 값을 넣기 전 초기화하기
 
                 //child 내에 있는 메시지 데이터를 저장하는 작업
                 for(DataSnapshot answerData : datasnapshot.getChildren()){
