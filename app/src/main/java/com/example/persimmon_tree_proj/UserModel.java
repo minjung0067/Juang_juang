@@ -6,7 +6,7 @@ public class UserModel {
     public String uid; //현재 로그인한 사용자
     public String phone;
     public String birth;
-    public Integer fcode;
+    public String fcode;
     public String introduce;
 
     public UserModel() {
@@ -47,7 +47,7 @@ public class UserModel {
         this.birth = birth;
     }
 
-    public Integer getFamilyCode(){return fcode;}
+    public String getFamilyCode(){return fcode;}
 
     public void setFamilyCode(){this.fcode = fcode; }
 
