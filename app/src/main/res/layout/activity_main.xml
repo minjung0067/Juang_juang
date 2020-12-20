@@ -49,14 +49,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:text="답변 하러가기"
         android:textAlignment="center"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_answer2" />
+        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
 
     <TextView
         android:id="@+id/txt_question"
@@ -69,30 +69,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txt_answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_question" />
-
-    <TextView
-        android:id="@+id/txt_answer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_answer1" />
 
     <Button
         android:id="@+id/btn_mypage"
@@ -107,5 +83,13 @@
         app:layout_constraintVertical_bias="0.027"
         app:srcCompat="@drawable/image"
         tools:ignore="MissingConstraints" />
+
+    <ListView
+        android:id="@+id/listview_msg"
+        android:layout_width="766dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_mypage"
+        tools:layout_editor_absoluteX="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

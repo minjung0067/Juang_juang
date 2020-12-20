@@ -1,11 +1,9 @@
-<<<<<<< HEAD
-package com.example.persimmon_tree_proj;
 
+package com.example.persimmon_tree_proj;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.security.acl.Group;
-/*
+
 public class GroupFamily {
 
     public Integer fcode;
@@ -23,7 +21,7 @@ public class GroupFamily {
         mDatabase.child("groups").child(fcode).setValue(group); //데이터 덮어쓰기
     }
 }
- */
+
 =======
 //package com.example.persimmon_tree_proj;
 //
