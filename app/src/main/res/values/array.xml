@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="question">
+        <item>당신은 민트초코를 좋아하는감?</item>
+        <item>이번 크리스마스에 뭐가 먹고 싶은감?</item>
+        <item>제일 좋아하는 치킨은 무엇인감?</item>
+    </string-array>
+</resources>

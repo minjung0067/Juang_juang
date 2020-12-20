@@ -1,5 +1,5 @@
-
 package com.example.persimmon_tree_proj;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,8 +30,7 @@ public class GroupFamily {
         HashMap<String, Object> result = new HashMap<>();
         result.put("fcode", str_code);
         return result;
-    }
+
     */
 }
-
 
