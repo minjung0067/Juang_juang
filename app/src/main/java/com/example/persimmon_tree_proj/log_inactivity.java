@@ -80,6 +80,8 @@ public class log_inactivity extends AppCompatActivity {
                     autoLogin.putString("inputId",editTextEmail.getText().toString());
                     autoLogin.putString("inputPwd",editTextPassword.getText().toString());
                     autoLogin.commit(); //값 저장
+                    Intent intent = new Intent(getApplicationContext(), CodeActivity.class);
+
 
                 } else {   //아니라면
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
