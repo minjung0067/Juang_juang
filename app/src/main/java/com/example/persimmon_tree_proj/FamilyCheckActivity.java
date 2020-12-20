@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj;
+/*package com.example.persimmon_tree_proj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -59,3 +59,4 @@ public class FamilyCheckActivity extends AppCompatActivity {
         //if(et_introduce!=null)
     }
 }
+ */
