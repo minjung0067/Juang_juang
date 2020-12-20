@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
+    private TextView textView;
 
     private ListView listView;
+    //array배열을 생성하고 리스트뷰와 연결
     private ArrayAdapter<String> adapter;
     List<Object> Array = new ArrayList<Object>();
 
@@ -48,15 +51,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textView =(TextView)findViewById(R.id.txt_question);
         listView =(ListView)findViewById(R.id.listview_msg);
 
         initDatabase();
 
+
+        mReference = mDatabase.getReference("question");
         mReference = mDatabase.getReference("answer");
+        //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                adapter.clear(); //리스튜에 값을 넣기 전 초기화
+           public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                adapter.clear(); //리스트에 값을 넣기 전 초기화
 
                 //child 내에 있는 메시지 데이터를 저장하는 작업
                 for(DataSnapshot answerData : datasnapshot.getChildren()){
@@ -75,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //listView의 뷰를 연결하고, Arrayadapter와 listView 연결
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         listView.setAdapter(adapter);
 
