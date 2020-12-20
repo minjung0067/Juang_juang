@@ -7,7 +7,7 @@
     tools:context="com.example.persimmon_tree_proj.Answeractivity">
 
     <TextView
-        android:id="@+id/txt_question"
+        android:id="@+id/txt_question2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
