@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
-    private TextView textView;
+    private TextView textView; //질문 나오는 textView
 
     private ListView listView;
     //array배열을 생성하고 리스트뷰와 연결
