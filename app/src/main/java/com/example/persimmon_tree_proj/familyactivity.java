@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.Juang_juang.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-/*
+
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
     private Button btn_ok; //코드 확인 버튼
@@ -61,3 +61,4 @@ public class familyactivity extends AppCompatActivity {
         //초대코드 생성 부분 끝
 
 }}
+
