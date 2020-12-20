@@ -12,15 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
     private TextView textView; //질문 나오는 textView
+    private String question;
     private Spinner spinner; //질문 목록이 있는 spinner
     private ListView listView;
     //array배열을 생성하고 리스트뷰와 연결
@@ -64,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                textView.setText(""+parent.getItemAtPosition(position));
+                textView.setText(" "+parent.getItemAtPosition(position));
+                question = textView.getText().toString();
             }
 
             @Override
@@ -125,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Answeactivity로 이동
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
+                intent.putExtra("question",question);
                 startActivity(intent);
             }
         });
