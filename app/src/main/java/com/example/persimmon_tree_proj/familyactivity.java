@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj;
+/*package com.example.persimmon_tree_proj;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -67,3 +67,4 @@ public class familyactivity extends AppCompatActivity {
         //초대코드 생성 버튼 누르면 위에가 실행됨
 
 }}
+ */

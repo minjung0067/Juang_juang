@@ -28,6 +28,7 @@ public class CodeActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference mDatabase; //데이터베이스에서 데이터 읽고 쓰기위해 인스턴스 필요
     private String str_code;
+}
 
 
 
