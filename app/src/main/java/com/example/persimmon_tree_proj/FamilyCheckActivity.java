@@ -56,7 +56,10 @@ public class FamilyCheckActivity extends AppCompatActivity {
 
 
         //만약 초기 프로필 작성이 이미 완료된 사람이라면 바로 main 화면으로 넘기기
-        //if(et_introduce!=null)
+        if(et_introduce!=null){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        }
     }
 }
  */
