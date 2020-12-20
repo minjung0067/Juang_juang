@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
@@ -30,9 +31,6 @@ public class CodeActivity extends AppCompatActivity {
     private String str_code;
 }
 
-
-
-/*
     public TextView makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.textView); //초기화
         FirebaseDatabase database = FirebaseDatabase.getInstance();//파이어베이스의 인스턴스를 가져온다 즉, root를 가져온다고 생각
@@ -67,12 +65,12 @@ public class CodeActivity extends AppCompatActivity {
 
         }
 
-        if(str_code)
-            SharedPreferences saveprofile = getSharedPreferences("saveprofile",MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
+        if(str_code!=""){
+            SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
             SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
-            editor.putString("fcode",tv_code);//코드 저장
+            editor.putString("fcode", String.valueOf(tv_code));//코드 저장
             editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
-
+        }
             //파이어 베이스에 올리기
             mDatabase.child("users").child(name).child("fcode").setValue(tv_code); //user 이름 개인정보 있는 데이터 베이스에 올리기
             mDatabase.child("groups").setValue(tv_code); //가족 코드 별 group 으로 묶어주는 데이터 베이스에 올리기
@@ -88,15 +86,13 @@ public class CodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
-
-
-//        Intent intent = getIntent();
-//        String str_code = intent.getStringExtra("str_code"); //family activity
-        Integer familycode;
-        mDatabase.child("users").child(familycode).child("fcode").setValue(codelist); //전체 객체를 다 쓰지 않고 하위 항목 업데이트 하는 방식으로 family code 할당하기
+        int familycodee = 0;
+        Intent intent = getIntent();
+        String str_code = intent.getStringExtra("str_code"); //family activity
+        Integer familycode = new Integer(familycodee);
+        mDatabase.child("users").child(String.valueOf(familycode)).child("fcode").setValue(codelist); //전체 객체를 다 쓰지 않고 하위 항목 업데이트 하는 방식으로 family code 할당하기
 
 
 
     }
 }
-*/
