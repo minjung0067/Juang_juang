@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class GroupFamily {
 
-    public String fcode;
     public String str_code;
 
     public GroupFamily(){
@@ -17,20 +16,18 @@ public class GroupFamily {
     }
 
     public GroupFamily(String str_code){
-        this.fcode = str_code;
+        this.str_code = str_code;
     }
 
-    public String getFcode(){return str_code;}
-    public void setFcode(){this.fcode = str_code; }
+    public String getStr_code(){return str_code;}
+    public void setStr_code(){this.str_code = str_code; }
 
     //나는 멥으로 묶을 필요가 없는데.. 일단 적었습!
-    /*
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("fcode", str_code);
+        result.put(str_code, str_code);
         return result;
-
-    */
+    }
 }
 
