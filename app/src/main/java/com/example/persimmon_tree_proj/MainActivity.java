@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         //listView에 answer 올리기
         a_Reference = a_Database.getReference("family");
         //이부분이 문제야!!
-        a_Reference.child("family1").child("answer").child("1").addValueEventListener(new ValueEventListener() {
+        a_Reference.child("family1").child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기

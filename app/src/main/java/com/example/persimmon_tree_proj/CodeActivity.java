@@ -89,12 +89,12 @@ public class CodeActivity extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Log.i("datasnapshot soob","here");
-                    if (snapshot.getValue().equals(str_code)){//str_code랑 원래 기존에 있던 코드랑 같다면
+                    if ((snapshot.getValue()).equals(str_code)){//str_code랑 원래 기존에 있던 코드랑 같다면
                         tf = 1; //있는지 없는지 true false 알려줌 있으면 1 없으면 0(기존 설정 값)
                     }
                 }
 
-                if (tf.equals(0)){
+                if (tf == 0){
                     SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE);
                     SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
                     editor.putString("fcode", String.valueOf(str_code));//코드 저장
