@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher_persimmon"
+        android:label="우리집 감나무"
+        android:roundIcon="@mipmap/ic_launcher_persimmon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.persimmon_tree_proj.tmp"></activity>
