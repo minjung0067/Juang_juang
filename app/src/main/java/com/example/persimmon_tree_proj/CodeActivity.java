@@ -91,7 +91,9 @@ public class CodeActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if ((snapshot.getValue())==str_code){//str_code랑 원래 기존에 있던 코드랑 같다면
                         tf = 1; //있는지 없는지 true false 알려줌 있으면 1 없으면 0(기존 설정 값)
-                        Log.i("datasnapshot soob","here");
+                        Log.i("break","----here");
+                        break;
+
                     }
                 }
 
@@ -107,7 +109,7 @@ public class CodeActivity extends AppCompatActivity {
                     tf = 1;
                 }
 
-                else if(tf!=0){
+                else{
                     Log.i("Check function", "same fcode");
                     makeCode(); //기존 가족 코드랑 같은 값이 나왔다면 코드 생성 함수를 다시 실행하라
                 }
