@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_mypage;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private DatabaseReference answerReference;
     private ChildEventListener mChild;
     private TextView textView; //질문 나오는 textView
+    private TextView answerView; //질문에 대한 답변이 나오는 textView
     private String question;
     private String question_position;
     private Spinner spinner; //질문 목록이 있는 spinner
@@ -54,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
+        answerView = (TextView)findViewById(R.id.txt_answer); //answer을 나타내는 textView
 
         initDatabase();
 
+        answerReference = mDatabase.getReference("")
         mReference = mDatabase.getReference("question");
         //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
         mReference.addValueEventListener(new ValueEventListener() {
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //listView의 뷰를 연결하고, Arrayadapter와 listView 연결
+        //spinner를 연결하고, Arrayadapter와 spinner 연결
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         spinner.setAdapter(adapter);
 
