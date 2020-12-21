@@ -86,22 +86,8 @@
         app:srcCompat="@drawable/image"
         tools:ignore="MissingConstraints" />
 
-    <ListView
-        android:id="@+id/listview_msg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_question"
-        app:layout_constraintVertical_bias="0.526" />
-
     <Spinner
         android:id="@+id/spinner_question"
-        android:entries="@array/question"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -111,5 +97,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_question" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

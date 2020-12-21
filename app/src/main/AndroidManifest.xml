@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.persimmon_tree_proj.MakeProfile"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.tmp"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.MakeProfile" />
         <activity android:name="com.example.persimmon_tree_proj.MypageActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Answeractivity" />
         <activity android:name="com.example.persimmon_tree_proj.splash">
