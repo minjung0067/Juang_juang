@@ -1,74 +1,63 @@
 package com.example.persimmon_tree_proj;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import java.io.InputStream;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.Toast;
 
-import java.io.InputStream;
-import java.net.URL;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.Juang_juang.R;
+
+
+
 
 
 public class MakeProfile extends AppCompatActivity {
 
-    private static int PICK_IMAGE_REQUEST = 1;
-    ImageView imgView;
-    static final String TAG = "MakeProfile";
+    ImageView imageView;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
-    }
+        imageView = (ImageView)findViewById(R.id.profile_image);
 
-    //로드버튼 클릭시 실행
-    public void loadImagefromGallery(View view) {
-        //Intent 생성
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*"); //이미지만 보이게
-        //Intent 시작 - 갤러리앱을 열어서 원하는 이미지를 선택할 수 있다.
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
-
-    //이미지 선택작업을 후의 결과 처리
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            //이미지를 하나 골랐을때
-            if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && null != data) {
-                //data에서 절대경로로 이미지를 가져옴
-                Uri uri = data.getData();
-
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                //이미지가 한계이상(?) 크면 불러 오지 못하므로 사이즈를 줄여 준다.
-                int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
-                Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 1024, nh, true);
-
-                imgView = (ImageView) findViewById(R.id.profile_image);
-                imgView.setImageBitmap(scaled);
-
-            } else {
-                Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_LONG).show();
+        button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
             }
+        });
+    }
 
-        } catch (Exception e) {
-            Toast.makeText(this, "Oops! 로딩에 오류가 있습니다.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == 1) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                try {// 선택한 이미지에서 비트맵 생성
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+                    // 이미지가 너무 크면 못 불러오니까 사이즈를 줄임
+                    int nh = (int) (img.getHeight() * (1024.0 / img.getWidth()));
+                    Bitmap scaled = Bitmap.createScaledBitmap(img, 1024, nh, true);
+                    //이미지 표시
+                    imageView.setImageBitmap(img);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
     }
 }
