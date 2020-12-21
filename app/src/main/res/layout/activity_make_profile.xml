@@ -70,6 +70,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         app:civ_border_width="0dp"
+        android:maxWidth="30dp"
+        android:maxHeight="30dp"
         android:id="@+id/profile_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
