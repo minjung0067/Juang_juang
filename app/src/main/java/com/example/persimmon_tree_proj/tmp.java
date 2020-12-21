@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj;
+/*package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class tmp extends AppCompatActivity {
 
     private Button btn_logout;     //로그아웃 버튼
     private Button btn_goanswer; //답변하러가기 버튼
@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView; //질문 나오는 textView
     private String question;
     private Spinner spinner; //질문 목록이 있는 spinner
-    //array배열을 생성하고 spinner와 연결
+    private ListView listView;
+    //array배열을 생성하고 리스트뷰와 연결
     private ArrayAdapter<String> adapter;
     List<Object> Array = new ArrayList<Object>();
 
@@ -53,32 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
+        listView =(ListView)findViewById(R.id.listview_msg); //answer에 대한 listView
 
         initDatabase();
-
-        mReference = mDatabase.getReference("question");
-        //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
-
-                //child 내에 있는 question 데이터를 저장하는 작업
-                for(DataSnapshot questionData : datasnapshot.getChildren()){
-                    String question = questionData.getValue().toString();
-                    Array.add(question);
-                    adapter.add(question);
-                }
-                //spinner를 갱신하고 마지막 위치를 카운트
-                adapter.notifyDataSetChanged();
-                spinner.setSelection(adapter.getCount()-1);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -95,11 +73,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mReference = mDatabase.getReference("answer");
+        //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                adapter.clear(); //리스트에 값을 넣기 전 초기화하기
 
+                //child 내에 있는 메시지 데이터를 저장하는 작업
+                for(DataSnapshot answerData : datasnapshot.getChildren()){
+                    String msg2 = answerData.getValue().toString();
+                    Array.add(msg2);
+                    adapter.add(msg2);
+                }
+                //리스트뷰를 갱신하고 마지막 위치를 카운트
+                adapter.notifyDataSetChanged();
+                listView.setSelection(adapter.getCount()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //listView의 뷰를 연결하고, Arrayadapter와 listView 연결
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
-        spinner.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     private void initDatabase(){
         mDatabase = FirebaseDatabase.getInstance();
 
-        mReference = mDatabase.getReference("question");
+        mReference = mDatabase.getReference("answer");
 
         mChild = new ChildEventListener(){
 
@@ -181,5 +181,6 @@ public class MainActivity extends AppCompatActivity {
         mReference.removeEventListener(mChild);
     }
 }
+*/
 
 
