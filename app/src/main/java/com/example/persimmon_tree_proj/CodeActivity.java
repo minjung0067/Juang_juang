@@ -55,15 +55,15 @@ public class CodeActivity extends AppCompatActivity {
     public String makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.textView); //초기화
         Log.i("Check function","make code");
-
+        str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
             int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             str_code += Integer.toString(randomNum);
         }
-        
+
         Toast.makeText(CodeActivity.this, "가족코드 "+ str_code +"생성 완료 ", Toast.LENGTH_SHORT).show();
         checkDatabase(str_code);
-    return str_code;
+        return str_code;
     }
 
     //groups라는 루트 노드 아래에 str_code 6자리를 키 값과 value로 가지는 노드 생성
@@ -87,14 +87,16 @@ public class CodeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.i("value event function","data upload start");
-                System.out.println("before SnapShot tf is "+tf+"\n");
+                tf = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.i("datasnapshot soob","here");
-                    if ((snapshot.getValue()).equals(str_code)){//str_code랑 원래 기존에 있던 코드랑 같다면
+                    if ((snapshot.getValue())==str_code){//str_code랑 원래 기존에 있던 코드랑 같다면
                         tf = 1; //있는지 없는지 true false 알려줌 있으면 1 없으면 0(기존 설정 값)
+                        Log.i("break","----here");
+                        break;
+
                     }
                 }
-                System.out.println("after SnapShot tf is "+tf+"\n");
+
                 if (tf==0){
                     SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE);
                     SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
@@ -104,15 +106,15 @@ public class CodeActivity extends AppCompatActivity {
                     Log.i("if function","tf == 0 start upload data");
                     mReference.child("users").child(name).child("fcode").setValue(str_code); //user 이름 개인정보 있는 데이터 베이스에 올리기
                     writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
-
-                    System.out.println("when tf==0 tf is "+tf+"\n");
+                    tf = 1;
                 }
 
-                else if(tf!=0){
+                else if (tf ==1){
                     Log.i("Check function", "same fcode");
-                    System.out.println("when tf!=0 tf is "+tf+"\n");
-                    //makeCode(); //기존 가족 코드랑 같은 값이 나왔다면 코드 생성 함수를 다시 실행하라
+                    makeCode(); //기존 가족 코드랑 같은 값이 나왔다면 코드 생성 함수를 다시 실행하라
                 }
+
+
             }
 
             @Override
