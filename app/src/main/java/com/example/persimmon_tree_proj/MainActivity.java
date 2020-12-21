@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ChildEventListener mChild;
     private TextView textView; //질문 나오는 textView
     private String question;
+    private String question_position;
     private Spinner spinner; //질문 목록이 있는 spinner
     //array배열을 생성하고 spinner와 연결
     private ArrayAdapter<String> adapter;
@@ -87,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 textView.setText(" "+parent.getItemAtPosition(position)); //mainactivity에서 textview에 question을 띄어줌.
                 question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
+                question_position = String.valueOf(position+1);
+
             }
 
             @Override
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 //Answeactivity로 이동
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
                 intent.putExtra("question",question); //선택한 question을 갖고 감.
+                intent.putExtra("position",question_position); //선택한 position값을 갖고 감.
                 startActivity(intent);
             }
         });
