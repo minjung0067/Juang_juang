@@ -73,7 +73,7 @@ public class CodeActivity extends AppCompatActivity {
     }
 
     public String makeCode(){ //코드 만드는 함수
-        tv_code = (TextView) findViewById(R.id.textView); //초기화
+        tv_code = (TextView) findViewById(R.id.tv_code); //초기화
         Log.i("Check function","make code");
         str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
