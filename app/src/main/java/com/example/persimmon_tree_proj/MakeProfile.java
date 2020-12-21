@@ -32,6 +32,7 @@ public class MakeProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
+                //갤러리 열 때 사용 !!
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, 1);
@@ -52,7 +53,7 @@ public class MakeProfile extends AppCompatActivity {
                     // 이미지가 너무 크면 못 불러오니까 사이즈를 줄임
                     int nh = (int) (img.getHeight() * (1024.0 / img.getWidth()));
                     Bitmap scaled = Bitmap.createScaledBitmap(img, 1024, nh, true);
-                    //이미지 표시
+                    // 감 그림 대신 선택한 이미지 표시
                     imageView.setImageBitmap(img);
                 } catch (Exception e) {
                     e.printStackTrace();
