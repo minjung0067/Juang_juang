@@ -55,7 +55,7 @@ public class CodeActivity extends AppCompatActivity {
     public String makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.textView); //초기화
         Log.i("Check function","make code");
-
+        str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
             int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             str_code += Integer.toString(randomNum);
@@ -87,7 +87,7 @@ public class CodeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.i("value event function","data upload start");
-
+                tf = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if ((snapshot.getValue())==str_code){//str_code랑 원래 기존에 있던 코드랑 같다면
                         tf = 1; //있는지 없는지 true false 알려줌 있으면 1 없으면 0(기존 설정 값)
