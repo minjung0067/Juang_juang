@@ -47,21 +47,8 @@ public class CodeActivity extends AppCompatActivity {
             checkDatabase(str_code);
         }while(tf == 1);
 
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference("groups");
-
-        //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
-        SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
-        final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
-        Log.i("checkDatabase function","they run this fuction");
-        SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE);
-        SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
-        editor.putString("fcode", String.valueOf(str_code));//코드 저장
-        editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
-
-        Log.i("if function","tf == 0 start upload data");
-        mReference.child("users").child(name).child("fcode").setValue(str_code); //user 이름 개인정보 있는 데이터 베이스에 올리기
         writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
+
         tv_code.setText(str_code);//화면에 code출력하기
 
         //지금 바로 만들어주고 넘어가니까 공유하기 누르면 넘어가는 걸로 바꾸기
@@ -73,7 +60,7 @@ public class CodeActivity extends AppCompatActivity {
     }
 
     public String makeCode(){ //코드 만드는 함수
-        tv_code = (TextView) findViewById(R.id.textView); //초기화
+        tv_code = (TextView) findViewById(R.id.tv_code); //초기화
         Log.i("Check function","make code");
         str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
@@ -87,8 +74,24 @@ public class CodeActivity extends AppCompatActivity {
 
     //groups라는 루트 노드 아래에 str_code 6자리를 키 값과 value로 가지는 노드 생성
     private void writeGroupFamily(String str_code){
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference("groups");
         GroupFamily groupFamily = new GroupFamily(str_code);
         mReference.child(str_code).setValue(str_code);
+
+
+
+        //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
+        SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
+        final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
+
+        SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
+        editor.putString("fcode", String.valueOf(str_code));//코드 저장
+        editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
+
+        //mDatabase.getReference("users").child(name).setValue("fcode",str_code);
+        mDatabase.getReference("users").child(name).child("fcode").setValue(str_code); //user 이름 개인정보 있는 데이터 베이스에 올리기
     }
 
 
@@ -103,7 +106,7 @@ public class CodeActivity extends AppCompatActivity {
         Log.i("checkDatabase function","they run this fuction");
         FirebaseDatabase.getInstance().getReference("groups").addValueEventListener(new ValueEventListener() {
 
-            @Override
+       ;     @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.i("value event function","data upload start");
                 tf = 0;

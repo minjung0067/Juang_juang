@@ -187,6 +187,8 @@ public class Registeractivity extends AppCompatActivity {
                         result.put("name", name);
                         result.put("phone", phone);
                         result.put("birth", birth);
+                        result.put("fcode", "");
+
 
                         createUser(id, pwd, phone, birth, name);   //새로운 유저 만들기 함수로 넘어감!
                     }
