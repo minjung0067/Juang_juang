@@ -60,10 +60,10 @@ public class CodeActivity extends AppCompatActivity {
             int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             str_code += Integer.toString(randomNum);
         }
-        
+
         Toast.makeText(CodeActivity.this, "가족코드 "+ str_code +"생성 완료 ", Toast.LENGTH_SHORT).show();
         checkDatabase(str_code);
-    return str_code;
+        return str_code;
     }
 
     //groups라는 루트 노드 아래에 str_code 6자리를 키 값과 value로 가지는 노드 생성
