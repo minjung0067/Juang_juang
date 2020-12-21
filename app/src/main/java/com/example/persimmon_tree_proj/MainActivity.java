@@ -52,18 +52,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView =(TextView)findViewById(R.id.txt_question);
+        textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
         listView =(ListView)findViewById(R.id.listview_msg); //answer에 대한 listView
 
         initDatabase();
 
+        //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                textView.setText(" "+parent.getItemAtPosition(position));
-                question = textView.getText().toString();
+                textView.setText(" "+parent.getItemAtPosition(position)); //mainactivity에서 textview에 question을 띄어줌.
+                question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
             }
 
             @Override
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Answeactivity로 이동
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
-                intent.putExtra("question",question);
+                intent.putExtra("question",question); //선택한 question을 갖고 감.
                 startActivity(intent);
             }
         });
