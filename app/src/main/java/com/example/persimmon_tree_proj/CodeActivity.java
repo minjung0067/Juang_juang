@@ -109,7 +109,7 @@ public class CodeActivity extends AppCompatActivity {
                     tf = 1;
                 }
 
-                else{
+                else if (tf ==1){
                     Log.i("Check function", "same fcode");
                     makeCode(); //기존 가족 코드랑 같은 값이 나왔다면 코드 생성 함수를 다시 실행하라
                 }
