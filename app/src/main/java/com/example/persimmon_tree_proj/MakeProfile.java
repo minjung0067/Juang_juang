@@ -11,22 +11,21 @@ import java.io.InputStream;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.Juang_juang.R;
-
-
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class MakeProfile extends AppCompatActivity {
 
     ImageView imageView;
     Button button;
+    private StorageReference mStorageRef; //이미지 구글 firebase storage에 업로드 하기 위함임
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
         imageView = (ImageView)findViewById(R.id.profile_image);
-
         button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +37,8 @@ public class MakeProfile extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
+        //이미지 데이터 베이스 삽입
+        mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -47,6 +48,7 @@ public class MakeProfile extends AppCompatActivity {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 try {// 선택한 이미지에서 비트맵 생성
+                    //data.getData()로 받은 것은 파일 주소
                     InputStream in = getContentResolver().openInputStream(data.getData());
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
@@ -61,4 +63,11 @@ public class MakeProfile extends AppCompatActivity {
             }
         }
     }
+
+
+    //프로필 이미지는 firebase storage에,
+    // 그리고 그 프로필 이미지의 url을 user의 회원 정보 속 프로필 사진가지에 추가
+    //한 줄 소개도 같이 추가
+    public void onClick()
+
 }
