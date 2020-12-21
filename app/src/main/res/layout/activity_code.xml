@@ -34,11 +34,11 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="88dp"
         android:text="우리 가족 코드"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.343"
+        app:layout_constraintHorizontal_bias="0.281"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -46,20 +46,22 @@
         android:id="@+id/tv_code"
         android:layout_width="198dp"
         android:layout_height="85dp"
-        android:layout_marginTop="112dp"
-        android:text="TextView"
+        android:layout_marginTop="284dp"
         android:textAlignment="center"
         android:textSize="36sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_editor_absoluteX="93dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_gohome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="20dp"
         android:text="홈으로 가기"
-        app:layout_constraintTop_toBottomOf="@+id/btn_profileok"
-        tools:layout_editor_absoluteX="180dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_profileok" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
