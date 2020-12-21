@@ -94,7 +94,7 @@ public class CodeActivity extends AppCompatActivity {
                     }
                 }
 
-                if (tf.equals(0)){
+                if ((tf==0)){
                     SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE);
                     SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
                     editor.putString("fcode", String.valueOf(str_code));//코드 저장

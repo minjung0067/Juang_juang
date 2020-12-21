@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -98,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(" "+parent.getItemAtPosition(position)); //mainactivity에서 textview에 question을 띄어줌.
                 question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
                 question_position = String.valueOf(position+1);
-
 
             }
 
@@ -111,17 +111,19 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         spinner.setAdapter(adapter);
 
+
+
         //listView에 answer 올리기
-        a_Reference = a_Database.getReference("family");
+        a_Reference = a_Database.getReference("family").child("family1").child("answer");
         //이부분이 문제야!!
-        a_Reference.child("family1").child("answer").child("1").addValueEventListener(new ValueEventListener() {
+        a_Reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
 
                 //child 내에 있는 answer데이터를 저장하는 작업
                 for(DataSnapshot answerData : snapshot.getChildren()){
-                    String answer = answerData.getValue().toString();
+                    String answer = answerData.child(question_position).getValue().toString();
                     a_Array.add(answer);
                     a_adapter.add(answer);
                 }
