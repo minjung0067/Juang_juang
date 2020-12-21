@@ -19,7 +19,6 @@ public class Answeractivity extends AppCompatActivity {
     private EditText edit_answer;
     private TextView textView;
     public String msg; //edit_answer의 텍스트 값을 받아 msg에 저장
-
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
