@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.sql.DriverManager.println;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView a_View;
     private ArrayAdapter<String> a_adapter;
     List<Object> a_Array = new ArrayList<Object>();
-
+    String pst ="";
 
 
     @Override
@@ -90,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -99,6 +101,35 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(" "+parent.getItemAtPosition(position)); //mainactivity에서 textview에 question을 띄어줌.
                 question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
                 question_position = String.valueOf(position+1);
+                Log.i("a 의 값 : ", question_position);
+
+                //listView에 answer 올리기
+                a_Reference = a_Database.getReference("family");
+                //이부분이 문제야!!
+                a_Reference.child("family1").child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
+
+                        //child 내에 있는 answer데이터를 저장하는 작업
+                        for(DataSnapshot answerData : snapshot.getChildren()){
+                            String answer = answerData.getValue().toString();
+                            a_Array.add(answer);
+                            a_adapter.add(answer);
+                        }
+                        //ListView를 갱신하고 마지막 위치를 카운트
+                        a_adapter.notifyDataSetChanged();
+                        a_View.setSelection(a_adapter.getCount()-1);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
 
             }
 
@@ -106,41 +137,17 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
+
         });
         //spinner를 연결하고, Arrayadapter와 spinner 연결
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         spinner.setAdapter(adapter);
-
-
-
-        //listView에 answer 올리기
-        a_Reference = a_Database.getReference("family").child("family1").child("answer");
-        //이부분이 문제야!!
-        a_Reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
-
-                //child 내에 있는 answer데이터를 저장하는 작업
-                for(DataSnapshot answerData : snapshot.getChildren()){
-                    String answer = answerData.child(question_position).getValue().toString();
-                    a_Array.add(answer);
-                    a_adapter.add(answer);
-                }
-                //ListView를 갱신하고 마지막 위치를 카운트
-                a_adapter.notifyDataSetChanged();
-                a_View.setSelection(a_adapter.getCount()-1);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         a_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         a_View.setAdapter(a_adapter);
+
+
+
 
 
 
@@ -257,5 +264,4 @@ public class MainActivity extends AppCompatActivity {
         a_Reference.removeEventListener(a_Child);
     }
 }
-
 
