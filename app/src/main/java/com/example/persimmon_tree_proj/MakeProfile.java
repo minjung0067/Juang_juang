@@ -49,7 +49,10 @@ public class MakeProfile extends AppCompatActivity {
                     InputStream in = getContentResolver().openInputStream(data.getData());
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
-                    // 이미지 표시
+                    // 이미지가 너무 크면 못 불러오니까 사이즈를 줄임
+                    int nh = (int) (img.getHeight() * (1024.0 / img.getWidth()));
+                    Bitmap scaled = Bitmap.createScaledBitmap(img, 1024, nh, true);
+                    //이미지 표시
                     imageView.setImageBitmap(img);
                 } catch (Exception e) {
                     e.printStackTrace();
