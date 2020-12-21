@@ -63,10 +63,8 @@ public class MakeProfile extends AppCompatActivity {
             }
         }
     }
-
-
     //프로필 이미지는 firebase storage에,
-    // 그리고 그 프로필 이미지의 url을 user의 회원 정보 속 프로필 사진가지에 추가
+    //그리고 그 프로필 이미지의 url을 user의 회원 정보 속 프로필 사진가지에 추가
     //한 줄 소개도 같이 추가
 
 
