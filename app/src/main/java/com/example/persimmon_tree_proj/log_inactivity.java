@@ -81,7 +81,8 @@ public class log_inactivity extends AppCompatActivity {
                     autoLogin.putString("inputPwd",editTextPassword.getText().toString());
                     autoLogin.commit(); //값 저장
                     Intent intent = new Intent(getApplicationContext(), CodeActivity.class);
-
+                    startActivity(intent);
+                    //이미 코드가 연결 된 경우 main으로 넘어가고 아닌 경우 codeactivity로 넘어가야함 그래서 수정이 필요함
 
                 } else {   //아니라면
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
