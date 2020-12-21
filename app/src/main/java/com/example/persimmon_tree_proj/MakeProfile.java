@@ -1,25 +1,23 @@
 package com.example.persimmon_tree_proj;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.app.AlertDialog; //알람
+import android.content.DialogInterface; //갤러리에서 사진 가져오기
+import android.Manifest;
+import android.os.Environment;
+import android.provider.MediaStore;
+
+import android.
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import java.io.InputStream;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.InputStream;
-import java.net.URL;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.Juang_juang.R;
 
 
@@ -54,7 +52,7 @@ public class MakeProfile extends AppCompatActivity {
                 Uri uri = data.getData();
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                //이미지가 한계이상(?) 크면 불러 오지 못하므로 사이즈를 줄여 준다.
+                //이미지가 너무 크면 불러 오지 못하므로 사이즈를 줄여 준다.
                 int nh = (int) (bitmap.getHeight() * (1024.0 / bitmap.getWidth()));
                 Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 1024, nh, true);
 
