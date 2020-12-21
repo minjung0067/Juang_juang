@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,12 +50,12 @@ public class CodeActivity extends AppCompatActivity {
         //그렇게하고 공유하기 누르면 복사 되는거 만들기
         //홈으로 가기 만들기
         //코드 생성 후 intent로 profile만드는 xml로 이동하기
-
-
+        Log.i("Check function","make code");
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
             int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             str_code += Integer.toString(randomNum);
         }
+        Toast.makeText(CodeActivity.this, "가족코드 "+ str_code +"생성 완료 ", Toast.LENGTH_SHORT).show();
     return str_code;
     }
 
@@ -63,6 +64,7 @@ public class CodeActivity extends AppCompatActivity {
         GroupFamily groupFamily = new GroupFamily(str_code);
         mDatabase.child("groups").child(str_code).setValue(str_code);
     }
+
 
     public void checkDatabase(final String str_code) {
 
@@ -105,10 +107,11 @@ public class CodeActivity extends AppCompatActivity {
                 Log.e("코드 엑티비티", "groups 안에 하위 노드를 읽지 못하였음");
             }
         };
+
     }
 
     public void share(){//공유하기
-
+        bt_share = (Button)findViewById(R.id.btn_profileok);
     }
 
 }

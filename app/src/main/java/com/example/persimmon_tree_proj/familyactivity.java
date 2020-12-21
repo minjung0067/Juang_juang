@@ -54,7 +54,6 @@ public class familyactivity extends AppCompatActivity {
                 public void onClick(View v){  //새로운 코드 만들러 가는 부분
                 Intent intent = new Intent(getApplicationContext(), CodeActivity.class); //코드 생성 xml로 이동
                     startActivity(intent);
-                    finish();
                 }
         //초대코드 생성 부분 끝
                 });
