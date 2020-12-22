@@ -78,6 +78,42 @@ public class log_inactivity extends AppCompatActivity {
         //키 값은 자유, 값은 null
         //login된 값(설정값을)저장하기 위한 변수
 
+
+        //검사하면서 자동로그인!!!!!!
+        FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
+        if (user != null) {   //user 이 null이 아니라면
+            //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
+            //현재 로그인한 user uid로 접근해서 fcode 랑 한줄 소개 있는 애만 자동로그인 되게
+            mDatabase = FirebaseDatabase.getInstance();
+            mReference = mDatabase.getReference("users");  //users에서 현 uid 가진 사람 찾기
+            String myfcode = mReference.child(user.getUid()).child("fcode").getKey();
+            String introduce = mReference.child(user.getUid()).child("introduce").getKey();
+
+            if (loginId != null && loginPwd != null) { //한번 로그인한 적 있고
+                if (!myfcode.equals(check)) {//코드가 있으면서
+                    if (!introduce.equals(check)) {//한줄 소개가 있으면
+                        Toast.makeText(log_inactivity.this, loginId + "님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                        //자동로그인이 되었다면, Mainactivity로 바로 이동
+                        startActivity(intent);
+                    } else { //한줄소개 안 적혀있으면
+                        Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                        startActivity(intentt);
+                        finish();
+                    }
+                } else { //코드가 없으면
+                    Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
+                    startActivity(intentt);
+                    finish();
+                }
+            } else {
+                Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
+                startActivity(intentt);
+                finish();
+            }
+
+
+        }
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +144,6 @@ public class log_inactivity extends AppCompatActivity {
                                             Intent intent = new Intent(log_inactivity.this, MainActivity.class);
                                             //자동로그인이 되었다면, Mainactivity로 바로 이동
                                             startActivity(intent);
-                                            finish();
                                         } else { //한줄소개 안 적혀있으면
                                             Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
                                             startActivity(intentt);
