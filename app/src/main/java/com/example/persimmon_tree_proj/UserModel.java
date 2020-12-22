@@ -62,7 +62,7 @@ public class UserModel {
                 ", phone='" + phone + '\'' +
                 ", birth='" + birth + '\'' +
                 ", family code='" + fcode + '\''+
-                ", introduce my self ='" +introduce+'\''+
+                ", introduce my self ='" + introduce +'\''+
                 '}';
     }
 }

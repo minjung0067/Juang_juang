@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/example"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="73dp"
@@ -47,10 +47,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/whoami" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/whoami"
         android:layout_width="263dp"
         android:layout_height="45dp"
         android:layout_marginStart="74dp"
@@ -62,7 +62,7 @@
         android:singleLine="false"
         android:textColor="#777777"
         android:textColorHint="#939393"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintBottom_toTopOf="@+id/example"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/change_photo_btn"
         android:layout_width="39dp"
         android:layout_height="32dp"
         android:layout_marginStart="240dp"
