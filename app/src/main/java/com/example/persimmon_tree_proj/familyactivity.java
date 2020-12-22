@@ -10,17 +10,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
-    private Button btn_ok; //코드 확인 버튼
+    private Button btn_profileok; //코드 확인 버튼
     private EditText et_code; //코드 입력 text
     private String str; //입력한 코드 str로 바꿀 string 변수
-    //추가해야될 사항 : 파이어베이스에서 가족 코드 주소 가져오기 그걸 str_code(=et_code)와 비교하기
+    private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
 
-    private DatabaseReference mDatabase;
+    private FirebaseDatabase mDatabase;
 
 
     //입력한 코드가 맞는지 확인하고 맞으면 메인으로 회원가입 완료 + main으로 넘어가는 부분
@@ -32,17 +34,20 @@ public class familyactivity extends AppCompatActivity {
 
         et_code = findViewById(R.id.et_code);
         btn_makecode = findViewById(R.id.btn_makecode);
-        btn_ok = findViewById(R.id.btn_profileok);
+        btn_profileok = findViewById(R.id.btn_profileok);
         //findViewById : activity_familyactivity.xml에서 위에 선언한 친구들을 찾아라
-        str = et_code.getText().toString(); //str에다가 code넣어줌
 
-        mDatabase = FirebaseDatabase.getInstance().getReference(); //databasereference의 인스턴스 가져오기
-
-        btn_ok.setOnClickListener(new View.OnClickListener() {
+        btn_profileok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //만약 가족 코드가 일치한다면
+                str = et_code.getText().toString(); //str에다가 code넣어줌
+                mDatabase = FirebaseDatabase.getInstance();
+                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
+                mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
+                startActivity(intent);
+                //+추가로 만든사람 이름 입력하거나 그런 거 해서 남의 가족 거에 안 들어가게 해야할 듯!?
             }
         });
 
