@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String f_code = snapshot.child("fcode").getValue().toString();
-                textViewcode.setText(f_code);
+                //String f_code = snapshot.child("fcode").getValue().toString();
+                //textViewcode.setText(f_code);
 
             }
 
@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         //spinner를 연결하고, Arrayadapter와 spinner 연결
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         spinner.setAdapter(adapter);
+
         //listview를 연결하고, Arrayadapter_a와 listview  연결
         a_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         a_View.setAdapter(a_adapter);
