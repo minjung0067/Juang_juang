@@ -25,6 +25,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class log_inactivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
@@ -41,6 +46,9 @@ public class log_inactivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     // 구글  로그인 버튼
     private SignInButton buttonGoogle;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+    private String check="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +88,47 @@ public class log_inactivity extends AppCompatActivity {
                     autoLogin.putString("inputId",editTextEmail.getText().toString());
                     autoLogin.putString("inputPwd",editTextPassword.getText().toString());
                     autoLogin.commit(); //값 저장
-                    Intent intent = new Intent(getApplicationContext(), familyactivity.class);
-                    startActivity(intent);
-                    //이미 코드가 연결 된 경우 main으로 넘어가고 아닌 경우 codeactivity로 넘어가야함 그래서 수정이 필요함
+
+                    firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+                        @Override
+                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
+                            FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
+                            if (user != null) {   //user 이 null이 아니라면
+                                //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
+                                //현재 로그인한 user uid로 접근해서 fcode 랑 한줄 소개 있는 애만 자동로그인 되게
+                                mDatabase = FirebaseDatabase.getInstance();
+                                mReference = mDatabase.getReference("users");  //users에서 현 uid 가진 사람 찾기
+                                String myfcode = mReference.child(user.getUid()).child("fcode").getKey();
+                                String introduce = mReference.child(user.getUid()).child("introduce").getKey();
+
+                                if (loginId != null && loginPwd != null) { //한번 로그인한 적 있고
+                                    if (!myfcode.equals(check)) {//코드가 있으면서
+                                        if (!introduce.equals(check)) {//한줄 소개가 있으면
+                                            Toast.makeText(log_inactivity.this, loginId + "님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                                            //자동로그인이 되었다면, Mainactivity로 바로 이동
+                                            startActivity(intent);
+                                            finish();
+                                        } else { //한줄소개 안 적혀있으면
+                                            Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                                            startActivity(intentt);
+                                            finish();
+                                        }
+                                    } else { //코드가 없으면
+                                        Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
+                                        startActivity(intentt);
+                                        finish();
+                                    }
+                                } else {
+                                    Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
+                                    startActivity(intentt);
+                                    finish();
+                                }
+
+
+                            }
+                        }
+                    };
 
                 } else {   //아니라면
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
@@ -90,32 +136,6 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
-
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
-                FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
-                if (user != null) {   //user 이 null이 아니라면
-                    Intent intent = new Intent(log_inactivity.this, familyactivity.class);   //로그인 된다면 MainActivity로 이동
-                    startActivity(intent);
-                    finish();
-                } else {
-                }
-            }
-        };
-
-
-
-        //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
-        //값을 가져와 id가 edittextmail과 동일하고 edittextpassword와 동일하다면 자동로그인
-        //dmstj-파이어베이스와 연결
-        if(loginId != null && loginPwd != null){
-                Toast.makeText(log_inactivity.this,loginId+"님 자동로그인 입니다.",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(log_inactivity.this,MainActivity.class);
-                //자동로그인이 되었다면, Mainactivity로 바로 이동동
-                startActivity(intent);
-                finish();
-          }
 
 
 

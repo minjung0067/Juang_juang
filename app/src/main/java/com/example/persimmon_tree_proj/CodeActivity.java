@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +32,7 @@ public class CodeActivity extends AppCompatActivity {
     private TextView tv_code;
     private Button ok;
     private EditText et_introduce;
+    private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     //private FirebaseDatabase database;
@@ -87,19 +91,12 @@ public class CodeActivity extends AppCompatActivity {
         GroupFamily groupFamily = new GroupFamily(str_code);
         mReference.child(str_code).setValue(str_code);
 
+        //현재 들어온 사람의 fcode 쪽에 fcode들어가게
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+        mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str_code);
 
-
-        //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
-        SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
-        final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
-
-        SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE);
-        SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
-        editor.putString("fcode", String.valueOf(str_code));//코드 저장
-        editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
-
-        //mDatabase.getReference("users").child(name).setValue("fcode",str_code);
-        mDatabase.getReference("users").child(name).child("fcode").setValue(str_code); //user 이름 개인정보 있는 데이터 베이스에 올리기
     }
 
 
@@ -114,7 +111,7 @@ public class CodeActivity extends AppCompatActivity {
         Log.i("checkDatabase function","they run this fuction");
         FirebaseDatabase.getInstance().getReference("groups").addValueEventListener(new ValueEventListener() {
 
-       ;     @Override
+            ;     @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.i("value event function","data upload start");
                 tf = 0;

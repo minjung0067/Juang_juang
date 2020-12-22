@@ -15,6 +15,8 @@ import java.io.InputStream;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.Juang_juang.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,7 +34,7 @@ public class MakeProfile extends AppCompatActivity {
     private EditText whoami; //한줄 소개 칸
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-
+    private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
 
 
 
@@ -49,13 +51,13 @@ public class MakeProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MakeProfile.this, MainActivity.class);
                 startActivity(intent);
-
                 String introduce = whoami.getText().toString();
                 mDatabase = FirebaseDatabase.getInstance();
-                //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
-                SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
-                final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
-                mDatabase.getReference("users").child(name).child("introduce").setValue(introduce); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                //입력한 한줄소개 현재 로그인한 사람 uid 통해서 그 사람 introduce에 넣기
+                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+                mDatabase.getReference("users").child(user.getUid()).child("introduce").setValue(introduce); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
 
             }
         });

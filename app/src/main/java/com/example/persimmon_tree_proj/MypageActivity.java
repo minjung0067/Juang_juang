@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,14 +21,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MypageActivity extends AppCompatActivity {
+    private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private TextView my_id;
     private TextView my_introduce;
     private TextView my_fcode;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-    private String id;
-    private String introduce;
-    private String fcode;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,29 +39,23 @@ public class MypageActivity extends AppCompatActivity {
         my_introduce = (TextView) findViewById(R.id.my_introduce);
         my_fcode = (TextView) findViewById(R.id.my_fcode);
 
-        //database에서 값 가져와서 보여주기
-        mReference = mDatabase.getReference("user");
-        SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
-        final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
-//        mReference.child(name).child("introduce").addValueEventListener(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
-//                //child 내에 있는 answer데이터를 저장하는 작업
-//                for(DataSnapshot answerData : snapshot.getChildren()){
-//                    String answer = answerData.getValue().toString();
-//                    a_Array.add(answer);
-//                    a_adapter.add(answer);
-//                }
-//                //ListView를 갱신하고 마지막 위치를 카운트
-//                a_adapter.notifyDataSetChanged();
-//                a_View.setSelection(a_adapter.getCount()-1);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        }
+        //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                String myintroduce = dataSnapshot.child("introduce").getValue(String.class);
+                my_introduce.setText(myintroduce);
+                my_fcode.setText(myfcode);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
         Button revise = (Button)findViewById(R.id.go_back);
         revise.setOnClickListener(new View.OnClickListener() {
