@@ -15,8 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="130dp"
+        android:layout_marginLeft="130dp"
         android:src="@drawable/abc_vector_test"
+        android:text="프로필수정"
         app:layout_constraintBottom_toTopOf="@+id/profile_text" />
 
     <TextView
@@ -33,7 +34,7 @@
         android:id="@+id/profile_image"
         android:layout_width="102dp"
         android:layout_height="71dp"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@drawable/image"
         tools:src="@tools:sample/avatars" />
 
     <LinearLayout
