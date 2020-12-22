@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.persimmon_tree_proj.log_inactivity" />
-        <activity android:name="com.example.persimmon_tree_proj.FamilyCheckActivity" />
         <activity android:name="com.example.persimmon_tree_proj.familyactivity" />
         <activity android:name="com.example.persimmon_tree_proj.CodeActivity" />
         <activity android:name="com.example.persimmon_tree_proj.MainActivity" />
