@@ -27,6 +27,7 @@ import java.util.Map;
 public class CodeActivity extends AppCompatActivity {
     private Button bt_share;
     private TextView tv_code;
+    private Button ok;
     private EditText et_introduce;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -39,7 +40,14 @@ public class CodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
-
+        ok = (Button)findViewById(R.id.ok_btn);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CodeActivity.this, MakeProfile.class);
+                startActivity(intent);
+            }
+        });
         // str_code에 6자리 숫자를 기록 할당하고 makecode안에서 checkDatabase를 돌리기 때문에 똑같은 코드가 아니면 업로드 까지
 
         do {
@@ -131,5 +139,6 @@ public class CodeActivity extends AppCompatActivity {
     public void share(){//공유하기
         bt_share = (Button)findViewById(R.id.btn_profileok);
     }
+
 
 }
