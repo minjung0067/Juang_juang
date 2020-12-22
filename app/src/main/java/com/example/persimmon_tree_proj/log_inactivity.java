@@ -96,6 +96,7 @@ public class log_inactivity extends AppCompatActivity {
                         Intent intent = new Intent(log_inactivity.this, MainActivity.class);
                         //자동로그인이 되었다면, Mainactivity로 바로 이동
                         startActivity(intent);
+                        finish();
                     } else { //한줄소개 안 적혀있으면
                         Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
                         startActivity(intentt);
