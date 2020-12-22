@@ -19,12 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
     private TextView textView; //질문 나오는 textView
+    private TextView textViewcode;
     private String question;
     private String question_position;
     private Spinner spinner; //질문 목록이 있는 spinner
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     List<Object> Array = new ArrayList<Object>();
 
+    //answer 관련
     private FirebaseDatabase a_Database;
     private DatabaseReference a_Reference;
     private ChildEventListener a_Child;
@@ -56,12 +62,17 @@ public class MainActivity extends AppCompatActivity {
     List<Object> a_Array = new ArrayList<Object>();
     String pst ="";
 
+    //family code 관련
+    private String f_code;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textViewcode =(TextView)findViewById(R.id.textViewcode); //fcode확인
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
         a_View = (ListView)findViewById(R.id.answer_view); //answer을 나타내는 textView
@@ -69,43 +80,37 @@ public class MainActivity extends AppCompatActivity {
         initDatabase();
 
 
-        mReference = mDatabase.getReference("question");
-        //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
-        mReference.addValueEventListener(new ValueEventListener() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
+                String f_code = snapshot.child("fcode").getValue().toString();
+                textViewcode.setText(f_code);
 
-                //child 내에 있는 question 데이터를 저장하는 작업
-                for(DataSnapshot questionData : snapshot.getChildren()){
-                    String question = questionData.getValue().toString();
-                    Array.add(question);
-                    adapter.add(question);
-                }
-                //spinner를 갱신하고 마지막 위치를 카운트
-                adapter.notifyDataSetChanged();
-                spinner.setSelection(adapter.getCount()-1);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
 
+
+        });
         //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                textView.setText(" "+parent.getItemAtPosition(position)); //mainactivity에서 textview에 question을 띄어줌.
+                //textView.setText(" "+parent.getItemAtPosition(position)+f_code); //mainactivity에서 textview에 question을 띄어줌.
+                textView.setText(" "+parent.getItemAtPosition(position));
                 question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
                 question_position = String.valueOf(position+1);
                 Log.i("a 의 값 : ", question_position);
 
+
+
                 //listView에 answer 올리기
-                a_Reference = a_Database.getReference("family");
-                //이부분이 문제야!!
                 a_Reference.child("family1").child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
 
                     @Override
@@ -140,9 +145,36 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
+        mReference = mDatabase.getReference("question");
+        //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
+
+                //child 내에 있는 question 데이터를 저장하는 작업
+                for(DataSnapshot questionData : snapshot.getChildren()){
+                    String question = questionData.getValue().toString();
+                    Array.add(question);
+                    adapter.add(question);
+                }
+                //spinner를 갱신하고 마지막 위치를 카운트
+                adapter.notifyDataSetChanged();
+                spinner.setSelection(adapter.getCount()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         //spinner를 연결하고, Arrayadapter와 spinner 연결
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         spinner.setAdapter(adapter);
+        //listview를 연결하고, Arrayadapter_a와 listview  연결
         a_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
         a_View.setAdapter(a_adapter);
 
@@ -178,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
                 intent.putExtra("question",question); //선택한 question을 갖고 감.
                 intent.putExtra("position",question_position); //선택한 position값을 갖고 감.
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
             }
         });
