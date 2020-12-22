@@ -107,14 +107,11 @@ public class log_inactivity extends AppCompatActivity {
                     startActivity(intentt);
                     finish();
                 }
-            } else {
-                Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
-                startActivity(intentt);
-                finish();
             }
 
 
         }
+
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
