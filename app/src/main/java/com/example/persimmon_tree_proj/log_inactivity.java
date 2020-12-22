@@ -88,8 +88,6 @@ public class log_inactivity extends AppCompatActivity {
             mReference = mDatabase.getReference("users");  //users에서 현 uid 가진 사람 찾기
             String myfcode = mReference.child(user.getUid()).child("fcode").getKey();
             String introduce = mReference.child(user.getUid()).child("introduce").getKey();
-
-            if (loginId != null && loginPwd != null) { //한번 로그인한 적 있고
                 if (!myfcode.equals(check)) {//코드가 있으면서
                     if (!introduce.equals(check)) {//한줄 소개가 있으면
                         Toast.makeText(log_inactivity.this, loginId + "님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
@@ -107,9 +105,6 @@ public class log_inactivity extends AppCompatActivity {
                     startActivity(intentt);
                     finish();
                 }
-            }
-
-
         }
 
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
