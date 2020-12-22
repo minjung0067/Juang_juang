@@ -80,7 +80,7 @@ public class log_inactivity extends AppCompatActivity {
                     autoLogin.putString("inputId",editTextEmail.getText().toString());
                     autoLogin.putString("inputPwd",editTextPassword.getText().toString());
                     autoLogin.commit(); //값 저장
-                    Intent intent = new Intent(getApplicationContext(), CodeActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), familyactivity.class);
                     startActivity(intent);
                     //이미 코드가 연결 된 경우 main으로 넘어가고 아닌 경우 codeactivity로 넘어가야함 그래서 수정이 필요함
 
@@ -96,7 +96,7 @@ public class log_inactivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
                 FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
                 if (user != null) {   //user 이 null이 아니라면
-                    Intent intent = new Intent(log_inactivity.this, MainActivity.class);   //로그인 된다면 MainActivity로 이동
+                    Intent intent = new Intent(log_inactivity.this, familyactivity.class);   //로그인 된다면 MainActivity로 이동
                     startActivity(intent);
                     finish();
                 } else {

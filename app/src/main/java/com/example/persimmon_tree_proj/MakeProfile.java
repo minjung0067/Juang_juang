@@ -20,11 +20,24 @@ public class MakeProfile extends AppCompatActivity {
     ImageView imageView;
     Button button;
     private StorageReference mStorageRef; //이미지 구글 firebase storage에 업로드 하기 위함임
+    Button ok;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
+
+        //확인 버튼 누르면 main으로
+        ok = (Button)findViewById(R.id.ok_btn);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         imageView = (ImageView)findViewById(R.id.profile_image);
         button = (Button)findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +53,7 @@ public class MakeProfile extends AppCompatActivity {
         //이미지 데이터 베이스 삽입
         mStorageRef = FirebaseStorage.getInstance().getReference();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
