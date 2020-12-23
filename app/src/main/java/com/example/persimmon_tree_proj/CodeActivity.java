@@ -48,7 +48,7 @@ public class CodeActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CodeActivity.this, MakeProfile.class);
+                Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
                 startActivity(intent);
             }
         });
