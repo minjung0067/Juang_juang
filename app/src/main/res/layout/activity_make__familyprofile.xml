@@ -28,12 +28,12 @@
         android:text="확인"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/whoami"
+        app:layout_constraintStart_toStartOf="@+id/count"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/example2"
+        android:id="@+id/question1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/example4"
+        android:id="@+id/question2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
@@ -51,8 +51,8 @@
         android:text="우리가족만의 이름을 지어주세요!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/example2"
-        app:layout_constraintTop_toBottomOf="@+id/example2" />
+        app:layout_constraintStart_toStartOf="@+id/question1"
+        app:layout_constraintTop_toBottomOf="@+id/question1" />
 
     <TextView
         android:id="@+id/example5"
@@ -74,10 +74,10 @@
         android:text="*모든 가족구성원이 가입해야 우리집 감나무가 열려요!"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/example2" />
+        app:layout_constraintTop_toBottomOf="@+id/question1" />
 
     <EditText
-        android:id="@+id/whoami"
+        android:id="@+id/about_family"
         android:layout_width="263dp"
         android:layout_height="45dp"
         android:layout_marginStart="4dp"
@@ -89,11 +89,11 @@
         android:textColor="#777777"
         android:textColorHint="#939393"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/whoami2"
-        app:layout_constraintTop_toBottomOf="@+id/whoami2" />
+        app:layout_constraintStart_toStartOf="@+id/count"
+        app:layout_constraintTop_toBottomOf="@+id/count" />
 
     <EditText
-        android:id="@+id/whoami2"
+        android:id="@+id/count"
         android:layout_width="263dp"
         android:layout_height="45dp"
         android:layout_marginTop="12dp"
