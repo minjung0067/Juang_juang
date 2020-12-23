@@ -42,14 +42,17 @@ public class MypageActivity extends AppCompatActivity {
         //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        final SharedPreferences autologin = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
                 String myintroduce = dataSnapshot.child("introduce").getValue(String.class);
+                String LoginId = autologin.getString("inputId", "");
                 my_introduce.setText(myintroduce);
                 my_fcode.setText(myfcode);
+                my_id.setText(LoginId);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
