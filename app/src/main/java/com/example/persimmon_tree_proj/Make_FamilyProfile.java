@@ -29,12 +29,13 @@ public class Make_FamilyProfile extends AppCompatActivity {
 
     private StorageReference mStorageRef; //이미지 구글 firebase storage에 업로드 하기 위함임
     Button ok; //확인버튼
-    private EditText count; //가족 몇명
-    private EditText about_family; //가족 이름
+    private EditText counts; //가족 몇명
+    private EditText about_familys; //가족 이름
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private String fcount;
+    private String about_myfamily;
 
 
     @Override
@@ -42,10 +43,11 @@ public class Make_FamilyProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make__familyprofile);
 
-        count = (EditText) findViewById(R.id.count);
-        about_family = (EditText) findViewById(R.id.about_family);
+        counts = (EditText) findViewById(R.id.count);
+        about_familys = (EditText) findViewById(R.id.about_family);
 
-        fcount = count.getText().toString();
+        fcount = counts.getText().toString();
+        about_myfamily = about_familys.getText().toString();
 
 
         //확인 버튼 누르면 main으로
@@ -58,12 +60,12 @@ public class Make_FamilyProfile extends AppCompatActivity {
                 firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-                final SharedPreferences autologin = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
                 reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                        FirebaseDatabase.getInstance().getReference("groups").child(myfcode).child("count").setValue(fcount);
+                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
+                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
 
                     }
                     @Override
