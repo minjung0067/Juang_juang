@@ -63,7 +63,7 @@ public class Make_FamilyProfile extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                        FirebaseDatabase.getInstance().getReference("groups").child(myfcode).push().setValue(fcount);
+                        FirebaseDatabase.getInstance().getReference("groups").child(myfcode).child("count").setValue(fcount);
 
                     }
                     @Override
