@@ -97,6 +97,7 @@ public class log_inactivity extends AppCompatActivity {
                     myfcode = dataSnapshot.child("fcode").getValue(String.class);
                     introduce = dataSnapshot.child("introduce").getValue(String.class);
                     if (myfcode.equals("")) {//코드가 없으면
+                        Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
                         Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                         startActivity(intentt);
                         finish();
@@ -142,7 +143,6 @@ public class log_inactivity extends AppCompatActivity {
                         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
                             FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
-                            Toast.makeText(log_inactivity.this, "자동로그인 성공", Toast.LENGTH_SHORT).show();
                             reference.child(loginUid).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -155,13 +155,11 @@ public class log_inactivity extends AppCompatActivity {
                                     }
                                     else { //코드 있으면
                                         if (introduce.equals("")) {//한줄 소개 없으면
-                                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
                                             Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
                                             startActivity(intentt);
                                             finish();
                                         }
                                         else { //한줄소개까지 있으면
-                                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(log_inactivity.this, MainActivity.class);
                                             //자동로그인이 되었다면, Mainactivity로 바로 이동
                                             startActivity(intent);
