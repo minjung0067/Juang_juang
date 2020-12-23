@@ -34,8 +34,7 @@ public class Make_FamilyProfile extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
-    private String fcount;
-    private String about_myfamily;
+
 
 
     @Override
@@ -45,9 +44,6 @@ public class Make_FamilyProfile extends AppCompatActivity {
 
         counts = (EditText) findViewById(R.id.count);
         about_familys = (EditText) findViewById(R.id.about_family);
-
-        fcount = counts.getText().toString();
-        about_myfamily = about_familys.getText().toString();
 
 
         //확인 버튼 누르면 main으로
@@ -64,6 +60,8 @@ public class Make_FamilyProfile extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                        String fcount = counts.getText().toString();
+                        String about_myfamily = about_familys.getText().toString();
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
 

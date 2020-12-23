@@ -109,7 +109,7 @@ public class log_inactivity extends AppCompatActivity {
                             finish();
                         }
                         else { //한줄소개까지 있으면
-                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                            Intent intent = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                             //자동로그인이 되었다면, Mainactivity로 바로 이동
                             startActivity(intent);
                             Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
