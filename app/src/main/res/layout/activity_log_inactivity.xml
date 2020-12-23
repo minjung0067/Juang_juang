@@ -17,22 +17,22 @@
 
     <EditText
         android:id="@+id/edittext_email"
-        android:layout_width="312dp"
-        android:layout_height="53dp"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="아이디 또는 전화번호"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/edittext_password"
-        android:layout_width="312dp"
-        android:layout_height="53dp"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:ems="10"
@@ -45,8 +45,8 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="312dp"
-        android:layout_height="53dp"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:background="#FF6100"
@@ -67,12 +67,12 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"
-        app:layout_constraintVertical_bias="0.505" />
+        app:layout_constraintVertical_bias="0.341" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_googleSignIn"
-        android:layout_width="312dp"
-        android:layout_height="53dp"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
@@ -108,13 +108,13 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="74dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="67dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="100dp"
         android:text="로그인"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     ​

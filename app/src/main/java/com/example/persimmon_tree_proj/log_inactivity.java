@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class log_inactivity extends AppCompatActivity {
     private EditText editTextPassword;   //비밀번호용
     private String loginId; //자동 로그인 아이디
     private String loginPwd; //자동 로그인 비밀번호
+    private String loginUid; //자동 로그인 비밀번호
     private Button buttonLogIn; //로그인 버튼
     private Button buttonSignUp; //회원가입 버튼
     // 구글로그인 result 상수
@@ -48,8 +50,9 @@ public class log_inactivity extends AppCompatActivity {
     private SignInButton buttonGoogle;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private String myfcode;
+    private String introduce;
     private String check="";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,40 +78,49 @@ public class log_inactivity extends AppCompatActivity {
         //자동로그인을 위한 파일명 auto SharedPreference 선언
         loginId = auto.getString("inputId",null);
         loginPwd = auto.getString("inputPwd",null);
+        loginUid = auto.getString("inputUid",null);
         //키 값은 자유, 값은 null
         //login된 값(설정값을)저장하기 위한 변수
 
 
         //검사하면서 자동로그인!!!!!!
         FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
-        if (user != null) {   //user 이 null이 아니라면
+        if (user.getUid().equals(loginUid)) {
+            //한번 로그인한 적 있고
             //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
             //현재 로그인한 user uid로 접근해서 fcode 랑 한줄 소개 있는 애만 자동로그인 되게
-            mDatabase = FirebaseDatabase.getInstance();
-            mReference = mDatabase.getReference("users");  //users에서 현 uid 가진 사람 찾기
-            String myfcode = mReference.child(user.getUid()).child("fcode").getKey();
-            String introduce = mReference.child(user.getUid()).child("introduce").getKey();
-
-            if (loginId != null && loginPwd != null) { //한번 로그인한 적 있고
-                if (!myfcode.equals(check)) {//코드가 있으면서
-                    if (!introduce.equals(check)) {//한줄 소개가 있으면
-                        Toast.makeText(log_inactivity.this, loginId + "님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(log_inactivity.this, MainActivity.class);
-                        //자동로그인이 되었다면, Mainactivity로 바로 이동
-                        startActivity(intent);
-                        finish();
-                    } else { //한줄소개 안 적혀있으면
-                        Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
+            Toast.makeText(log_inactivity.this, "자동로그인 성공", Toast.LENGTH_SHORT).show();
+            reference.child(loginUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                    introduce = dataSnapshot.child("introduce").getValue(String.class);
+                    if (myfcode.equals("")) {//코드가 없으면
+                        Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                         startActivity(intentt);
                         finish();
                     }
-                } else { //코드가 없으면
-                    Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
-                    startActivity(intentt);
-                    finish();
+                    else { //코드 있으면
+                        if (introduce.equals("")) {//한줄 소개 없으면
+                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                            Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                            startActivity(intentt);
+                            finish();
+                        }
+                        else { //한줄소개까지 있으면
+                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                            //자동로그인이 되었다면, Mainactivity로 바로 이동
+                            startActivity(intent);
+                            finish();
+                        }
+                    }                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    throw databaseError.toException();
                 }
-            }
-
+            });
 
         }
 
@@ -116,11 +128,13 @@ public class log_inactivity extends AppCompatActivity {
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
                     loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
                     //inputId와 inputPwd에 이메일, 비밀번호 저장
                     autoLogin.putString("inputId",editTextEmail.getText().toString());
                     autoLogin.putString("inputPwd",editTextPassword.getText().toString());
+                    autoLogin.putString("inputUid",user.getUid());
                     autoLogin.commit(); //값 저장
 
                     firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -134,6 +148,7 @@ public class log_inactivity extends AppCompatActivity {
                                 mReference = mDatabase.getReference("users");  //users에서 현 uid 가진 사람 찾기
                                 String myfcode = mReference.child(user.getUid()).child("fcode").getKey();
                                 String introduce = mReference.child(user.getUid()).child("introduce").getKey();
+
                                     if (!myfcode.equals(check)) {//코드가 있으면서
                                         if (!introduce.equals(check)) {//한줄 소개가 있으면
                                             Intent intent = new Intent(log_inactivity.this, MainActivity.class);
