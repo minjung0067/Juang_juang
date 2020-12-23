@@ -95,7 +95,7 @@ public class log_inactivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     myfcode = dataSnapshot.child("fcode").getValue(String.class);
                     introduce = dataSnapshot.child("introduce").getValue(String.class);
-                    if ((myfcode==null)) {//코드가 없으면
+                    if (myfcode==null) {//코드가 없으면
                         Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                         startActivity(intentt);
                         Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
