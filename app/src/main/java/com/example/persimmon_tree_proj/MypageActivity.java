@@ -66,7 +66,7 @@ public class MypageActivity extends AppCompatActivity {
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, MakeProfile.class);
+                Intent intent = new Intent(MypageActivity.this, profile_gam.class);
                 startActivity(intent);
             }
         });

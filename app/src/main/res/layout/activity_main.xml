@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="invisible" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_mypage"
         android:layout_width="52dp"
         android:layout_height="43dp"
