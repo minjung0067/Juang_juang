@@ -16,8 +16,8 @@ public class profile_color extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_color);
-        Button color = (Button)findViewById(R.id.color);
-        color.setOnClickListener(new View.OnClickListener() {
+        Button gam = (Button)findViewById(R.id.gam);
+        gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(profile_color.this, profile_gam.class);
