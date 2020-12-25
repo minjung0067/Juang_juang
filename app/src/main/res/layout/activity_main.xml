@@ -87,7 +87,7 @@
         app:layout_constraintStart_toEndOf="@+id/title_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.027"
-        app:srcCompat="@drawable/image"
+        app:srcCompat="@drawable/orange_tree"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@drawable/orange_tree" />
 

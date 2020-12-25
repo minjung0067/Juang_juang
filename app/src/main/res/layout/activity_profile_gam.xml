@@ -42,4 +42,100 @@
         app:layout_constraintStart_toEndOf="@+id/gam"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/gam1"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam2"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam3"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam4"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam5"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam6"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam7"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/gam8"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/thickshape"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
