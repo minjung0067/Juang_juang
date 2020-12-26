@@ -70,6 +70,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this, profile_gam.class);
                 startActivity(intent);
+                finish();
             }
         });
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
@@ -78,6 +79,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
