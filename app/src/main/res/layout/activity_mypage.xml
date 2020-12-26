@@ -14,12 +14,13 @@
         android:id="@+id/go_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="150dp"
         android:background="#00B1A6A6"
         android:src="?attr/homeAsUpIndicator"
         app:layout_constraintBottom_toTopOf="@+id/profile_text" />
+
     <TextView
         android:id="@+id/profile_text"
         android:layout_width="wrap_content"
@@ -98,9 +99,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:gravity="bottom|center"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="10dp"
+            android:background="#00FFFFFF"
+            android:text="로그아웃"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/mun2"
@@ -113,5 +128,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="gammnamooo@gmail.com" />
+
     </LinearLayout>
 </LinearLayout>
