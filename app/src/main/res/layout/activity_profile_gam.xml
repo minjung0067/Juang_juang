@@ -27,6 +27,8 @@
         android:foreground="@color/common_google_signin_btn_text_dark_disabled"
         android:foregroundGravity="fill"
         android:text="감 친구"
+        android:clickable="true"
+        android:longClickable="true"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +42,8 @@
         android:layout_marginEnd="100dp"
         android:background="@drawable/shpae"
         android:text="색상"
+        android:clickable="true"
+        android:longClickable="true"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -53,6 +57,8 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="140dp"
         android:background="@drawable/thickshape"
+        android:clickable="true"
+        android:longClickable="true"
         android:scaleType="fitCenter"
         android:src="@drawable/gam1"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +73,8 @@
         android:background="@drawable/thickshape"
         android:scaleType="fitCenter"
         android:src="@drawable/gam2"
+        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,6 +88,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/gam3"
         app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -91,6 +101,8 @@
         android:background="@drawable/thickshape"
         android:scaleType="fitCenter"
         android:src="@drawable/gam4"
+        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,6 +114,8 @@
         android:layout_marginTop="240dp"
         android:background="@drawable/thickshape"
         android:scaleType="fitCenter"
+        android:clickable="true"
+        android:longClickable="true"
         android:src="@drawable/gam5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -115,6 +129,8 @@
         android:background="@drawable/thickshape"
         android:scaleType="fitCenter"
         android:src="@drawable/gam6"
+        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -127,12 +143,16 @@
         android:background="@drawable/thickshape"
         android:scaleType="fitCenter"
         android:src="@drawable/gam7"
+        android:clickable="true"
+        android:longClickable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/gam8"
         android:layout_width="128dp"
+        android:clickable="true"
+        android:longClickable="true"
         android:layout_height="87dp"
         android:layout_marginStart="224dp"
         android:layout_marginTop="440dp"
