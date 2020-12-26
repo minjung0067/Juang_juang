@@ -1,5 +1,6 @@
 package com.example.persimmon_tree_proj;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -157,6 +158,13 @@ public class Registeractivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {  //모든 정보 입력했는지 확인
                 //email, pwd, phone, birth, name 변수에 입력된 내용을 string으로 바꿔서 각각의 변수에 넣기
+                //자동로그인 안되게 기기에 저장된 거 지움
+                SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = auto.edit();
+                //edit.clear()는 파일 auto에 들어있는 모든 정보를 기기에서 지운다.
+                editor.clear();
+                editor.commit(); //저장
+
                 String id = editTextEmail.getText().toString();
                 String pwd = editTextPassword.getText().toString();
                 String phone = editTextPhone.getText().toString();

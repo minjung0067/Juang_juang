@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button mypage = (Button) findViewById(R.id.btn_mypage); //마이페이지 버튼
+        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage); //마이페이지 버튼
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 마이페이지로 이동

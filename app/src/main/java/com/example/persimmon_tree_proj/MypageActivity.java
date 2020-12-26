@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
@@ -42,14 +44,17 @@ public class MypageActivity extends AppCompatActivity {
         //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        final SharedPreferences autologin = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
                 String myintroduce = dataSnapshot.child("introduce").getValue(String.class);
+                String LoginId = autologin.getString("inputId", "");
                 my_introduce.setText(myintroduce);
                 my_fcode.setText(myfcode);
+                my_id.setText(LoginId);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -57,11 +62,19 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
-        Button revise = (Button)findViewById(R.id.go_back);
+        ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, MakeProfile.class);
+                Intent intent = new Intent(MypageActivity.this, profile_gam.class);
+                startActivity(intent);
+            }
+        });
+        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MypageActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

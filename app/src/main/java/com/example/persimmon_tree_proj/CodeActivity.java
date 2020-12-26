@@ -48,7 +48,7 @@ public class CodeActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CodeActivity.this, MakeProfile.class);
+                Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +80,6 @@ public class CodeActivity extends AppCompatActivity {
             str_code += Integer.toString(randomNum);
         }
 
-        Toast.makeText(CodeActivity.this, "가족코드 "+ str_code +"생성 완료 ", Toast.LENGTH_SHORT).show();
         return str_code;
     }
 
@@ -108,7 +107,6 @@ public class CodeActivity extends AppCompatActivity {
         //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
         SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
         final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
-        Log.i("checkDatabase function","they run this fuction");
         FirebaseDatabase.getInstance().getReference("groups").addValueEventListener(new ValueEventListener() {
 
             ;     @Override

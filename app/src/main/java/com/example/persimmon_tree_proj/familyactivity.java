@@ -47,7 +47,8 @@ public class familyactivity extends AppCompatActivity {
                 mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
                 Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
                 startActivity(intent);
-                //+추가로 만든사람 이름 입력하거나 그런 거 해서 남의 가족 거에 안 들어가게 해야할 듯!?
+                //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
+                //잘못된 코드 입력 시 토스트 띄우기 !
             }
         });
 

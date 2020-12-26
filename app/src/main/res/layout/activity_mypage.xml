@@ -10,16 +10,16 @@
     android:layout_marginRight="40dp"
     tools:context="com.example.persimmon_tree_proj.MypageActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/go_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="130dp"
-        android:src="@drawable/abc_vector_test"
-        android:text="프로필수정"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="150dp"
+        android:background="#00B1A6A6"
+        android:src="?attr/homeAsUpIndicator"
         app:layout_constraintBottom_toTopOf="@+id/profile_text" />
-
     <TextView
         android:id="@+id/profile_text"
         android:layout_width="wrap_content"
@@ -29,6 +29,16 @@
         android:height="30dp"
         android:text="프로필"
         android:textSize="17sp" />
+
+    <ImageButton
+        android:id="@+id/edit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:background="#00B1A6A6"
+        android:src="@android:drawable/ic_menu_edit"
+        app:layout_constraintBottom_toTopOf="@+id/profile_text" />
 
     <Button
         android:id="@+id/profile_image"
@@ -49,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="별명" />
+            android:text="한 줄 소개" />
 
         <TextView
             android:id="@+id/my_introduce"
