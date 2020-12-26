@@ -26,6 +26,7 @@
         android:layout_marginTop="84dp"
         android:background="@drawable/shpae"
         android:text="감 친구"
+        android:clickable="true"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +39,7 @@
         android:layout_marginTop="84dp"
         android:layout_marginEnd="100dp"
         android:background="@drawable/shpae"
+        android:clickable="true"
         android:foreground="@color/common_google_signin_btn_text_dark_disabled"
         android:text="색상"
         android:textSize="14sp"
@@ -47,7 +49,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/c1"
+        android:id="@+id/c3"
         android:layout_width="59dp"
         android:layout_height="57dp"
         android:layout_marginTop="148dp"
@@ -56,6 +58,7 @@
         android:drawableBottom="@android:color/holo_orange_dark"
         android:foreground="@drawable/thickshape"
         app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
         android:onClick="Click"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,43 +66,55 @@
         android:id="@+id/c2"
         android:layout_width="59dp"
         android:layout_height="57dp"
-        android:layout_marginStart="80dp"
         android:layout_marginTop="148dp"
         android:background="#A98BC34A"
+        android:clickable="true"
         android:foreground="@drawable/thickshape"
-        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="Click"
+        app:layout_constraintEnd_toStartOf="@+id/c3"
+        app:layout_constraintStart_toEndOf="@+id/c1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/c3"
+        android:id="@+id/c1"
         android:layout_width="59dp"
         android:layout_height="57dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="148dp"
         android:background="#FFEB3B"
+        android:clickable="true"
         android:foreground="@drawable/thickshape"
+        android:onClick="Click"
         app:layout_constraintEnd_toStartOf="@+id/c1"
-        app:layout_constraintStart_toEndOf="@+id/c2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/c4"
-        android:layout_width="59dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="240dp"
-        android:background="#C3CDDC39"
-        android:drawableBottom="@android:color/holo_orange_dark"
-        android:foreground="@drawable/thickshape"
-        app:layout_constraintEnd_toStartOf="@+id/c6"
-        app:layout_constraintStart_toEndOf="@+id/c9"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/c5"
         android:layout_width="59dp"
         android:layout_height="57dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="36dp"
+        android:background="#C3CDDC39"
+        android:clickable="true"
+        android:drawableBottom="@android:color/holo_orange_dark"
+        android:foreground="@drawable/thickshape"
+        android:onClick="Click"
+        app:layout_constraintEnd_toStartOf="@+id/c6"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toEndOf="@+id/c4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/c9"
+        android:layout_width="59dp"
+        android:layout_height="57dp"
         android:layout_marginTop="336dp"
         android:layout_marginEnd="80dp"
+        android:onClick="Click"
         android:background="#527B03F4"
+        android:clickable="true"
         android:foreground="@drawable/thickshape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -109,40 +124,48 @@
         android:layout_width="59dp"
         android:layout_height="57dp"
         android:layout_marginTop="240dp"
+        android:onClick="Click"
         android:layout_marginEnd="80dp"
         android:background="#8D3BC7FF"
+        android:clickable="true"
         android:foreground="@drawable/thickshape"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/c7"
-        android:layout_width="59dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="336dp"
-        android:background="#8A0F371E"
-        android:drawableBottom="@android:color/holo_orange_dark"
-        android:foreground="@drawable/thickshape"
-        app:layout_constraintEnd_toStartOf="@+id/c5"
-        app:layout_constraintStart_toEndOf="@+id/c8"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/c8"
         android:layout_width="59dp"
         android:layout_height="57dp"
+        android:layout_marginTop="336dp"
+        android:background="#8A0F371E"
+        android:clickable="true"
+        android:drawableBottom="@android:color/holo_orange_dark"
+        android:foreground="@drawable/thickshape"
+        android:onClick="Click"
+        app:layout_constraintEnd_toStartOf="@+id/c9"
+        app:layout_constraintStart_toEndOf="@+id/c7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/c7"
+        android:layout_width="59dp"
+        android:layout_height="57dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="336dp"
         android:background="#7CF4C466"
+        android:clickable="true"
         android:foreground="@drawable/thickshape"
+        android:onClick="Click"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/c9"
+        android:id="@+id/c4"
         android:layout_width="59dp"
         android:layout_height="57dp"
         android:layout_marginStart="80dp"
+        android:clickable="true"
+        android:onClick="Click"
         android:layout_marginTop="240dp"
         android:background="#8DFF4B3B"
         android:foreground="@drawable/thickshape"
