@@ -30,6 +30,7 @@ public class profile_gam extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(profile_gam.this, MypageActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

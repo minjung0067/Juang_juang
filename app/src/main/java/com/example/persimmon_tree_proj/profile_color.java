@@ -31,6 +31,7 @@ public class profile_color extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(profile_color.this, MypageActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
