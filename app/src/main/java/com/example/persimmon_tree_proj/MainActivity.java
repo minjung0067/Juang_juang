@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //listView에 answer 올리기
-                a_Reference.child("family1").child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
+                a_Reference.child(f_code).child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
