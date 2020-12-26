@@ -16,7 +16,7 @@ public class profile_gam extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_gam);
-        Button color = (Button)findViewById(R.id.color);
+        Button color = (Button)findViewById(R.id.color);   //색상 버튼
         color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,7 +24,7 @@ public class profile_gam extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ImageButton go_back = (ImageButton)findViewById(R.id.go_back);
+        ImageButton go_back = (ImageButton)findViewById(R.id.go_back);  //뒤로가기 버튼
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,5 +33,27 @@ public class profile_gam extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void Click(View view) {  //버튼 클릭시마다 switch문으로 다른 이벤트
+        switch (view.getId())
+        {
+            case R.id.gam1:
+                break;
+            case R.id.gam2:
+                break;
+            case R.id.gam3:
+                break;
+            case R.id.gam4:
+                break;
+            case R.id.gam5:
+                break;
+            case R.id.gam6:
+                break;
+            case R.id.gam7:
+                break;
+            case R.id.gam8:
+                break;
+        }
     }
 }

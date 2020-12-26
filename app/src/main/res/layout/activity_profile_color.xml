@@ -56,6 +56,7 @@
         android:drawableBottom="@android:color/holo_orange_dark"
         android:foreground="@drawable/thickshape"
         app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="Click"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
