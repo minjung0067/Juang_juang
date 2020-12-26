@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //String f_code = snapshot.child("fcode").getValue().toString();
-                //textViewcode.setText(f_code);
+                f_code = snapshot.child("fcode").getValue().toString();
+                textViewcode.setText(f_code);
 
             }
 
