@@ -80,15 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
         initDatabase();
 
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
-                textViewcode.setText(f_code);
-
             }
 
             @Override
@@ -98,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
         //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
@@ -108,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
                 question_position = String.valueOf(position+1);
                 Log.i("a 의 값 : ", question_position);
-
 
 
                 //listView에 answer 올리기

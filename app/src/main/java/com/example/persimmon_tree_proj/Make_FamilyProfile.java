@@ -1,5 +1,6 @@
 package com.example.persimmon_tree_proj;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class Make_FamilyProfile extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class Make_FamilyProfile extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
+    private String myfcode;
 
 
 
@@ -55,13 +58,18 @@ public class Make_FamilyProfile extends AppCompatActivity {
                 startActivity(intent);
                 firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
                 reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                        myfcode = dataSnapshot.child("fcode").getValue(String.class);
                         String fcount = counts.getText().toString();
                         String about_myfamily = about_familys.getText().toString();
+                        String user_name = dataSnapshot.child("name").getValue().toString();
+                        String introduce = dataSnapshot.child("introduce").getValue().toString();
+                        HashMap members = new HashMap<>();  //database 올릴 때 사용
+                        members.put(user_name, introduce); //user_name이 key 값 , introduce가 value인 것을 파이어베이스에 연결
+                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").setValue(members);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
 
