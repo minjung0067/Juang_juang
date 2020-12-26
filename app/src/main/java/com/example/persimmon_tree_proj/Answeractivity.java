@@ -30,17 +30,18 @@ public class Answeractivity extends AppCompatActivity {
 
         Intent intent = getIntent();//mainactivity에서 받아온 intent 선언
         String question = intent.getStringExtra("question");//mainactivity에서 받아온 question
+        final String f_code = intent.getStringExtra("f_code"); //mainacitivity에서 받아온 f_code
         final String position = intent.getStringExtra("position");
 
         textView =(TextView)findViewById(R.id.txt_question2);
-        textView.setText(question); //textView에 question 띄우기
+        textView.setText(question+f_code); //textView에 question 띄우기
         edit_answer = (EditText)findViewById(R.id.edit_answer);
         Button answer = (Button)findViewById(R.id.btn_answer);
         answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 msg = edit_answer.getText().toString();//edit_answer에 작성한 text msg에 저장
-                databaseReference.child("family").child("family1").child("answer").child(position).push().setValue(msg);
+                databaseReference.child("family").child(f_code).child("answer").child(position).push().setValue(msg);
                 Intent intent = new Intent(Answeractivity.this, MainActivity.class);
                 startActivity(intent);
             }
