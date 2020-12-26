@@ -65,11 +65,6 @@ public class Make_FamilyProfile extends AppCompatActivity {
                         myfcode = dataSnapshot.child("fcode").getValue(String.class);
                         String fcount = counts.getText().toString();
                         String about_myfamily = about_familys.getText().toString();
-                        String user_name = dataSnapshot.child("name").getValue().toString();
-                        String introduce = dataSnapshot.child("introduce").getValue().toString();
-                        HashMap members = new HashMap<>();  //database 올릴 때 사용
-                        members.put(user_name, introduce); //user_name이 key 값 , introduce가 value인 것을 파이어베이스에 연결
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").setValue(members);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
 
