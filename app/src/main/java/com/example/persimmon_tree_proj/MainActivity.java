@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //child 내에 있는 answer데이터를 저장하는 작업
                         for(DataSnapshot answerData : snapshot.getChildren()){
-                            String answer = answerData.getValue().toString();
+                            String answer = (answerData.getValue()).toString();
                             a_Array.add(answer);
                             a_adapter.add(answer);
                         }
