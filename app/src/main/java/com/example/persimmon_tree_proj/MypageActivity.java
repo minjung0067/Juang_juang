@@ -104,7 +104,7 @@ public class MypageActivity extends AppCompatActivity {
                                 my_image.setImageResource(R.drawable.gam8);
                                 break;
                             default:
-                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setBackgroundColor(Color.parseColor("#000000"));
                                 my_image.setImageResource(R.drawable.gam1);
                                 break;
                         }
