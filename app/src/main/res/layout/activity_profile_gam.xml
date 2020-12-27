@@ -23,12 +23,10 @@
         android:layout_height="30dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="84dp"
-        android:background="@drawable/btn_clicked"
+        android:background="@drawable/shpae"
         android:foreground="@color/common_google_signin_btn_text_dark_disabled"
-        android:foregroundGravity="fill"
         android:text="감 친구"
         android:clickable="true"
-        android:longClickable="true"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +48,7 @@
         app:layout_constraintStart_toEndOf="@+id/gam"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam1"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -65,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam3"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -80,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam2"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -95,7 +93,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam5"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -110,7 +108,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam4"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -125,7 +123,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam6"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -140,7 +138,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam7"
         android:layout_width="128dp"
         android:layout_height="87dp"
@@ -155,7 +153,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/gam8"
         android:layout_width="128dp"
         android:clickable="true"
