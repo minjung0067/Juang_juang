@@ -33,7 +33,7 @@ import org.w3c.dom.Text;
 public class MakeProfile extends AppCompatActivity {
 
     ImageView imageView;
-    Button change_photo_btn; //사진 바꾸기버튼
+    Button change_btn; //사진 바꾸기버튼
     private StorageReference mStorageRef; //이미지 구글 firebase storage에 업로드 하기 위함임
     Button ok; //확인버튼
     private EditText whoami; //한줄 소개 칸
@@ -87,14 +87,14 @@ public class MakeProfile extends AppCompatActivity {
         });
 
         imageView = (ImageView) findViewById(R.id.profile_image);
-        change_photo_btn = (Button) findViewById(R.id.change_photo_btn); //사진 바꾸는 +버튼
-        change_photo_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
-                startActivity(intent);
-            }
-        });
+//        change_btn = (Button) findViewById(R.id.change_photo_btn);
+//        change_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }
         //갤러리 열기
