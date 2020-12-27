@@ -8,6 +8,8 @@ import androidx.core.widget.ImageViewCompat;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +37,7 @@ public class MypageActivity extends AppCompatActivity {
     private TextView my_fcode;
     private ImageView my_image;
     private String gam_number;
+    private String color_number;
     private String myfcode;
     private String user_name;
     private FirebaseDatabase mDatabase;
@@ -65,38 +68,49 @@ public class MypageActivity extends AppCompatActivity {
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
                         gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
                         switch (gam_number) {
                             case "1":
-                                my_image.setBackgroundResource(R.drawable.gam1);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam1);
                                 break;
                             case "2":
-                                my_image.setBackgroundResource(R.drawable.gam2);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam2);
                                 break;
                             case "3":
-                                my_image.setBackgroundResource(R.drawable.gam3);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam3);
                                 break;
                             case "4":
-                                my_image.setBackgroundResource(R.drawable.gam4);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam4);
                                 break;
                             case "5":
-                                my_image.setBackgroundResource(R.drawable.gam5);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam5);
                                 break;
                             case "6":
-                                my_image.setBackgroundResource(R.drawable.gam6);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam6);
                                 break;
                             case "7":
-                                my_image.setBackgroundResource(R.drawable.gam7);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam7);
                                 break;
                             case "8":
-                                my_image.setBackgroundResource(R.drawable.gam8);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam8);
                                 break;
                             default:
-                                my_image.setBackgroundResource(R.drawable.gam1);
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam1);
                                 break;
-
                         }
+
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         throw databaseError.toException();
