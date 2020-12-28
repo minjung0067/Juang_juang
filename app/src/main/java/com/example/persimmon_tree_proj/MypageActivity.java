@@ -2,16 +2,21 @@ package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +35,11 @@ public class MypageActivity extends AppCompatActivity {
     private TextView my_id;
     private TextView my_introduce;
     private TextView my_fcode;
+    private ImageView my_image;
+    private String gam_number;
+    private String color_number;
+    private String myfcode;
+    private String user_name;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
 
@@ -42,15 +52,84 @@ public class MypageActivity extends AppCompatActivity {
         my_id = (TextView) findViewById(R.id.my_id);
         my_introduce = (TextView) findViewById(R.id.my_introduce);
         my_fcode = (TextView) findViewById(R.id.my_fcode);
+        my_image = (ImageView) findViewById(R.id.profile_image);
 
         //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        final SharedPreferences autologin = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                user_name = dataSnapshot.child("name").getValue(String.class);
+                DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("family");
+                reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
+                        gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
+                        switch (gam_number) {
+                            case "1":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam1);
+                                break;
+                            case "2":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam2);
+                                break;
+                            case "3":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam3);
+                                break;
+                            case "4":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam4);
+                                break;
+                            case "5":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam5);
+                                break;
+                            case "6":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam6);
+                                break;
+                            case "7":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam7);
+                                break;
+                            case "8":
+                                my_image.setBackgroundColor(Color.parseColor(color_number));
+                                my_image.setImageResource(R.drawable.gam8);
+                                break;
+                            default:
+                                my_image.setBackgroundColor(Color.parseColor("#ffffff"));
+                                my_image.setImageResource(R.drawable.gam1);
+                                break;
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+
+
+                });}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
+
+
+
+        final SharedPreferences autologin = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {  //fcode 랑 소개랑 id 데이터베이스에서 찾아와서 보여주기
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
                 String myintroduce = dataSnapshot.child("introduce").getValue(String.class);
                 String LoginId = autologin.getString("inputId", "");
@@ -70,6 +149,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this, profile_gam.class);
                 startActivity(intent);
+                finish();
             }
         });
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
@@ -78,6 +158,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼

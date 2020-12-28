@@ -33,14 +33,13 @@ import org.w3c.dom.Text;
 public class MakeProfile extends AppCompatActivity {
 
     ImageView imageView;
-    Button change_photo_btn; //사진 바꾸기버튼
+    Button change_btn; //사진 바꾸기버튼
     private StorageReference mStorageRef; //이미지 구글 firebase storage에 업로드 하기 위함임
     Button ok; //확인버튼
     private EditText whoami; //한줄 소개 칸
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
-
 
 
     @Override
@@ -50,7 +49,7 @@ public class MakeProfile extends AppCompatActivity {
         whoami = (EditText) findViewById(R.id.whoami);
 
         //확인 버튼 누르면 main으로
-        ok = (Button)findViewById(R.id.ok_btn);
+        ok = (Button) findViewById(R.id.ok_btn);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +69,9 @@ public class MakeProfile extends AppCompatActivity {
                         String user_name = snapshot.child("name").getValue().toString();
                         String introduce = snapshot.child("introduce").getValue().toString();
                         HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                        user_info.put("introduce",introduce);
-                        user_info.put("user_gamprofil","");
-                        user_info.put("user_color","");
+                        user_info.put("introduce", introduce);
+                        user_info.put("user_gam", "");
+                        user_info.put("user_color", "");
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
 
 
@@ -87,51 +86,54 @@ public class MakeProfile extends AppCompatActivity {
             }
         });
 
-        imageView = (ImageView)findViewById(R.id.profile_image);
-        change_photo_btn = (Button)findViewById(R.id.change_photo_btn); //사진 바꾸는 +버튼 누르면
-        change_photo_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                //아래 3줄 갤러리 열 때 사용 !!
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, 1);
-            }
-        });
-        //이미지 데이터 베이스 삽입
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+        imageView = (ImageView) findViewById(R.id.profile_image);
+//        change_btn = (Button) findViewById(R.id.change_photo_btn);
+//        change_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
+//                startActivity(intent);
+//            }
+//        });
     }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //위의 startactivity for result 함수랑 이어짐
-        // Check which request we're responding to
-        if (requestCode == 1) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                try {// 선택한 이미지에서 비트맵 생성
-                    //data.getData()로 받은 것은 파일 주소
-                    InputStream in = getContentResolver().openInputStream(data.getData());
-                    Bitmap img = BitmapFactory.decodeStream(in);
-                    in.close();
-                    // 이미지가 너무 크면 못 불러오니까 사이즈를 줄임
-                    int nh = (int) (img.getHeight() * (1024.0 / img.getWidth()));
-                    Bitmap scaled = Bitmap.createScaledBitmap(img, 1024, nh, true);
-                    // 감 그림 대신 선택한 이미지를 imageview 에 띄우기
-                    imageView.setImageBitmap(img);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
-    //프로필 이미지는 firebase storage에,
-    //그리고 그 프로필 이미지의 url을 user의 회원 정보 속 프로필 사진가지에 추가
-    //한 줄 소개도 같이 추가
-
-
-
 }
+        //갤러리 열기
+//        imageView = (ImageView)findViewById(R.id.profile_image);
+//        change_photo_btn = (Button)findViewById(R.id.change_photo_btn); //사진 바꾸는 +버튼 누르면
+//        change_photo_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent();
+//                //아래 3줄 갤러리 열 때 사용 !!
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(intent, 1);
+//            }
+//        });
+//        //이미지 데이터 베이스 삽입
+//        mStorageRef = FirebaseStorage.getInstance().getReference();
+//    }
+//
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //위의 startactivity for result 함수랑 이어짐
+//        // Check which request we're responding to
+//        if (requestCode == 1) {
+//            // Make sure the request was successful
+//            if (resultCode == RESULT_OK) {
+//                try {// 선택한 이미지에서 비트맵 생성
+//                    //data.getData()로 받은 것은 파일 주소
+//                    InputStream in = getContentResolver().openInputStream(data.getData());
+//                    Bitmap img = BitmapFactory.decodeStream(in);
+//                    in.close();
+//                    // 이미지가 너무 크면 못 불러오니까 사이즈를 줄임
+//                    int nh = (int) (img.getHeight() * (1024.0 / img.getWidth()));
+//                    Bitmap scaled = Bitmap.createScaledBitmap(img, 1024, nh, true);
+//                    // 감 그림 대신 선택한 이미지를 imageview 에 띄우기
+//                    imageView.setImageBitmap(img);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }

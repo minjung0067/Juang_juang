@@ -21,37 +21,33 @@
         android:src="?attr/homeAsUpIndicator"
         app:layout_constraintBottom_toTopOf="@+id/profile_text" />
 
-    <TextView
-        android:id="@+id/profile_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginRight="120dp"
-        android:height="30dp"
-        android:text="프로필"
-        android:textSize="17sp" />
-
     <ImageButton
         android:id="@+id/edit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
         android:background="#00B1A6A6"
-        android:src="@android:drawable/ic_menu_edit"
-        app:layout_constraintBottom_toTopOf="@+id/profile_text" />
+        android:layout_marginLeft="130dp"
+        android:src="@android:drawable/ic_menu_edit" />
 
-    <Button
+    <TextView
+        android:id="@+id/profile_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="120dp"
+        android:layout_marginBottom="80dp"
+        android:height="30dp"
+        android:text="프로필"
+        android:textSize="17sp" />
+
+    <ImageView
         android:id="@+id/profile_image"
         android:layout_width="102dp"
-        android:layout_height="71dp"
-        android:background="@drawable/image"
-        tools:src="@tools:sample/avatars" />
+        android:layout_height="93dp"
+        android:foreground="@drawable/thickshape" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="288dp"
-        android:layout_marginTop="20dp"
         android:minHeight="80dp"
         android:orientation="vertical">
 
