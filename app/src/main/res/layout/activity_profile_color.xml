@@ -55,7 +55,7 @@
         android:layout_marginTop="148dp"
         android:layout_marginEnd="80dp"
         android:foreground="#9FFFBB33"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         app:layout_constraintEnd_toEndOf="parent"
         android:clickable="true"
         android:onClick="Click"
@@ -68,7 +68,7 @@
         android:layout_marginTop="148dp"
         android:clickable="true"
         android:foreground="#A98BC34A"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         android:onClick="Click"
         app:layout_constraintEnd_toStartOf="@+id/c3"
         app:layout_constraintStart_toEndOf="@+id/c1"
@@ -80,7 +80,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="148dp"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         android:clickable="true"
         android:foreground="#9FFFBB33"
         android:onClick="Click"
@@ -94,8 +94,8 @@
         android:layout_marginTop="240dp"
         android:layout_marginEnd="36dp"
         android:clickable="true"
-        android:foreground="@drawable/btn_not_clicked"
-        android:background="#C3CDDC39"
+        android:background="@drawable/btn_not_clicked"
+        android:foreground="#C3CDDC39"
         android:onClick="Click"
         app:layout_constraintEnd_toStartOf="@+id/c6"
         app:layout_constraintHorizontal_bias="0.973"
@@ -111,7 +111,7 @@
         android:onClick="Click"
         android:foreground="#527B03F4"
         android:clickable="true"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -124,7 +124,7 @@
         android:layout_marginEnd="80dp"
         android:foreground="#8D3BC7FF"
         android:clickable="true"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,7 +136,7 @@
         android:foreground="#8A0F371E"
         android:clickable="true"
         android:drawableBottom="@android:color/holo_orange_dark"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         android:onClick="Click"
         app:layout_constraintEnd_toStartOf="@+id/c9"
         app:layout_constraintStart_toEndOf="@+id/c7"
@@ -150,7 +150,7 @@
         android:layout_marginTop="336dp"
         android:foreground="#7CF4C466"
         android:clickable="true"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         android:onClick="Click"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -164,7 +164,7 @@
         android:onClick="Click"
         android:layout_marginTop="240dp"
         android:foreground="#8DFF4B3B"
-        android:background="@drawable/btn_drawable"
+        android:background="@drawable/btn_not_clicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
