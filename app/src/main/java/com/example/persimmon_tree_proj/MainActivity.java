@@ -105,14 +105,26 @@ public class MainActivity extends AppCompatActivity {
         //family-fcode-answer-(num)이 family-fcode-count보다 작다면, 다음 질문을 보여주지 않는다.
         //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
         //질문 확인함.
+        a_Reference = a_Database.getReference("family");
         a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                count = (int) snapshot.child("count").getValue();
-                member_count = 0;
-                for(DataSnapshot countData : snapshot.getChildren()){
-                    countData.child(f_code).child("members").getKey();
-                    member_count++;
+                count = (int)snapshot.child("count").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        member_count = 0;
+        a_Reference = a_Database.getReference("family");
+        a_Reference.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot countdata : snapshot.getChildren()){
+                    countdata.getKey();
                 }
 
             }
@@ -121,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        })
+
 
 
         //spinner 선택했을 때
