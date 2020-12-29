@@ -58,6 +58,7 @@ public class MypageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -133,6 +134,7 @@ public class MypageActivity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
+
 
 
 

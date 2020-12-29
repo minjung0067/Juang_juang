@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     //family code 관련
     private String f_code;
+    private int count;
+    private int member_count;
 
 
 
@@ -95,6 +97,46 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        //family-fcode-members가 family-fcode-count 보다 작으면, 블러처리하면서, 아직 가족이 생성되지 않았습니다. 표시
+        //family-fcode-members가 family-fcode-count가 같다면, 가족 생성되어서 첫번째 질문을 보여줌
+        //family-fcode-count랑 family-fcode-members가 같은데 또, 가족코드가 입력되었다면 알맞지 않은 것으로 표시함.
+        //가족 인원수 확인함.
+
+        //family-fcode-answer-(num)이 family-fcode-count보다 작다면, 다음 질문을 보여주지 않는다.
+        //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
+        //질문 확인함.
+        a_Reference = a_Database.getReference("family");
+        /*a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                count = (int)snapshot.child("count").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        member_count = 0;
+        a_Reference = a_Database.getReference("family");
+        a_Reference.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot countdata : snapshot.getChildren()){
+                    countdata.getKey();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        */
+
+
 
         //spinner 선택했을 때
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){

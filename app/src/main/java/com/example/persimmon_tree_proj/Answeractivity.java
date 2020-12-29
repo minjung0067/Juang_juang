@@ -44,7 +44,7 @@ public class Answeractivity extends AppCompatActivity {
         final String position = intent.getStringExtra("position");
 
         textView =(TextView)findViewById(R.id.txt_question2);
-        textView.setText(question+f_code); //textView에 question 띄우기
+        textView.setText(question); //textView에 question 띄우기
         edit_answer = (EditText)findViewById(R.id.edit_answer);
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
