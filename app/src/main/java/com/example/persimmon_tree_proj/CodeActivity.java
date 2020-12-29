@@ -3,8 +3,9 @@ package com.example.persimmon_tree_proj;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,12 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class CodeActivity extends AppCompatActivity {
-    private Button bt_share;
+    private Button btn_profileok;
     private TextView tv_code;
     private Button ok;
     private EditText et_introduce;
@@ -39,12 +37,15 @@ public class CodeActivity extends AppCompatActivity {
     //private DatabaseReference mDatabase; //데이터베이스에서 데이터 읽고 쓰기위해 인스턴스 필요
     private String str_code = "";
     private int tf = 0;
+    //code 공유하기 누를때 복사하기 위한 string형 code
+    private String code = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
         ok = (Button)findViewById(R.id.ok_btn);
+
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +53,9 @@ public class CodeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // str_code에 6자리 숫자를 기록 할당하고 makecode안에서 checkDatabase를 돌리기 때문에 똑같은 코드가 아니면 업로드 까지
 
+        //----코드 생성-----
+        // str_code에 6자리 숫자를 기록 할당하고 makecode안에서 checkDatabase를 돌리기 때문에 똑같은 코드가 아니면 업로드 까지
         do {
             str_code = makeCode();
             checkDatabase(str_code);
@@ -63,11 +65,32 @@ public class CodeActivity extends AppCompatActivity {
 
         tv_code.setText(str_code);//화면에 code출력하기
 
-        //지금 바로 만들어주고 넘어가니까 공유하기 누르면 넘어가는 걸로 바꾸기
-        //Toast.makeText(CodeActivity.this, "가족 코드가 생성이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
-        //mDatabase.removeEventListener();
-        //Intent intent = new Intent(getApplicationContext(),MakeProfile.class);
-        //startActivity(intent);
+        //----공유하기----
+        //tv_code(text view)에 적혀있는 코드를 가져오는 방식임
+        //오류가 나거나 잘안된다면 str_code(string형)을 바로 사용하는 방식으로 바꾸어도 좋을듯
+        btn_profileok = (Button)findViewById(R.id.btn_ok);//btn과 java연결
+        TextView textView= (TextView) findViewById(R.id.tv_code); //텍스트뷰
+        final String code = textView.getText().toString();//텍스트 뷰 글자 가져옴
+        btn_profileok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (code == ""){ //가족 코드 생성 전에 누른다면
+                    Toast.makeText(CodeActivity.this, "가족코드가 생성이 되지 않았습니다. 다시 시도해주세요.",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+                    clipboardManager.setPrimaryClip(clipData);
+
+                    //복사가 되었다면 토스트메시지 노출
+                    Toast.makeText(CodeActivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
+
+                    //토스트 띄우고 화면 전환하기
+                    Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -86,7 +109,7 @@ public class CodeActivity extends AppCompatActivity {
     //groups라는 루트 노드 아래에 str_code 6자리를 키 값과 value로 가지는 노드 생성
     private void writeGroupFamily(String str_code){
         mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference("groups");
+        mReference = mDatabase.getReference("groups"); //파이어 베이스의 경로 선택함
         GroupFamily groupFamily = new GroupFamily(str_code);
         mReference.child(str_code).setValue(str_code);
 
@@ -104,9 +127,6 @@ public class CodeActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("groups");
 
-        //현재 코드가 생성하는 사용자 이름을 디바이스에 저장된 파일에서 불러오기 위함
-        SharedPreferences comefile = getSharedPreferences("saveprofile", MODE_PRIVATE); // 저장된 값을 불러오기 위해 네임파일 saveprofile을 찾음
-        final String name = comefile.getString("name", ""); //key에 저장된 값이 있는지 확인 없으면 ""반환
         FirebaseDatabase.getInstance().getReference("groups").addValueEventListener(new ValueEventListener() {
 
             ;     @Override
@@ -132,7 +152,32 @@ public class CodeActivity extends AppCompatActivity {
     }
 
     public void share(){//공유하기
-        bt_share = (Button)findViewById(R.id.btn_profileok);
+        btn_profileok = (Button)findViewById(R.id.btn_ok);//btn과 java연결
+        TextView textView= (TextView) findViewById(R.id.tv_code); //텍스트뷰
+        final String code = textView.getText().toString();//텍스트 뷰 글자 가져옴
+
+        //tv_code(text view)에 적혀있는 코드를 가져오는 방식임
+        //오류가 나거나 잘안된다면 str_code(string형)을 바로 사용하는 방식으로 바꾸어도 좋을듯
+
+        if (code == ""){
+            Toast.makeText(CodeActivity.this, "가족코드가 생성이 되지 않았습니다. 다시 시도해주세요.",Toast.LENGTH_LONG).show();
+        }
+
+        else {
+            View.OnClickListener listener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //클립보드 사용 코드
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+                    clipboardManager.setPrimaryClip(clipData);
+
+                    //복사가 되었다면 토스트메시지 노출
+                    Toast.makeText(CodeActivity.this, "가족 코드가 복사되었습니다.", Toast.LENGTH_SHORT).show();
+
+                }
+            };
+        }
     }
 
 
