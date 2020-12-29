@@ -71,6 +71,16 @@ public class MypageActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
                         gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
+
+                        //나중에 주석 처리해서 지울 부분
+                        if (gam_number == null){
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("#1");
+                        }
+                        if (color_number == null){
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#9FFFBB33");
+                        }
+                        // 나중엔 여기까지 지우기 !
+
                         switch (gam_number) {
                             case "1":
                                 my_image.setBackgroundColor(Color.parseColor(color_number));

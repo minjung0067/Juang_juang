@@ -52,6 +52,7 @@ public class profile_gam extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(profile_gam.this, profile_color.class);
                 startActivity(intent);
+                finish();
             }
         });
         ImageButton go_back = (ImageButton) findViewById(R.id.go_back);  //뒤로가기 버튼
