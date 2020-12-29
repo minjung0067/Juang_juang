@@ -66,6 +66,18 @@ public class profile_gam extends AppCompatActivity {
         });
 
     }
+    public void make_clicked(ImageView view) {   //선택한 걔빼고는 다 선택해제 되게, 이미 다른 가족이 선택한 애들은 선택 안되게 하는 함수!
+        gam_1.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_2.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_3.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_4.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_5.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_6.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_7.setBackgroundResource(R.drawable.btn_not_clicked);
+        gam_8.setBackgroundResource(R.drawable.btn_not_clicked);
+        view.setBackgroundResource(R.drawable.btn_clicked);
+
+    }
     public void Click(final View view) {  //버튼 클릭시마다 switch문으로 다른 감 프로필 선택
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -77,35 +89,35 @@ public class profile_gam extends AppCompatActivity {
                 String user_name = dataSnapshot.child("name").getValue(String.class);
                 switch (view.getId()) {
                     case R.id.gam1:
-                        gam_1.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_1);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("1");
                         break;
                     case R.id.gam2:
-                        gam_2.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_2);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("2");
                         break;
                     case R.id.gam3:
-                        gam_3.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_3);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("3");
                         break;
                     case R.id.gam4:
-                        gam_4.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_4);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("4");
                         break;
                     case R.id.gam5:
-                        gam_5.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_5);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("5");
                         break;
                     case R.id.gam6:
-                        gam_6.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_6);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("6");
                         break;
                     case R.id.gam7:
-                        gam_7.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_7);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("7");
                         break;
                     case R.id.gam8:
-                        gam_8.setBackgroundResource(R.drawable.btn_clicked);
+                        make_clicked(gam_8);
                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("8");
                         break;
 
