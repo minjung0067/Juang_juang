@@ -91,7 +91,6 @@ public class profile_color extends AppCompatActivity {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
                         while(members.hasNext()) {
                             String family_color_num = members.next().child("user_color").getValue(String.class);
-                            Log.i("a 가모냐면의 값 : ", String.valueOf(family_color_num));
                             if (family_color_num != null) {
                                 make_cannot_select(family_color_num);
                                 //각각 체크해서 다른 가족에 의해 선택된 건 2로 바꾸는 함수
@@ -114,10 +113,10 @@ public class profile_color extends AppCompatActivity {
     public void check_process(int clicked_what, ImageView clicked_btn){
         //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
         if (clicked_what==1){
-            clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
+            clicked_btn.setBackgroundResource(R.drawable.btn_clicked_color);
         }
         else if(clicked_what==2){
-            clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
+            clicked_btn.setBackgroundResource(R.drawable.btn_clicked_color);
         }
         else{
             clicked_btn.setBackgroundResource(R.drawable.btn_not_clicked);
