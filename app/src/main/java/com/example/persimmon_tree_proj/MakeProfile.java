@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,12 +42,27 @@ public class MakeProfile extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
+    private String myfcode;
+    private String user_name;
+    private String gam_number;
+    private String color_number;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
+
+        Button go_back = (Button) findViewById(R.id.go_back);    //뒤로가기
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         whoami = (EditText) findViewById(R.id.whoami);
 
         //확인 버튼 누르면 main으로
@@ -87,14 +104,94 @@ public class MakeProfile extends AppCompatActivity {
         });
 
         imageView = (ImageView) findViewById(R.id.profile_image);
-//        change_btn = (Button) findViewById(R.id.change_photo_btn);
-//        change_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
-//                startActivity(intent);
-//            }
-//        });
+        change_btn = (Button) findViewById(R.id.change_profile);
+        change_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
+                startActivity(intent);
+            }
+        });
+        //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                user_name = dataSnapshot.child("name").getValue(String.class);
+                DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("family");
+                reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
+                        gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
+
+                        //나중에 주석 처리해서 지울 부분
+                        if (gam_number == null){
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("#1");
+                        }
+                        if (color_number == null){
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#9FFFBB33");
+                        }
+                        // 나중엔 여기까지 지우기 !
+
+                        switch (gam_number) {
+                            case "1":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam1);
+                                break;
+                            case "2":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam2);
+                                break;
+                            case "3":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam3);
+                                break;
+                            case "4":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam4);
+                                break;
+                            case "5":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam5);
+                                break;
+                            case "6":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam6);
+                                break;
+                            case "7":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam7);
+                                break;
+                            case "8":
+                                imageView.setBackgroundColor(Color.parseColor(color_number));
+                                imageView.setImageResource(R.drawable.gam8);
+                                break;
+                            default:
+                                imageView.setBackgroundColor(Color.parseColor("#ffffff"));
+                                imageView.setImageResource(R.drawable.gam1);
+                                break;
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+
+
+                });}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
     }
 }
         //갤러리 열기
