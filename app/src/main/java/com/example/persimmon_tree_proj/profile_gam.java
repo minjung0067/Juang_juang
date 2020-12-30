@@ -78,7 +78,7 @@ public class profile_gam extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-
+                String user_name = dataSnapshot.child("name").getValue(String.class);
                 //이미 다른 가족 구성원이 선택한 감 사진이이 뭔지 검사하는 부분 시작
                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
                 reference1.child(myfcode).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
