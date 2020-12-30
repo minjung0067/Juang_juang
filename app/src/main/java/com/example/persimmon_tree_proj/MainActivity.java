@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
         //질문 확인함.
         a_Reference = a_Database.getReference("family");
-        /*a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+        a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 count = (int)snapshot.child("count").getValue();
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        */
+
 
 
 
