@@ -69,7 +69,7 @@ public class profile_color extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(profile_color.this, MypageActivity.class);
+                Intent intent = new Intent(profile_color.this, MakeProfile.class);
                 startActivity(intent);
                 finish();
             }

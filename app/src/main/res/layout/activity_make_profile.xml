@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MakeProfile">
 
+    <Button
+        android:id="@+id/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="516dp"
+        android:background="#00B1A6A6"
+        android:src="@android:drawable/btn_dialog"
+        android:text="메인페이지로"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -86,22 +98,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-<!--    <Button-->
-<!--        android:id="@+id/change_photo_btn"-->
-<!--        android:layout_width="39dp"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:layout_marginStart="240dp"-->
-<!--        android:layout_marginTop="260dp"-->
-<!--        android:layout_marginEnd="120dp"-->
-<!--        android:background="#00FFFFFF"-->
-<!--        android:text="+"-->
-<!--        android:textColor="#FE8738"-->
-<!--        android:textSize="30sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.0" />-->
+    <Button
+        android:id="@+id/change_profile"
+        android:layout_width="39dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="120dp"
+        android:background="#00FFFFFF"
+        android:text="+"
+        android:textColor="#FE8738"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
