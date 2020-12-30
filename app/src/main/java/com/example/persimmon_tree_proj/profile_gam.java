@@ -78,16 +78,17 @@ public class profile_gam extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                String user_name = dataSnapshot.child("name").getValue(String.class);
+                final String user_name = dataSnapshot.child("name").getValue(String.class);
                 //이미 다른 가족 구성원이 선택한 감 사진이이 뭔지 검사하는 부분 시작
                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
                 reference1.child(myfcode).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
+                        String previous_choice = dataSnapshot.child(user_name).child("user_gam").getValue(String.class);
                         while (members.hasNext()) {
                             String family_gam_num = members.next().child("user_gam").getValue(String.class);
-                            if (family_gam_num != null) {
+                            if (family_gam_num != null && family_gam_num!= previous_choice) {
                                 make_cannot_select(family_gam_num);
                                 //각각 체크해서 다른 가족에 의해 선택된 건 2로 바꾸는 함수
                             }
