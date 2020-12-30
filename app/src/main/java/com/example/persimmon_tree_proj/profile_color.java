@@ -91,11 +91,13 @@ public class profile_color extends AppCompatActivity {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
                         //원래 사용자가 선택했던 건 다시 선택지 안에 들어가야 하니까
                         String previous_choice = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
+                        make_cannot_select(previous_choice,1);
+                        make_clicked();
                         while(members.hasNext()) {
                             String family_color_num = members.next().child("user_color").getValue(String.class);
                             if (family_color_num != null && family_color_num!= previous_choice) {
                                 //family_color_num이 있긴 하면서 이전의 선택과 같지 않은 거 == 나를 제외, 가족들이 선택한 거
-                                make_cannot_select(family_color_num);
+                                make_cannot_select(family_color_num,2);
                                 //각각 체크해서 다른 가족에 의해 선택된 건 2로 바꾸는 함수
                             }
                         }
@@ -137,26 +139,26 @@ public class profile_color extends AppCompatActivity {
         check_process(clicked_arr[7], c_8);
         check_process(clicked_arr[8], c_9);
     }
-    //가족들이 이미 선택한 색깔 체크해서 이미 선택된 건 2로 바꾸는 함수
-    public void make_cannot_select(String family_color_num) {
+    //사용자가 전에 선택했던 건 1로 가족들이 이미 선택한 색깔 체크해서 이미 선택된 건 2로 바꾸는 함수
+    public void make_cannot_select(String family_color_num,int num) {
         if (family_color_num.equals("#9FFFBB33")) {
-            clicked_arr[0] = 2;
+            clicked_arr[0] = num;
         } else if (family_color_num.equals("#A98BC34A")) {
-            clicked_arr[1] = 2;
+            clicked_arr[1] = num;
         } else if (family_color_num.equals("#9FFFBB34")) {
-            clicked_arr[2] = 2;
+            clicked_arr[2] = num;
         } else if (family_color_num.equals("#8DFF4B3B")) {
-            clicked_arr[3] = 2;
+            clicked_arr[3] = num;
         } else if (family_color_num.equals("#C3CDDC39")) {
-            clicked_arr[4] = 2;
+            clicked_arr[4] = num;
         } else if (family_color_num.equals("#8D3BC7FF")) {
-            clicked_arr[5] = 2;
+            clicked_arr[5] = num;
         } else if (family_color_num.equals("#7CF4C466")) {
-            clicked_arr[6] = 2;
+            clicked_arr[6] = num;
         } else if (family_color_num.equals("#8A0F371E")) {
-            clicked_arr[7] = 2;
+            clicked_arr[7] = num;
         } else if (family_color_num.equals("#527B03F4")) {
-            clicked_arr[8] = 2; }
+            clicked_arr[8] = num; }
         else{
         }
         make_clicked();
