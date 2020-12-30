@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.Answeractivity">
 
+    <ImageButton
+        android:id="@+id/btn_mypage2"
+        android:layout_width="31dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:background="#FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/orange_tree"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@drawable/orange_tree" />
+
     <TextView
         android:id="@+id/txt_question2"
         android:layout_width="0dp"
@@ -42,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:background="#FF9800"
         android:text="답변완료"
         app:layout_constraintBottom_toTopOf="@+id/edit_answer"
         app:layout_constraintEnd_toEndOf="parent"
