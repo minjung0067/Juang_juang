@@ -82,16 +82,19 @@ public class profile_color extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-
+                final String user_name = dataSnapshot.child("name").getValue(String.class);
                 //이미 다른 가족 구성원이 선택한 색깔이 뭔지 검사하는 부분 시작
                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
                 reference1.child(myfcode).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
+                        //원래 사용자가 선택했던 건 다시 선택지 안에 들어가야 하니까
+                        String previous_choice = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
                         while(members.hasNext()) {
                             String family_color_num = members.next().child("user_color").getValue(String.class);
-                            if (family_color_num != null) {
+                            if (family_color_num != null && family_color_num!= previous_choice) {
+                                //family_color_num이 있긴 하면서 이전의 선택과 같지 않은 거 == 나를 제외, 가족들이 선택한 거
                                 make_cannot_select(family_color_num);
                                 //각각 체크해서 다른 가족에 의해 선택된 건 2로 바꾸는 함수
                             }
@@ -142,7 +145,7 @@ public class profile_color extends AppCompatActivity {
             clicked_arr[1] = 2;
         } else if (family_color_num.equals("#9FFFBB34")) {
             clicked_arr[2] = 2;
-        } else if (family_color_num.equals("#9FFFBB34")) {
+        } else if (family_color_num.equals("#8DFF4B3B")) {
             clicked_arr[3] = 2;
         } else if (family_color_num.equals("#C3CDDC39")) {
             clicked_arr[4] = 2;
