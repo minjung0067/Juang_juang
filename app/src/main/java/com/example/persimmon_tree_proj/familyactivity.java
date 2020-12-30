@@ -29,7 +29,8 @@ public class familyactivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
 
 
-    //입력한 코드가 맞는지 확인하고 맞으면 메인으로 회원가입 완료 + main으로 넘어가는 부분
+    //바로 가족코드 만들기 하면 넘어감
+    // 근데 자꾸 intent 생성하고 넘어가는 화면전환으로 인해서 여러개가 생성되는 거 같음 ! 확인 필요함
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,47 +41,121 @@ public class familyactivity extends AppCompatActivity {
         btn_makecode = findViewById(R.id.btn_makecode);
         btn_ok = findViewById(R.id.btn_ok);
         //findViewById : activity_familyactivity.xml에서 위에 선언한 친구들을 찾아라
-
-        str = et_code.getText().toString(); //str에다가 code넣어줌
-
-        //확인하기 누르면 코드가 맞는지 확인
-        btn_ok.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                switch (v.getId()) {
+
+                    case R.id.btn_ok: {
+                        //btn_ok 눌렀을 때의 처리
+                        str = et_code.getText().toString(); //str에다가 code넣어줌
+                        mDatabase = FirebaseDatabase.getInstance();
+                        mDatabase.getReference("groups").addValueEventListener(new ValueEventListener() { //groups에서 실제로 그 코드가 있는지 확인함
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                tf = 0;
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    Log.i("familycheck", String.valueOf(snapshot.getValue()));
+                                    if ((snapshot.getValue()).equals(str)) {//str_code랑 원래 기존에 있던 코드랑 같다면
+                                        Log.i("familycheck", "str is = " + str);
+                                        tf = 1;
+                                        Log.i("break", "----here");
+                                        break;
+
+                                    }
+                                }
+
+                                if (tf == 1) { //가족 코드 모음집(groups)에 있는 코드와 동일함 그래서 자기database에 fcode추가하고 화면전환
+                                    Log.i("family acitivity", "tf=1");
+                                    firebaseAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
+                                    mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                                    Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
+                                    startActivity(intent);
+                                    finish();
+                                    //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
+
+                                } else if(tf==0){//잘못된 코드 입력 시 토스트 띄우기 !
+                                    Log.i("family acitivity", "tf=0");
+                                    Toast.makeText(familyactivity.this, "가족 코드가 틀렸습니다. 다시 시도해주세요 !", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), familyactivity.class); //회원가입 실패했으니 페이지 다시 로드
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("family activity", "groups 안에 하위 노드를 읽지 못하였음");
+                            }
+                        });
+                    }
+                        break;
+
+                    case R.id.btn_makecode:
+                        {
+                        //btn_makecode 눌렀을 때의 처리
+                        Intent intent = new Intent(getApplicationContext(), CodeActivity.class); //코드 생성 xml로 이동
+                        startActivity(intent);
+                        finish();
+                        }
+                        break;
+
+
+                }
+            }
+        };
+        btn_makecode.setOnClickListener(onClickListener);
+        btn_ok.setOnClickListener(onClickListener);
+    }
+}
+        //확인하기 누르면 코드가 맞는지 확인
+        /*btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                str = et_code.getText().toString(); //str에다가 code넣어줌
                 mDatabase = FirebaseDatabase.getInstance();
                 mDatabase.getReference("groups").addValueEventListener(new ValueEventListener() { //groups에서 실제로 그 코드가 있는지 확인함
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        tf=0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            Log.i("familycheck", String.valueOf(snapshot.getValue()));
                             if ((snapshot.getValue()).equals(str)){//str_code랑 원래 기존에 있던 코드랑 같다면
+                                Log.i("familycheck","str is = "+str);
                                 tf = 1 ;
                                 Log.i("break","----here");
                                 break;
 
                             }
                         }
+
+                        if (tf==1 ){ //가족 코드 모음집(groups)에 있는 코드와 동일함 그래서 자기database에 fcode추가하고 화면전환
+                            Log.i("family acitivity","tf=1");
+                            firebaseAuth = FirebaseAuth.getInstance();
+                            FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
+                            mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                            Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
+                            startActivity(intent);
+                            //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
+
+                        }
+                        else{//잘못된 코드 입력 시 토스트 띄우기 !
+                            Log.i("family acitivity","tf=0");
+                            Toast.makeText(familyactivity.this, "가족 코드가 틀렸습니다. 다시 시도해주세요 !", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(familyactivity.this, familyactivity.class); //회원가입 실패했으니 페이지 다시 로드
+                            startActivity(intent);
+                        }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        Log.e("family activity", "groups 안에 하위 노드를 읽지 못하였음");
                     }
                 });
 
-                if (tf == 1 ){ //가족 코드 모음집(groups)에 있는 코드와 동일함 그래서 자기database에 fcode추가하고 화면전환
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
-                    mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
-                    Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
-                    startActivity(intent);
-                    //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
-
-            }
-                else{//잘못된 코드 입력 시 토스트 띄우기 !
-                    Toast.makeText(familyactivity.this, "가족 코드가 틀렸습니다. 다시 시도해주세요 !", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(familyactivity.this, familyactivity.class); //회원가입 실패했으니 페이지 다시 로드
-                    startActivity(intent);
-                }
             }
         });
 
@@ -96,4 +171,4 @@ public class familyactivity extends AppCompatActivity {
         //초대코드 생성 부분 끝
                 });
             }
-    }
+*/

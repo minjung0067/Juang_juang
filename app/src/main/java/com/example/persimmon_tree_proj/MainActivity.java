@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
+                Log.i("main activity",f_code);
             }
 
             @Override
@@ -105,8 +106,10 @@ public class MainActivity extends AppCompatActivity {
         //family-fcode-answer-(num)이 family-fcode-count보다 작다면, 다음 질문을 보여주지 않는다.
         //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
         //질문 확인함.
+        /*
         a_Reference = a_Database.getReference("family");
         a_Reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 count = (int)snapshot.child(f_code).child("count").getValue();
@@ -134,8 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
+*/
 
 
         //spinner 선택했을 때

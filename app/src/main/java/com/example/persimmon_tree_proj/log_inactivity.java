@@ -125,7 +125,7 @@ public class log_inactivity extends AppCompatActivity {
                 });
 
             }
-    }
+        }
 
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +174,7 @@ public class log_inactivity extends AppCompatActivity {
                             });
 
 
-                            }
+                        }
                     };
 
                 } else {   //아니라면
@@ -269,8 +269,8 @@ public class log_inactivity extends AppCompatActivity {
                             // 구글로그인 성공
                             Toast.makeText(log_inactivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(log_inactivity.this, MainActivity.class);  //구글 로그인 성공시 familyactivity로 넘어가게
-                                startActivity(intent);
-                                finish();
+                            startActivity(intent);
+                            finish();
                         } else {
                             // 구글로그인 실패
                             Toast.makeText(log_inactivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
