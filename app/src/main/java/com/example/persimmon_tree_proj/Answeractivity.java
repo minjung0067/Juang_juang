@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class Answeractivity extends AppCompatActivity {
     private Button btn_answer;
     private EditText edit_answer;
     private TextView textView;
+    private Button btn_mypage2;
     public String msg; //edit_answer의 텍스트 값을 받아 msg에 저장
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -68,6 +70,15 @@ public class Answeractivity extends AppCompatActivity {
                     }
                 });
                 Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage2); //마이페이지 버튼
+        mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 마이페이지로 이동
+                Intent intent = new Intent(Answeractivity.this, MypageActivity.class);
                 startActivity(intent);
             }
         });

@@ -82,6 +82,7 @@
         android:id="@+id/gam2"
         android:layout_width="128dp"
         android:layout_height="87dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="140dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/btn_drawable"
@@ -91,6 +92,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/gam2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -112,6 +114,7 @@
         android:id="@+id/gam4"
         android:layout_width="128dp"
         android:layout_height="87dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="240dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/btn_drawable"
@@ -121,21 +124,24 @@
         android:scaleType="fitCenter"
         android:src="@drawable/gam4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/gam6"
         android:layout_width="128dp"
         android:layout_height="87dp"
-        android:layout_marginStart="224dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="340dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/btn_drawable"
-        android:scaleType="fitCenter"
-        android:onClick="Click"
-        android:src="@drawable/gam6"
         android:clickable="true"
         android:longClickable="true"
-        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="Click"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam5"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -156,16 +162,18 @@
     <ImageView
         android:id="@+id/gam8"
         android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/btn_drawable"
         android:clickable="true"
         android:longClickable="true"
-        android:layout_height="87dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="440dp"
-        android:background="@drawable/btn_drawable"
+        android:onClick="Click"
         android:scaleType="fitCenter"
         android:src="@drawable/gam8"
-        android:onClick="Click"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam7"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
