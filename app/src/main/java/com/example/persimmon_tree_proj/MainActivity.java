@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         //family-fcode-answer-(num)이 family-fcode-count보다 작다면, 다음 질문을 보여주지 않는다.
         //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
         //질문 확인함.
-        /*
+
         a_Reference = a_Database.getReference("family");
         a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-*/
 
 
         //spinner 선택했을 때
@@ -179,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
