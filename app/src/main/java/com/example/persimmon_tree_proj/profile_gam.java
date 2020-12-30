@@ -86,6 +86,8 @@ public class profile_gam extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
                         String previous_choice = dataSnapshot.child(user_name).child("user_gam").getValue(String.class);
+                        clicked_arr[Integer.valueOf(previous_choice)-1] = 1;    //선택했던 거 먼저 눌러져있게
+                        make_clicked();
                         while (members.hasNext()) {
                             String family_gam_num = members.next().child("user_gam").getValue(String.class);
                             if (family_gam_num != null && family_gam_num!= previous_choice) {
