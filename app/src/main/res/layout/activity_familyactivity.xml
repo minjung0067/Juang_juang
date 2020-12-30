@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_profileok"
+        android:id="@+id/btn_ok"
         android:layout_width="293dp"
         android:layout_height="39dp"
         android:layout_marginStart="8dp"
@@ -86,5 +86,5 @@
         app:layout_constraintEnd_toEndOf="@+id/txt_ifhave"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_ifhave"
-        app:layout_constraintTop_toBottomOf="@+id/btn_profileok" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ok" />
 </androidx.constraintlayout.widget.ConstraintLayout>

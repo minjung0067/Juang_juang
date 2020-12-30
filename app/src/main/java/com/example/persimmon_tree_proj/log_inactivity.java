@@ -73,58 +73,59 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences auto = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
         final SharedPreferences.Editor autoLogin = auto.edit();
         //자동로그인을 위한 파일명 auto SharedPreference 선언
-        loginId = auto.getString("inputId",null);
-        loginPwd = auto.getString("inputPwd",null);
-        loginUid = auto.getString("inputUid",null);
+        loginId = auto.getString("inputId", null);
+        loginPwd = auto.getString("inputPwd", null);
+        loginUid = auto.getString("inputUid", null);
         //키 값은 자유, 값은 null
         //login된 값(설정값을)저장하기 위한 변수
 
 
         //검사하면서 자동로그인!!!!!!
         FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
-        if (user.getUid().equals(loginUid)&&(loginId!=null)) {
-            //한번 로그인한 적 있고
-            //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
-            //현재 로그인한 user uid로 접근해서 fcode 랑 한줄 소개 있는 애만 자동로그인 되게
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
-            reference.child(loginUid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                    introduce = dataSnapshot.child("introduce").getValue(String.class);
-                    if (myfcode==null) {//코드가 없으면
-                        Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
-                        startActivity(intentt);
-                        Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                    else { //코드 있으면
-                        if (introduce==null) {//한줄 소개 없으면
-                            Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+        if (user.getUid() != null){  //아예 생전 로그인 안해본 애면 바로 넘어가게 함
+            if (user.getUid().equals(loginUid) && (loginId != null)) {
+                //한번 로그인한 적 있고
+                //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
+                //현재 로그인한 user uid로 접근해서 fcode 랑 한줄 소개 있는 애만 자동로그인 되게
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
+                reference.child(loginUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        myfcode = dataSnapshot.child("fcode").getValue(String.class);
+                        introduce = dataSnapshot.child("introduce").getValue(String.class);
+                        if (myfcode == null) {//코드가 없으면
+                            Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                             startActivity(intentt);
                             Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
                             finish();
+                        } else { //코드 있으면
+                            if (introduce == null) {//한줄 소개 없으면
+                                Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                                startActivity(intentt);
+                                Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else { //한줄소개까지 있으면
+                                Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                                //자동로그인이 되었다면, Mainactivity로 바로 이동
+                                startActivity(intent);
+                                Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
                         }
-                        else { //한줄소개까지 있으면
-                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
-                            //자동로그인이 되었다면, Mainactivity로 바로 이동
-                            startActivity(intent);
-                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+
                     }
 
-                   }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    throw databaseError.toException();
-                }
-            });
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+                });
 
-        }
+            }
+    }
 
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
