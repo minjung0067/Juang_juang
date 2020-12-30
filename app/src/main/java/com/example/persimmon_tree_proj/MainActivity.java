@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     String pst ="";
 
     //family code 관련
-    private String f_code;
+    static String f_code;
     private int count;
     private int member_count;
 
@@ -89,6 +89,41 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
                 Log.i("main activity",f_code);
+                member_count = 0;
+                a_Reference = a_Database.getReference("family");
+                a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.child(f_code).child("count").getValue(Integer.class) == null){
+                            count = 0;
+                        }
+                        else{
+                            count = snapshot.child(f_code).child("count").getValue(Integer.class);
+                            Log.i("count",String.valueOf(count));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                a_Reference = a_Database.getReference("family");
+                a_Reference.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot countdata : snapshot.getChildren()){
+                            countdata.getKey();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -106,38 +141,9 @@ public class MainActivity extends AppCompatActivity {
         //family-fcode-answer-(num)이 family-fcode-count보다 작다면, 다음 질문을 보여주지 않는다.
         //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
         //질문 확인함.
-        /*
-        a_Reference = a_Database.getReference("family");
-        a_Reference.addListenerForSingleValueEvent(new ValueEventListener() {
-        a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                count = (int)snapshot.child(f_code).child("count").getValue();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
 
-        member_count = 0;
-        a_Reference = a_Database.getReference("family");
-        a_Reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot countdata : snapshot.getChildren()){
-                    member_count = (int) snapshot.child(f_code).child("members").getChildrenCount();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-*/
 
 
         //spinner 선택했을 때
@@ -145,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //textView.setText(" "+parent.getItemAtPosition(position)+f_code); //mainactivity에서 textview에 question을 띄어줌.
+                //textView.setText(" "+parent.getItemAtPosition(position)+f_code+count); //mainactivity에서 textview에 question을 띄어줌.
                 textView.setText(" "+parent.getItemAtPosition(position));
                 question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
                 question_position = String.valueOf(position+1);
@@ -153,21 +159,35 @@ public class MainActivity extends AppCompatActivity {
 
 
                 //listView에 answer 올리기
-                a_Reference.child(f_code).child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
-
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
+                        f_code = snapshot.child("fcode").getValue().toString();
+                        a_Reference.child(f_code).child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
 
-                        //child 내에 있는 answer데이터를 저장하는 작업
-                        for(DataSnapshot answerData : snapshot.getChildren()){
-                            String answer = (answerData.getValue()).toString();
-                            a_Array.add(answer);
-                            a_adapter.add(answer);
-                        }
-                        //ListView를 갱신하고 마지막 위치를 카운트
-                        a_adapter.notifyDataSetChanged();
-                        a_View.setSelection(a_adapter.getCount()-1);
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
+
+                                //child 내에 있는 answer데이터를 저장하는 작업
+                                for(DataSnapshot answerData : snapshot.getChildren()){
+                                    String answer = (answerData.getValue()).toString();
+                                    a_Array.add(answer);
+                                    a_adapter.add(answer);
+                                }
+                                //ListView를 갱신하고 마지막 위치를 카운트
+                                a_adapter.notifyDataSetChanged();
+                                a_View.setSelection(a_adapter.getCount()-1);
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                     }
 
@@ -184,8 +204,6 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-
-
         });
 
 
@@ -319,4 +337,3 @@ public class MainActivity extends AppCompatActivity {
         a_Reference.removeEventListener(a_Child);
     }
 }
-
