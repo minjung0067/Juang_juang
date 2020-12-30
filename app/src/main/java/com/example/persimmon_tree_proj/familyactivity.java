@@ -78,9 +78,6 @@ public class familyactivity extends AppCompatActivity {
                                 } else if(tf==0){//잘못된 코드 입력 시 토스트 띄우기 !
                                     Log.i("family acitivity", "tf=0");
                                     Toast.makeText(familyactivity.this, "가족 코드가 틀렸습니다. 다시 시도해주세요 !", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), familyactivity.class); //회원가입 실패했으니 페이지 다시 로드
-                                    startActivity(intent);
-                                    finish();
                                 }
                             }
 
@@ -95,7 +92,7 @@ public class familyactivity extends AppCompatActivity {
                     case R.id.btn_makecode:
                         {
                         //btn_makecode 눌렀을 때의 처리
-                        Intent intent = new Intent(getApplicationContext(), CodeActivity.class); //코드 생성 xml로 이동
+                        Intent intent = new Intent(familyactivity.this, CodeActivity.class); //코드 생성 xml로 이동
                         startActivity(intent);
                         finish();
                         }
