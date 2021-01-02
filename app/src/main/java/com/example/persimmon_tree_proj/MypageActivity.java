@@ -161,6 +161,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this, MakeProfile.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });

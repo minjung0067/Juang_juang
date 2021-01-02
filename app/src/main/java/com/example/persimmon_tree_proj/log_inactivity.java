@@ -52,7 +52,8 @@ public class log_inactivity extends AppCompatActivity {
     private DatabaseReference mReference;
     private String myfcode;
     private String introduce;
-    private String check="";
+    private String myfam_count;
+    private String myfam_introduce;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,25 +97,47 @@ public class log_inactivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         myfcode = dataSnapshot.child("fcode").getValue(String.class);
                         introduce = dataSnapshot.child("introduce").getValue(String.class);
-                        if (myfcode == null) {//코드가 없으면
-                            Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
-                            startActivity(intentt);
-                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else { //코드 있으면
-                            if (introduce == null) {//한줄 소개 없으면
-                                Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
-                                startActivity(intentt);
-                                Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
-                                finish();
-                            } else { //한줄소개까지 있으면
-                                Intent intent = new Intent(log_inactivity.this, MainActivity.class);
-                                //자동로그인이 되었다면, Mainactivity로 바로 이동
-                                startActivity(intent);
-                                Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
-                                finish();
+                        firebaseAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        final DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("family");
+                        reference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
+                                myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
+                                if (myfcode == null) {//코드가 없으면
+                                    Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
+                                    startActivity(intentt);
+                                    Toast.makeText(log_inactivity.this, "아직 가족코드가 없어요!", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                } else { //코드 있으면
+                                    if (myfam_count.equals("0")==true || myfam_introduce==null){ //가족 프로필 안 만들었으면
+                                        Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
+                                        startActivity(intenttt);
+                                        Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                    else{
+                                        if (introduce == null) {//한줄 소개 없으면
+                                            Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                                            startActivity(intentt);
+                                            Toast.makeText(log_inactivity.this, "아직 소개를 입력하지 않았어요!", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        } else { //한줄소개까지 있으면
+                                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                                            //자동로그인이 되었다면, Mainactivity로 바로 이동
+                                            startActivity(intent);
+                                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    }
+                                }
                             }
-                        }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                throw databaseError.toException();
+                            }
+                        });
 
                     }
 

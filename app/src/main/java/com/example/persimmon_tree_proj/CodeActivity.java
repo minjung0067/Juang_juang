@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 
 public class CodeActivity extends AppCompatActivity {
     private Button btn_profileok;
@@ -86,6 +88,29 @@ public class CodeActivity extends AppCompatActivity {
                     Toast.makeText(CodeActivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
 
                     //토스트 띄우고 화면 전환하기
+                    firebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String myfcode = snapshot.child("fcode").getValue(String.class);
+                            String user_name = snapshot.child("name").getValue().toString();
+                            String introduce = snapshot.child("introduce").getValue().toString();
+                            HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
+                            user_info.put("introduce", "");
+                            user_info.put("user_gam", "1");
+                            user_info.put("user_color", "#ffffff");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
                     startActivity(intent);
                 }

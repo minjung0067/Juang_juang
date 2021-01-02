@@ -54,8 +54,6 @@ public class Make_FamilyProfile extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
-                startActivity(intent);
                 firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -74,7 +72,8 @@ public class Make_FamilyProfile extends AppCompatActivity {
                         throw databaseError.toException();
                     }
                 });
-
+                Intent intent = new Intent(Make_FamilyProfile.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

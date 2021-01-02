@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -70,6 +71,20 @@ public class familyactivity extends AppCompatActivity {
                                     firebaseAuth = FirebaseAuth.getInstance();
                                     FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
                                     mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
+                                            FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
+
+                                        }
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                            throw databaseError.toException();
+                                        }
+                                    });
+
                                     Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
                                     startActivity(intent);
                                     finish();

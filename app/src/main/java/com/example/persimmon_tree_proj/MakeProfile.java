@@ -53,15 +53,19 @@ public class MakeProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
 
-        Button go_back = (Button) findViewById(R.id.go_back);    //뒤로가기
-        go_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        Button go_back = (Button) findViewById(R.id.go_back);    //뒤로가기
+//        go_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
 
         whoami = (EditText) findViewById(R.id.whoami);
 
@@ -79,26 +83,6 @@ public class MakeProfile extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
                 mDatabase.getReference("users").child(user.getUid()).child("introduce").setValue(introduce); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
-                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String myfcode = snapshot.child("fcode").getValue(String.class);
-                        String user_name = snapshot.child("name").getValue().toString();
-                        String introduce = snapshot.child("introduce").getValue().toString();
-                        HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                        user_info.put("introduce", introduce);
-                        user_info.put("user_gam", "1");
-                        user_info.put("user_color", "#ffffff");
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
             }
         });
@@ -112,12 +96,7 @@ public class MakeProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
