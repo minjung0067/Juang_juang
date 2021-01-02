@@ -74,7 +74,7 @@ public class MypageActivity extends AppCompatActivity {
 
                         //나중에 주석 처리해서 지울 부분
                         if (gam_number == null){
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("#1");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("1");
                         }
                         if (color_number == null){
                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#9FFFBB33");

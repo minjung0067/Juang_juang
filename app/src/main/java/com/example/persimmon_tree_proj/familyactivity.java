@@ -28,6 +28,7 @@ public class familyactivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private int tf = 0; //가족 코드 맞는지 표시해줄 int형 변수
     private FirebaseDatabase mDatabase;
+    private String count;
 
 
     //바로 가족코드 만들기 하면 넘어감
@@ -71,12 +72,14 @@ public class familyactivity extends AppCompatActivity {
                                     firebaseAuth = FirebaseAuth.getInstance();
                                     FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
                                     mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
-                                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
                                     reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
-                                            FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
+                                            count = dataSnapshot.child(str).child("count").getValue(String.class);
+                                            if(count == null)
+                                                FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
+                                                FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
 
                                         }
                                         @Override
