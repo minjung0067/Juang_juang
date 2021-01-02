@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
-                        count = Integer.valueOf(str).intValue();
+                        count = Integer.valueOf(str);
                         Log.i("member_count", String.valueOf(count));
                         //member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
