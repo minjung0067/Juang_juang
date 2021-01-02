@@ -56,6 +56,7 @@ public class profile_gam extends AppCompatActivity {
             public void onClick(View v) {  //색상 버튼 누르면 색깔 정하는 곳으로 가게
                 Intent intent = new Intent(profile_gam.this, profile_color.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
@@ -66,6 +67,7 @@ public class profile_gam extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(profile_gam.this, MakeProfile.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });

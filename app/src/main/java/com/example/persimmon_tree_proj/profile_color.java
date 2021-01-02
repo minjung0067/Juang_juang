@@ -61,6 +61,7 @@ public class profile_color extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(profile_color.this, profile_gam.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
@@ -71,6 +72,7 @@ public class profile_color extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(profile_color.this, MakeProfile.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
