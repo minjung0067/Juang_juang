@@ -17,21 +17,23 @@ public class Calendar extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
 
-        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn); //마이페이지 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn); //왔다감 버튼
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //누르면 마이페이지로 이동
+            public void onClick(View v) { //누르면 왔다감으로 이동
                 Intent intent = new Intent(Calendar.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
-        ImageButton go_calendar = (ImageButton) findViewById(R.id.calender_btn); //마이페이지 버튼
+        ImageButton go_calendar = (ImageButton) findViewById(R.id.calender_btn); //캘린더 버튼
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //누르면 마이페이지로 이동
+            public void onClick(View v) { //누르면 캘린더 새로고침
                 Intent intent = new Intent(Calendar.this, Calendar.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
