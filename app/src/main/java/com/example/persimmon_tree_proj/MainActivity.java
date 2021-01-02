@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.sql.DriverManager.println;
@@ -65,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     //family code 관련
     static String f_code;
-    private int count;
-    private int member_count;
+    static int count;
+    static int member_count;
 
 
 
@@ -88,34 +89,130 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
-                Log.i("main activity",f_code);
+                final String user_name = snapshot.child("name").getValue(String.class);
+                Log.i("f_code",f_code);
                 member_count = 0;
+                //지정한 member 수 가져오기
                 a_Reference = a_Database.getReference("family");
-                a_Reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+                a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.child(f_code).child("count").getValue(Integer.class) == null){
-                            count = 0;
+                        //count 수 가져오기
+                        String str = (String) snapshot.child("count").getValue();
+                        count = Integer.valueOf(str).intValue();
+                        Log.i("member_count", String.valueOf(count));
+                        //member 수 세기
+                        Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
+                        while (members.hasNext()){
+                            String member_num = members.next().getKey();
+                            member_count++;
+                            Log.i("member_num", String.valueOf(member_num));
                         }
-                        else{
-                            count = snapshot.child(f_code).child("count").getValue(Integer.class);
-                            Log.i("count",String.valueOf(count));
+                        Log.i("member_count1", String.valueOf(member_count));
+
+                        //가족 수 확인하여서 가족 만들어졌는지 확인
+
+
+                        //가족 감나무가 만들어졌을 경우
+                        if(member_count == count){
+
+                            //spinner 선택했을 때
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    //textView.setText(" "+parent.getItemAtPosition(position)+f_code+count); //mainactivity에서 textview에 question을 띄어줌.
+                                    textView.setText(" "+parent.getItemAtPosition(position));
+                                    question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
+                                    question_position = String.valueOf(position+1);
+
+                                    //listView에 answer 올리기
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            f_code = snapshot.child("fcode").getValue().toString();
+                                            a_Reference.child(f_code).child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
+
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
+
+                                                    //child 내에 있는 answer데이터를 저장하는 작업
+                                                    for(DataSnapshot answerData : snapshot.getChildren()){
+                                                        String answer = (answerData.getValue()).toString();
+                                                        a_Array.add(answer);
+                                                        a_adapter.add(answer);
+                                                    }
+                                                    //ListView를 갱신하고 마지막 위치를 카운트
+                                                    a_adapter.notifyDataSetChanged();
+                                                    a_View.setSelection(a_adapter.getCount()-1);
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+
+
+                            mReference = mDatabase.getReference("question");
+                            //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
+                            mReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
+
+                                    //child 내에 있는 question 데이터를 저장하는 작업
+                                    for(DataSnapshot questionData : snapshot.getChildren()){
+                                        String question = questionData.getValue().toString();
+                                        Array.add(question);
+                                        adapter.add(question);
+                                    }
+                                    //spinner를 갱신하고 마지막 위치를 카운트
+                                    adapter.notifyDataSetChanged();
+                                    spinner.setSelection(adapter.getCount()-1);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
+
+
                         }
-                    }
+                        //감나무가 생성되지 않은 경우
+                        else if(member_count < count){
+                            Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                a_Reference = a_Database.getReference("family");
-                a_Reference.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot countdata : snapshot.getChildren()){
-                            countdata.getKey();
+
+
                         }
+                        else{//member_count > count
 
+                        }
                     }
 
                     @Override
@@ -125,119 +222,33 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
-
         });
+
+        //spinner(질문)를 연결하고, Arrayadapter와 spinner 연결
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
+        spinner.setAdapter(adapter);
+
+        //listview(대답)를 연결하고, Arrayadapter_a와 listview  연결
+        a_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
+        a_View.setAdapter(a_adapter);
+
+
         //family-fcode-members가 family-fcode-count 보다 작으면, 블러처리하면서, 아직 가족이 생성되지 않았습니다. 표시
-        //family-fcode-members가 family-fcode-count가 같다면, 가족 생성되어서 첫번째 질문을 보여줌
+        //family-fcode-members가 family-fcode-count가 같다면, 가족 생성 되어서 첫번째 질문을 보여줌
         //family-fcode-count랑 family-fcode-members가 같은데 또, 가족코드가 입력되었다면 알맞지 않은 것으로 표시함.
         //가족 인원수 확인함.
+
+
 
         //family-fcode-answer-(num)이 family-fcode-count보다 작다면, 다음 질문을 보여주지 않는다.
         //family-fcode-answer-(num)이 family-fcode-count와 같아진다면, 다음 질문을 보여준다.
         //질문 확인함.
-
-
-
-
-
-        //spinner 선택했을 때
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //textView.setText(" "+parent.getItemAtPosition(position)+f_code+count); //mainactivity에서 textview에 question을 띄어줌.
-                textView.setText(" "+parent.getItemAtPosition(position));
-                question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
-                question_position = String.valueOf(position+1);
-                Log.i("a 의 값 : ", question_position);
-
-
-                //listView에 answer 올리기
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        f_code = snapshot.child("fcode").getValue().toString();
-                        a_Reference.child(f_code).child("answer").child(question_position).addValueEventListener(new ValueEventListener() {
-
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                a_adapter.clear(); //ListView에 넣을 값을 넣기전 초기화하기
-
-                                //child 내에 있는 answer데이터를 저장하는 작업
-                                for(DataSnapshot answerData : snapshot.getChildren()){
-                                    String answer = (answerData.getValue()).toString();
-                                    a_Array.add(answer);
-                                    a_adapter.add(answer);
-                                }
-                                //ListView를 갱신하고 마지막 위치를 카운트
-                                a_adapter.notifyDataSetChanged();
-                                a_View.setSelection(a_adapter.getCount()-1);
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        mReference = mDatabase.getReference("question");
-        //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
-
-                //child 내에 있는 question 데이터를 저장하는 작업
-                for(DataSnapshot questionData : snapshot.getChildren()){
-                    String question = questionData.getValue().toString();
-                    Array.add(question);
-                    adapter.add(question);
-                }
-                //spinner를 갱신하고 마지막 위치를 카운트
-                adapter.notifyDataSetChanged();
-                spinner.setSelection(adapter.getCount()-1);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        //spinner를 연결하고, Arrayadapter와 spinner 연결
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
-        spinner.setAdapter(adapter);
-
-        //listview를 연결하고, Arrayadapter_a와 listview  연결
-        a_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,new ArrayList<String>());
-        a_View.setAdapter(a_adapter);
 
 
 
