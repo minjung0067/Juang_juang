@@ -111,25 +111,34 @@ public class log_inactivity extends AppCompatActivity {
                                     Toast.makeText(log_inactivity.this, "아직 가족코드가 없어요!", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else { //코드 있으면
-                                    if (myfam_count.equals("0")==true || myfam_introduce==null){ //가족 프로필 안 만들었으면
+                                    if (myfam_count.equals("0")==true || myfam_introduce==null){ //코드 만드는 사람이 아예 안 만들었으면
                                         Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                                         startActivity(intenttt);
                                         Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                     else{
-                                        if (introduce == null) {//한줄 소개 없으면
-                                            Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
-                                            startActivity(intentt);
-                                            Toast.makeText(log_inactivity.this, "아직 소개를 입력하지 않았어요!", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                        } else { //한줄소개까지 있으면
-                                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
-                                            //자동로그인이 되었다면, Mainactivity로 바로 이동
-                                            startActivity(intent);
-                                            Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                                        if (myfam_count.equals("")==true || myfam_introduce.equals("")==true){ //코드 만든 사람이 가족 프로필 안 만들었는데 다른 사람이 코드 치고 들어온 경우
+                                            Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
+                                            startActivity(intenttt);
+                                            Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
+                                        else{
+                                            if (introduce == null) {//한줄 소개 없으면
+                                                Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                                                startActivity(intentt);
+                                                Toast.makeText(log_inactivity.this, "아직 소개를 입력하지 않았어요!", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            } else { //한줄소개까지 있으면
+                                                Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                                                //자동로그인이 되었다면, Mainactivity로 바로 이동
+                                                startActivity(intent);
+                                                Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            }
+                                        }
+
                                     }
                                 }
                             }

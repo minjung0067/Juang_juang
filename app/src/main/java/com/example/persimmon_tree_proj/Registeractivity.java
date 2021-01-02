@@ -178,8 +178,6 @@ public class Registeractivity extends AppCompatActivity {
                         if (TERMS_AGREE_3 == 1) {
                             // 두번째 약관 체크 여부
                                 if (TERMS_AGREE_1 == 1) {
-                                    // 페이저 login 액티비티로 고고
-                                    startActivity(new Intent(Registeractivity.this, log_inactivity.class));
                                 } else {
                                     Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                                     return;
