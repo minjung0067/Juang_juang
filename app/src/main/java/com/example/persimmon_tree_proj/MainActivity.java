@@ -111,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("member_count1", String.valueOf(member_count));
 
                         //가족 수 확인하여서 가족 만들어졌는지 확인
-                        if(member_count == count){//가족 감나무가 만들어졌을 경우
+
+
+                        //가족 감나무가 만들어졌을 경우
+                        if(member_count == count){
 
                             //spinner 선택했을 때
                             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -199,8 +202,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                         }
+                        //감나무가 생성되지 않은 경우
                         else if(member_count < count){
-                            Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
 
 
