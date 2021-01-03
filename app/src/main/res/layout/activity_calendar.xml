@@ -34,7 +34,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginStart="7dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="58dp"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints"></LinearLayout>
     </RelativeLayout>
