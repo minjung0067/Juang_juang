@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_persimmon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.persimmon_tree_proj.profile_color"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.sub_calendar"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.profile_color" />
         <activity android:name="com.example.persimmon_tree_proj.profile_gam" />
         <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfile" />
         <activity android:name="com.example.persimmon_tree_proj.MakeProfile" />
