@@ -115,6 +115,10 @@ public class MakeProfile extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myfcode = dataSnapshot.child("fcode").getValue(String.class);
                 user_name = dataSnapshot.child("name").getValue(String.class);
+                introduce = dataSnapshot.child("introduce").getValue(String.class);
+                if (introduce.equals(null)!=true){
+                    whoami.setText(introduce);
+                }
                 DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("family");
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
