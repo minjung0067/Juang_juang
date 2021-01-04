@@ -231,16 +231,15 @@ public class Registeractivity extends AppCompatActivity {
                                             editor.putString("name",name);//이름 저장
                                             editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
 
-                                            Intent intent = new Intent(Registeractivity.this, log_inactivity.class);   //회원가입 성공했으니 로그인 페이지로 이동
-                                            startActivity(intent);
+
+                                            finish();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {  //database에 올리기 실패했으면
                                             Toast.makeText(Registeractivity.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(Registeractivity.this, Registeractivity.class); //회원가입 실패했으니 페이지 다시 로드
-                                            startActivity(intent);
+
                                         }
                                     });
                             // database에 저장
@@ -249,8 +248,7 @@ public class Registeractivity extends AppCompatActivity {
                         } else {
                             // 계정이 중복된 경우
                             Toast.makeText(Registeractivity.this, "아이디(이메일 형식), 비밀번호(6자리 이상)를 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Registeractivity.this, Registeractivity.class);  //회원가입 실패했으니 페이지 다시 로드
-                            startActivity(intent);
+
                         }
                     }
                 });

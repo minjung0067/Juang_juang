@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
     private Button btn_ok; //코드 확인 버튼
@@ -73,10 +75,32 @@ public class familyactivity extends AppCompatActivity {
                                 if (tf == 1) { //가족 코드 모음집(groups)에 있는 코드와 동일함 그래서 자기database에 fcode추가하고 화면전환
                                     Log.i("family acitivity", "tf=1");
                                     firebaseAuth = FirebaseAuth.getInstance();
-                                    FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
+                                    FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user\
+
                                     mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
-                                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
+
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
                                     reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String myfcode = snapshot.child("fcode").getValue(String.class);
+                                            String user_name = snapshot.child("name").getValue().toString();
+                                            String introduce = snapshot.child("introduce").getValue().toString();
+                                            HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
+                                            user_info.put("introduce", introduce);
+                                            user_info.put("user_gam", "1");
+                                            user_info.put("user_color", "#ffffff");
+                                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("family");
+                                    reference2.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             count = dataSnapshot.child(str).child("count").getValue(String.class);
@@ -91,7 +115,7 @@ public class familyactivity extends AppCompatActivity {
                                         }
                                     });
 
-                                    Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
+                                    Intent intent = new Intent(familyactivity.this, MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
                                     startActivity(intent);
                                     finish();
                                     //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고

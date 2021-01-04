@@ -113,6 +113,7 @@ public class CodeActivity extends AppCompatActivity {
                     });
                     Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
