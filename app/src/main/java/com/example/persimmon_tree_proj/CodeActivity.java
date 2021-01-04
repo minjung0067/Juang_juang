@@ -81,7 +81,7 @@ public class CodeActivity extends AppCompatActivity {
                 }
                 else {
                     ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 family code 라는 이름표로 code 값을 복사하여 저장
                     clipboardManager.setPrimaryClip(clipData);
 
                     //복사가 되었다면 토스트메시지 노출
@@ -96,9 +96,9 @@ public class CodeActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             String myfcode = snapshot.child("fcode").getValue(String.class);
                             String user_name = snapshot.child("name").getValue().toString();
-                            String introduce = snapshot.child("introduce").getValue().toString();
+                            //String introduce = snapshot.child("introduce").getValue().toString();
                             HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                            user_info.put("introduce", introduce);
+                            //user_info.put("introduce", introduce);
                             user_info.put("user_gam", "1");
                             user_info.put("user_color", "#ffffff");
                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);

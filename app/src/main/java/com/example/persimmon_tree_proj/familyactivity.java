@@ -26,7 +26,7 @@ public class familyactivity extends AppCompatActivity {
     private EditText et_code; //코드 입력 text
     private String str; //입력한 코드 str로 바꿀 string 변수
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
-    private int tf = 0; //가족 코드 맞는지 표시해줄 int형 변수
+    private int tf = 2; //가족 코드 맞는지 표시해줄 int형 변수
     private FirebaseDatabase mDatabase;
     private String count;
 
@@ -51,6 +51,7 @@ public class familyactivity extends AppCompatActivity {
                     case R.id.btn_ok: {
                         //btn_ok 눌렀을 때의 처리
                         str = et_code.getText().toString(); //str에다가 code넣어줌
+                        if (str!=null && str.length()==6){//가족 코드가 6자리를 착실하게 기입했는데 그게 실제로 있는 코드인지 확인
                         mDatabase = FirebaseDatabase.getInstance();
                         mDatabase.getReference("groups").addValueEventListener(new ValueEventListener() { //groups에서 실제로 그 코드가 있는지 확인함
                             @Override
@@ -63,7 +64,9 @@ public class familyactivity extends AppCompatActivity {
                                         tf = 1;
                                         Log.i("break", "----here");
                                         break;
-
+                                    }
+                                    else{
+                                        tf=0;
                                     }
                                 }
 
@@ -97,6 +100,7 @@ public class familyactivity extends AppCompatActivity {
                                     Log.i("family acitivity", "tf=0");
                                     Toast.makeText(familyactivity.this, "가족 코드가 틀렸습니다. 다시 시도해주세요 !", Toast.LENGTH_SHORT).show();
                                 }
+
                             }
 
                             @Override
@@ -104,6 +108,11 @@ public class familyactivity extends AppCompatActivity {
                                 Log.e("family activity", "groups 안에 하위 노드를 읽지 못하였음");
                             }
                         });
+                        }
+                        else{ //가족코드 6자리 or 공백일 때 오류 토스트 띄우기
+                            Log.i("family acitivity", "str is null");
+                            Toast.makeText(familyactivity.this, "가족 코드 6자리를 입력해주세요 !", Toast.LENGTH_SHORT).show();
+                        }
                     }
                         break;
 
