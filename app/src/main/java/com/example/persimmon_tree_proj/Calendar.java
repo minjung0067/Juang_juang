@@ -66,7 +66,7 @@ public class Calendar extends AppCompatActivity {
                         //현재 가족으로 묶인 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator();
                         while (members.hasNext()){
-                            String member_num = members.next().getKey();
+                            String member_num = members.next().getKey();  //이 줄 있어야함, 없으면 에러
                             count++;
                         }
 
@@ -83,43 +83,43 @@ public class Calendar extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members1 = dataSnapshot.getChildren().iterator();
-                        while (members1.hasNext()) {
+                        while (members1.hasNext()) { //전체 다 돌기
                             String color_number = members1.next().child("user_color").getValue(String.class);
-                            if (color_number != null) {
-                                color_arr.add(count_color++,color_number);
-                                Log.i("lala color ", color_arr.get(count_color-1));
+                            if (color_number != null) { //있으면 담기, 없으면 패스
+                                color_arr.add(count_color++,color_number); //묶인 현재 가족구성원이 선택한 색깔 차례대로 COLOR_ARR 배열에 담기
+//                                Log.i("lala color ", color_arr.get(count_color-1));
                             }
                         }
                         Iterator<DataSnapshot> members2 = dataSnapshot.getChildren().iterator();
                         while (members2.hasNext()) {
                             String gam_number = members2.next().child("user_gam").getValue(String.class);
-                            if (gam_number != null) {
-                                gam_arr.add(count_gam++,gam_number);
-                                Log.i("lala gam ", gam_arr.get(count_gam-1));
+                            if (gam_number != null) { //있으면 담기, 없으면 패스
+                                gam_arr.add(count_gam++,gam_number);  //묶인 현재 가족구성원이 선택한 감 프로필 사진 차례대로 GAM_ARR 배열에 담기
+//                                Log.i("lala gam ", gam_arr.get(count_gam-1));
                             }
                         }
                         Iterator<DataSnapshot> members3 = dataSnapshot.getChildren().iterator();
                         while (members3.hasNext()) {
                             String introduce = members3.next().child("introduce").getValue(String.class);
-                            if (introduce != null) {
-                                introduce_arr.add(count_introduce++,introduce);
-                                Log.i("lala introduce", introduce_arr.get(count_introduce-1));
+                            if (introduce != null) {  //있으면 담기, 없으면 패스
+                                introduce_arr.add(count_introduce++,introduce); //묶인 현재 가족구성원이 선택한 소개 메세지 INTRODUCE_ARR 배열에 담기
+//                                Log.i("lala introduce", introduce_arr.get(count_introduce-1));
                             }
 
                         }
                         //저장해 준 것들 하나씩 꺼내서 캘린더 상단에 모든 가족 구성원 프로필 표시
-                        //위에서 셌던 현재 구성원 수만큼 동적으로 layout 생성하고 각각 view 지정 다르게
+                        //현재 묶여있는 구성원 수만큼 동적으로 layout 생성하고 각각 TEXT랑 IMAGE 각자가 선택한 걸로 적용시킨다
                         for(int i=0; i<count; i++){
                             String gamgam = gam_arr.get(i); //감 프로필 사진 번호가 뭐냐에 따라 나눴삼
-                            if(gamgam.equals("1")) {
+                            if(gamgam.equals("1")) {    //1번 감 프로필 선택한 경우
                                 Sub n_layout1 = new Sub(getApplicationContext());  //동적 layout 생성
                                 ImageView iv = n_layout1.findViewById(R.id.gam_image);
-                                TextView user_name = n_layout1.findViewById(R.id.user_name);
-                                iv.setImageResource(R.drawable.gam1);  //이미지
+                                TextView user_name = n_layout1.findViewById(R.id.user_name);  //각각 ID 찾아서
+                                iv.setImageResource(R.drawable.gam1);  //이미지 적용
                                 iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd1 = (GradientDrawable) iv.getBackground();
-                                gd1.setStroke(23,Color.parseColor(color_arr.get(i))); //배열에 담긴 색깔 테두리 설정
-                                user_name.setText(introduce_arr.get(i));
+                                GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
+                                gd1.setStroke(23,Color.parseColor(color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                                user_name.setText(introduce_arr.get(i));   //소개 띄우는 부분
                                 container.addView(n_layout1); // 기존 linearLayout에 imageView 추가
                             }
                             else if(gamgam.equals("2")) {  //이하동일
