@@ -120,7 +120,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
                                 gd1.setStroke(23,Color.parseColor(color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
                                 user_name.setText(introduce_arr.get(i));   //소개 띄우는 부분
-                                container.addView(n_layout1); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else if(gamgam.equals("2")) {  //이하동일
                                 Sub n_layout2 = new Sub(getApplicationContext());
@@ -131,7 +131,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd2 = (GradientDrawable) iv.getBackground();
                                 gd2.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout2); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout2); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else if(gamgam.equals("3")) {
                                 Sub n_layout3 = new Sub(getApplicationContext());
@@ -142,7 +142,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd3 = (GradientDrawable) iv.getBackground();
                                 gd3.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout3); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout3); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else if(gamgam.equals("4")) {
                                 Sub n_layout4 = new Sub(getApplicationContext());
@@ -153,7 +153,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd4 = (GradientDrawable) iv.getBackground();
                                 gd4.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout4); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout4); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else if(gamgam.equals("5")) {
                                 Sub n_layout5 = new Sub(getApplicationContext());
@@ -164,7 +164,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd5 = (GradientDrawable) iv.getBackground();
                                 gd5.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout5); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout5); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else if(gamgam.equals("6")) {
                                 Sub n_layout6 = new Sub(getApplicationContext());
@@ -175,7 +175,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd6 = (GradientDrawable) iv.getBackground();
                                 gd6.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout6); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout6); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else if(gamgam.equals("7")) {
                                 Sub n_layout7 = new Sub(getApplicationContext());
@@ -186,7 +186,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd7 = (GradientDrawable) iv.getBackground();
                                 gd7.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout7); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout7); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                             else {
                                 Sub n_layout8 = new Sub(getApplicationContext());
@@ -197,7 +197,7 @@ public class Calendar extends AppCompatActivity {
                                 GradientDrawable gd8 = (GradientDrawable) iv.getBackground();
                                 gd8.setStroke(23,Color.parseColor(color_arr.get(i)));
                                 user_name.setText(introduce_arr.get(i));
-                                container.addView(n_layout8); // 기존 linearLayout에 imageView 추가
+                                container.addView(n_layout8); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                             }
                         }
                     }
