@@ -150,6 +150,12 @@ public class MainActivity extends AppCompatActivity {
                                                     Log.i("count", String.valueOf(count));
                                                     if(user_count == count){
                                                         answer_position++;
+                                                        question = (String) snapquestionshot.child(String.valueOf(answer_position)).getValue();
+                                                        Array.add(question);
+                                                        adapter.add(question);
+                                                    }
+                                                    else{
+                                                        question_position = String.valueOf(answer_position);
                                                     }
 
 
@@ -234,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                             });
 
 
-                            mReference = mDatabase.getReference("question");
+                            /*mReference = mDatabase.getReference("question");
                             //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
                             mReference.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -257,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                             });
+                            */
 
 
 
