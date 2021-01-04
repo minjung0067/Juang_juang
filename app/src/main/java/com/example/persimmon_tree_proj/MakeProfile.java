@@ -75,8 +75,6 @@ public class MakeProfile extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
-                startActivity(intent);
                 introduce = whoami.getText().toString();
                 mDatabase = FirebaseDatabase.getInstance();
                 //입력한 한줄소개 현재 로그인한 사람 uid 통해서 그 사람 introduce에 넣기
@@ -96,7 +94,9 @@ public class MakeProfile extends AppCompatActivity {
                         throw databaseError.toException();
                     }
                 });
-
+                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -125,44 +125,45 @@ public class MakeProfile extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
                         gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
-
-                        switch (gam_number) {
-                            case "1":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam1);
-                                break;
-                            case "2":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam2);
-                                break;
-                            case "3":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam3);
-                                break;
-                            case "4":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam4);
-                                break;
-                            case "5":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam5);
-                                break;
-                            case "6":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam6);
-                                break;
-                            case "7":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam7);
-                                break;
-                            case "8":
-                                imageView.setBackgroundColor(Color.parseColor(color_number));
-                                imageView.setImageResource(R.drawable.gam8);
-                                break;
-                            default:
-                                imageView.setBackgroundColor(Color.parseColor("#ffffff"));
-                                imageView.setImageResource(R.drawable.gam1);
-                                break;
+                        if(gam_number != null && color_number!=null){
+                            switch (gam_number) {
+                                case "1":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam1);
+                                    break;
+                                case "2":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam2);
+                                    break;
+                                case "3":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam3);
+                                    break;
+                                case "4":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam4);
+                                    break;
+                                case "5":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam5);
+                                    break;
+                                case "6":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam6);
+                                    break;
+                                case "7":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam7);
+                                    break;
+                                case "8":
+                                    imageView.setBackgroundColor(Color.parseColor(color_number));
+                                    imageView.setImageResource(R.drawable.gam8);
+                                    break;
+                                default:
+                                    imageView.setBackgroundColor(Color.parseColor("#ffffff"));
+                                    imageView.setImageResource(R.drawable.gam1);
+                                    break;
+                            }
                         }
 
 
