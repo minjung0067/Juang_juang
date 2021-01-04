@@ -93,7 +93,9 @@ public class profile_color extends AppCompatActivity {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
                         //원래 사용자가 선택했던 건 다시 선택지 안에 들어가야 하니까
                         String previous_choice = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
-                        make_cannot_select(previous_choice,1);
+                        if(previous_choice != null){
+                            make_cannot_select(previous_choice,1);
+                        }
                         make_clicked();
                         while(members.hasNext()) {
                             String family_color_num = members.next().child("user_color").getValue(String.class);

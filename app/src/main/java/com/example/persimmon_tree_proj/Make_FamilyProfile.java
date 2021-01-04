@@ -72,8 +72,9 @@ public class Make_FamilyProfile extends AppCompatActivity {
                         throw databaseError.toException();
                     }
                 });
-                Intent intent = new Intent(Make_FamilyProfile.this, MainActivity.class);
+                Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
