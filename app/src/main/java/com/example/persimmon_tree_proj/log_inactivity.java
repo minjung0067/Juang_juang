@@ -111,7 +111,7 @@ public class log_inactivity extends AppCompatActivity {
                                     Toast.makeText(log_inactivity.this, "아직 가족코드가 없어요!", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else { //코드 있으면
-                                    if (myfam_count.equals("0")==true || myfam_introduce==null){ //코드 만드는 사람이 아예 안 만들었으면
+                                    if (myfam_count.equals("0")==true || myfam_introduce==null){ //코드 만드는 사람이 아예 가족 프로필 안 만들었으면
                                         Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                                         startActivity(intenttt);
                                         Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();

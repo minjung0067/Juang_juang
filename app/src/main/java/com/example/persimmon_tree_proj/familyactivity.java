@@ -77,7 +77,7 @@ public class familyactivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             count = dataSnapshot.child(str).child("count").getValue(String.class);
-                                            if(count == null)
+                                            if(count.equals(null))
                                                 FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
                                                 FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
 
