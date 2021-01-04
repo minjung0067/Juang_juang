@@ -63,11 +63,14 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> a_adapter;
     List<Object> a_Array = new ArrayList<Object>();
     String pst ="";
+    static int answer_users;
+    static int answer_position;
 
     //family code 관련
     static String f_code;
     static int count;
     static int member_count;
+
 
 
 
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 f_code = snapshot.child("fcode").getValue().toString();
                 final String user_name = snapshot.child("name").getValue(String.class);
                 Log.i("f_code",f_code);
-                member_count = 0;
+
                 //지정한 member 수 가져오기
                 a_Reference = a_Database.getReference("family");
                 a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
@@ -99,10 +102,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
-                       count = Integer.valueOf(str);
+                        count = Integer.valueOf(str);
                         Log.i("member_count", String.valueOf(count));
                         //member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
+                        member_count = 0;
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
@@ -124,7 +128,61 @@ public class MainActivity extends AppCompatActivity {
                                     //textView.setText(" "+parent.getItemAtPosition(position)+f_code+count); //mainactivity에서 textview에 question을 띄어줌.
                                     textView.setText(" "+parent.getItemAtPosition(position));
                                     question = textView.getText().toString();                 //quesition이라는 변수에 문자열로 저장
-                                    question_position = String.valueOf(position+1);
+                                    question_position = String.valueOf(position+1);           //question_position은 해당 question에 맞는 answer과 연결하기 위해 사용
+                                                                                              //answer_position은 몇번째 질문을 해야하는지와 관련됨.
+
+
+                                    //question 올리기
+                                    mReference = mDatabase.getReference("question");
+                                    //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
+                                    mReference.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
+                                            answer_position = 1;
+
+
+                                            //child 내에 있는 question 데이터를 저장하는 작업
+                                            for(DataSnapshot questionData : snapshot.getChildren()){
+                                                //answer에 답한 user 수 세기기
+                                                question = questionData.getValue().toString();
+                                                a_Reference = a_Database.getReference("family");
+                                                a_Reference.child(f_code).child("answer").child(String.valueOf(answer_position)).addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        Iterator<DataSnapshot> answers = snapshot.getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
+                                                        answer_users =0;
+                                                        while (answers.hasNext()){
+                                                            String answer_num = answers.next().getKey();
+                                                            answer_users++;
+                                                        }
+                                                        Log.i("answer_user", String.valueOf(answer_users));
+                                                        if(answer_users == count){
+                                                            //count와 answer-position-user의 수가 같다면, question array에 저장
+                                                            Array.add(question);
+                                                            adapter.add(question);
+                                                            answer_position++;
+                                                        }
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+                                            }
+                                            //spinner를 갱신하고 마지막 위치를 카운트
+                                            adapter.notifyDataSetChanged();
+                                            spinner.setSelection(adapter.getCount()-1);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
 
                                     //listView에 answer 올리기
                                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
@@ -166,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                                     });
 
 
+
                                 }
 
                                 @Override
@@ -174,30 +233,6 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
 
-
-                            mReference = mDatabase.getReference("question");
-                            //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
-                            mReference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
-
-                                    //child 내에 있는 question 데이터를 저장하는 작업
-                                    for(DataSnapshot questionData : snapshot.getChildren()){
-                                        String question = questionData.getValue().toString();
-                                        Array.add(question);
-                                        adapter.add(question);
-                                    }
-                                    //spinner를 갱신하고 마지막 위치를 카운트
-                                    adapter.notifyDataSetChanged();
-                                    spinner.setSelection(adapter.getCount()-1);
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
 
 
 
