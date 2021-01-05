@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     static String f_code;
     static int count;
     static int member_count;
+    private int answer_position;
+    private int user_count;
 
 
 
@@ -99,22 +101,86 @@ public class MainActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
-                       count = Integer.valueOf(str);
-                        Log.i("member_count", String.valueOf(count));
+                        count = Integer.valueOf(str);
                         //member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
-                            Log.i("member_num", String.valueOf(member_num));
                         }
-                        Log.i("member_count1", String.valueOf(member_count));
+
 
                         //가족 수 확인하여서 가족 만들어졌는지 확인
 
 
                         //가족 감나무가 만들어졌을 경우
                         if(member_count == count){
+
+                            //질문 가져오기 - 조건에 따른 질문 가져오기
+                            //answer가 null이라면, 첫번째 질문을 보여주기
+                            //answer가 null이 아니라면, 질문에 대한 답변의 갯수를 확인하여서 어디까지 배열에 넣을 것인지 확인하기
+                            mReference = mDatabase.getReference("question");
+                            mReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull final DataSnapshot snapquestionshot) {
+                                    adapter.clear(); //spinner에 넣을 값을 넣기 전 초기화하기
+
+                                    a_Reference = a_Database.getReference("family");
+                                    a_Reference.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            a_Reference.child(f_code).child("answer").child("0").setValue("");
+                                            Iterator<DataSnapshot> question_num = snapshot.child(f_code).child("answer").getChildren().iterator(); //answer_postion을 확인하기 위함.
+                                            answer_position = 1;
+                                            while(question_num.hasNext()) {
+                                                String check = (String) question_num.next().child(f_code).child("answer").getKey();
+                                                Log.i("checkingcheck",check);
+                                                if (snapshot.child(f_code).child("answer").child(String.valueOf(answer_position)).getValue()== null) {
+                                                    String questionData1 = (String) snapquestionshot.child("1").getValue(); //질문에서 첫번째 질문을 보여준다.
+                                                    Array.add(questionData1);
+                                                    adapter.add(questionData1); //첫번째 질문에 대한 question_position
+                                                }
+                                                if (snapshot.child(f_code).child("answer").child(String.valueOf(answer_position)).getValue() != null) {
+                                                    Iterator<DataSnapshot> user_num = snapshot.child(f_code).child("answer").child(String.valueOf(answer_position)).getChildren().iterator();
+                                                    user_count = 0;
+                                                    while(user_num.hasNext()){//대답한 인원 구하기
+                                                        String answer_user = user_num.next().getKey();
+                                                        Log.i("answer_user",answer_user);
+                                                        user_count++;
+                                                    }
+                                                    Log.i("user_count", String.valueOf(user_count));
+                                                    Log.i("count", String.valueOf(count));
+                                                    if(user_count == count){
+                                                        answer_position++;
+                                                        //spinner.setSelection(answer_position);
+                                                        question = (String) snapquestionshot.child(String.valueOf(answer_position)).getValue();
+                                                        Array.add(question);
+                                                        adapter.add(question);
+                                                    }
+                                                    else{
+                                                        question_position = String.valueOf(answer_position);
+                                                    }
+
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                    //spinner를 갱신하고 마지막 위치를 카운트
+                                    adapter.notifyDataSetChanged();
+                                    spinner.setSelection(adapter.getCount()-1);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
 
                             //spinner 선택했을 때
                             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -175,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                             });
 
 
-                            mReference = mDatabase.getReference("question");
+                            /*mReference = mDatabase.getReference("question");
                             //ValueEventListener : 경로의 전체 내용에 대한 변경을 읽고 수신 대기
                             mReference.addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -198,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                             });
+                            */
 
 
 
@@ -260,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
                 //Answeactivity로 이동
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
                 intent.putExtra("question",question); //선택한 question을 갖고 감.
-                intent.putExtra("position",question_position); //선택한 position값을 갖고 감.
+                intent.putExtra("position",question_position+1); //선택한 position값을 갖고 감.
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
             }

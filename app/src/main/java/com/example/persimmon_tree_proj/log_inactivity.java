@@ -83,7 +83,7 @@ public class log_inactivity extends AppCompatActivity {
         //키 값은 자유, 값은 null
         //login된 값(설정값을)저장하기 위한 변수
 
-/*
+
         //검사하면서 자동로그인!!!!!!
         FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
         if (user.getUid() != null){  //아예 생전 로그인 안해본 애면 바로 넘어가게 함
@@ -158,7 +158,6 @@ public class log_inactivity extends AppCompatActivity {
 
             }
         }
-*/
 
 
 

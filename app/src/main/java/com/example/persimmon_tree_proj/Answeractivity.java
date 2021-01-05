@@ -2,6 +2,7 @@ package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,7 @@ public class Answeractivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String user_name = snapshot.child("userName").getValue(String.class);
+                        Log.i("answer_position",position);
                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("answer").child(position).child(user_name).setValue(msg);
                     }
 

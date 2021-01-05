@@ -85,9 +85,9 @@ public class familyactivity extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String myfcode = snapshot.child("fcode").getValue(String.class);
                                             String user_name = snapshot.child("name").getValue().toString();
-                                            String introduce = snapshot.child("introduce").getValue().toString();
+                                            //String introduce = snapshot.child("introduce").getValue().toString();
                                             HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                                            user_info.put("introduce", introduce);
+                                            //user_info.put("introduce", introduce);
                                             user_info.put("user_gam", "1");
                                             user_info.put("user_color", "#ffffff");
                                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
