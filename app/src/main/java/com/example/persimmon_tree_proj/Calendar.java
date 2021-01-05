@@ -11,6 +11,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ import java.util.Iterator;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.media.CamcorderProfile.get;
+import static com.example.Juang_juang.R.id.calendarView;
 
 public class Calendar extends AppCompatActivity {
     private Context context;
@@ -42,6 +44,7 @@ public class Calendar extends AppCompatActivity {
     private ArrayList<String> gam_arr = new ArrayList<String>();
     private ArrayList<String> color_arr = new ArrayList<String>();
     private ArrayList<String> introduce_arr = new ArrayList<String>();
+    private CalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,7 +219,13 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
+        calendarView = findViewById(R.id.calendarView);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
+            }
+        });
 
             ImageButton go_main = (ImageButton) findViewById(R.id.main_btn); //왔다감 버튼
             go_main.setOnClickListener(new View.OnClickListener() {
