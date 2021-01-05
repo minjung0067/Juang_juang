@@ -37,6 +37,15 @@
             android:layout_marginTop="58dp"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints"></LinearLayout>
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="454dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="182dp"
+            android:layout_marginBottom="95dp" />
     </RelativeLayout>
 
 
