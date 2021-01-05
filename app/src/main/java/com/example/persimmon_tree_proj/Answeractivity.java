@@ -2,6 +2,7 @@ package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,9 +43,10 @@ public class Answeractivity extends AppCompatActivity {
 
         Intent intent = getIntent();//mainactivity에서 받아온 intent 선언
         String question = intent.getStringExtra("question");//mainactivity에서 받아온 question
+        Log.i("position",question);
         final String f_code = intent.getStringExtra("f_code"); //mainacitivity에서 받아온 f_code
         final String position = intent.getStringExtra("position");
-
+        Log.i("position",position);
         textView =(TextView)findViewById(R.id.txt_question2);
         textView.setText(question); //textView에 question 띄우기
         edit_answer = (EditText)findViewById(R.id.edit_answer);
@@ -69,8 +71,8 @@ public class Answeractivity extends AppCompatActivity {
 
                     }
                 });
-                Intent intent = new Intent(Answeractivity.this, MainActivity.class);
-                startActivity(intent);
+
+                finish();
             }
         });
 
