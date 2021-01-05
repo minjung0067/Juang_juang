@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                                             Log.i("all_arr3223",String.valueOf(index));
                                             index++;
                                             Log.i("index234242",String.valueOf(index));
+                                            goanswer.setClickable(true);
 //                                            if(qq_cnt==q_cnt){
 //                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
 //                                                q_cnt++;
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         }
                                         else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
-
+                                            goanswer.setClickable(true);
                                             if (snapshot.child("answer").child(String.valueOf(q_cnt)).hasChild(user_name)) { //사용자가 대답했으면
                                                 Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
                                                 goanswer.setOnClickListener(new View.OnClickListener() {

@@ -71,7 +71,8 @@ public class Answeractivity extends AppCompatActivity {
 
                     }
                 });
-
+                Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
