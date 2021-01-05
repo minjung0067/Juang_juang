@@ -235,6 +235,23 @@ public class MainActivity extends AppCompatActivity {
                                     else {  // 첫번째 질문 들어가 있을 때 first_time==false
                                         our_q_arr = new ArrayList<>();
                                         our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
+                                        Log.i("sizesize",String.valueOf(our_q_arr.size()));
+                                        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
+                                        spinner = (Spinner)findViewById(R.id.spinner_question);
+                                        spinner.setAdapter(arrayAdapter);
+                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                                textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
+                                                answer_position = i++; //answer_position : 0~
+                                                Log.i("answerposition",String.valueOf(answer_position));
+                                                setanswer();
+
+                                            }
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                            }
+                                        });
                                     }
                                 }
 
