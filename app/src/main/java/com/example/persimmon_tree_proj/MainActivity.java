@@ -197,10 +197,6 @@ public class MainActivity extends AppCompatActivity {
                                             index++;
                                             //q_cnt++;
                                             Log.i("index234242",String.valueOf(index));
-                                            //Intent intent = new Intent(MainActivity.this,Mainsplash.class);
-                                            //intent.putExtra("index_splash",String.valueOf(index+1));
-                                            //Log.i("eunseoindex", String.valueOf(index));
-                                            //startActivity(intent);
 //                                            if(qq_cnt==q_cnt){ qq_cnt 데이터 베이스에 우리가족이 가지고 있는 질문 수,
 //                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
 //                                                q_cnt++;
