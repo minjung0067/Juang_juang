@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                                             index = i; //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
                                             Log.i("all_arr0022",String.valueOf(index));
                                         }
+
                                         Iterator<DataSnapshot> user_num = snapshot.child("answer").child(String.valueOf(q_cnt)).getChildren().iterator(); //제일 최근 질문
                                         user_count = 0;
                                         while(user_num.hasNext()){//대답한 인원 구하기  //모든 사람이 답변해야한다
@@ -182,15 +183,22 @@ public class MainActivity extends AppCompatActivity {
                                             Log.i("userctn2",String.valueOf(count));
                                         }
 
+                                        //spinner.setSelection(index+1);
+                                        Log.i("eunseoindex", String.valueOf(index));
+
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
                                             Log.i("all_arr22222",all_q_arr.get(index+1));
                                             Log.i("all_arr3223",String.valueOf(index));
                                             index++;
+                                            //q_cnt++;
                                             Log.i("index234242",String.valueOf(index));
-                                            goanswer.setClickable(true);
-//                                            if(qq_cnt==q_cnt){
+                                            //Intent intent = new Intent(MainActivity.this,Mainsplash.class);
+                                            //intent.putExtra("index_splash",String.valueOf(index+1));
+                                            //Log.i("eunseoindex", String.valueOf(index));
+                                            //startActivity(intent);
+//                                            if(qq_cnt==q_cnt){ qq_cnt 데이터 베이스에 우리가족이 가지고 있는 질문 수,
 //                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
 //                                                q_cnt++;
 //                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
@@ -199,26 +207,18 @@ public class MainActivity extends AppCompatActivity {
 
                                         }
                                         else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
-                                            goanswer.setClickable(true);
+
                                             if (snapshot.child("answer").child(String.valueOf(q_cnt)).hasChild(user_name)) { //사용자가 대답했으면
                                                 Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) { //누르면 마이페이지로 이동
                                                         Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
-                                                        //goanswer.setClickable(false); //버튼 클릭 못함
+                                                        goanswer.setClickable(false); //버튼 클릭 못함
                                                     }
                                                 });
-                                                //goanswer.setClickable(false); //버튼 클릭 못함
+                                                goanswer.setClickable(false); //버튼 클릭 못함
                                             }
-                                            /*else{
-                                                goanswer.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안왔다감!!",Toast.LENGTH_LONG).show();
-                                                    }
-                                                });
-                                            }*/
                                         }
                                         //우리 가족 질문 배열에 질문 수 넣기
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
+                                        spinner.setSelection(index);
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -251,6 +252,10 @@ public class MainActivity extends AppCompatActivity {
                                         arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter2);
+                                        spinner.setSelection(index);
+                                        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
+                                        spinner = (Spinner)findViewById(R.id.spinner_question);
+                                        spinner.setAdapter(arrayAdapter);
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
