@@ -194,16 +194,11 @@ public class MainActivity extends AppCompatActivity {
                                             index++;
                                             //q_cnt++;
                                             Log.i("index234242",String.valueOf(index));
-<<<<<<< HEAD
-                                            goanswer.setClickable(true);
-//                                            if(qq_cnt==q_cnt){
-=======
                                             //Intent intent = new Intent(MainActivity.this,Mainsplash.class);
                                             //intent.putExtra("index_splash",String.valueOf(index+1));
                                             //Log.i("eunseoindex", String.valueOf(index));
                                             //startActivity(intent);
 //                                            if(qq_cnt==q_cnt){ qq_cnt 데이터 베이스에 우리가족이 가지고 있는 질문 수,
->>>>>>> 5e2d233f250d3982d75048afb8d1d01c3745e3ca
 //                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
 //                                                q_cnt++;
 //                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
@@ -212,11 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         }
                                         else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
-<<<<<<< HEAD
-                                            goanswer.setClickable(true);
-=======
 
->>>>>>> 5e2d233f250d3982d75048afb8d1d01c3745e3ca
                                             if (snapshot.child("answer").child(String.valueOf(q_cnt)).hasChild(user_name)) { //사용자가 대답했으면
                                                 Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
@@ -237,10 +228,7 @@ public class MainActivity extends AppCompatActivity {
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
-<<<<<<< HEAD
-=======
                                         spinner.setSelection(index);
->>>>>>> 5e2d233f250d3982d75048afb8d1d01c3745e3ca
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -261,22 +249,13 @@ public class MainActivity extends AppCompatActivity {
                                         our_q_arr = new ArrayList<>();
                                         our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
-<<<<<<< HEAD
-                                        arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
-                                        spinner = (Spinner)findViewById(R.id.spinner_question);
-                                        spinner.setAdapter(arrayAdapter2);
-=======
-<<<<<<< HEAD
                                         arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter2);
                                         spinner.setSelection(index);
-=======
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
->>>>>>> ff88d2059276c3d9be83cd69222256aa74aefcf9
->>>>>>> 5e2d233f250d3982d75048afb8d1d01c3745e3ca
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
