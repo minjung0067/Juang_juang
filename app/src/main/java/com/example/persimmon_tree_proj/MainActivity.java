@@ -45,9 +45,7 @@ import static java.sql.DriverManager.println;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_logout;     //로그아웃 버튼
     private Button btn_goanswer; //답변하러가기 버튼
-    private Button btn_mypage;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         qq_cnt = intent.getIntExtra("qq_cnt", 0);
 
-        textViewcode =(TextView)findViewById(R.id.textViewcode); //fcode확인
+
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
         container = (LinearLayout)findViewById(R.id.answer_view); //answer을 나타내는 textView
@@ -183,17 +181,13 @@ public class MainActivity extends AppCompatActivity {
                                             Log.i("userctn2",String.valueOf(count));
                                         }
 
-                                        //spinner.setSelection(index+1);
-                                        Log.i("eunseoindex", String.valueOf(index));
 
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
                                             Log.i("all_arr22222",all_q_arr.get(index+1));
                                             Log.i("all_arr3223",String.valueOf(index));
-                                            Log.i("194 line index user= ",String.valueOf(user_count));
-                                            Log.i("195 line index inde= ",String.valueOf(index));
-                                            Log.i("196 line index our = ",String.valueOf(our_q_arr));
+
                                             index++;
                                             //q_cnt++;
                                             Log.i("index234242",String.valueOf(index));
