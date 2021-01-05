@@ -396,7 +396,6 @@ public class MainActivity extends AppCompatActivity {
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
                     iv.setImageResource(R.drawable.gam4);  //이미지 적용
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                    Log.i("party",member_ans_arr.get(2));
                     if(member_ans_arr.get(i) == "abc"){ //아직 대답 안된 부분 처리
                         family_answers.setTextColor(Color.parseColor("#92C44B"));
                         iv.setImageResource(R.drawable.gam5);  //이미지 적용
