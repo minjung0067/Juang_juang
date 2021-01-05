@@ -129,34 +129,50 @@ public class MainActivity extends AppCompatActivity {
                                     a_Reference.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            a_Reference.child(f_code).child("answer").child("0").setValue("");
                                             Iterator<DataSnapshot> question_num = snapshot.child(f_code).child("answer").getChildren().iterator(); //answer_postion을 확인하기 위함.
                                             answer_position = 1;
                                             while(question_num.hasNext()) {
-                                                if (snapshot.child(f_code).child("answer") == null) {
+                                                String check = (String) question_num.next().getKey();
+                                                Log.i("checkingcheck",check);
+                                                if (snapshot.child(f_code).child("answer").child("1").getValue()== null) {
                                                     String questionData1 = (String) snapquestionshot.child("1").getValue(); //질문에서 첫번째 질문을 보여준다.
                                                     Array.add(questionData1);
-                                                    adapter.add(questionData1);
+                                                    adapter.add(questionData1); //첫번째 질문에 대한 question_position
+                                                    Log.i("array1", (String) Array.get(0));
+                                                    answer_position = 1;
+                                                    //spinner를 갱신하고 마지막 위치를 카운트
+                                                    adapter.notifyDataSetChanged();
+                                                    spinner.setSelection(adapter.getCount()-1);
                                                 }
-                                                if (snapshot.child(f_code).child("answer") != null) {
-                                                    snapshot.child(f_code).child("answer").child(String.valueOf(answer_position));
+                                                if (snapshot.child(f_code).child("answer").child(String.valueOf(answer_position)).getValue() != null) {
                                                     Iterator<DataSnapshot> user_num = snapshot.child(f_code).child("answer").child(String.valueOf(answer_position)).getChildren().iterator();
                                                     user_count = 0;
-                                                    while(user_num.hasNext()){
+                                                    while(user_num.hasNext()){//대답한 인원 구하기
                                                         String answer_user = user_num.next().getKey();
                                                         Log.i("answer_user",answer_user);
                                                         user_count++;
                                                     }
                                                     Log.i("user_count", String.valueOf(user_count));
-                                                    Log.i("count", String.valueOf(count));
+                                                    Log.i("count1", String.valueOf(count));
                                                     if(user_count == count){
                                                         answer_position++;
+                                                        Log.i("answer_position", String.valueOf(answer_position));
                                                         question = (String) snapquestionshot.child(String.valueOf(answer_position)).getValue();
+                                                        Log.i("question",question);
                                                         Array.add(question);
                                                         adapter.add(question);
+                                                        //spinner를 갱신하고 마지막 위치를 카운트
+                                                        Log.i("array2", (String) Array.get(1));
+                                                        adapter.notifyDataSetChanged();
+                                                        spinner.setSelection(adapter.getCount()-1);
                                                     }
                                                     else{
                                                         question_position = String.valueOf(answer_position);
+                                                        break;
                                                     }
+                                                    question_position = String.valueOf(answer_position);
+                                                    break;
 
 
 
@@ -171,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
                                     });
 
                                     //spinner를 갱신하고 마지막 위치를 카운트
-                                    adapter.notifyDataSetChanged();
-                                    spinner.setSelection(adapter.getCount()-1);
+                                    /*adapter.notifyDataSetChanged();
+                                    spinner.setSelection(adapter.getCount()-1);*/
                                 }
 
                                 @Override
