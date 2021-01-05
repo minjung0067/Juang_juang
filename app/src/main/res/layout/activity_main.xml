@@ -54,18 +54,17 @@
 
     <TextView
         android:id="@+id/txt_question"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
-        android:visibility="invisible"
+        android:layout_width="329dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="32dp"
+        android:text=""
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
@@ -97,20 +96,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.595" />
 
-    <ListView
-        android:id="@+id/answer_view"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_question"
-        app:layout_constraintVertical_bias="0.435" />
+<!--    <ListView-->
+<!--        android:id="@+id/answer_view"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.494"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txt_question"-->
+<!--        app:layout_constraintVertical_bias="0.435" />-->
 
     <ImageButton
         android:id="@+id/main_btn"
@@ -140,5 +139,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/calender_"
         tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/answer_view"
+        android:layout_width="299dp"
+        android:layout_height="323dp"
+        android:layout_marginBottom="124dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="56dp">
+
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/relativeLayout"-->
+        <!--            android:layout_width="404dp"-->
+        <!--            android:layout_height="301dp"-->
+        <!--            android:layout_marginTop="108dp"-->
+        <!--            tools:ignore="MissingConstraints">-->
+
+        <!--        </RelativeLayout>-->
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
