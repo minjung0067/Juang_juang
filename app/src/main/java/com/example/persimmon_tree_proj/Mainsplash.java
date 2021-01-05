@@ -28,7 +28,6 @@ public class Mainsplash extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("index",index);
                 startActivity(intent);
                 finish();
 

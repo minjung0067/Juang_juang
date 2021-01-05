@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                                             Log.i("userctn2",String.valueOf(count));
                                         }
 
-                                        spinner.setSelection(index+1);
+                                        //spinner.setSelection(index+1);
                                         Log.i("eunseoindex", String.valueOf(index));
 
                                         if(user_count == count){
@@ -192,12 +192,13 @@ public class MainActivity extends AppCompatActivity {
                                             Log.i("all_arr22222",all_q_arr.get(index+1));
                                             Log.i("all_arr3223",String.valueOf(index));
                                             index++;
+                                            //q_cnt++;
                                             Log.i("index234242",String.valueOf(index));
                                             //Intent intent = new Intent(MainActivity.this,Mainsplash.class);
-                                            //intent.putExtra("index_splash",String.valueOf(index));
+                                            //intent.putExtra("index_splash",String.valueOf(index+1));
                                             //Log.i("eunseoindex", String.valueOf(index));
                                             //startActivity(intent);
-//                                            if(qq_cnt==q_cnt){
+//                                            if(qq_cnt==q_cnt){ qq_cnt 데이터 베이스에 우리가족이 가지고 있는 질문 수,
 //                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
 //                                                q_cnt++;
 //                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
