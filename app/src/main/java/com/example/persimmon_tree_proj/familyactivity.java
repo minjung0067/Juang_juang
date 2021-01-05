@@ -107,7 +107,9 @@ public class familyactivity extends AppCompatActivity {
                                             if(count.equals(null))
                                                 FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
                                                 FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
-
+                                                Intent intent = new Intent(familyactivity.this, Make_FamilyProfile.class); //바로 프로필 만들러 ㄱㄱ
+                                                startActivity(intent);
+                                                finish();
                                         }
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
