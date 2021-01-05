@@ -158,11 +158,8 @@ public class MainActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     answer_position = 1;
                                     first_time = snapshot.child("answer").hasChild("1");  //첫번째 질문이 있으면 true이고 없으면 false
-                                    if(!first_time){   //첫번째 질문이 db에 들어 가 있지 않을 때
-                                        our_q_arr = new ArrayList<>();
-                                        our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
-                                    }
-                                    else {  // 첫번째 질문 들어가 있을 때 first_time==false
+                                    Log.i("first time인가용",String.valueOf(first_time));
+                                    if(first_time){
                                         long question_cnt = snapshot.child("answer").getChildrenCount();  //현재 db에 올라간 질문 개수 처음엔 1개부터
                                         int q_cnt = Long.valueOf(question_cnt).intValue();
                                         Log.i("all_arr00",String.valueOf(q_cnt));
@@ -233,8 +230,11 @@ public class MainActivity extends AppCompatActivity {
                                                 public void onNothingSelected(AdapterView<?> adapterView) {
                                                 }
                                             });
-
                                         }
+                                    }
+                                    else {  // 첫번째 질문 들어가 있을 때 first_time==false
+                                        our_q_arr = new ArrayList<>();
+                                        our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
                                     }
                                 }
 
