@@ -78,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
     static String f_code;
     static int count;
     static int member_count;
-    private int answer_position;
-    private int user_count;
+    static int answer_position;
+    static int user_count;
     private boolean first_time;
-    private int index;
+    static int index;
     private String user_name;
-    private int qq_cnt;
+    static int qq_cnt;
 
 
     @Override
@@ -191,6 +191,9 @@ public class MainActivity extends AppCompatActivity {
                                             our_q_arr.add(all_q_arr.get(index+1));
                                             Log.i("all_arr22222",all_q_arr.get(index+1));
                                             Log.i("all_arr3223",String.valueOf(index));
+                                            Log.i("194 line index user= ",String.valueOf(user_count));
+                                            Log.i("195 line index inde= ",String.valueOf(index));
+                                            Log.i("196 line index our = ",String.valueOf(our_q_arr));
                                             index++;
                                             //q_cnt++;
                                             Log.i("index234242",String.valueOf(index));
@@ -204,21 +207,38 @@ public class MainActivity extends AppCompatActivity {
 //                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
 //                                                startActivity(intent);
 //                                            }
-
-                                        }
-                                        else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
-
-                                            if (snapshot.child("answer").child(String.valueOf(q_cnt)).hasChild(user_name)) { //사용자가 대답했으면
-                                                Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
+                                            if(our_q_arr.size() == (q_cnt +1)){
+                                                goanswer.setClickable(true);
+                                            }
+                                            if (snapshot.child("answer").child(String.valueOf(q_cnt+1)).hasChild(user_name)) { //사용자가 대답했으면
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) { //누르면 마이페이지로 이동
-                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
-                                                        goanswer.setClickable(false); //버튼 클릭 못함
+                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감1~", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                                 goanswer.setClickable(false); //버튼 클릭 못함
                                             }
+                                            else{
+                                                goanswer.setClickable(true); //버튼 클릭 못함
+                                            }
+
+                                        }
+                                        else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
+                                            while(user_count == count){
+                                                if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)) { //사용자가 대답했으면
+                                                    goanswer.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) { //누르면 마이페이지로 이동
+                                                            Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감2~", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                    goanswer.setClickable(false); //버튼 클릭 못함
+                                                }
+
+                                            }
+                                            our_q_arr.add(all_q_arr.get(index+1));
+
                                         }
                                         //우리 가족 질문 배열에 질문 수 넣기
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
