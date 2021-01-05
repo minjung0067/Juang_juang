@@ -249,10 +249,16 @@ public class MainActivity extends AppCompatActivity {
                                         our_q_arr = new ArrayList<>();
                                         our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
+<<<<<<< HEAD
                                         arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter2);
                                         spinner.setSelection(index);
+=======
+                                        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
+                                        spinner = (Spinner)findViewById(R.id.spinner_question);
+                                        spinner.setAdapter(arrayAdapter);
+>>>>>>> ff88d2059276c3d9be83cd69222256aa74aefcf9
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
