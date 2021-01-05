@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     //answer 관련
     private FirebaseDatabase a_Database;
     private DatabaseReference a_Reference;
+    private DatabaseReference color_Reference;
     private ChildEventListener a_Child;
     private ListView a_View;
     private LinearLayout container;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
     String pst ="";
     private ArrayList<String> member_arr = new ArrayList<String>();
     private ArrayList<String> member_ans_arr = new ArrayList<String>();
+    private ArrayList<String> member_color_arr = new ArrayList<String>();
+    private ArrayList<String> member_gam_arr = new ArrayList<String>();
 
     //family code 관련
     static String f_code;
@@ -82,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
     static int index;
     private String user_name;
     static int qq_cnt;
+    private String key;
+    private String keyy;
 
 
     @Override
@@ -185,18 +190,7 @@ public class MainActivity extends AppCompatActivity {
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
-                                            Log.i("all_arr22222",all_q_arr.get(index+1));
-                                            Log.i("all_arr3223",String.valueOf(index));
-
                                             index++;
-                                            //q_cnt++;
-                                            Log.i("index234242",String.valueOf(index));
-//                                            if(qq_cnt==q_cnt){ qq_cnt 데이터 베이스에 우리가족이 가지고 있는 질문 수,
-//                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                                                q_cnt++;
-//                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
-//                                                startActivity(intent);
-//                                            }
                                             if(our_q_arr.size() == (q_cnt +1)){
                                                 goanswer.setClickable(true);
                                             }
@@ -232,9 +226,6 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                         //우리 가족 질문 배열에 질문 수 넣기
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
-//                                            if(q_cnt == qq_cnt){
-//                                                our_q_arr.add(all_q_arr.get(index+1));
-//                                            }
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
@@ -296,9 +287,6 @@ public class MainActivity extends AppCompatActivity {
                         else if(member_count < count){
                             Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
-
-
-
                         }
                         else{//member_count > count
 
@@ -325,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Answeactivity로 이동
-                Log.i("index234242",String.valueOf(index));
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
                 intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
@@ -361,30 +348,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
+    public void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
         a_Reference.child(f_code).child("answer").child(String.valueOf(answer_position+1)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i(" 지금 어디인가",String.valueOf(answer_position+1));
+                member_color_arr = new ArrayList<>();
                 member_arr.clear();
                 member_ans_arr.clear();
+                member_color_arr.clear();
+                member_gam_arr.clear();
                 for(DataSnapshot data : dataSnapshot.getChildren()){
-                    String key = data.getKey();
+                    key = data.getKey();
                     String value = data.getValue().toString();
-                    Log.i("value는 말이야",value);
                     member_arr.add(key);
                     member_ans_arr.add(value);
-                    Log.i("key는 말이야",key);
+                    Log.i("keysy",key);
+                    //key로 색깔에 접근해서 color 배열에 넣기
+                    change_color(key);
+
                 }
-                Log.i("partysize",String.valueOf(member_arr.size()));
-                Log.i("partysize",String.valueOf(count));
                 int now_size = member_arr.size();
                 if (now_size < count ) { //대답 덜한 사람 있는 최신 질문에 대해서는
                     for(int i=0; i<(count-now_size);i++){
                         //부족한 답변 갯수만큼 추가해줘야함
-                        member_arr.add("아직"); //member 랑 답변 추가해줘야함..
-                        member_ans_arr.add("abc");
+                        member_arr.add("아직"); //member 랑 임의로 답변 추가해줘야함..
+                        member_ans_arr.add("아직 답변하지 않았감 !");
+                        member_color_arr.add("#92C44B");
+//                        member_gam_arr.add("1");
                     }
                 }
                 //저장해 준 것들 하나씩 꺼내서 대답 표시
@@ -396,8 +387,9 @@ public class MainActivity extends AppCompatActivity {
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
                     iv.setImageResource(R.drawable.gam4);  //이미지 적용
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                    Log.i("party",member_ans_arr.get(2));
-                    if(member_ans_arr.get(i) == "abc"){ //아직 대답 안된 부분 처리
+//                    GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
+//                    gd1.setStroke(23,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                    if(member_ans_arr.get(i) == "아직 답변하지 않았감 !"){ //아직 대답 안된 부분 처리
                         family_answers.setTextColor(Color.parseColor("#92C44B"));
                         iv.setImageResource(R.drawable.gam5);  //이미지 적용
                     }
@@ -412,6 +404,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void change_color(String key) {
+        keyy = key;
+        DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("family");
+        Log.i("user_color", f_code);
+        reference3.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot2) {
+                String user_color = dataSnapshot2.child(keyy).child("user_color").getValue(String.class); //해당 답변 가진 사람 색깔이랑 감 담아옴
+                Log.i("user_color", user_color);
+                member_color_arr.add(user_color);
+                Log.i("들어왔어?", member_color_arr.get(0));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
     }
     private void initDatabase(){
         mDatabase = FirebaseDatabase.getInstance();
