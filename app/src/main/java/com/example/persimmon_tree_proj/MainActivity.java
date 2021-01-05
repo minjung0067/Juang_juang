@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> a_adapter;
     private Spinner spinner; //질문 목록이 있는 spinner
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> arrayAdapter2;
     private ArrayList<String> all_q_arr; //만들어 놓은 모든 질문 담기는 배열
     private ArrayList<String> our_q_arr; //우리 가족의 질문이 담기는 배열
     String pst ="";
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 all_q_arr = new ArrayList<>();
                 all_q_arr.clear();
                 for(int i=1;i<7;i++) {  //질문 추가되면 수정필요
-                 String this_question = dataSnapshot.child(String.valueOf(i)).getValue(String.class);
+                    String this_question = dataSnapshot.child(String.valueOf(i)).getValue(String.class);
                     Log.i("this question",this_question);
                     all_q_arr.add(this_question);
                 }
@@ -184,20 +185,21 @@ public class MainActivity extends AppCompatActivity {
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
-                                            Log.i("all_arr22",all_q_arr.get(index+1));
-                                            Log.i("all_arr33",String.valueOf(index));
+                                            Log.i("all_arr22222",all_q_arr.get(index+1));
+                                            Log.i("all_arr3223",String.valueOf(index));
                                             index++;
                                             Log.i("index234242",String.valueOf(index));
-                                            if(qq_cnt==q_cnt){
-                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                                                intent.putExtra("qq_cnt",q_cnt++); //선택한 question을 갖고 감.
-                                                startActivity(intent);
-                                            }
+//                                            if(qq_cnt==q_cnt){
+//                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                                                q_cnt++;
+//                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
+//                                                startActivity(intent);
+//                                            }
 
                                         }
-                                        else if(user_count < count){  //아직 가족 모두가 대답 안 한 거
+                                        else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
 
-                                            if(snapshot.child("answer").child(String.valueOf(q_cnt)).hasChild(user_name)){ //사용자가 대답했으면
+                                            if (snapshot.child("answer").child(String.valueOf(q_cnt)).hasChild(user_name)) { //사용자가 대답했으면
                                                 Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
@@ -207,38 +209,39 @@ public class MainActivity extends AppCompatActivity {
                                                     }
                                                 });
                                                 goanswer.setClickable(false); //버튼 클릭 못함
-
+                                            }
+                                        }
+                                        //우리 가족 질문 배열에 질문 수 넣기
+                                        Log.i("sizesize",String.valueOf(our_q_arr.size()));
+//                                            if(q_cnt == qq_cnt){
+//                                                our_q_arr.add(all_q_arr.get(index+1));
+//                                            }
+                                        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
+                                        spinner = (Spinner)findViewById(R.id.spinner_question);
+                                        spinner.setAdapter(arrayAdapter);
+                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                                textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
+                                                Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
+                                                        Toast.LENGTH_SHORT).show();
+                                                answer_position = i++; //answer_position : 0~
+                                                Log.i("answerposition",String.valueOf(answer_position));
+                                                setanswer();
 
                                             }
-                                            //우리 가족 질문 배열에 질문 수 넣기
-                                            Log.i("sizesize",String.valueOf(our_q_arr.size()));
-                                            arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
-                                            spinner = (Spinner)findViewById(R.id.spinner_question);
-                                            spinner.setAdapter(arrayAdapter);
-                                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
-                                                @Override
-                                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                    textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
-                                                    Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                    answer_position = i++; //answer_position : 0~
-                                                    Log.i("answerposition",String.valueOf(answer_position));
-                                                    setanswer();
-
-                                                }
-                                                @Override
-                                                public void onNothingSelected(AdapterView<?> adapterView) {
-                                                }
-                                            });
-                                        }
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                            }
+                                        });
                                     }
                                     else {  // 첫번째 질문 들어가 있을 때 first_time==false
                                         our_q_arr = new ArrayList<>();
                                         our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
-                                        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
+                                        arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
-                                        spinner.setAdapter(arrayAdapter);
+                                        spinner.setAdapter(arrayAdapter2);
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -350,36 +353,40 @@ public class MainActivity extends AppCompatActivity {
                     member_ans_arr.add(value);
                     Log.i("key는 말이야",key);
                 }
-                if (member_arr.size() < count ) { //대답 덜한 사람 있는 최신 질문에 대해서는
-                    for(int i=0; i<(count-(member_arr.size()));i++){
+                Log.i("partysize",String.valueOf(member_arr.size()));
+                Log.i("partysize",String.valueOf(count));
+                int now_size = member_arr.size();
+                if (now_size < count ) { //대답 덜한 사람 있는 최신 질문에 대해서는
+                    for(int i=0; i<(count-now_size);i++){
                         //부족한 답변 갯수만큼 추가해줘야함
                         member_arr.add("아직"); //member 랑 답변 추가해줘야함..
-                        member_ans_arr.add("아직 안 왔다감 ~");
+                        member_ans_arr.add("abc");
                     }
                 }
                 //저장해 준 것들 하나씩 꺼내서 대답 표시
                 //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
-                        container.removeAllViewsInLayout();
-                        for(int i=0; i<count; i++){
-                            sub_answer n_layout1 = new sub_answer(getApplicationContext());  //동적 layout 생성
-                                ImageView iv = n_layout1.findViewById(R.id.profile_image);
-                                TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
-                                iv.setImageResource(R.drawable.gam4);  //이미지 적용
-                                iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                if(member_ans_arr.get(i) == "아직 안 왔다감 ~"){ //아직 대답 안된 부분 처리
-                                    family_answers.setTextColor(Color.parseColor("#92C44B"));
-                                    iv.setImageResource(R.drawable.gam5);  //이미지 적용
-                                }
-                                family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
-                                container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
-                            }
+                container.removeAllViewsInLayout();
+                for(int i=0; i<count; i++){
+                    sub_answer n_layout1 = new sub_answer(getApplicationContext());  //동적 layout 생성
+                    ImageView iv = n_layout1.findViewById(R.id.profile_image);
+                    TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
+                    iv.setImageResource(R.drawable.gam4);  //이미지 적용
+                    iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                    Log.i("party",member_ans_arr.get(2));
+                    if(member_ans_arr.get(i) == "abc"){ //아직 대답 안된 부분 처리
+                        family_answers.setTextColor(Color.parseColor("#92C44B"));
+                        iv.setImageResource(R.drawable.gam5);  //이미지 적용
                     }
+                    family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
+                    container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
+                }
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException();
-                    }
-                });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
     }
     private void initDatabase(){
