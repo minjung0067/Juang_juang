@@ -219,13 +219,20 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
+        //캘린더
         calendarView = findViewById(R.id.calendarView);
+        CalendarView calendarView = CalendarView.getInstance();
+        
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
             }
         });
+
+
+
+
 
             ImageButton go_main = (ImageButton) findViewById(R.id.main_btn); //왔다감 버튼
             go_main.setOnClickListener(new View.OnClickListener() {
