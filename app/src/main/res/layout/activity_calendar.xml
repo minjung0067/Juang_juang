@@ -38,7 +38,17 @@
             android:layout_marginTop="58dp"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints">
-
+            <Button
+                android:id="@+id/selectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorAccent"
+                android:padding="10dp"
+                android:text="Search"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="15sp" />
         </LinearLayout>
 
 
@@ -56,17 +66,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/selectButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/colorAccent"
-                android:padding="10dp"
-                android:text="Search"
-                android:textAlignment="center"
-                android:textColor="#FFF"
-                android:textSize="15sp" />
+
+
         </LinearLayout>
 
     </RelativeLayout>
