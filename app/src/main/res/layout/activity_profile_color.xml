@@ -14,7 +14,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="48dp"
         android:background="#00B1A6A6"
-        android:src="?attr/homeAsUpIndicator"
+        android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,12 +93,12 @@
         android:layout_height="57dp"
         android:layout_marginTop="240dp"
         android:layout_marginEnd="36dp"
-        android:clickable="true"
         android:background="@drawable/btn_not_clicked"
+        android:clickable="true"
         android:foreground="#C3CDDC39"
         android:onClick="Click"
         app:layout_constraintEnd_toStartOf="@+id/c6"
-        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toEndOf="@+id/c4"
         app:layout_constraintTop_toTopOf="parent" />
 

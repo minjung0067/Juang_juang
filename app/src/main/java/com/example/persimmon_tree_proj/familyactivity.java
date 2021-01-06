@@ -106,10 +106,10 @@ public class familyactivity extends AppCompatActivity {
                                             count = dataSnapshot.child(str).child("count").getValue(String.class);
                                             if(count.equals(null))
                                                 FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
-                                                FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
-                                                Intent intent = new Intent(familyactivity.this, Make_FamilyProfile.class); //바로 프로필 만들러 ㄱㄱ
-                                                startActivity(intent);
-                                                finish();
+                                            FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
+                                            Intent intent = new Intent(familyactivity.this, Make_FamilyProfile.class); //바로 프로필 만들러 ㄱㄱ
+                                            startActivity(intent);
+                                            finish();
                                         }
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
@@ -140,16 +140,16 @@ public class familyactivity extends AppCompatActivity {
                             Toast.makeText(familyactivity.this, "가족 코드 6자리를 입력해주세요 !", Toast.LENGTH_SHORT).show();
                         }
                     }
-                        break;
+                    break;
 
                     case R.id.btn_makecode:
-                        {
+                    {
                         //btn_makecode 눌렀을 때의 처리
                         Intent intent = new Intent(familyactivity.this, CodeActivity.class); //코드 생성 xml로 이동
                         startActivity(intent);
                         finish();
-                        }
-                        break;
+                    }
+                    break;
 
 
                 }

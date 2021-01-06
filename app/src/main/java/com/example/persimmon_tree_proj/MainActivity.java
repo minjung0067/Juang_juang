@@ -49,16 +49,19 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
+    private ChildEventListener c_Child;
     private TextView textView; //질문 나오는 textView
     private TextView textViewcode;
     private String question;
     private String question_position;
     //array배열을 생성하고 spinner와 연결
-    List<Object> Array = new ArrayList<Object>();
 
     //answer 관련
     private FirebaseDatabase a_Database;
+    private FirebaseDatabase c_Database;
     private DatabaseReference a_Reference;
+    private DatabaseReference c_Reference;
+    private DatabaseReference color_Reference;
     private ChildEventListener a_Child;
     private ListView a_View;
     private LinearLayout container;
@@ -70,10 +73,13 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> our_q_arr; //우리 가족의 질문이 담기는 배열
     String pst ="";
     private ArrayList<String> member_arr = new ArrayList<String>();
-    private ArrayList<String> member_ans_arr = new ArrayList<String>();
+    private ArrayList<String> member_ans_arr =  new ArrayList<String>();
+    ArrayList<String> member_color_arr =  new ArrayList<String>();
+    ArrayList<String> member_gam_arr =  new ArrayList<String>();
 
     //family code 관련
-    static String f_code;
+    private String f_code;
+    private String users_color;
     static int count;
     static int member_count;
     static int answer_position;
@@ -82,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
     static int index;
     private String user_name;
     static int qq_cnt;
+    private String key;
+    String this_color="";
+    String this_gam ="";
 
 
     @Override
@@ -92,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         qq_cnt = intent.getIntExtra("qq_cnt", 0);
 
-        textViewcode =(TextView)findViewById(R.id.textViewcode); //fcode확인
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
         container = (LinearLayout)findViewById(R.id.answer_view); //answer을 나타내는 textView
@@ -185,18 +193,7 @@ public class MainActivity extends AppCompatActivity {
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
-                                            Log.i("all_arr22222",all_q_arr.get(index+1));
-                                            Log.i("all_arr3223",String.valueOf(index));
-
                                             index++;
-                                            //q_cnt++;
-                                            Log.i("index234242",String.valueOf(index));
-//                                            if(qq_cnt==q_cnt){ qq_cnt 데이터 베이스에 우리가족이 가지고 있는 질문 수,
-//                                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                                                q_cnt++;
-//                                                intent.putExtra("qq_cnt",q_cnt); //선택한 question을 갖고 감.
-//                                                startActivity(intent);
-//                                            }
                                             if(our_q_arr.size() == (q_cnt +1)){
                                                 goanswer.setClickable(true);
                                             }
@@ -232,9 +229,6 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                         //우리 가족 질문 배열에 질문 수 넣기
                                         Log.i("sizesize",String.valueOf(our_q_arr.size()));
-//                                            if(q_cnt == qq_cnt){
-//                                                our_q_arr.add(all_q_arr.get(index+1));
-//                                            }
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
@@ -242,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
+                                                textView.setText(our_q_arr.get(i));
                                                 Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
                                                         Toast.LENGTH_SHORT).show();
                                                 answer_position = i++; //answer_position : 0~
@@ -296,9 +290,6 @@ public class MainActivity extends AppCompatActivity {
                         else if(member_count < count){
                             Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
-
-
-
                         }
                         else{//member_count > count
 
@@ -325,7 +316,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Answeactivity로 이동
-                Log.i("index234242",String.valueOf(index));
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
                 intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
@@ -363,28 +353,32 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
-        a_Reference.child(f_code).child("answer").child(String.valueOf(answer_position+1)).addValueEventListener(new ValueEventListener() {
+        a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i(" 지금 어디인가",String.valueOf(answer_position+1));
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 member_arr.clear();
                 member_ans_arr.clear();
-                for(DataSnapshot data : dataSnapshot.getChildren()){
-                    String key = data.getKey();
+                member_color_arr.clear();
+                member_gam_arr.clear();
+                for(DataSnapshot data : dataSnapshot.child("answer").child(String.valueOf(answer_position+1)).getChildren()){
+                    key = data.getKey();
                     String value = data.getValue().toString();
-                    Log.i("value는 말이야",value);
+                    this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
+                    this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
+                    member_color_arr.add(this_color);
+                    member_gam_arr.add(this_gam);
                     member_arr.add(key);
                     member_ans_arr.add(value);
-                    Log.i("key는 말이야",key);
                 }
-                Log.i("partysize",String.valueOf(member_arr.size()));
-                Log.i("partysize",String.valueOf(count));
                 int now_size = member_arr.size();
+
                 if (now_size < count ) { //대답 덜한 사람 있는 최신 질문에 대해서는
                     for(int i=0; i<(count-now_size);i++){
                         //부족한 답변 갯수만큼 추가해줘야함
-                        member_arr.add("아직"); //member 랑 답변 추가해줘야함..
-                        member_ans_arr.add("abc");
+                        member_arr.add("아직"); //member 랑 임의로 답변 추가해줘야함..
+                        member_ans_arr.add("아직 답변하지 않았감 !");
+                        member_color_arr.add("#92C44B");
+                        member_gam_arr.add("4");
                     }
                 }
                 //저장해 준 것들 하나씩 꺼내서 대답 표시
@@ -394,12 +388,30 @@ public class MainActivity extends AppCompatActivity {
                     sub_answer n_layout1 = new sub_answer(getApplicationContext());  //동적 layout 생성
                     ImageView iv = n_layout1.findViewById(R.id.profile_image);
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
-                    iv.setImageResource(R.drawable.gam4);  //이미지 적용
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                    Log.i("party",member_ans_arr.get(2));
-                    if(member_ans_arr.get(i) == "abc"){ //아직 대답 안된 부분 처리
-                        family_answers.setTextColor(Color.parseColor("#92C44B"));
-                        iv.setImageResource(R.drawable.gam5);  //이미지 적용
+                    GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
+                    gd1.setStroke(23,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                    Log.i("member_gam",member_gam_arr.get(i));
+                    if (member_gam_arr.get(i).equals("1")){
+                        iv.setImageResource(R.drawable.gam1);}
+                    else if(member_gam_arr.get(i).equals("2")){
+                        iv.setImageResource(R.drawable.gam2);}
+                    else if(member_gam_arr.get(i).equals("3")){
+                        iv.setImageResource(R.drawable.gam3);}
+                    else if(member_gam_arr.get(i).equals("4")){
+                        iv.setImageResource(R.drawable.gam4);}
+                    else if(member_gam_arr.get(i).equals("5")){
+                        iv.setImageResource(R.drawable.gam5);}
+                    else if(member_gam_arr.get(i).equals("6")){
+                        iv.setImageResource(R.drawable.gam6);}
+                    else if(member_gam_arr.get(i).equals("7")){
+                        iv.setImageResource(R.drawable.gam7);}
+                    else if(member_gam_arr.get(i).equals("8")){
+                        iv.setImageResource(R.drawable.gam8);}
+                    else{
+                        iv.setImageResource(R.drawable.gam1);}
+                    if(member_ans_arr.get(i) == "아직 답변하지 않았감 !"){ //아직 대답 안된 부분 처리
+                        family_answers.setTextColor(Color.parseColor("#808080"));
                     }
                     family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
                     container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
@@ -413,6 +425,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private void initDatabase(){
         mDatabase = FirebaseDatabase.getInstance();
         a_Database = FirebaseDatabase.getInstance();
@@ -475,6 +488,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
         mReference.addChildEventListener(mChild);
         a_Reference.addChildEventListener(a_Child);
     }
