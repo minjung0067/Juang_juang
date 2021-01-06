@@ -37,16 +37,38 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="58dp"
             android:orientation="horizontal"
-            tools:ignore="MissingConstraints"></LinearLayout>
+            tools:ignore="MissingConstraints">
 
-        <CalendarView
-            android:id="@+id/calendarView"
+        </LinearLayout>
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="454dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="434dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="182dp"
-            android:layout_marginBottom="95dp" />
+            android:layout_marginBottom="78dp"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+            <com.applikeysolutions.cosmocalendar.view.CalendarView
+                android:id="@+id/cosmo_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/selectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorAccent"
+                android:padding="10dp"
+                android:text="Search"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="15sp" />
+        </LinearLayout>
+
     </RelativeLayout>
 
 
