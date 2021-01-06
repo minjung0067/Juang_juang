@@ -183,7 +183,7 @@ public class MakeProfile extends AppCompatActivity {
         });
     }
 }
-        //갤러리 열기
+//갤러리 열기
 //        imageView = (ImageView)findViewById(R.id.profile_image);
 //        change_photo_btn = (Button)findViewById(R.id.change_photo_btn); //사진 바꾸는 +버튼 누르면
 //        change_photo_btn.setOnClickListener(new View.OnClickListener() {

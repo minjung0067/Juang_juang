@@ -49,16 +49,18 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
+    private ChildEventListener c_Child;
     private TextView textView; //질문 나오는 textView
     private TextView textViewcode;
     private String question;
     private String question_position;
     //array배열을 생성하고 spinner와 연결
-    List<Object> Array = new ArrayList<Object>();
 
     //answer 관련
     private FirebaseDatabase a_Database;
+    private FirebaseDatabase c_Database;
     private DatabaseReference a_Reference;
+    private DatabaseReference c_Reference;
     private DatabaseReference color_Reference;
     private ChildEventListener a_Child;
     private ListView a_View;
@@ -71,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> our_q_arr; //우리 가족의 질문이 담기는 배열
     String pst ="";
     private ArrayList<String> member_arr = new ArrayList<String>();
-    private ArrayList<String> member_ans_arr = new ArrayList<String>();
-    private ArrayList<String> member_color_arr = new ArrayList<String>();
-    private ArrayList<String> member_gam_arr = new ArrayList<String>();
+    private ArrayList<String> member_ans_arr =  new ArrayList<String>();
+    ArrayList<String> member_color_arr =  new ArrayList<String>();
+    ArrayList<String> member_gam_arr =  new ArrayList<String>();
 
     //family code 관련
-    static String f_code;
+    private String f_code;
+    private String users_color;
     static int count;
     static int member_count;
     static int answer_position;
@@ -86,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
     private String user_name;
     static int qq_cnt;
     private String key;
-    private String keyy;
+    String this_color="";
+    String this_gam ="";
 
 
     @Override
@@ -348,34 +352,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
+    private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
-        a_Reference.child(f_code).child("answer").child(String.valueOf(answer_position+1)).addValueEventListener(new ValueEventListener() {
+        a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                member_color_arr = new ArrayList<>();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 member_arr.clear();
                 member_ans_arr.clear();
                 member_color_arr.clear();
                 member_gam_arr.clear();
-                for(DataSnapshot data : dataSnapshot.getChildren()){
+                for(DataSnapshot data : dataSnapshot.child("answer").child(String.valueOf(answer_position+1)).getChildren()){
                     key = data.getKey();
                     String value = data.getValue().toString();
+                    this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
+                    this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
+                    member_color_arr.add(this_color);
+                    member_gam_arr.add(this_gam);
                     member_arr.add(key);
                     member_ans_arr.add(value);
-                    Log.i("keysy",key);
-                    //key로 색깔에 접근해서 color 배열에 넣기
-                    change_color(key);
-
                 }
                 int now_size = member_arr.size();
+
                 if (now_size < count ) { //대답 덜한 사람 있는 최신 질문에 대해서는
                     for(int i=0; i<(count-now_size);i++){
                         //부족한 답변 갯수만큼 추가해줘야함
                         member_arr.add("아직"); //member 랑 임의로 답변 추가해줘야함..
                         member_ans_arr.add("아직 답변하지 않았감 !");
                         member_color_arr.add("#92C44B");
-//                        member_gam_arr.add("1");
+                        member_gam_arr.add("4");
                     }
                 }
                 //저장해 준 것들 하나씩 꺼내서 대답 표시
@@ -385,13 +389,30 @@ public class MainActivity extends AppCompatActivity {
                     sub_answer n_layout1 = new sub_answer(getApplicationContext());  //동적 layout 생성
                     ImageView iv = n_layout1.findViewById(R.id.profile_image);
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
-                    iv.setImageResource(R.drawable.gam4);  //이미지 적용
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-//                    GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
-//                    gd1.setStroke(23,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                    GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
+                    gd1.setStroke(23,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                    Log.i("member_gam",member_gam_arr.get(i));
+                    if (member_gam_arr.get(i).equals("1")){
+                        iv.setImageResource(R.drawable.gam1);}
+                    else if(member_gam_arr.get(i).equals("2")){
+                        iv.setImageResource(R.drawable.gam2);}
+                    else if(member_gam_arr.get(i).equals("3")){
+                        iv.setImageResource(R.drawable.gam3);}
+                    else if(member_gam_arr.get(i).equals("4")){
+                        iv.setImageResource(R.drawable.gam4);}
+                    else if(member_gam_arr.get(i).equals("5")){
+                        iv.setImageResource(R.drawable.gam5);}
+                    else if(member_gam_arr.get(i).equals("6")){
+                        iv.setImageResource(R.drawable.gam6);}
+                    else if(member_gam_arr.get(i).equals("7")){
+                        iv.setImageResource(R.drawable.gam7);}
+                    else if(member_gam_arr.get(i).equals("8")){
+                        iv.setImageResource(R.drawable.gam8);}
+                    else{
+                        iv.setImageResource(R.drawable.gam1);}
                     if(member_ans_arr.get(i) == "아직 답변하지 않았감 !"){ //아직 대답 안된 부분 처리
-                        family_answers.setTextColor(Color.parseColor("#92C44B"));
-                        iv.setImageResource(R.drawable.gam5);  //이미지 적용
+                        family_answers.setTextColor(Color.parseColor("#808080"));
                     }
                     family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
                     container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
@@ -405,25 +426,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void change_color(String key) {
-        keyy = key;
-        DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("family");
-        Log.i("user_color", f_code);
-        reference3.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot2) {
-                String user_color = dataSnapshot2.child(keyy).child("user_color").getValue(String.class); //해당 답변 가진 사람 색깔이랑 감 담아옴
-                Log.i("user_color", user_color);
-                member_color_arr.add(user_color);
-                Log.i("들어왔어?", member_color_arr.get(0));
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
-    }
     private void initDatabase(){
         mDatabase = FirebaseDatabase.getInstance();
         a_Database = FirebaseDatabase.getInstance();
@@ -486,6 +489,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
         mReference.addChildEventListener(mChild);
         a_Reference.addChildEventListener(a_Child);
     }
