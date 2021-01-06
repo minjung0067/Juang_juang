@@ -45,8 +45,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.1.0' //구글플레이 서비스 쓸거다
     implementation 'de.hdodenhof:circleimageview:2.2.0' //이미지 동그랗게 보여주는 거
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
-
-
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
 }
 

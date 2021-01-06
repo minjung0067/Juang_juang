@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -33,14 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import static java.sql.DriverManager.println;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -193,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) { //누르면 마이페이지로 이동
-                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감1", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                                 goanswer.setClickable(false); //버튼 클릭 못함
@@ -208,19 +200,20 @@ public class MainActivity extends AppCompatActivity {
                                         //모두 답변하지 못한 경우
                                         else if(user_count < count) {
                                             //모두가 답변하기 전까지 답변하러가기 버튼 누를 수 없으며, 모두 답변한 경우 다음 질문으로 넘어감.
+
                                             while(user_count == count){
                                                 if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)) { //사용자가 대답했으면
                                                     goanswer.setOnClickListener(new View.OnClickListener() {
                                                         @Override
                                                         public void onClick(View v) { //누르면 마이페이지로 이동
                                                             Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감", Toast.LENGTH_SHORT).show();
+                                                            Log.i("index무엇인고2", String.valueOf(index));
                                                         }
                                                     });
                                                     goanswer.setClickable(false); //버튼 클릭 못함
                                                 }
 
                                             }
-                                            our_q_arr.add(all_q_arr.get(index+1));
 
                                         }
 
@@ -345,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(MainActivity.this, Calendar.class);
+                Intent intent = new Intent(MainActivity.this, Calendar_activity.class);
                 startActivity(intent);
             }
         });
