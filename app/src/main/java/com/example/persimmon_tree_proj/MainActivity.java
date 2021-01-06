@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
+                                                textView.setText(our_q_arr.get(i));
                                                 Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
                                                         Toast.LENGTH_SHORT).show();
                                                 answer_position = i++; //answer_position : 0~
