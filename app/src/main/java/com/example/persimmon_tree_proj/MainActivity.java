@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         qq_cnt = intent.getIntExtra("qq_cnt", 0);
 
-        textViewcode =(TextView)findViewById(R.id.textViewcode); //fcode확인
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
         container = (LinearLayout)findViewById(R.id.answer_view); //answer을 나타내는 textView
@@ -237,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
+                                                textView.setText(our_q_arr.get(i));
                                                 Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
                                                         Toast.LENGTH_SHORT).show();
                                                 answer_position = i++; //answer_position : 0~

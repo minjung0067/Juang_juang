@@ -27,6 +27,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:id="@+id/con"
             android:layout_width="411dp"
             android:layout_height="120dp"
