@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,12 +29,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.media.CamcorderProfile.get;
 import static com.example.Juang_juang.R.id.calendarView;
+import static com.example.Juang_juang.R.id.cosmo_calendar;
 
 public class Calendar extends AppCompatActivity {
     private Context context;
@@ -44,8 +48,12 @@ public class Calendar extends AppCompatActivity {
     private ArrayList<String> gam_arr = new ArrayList<String>();
     private ArrayList<String> color_arr = new ArrayList<String>();
     private ArrayList<String> introduce_arr = new ArrayList<String>();
+    //캘린더에 사용하는 변수
     private CalendarView calendarView;
+    private Button btn_plus;
+    private String startDate, endDate; //시작과 끝 날짜를 알리는 string 변수
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -221,8 +229,12 @@ public class Calendar extends AppCompatActivity {
 
         //캘린더
         calendarView = findViewById(R.id.calendarView);
-        CalendarView calendarView = CalendarView.getInstance();
-        
+        //일주일 중 첫번째로 나오는 요일이 월요일이다
+        //calendarView.setFirstDayOfWeek(cosmo_calendar.MONDAY);
+        //달 넘어가는 건 가로로
+        //calendarView.setCalendarOrientation(0);
+        //
+        //calendarView.setWeekendDays(new HashSet<>())
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -230,6 +242,14 @@ public class Calendar extends AppCompatActivity {
             }
         });
 
+        //btn_plus 일정 추가 클릭 시
+        btn_plus = findViewById(R.id.btn_plus);
+        btn_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
 
