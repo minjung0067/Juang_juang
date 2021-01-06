@@ -30,7 +30,6 @@
         <activity android:name="com.example.persimmon_tree_proj.CodeActivity" />
         <activity android:name="com.example.persimmon_tree_proj.MainActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Registeractivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Calendar" />
     </application>
 
 </manifest>
