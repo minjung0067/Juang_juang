@@ -1,6 +1,7 @@
 package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
+import android.icu.text.Edits;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
@@ -61,9 +63,33 @@ public class familyactivity extends AppCompatActivity {
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     Log.i("familycheck", String.valueOf(snapshot.getValue()));
                                     if ((snapshot.getValue()).equals(str)) {//str_code랑 원래 기존에 있던 코드랑 같다면
-                                        Log.i("familycheck", "str is = " + str);
-                                        tf = 1;
-                                        Log.i("break", "----here");
+                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
+                                        reference.child(str).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                //count 수 가져오기
+                                                String family_count1 = (String)snapshot.child("count").getValue();
+                                                Integer family_count2 = Integer.valueOf(family_count1);
+                                                //f_code에 해당하는 member수 세기
+                                                Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator();
+                                                int member_count = 0;
+                                                while(members.hasNext()){
+                                                    String member_num = members.next().getKey();
+                                                    member_count++;
+                                                }
+                                                if(member_count >= family_count2){
+                                                    tf = 0; //가입 할 수 없음
+                                                }
+                                                else{//member_count < family_count
+                                                    tf = 1; //가입 할 수 있음.
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                         break;
 
                                     }
