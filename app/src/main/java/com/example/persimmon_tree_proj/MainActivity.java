@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         qq_cnt = intent.getIntExtra("qq_cnt", 0);
 
-        textViewcode =(TextView)findViewById(R.id.textViewcode); //fcode확인
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
         container = (LinearLayout)findViewById(R.id.answer_view); //answer을 나타내는 textView
