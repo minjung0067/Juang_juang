@@ -45,7 +45,6 @@ import static java.sql.DriverManager.println;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_goanswer; //답변하러가기 버튼
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean first_time;
     static int index;
     private String user_name;
-    static int qq_cnt;
     private String key;
     String this_color="";
     String this_gam ="";
@@ -99,26 +97,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        qq_cnt = intent.getIntExtra("qq_cnt", 0);
 
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
-        spinner =(Spinner)findViewById(R.id.spinner_question); //spinner_question
+        spinner =(Spinner)findViewById(R.id.spinner_question); //question을 선택하는 spinner
         container = (LinearLayout)findViewById(R.id.answer_view); //answer을 나타내는 textView
 
         initDatabase();
 
         //전체 질문 목록 가져와서 all_q_arr에 넣기
         DatabaseReference reference_q = FirebaseDatabase.getInstance().getReference("question");
-        Log.i("this question","여긴 옴");
         reference_q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i("this question","여기도 들어옴");
                 all_q_arr = new ArrayList<>();
                 all_q_arr.clear();
-                for(int i=1;i<7;i++) {  //질문 추가되면 수정필요
+                for(int i=1;i<7;i++) {  //질문 추가되면 수정필요 (7은 질문 갯수)
                     String this_question = dataSnapshot.child(String.valueOf(i)).getValue(String.class);
-                    Log.i("this question",this_question);
                     all_q_arr.add(this_question);
                 }
             }
@@ -128,16 +122,17 @@ public class MainActivity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
-        //전체 질문 목록 가져오기 끝
-        final Button goanswer = (Button) findViewById(R.id.btn_goanswer);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); //현재 사용자 확보
+        //전체 질문 가져오기 끝
+
+        final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //질문하러가기 버츤
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
                 user_name = snapshot.child("userName").getValue().toString();
-                Log.i("f_code",f_code);
                 member_count = 0;
                 //지정한 member 수 가져오기
                 a_Reference = a_Database.getReference("family");
@@ -147,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
                         count = Integer.valueOf(str);
-                        //member 수 세기
+                        //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
@@ -155,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-                        //가족 수 확인하여서 가족 만들어졌는지 확인
+                        //가족 수 확인하여서 가족 만들어졌는지 확인 member_count 와 count 비교
+
 
                         //가족 감나무가 만들어졌을 경우
                         if(member_count == count){
@@ -165,31 +161,27 @@ public class MainActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     answer_position = 1;
                                     first_time = snapshot.child("answer").hasChild("1");  //첫번째 질문이 있으면 true이고 없으면 false
-                                    Log.i("first time인가용",String.valueOf(first_time));
                                     if(first_time){
-                                        long question_cnt = snapshot.child("answer").getChildrenCount();  //현재 db에 올라간 질문 개수 처음엔 1개부터
+                                        //첫번쨰 질문이 있는 경우, 답변해야 하는 질문 가져오기
+                                        long question_cnt = snapshot.child("answer").getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
                                         int q_cnt = Long.valueOf(question_cnt).intValue();
-                                        Log.i("all_arr00",String.valueOf(q_cnt));
-                                        our_q_arr = new ArrayList<>();
+                                        our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
                                         our_q_arr.clear();
                                         for (int i=0; i<q_cnt;i++){
-                                            Log.i("all_arr11",all_q_arr.get(i));
                                             String this_question = String.valueOf(all_q_arr.get(i));
-                                            our_q_arr.add(this_question);
-                                            index = i; //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
-                                            Log.i("all_arr0022",String.valueOf(index));
+                                            our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
+                                            index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
                                         }
 
+                                        //제일 최근 질문에 답변한 인원 수 구하기
                                         Iterator<DataSnapshot> user_num = snapshot.child("answer").child(String.valueOf(q_cnt)).getChildren().iterator(); //제일 최근 질문
-                                        user_count = 0;
-                                        while(user_num.hasNext()){//대답한 인원 구하기  //모든 사람이 답변해야한다
+                                        user_count = 0; //질문에 답변한 인원 수
+                                        while(user_num.hasNext()){
                                             String answer_user = user_num.next().getKey();
                                             user_count++;  //대답한 사람의 수
-                                            Log.i("usrctn",String.valueOf(user_count));
-                                            Log.i("userctn2",String.valueOf(count));
                                         }
 
-
+                                        //모두 답변한 경우, 새로운 질문 하나 더 추가
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
@@ -201,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) { //누르면 마이페이지로 이동
-                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감1~", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                                 goanswer.setClickable(false); //버튼 클릭 못함
@@ -210,14 +202,18 @@ public class MainActivity extends AppCompatActivity {
                                                 goanswer.setClickable(true); //버튼 클릭 못함
                                             }
 
+
                                         }
-                                        else if(user_count < count) {  //아직 가족 모두가 대답 안 한 거
+
+                                        //모두 답변하지 못한 경우
+                                        else if(user_count < count) {
+                                            //모두가 답변하기 전까지 답변하러가기 버튼 누를 수 없으며, 모두 답변한 경우 다음 질문으로 넘어감.
                                             while(user_count == count){
                                                 if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)) { //사용자가 대답했으면
                                                     goanswer.setOnClickListener(new View.OnClickListener() {
                                                         @Override
                                                         public void onClick(View v) { //누르면 마이페이지로 이동
-                                                            Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감2~", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
                                                     goanswer.setClickable(false); //버튼 클릭 못함
@@ -227,20 +223,19 @@ public class MainActivity extends AppCompatActivity {
                                             our_q_arr.add(all_q_arr.get(index+1));
 
                                         }
+
                                         //우리 가족 질문 배열에 질문 수 넣기
-                                        Log.i("sizesize",String.valueOf(our_q_arr.size()));
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
-                                        spinner.setSelection(index);
-                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
+                                        spinner.setSelection(index); //가장 최근 질문 spinner에 자동 선택
+                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //spinner를 선택하면 질문과 함꼐 답변 가져오기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                                 textView.setText(our_q_arr.get(i));
                                                 Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
                                                         Toast.LENGTH_SHORT).show();
                                                 answer_position = i++; //answer_position : 0~
-                                                Log.i("answerposition",String.valueOf(answer_position));
                                                 setanswer();
 
                                             }
@@ -249,10 +244,12 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                                     }
+
+
+                                    //첫번쨰 질문이 들어가지 않았을 경우
                                     else {  // 첫번째 질문 들어가 있을 때 first_time==false
                                         our_q_arr = new ArrayList<>();
                                         our_q_arr.add(String.valueOf(all_q_arr.get(0))); //첫번째 질문 array에 추가
-                                        Log.i("sizesize",String.valueOf(our_q_arr.size()));
                                         arrayAdapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter2);
@@ -263,9 +260,8 @@ public class MainActivity extends AppCompatActivity {
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //선택->답변 띄우기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                textView.setText("질문이 뭔감 ! : " + our_q_arr.get(i));
+                                                textView.setText( our_q_arr.get(i));
                                                 answer_position = i++; //answer_position : 0~
-                                                Log.i("answerposition",String.valueOf(answer_position));
                                                 setanswer();
 
                                             }
@@ -291,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
                         }
+
                         else{//member_count > count
 
                         }
@@ -311,11 +308,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //Answeractivity로 이동
         goanswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Answeactivity로 이동
                 Intent intent = new Intent(MainActivity.this, Answeractivity.class);
                 intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
@@ -324,25 +320,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage); //마이페이지 버튼
+        //마이페이지 버튼
+        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //누르면 마이페이지로 이동
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MypageActivity.class);
                 startActivity(intent);
             }
         });
 
-        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn); //왔다감 버튼
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //누르면 왔다감으로 이동
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        ImageButton go_calendar = (ImageButton) findViewById(R.id.calender_btn); //공유캘린더 버튼
+        //공유캘린더 버튼
+        ImageButton go_calendar = (ImageButton) findViewById(R.id.calender_btn);
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
