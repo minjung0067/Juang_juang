@@ -103,14 +103,16 @@ public class log_inactivity extends AppCompatActivity {
                         reference2.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
-                                myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
+                                //myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
+                                //myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                 if (myfcode == null) {//코드가 없으면
                                     Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                                     startActivity(intentt);
                                     Toast.makeText(log_inactivity.this, "아직 가족코드가 없어요!", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else { //코드 있으면
+                                    myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
+                                    myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                     if (myfam_introduce==null || myfam_count.equals("0")==true){ //코드 만드는 사람이 아예 가족 프로필 안 만들었으면
                                         Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                                         startActivity(intenttt);

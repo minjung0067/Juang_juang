@@ -30,9 +30,12 @@ public class familyactivity extends AppCompatActivity {
     private EditText et_code; //코드 입력 text
     private String str; //입력한 코드 str로 바꿀 string 변수
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
+    private int exist = 0;
     private int tf = 0; //가족 코드 맞는지 표시해줄 int형 변수
     private FirebaseDatabase mDatabase;
     private String count;
+    private int member_count;
+    private int family_count2;
 
 
     //바로 가족코드 만들기 하면 넘어감
@@ -63,37 +66,55 @@ public class familyactivity extends AppCompatActivity {
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     Log.i("familycheck", String.valueOf(snapshot.getValue()));
                                     if ((snapshot.getValue()).equals(str)) {//str_code랑 원래 기존에 있던 코드랑 같다면
-                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
-                                        reference.child(str).addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                //count 수 가져오기
-                                                String family_count1 = (String)snapshot.child("count").getValue();
-                                                Integer family_count2 = Integer.valueOf(family_count1);
-                                                //f_code에 해당하는 member수 세기
-                                                Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator();
-                                                int member_count = 0;
-                                                while(members.hasNext()){
-                                                    String member_num = members.next().getKey();
-                                                    member_count++;
-                                                }
-                                                if(member_count >= family_count2){
-                                                    tf = 0; //가입 할 수 없음
-                                                }
-                                                else{//member_count < family_count
-                                                    tf = 1; //가입 할 수 있음.
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                            }
-                                        });
+                                        exist = 1;
+                                        Log.i("familycheck1",str);
                                         break;
 
                                     }
                                 }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("family activity", "groups 안에 하위 노드를 읽지 못하였음");
+                            }
+                        });
+                        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
+                        reference1.child(str).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                //count 수 가져오기
+                                Log.i("test1t", String.valueOf(exist));
+                                Log.i("testt2", String.valueOf(tf));
+                                Log.i("familycheck2","들어왔니?");
+                                String family_count1 = (String)snapshot.child("count").getValue();
+                                Integer family_count2 = Integer.valueOf(family_count1);
+                                //f_code에 해당하는 member수 세기
+                                Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator();
+                                int member_count = 0;
+                                while(members.hasNext()){
+                                    String member_num = members.next().getKey();
+                                    member_count++;
+                                }
+                                Log.i("member_count", String.valueOf(member_count));
+                                Log.i("count", String.valueOf(family_count2));
+
+                                if(exist == 1){
+                                    if(member_count >= family_count2){
+                                        tf = 0; //가입 할 수 없음
+                                        Log.i("family_check", String.valueOf(tf));
+                                    }
+                                    else if(member_count < family_count2){//member_count < family_count
+                                        tf = 1; //가입 할 수 있음.
+                                        Log.i("family_check", String.valueOf(tf));
+                                    }
+
+
+                                }
+                                else if(exist == 0){
+                                    tf = 0;
+                                }
+
 
                                 if (tf == 1) { //가족 코드 모음집(groups)에 있는 코드와 동일함 그래서 자기database에 fcode추가하고 화면전환
                                     Log.i("family acitivity", "tf=1");
@@ -108,9 +129,9 @@ public class familyactivity extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String myfcode = snapshot.child("fcode").getValue(String.class);
                                             String user_name = snapshot.child("name").getValue().toString();
-                                            String introduce = snapshot.child("introduce").getValue().toString();
+                                            //String introduce = snapshot.child("introduce").getValue().toString();
                                             HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                                            user_info.put("introduce", introduce);
+                                            user_info.put("introduce", "");
                                             user_info.put("user_gam", "1");
                                             user_info.put("user_color", "#ffffff");
                                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
@@ -126,11 +147,11 @@ public class familyactivity extends AppCompatActivity {
                                     reference2.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            count = dataSnapshot.child(str).child("count").getValue(String.class);
-                                            if(count.equals(null))
-                                                FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
-                                            FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
-                                            Intent intent = new Intent(familyactivity.this, Make_FamilyProfile.class); //바로 프로필 만들러 ㄱㄱ
+                                            //count = dataSnapshot.child(str).child("count").getValue(String.class);
+                                            //if(count.equals(null))
+                                                //FirebaseDatabase.getInstance().getReference("family").child(str).child("count").setValue("");
+                                            //FirebaseDatabase.getInstance().getReference("family").child(str).child("family_name").setValue("");
+                                            Intent intent = new Intent(familyactivity.this, MakeProfile.class); //바로 프로필 만들러 ㄱㄱ
                                             startActivity(intent);
                                             finish();
                                         }
@@ -145,19 +166,21 @@ public class familyactivity extends AppCompatActivity {
                                     finish();
                                     //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
 
-                                } else if(tf==0){//잘못된 코드 입력 시 토스트 띄우기 !
+                                } else if(tf == 0){//잘못된 코드 입력 시 토스트 띄우기 !
                                     Log.i("family acitivity", "tf=0");
                                     Toast.makeText(familyactivity.this, "가족 코드가 틀렸습니다. 다시 시도해주세요 !", Toast.LENGTH_SHORT).show();
                                 }
+
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-                                Log.e("family activity", "groups 안에 하위 노드를 읽지 못하였음");
+
                             }
                         });
                     }
                     break;
+
 
                     case R.id.btn_makecode:
                     {
