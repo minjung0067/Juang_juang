@@ -316,9 +316,6 @@ public class Calendar_activity extends AppCompatActivity implements RadioGroup.O
                 calendarView.setSelectionType(SelectionType.RANGE);
                 break;
 
-            case R.id.rb_none:
-                calendarView.setSelectionType(SelectionType.NONE);
-                break;
         }
     }
 }
