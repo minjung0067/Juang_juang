@@ -24,14 +24,13 @@
 
     <LinearLayout
         android:id="@+id/con"
-        android:layout_width="415dp"
-        android:layout_height="89dp"
+        android:layout_width="413dp"
+        android:layout_height="72dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="64dp"
         android:orientation="horizontal"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-2dp">
 
@@ -40,25 +39,25 @@
     <RelativeLayout
         android:layout_width="404dp"
         android:layout_height="511dp"
-        android:layout_marginTop="144dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/con"
         tools:layout_editor_absoluteX="3dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:minHeight="?attr/actionBarSize" />
 
         <com.applikeysolutions.cosmocalendar.view.CalendarView
             android:id="@+id/calendar_view"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="387dp"
             android:layout_above="@+id/ll_settings"
             android:layout_below="@id/toolbar"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="3dp" />
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp" />
 
         <LinearLayout
             android:id="@+id/ll_settings"
