@@ -304,10 +304,6 @@ public class Calendar_activity extends AppCompatActivity implements RadioGroup.O
         clearSelectionsMenuClick();
         switch (checkedId) {
 
-            case R.id.rb_single:
-                calendarView.setSelectionType(SelectionType.SINGLE);
-                break;
-
             case R.id.rb_multiple:
                 calendarView.setSelectionType(SelectionType.MULTIPLE);
                 break;
