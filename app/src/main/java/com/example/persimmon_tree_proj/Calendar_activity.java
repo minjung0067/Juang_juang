@@ -9,6 +9,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import java.util.Calendar;
@@ -43,7 +46,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Calendar_activity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class Calendar_activity extends AppCompatActivity {
     private Context context;
     private int count = 0;
     private int count_gam = 0;
@@ -54,6 +57,7 @@ public class Calendar_activity extends AppCompatActivity implements RadioGroup.O
     private ArrayList<String> color_arr = new ArrayList<String>();
     private ArrayList<String> introduce_arr = new ArrayList<String>();
     private CalendarView calendarView;
+    private CheckBox multiple_check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,6 +251,20 @@ public class Calendar_activity extends AppCompatActivity implements RadioGroup.O
                 finish();
             }
         });
+        multiple_check = (CheckBox) findViewById(R.id.rb_multiple);  //회원가입 버튼
+
+
+        // 첫번째 항 동의
+        multiple_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {   //체크 안되어있으면
+                    calendarView.setSelectionType(SelectionType.MULTIPLE);
+                } else {   //이미 체크 되어있으면
+                    calendarView.setSelectionType(SelectionType.RANGE);
+                }
+            }
+        });
 
 
     }
@@ -254,17 +272,16 @@ public class Calendar_activity extends AppCompatActivity implements RadioGroup.O
     private void initViews() {
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
         calendarView.setCalendarOrientation(OrientationHelper.HORIZONTAL);
-
-        ((RadioGroup) findViewById(R.id.rg_selection_type)).setOnCheckedChangeListener(this);
+        calendarView.setSelectionType(SelectionType.RANGE);
     }
-
+//툴바 나중에 지울 것
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
+    //툴바 속 지우기 버튼이랑 선택한 거 보여주는 부분
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -297,25 +314,8 @@ public class Calendar_activity extends AppCompatActivity implements RadioGroup.O
 
     private void clearSelectionsMenuClick() {
         calendarView.clearSelections();
-
     }
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        clearSelectionsMenuClick();
-        switch (checkedId) {
 
-            case R.id.rb_single:
-                calendarView.setSelectionType(SelectionType.SINGLE);
-                break;
 
-            case R.id.rb_multiple:
-                calendarView.setSelectionType(SelectionType.MULTIPLE);
-                break;
 
-            case R.id.rb_range:
-                calendarView.setSelectionType(SelectionType.RANGE);
-                break;
-
-        }
-    }
 }
