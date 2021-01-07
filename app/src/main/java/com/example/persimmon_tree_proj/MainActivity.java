@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) { //누르면 마이페이지로 이동
-                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감1", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                                 goanswer.setClickable(false); //버튼 클릭 못함
@@ -226,8 +226,6 @@ public class MainActivity extends AppCompatActivity {
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                                 textView.setText(our_q_arr.get(i));
-                                                Toast.makeText(getApplicationContext(),our_q_arr.get(i)+"가 선택되었습니다.",
-                                                        Toast.LENGTH_SHORT).show();
                                                 answer_position = i++; //answer_position : 0~
                                                 setanswer();
 
