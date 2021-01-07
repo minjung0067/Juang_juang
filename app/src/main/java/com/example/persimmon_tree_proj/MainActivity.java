@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //전체 질문 가져오기 끝
 
-        final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //질문하러가기 버츤
+        final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //답변 하러 가기
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
