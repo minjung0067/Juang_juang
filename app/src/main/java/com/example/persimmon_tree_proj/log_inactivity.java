@@ -256,7 +256,7 @@ public class log_inactivity extends AppCompatActivity {
                     };
 
                 } else {   //아니라면
-                    Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
+                    Toast.makeText(log_inactivity.this, "아이디 또는 비밀번호를 다시 한번 확인해달라감!", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
                 }
             }
 
@@ -274,7 +274,7 @@ public class log_inactivity extends AppCompatActivity {
                             firebaseAuth.addAuthStateListener(firebaseAuthListener);   //파이어베이스에 사용자 추가
                         } else {
                             // 로그인 실패
-                            Toast.makeText(log_inactivity.this, "아이디 또는 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(log_inactivity.this, "아이디 또는 비밀번호를 다시 한번 확인해달라감!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
