@@ -214,6 +214,7 @@ public class log_inactivity extends AppCompatActivity {
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
                 }
             }
+
         });
 
 
