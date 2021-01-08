@@ -91,6 +91,7 @@ public class familyactivity extends AppCompatActivity {
                                             //f_code에 해당하는 member수 세기
                                             Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator();
                                             int member_count = 0;
+                                            int move = 0;
                                             while(members.hasNext()){
                                                 String member_num = members.next().getKey();
                                                 member_count++;
@@ -105,6 +106,7 @@ public class familyactivity extends AppCompatActivity {
                                             else if(member_count < family_count2){//member_count < family_count
                                                 tf = 1; //가입 할 수 있음.
                                                 Log.i("family_check", String.valueOf(tf));
+
                                             }
                                             if (tf == 1) { //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환
                                                 Log.i("family acitivity", "tf=1");
@@ -120,11 +122,19 @@ public class familyactivity extends AppCompatActivity {
                                                         String myfcode = snapshot.child("fcode").getValue(String.class);
                                                         String user_name = snapshot.child("name").getValue().toString();
                                                         //String introduce = snapshot.child("introduce").getValue().toString();
+                                                        Log.i("어디있니?","어디가3");
                                                         HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
                                                         user_info.put("introduce", "");
                                                         user_info.put("user_gam", "1");
                                                         user_info.put("user_color", "#ffffff");
                                                         FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
+                                                        /*Intent intent = new Intent(familyactivity.this, MakeProfile.class); //개인프로필 만드는 창으로 이동
+                                                        startActivity(intent);
+                                                        finish();
+
+                                                         */
+                                                        //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
+
                                                     }
 
                                                     @Override
@@ -132,32 +142,22 @@ public class familyactivity extends AppCompatActivity {
 
                                                     }
                                                 });
+                                                move = 1;
 
-                                        /*DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("family");
-                                        reference2.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                Intent intent = new Intent(familyactivity.this, MakeProfile.class); //개인프로필
-                                                startActivity(intent);
-                                                finish();
                                             }
-                                            @Override
-                                            public void onCancelled(DatabaseError databaseError) {
-                                                throw databaseError.toException();
+                                            else if(tf == 0){ //존재는 하지만, 가족이 다 찼을 경우
+                                                Log.i("어디있니?","어디가2");
+                                                Log.i("family acitivity", "tf=0");
+                                                Toast.makeText(familyactivity.this, "가족인원이 다 찼습니다.", Toast.LENGTH_SHORT).show();
                                             }
-                                        });
-
-                                         */
-
+                                            if(move == 1){
+                                                Log.i("어디있니?","어디가1");
                                                 Intent intent = new Intent(familyactivity.this, MakeProfile.class); //개인프로필 만드는 창으로 이동
                                                 startActivity(intent);
                                                 finish();
                                                 //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
 
-                                            }
-                                            else if(tf == 0){ //존재는 하지만, 가족이 다 찼을 경우
-                                                Log.i("family acitivity", "tf=0");
-                                                Toast.makeText(familyactivity.this, "가족인원이 다 찼습니다.", Toast.LENGTH_SHORT).show();
+
                                             }
 
 
