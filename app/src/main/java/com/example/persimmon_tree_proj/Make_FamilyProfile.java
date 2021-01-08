@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,10 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.InputStream;
 import java.util.HashMap;
+
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.widget.Toast;
 
 public class Make_FamilyProfile extends AppCompatActivity {
 
@@ -59,38 +65,48 @@ public class Make_FamilyProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                firebaseAuth = FirebaseAuth.getInstance();
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
-                reference.child(user.getUid()).child("fcode").setValue(myfcode);
-                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String user_name = snapshot.child("name").getValue().toString();
-                        HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                        user_info.put("introduce", "");
-                        user_info.put("user_gam", "1");
-                        user_info.put("user_color", "#ffffff");
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
-                        String fcount = counts.getText().toString();
-                        String about_myfamily = about_familys.getText().toString();
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
+                Integer fcount2 = Integer.valueOf(counts.getText().toString());
+                if((fcount2< 2) || (fcount2 > 8)){
+                    Toast.makeText(Make_FamilyProfile.this, "가족 인원 수는 최소 2명, 최대 8명까지 가능합니다.",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    firebaseAuth = FirebaseAuth.getInstance();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+                    reference.child(user.getUid()).child("fcode").setValue(myfcode);
+                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String user_name = snapshot.child("name").getValue().toString();
+                            HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
+                            user_info.put("introduce", "");
+                            user_info.put("user_gam", "1");
+                            user_info.put("user_color", "#ffffff");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
+                            String fcount = counts.getText().toString();
+                            String about_myfamily = about_familys.getText().toString();
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
 
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
-                startActivity(intent);
-                finish();
+                        }
+                    });
+                    Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+
             }
         });
     }
+
+
 }
 
 
