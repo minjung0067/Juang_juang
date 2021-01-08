@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -271,7 +273,10 @@ public class Calendar_activity extends AppCompatActivity {
 
     private void initViews() {
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
-        calendarView.setCalendarOrientation(OrientationHelper.HORIZONTAL);
+        calendarView.setCalendarOrientation(OrientationHelper.VERTICAL);
+        calendarView.setSelectedDayBackgroundColor(Color.parseColor("#FE8738"));
+        calendarView.setSelectedDayBackgroundStartColor(Color.parseColor("#92C44B"));
+        calendarView.setSelectedDayBackgroundEndColor(Color.parseColor("#92C44B"));
         calendarView.setSelectionType(SelectionType.RANGE);
     }
 //툴바 나중에 지울 것
