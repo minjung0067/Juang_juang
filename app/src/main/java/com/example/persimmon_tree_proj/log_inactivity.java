@@ -40,7 +40,7 @@ public class log_inactivity extends AppCompatActivity {
     private String loginId; //자동 로그인 아이디
     private String loginPwd; //자동 로그인 비밀번호
     private String loginUid; //자동 로그인 비밀번호
-    private Button buttonLogIn; //로그인 버튼
+    private Button buttonLogIn;//로그인 버튼
     private Button buttonSignUp; //회원가입 버튼
     // 구글로그인 result 상수
     private static final int RC_SIGN_IN = 900; //RC_SIGN_IN 상수는 구글로그인 버튼을 클릭하여 startactivityforresult 응답 코드로 사용
@@ -86,7 +86,7 @@ public class log_inactivity extends AppCompatActivity {
 
         //검사하면서 자동로그인!!!!!!
         FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
-        if (user.getUid() != null){  //아예 생전 로그인 안해본 애면 바로 넘어가게 함
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){  //아예 생전 로그인 안해본 애면 바로 넘어가게 함
             if (user.getUid().equals(loginUid) && (loginId != null)) {
                 //한번 로그인한 적 있고
                 //log_inaxtivity로 들어왔을 때 loginID와 loginPwd값을 가져와서 null이 아니라면,
@@ -103,14 +103,16 @@ public class log_inactivity extends AppCompatActivity {
                         reference2.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
-                                myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
+                                //myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
+                                //myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                 if (myfcode == null) {//코드가 없으면
                                     Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                                     startActivity(intentt);
                                     Toast.makeText(log_inactivity.this, "아직 가족코드가 없어요!", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else { //코드 있으면
+                                    myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
+                                    myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                     if (myfam_introduce==null || myfam_count.equals("0")==true){ //코드 만드는 사람이 아예 가족 프로필 안 만들었으면
                                         Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                                         startActivity(intenttt);
@@ -158,10 +160,13 @@ public class log_inactivity extends AppCompatActivity {
 
             }
         }
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 4e521ad8700bf09010f4660f8cac6652ee2173ec
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,9 +175,9 @@ public class log_inactivity extends AppCompatActivity {
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
                     loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
                     //inputId와 inputPwd에 이메일, 비밀번호 저장
-                    autoLogin.putString("inputId",editTextEmail.getText().toString());
-                    autoLogin.putString("inputPwd",editTextPassword.getText().toString());
-                    autoLogin.putString("inputUid",user.getUid());
+                    autoLogin.putString("inputId", editTextEmail.getText().toString());
+                    autoLogin.putString("inputPwd", editTextPassword.getText().toString());
+                    autoLogin.putString("inputUid", firebaseAuth.getCurrentUser().getUid());
                     autoLogin.commit(); //값 저장
 
                     firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -185,23 +190,23 @@ public class log_inactivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     myfcode = dataSnapshot.child("fcode").getValue(String.class);
                                     introduce = dataSnapshot.child("introduce").getValue(String.class);
-                                    if (myfcode==null) {//코드가 없으면
+                                    if (myfcode == null) {//코드가 없으면
                                         Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
                                         startActivity(intentt);
                                         finish();
-                                    }
-                                    else { //코드 있으면
-                                        if (introduce==null) {//한줄 소개 없으면
+                                    } else { //코드 있으면
+                                        if (introduce == null) {//한줄 소개 없으면
                                             Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
                                             startActivity(intentt);
                                             finish();
-                                        }
-                                        else { //한줄소개까지 있으면
+                                        } else { //한줄소개까지 있으면
                                             Intent intent = new Intent(log_inactivity.this, MainActivity.class);
                                             //자동로그인이 되었다면, Mainactivity로 바로 이동
                                             startActivity(intent);
                                         }
-                                    }                }
+                                    }
+                                }
+
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
                                     throw databaseError.toException();
@@ -216,7 +221,9 @@ public class log_inactivity extends AppCompatActivity {
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
                 }
             }
+
         });
+
 
 
 

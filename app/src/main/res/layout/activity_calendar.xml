@@ -22,27 +22,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/con"
-        android:layout_width="413dp"
-        android:layout_height="72dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:orientation="horizontal"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        app:layout_constraintTop_toBottomOf="@+id/title_text"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-2dp">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/con"-->
+<!--        android:layout_width="413dp"-->
+<!--        android:layout_height="72dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:scrollbarAlwaysDrawHorizontalTrack="true"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/title_text"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="-2dp">-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <RelativeLayout
-        android:layout_width="404dp"
-        android:layout_height="511dp"
+        android:layout_width="402dp"
+        android:layout_height="564dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/con"
-        tools:layout_editor_absoluteX="3dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -66,26 +67,26 @@
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
-<!--            <RadioGroup-->
-<!--                android:id="@+id/rg_selection_type"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1">-->
+            <!--            <RadioGroup-->
+            <!--                android:id="@+id/rg_selection_type"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_weight="1">-->
 
-                <CheckBox
-                    android:id="@+id/rb_multiple"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="반복" />
+            <CheckBox
+                android:id="@+id/rb_multiple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="반복" />
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/rb_range"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="range" />-->
+            <!--                <RadioButton-->
+            <!--                    android:id="@+id/rb_range"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="range" />-->
 
 
-<!--            </RadioGroup>-->
+            <!--            </RadioGroup>-->
 
         </LinearLayout>
 
