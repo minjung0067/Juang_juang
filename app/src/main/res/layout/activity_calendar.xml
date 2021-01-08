@@ -54,11 +54,11 @@
         <com.applikeysolutions.cosmocalendar.view.CalendarView
             android:id="@+id/calendar_view"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="203dp"
             android:layout_above="@+id/ll_settings"
             android:layout_below="@id/toolbar"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="3dp" />
+            android:layout_marginBottom="100dp" />
 
         <LinearLayout
             android:id="@+id/ll_settings"
