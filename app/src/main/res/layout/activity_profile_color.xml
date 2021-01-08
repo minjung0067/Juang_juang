@@ -98,7 +98,7 @@
         android:foreground="#C3CDDC39"
         android:onClick="Click"
         app:layout_constraintEnd_toStartOf="@+id/c6"
-        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/c4"
         app:layout_constraintTop_toTopOf="parent" />
 
