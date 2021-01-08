@@ -52,6 +52,7 @@ public class CodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
+                intent.putExtra("f_code",str_code); //make_familyprofil로 f_code를 보내서, make_familyprofil을 해야만 될 수 있도록
                 startActivity(intent);
             }
         });
@@ -81,36 +82,14 @@ public class CodeActivity extends AppCompatActivity {
                 }
                 else {
                     ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 family code 라는 이름표로 code 값을 복사하여 저장
+                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
                     clipboardManager.setPrimaryClip(clipData);
 
                     //복사가 되었다면 토스트메시지 노출
                     Toast.makeText(CodeActivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
 
                     //토스트 띄우고 화면 전환하기
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
-                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String myfcode = snapshot.child("fcode").getValue(String.class);
-                            String user_name = snapshot.child("name").getValue().toString();
-                            //String introduce = snapshot.child("introduce").getValue().toString();
-                            HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                            //user_info.put("introduce", introduce);
-                            user_info.put("user_gam", "1");
-                            user_info.put("user_color", "#ffffff");
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
 
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
                     Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
                     startActivity(intent);
                     finish();
@@ -139,11 +118,13 @@ public class CodeActivity extends AppCompatActivity {
         GroupFamily groupFamily = new GroupFamily(str_code);
         mReference.child(str_code).setValue(str_code);
 
-        //현재 들어온 사람의 fcode 쪽에 fcode들어가게
+        /*//현재 들어온 사람의 fcode 쪽에 fcode들어가게
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
         mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str_code);
+
+         */
 
     }
 
