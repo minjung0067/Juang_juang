@@ -65,7 +65,7 @@ public class familyactivity extends AppCompatActivity {
             public void onClick(View v) {
                 str = et_code.getText().toString(); //str에다가 code넣어줌
                 mDatabase = FirebaseDatabase.getInstance();
-                mDatabase.getReference("groups").addValueEventListener(new ValueEventListener() { //groups에서 실제로 그 코드가 있는지 확인함
+                mDatabase.getReference("groups").addListenerForSingleValueEvent(new ValueEventListener() { //groups에서 실제로 그 코드가 있는지 확인함
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //tf = 0;
@@ -84,7 +84,7 @@ public class familyactivity extends AppCompatActivity {
                             Toast.makeText(familyactivity.this, "올바르지 않은 코드입니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
                         } else if (exist == 1) { //코드가 있는 경우
                             DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
-                            reference1.child(str).addValueEventListener(new ValueEventListener() {
+                            reference1.child(str).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     //count 수 가져오기
@@ -133,11 +133,7 @@ public class familyactivity extends AppCompatActivity {
                                                 user_info.put("user_gam", "1");
                                                 user_info.put("user_color", "#ffffff");
                                                 FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
-                                                Intent intent = new Intent(familyactivity.this, MakeProfile.class); //개인프로필 만드는 창으로 이동
-                                                startActivity(intent);
-                                                finish();
 
-                                                //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
 
                                             }
 
