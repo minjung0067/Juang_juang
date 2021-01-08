@@ -74,15 +74,6 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
-        final SharedPreferences.Editor autoLogin = auto.edit();
-        //자동로그인을 위한 파일명 auto SharedPreference 선언
-        loginId = auto.getString("inputId", null);
-        loginPwd = auto.getString("inputPwd", null);
-        loginUid = auto.getString("inputUid", null);
-        //키 값은 자유, 값은 null
-        //login된 값(설정값을)저장하기 위한 변수
-
 
         //검사하면서 자동로그인!!!!!!
         FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
@@ -159,11 +150,65 @@ public class log_inactivity extends AppCompatActivity {
                 });
 
             }
+            buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
+            buttonLogIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login_btn_clicked_action();
+                }
+
+            });
         }
+        else{
+            buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
+            buttonLogIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    login_btn_clicked_action();
+                }
+
+            });
+        }
+
+
+
+
+
+
+        // Google 로그인을 앱에 통합
+        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
+
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+
+    }
+
+    public void login_btn_clicked_action(){
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
+                final SharedPreferences.Editor autoLogin = auto.edit();
+                //자동로그인을 위한 파일명 auto SharedPreference 선언
+                loginId = auto.getString("inputId", null);
+                loginPwd = auto.getString("inputPwd", null);
+                loginUid = auto.getString("inputUid", null);
+                //키 값은 자유, 값은 null
+                //login된 값(설정값을)저장하기 위한 변수
+
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
                     loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
@@ -217,30 +262,7 @@ public class log_inactivity extends AppCompatActivity {
 
         });
 
-
-
-
-
-
-        // Google 로그인을 앱에 통합
-        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
-
-        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
-
     }
-
     public void loginUser(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password)   //이메일 패스워드 방식으로 로그인하는 함수
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
