@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +28,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;  //database에 올릴 때 HashMap이란 걸 사용한다구 함!
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,6 +46,7 @@ public class Registeractivity extends AppCompatActivity {
     private EditText editTextName; //이름 칸
     private Button buttonJoin; //회원가입 버튼
 
+
     //체크박스 체크 여부 확인하는 변수들들 // No Check = 0, Check = 1
     public int TERMS_AGREE_1 = 0;   //첫번째 약관 동의 버튼
     public int TERMS_AGREE_2 = 0;   //두번째 약관 동의 버튼
@@ -51,6 +58,11 @@ public class Registeractivity extends AppCompatActivity {
     CheckBox check2; // 두번째 체크박스
     CheckBox check3; // 두번째 체크박스
     CheckBox checkall; // 전체 체크박스
+
+    //약관 확인 html로 이동
+    private Button btn_view1;
+    private Button btn_view2;
+    private Button btn_view3;
 
 
     //유효성 판단
@@ -78,6 +90,9 @@ public class Registeractivity extends AppCompatActivity {
         checkall = (CheckBox) findViewById(R.id.check_all);  //모두 체크하는 체크 박스!
 
         buttonJoin = (Button) findViewById(R.id.btn_join);  //회원가입 버튼
+        btn_view1 = (Button)findViewById(R.id.btn_view1);
+        btn_view2 = (Button)findViewById(R.id.btn_view2);
+        btn_view3 = (Button)findViewById(R.id.btn_view3);
 
 
         // 첫번째 항 동의
@@ -158,6 +173,14 @@ public class Registeractivity extends AppCompatActivity {
             }
         });
 
+        btn_view2.setOnClickListener(new View.OnClickListener() {//개인정보 연결
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Registeractivity.this,privacyhtml.class);
+                startActivity(intent);
+            }
+        });
+
 
         //회원가입 버튼을 누르면
         buttonJoin.setOnClickListener(new View.OnClickListener() {
@@ -234,6 +257,8 @@ public class Registeractivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     //비밀번호 유효성 검사
     void check_validation1(String password) {
