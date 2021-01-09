@@ -9,7 +9,7 @@ public class UserModel {
     public String fcode;
     public String introduce;
 
-    public UserModel() {
+    public UserModel(String name, String uid, String birth) {
 
     }
     public UserModel(String name, String uid, String phone, String birth){
