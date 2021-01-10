@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(MainActivity.this, Calendar_activity.class);
+                Intent intent = new Intent(MainActivity.this, our_calendar_activity.class);
                 startActivity(intent);
             }
         });

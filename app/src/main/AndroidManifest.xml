@@ -21,8 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.note_preview_activity"/>
-        <activity android:name="com.example.persimmon_tree_proj.add_event_Activity" />
         <activity android:name="com.example.persimmon_tree_proj.our_calendar_activity" />
         <activity android:name="com.example.persimmon_tree_proj.privacyhtml" />
         <activity android:name="com.example.persimmon_tree_proj.profile_color" />
