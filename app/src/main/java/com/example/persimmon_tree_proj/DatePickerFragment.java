@@ -36,10 +36,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        DialogInterface.OnMultiChoiceClickListener
-        CalendarView calendarView;
-        calendarView.setSelectionType(SelectionType.RANGE);
-
+/* 이건 range할려면 이거가져와야되나 싶어서 가져온거 ! 지워도됨
         List<Calendar> days = calendarView.getSelectedDates();
         String result="";
         for( int i=0; i<days.size(); i++)
@@ -54,7 +51,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
             result += (day_full + "\n");
         }
         Toast.makeText(Calendar_activity.this, result, Toast.LENGTH_LONG).show();
-        
+ */
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
