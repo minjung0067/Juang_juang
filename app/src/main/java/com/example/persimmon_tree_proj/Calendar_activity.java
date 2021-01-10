@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.appcompat.widget.Toolbar;
 
@@ -267,8 +268,26 @@ public class Calendar_activity extends AppCompatActivity {
             }
         });
 
+        ImageButton add_calendar = (ImageButton)findViewById(R.id.btn_addcal); //일정 추가 버튼
+        add_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
 
     }
+
+    public void processDatePickerResult(int year, int month, int day){
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+
+        Toast.makeText(this,"Date: "+dateMessage,Toast.LENGTH_SHORT).show();
+    }
+
 
     private void initViews() {
         calendarView = (CalendarView) findViewById(R.id.calendar_view);

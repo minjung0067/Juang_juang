@@ -91,7 +91,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btn_addcal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/ic_menu_today" />
