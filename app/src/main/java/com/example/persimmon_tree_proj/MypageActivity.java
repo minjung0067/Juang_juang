@@ -174,6 +174,8 @@ public class MypageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
