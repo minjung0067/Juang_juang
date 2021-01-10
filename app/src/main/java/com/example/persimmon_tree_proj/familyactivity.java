@@ -54,7 +54,8 @@ public class familyactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //btn_makecode 눌렀을 때의 처리
-                Intent intent = new Intent(familyactivity.this, CodeActivity.class); //코드 생성 xml로 이동
+                Intent intent = new Intent(getApplicationContext(), CodeActivity.class); //코드 생성 activity로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
@@ -151,8 +152,10 @@ public class familyactivity extends AppCompatActivity {
                                     }
                                     if (move == 1) {
                                         Log.i("어디있니?", "어디가1");
-                                        Intent intent = new Intent(familyactivity.this, MakeProfile.class); //개인프로필 만드는 창으로 이동
+                                        Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //코드 생성 activity로 이동
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
+                                        finish();
                                         //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
 
 
