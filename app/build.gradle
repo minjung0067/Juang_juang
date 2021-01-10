@@ -47,5 +47,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0' //이미지 동그랗게 보여주는 거
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4' //range선택해주는 cosmocalendar
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
     implementation 'com.google.android.material:material:1.2.0-alpha03'//material + date picker calendar
 }
