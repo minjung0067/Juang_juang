@@ -7,33 +7,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.splash">
 
-
     <ImageView
-        android:id="@+id/splash_image"
-        android:layout_width="341dp"
-        android:layout_height="82dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/image"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        android:id="@+id/imageView2"
+        android:layout_width="360dp"
+        android:layout_height="453dp"
+        android:layout_marginTop="140dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spalsh_text" />
-
-    <TextView
-        android:id="@+id/spalsh_text"
-        android:layout_width="149dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="8dp"
-        android:text="우리집 감나무"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/splash_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/__" />
 </androidx.constraintlayout.widget.ConstraintLayout>
