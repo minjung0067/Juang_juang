@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,10 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;  //database에 올릴 때 HashMap이란 걸 사용한다구 함!
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -90,8 +84,9 @@ public class Registeractivity extends AppCompatActivity {
         checkall = (CheckBox) findViewById(R.id.check_all);  //모두 체크하는 체크 박스!
 
         buttonJoin = (Button) findViewById(R.id.btn_join);  //회원가입 버튼
+
         btn_view1 = (Button)findViewById(R.id.btn_view1);
-        btn_view2 = (Button)findViewById(R.id.btn_view2);
+        btn_view2 = (Button)findViewById(R.id.btn_view2); //개인정보 확인 버튼튼
         btn_view3 = (Button)findViewById(R.id.btn_view3);
 
 
@@ -206,11 +201,11 @@ public class Registeractivity extends AppCompatActivity {
                         // 첫번째 약관 체크여부
                         if (TERMS_AGREE_3 == 1) {
                             // 두번째 약관 체크 여부
-                                if (TERMS_AGREE_1 == 1) {
-                                } else {
-                                    Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
+                            if (TERMS_AGREE_1 == 1) {
+                            } else {
+                                Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                         } else {
                             Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                             return;
@@ -219,8 +214,11 @@ public class Registeractivity extends AppCompatActivity {
                     // 전체 약관 체크된경우
                     else {
                         check_validation1(pwd);
+                        Log.i("ok1", String.valueOf(ok1));
+                        Log.i("ok2", String.valueOf(ok2));
                         check_validation2(birth);
                         Log.i("ok1", String.valueOf(ok1));
+                        Log.i("ok2", String.valueOf(ok2));
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
                             if(ok2 == 1){
                                 Log.i("어디얌","여기야");
@@ -302,8 +300,10 @@ public class Registeractivity extends AppCompatActivity {
                         if (task.isSuccessful()) {   //auth에 업로드에 성공했다면
                             // 회원가입 성공
                             final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
+                            Log.i("uid1111111",uid);
                             UserModel usermodel = new UserModel(name, uid, birth);  //usermodel.java에서 새로운 UserModel 만듦
-                            mDatabase.child("users").child(uid).setValue(usermodel) //database에 users 안에 usermodel의 내용으로 업로드
+                            Log.i("usermodel", String.valueOf(usermodel));
+                            mDatabase.child("users").child(uid).setValue(usermodel)//database에 users 안에 usermodel의 내용으로 업로드
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) { //database에 올리기 성공했으면
