@@ -59,7 +59,7 @@ public class Make_FamilyProfile extends AppCompatActivity {
         myfcode = intent.getStringExtra("f_code");//mainactivity에서 받아온 question
 
 
-        //확인 버튼 누르면 main으로
+        //확인 버튼 누르면 makeprofil으로
         ok = (Button) findViewById(R.id.ok_btn);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +96,9 @@ public class Make_FamilyProfile extends AppCompatActivity {
 
                         }
                     });
-                    Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
+                    Intent intent = new Intent(getApplicationContext(), MakeProfile.class);
+                    //Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                 }

@@ -101,10 +101,10 @@ public class MakeProfile extends AppCompatActivity {
                             throw databaseError.toException();
                         }
                     });
-                    Intent intent = new Intent(MakeProfile.this, MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
-
                 }
 
             }
