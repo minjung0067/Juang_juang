@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.appcompat.widget.Toolbar;
 
@@ -253,23 +254,41 @@ public class Calendar_activity extends AppCompatActivity {
                 finish();
             }
         });
-        multiple_check = (CheckBox) findViewById(R.id.rb_multiple);  //회원가입 버튼
 
-
-        // 첫번째 항 동의
+        multiple_check = (CheckBox) findViewById(R.id.rb_multiple);  //여러날짜 선택 누르게 된다
+        // 여러 날짜 선택 체크박스가 선택된다면 여러개, 체크박스 해제하면 자동으로 Range 선택
         multiple_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {   //체크 안되어있으면
+                if (isChecked) {   //체크 되어있으면
                     calendarView.setSelectionType(SelectionType.MULTIPLE);
-                } else {   //이미 체크 되어있으면
+                } else {   //체크 안되어있으면
                     calendarView.setSelectionType(SelectionType.RANGE);
                 }
             }
         });
 
+        //일정 추가 이미지 버튼
+        ImageButton add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
+        add_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
 
     }
+
+    public void processDatePickerResult(int year, int month, int day){
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+
+        Toast.makeText(this,"Date: "+dateMessage,Toast.LENGTH_SHORT).show();
+    }
+
 
     private void initViews() {
         calendarView = (CalendarView) findViewById(R.id.calendar_view);
@@ -279,7 +298,8 @@ public class Calendar_activity extends AppCompatActivity {
         calendarView.setSelectedDayBackgroundEndColor(Color.parseColor("#92C44B"));
         calendarView.setSelectionType(SelectionType.RANGE);
     }
-//툴바 나중에 지울 것
+
+    //툴바 나중에 지울 것
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -320,7 +340,5 @@ public class Calendar_activity extends AppCompatActivity {
     private void clearSelectionsMenuClick() {
         calendarView.clearSelections();
     }
-
-
 
 }
