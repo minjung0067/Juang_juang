@@ -307,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
         goanswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Answeractivity.class);
+                Intent intent = new Intent(MainActivity.this,Answeractivity.class);
                 intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
                 intent.putExtra("f_code",f_code);
@@ -320,10 +320,8 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(MainActivity.this,MypageActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

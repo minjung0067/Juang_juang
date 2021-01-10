@@ -167,6 +167,7 @@ public class MypageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
