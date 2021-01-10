@@ -39,15 +39,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
-//    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.android.gms:play-services-auth:18.1.0' //구글플레이 서비스 쓸거다
     implementation 'de.hdodenhof:circleimageview:2.2.0' //이미지 동그랗게 보여주는 거
-    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
+    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4' //range선택해주는 cosmocalendar
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.applandeo:material-calendar-view:1.0.1'   //material view
-    implementation 'com.android.support:design:28.0.0'  //material view 용
+    implementation 'com.google.android.material:material:1.2.0-alpha03'//material + date picker calendar
 }
-

@@ -143,7 +143,8 @@ public class MakeProfile extends AppCompatActivity {
                                     break;
                                 case "2":
                                     imageView.setBackgroundColor(Color.parseColor(color_number));
-                                    imageView.setImageResource(R.drawable.gam2);
+                                    imageView.setImageResource(R
+                                            .drawable.gam2);
                                     break;
                                 case "3":
                                     imageView.setBackgroundColor(Color.parseColor(color_number));
