@@ -59,10 +59,11 @@ public class profile_color extends AppCompatActivity {
         gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(profile_color.this, profile_gam.class);
+                Intent intent = new Intent(getApplicationContext(), profile_gam.class); //코드 생성 activity로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
 
@@ -70,7 +71,7 @@ public class profile_color extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(profile_color.this, MakeProfile.class);
+                Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //makeprofil로 이동
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
