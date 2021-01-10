@@ -268,7 +268,8 @@ public class Calendar_activity extends AppCompatActivity {
             }
         });
 
-        ImageButton add_calendar = (ImageButton)findViewById(R.id.btn_addcal); //일정 추가 버튼
+        //일정 추가 이미지 버튼
+        ImageButton add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
         add_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
