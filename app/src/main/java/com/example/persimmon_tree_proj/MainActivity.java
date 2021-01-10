@@ -275,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         //감나무가 생성되지 않은 경우
                         else if(member_count < count){
+                            goanswer.setClickable(false); //버튼 클릭 못함
                             Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
                         }

@@ -1,11 +1,13 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,9 +53,11 @@ public class CodeActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
-                intent.putExtra("f_code",str_code); //make_familyprofil로 f_code를 보내서, make_familyprofil을 해야만 될 수 있도록
+                Intent intent = new Intent(getApplicationContext(), Make_FamilyProfile.class);
+                intent.putExtra("f_code",str_code);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -75,6 +79,7 @@ public class CodeActivity extends AppCompatActivity {
         TextView textView= (TextView) findViewById(R.id.tv_code); //텍스트뷰
         final String code = textView.getText().toString();//텍스트 뷰 글자 가져옴
         btn_profileok.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onClick(View v) {
                 if (code == ""){ //가족 코드 생성 전에 누른다면
@@ -172,6 +177,7 @@ public class CodeActivity extends AppCompatActivity {
 
         else {
             View.OnClickListener listener = new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
                 @Override
                 public void onClick(View v) {
                     //클립보드 사용 코드

@@ -54,8 +54,10 @@ public class profile_gam extends AppCompatActivity {
         color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {  //색상 버튼 누르면 색깔 정하는 곳으로 가게
-                Intent intent = new Intent(profile_gam.this, profile_color.class);
+                Intent intent = new Intent(getApplicationContext(), profile_color.class); //코드 생성 activity로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
@@ -64,7 +66,7 @@ public class profile_gam extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(profile_gam.this, MakeProfile.class);
+                Intent intent = new Intent(getApplicationContext(), MakeProfile.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }

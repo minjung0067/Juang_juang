@@ -171,8 +171,6 @@ public class MypageActivity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -182,14 +180,17 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //SharedPreferences에 저장된 값들을 로그아웃 버튼을 누르면 삭제하기 위해
                 //SharedPregerences값을 불러온다.
-                Intent intent = new Intent(MypageActivity.this, log_inactivity.class);
+                Intent intent = new Intent(getApplicationContext(), log_inactivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                //Intent intent = new Intent(MypageActivity.this, log_inactivity.class);
                 SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = auto.edit();
                 //edit.clear()는 파일 auto에 들어있는 모든 정보를 기기에서 지운다.
                 editor.clear();
                 editor.commit(); //저장
                 Toast.makeText(MypageActivity.this, "로그아웃.", Toast.LENGTH_SHORT).show();
+                //startActivity(intent);
                 finish();
             }
         });
