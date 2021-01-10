@@ -81,7 +81,7 @@ public class Answeractivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 마이페이지로 이동
-                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                Intent intent = new Intent(Answeractivity.this, MypageActivity.class);
                 startActivity(intent);
             }
         });
