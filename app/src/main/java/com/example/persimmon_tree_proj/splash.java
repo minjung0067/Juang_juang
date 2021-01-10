@@ -23,7 +23,7 @@ public class splash extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },2000); //splash screen 이 등장하는 시간
+        },3000); //splash screen 이 등장하는 시간
     }
 
     protected void onPause(){

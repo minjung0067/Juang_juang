@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.our_calendar_activity" />
+        <activity android:name="com.example.persimmon_tree_proj.Waitactivity"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfilewait"></activity>
         <activity android:name="com.example.persimmon_tree_proj.privacyhtml" />
         <activity android:name="com.example.persimmon_tree_proj.profile_color" />
         <activity android:name="com.example.persimmon_tree_proj.profile_gam" />

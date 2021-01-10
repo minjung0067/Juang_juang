@@ -275,7 +275,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         //감나무가 생성되지 않은 경우
                         else if(member_count < count){
-                            goanswer.setClickable(false); //버튼 클릭 못함
+                            Intent intent = new Intent(getApplicationContext(),Waitactivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
                             Toast.makeText(MainActivity.this, "아직 감나무가 생성되지 않았습니다..", Toast.LENGTH_SHORT).show();
 
                         }
@@ -304,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
         goanswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Answeractivity.class);
+                Intent intent = new Intent(MainActivity.this,Answeractivity.class);
                 intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
                 intent.putExtra("f_code",f_code);
@@ -317,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
+                Intent intent = new Intent(MainActivity.this,MypageActivity.class);
                 startActivity(intent);
             }
         });
@@ -327,8 +330,10 @@ public class MainActivity extends AppCompatActivity {
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -337,8 +342,10 @@ public class MainActivity extends AppCompatActivity {
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(MainActivity.this, Calendar_activity.class);
+                Intent intent = new Intent(getApplicationContext(),Calendar_activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
     }
