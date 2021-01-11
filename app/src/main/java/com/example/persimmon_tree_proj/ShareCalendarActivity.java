@@ -10,6 +10,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class ShareCalendarActivity extends Activity {
         final SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM", Locale.KOREA);
         final SimpleDateFormat curDayFormat = new SimpleDateFormat("dd", Locale.KOREA);
 
+
         //현재 날짜 텍스트뷰에 뿌려줌
         tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
 
@@ -90,6 +92,10 @@ public class ShareCalendarActivity extends Activity {
             dayList.add("");
         }
         setCalendarDate(mCal.get(Calendar.MONTH) + 1);
+        gridAdapter = new GridAdapter(getApplicationContext(), dayList);
+        gridView.setAdapter(gridAdapter);
+
+        //다음달로 이동하는 버튼
         rightBtn = (Button)findViewById(R.id.rightBtn);
 
         rightBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,10 +103,9 @@ public class ShareCalendarActivity extends Activity {
             public void onClick(View v) {
                 mCal = Calendar.getInstance();
                 tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
-                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
+                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) + 1, 1);
                 int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
 //1일 - 요일 매칭 시키기 위해 공백 add
-                dayList = new ArrayList();
                 for (int i = 1; i < dayNum; i++) {
                     dayList.add("");
                 }
@@ -109,6 +114,8 @@ public class ShareCalendarActivity extends Activity {
             }
 
         });
+
+        //이전달로 이동하는 버튼
         leftBtn = (Button)findViewById(R.id.leftBtn);
 
         leftBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +126,6 @@ public class ShareCalendarActivity extends Activity {
                 mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
                 int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
 //1일 - 요일 매칭 시키기 위해 공백 add
-                dayList = new ArrayList();
                 for (int i = 1; i < dayNum; i++) {
                     dayList.add("");
                 }
@@ -128,8 +134,7 @@ public class ShareCalendarActivity extends Activity {
             }
 
         });
-        gridAdapter = new GridAdapter(getApplicationContext(), dayList);
-        gridView.setAdapter(gridAdapter);
+
 
 
 
@@ -204,6 +209,21 @@ public class ShareCalendarActivity extends Activity {
 
             //해당 날짜 텍스트 컬러,배경 변경
             mCal = Calendar.getInstance();
+
+//            if(position % 7 == 0)
+//            {
+//                dayViewHolder.tvDay.setTextColor(Color.RED);
+//            }
+//            else if(position % 7 == 6)
+//            {
+//                dayViewHolder.tvDay.setTextColor(Color.BLUE);
+//            }
+//            else
+//            {
+//                dayViewHolder.tvDay.setTextColor(Color.BLACK);
+//            }
+
+
             //오늘 day 가져옴
             Integer today = mCal.get(Calendar.DAY_OF_MONTH);
             String sToday = String.valueOf(today);
