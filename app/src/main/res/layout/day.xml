@@ -15,6 +15,7 @@
         android:paddingLeft="3dp"
         android:paddingTop="2dp"
         android:gravity="center"
+        android:layout_gravity="center"
         android:textSize="18sp"/>
 
     <!-- /날짜 -->
