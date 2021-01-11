@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/linearLayout"
     android:layout_width="fill_parent"
@@ -10,91 +9,6 @@
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/tv_Sunday"
-            app:layout_constraintBottom_toTopOf="@+id/gv_calendar_activity_gv_calendar"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Monday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gv_calendar_activity_tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-
-        <TextView
-            android:id="@+id/tv_Monday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="월"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Sunday"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Tuesday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_Sunday"
-            app:layout_constraintTop_toTopOf="@+id/tv_Sunday" />
-
-        <TextView
-            android:id="@+id/tv_Tuesday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="화"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Monday"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Wednesday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_Monday"
-            app:layout_constraintTop_toTopOf="@+id/tv_Monday" />
-
-        <TextView
-            android:id="@+id/tv_Wednesday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="수"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Tuesday"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Thursday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_Tuesday"
-            app:layout_constraintTop_toTopOf="@+id/tv_Tuesday" />
-
-        <TextView
-            android:id="@+id/tv_Thursday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="목"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Wednesday"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Friday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_Wednesday"
-            app:layout_constraintTop_toTopOf="@+id/tv_Wednesday" />
-
-        <TextView
-            android:id="@+id/tv_Friday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="금"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Thursday"
-            app:layout_constraintEnd_toStartOf="@+id/tv_Saturday"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_Thursday"
-            app:layout_constraintTop_toTopOf="@+id/tv_Thursday" />
-
-        <TextView
-            android:id="@+id/tv_Saturday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="토"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Friday"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_Friday"
-            app:layout_constraintTop_toTopOf="@+id/tv_Friday" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <TextView
         android:text="2021년 몇월"
