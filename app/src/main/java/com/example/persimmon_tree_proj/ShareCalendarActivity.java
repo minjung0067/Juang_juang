@@ -90,6 +90,10 @@ public class ShareCalendarActivity extends Activity {
             dayList.add("");
         }
         setCalendarDate(mCal.get(Calendar.MONTH) + 1);
+        gridAdapter = new GridAdapter(getApplicationContext(), dayList);
+        gridView.setAdapter(gridAdapter);
+
+        //다음달로 이동하는 버튼
         rightBtn = (Button)findViewById(R.id.rightBtn);
 
         rightBtn.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +104,6 @@ public class ShareCalendarActivity extends Activity {
                 mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
                 int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
 //1일 - 요일 매칭 시키기 위해 공백 add
-                dayList = new ArrayList();
                 for (int i = 1; i < dayNum; i++) {
                     dayList.add("");
                 }
@@ -109,6 +112,8 @@ public class ShareCalendarActivity extends Activity {
             }
 
         });
+
+        //이전달로 이동하는 버튼
         leftBtn = (Button)findViewById(R.id.leftBtn);
 
         leftBtn.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +121,9 @@ public class ShareCalendarActivity extends Activity {
             public void onClick(View v) {
                 mCal = Calendar.getInstance();
                 tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
-                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
+                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) + 1, 1);
                 int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
 //1일 - 요일 매칭 시키기 위해 공백 add
-                dayList = new ArrayList();
                 for (int i = 1; i < dayNum; i++) {
                     dayList.add("");
                 }
@@ -128,8 +132,7 @@ public class ShareCalendarActivity extends Activity {
             }
 
         });
-        gridAdapter = new GridAdapter(getApplicationContext(), dayList);
-        gridView.setAdapter(gridAdapter);
+
 
 
 
