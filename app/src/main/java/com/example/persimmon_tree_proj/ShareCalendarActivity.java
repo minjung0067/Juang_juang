@@ -34,7 +34,7 @@ import com.example.persimmon_tree_proj.domain.DayInfo;
  * @author croute
  * @since 2011.03.08
  */
-public class ShareCalendarActivity extends Activity implements OnItemClickListener, OnClickListener
+public class ShareCalendarActivity extends Activity implements OnItemClickListener
 {
     private GestureDetectorCompat detector;
     public static int SUNDAY        = 1;
