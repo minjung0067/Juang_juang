@@ -2,11 +2,7 @@
 <LinearLayout
     android:id="@+id/day_cell_ll_background"
     xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    android:layout_width="wrap_content"
-=======
     android:layout_width="60dp"
->>>>>>> b0a8a2716657a4283322e24b12f8727cbbeae7b5
     android:layout_height="53dp"
     android:orientation="vertical"
     android:background="@color/pointColor">
@@ -15,11 +11,7 @@
     <TextView
         android:id="@+id/day_cell_tv_day"
         android:layout_width="wrap_content"
-<<<<<<< HEAD
-        android:layout_height="fill_parent"
-=======
         android:layout_height="wrap_content"
->>>>>>> b0a8a2716657a4283322e24b12f8727cbbeae7b5
         android:paddingLeft="3dp"
         android:paddingTop="2dp"
         android:gravity="center"

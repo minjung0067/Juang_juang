@@ -48,17 +48,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private TextView mTvCalendarTitle;
     private GridView mGvCalendar;
 
-    private TextView mSunDay;
-    private TextView mMonday;
-    private TextView mTuesday;
-    private TextView mWednesday;
-    private TextView mThursday;
-    private TextView mFriday;
-    private TextView mSaturday;
-
-
-
-
     private ArrayList<DayInfo> mDayList;
     private CalendarAdapter mCalendarAdapter;
 
@@ -78,17 +67,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
         mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar);
-
-        mSunDay = (TextView)findViewById(R.id.tv_Sunday);
-        mMonday = (TextView)findViewById(R.id.tv_Monday);
-        mTuesday= (TextView)findViewById(R.id.tv_Tuesday);
-        mWednesday = (TextView)findViewById(R.id.tv_Wednesday);
-        mThursday = (TextView)findViewById(R.id.tv_Thursday);
-        mFriday = (TextView)findViewById(R.id.tv_Friday);
-        mSaturday = (TextView)findViewById(R.id.tv_Saturday);
-
         GestureDetector gestureDetector = null;
-
 
         mGvCalendar.setOnItemClickListener(this);
 
@@ -186,7 +165,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
                 + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
 
-
         DayInfo day;
 
         Log.e("DayOfMOnth", dayOfMonth+"");
@@ -260,8 +238,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
-}
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         detector.onTouchEvent(event);
@@ -324,4 +300,3 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     }
 }
-
