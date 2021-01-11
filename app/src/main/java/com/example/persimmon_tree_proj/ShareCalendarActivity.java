@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -195,6 +196,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         }
 
         initCalendarAdapter();
+
     }
 
     /**
@@ -230,7 +232,11 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long arg3)
     {
-
+//        Object select_position = Integer.valueOf(mThisMonthCalendar.getItemAtPosition(position));
+//        int select_year = mThisMonthCalendar.get(Calendar.YEAR);
+//        int select_month = mThisMonthCalendar.get(Calendar.MONTH) + 1;
+//        Log.i("value","selected!!!!");
+//        Log.i("value",String.valueOf(select_year));
     }
 
     private void initCalendarAdapter()
