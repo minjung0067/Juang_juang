@@ -1,40 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
-    android:orientation="vertical"
-    tools:context="com.example.persimmon_tree_proj.ShareCalendarActivity">
+    android:id="@+id/linearLayout2"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/subColor">
+
+    <!-- Activity Layout XML -->
+    <!-- @author croute -->
+    <!-- @since 2011.03.08 -->
 
     <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#808080"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:textColor="@color/mainColor"
-        android:textSize="20sp" />
+        android:id="@+id/tv_Sunday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일"
+        app:layout_constraintBottom_toTopOf="@+id/gv_calendar_activity_gv_calendar"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Monday"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gv_calendar_activity_tv_title" />
+
+    <TextView
+        android:id="@+id/tv_Monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="월"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Sunday"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Tuesday"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_Sunday"
+        app:layout_constraintTop_toTopOf="@+id/tv_Sunday" />
+
+    <TextView
+        android:id="@+id/tv_Tuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="화"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Monday"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Wednesday"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_Monday"
+        app:layout_constraintTop_toTopOf="@+id/tv_Monday" />
+
+    <TextView
+        android:id="@+id/tv_Wednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="수"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Tuesday"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Thursday"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_Tuesday"
+        app:layout_constraintTop_toTopOf="@+id/tv_Tuesday" />
+
+    <TextView
+        android:id="@+id/tv_Thursday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="목"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Wednesday"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Friday"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_Wednesday"
+        app:layout_constraintTop_toTopOf="@+id/tv_Wednesday" />
+
+    <TextView
+        android:id="@+id/tv_Friday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="금"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Thursday"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Saturday"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_Thursday"
+        app:layout_constraintTop_toTopOf="@+id/tv_Thursday" />
+
+    <TextView
+        android:id="@+id/tv_Saturday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="토"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_Friday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_Friday"
+        app:layout_constraintTop_toTopOf="@+id/tv_Friday" />
+
+    <TextView
+        android:id="@+id/gv_calendar_activity_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="2021년 몇월"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/gv_calendar_activity_gv_calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
-        android:id="@+id/gridview"
-        android:layout_width="match_parent"
+        android:id="@+id/gv_calendar_activity_gv_calendar"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:listSelector="@color/colorPrimaryDark"
-        android:numColumns="7"></GridView>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="1dp"
+        android:listSelector="@drawable/grideview_selector"
+        android:numColumns="7"
+        android:stretchMode="columnWidth"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/gv_calendar_activity_tv_title" />
 
-    <Button
-        android:id="@+id/leftBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="left" />
-    <Button
-        android:id="@+id/rightBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="right" />
+        android:layout_marginBottom="63dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gv_calendar_activity_gv_calendar">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/gv_calendar_activity_b_last"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="지난달" />
+
+        <Button
+            android:id="@+id/gv_calendar_activity_b_next"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="다음달" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

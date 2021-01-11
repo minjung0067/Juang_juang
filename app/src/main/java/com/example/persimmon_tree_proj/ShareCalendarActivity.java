@@ -1,243 +1,229 @@
 package com.example.persimmon_tree_proj;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.adapter.CalendarAdapter;
+import com.example.persimmon_tree_proj.domain.DayInfo;
 
-public class ShareCalendarActivity extends Activity {
 
-    /**
-     * 연/월 텍스트뷰
-     */
-    private TextView tvDate;
-    /**
-     * 그리드뷰 어댑터
-     */
-    private GridAdapter gridAdapter;
+/**
+ * 그리드뷰를 이용한 달력 예제
+ *
+ * @blog http://croute.me
+ * @link http://croute.me/335
+ *
+ * @author croute
+ * @since 2011.03.08
+ */
+public class ShareCalendarActivity extends Activity implements OnItemClickListener, OnClickListener
+{
+    public static int SUNDAY        = 1;
+    public static int MONDAY        = 2;
+    public static int TUESDAY       = 3;
+    public static int WEDNSESDAY    = 4;
+    public static int THURSDAY      = 5;
+    public static int FRIDAY        = 6;
+    public static int SATURDAY      = 7;
 
-    /**
-     * 일 저장 할 리스트
-     */
-    private ArrayList<String> dayList;
+    private TextView mTvCalendarTitle;
+    private GridView mGvCalendar;
 
-    /**
-     * 그리드뷰
-     */
-    private GridView gridView;
+    private TextView mSunDay;
+    private TextView mMonday;
+    private TextView mTuesday;
+    private TextView mWednesday;
+    private TextView mThursday;
+    private TextView mFriday;
+    private TextView mSaturday;
 
-    /**
-     * 캘린더 변수
-     */
-    private Calendar mCal;
-    private Button leftBtn;
-    private Button rightBtn;
+
+
+
+    private ArrayList<DayInfo> mDayList;
+    private CalendarAdapter mCalendarAdapter;
+
+    Calendar mLastMonthCalendar;
+    Calendar mThisMonthCalendar;
+    Calendar mNextMonthCalendar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_share_calendar);
 
+        Button bLastMonth = (Button)findViewById(R.id.gv_calendar_activity_b_last);
+        Button bNextMonth = (Button)findViewById(R.id.gv_calendar_activity_b_next);
 
-
-        tvDate = (TextView)findViewById(R.id.tv_date);
-        gridView = (GridView)findViewById(R.id.gridview);
-
-        // 오늘에 날짜를 세팅 해준다.
-        long now = System.currentTimeMillis();
-        final Date date = new Date(now);
-        //연,월,일을 따로 저장
-        final SimpleDateFormat curYearFormat = new SimpleDateFormat("yyyy", Locale.KOREA);
-        final SimpleDateFormat curMonthFormat = new SimpleDateFormat("MM", Locale.KOREA);
-        final SimpleDateFormat curDayFormat = new SimpleDateFormat("dd", Locale.KOREA);
-
-
-        //현재 날짜 텍스트뷰에 뿌려줌
-        tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
-
-        //gridview 요일 표시
-        dayList = new ArrayList<String>();
-        dayList.add("일");
-        dayList.add("월");
-        dayList.add("화");
-        dayList.add("수");
-        dayList.add("목");
-        dayList.add("금");
-        dayList.add("토");
-
-        mCal = Calendar.getInstance();
-
-        //이번달 1일 무슨요일인지 판단 mCal.set(Year,Month,Day)
-        mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
-        int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
-        //1일 - 요일 매칭 시키기 위해 공백 add
-        for (int i = 1; i < dayNum; i++) {
-            dayList.add("");
-        }
-        setCalendarDate(mCal.get(Calendar.MONTH) + 1);
-        gridAdapter = new GridAdapter(getApplicationContext(), dayList);
-        gridView.setAdapter(gridAdapter);
-
-        //다음달로 이동하는 버튼
-        rightBtn = (Button)findViewById(R.id.rightBtn);
-
-        rightBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCal = Calendar.getInstance();
-                tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
-                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) + 1, 1);
-                int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
-//1일 - 요일 매칭 시키기 위해 공백 add
-                for (int i = 1; i < dayNum; i++) {
-                    dayList.add("");
-                }
-                setCalendarDate(mCal.get(Calendar.MONTH) +1);
-                gridAdapter.notifyDataSetChanged();
-            }
-
-        });
-
-        //이전달로 이동하는 버튼
-        leftBtn = (Button)findViewById(R.id.leftBtn);
-
-        leftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCal = Calendar.getInstance();
-                tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
-                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
-                int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
-//1일 - 요일 매칭 시키기 위해 공백 add
-                for (int i = 1; i < dayNum; i++) {
-                    dayList.add("");
-                }
-                setCalendarDate(mCal.get(Calendar.MONTH) -1);
-                gridAdapter.notifyDataSetChanged();
-            }
-
-        });
+        mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
+        mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar);
+        mSunDay = (TextView)findViewById(R.id.tv_Sunday);
+        mMonday = (TextView)findViewById(R.id.tv_Monday);
+        mTuesday= (TextView)findViewById(R.id.tv_Tuesday);
+        mWednesday = (TextView)findViewById(R.id.tv_Wednesday);
+        mThursday = (TextView)findViewById(R.id.tv_Thursday);
+        mFriday = (TextView)findViewById(R.id.tv_Friday);
+        mSaturday = (TextView)findViewById(R.id.tv_Saturday);
 
 
 
+        bLastMonth.setOnClickListener(this);
+        bNextMonth.setOnClickListener(this);
+        mGvCalendar.setOnItemClickListener(this);
 
+        mDayList = new ArrayList<DayInfo>();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        // 이번달 의 캘린더 인스턴스를 생성한다.
+        mThisMonthCalendar = Calendar.getInstance();
+        mThisMonthCalendar.set(Calendar.DAY_OF_MONTH, 1);
+        getCalendar(mThisMonthCalendar);
     }
 
     /**
-     * 해당 월에 표시할 일 수 구함
+     * 달력을 셋팅한다.
      *
-     * @param month
+     * @param calendar 달력에 보여지는 이번달의 Calendar 객체
      */
-    private void setCalendarDate(int month) {
-        mCal.set(Calendar.MONTH, month - 1);
+    private void getCalendar(Calendar calendar)
+    {
+        int lastMonthStartDay;
+        int dayOfMonth;
+        int thisMonthLastDay;
 
-        for (int i = 0; i < mCal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            dayList.add("" + (i + 1));
+        mDayList.clear();
+
+        // 이번달 시작일의 요일을 구한다. 시작일이 일요일인 경우 인덱스를 1(일요일)에서 8(다음주 일요일)로 바꾼다.)
+        dayOfMonth = calendar.get(Calendar.DAY_OF_WEEK);
+        thisMonthLastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        calendar.add(Calendar.MONTH, -1);
+        Log.e("지난달 마지막일", calendar.get(Calendar.DAY_OF_MONTH)+"");
+
+        // 지난달의 마지막 일자를 구한다.
+        lastMonthStartDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        calendar.add(Calendar.MONTH, 1);
+        Log.e("이번달 시작일", calendar.get(Calendar.DAY_OF_MONTH)+"");
+
+        if(dayOfMonth == SUNDAY)
+        {
+            dayOfMonth += 7;
         }
 
+        lastMonthStartDay -= (dayOfMonth-1)-1;
+
+
+        // 캘린더 타이틀(년월 표시)을 세팅한다.
+        mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
+                + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+
+
+        DayInfo day;
+
+        Log.e("DayOfMOnth", dayOfMonth+"");
+
+        for(int i=0; i<dayOfMonth-1; i++)
+        {
+            int date = lastMonthStartDay+i;
+            day = new DayInfo();
+            day.setDay(Integer.toString(date));
+            day.setInMonth(false);
+
+            mDayList.add(day);
+        }
+        for(int i=1; i <= thisMonthLastDay; i++)
+        {
+            day = new DayInfo();
+            day.setDay(Integer.toString(i));
+            day.setInMonth(true);
+
+            mDayList.add(day);
+        }
+        for(int i=1; i<42-(thisMonthLastDay+dayOfMonth-1)+1; i++)
+        {
+            day = new DayInfo();
+            day.setDay(Integer.toString(i));
+            day.setInMonth(false);
+            mDayList.add(day);
+        }
+
+        initCalendarAdapter();
     }
 
     /**
-     * 그리드뷰 어댑터
+     * 지난달의 Calendar 객체를 반환합니다.
      *
+     * @param calendar
+     * @return LastMonthCalendar
      */
-    private class GridAdapter extends BaseAdapter {
+    private Calendar getLastMonth(Calendar calendar)
+    {
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
+        calendar.add(Calendar.MONTH, -1);
+        mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
+                + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+        return calendar;
+    }
 
-        private final List<String> list;
+    /**
+     * 다음달의 Calendar 객체를 반환합니다.
+     *
+     * @param calendar
+     * @return NextMonthCalendar
+     */
+    private Calendar getNextMonth(Calendar calendar)
+    {
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
+        calendar.add(Calendar.MONTH, +1);
+        mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
+                + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+        return calendar;
+    }
 
-        private final LayoutInflater inflater;
+    @Override
+    public void onItemClick(AdapterView<?> parent, View v, int position, long arg3)
+    {
 
-        /**
-         * 생성자
-         *
-         * @param context
-         * @param list
-         */
-        public GridAdapter(Context context, List<String> list) {
-            this.list = list;
-            this.inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+    }
 
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public String getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            ViewHolder holder = null;
-
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.day, parent, false);
-                holder = new ViewHolder();
-
-                holder.tvItemGridView = (TextView)convertView.findViewById(R.id.tv_item_gridview);
-
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder)convertView.getTag();
-            }
-            holder.tvItemGridView.setText("" + getItem(position));
-
-            //해당 날짜 텍스트 컬러,배경 변경
-            mCal = Calendar.getInstance();
-
-//            if(position % 7 == 0)
-//            {
-//                dayViewHolder.tvDay.setTextColor(Color.RED);
-//            }
-//            else if(position % 7 == 6)
-//            {
-//                dayViewHolder.tvDay.setTextColor(Color.BLUE);
-//            }
-//            else
-//            {
-//                dayViewHolder.tvDay.setTextColor(Color.BLACK);
-//            }
-
-
-            //오늘 day 가져옴
-            Integer today = mCal.get(Calendar.DAY_OF_MONTH);
-            String sToday = String.valueOf(today);
-            if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
-                holder.tvItemGridView.setTextColor(getResources().getColor(R.color.colorAccent));
-            }
-            return convertView;
+    @Override
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            case R.id.gv_calendar_activity_b_last:
+                mThisMonthCalendar = getLastMonth(mThisMonthCalendar);
+                getCalendar(mThisMonthCalendar);
+                break;
+            case R.id.gv_calendar_activity_b_next:
+                mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
+                getCalendar(mThisMonthCalendar);
+                break;
         }
     }
 
-    private class ViewHolder {
-        TextView tvItemGridView;
+    private void initCalendarAdapter()
+    {
+        mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList);
+        mGvCalendar.setAdapter(mCalendarAdapter);
     }
-
-
-
 }
