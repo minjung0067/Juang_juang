@@ -40,8 +40,8 @@
             android:id="@+id/tv_Sunday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
             android:text="일"
-
             app:layout_constraintEnd_toStartOf="@+id/tv_Monday"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent" />
