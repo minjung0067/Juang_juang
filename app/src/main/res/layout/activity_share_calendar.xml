@@ -1,40 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
     android:orientation="vertical"
-    tools:context="com.example.persimmon_tree_proj.ShareCalendarActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/subColor">
+
+    <!-- Activity Layout XML -->
+    <!-- @author croute -->
+    <!-- @since 2011.03.08 -->
 
     <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#808080"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:textColor="@color/mainColor"
-        android:textSize="20sp" />
+        android:text="2021년 몇월"
+        android:textSize="20sp"
+        android:id="@+id/gv_calendar_activity_tv_title"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textStyle="bold"/>
 
     <GridView
-        android:id="@+id/gridview"
+        android:id="@+id/gv_calendar_activity_gv_calendar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:listSelector="@color/colorPrimaryDark"
-        android:numColumns="7"></GridView>
-
-    <Button
-        android:id="@+id/leftBtn"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="left" />
-    <Button
-        android:id="@+id/rightBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="right" />
+        android:layout_marginTop="30dp"
+        android:listSelector="@drawable/grideview_selector"
+        android:numColumns="7"
+        android:stretchMode="columnWidth" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/gv_calendar_activity_b_last"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="지난달" />
+
+        <Button
+            android:id="@+id/gv_calendar_activity_b_next"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="다음달" />
+
+    </LinearLayout>
 </LinearLayout>
