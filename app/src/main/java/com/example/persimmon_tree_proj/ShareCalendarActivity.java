@@ -34,7 +34,7 @@ import com.example.persimmon_tree_proj.domain.DayInfo;
  * @author croute
  * @since 2011.03.08
  */
-public class ShareCalendarActivity extends Activity implements OnItemClickListener, OnClickListener
+public class ShareCalendarActivity extends Activity implements OnItemClickListener
 {
     private GestureDetectorCompat detector;
     public static int SUNDAY        = 1;
@@ -231,22 +231,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     public void onItemClick(AdapterView<?> parent, View v, int position, long arg3)
     {
 
-    }
-
-    @Override
-    public void onClick(View v)
-    {
-        switch(v.getId())
-        {
-            case R.id.gv_calendar_activity_b_last:
-                mThisMonthCalendar = getLastMonth(mThisMonthCalendar);
-                getCalendar(mThisMonthCalendar);
-                break;
-            case R.id.gv_calendar_activity_b_next:
-                mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
-                getCalendar(mThisMonthCalendar);
-                break;
-        }
     }
 
     private void initCalendarAdapter()
