@@ -138,7 +138,7 @@ public class CalendarAdapter extends BaseAdapter
     private int getCellWidthDP()
     {
 //      int width = mContext.getResources().getDisplayMetrics().widthPixels;
-        int cellWidth = 480/7;
+        int cellWidth = 1080/7;
 
         return cellWidth;
     }
@@ -146,7 +146,7 @@ public class CalendarAdapter extends BaseAdapter
     private int getRestCellWidthDP()
     {
 //      int width = mContext.getResources().getDisplayMetrics().widthPixels;
-        int cellWidth = 480%7;
+        int cellWidth = 1080%7;
 
         return cellWidth;
     }
@@ -154,7 +154,7 @@ public class CalendarAdapter extends BaseAdapter
     private int getCellHeightDP()
     {
 //      int height = mContext.getResources().getDisplayMetrics().widthPixels;
-        int cellHeight = 480/6;
+        int cellHeight = 1420/6;
 
         return cellHeight;
     }

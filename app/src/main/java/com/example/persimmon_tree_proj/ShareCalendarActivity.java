@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -13,6 +16,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.core.view.GestureDetectorCompat;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.adapter.CalendarAdapter;
@@ -30,6 +36,7 @@ import com.example.persimmon_tree_proj.domain.DayInfo;
  */
 public class ShareCalendarActivity extends Activity implements OnItemClickListener, OnClickListener
 {
+    private GestureDetectorCompat detector;
     public static int SUNDAY        = 1;
     public static int MONDAY        = 2;
     public static int TUESDAY       = 3;
@@ -47,6 +54,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     Calendar mLastMonthCalendar;
     Calendar mThisMonthCalendar;
     Calendar mNextMonthCalendar;
+    final static int DISTANCE = 200;
+    final static int VELOCITY = 350;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -54,18 +63,57 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_calendar);
 
-        Button bLastMonth = (Button)findViewById(R.id.gv_calendar_activity_b_last);
-        Button bNextMonth = (Button)findViewById(R.id.gv_calendar_activity_b_next);
+        detector = new GestureDetectorCompat(this, new MyGestureListener());
 
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
         mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar);
+        GestureDetector gestureDetector = null;
 
-
-        bLastMonth.setOnClickListener(this);
-        bNextMonth.setOnClickListener(this);
         mGvCalendar.setOnItemClickListener(this);
 
+        mGvCalendar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                detector.onTouchEvent(event);
+                return false;
+            }
+        });
+
         mDayList = new ArrayList<DayInfo>();
+
+
+        //swipe 시작
+        GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener(){
+
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                if(e1.getX()-e2.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
+                    Log.i("ss","좌->우");
+                }
+                if(e2.getX()-e1.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
+                    Log.i("ss","우->좌");
+                }
+                return false;
+            }
+
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            public void onLongPress(MotionEvent e) {
+            }
+
+            public void onShowPress(MotionEvent e) {
+            }
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return false;
+            }
+
+            public boolean onDown(MotionEvent e) {
+                return false;
+            }
+        };
     }
 
     @Override
@@ -205,5 +253,66 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     {
         mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList);
         mGvCalendar.setAdapter(mCalendarAdapter);
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        detector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        private static final int SWIPE_THRESHOLD = 100;
+        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+
+            float diffY = event2.getY() - event1.getY();
+            float diffX = event2.getX() - event1.getX();
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffX > 0) {
+                        onSwipeRight();
+                    } else {
+                        onSwipeLeft();
+                    }
+                }
+            } else {
+                if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffY > 0) {
+                        onSwipeBottom();
+                    } else {
+                        onSwipeTop();
+                    }
+                }
+            }
+            return true;
+        }
+    }
+
+    private void onSwipeLeft() {
+        mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
+        getCalendar(mThisMonthCalendar);
+    }
+
+    private void onSwipeRight() {
+        mThisMonthCalendar = getLastMonth(mThisMonthCalendar);
+        getCalendar(mThisMonthCalendar);
+
+    }
+
+    private void onSwipeTop() {
+
+    }
+
+    private void onSwipeBottom() {
+
     }
 }
