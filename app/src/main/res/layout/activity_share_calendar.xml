@@ -30,25 +30,4 @@
         android:numColumns="7"
         android:stretchMode="columnWidth" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/gv_calendar_activity_b_last"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="지난달" />
-
-        <Button
-            android:id="@+id/gv_calendar_activity_b_next"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="다음달" />
-
-    </LinearLayout>
 </LinearLayout>

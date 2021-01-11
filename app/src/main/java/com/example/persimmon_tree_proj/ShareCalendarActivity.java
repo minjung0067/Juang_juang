@@ -65,15 +65,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         detector = new GestureDetectorCompat(this, new MyGestureListener());
 
-        Button bLastMonth = (Button)findViewById(R.id.gv_calendar_activity_b_last);
-        Button bNextMonth = (Button)findViewById(R.id.gv_calendar_activity_b_next);
-
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
         mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar);
         GestureDetector gestureDetector = null;
 
-        bLastMonth.setOnClickListener(this);
-        bNextMonth.setOnClickListener(this);
         mGvCalendar.setOnItemClickListener(this);
 
         mGvCalendar.setOnTouchListener(new View.OnTouchListener() {
