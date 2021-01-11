@@ -233,22 +233,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        switch(v.getId())
-        {
-            case R.id.gv_calendar_activity_b_last:
-                mThisMonthCalendar = getLastMonth(mThisMonthCalendar);
-                getCalendar(mThisMonthCalendar);
-                break;
-            case R.id.gv_calendar_activity_b_next:
-                mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
-                getCalendar(mThisMonthCalendar);
-                break;
-        }
-    }
-
     private void initCalendarAdapter()
     {
         mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList);
