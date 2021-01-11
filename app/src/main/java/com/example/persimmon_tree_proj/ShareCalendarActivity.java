@@ -9,9 +9,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,14 +96,10 @@ public class ShareCalendarActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mCal = Calendar.getInstance();
-                Log.i("calendar", "curDayFormat = "+String.valueOf(curDayFormat));
-                Log.i("calendar", "curMonthFormat = "+String.valueOf(curMonthFormat));
-                Log.i("calendar", "curYearFormat = "+String.valueOf(curYearFormat));
-                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
                 tvDate.setText(curYearFormat.format(date) + "/" + curMonthFormat.format(date));
-
+                mCal.set(Integer.parseInt(curYearFormat.format(date)), Integer.parseInt(curMonthFormat.format(date)) - 1, 1);
                 int dayNum = mCal.get(Calendar.DAY_OF_WEEK);
-        //1일 - 요일 매칭 시키기 위해 공백 add
+//1일 - 요일 매칭 시키기 위해 공백 add
                 dayList = new ArrayList();
                 for (int i = 1; i < dayNum; i++) {
                     dayList.add("");
@@ -210,24 +204,10 @@ public class ShareCalendarActivity extends Activity {
 
             //해당 날짜 텍스트 컬러,배경 변경
             mCal = Calendar.getInstance();
-            //주말 텍스트 컬러 변경
-
-            /*
-            Integer saturday = mCal.get(Calendar.SATURDAY);
-            String sSaturday = String.valueOf(saturday);
-            //Log.i("calendar", "saturday ="+String.valueOf(saturday));
-            //holder.tvItemGridView.setTextColor(getResources().getColor(R.color.mainColor));
-            Integer sunday = mCal.get(Calendar.SUNDAY);
-            String sSunday = String.valueOf(sunday);
-            if (sunday==1){
-                holder.tvItemGridView.setTextColor(getResources().getColor(R.color.pointColor));
-            }*/
-
             //오늘 day 가져옴
             Integer today = mCal.get(Calendar.DAY_OF_MONTH);
             String sToday = String.valueOf(today);
             if (sToday.equals(getItem(position))) { //오늘 day 텍스트 컬러 변경
-                Log.i("calendar","position = "+position);
                 holder.tvItemGridView.setTextColor(getResources().getColor(R.color.colorAccent));
             }
             return convertView;
