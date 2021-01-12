@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,7 +26,7 @@ import com.example.persimmon_tree_proj.domain.DayInfo;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PopupCalendar extends AppCompatActivity {
+public class PopupCalendar extends Activity {
 
     private GestureDetectorCompat detector;
     public static int SUNDAY        = 1;

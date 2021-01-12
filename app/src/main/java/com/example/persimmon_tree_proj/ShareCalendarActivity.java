@@ -96,19 +96,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         add_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                Intent intent = new Intent(this, PopupCalendar.class);
+                Intent intent = new Intent(ShareCalendarActivity.this,PopupCalendar.class);
                 startActivityForResult(intent, 1);
-
-
-            }
-        });
-=======
-                Intent intent = new Intent(ShareCalendarActivity.this, PopupCalendar.class);
-                startActivityForResult(intent, 1);
->>>>>>> 9935fdc28dc31480112e111812ab57fd6c92f4e0
-
-
             }
         });
 
