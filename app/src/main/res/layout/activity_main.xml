@@ -8,7 +8,18 @@
     android:scrollbarThumbVertical="@drawable/gam1"
     tools:context="MainActivity">
 
-
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="86dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@drawable/gam8"
+        android:layout_marginRight="4dp" />
     <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
@@ -38,32 +49,6 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="86dp"
-        android:layout_height="52dp"
-<<<<<<< HEAD
-        android:layout_marginTop="16dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8"
-        android:layout_marginRight="4dp" />
-
-
-=======
-        android:layout_marginStart="268dp"
-        android:layout_marginTop="16dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/gam_text2"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8"
-        android:layout_marginLeft="268dp" />
->>>>>>> e95158985d0e73d7bd89adc27b4dddac7c28c86b
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
@@ -156,7 +141,7 @@
         app:layout_constraintEnd_toStartOf="@+id/calender_btn"
         app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/calendar_icon"
+        android:src="@drawable/calendar_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginLeft="62dp" />
 
@@ -170,7 +155,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/setting_icon"
+        android:src="@drawable/setting_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginRight="62dp" />
 
