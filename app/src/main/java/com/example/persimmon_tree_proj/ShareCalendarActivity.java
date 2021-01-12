@@ -63,6 +63,11 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     final static int DISTANCE = 200;
     final static int VELOCITY = 350;
 
+    private String year;
+    private String month;
+    private int set_position;
+    private int set_month_lastday;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -188,6 +193,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         mThisMonthCalendar = Calendar.getInstance();
         mThisMonthCalendar.set(Calendar.DAY_OF_MONTH, 1);
         getCalendar(mThisMonthCalendar);
+        year = String.valueOf(mThisMonthCalendar.get(Calendar.YEAR));
+        month = String.valueOf(Integer.valueOf(mThisMonthCalendar.get(Calendar.MONTH)+1));
     }
 
     /**
@@ -231,14 +238,14 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         DayInfo day;
 
         Log.e("DayOfMOnth", dayOfMonth+"");
-
+        set_position = dayOfMonth;
+        set_month_lastday = thisMonthLastDay;
         for(int i=0; i<dayOfMonth-1; i++)
         {
             int date = lastMonthStartDay+i;
             day = new DayInfo();
             day.setDay(Integer.toString(date));
             day.setInMonth(false);
-
             mDayList.add(day);
         }
         for(int i=1; i <= thisMonthLastDay; i++)
@@ -271,8 +278,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     {
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
         calendar.add(Calendar.MONTH, -1);
-        mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
-                + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+        mTvCalendarTitle.setText(calendar.get(Calendar.YEAR) + "년 "
+                + (calendar.get(Calendar.MONTH) + 1) + "월");
+        year = String.valueOf(calendar.get(Calendar.YEAR));
+        month = String.valueOf(Integer.valueOf(calendar.get(Calendar.MONTH)+1));
         return calendar;
     }
 
@@ -286,19 +295,38 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     {
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
         calendar.add(Calendar.MONTH, +1);
-        mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
-                + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+        mTvCalendarTitle.setText(calendar.get(Calendar.YEAR) + "년 "
+                + (calendar.get(Calendar.MONTH)+1) + "월");
+        year = String.valueOf(calendar.get(Calendar.YEAR));
+        month = String.valueOf(Integer.valueOf(calendar.get(Calendar.MONTH)+1));
         return calendar;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long arg3)
-    {
+    { //앞에 회색 부분
+        if(position < set_position-1){
+            Toast.makeText(ShareCalendarActivity.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+        }
+        //뒤에 회색 부분
+        else if((set_month_lastday+set_position-2) < position){
+        Toast.makeText(ShareCalendarActivity.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+    }
+        //이번달에 포함된 날자
+            else{
+        Intent intent = new Intent(this, PopupcalActivity.class);
+        intent.putExtra("day", String.valueOf(Integer.valueOf(position)-set_position+2));
+        intent.putExtra("year", year);
+        intent.putExtra("month", month);
+        startActivityForResult(intent, 1);
+    }
 //        Object select_position = Integer.valueOf(mThisMonthCalendar.getItemAtPosition(position));
 //        int select_year = mThisMonthCalendar.get(Calendar.YEAR);
 //        int select_month = mThisMonthCalendar.get(Calendar.MONTH) + 1;
 //        Log.i("value","selected!!!!");
 //        Log.i("value",String.valueOf(select_year));
+
+
     }
 
     private void initCalendarAdapter()

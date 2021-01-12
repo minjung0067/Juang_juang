@@ -3,6 +3,7 @@
     android:id="@+id/day_cell_ll_background"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="40dp"
+    android:gravity="center"
     android:layout_height="wrap_content">
 
     <!-- 날짜 -->
@@ -15,6 +16,8 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="18sp"/>
+
+
 
     <!-- /날짜 -->
 
