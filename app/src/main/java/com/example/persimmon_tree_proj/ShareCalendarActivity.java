@@ -139,6 +139,25 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         mDayList = new ArrayList<DayInfo>();
 
 
+        //다음달, 이전달로 이동하는 버튼 !
+        Button last_month = (Button) findViewById(R.id.last_month_btn);
+        Button next_month = (Button) findViewById(R.id.next_month_btn);
+        last_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThisMonthCalendar = getLastMonth(mThisMonthCalendar);
+                getCalendar(mThisMonthCalendar);
+            }
+        });
+        next_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
+                getCalendar(mThisMonthCalendar);
+            }
+        });
+
+
         //swipe 시작
         GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener(){
 
