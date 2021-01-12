@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -16,10 +17,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.view.GestureDetectorCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.adapter.CalendarAdapter;
@@ -48,6 +52,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     private TextView mTvCalendarTitle;
     private GridView mGvCalendar;
+    private ImageButton add_calendar;
 
     private ArrayList<DayInfo> mDayList;
     private CalendarAdapter mCalendarAdapter;
@@ -80,6 +85,52 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         });
 
+//                //일정 추가 이미지 버튼
+//        add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
+//
+//        add_calendar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DialogFragment newFragment = new DatePickerFragment();
+//                newFragment.show(getSupportFragmentManager(), "datePicker");
+//            }
+//        });
+
+
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
+        go_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //공유캘린더 버튼
+        ImageButton go_calendar = (ImageButton) findViewById(R.id.calendar_btn);
+        go_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 캘린더로 이동
+                Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+        //설정 버튼
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        go_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 캘린더로 이동
+                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
         mDayList = new ArrayList<DayInfo>();
 
 
@@ -117,6 +168,17 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         };
     }
 
+//    private FragmentManager getSupportFragmentManager() {
+//    }
+//
+//    public void processDatePickerResult(int year, int month, int day){
+//        String month_string = Integer.toString(month+1);
+//        String day_string = Integer.toString(day);
+//        String year_string = Integer.toString(year);
+//        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+//
+//        Toast.makeText(this,"Date: "+dateMessage,Toast.LENGTH_SHORT).show();
+//    }
     @Override
     protected void onResume()
     {
@@ -305,4 +367,5 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private void onSwipeBottom() {
 
     }
+
 }

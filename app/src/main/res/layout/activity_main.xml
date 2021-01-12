@@ -4,154 +4,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarThumbVertical="@drawable/orange_tree"
+    android:background="@color/mainColor"
+    android:scrollbarThumbVertical="@drawable/gam1"
     tools:context="MainActivity">
-
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_weight="1"
-        android:text="왔다감"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_goanswer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="76dp"
-        android:background="#FE8738"
-        android:text="답변 하러가기"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic"
-        tools:ignore="UnknownId" />
-
-    <TextView
-        android:id="@+id/txt_question"
-        android:layout_width="329dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="32dp"
-        android:text=""
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
-        android:layout_width="31dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="52dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        android:background="#FFFFFF"
+        android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/orange_tree"
         tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/orange_tree" />
-
-    <Spinner
-        android:id="@+id/spinner_question"
-        android:layout_width="0dp"
+        tools:srcCompat="@drawable/gam8"
+        android:layout_marginRight="4dp" />
+    <TextView
+        android:id="@+id/gam_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center_vertical"
-        android:spinnerMode="dialog"
-        app:layout_constraintBottom_toTopOf="@+id/txt_question"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="왔다"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.595" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ListView-->
-<!--        android:id="@+id/answer_view"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="300dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.494"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/txt_question"-->
-<!--        app:layout_constraintVertical_bias="0.435" />-->
+    <TextView
+        android:id="@+id/gam_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="감"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/pointColor"
+        app:layout_constraintStart_toEndOf="@+id/gam_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="558dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/calendar_btn">
+
+        <LinearLayout
+            android:id="@+id/answer_view"
+            android:layout_width="287dp"
+            android:layout_height="272dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="48dp"
+            android:orientation="vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_question"
+            tools:ignore="MissingConstraints">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_question"
+            android:layout_width="329dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="32dp"
+            android:text=""
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Spinner
+            android:id="@+id/spinner_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_vertical"
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toTopOf="@+id/txt_question"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.595" />
+
+        <Button
+            android:id="@+id/btn_goanswer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/pointColor"
+            android:text="답변 하러가기"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/_dynamic"
+            tools:ignore="UnknownId"
+            android:gravity="center_horizontal" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="136dp"
+        android:id="@+id/calendar_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginStart="62dp"
         android:layout_marginBottom="4dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calender_btn"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/come_go_clicked"
-        tools:ignore="MissingConstraints" />
+        app:srcCompat="@drawable/calendar_icon"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="62dp" />
 
     <ImageButton
-        android:id="@+id/calender_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginBottom="10dp"
+        android:id="@+id/setting_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="4dp"
         android:background="#00FFFFFF"
-        android:drawableBottom="@drawable/calender_"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/calender_"
+        app:srcCompat="@drawable/setting_icon"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="62dp" />
+
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginStart="127dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/compose_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
+        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_layout"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
-    <LinearLayout
-        android:id="@+id/answer_view"
-        android:layout_width="287dp"
-        android:layout_height="272dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="48dp"
-        android:orientation="vertical"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_question"
-        tools:ignore="MissingConstraints">
-
-        <!--        <RelativeLayout-->
-        <!--            android:id="@+id/relativeLayout"-->
-        <!--            android:layout_width="404dp"-->
-        <!--            android:layout_height="301dp"-->
-        <!--            android:layout_marginTop="108dp"-->
-        <!--            tools:ignore="MissingConstraints">-->
-
-        <!--        </RelativeLayout>-->
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

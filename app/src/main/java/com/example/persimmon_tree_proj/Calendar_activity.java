@@ -97,19 +97,19 @@ public class Calendar_activity extends AppCompatActivity {
             }
         });
 
-        //일정 추가 이미지 버튼
-        ImageButton add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
-        add_calendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment newFragment = new DatePickerFragment();
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
-        });
+//        //일정 추가 이미지 버튼
+//        ImageButton add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
+//        add_calendar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DialogFragment newFragment = new DatePickerFragment();
+//                newFragment.show(getSupportFragmentManager(), "datePicker");
+//            }
+//        });
 
     }
 
-    public void processDatePickerResult(int year, int month, int day){
+    public void proceassDatePickerResult(int year, int month, int day){
         String month_string = Integer.toString(month+1);
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
