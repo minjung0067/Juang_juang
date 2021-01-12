@@ -8,12 +8,10 @@
     tools:context="com.example.persimmon_tree_proj.splash">
 
     <ImageView
-
         android:id="@+id/imageView2"
-        android:layout_width="360dp"
-        android:layout_height="453dp"
-        android:layout_marginTop="137dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="420dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/__" />
+        app:srcCompat="@drawable/_"
+        tools:layout_editor_absoluteX="-5dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
