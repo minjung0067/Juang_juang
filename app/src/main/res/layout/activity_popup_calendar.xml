@@ -4,27 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00ffffff"
     tools:context="com.example.persimmon_tree_proj.PopupCalendar">
 
-    <!-- 타이틀바 -->
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-    <!-- //end 타이틀바 -->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
-        android:layout_width="265dp"
-        android:layout_height="396dp"
-        android:layout_marginTop="140dp"
-
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        tools:layout_editor_absoluteX="73dp">
+        android:layout_width="360dp"
+        android:layout_height="500dp"
+        android:background="@drawable/line_dungle"
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="93dp">
 
 
         <TextView
@@ -137,8 +129,8 @@
 
         <GridView
             android:id="@+id/gv_calendar_activity_gv_calendar"
-            android:layout_width="265dp"
-            android:layout_height="278dp"
+            android:layout_width="332dp"
+            android:layout_height="406dp"
             android:layout_marginTop="40dp"
             android:background="#FFFFFF"
             android:listSelector="@drawable/grideview_selector"
@@ -147,15 +139,17 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             tools:layout_editor_absoluteX="0dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="64dp"
         android:src="@drawable/______"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="549dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
