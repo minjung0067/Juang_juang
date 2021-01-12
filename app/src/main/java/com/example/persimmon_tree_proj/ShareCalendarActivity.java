@@ -90,17 +90,36 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         });
 
-//                //일정 추가 이미지 버튼
-//        add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
-//
-//        add_calendar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DialogFragment newFragment = new DatePickerFragment();
-//                newFragment.show(getSupportFragmentManager(), "datePicker");
-//            }
-//        });
+        //일정 추가 이미지 버튼
+        add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
 
+        add_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShareCalendarActivity.this, PopupCalendar.class);
+                startActivityForResult(intent, 1);
+
+
+            }
+        });
+
+        //다음달, 이전달로 이동하는 버튼 !
+        Button last_month = (Button) findViewById(R.id.last_month_btn);
+        Button next_month = (Button) findViewById(R.id.next_month_btn);
+        last_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThisMonthCalendar = getLastMonth(mThisMonthCalendar);
+                getCalendar(mThisMonthCalendar);
+            }
+        });
+        next_month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
+                getCalendar(mThisMonthCalendar);
+            }
+        });
 
         //왔다감 버튼
         ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
@@ -173,7 +192,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         };
     }
 
-//    private FragmentManager getSupportFragmentManager() {
+    //    private FragmentManager getSupportFragmentManager() {
 //    }
 //
 //    public void processDatePickerResult(int year, int month, int day){
@@ -310,16 +329,16 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         }
         //뒤에 회색 부분
         else if((set_month_lastday+set_position-2) < position){
-        Toast.makeText(ShareCalendarActivity.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
-    }
+            Toast.makeText(ShareCalendarActivity.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+        }
         //이번달에 포함된 날자
-            else{
-        Intent intent = new Intent(this, PopupcalActivity.class);
-        intent.putExtra("day", String.valueOf(Integer.valueOf(position)-set_position+2));
-        intent.putExtra("year", year);
-        intent.putExtra("month", month);
-        startActivityForResult(intent, 1);
-    }
+        else{
+            Intent intent = new Intent(this, PopupcalActivity.class);
+            intent.putExtra("day", String.valueOf(Integer.valueOf(position)-set_position+2));
+            intent.putExtra("year", year);
+            intent.putExtra("month", month);
+            startActivityForResult(intent, 1);
+        }
 //        Object select_position = Integer.valueOf(mThisMonthCalendar.getItemAtPosition(position));
 //        int select_year = mThisMonthCalendar.get(Calendar.YEAR);
 //        int select_month = mThisMonthCalendar.get(Calendar.MONTH) + 1;
