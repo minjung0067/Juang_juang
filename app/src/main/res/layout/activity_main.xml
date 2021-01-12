@@ -49,6 +49,7 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
         android:layout_width="match_parent"
@@ -140,7 +141,7 @@
         app:layout_constraintEnd_toStartOf="@+id/calender_btn"
         app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/calendar_icon"
+        android:src="@drawable/calendar_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginLeft="62dp" />
 
@@ -154,7 +155,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/setting_icon"
+        android:src="@drawable/setting_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginRight="62dp" />
 
