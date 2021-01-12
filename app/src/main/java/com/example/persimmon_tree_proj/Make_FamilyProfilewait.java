@@ -44,6 +44,8 @@ public class Make_FamilyProfilewait extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
 
+        counts = (EditText) findViewById(R.id.count);
+
 
 
 

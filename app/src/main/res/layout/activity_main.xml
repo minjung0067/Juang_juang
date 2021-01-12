@@ -7,6 +7,7 @@
     android:background="@color/mainColor"
     android:scrollbarThumbVertical="@drawable/gam1"
     tools:context="MainActivity">
+
     <ImageButton
         android:id="@+id/btn_mypage"
         android:layout_width="86dp"

@@ -164,7 +164,6 @@ public class MypageActivity extends AppCompatActivity {
                 Intent intent = new Intent(MypageActivity.this, MakeProfile.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
-                finish();
             }
         });
 
@@ -172,7 +171,11 @@ public class MypageActivity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
+
             }
         });
 
