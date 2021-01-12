@@ -49,6 +49,22 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
+=======
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="86dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/gam_text2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:src="@drawable/gam8"
+        android:layout_marginLeft="268dp" />
+>>>>>>> acd38dad9bcc1d7feb38ed38b868bea3beecb9f0
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
