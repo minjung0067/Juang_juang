@@ -20,14 +20,18 @@
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="64dp"
+        android:layout_marginLeft="35.5dp"
+        android:layout_marginRight="35.5dp"
+        android:layout_marginBottom="302dp"
+
         android:ems="10"
         android:hint="아이디 또는 전화번호"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
 
     <EditText
         android:id="@+id/edittext_password"
@@ -49,25 +53,26 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
-        android:background="#FE8738"
+        android:background="@drawable/btn_orange_rounded"
         android:text="로그인하기"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_password" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_password"
+        />
 
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="96dp"
-        android:layout_height="26dp"
-        android:layout_gravity="center"
-        android:background="#FFE9CB"
-        android:text="회원가입하기"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"
-        app:layout_constraintVertical_bias="0.341" />
+<!--    <Button-->
+<!--        android:id="@+id/btn_signup"-->
+<!--        android:layout_width="96dp"-->
+<!--        android:layout_height="26dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:background="#FFE9CB"-->
+<!--        android:text="회원가입하기"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
+<!--        app:layout_constraintVertical_bias="0.341" />-->
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_googleSignIn"
@@ -93,29 +98,59 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="가입을 하지 않았는감?"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"
-        app:layout_constraintVertical_bias="1.0" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="40dp"-->
+<!--        android:text="가입을 하지 않았는감?"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/btn_signup"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="67dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="100dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="34dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_logintop"
+        android:layout_width="93dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginRight="195dp"
+        android:layout_marginBottom="561dp"
+        android:background="@drawable/btn_orange_rounded"
         android:text="로그인"
-        android:textSize="20sp"
+        android:textColor="#FFF"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    ​
+
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="93dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="55dp"
+            android:background="#FFF"
+            android:text="회원가입"
+            android:textColor="#B9B3BD"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_logintop"
+            app:layout_constraintStart_toEndOf="@+id/btn_logintop"
+            app:layout_constraintTop_toTopOf="@+id/btn_logintop" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
