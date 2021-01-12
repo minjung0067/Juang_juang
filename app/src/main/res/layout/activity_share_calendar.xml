@@ -227,22 +227,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<<<<<<< HEAD
-    <GridView
-        android:id="@+id/gv_calendar_activity_gv_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="91dp"
-        android:listSelector="@drawable/grideview_selector"
-        android:numColumns="7"
-        android:stretchMode="columnWidth"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-=======
->>>>>>> acd38dad9bcc1d7feb38ed38b868bea3beecb9f0
+
+<!--    <GridView-->
+<!--        android:id="@+id/gv_calendar_activity_gv_calendar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginBottom="91dp"-->
+<!--        android:listSelector="@drawable/grideview_selector"-->
+<!--        android:numColumns="7"-->
+<!--        android:stretchMode="columnWidth"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
+
 
     <ImageButton
         android:id="@+id/calendar_btn"
