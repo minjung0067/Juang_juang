@@ -262,7 +262,7 @@ public class Registeractivity extends AppCompatActivity {
     void check_validation1(String password) {
         // 비밀번호 유효성 검사식1 : 숫자, 특수문자가 포함되어야 한다.
 
-        String val_symbol = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,}";
+        String val_symbol = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.]).{8,}";
         // 정규표현식 컴파일
         Pattern pattern_symbol = Pattern.compile(val_symbol);
 
