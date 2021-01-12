@@ -30,7 +30,7 @@ public class PopupcalActivity extends Activity {
         String day = intent.getStringExtra("day");
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
-        txtText.setText( year + " 년 " + month+1 + "월" + day +" 일");
+        txtText.setText( year + " 년 " + month + " 월 " + day +" 일");
     }
 
     //확인 버튼 클릭

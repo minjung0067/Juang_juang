@@ -57,22 +57,22 @@
 
     <ImageButton
         android:id="@+id/calendar_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="56dp"
+        android:layout_width="75dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="48dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/calendar_icon"
-        tools:layout_editor_absoluteY="766dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="752dp" />
 
     <ImageButton
         android:id="@+id/setting_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="67dp"
+        android:layout_height="70dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,10 +82,8 @@
 
     <ImageButton
         android:id="@+id/main_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginStart="116dp"
-        android:layout_marginEnd="113dp"
+        android:layout_width="67dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="4dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
@@ -93,9 +91,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/setting_btn"
         app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="116dp"
-        android:layout_marginRight="113dp" />
+        tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
