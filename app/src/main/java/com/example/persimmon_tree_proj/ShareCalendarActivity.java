@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,7 +81,40 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 return false;
             }
         });
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
+        go_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
 
+        //공유캘린더 버튼
+        ImageButton go_calendar = (ImageButton) findViewById(R.id.calendar_btn);
+        go_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 캘린더로 이동
+                Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+        //설정 버튼
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        go_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 캘린더로 이동
+                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
         mDayList = new ArrayList<DayInfo>();
 
 
