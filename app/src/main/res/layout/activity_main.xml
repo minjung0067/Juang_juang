@@ -60,7 +60,7 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text2"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8"
+        android:src="@drawable/gam8"
         android:layout_marginLeft="268dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
