@@ -7,7 +7,18 @@
     android:background="@color/mainColor"
     android:scrollbarThumbVertical="@drawable/gam1"
     tools:context="MainActivity">
-
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="86dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@drawable/gam8"
+        android:layout_marginRight="4dp" />
     <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
@@ -37,18 +48,7 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="86dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="268dp"
-        android:layout_marginTop="16dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/gam_text2"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
