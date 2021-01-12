@@ -10,17 +10,7 @@
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="86dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="16dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="347dp"
-        tools:srcCompat="@drawable/gam8" />
+
     <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
@@ -51,51 +41,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginBottom="4dp"
+        android:id="@+id/btn_addcal"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="3dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/main_btn"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/calendar_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="62dp" />
+        android:src="@drawable/add_evnet"
+        app:layout_constraintEnd_toStartOf="@+id/btn_mypage"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/setting_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginBottom="4dp"
+        android:id="@+id/btn_mypage"
+        android:layout_width="86dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/gam8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toEndOf="@+id/main_btn"
-        app:srcCompat="@drawable/setting_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginRight="62dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
-    <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginStart="116dp"
-        android:layout_marginEnd="113dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:src="@drawable/compose_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
-        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="116dp"
-        android:layout_marginRight="113dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
@@ -231,6 +200,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+<<<<<<< HEAD
     <GridView
         android:id="@+id/gv_calendar_activity_gv_calendar"
         android:layout_width="wrap_content"
@@ -244,16 +214,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+=======
+>>>>>>> acd38dad9bcc1d7feb38ed38b868bea3beecb9f0
 
     <ImageButton
-        android:id="@+id/btn_addcal"
-        android:layout_width="53dp"
-        android:layout_height="53dp"
+        android:id="@+id/calendar_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginStart="62dp"
+        android:layout_marginBottom="4dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/add_evnet"
-        tools:layout_editor_absoluteX="295dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/calender_btn"
+        app:layout_constraintHorizontal_bias="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/calendar_icon"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="62dp" />
+
+
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginStart="116dp"
+        android:layout_marginEnd="113dp"
+        android:layout_marginBottom="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/compose_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
+        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="116dp"
+        android:layout_marginRight="113dp" />
+
+    <ImageButton
+        android:id="@+id/setting_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginBottom="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toEndOf="@+id/main_btn"
+        android:src="@drawable/setting_icon"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="62dp" />
+
+
+
 
 
 
