@@ -213,7 +213,7 @@ public class log_inactivity extends AppCompatActivity {
                 //키 값은 자유, 값은 null
                 //login된 값(설정값을)저장하기 위한 변수
 
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
                     loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
                     //inputId와 inputPwd에 이메일, 비밀번호 저장
