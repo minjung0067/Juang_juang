@@ -10,22 +10,27 @@
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
+
     <ImageButton
         android:id="@+id/btn_mypage"
         android:layout_width="86dp"
         android:layout_height="52dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_addcal"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="347dp"
         tools:srcCompat="@drawable/gam8" />
+
     <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:text="언제"
@@ -44,41 +49,36 @@
         android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:text="감"
+        android:textColor="@color/pointColor"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@color/pointColor"
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/calendar_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginBottom="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="56dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/main_btn"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/calendar_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="62dp" />
+        tools:layout_editor_absoluteY="766dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/setting_btn"
         android:layout_width="70px"
         android:layout_height="200px"
+        android:layout_marginRight="36dp"
         android:layout_marginBottom="4dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toEndOf="@+id/main_btn"
         app:srcCompat="@drawable/setting_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginRight="62dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/main_btn"
@@ -234,11 +234,12 @@
         android:id="@+id/btn_addcal"
         android:layout_width="53dp"
         android:layout_height="53dp"
+        android:layout_marginStart="182dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/gam_text2"
         app:srcCompat="@drawable/add_evnet"
-        tools:layout_editor_absoluteX="295dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="15dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

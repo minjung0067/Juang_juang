@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.ShareCalendarActivity"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.PopupcalActivity" android:theme="@android:style/Theme.Dialog"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.ShareCalendarActivity" />
         <activity android:name="com.example.persimmon_tree_proj.ShowFamilyActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Waitactivity" />
         <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfilewait" />

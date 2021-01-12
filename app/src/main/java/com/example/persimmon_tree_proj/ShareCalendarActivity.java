@@ -63,6 +63,9 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     final static int DISTANCE = 200;
     final static int VELOCITY = 350;
 
+    private String year;
+    private String month;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -188,6 +191,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         mThisMonthCalendar = Calendar.getInstance();
         mThisMonthCalendar.set(Calendar.DAY_OF_MONTH, 1);
         getCalendar(mThisMonthCalendar);
+        year = String.valueOf(mThisMonthCalendar.get(Calendar.YEAR));
+        month = String.valueOf(mThisMonthCalendar.get(Calendar.MONTH));
     }
 
     /**
@@ -273,6 +278,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         calendar.add(Calendar.MONTH, -1);
         mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
                 + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+        year = String.valueOf(mThisMonthCalendar.get(Calendar.YEAR));
+        month = String.valueOf(mThisMonthCalendar.get(Calendar.MONTH));
         return calendar;
     }
 
@@ -288,6 +295,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         calendar.add(Calendar.MONTH, +1);
         mTvCalendarTitle.setText(mThisMonthCalendar.get(Calendar.YEAR) + "년 "
                 + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
+        year = String.valueOf(mThisMonthCalendar.get(Calendar.YEAR));
+        month = String.valueOf(mThisMonthCalendar.get(Calendar.MONTH));
         return calendar;
     }
 
@@ -299,6 +308,12 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 //        int select_month = mThisMonthCalendar.get(Calendar.MONTH) + 1;
 //        Log.i("value","selected!!!!");
 //        Log.i("value",String.valueOf(select_year));
+        Intent intent = new Intent(this, PopupcalActivity.class);
+        intent.putExtra("day", String.valueOf(position));
+        intent.putExtra("year", year);
+        intent.putExtra("month", month);
+        startActivityForResult(intent, 1);
+
     }
 
     private void initCalendarAdapter()
