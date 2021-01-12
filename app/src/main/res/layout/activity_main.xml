@@ -42,6 +42,7 @@
         android:id="@+id/btn_mypage"
         android:layout_width="86dp"
         android:layout_height="52dp"
+<<<<<<< HEAD
         android:layout_marginTop="16dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
@@ -52,13 +53,27 @@
         android:layout_marginRight="4dp" />
 
 
+=======
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="@+id/gam_text2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@drawable/gam8"
+        android:layout_marginLeft="268dp" />
+>>>>>>> e95158985d0e73d7bd89adc27b4dddac7c28c86b
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
         android:layout_width="match_parent"
         android:layout_height="558dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/calendar_btn">
+        app:layout_constraintBottom_toTopOf="@+id/calendar_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
             android:id="@+id/answer_view"
@@ -116,6 +131,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@color/pointColor"
+            android:gravity="center_horizontal"
             android:text="답변 하러가기"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -125,8 +141,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/_dynamic"
-            tools:ignore="UnknownId"
-            android:gravity="center_horizontal" />
+            tools:ignore="UnknownId" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
