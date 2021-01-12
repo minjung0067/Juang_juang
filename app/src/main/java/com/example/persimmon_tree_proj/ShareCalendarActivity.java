@@ -90,16 +90,18 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         });
 
-//                //일정 추가 이미지 버튼
-//        add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
-//
-//        add_calendar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DialogFragment newFragment = new DatePickerFragment();
-//                newFragment.show(getSupportFragmentManager(), "datePicker");
-//            }
-//        });
+        //일정 추가 이미지 버튼
+        add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
+
+        add_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShareCalendarActivity.this, PopupCalendar.class);
+                startActivityForResult(intent, 1);
+
+
+            }
+        });
 
 
         //왔다감 버튼

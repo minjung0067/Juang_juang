@@ -245,11 +245,6 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
-=======
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toEndOf="@+id/main_btn"
->>>>>>> acd38dad9bcc1d7feb38ed38b868bea3beecb9f0
         android:src="@drawable/setting_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginRight="62dp" />
