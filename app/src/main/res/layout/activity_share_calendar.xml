@@ -44,24 +44,26 @@
         android:id="@+id/btn_addcal"
         android:layout_width="53dp"
         android:layout_height="53dp"
-        android:layout_marginStart="192dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="3dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/gam_text2"
-        app:srcCompat="@drawable/add_evnet"
-        tools:layout_editor_absoluteY="16dp" />
+        android:src="@drawable/add_evnet"
+        app:layout_constraintEnd_toStartOf="@+id/btn_mypage"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
         android:layout_width="86dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
+        android:src="@drawable/gam8"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="347dp"
-        tools:srcCompat="@drawable/gam8" />
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -211,7 +213,7 @@
         app:layout_constraintEnd_toStartOf="@+id/calender_btn"
         app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/calendar_icon"
+        android:src="@drawable/calendar_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginLeft="62dp" />
 
@@ -244,7 +246,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.968"
         app:layout_constraintStart_toEndOf="@+id/main_btn"
-        app:srcCompat="@drawable/setting_icon"
+        android:src="@drawable/setting_icon"
         tools:ignore="MissingConstraints"
         android:layout_marginRight="62dp" />
 
