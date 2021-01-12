@@ -36,22 +36,22 @@
 //    @Override
 //    public Dialog onCreateDialog(Bundle savedInstanceState) {
 //
-///* 이건 range할려면 이거가져와야되나 싶어서 가져온거 ! 지워도됨
-//        List<Calendar> days = calendarView.getSelectedDates();
-//        String result="";
-//        for( int i=0; i<days.size(); i++)
-//        {
-//
-//            java.util.Calendar calendar = days.get(i);
-//            final int day = calendar.get(calendar.DAY_OF_MONTH);
-//            final int month = calendar.get(calendar.MONTH);
-//            final int year = calendar.get(calendar.YEAR);
-//            String week = new SimpleDateFormat("EE").format(calendar.getTime());
-//            String day_full = year + "년 "+ (month+1)  + "월 " + day + "일 " + week + "요일";
-//            result += (day_full + "\n");
-//        }
-//        Toast.makeText(Calendar_activity.this, result, Toast.LENGTH_LONG).show();
-// */
+/////* 이건 range할려면 이거가져와야되나 싶어서 가져온거 ! 지워도됨
+////        List<Calendar> days = calendarView.getSelectedDates();
+////        String result="";
+////        for( int i=0; i<days.size(); i++)
+////        {
+////
+////            java.util.Calendar calendar = days.get(i);
+////            final int day = calendar.get(calendar.DAY_OF_MONTH);
+////            final int month = calendar.get(calendar.MONTH);
+////            final int year = calendar.get(calendar.YEAR);
+////            String week = new SimpleDateFormat("EE").format(calendar.getTime());
+////            String day_full = year + "년 "+ (month+1)  + "월 " + day + "일 " + week + "요일";
+////            result += (day_full + "\n");
+////        }
+////        Toast.makeText(Calendar_activity.this, result, Toast.LENGTH_LONG).show();
+//// */
 //        final Calendar c = Calendar.getInstance();
 //        int year = c.get(Calendar.YEAR);
 //        int month = c.get(Calendar.MONTH);
@@ -62,7 +62,7 @@
 //
 //    @Override
 //    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-//        Calendar_activity activity = (Calendar_activity) getActivity();
+//        ShareCalendarActivity activity = (ShareCalendarActivity) getActivity();
 //        activity.processDatePickerResult(year,month,day);
 //    }
 //}

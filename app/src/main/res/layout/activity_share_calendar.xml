@@ -17,11 +17,10 @@
         android:layout_marginTop="16dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8"
-        android:layout_marginRight="4dp" />
+        tools:layout_editor_absoluteX="347dp"
+        tools:srcCompat="@drawable/gam8" />
     <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
@@ -97,7 +96,6 @@
         tools:ignore="MissingConstraints"
         android:layout_marginLeft="116dp"
         android:layout_marginRight="113dp" />
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/calendar_layout"
@@ -229,7 +227,18 @@
             android:stretchMode="columnWidth"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
             tools:layout_editor_absoluteX="-3dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btn_addcal"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/add_evnet"
+        tools:layout_editor_absoluteX="295dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
