@@ -74,6 +74,14 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
+        final SharedPreferences.Editor autoLogin = auto.edit();
+        //자동로그인을 위한 파일명 auto SharedPreference 선언
+        loginId = auto.getString("inputId", null);
+        loginPwd = auto.getString("inputPwd", null);
+        loginUid = auto.getString("inputUid", null);
+        //키 값은 자유, 값은 null
+        //login된 값(설정값을)저장하기 위한 변수
 
         //검사하면서 자동로그인!!!!!!
         FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
@@ -105,32 +113,28 @@ public class log_inactivity extends AppCompatActivity {
                                     myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
                                     myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                     if (myfam_introduce==null || myfam_count.equals("0")==true){ //코드 만드는 사람이 아예 가족 프로필 안 만들었으면
-                                        Intent intenttt = new Intent(getApplicationContext(), Make_FamilyProfile.class);
-                                        intenttt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                                         startActivity(intenttt);
                                         Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                     else{
                                         if (myfam_count.equals("")==true || myfam_introduce.equals("")==true){ //코드 만든 사람이 가족 프로필 안 만들었는데 다른 사람이 코드 치고 들어온 경우
-                                            Intent intenttt = new Intent(getApplicationContext(), Make_FamilyProfile.class);
-                                            intenttt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
                                             startActivity(intenttt);
                                             Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
                                         else{
                                             if (introduce == null) {//한줄 소개 없으면
-                                                Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
-                                                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
                                                 startActivity(intentt);
                                                 Toast.makeText(log_inactivity.this, "아직 소개를 입력하지 않았어요!", Toast.LENGTH_SHORT).show();
                                                 finish();
                                             } else { //한줄소개까지 있으면
-                                                Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
-                                                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                Intent intent = new Intent(log_inactivity.this, MainActivity.class);
                                                 //자동로그인이 되었다면, Mainactivity로 바로 이동
-                                                startActivity(intentt);
+                                                startActivity(intent);
                                                 Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
                                                 finish();
                                             }
@@ -154,66 +158,12 @@ public class log_inactivity extends AppCompatActivity {
                 });
 
             }
-            buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
-            buttonLogIn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    login_btn_clicked_action();
-                }
-
-            });
         }
-        else{
-            buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
-            buttonLogIn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    login_btn_clicked_action();
-                }
-
-            });
-        }
-
-
-
-
-
-
-        // Google 로그인을 앱에 통합
-        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
-
-        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
-
-    }
-
-    public void login_btn_clicked_action(){
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
-                final SharedPreferences.Editor autoLogin = auto.edit();
-                //자동로그인을 위한 파일명 auto SharedPreference 선언
-                loginId = auto.getString("inputId", null);
-                loginPwd = auto.getString("inputPwd", null);
-                loginUid = auto.getString("inputUid", null);
-                //키 값은 자유, 값은 null
-                //login된 값(설정값을)저장하기 위한 변수
-
-
+                FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {   //둘 다 비어있지 않으면
                     loginUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
                     //inputId와 inputPwd에 이메일, 비밀번호 저장
@@ -260,13 +210,31 @@ public class log_inactivity extends AppCompatActivity {
                     };
 
                 } else {   //아니라면
-                    Toast.makeText(log_inactivity.this, "아이디 또는 비밀번호를 다시 한번 확인해달라감!", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
+                    Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
                 }
             }
+        });
 
+
+        // Google 로그인을 앱에 통합
+        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
+
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
         });
 
     }
+
     public void loginUser(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password)   //이메일 패스워드 방식으로 로그인하는 함수
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

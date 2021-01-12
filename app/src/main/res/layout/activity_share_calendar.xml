@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/mainColor">
+
+    <!-- Activity Layout XML -->
+    <!-- @author croute -->
+    <!-- @since 2011.03.08 -->
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="86dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="347dp"
+        tools:srcCompat="@drawable/gam8" />
+    <TextView
+        android:id="@+id/gam_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="언제"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gam_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="감"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/pointColor"
+        app:layout_constraintStart_toEndOf="@+id/gam_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/calendar_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginBottom="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/calendar_icon"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="62dp" />
+
+    <ImageButton
+        android:id="@+id/setting_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginBottom="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toEndOf="@+id/main_btn"
+        app:srcCompat="@drawable/setting_icon"
+        tools:ignore="MissingConstraints"
+        android:layout_marginRight="62dp" />
+
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="70px"
+        android:layout_height="200px"
+        android:layout_marginStart="116dp"
+        android:layout_marginEnd="113dp"
+        android:layout_marginBottom="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/compose_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
+        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="116dp"
+        android:layout_marginRight="113dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="6dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/main_btn"
+        app:layout_constraintTop_toBottomOf="@+id/gam_text"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/gv_calendar_activity_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="2021년 몇월"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="#FFFFFF"
+            app:layout_constraintTop_toBottomOf="@+id/gv_calendar_activity_tv_title"
+            tools:layout_editor_absoluteX="2dp">
+
+            <TextView
+                android:id="@+id/tv_Sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Monday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_Monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Sunday"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Tuesday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_Sunday"
+                app:layout_constraintTop_toTopOf="@+id/tv_Sunday" />
+
+            <TextView
+                android:id="@+id/tv_Tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Monday"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Wednesday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_Monday"
+                app:layout_constraintTop_toTopOf="@+id/tv_Monday" />
+
+            <TextView
+                android:id="@+id/tv_Wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="수"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Tuesday"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Thursday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_Tuesday"
+                app:layout_constraintTop_toTopOf="@+id/tv_Tuesday" />
+
+            <TextView
+                android:id="@+id/tv_Thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="목"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Wednesday"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Friday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_Wednesday"
+                app:layout_constraintTop_toTopOf="@+id/tv_Wednesday" />
+
+            <TextView
+                android:id="@+id/tv_Friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="금"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Thursday"
+                app:layout_constraintEnd_toStartOf="@+id/tv_Saturday"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_Thursday"
+                app:layout_constraintTop_toTopOf="@+id/tv_Thursday" />
+
+            <TextView
+                android:id="@+id/tv_Saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="토"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_Friday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_Friday"
+                app:layout_constraintTop_toTopOf="@+id/tv_Friday" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <GridView
+            android:id="@+id/gv_calendar_activity_gv_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_marginTop="1dp"
+            android:background="#FFFFFF"
+            android:listSelector="@drawable/grideview_selector"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            tools:layout_editor_absoluteX="-3dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btn_addcal"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/add_evnet"
+        tools:layout_editor_absoluteX="295dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

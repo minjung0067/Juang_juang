@@ -338,11 +338,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //공유캘린더 버튼
-        ImageButton go_calendar = (ImageButton) findViewById(R.id.calender_btn);
+        ImageButton go_calendar = (ImageButton) findViewById(R.id.calendar_btn);
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(getApplicationContext(),Calendar_activity.class);
+                Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+    //설정 버튼
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        go_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 캘린더로 이동
+                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
