@@ -320,8 +320,10 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MypageActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -348,17 +350,19 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-    //설정 버튼
-        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+
+        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { //누르면 캘린더로 이동
+            public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
         });
+
+        //설정 버튼
     }
     private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
