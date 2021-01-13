@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="40dp"
     android:gravity="center"
+    android:orientation="vertical"
     android:layout_height="wrap_content">
 
     <!-- 날짜 -->
@@ -16,6 +17,17 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="18sp"/>
+
+
+    <!-- 일정 바 들어오는 곳-->
+    <LinearLayout
+        android:id="@+id/plan_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
 
 

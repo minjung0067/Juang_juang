@@ -1,5 +1,6 @@
 package com.example.persimmon_tree_proj;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -77,6 +79,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private String month;
     private int set_position;
     private int set_month_lastday;
+    private ArrayList<String> have_plan_day =  new ArrayList<String>();
+    private ArrayList<String> when_whos_what_plan_arr =  new ArrayList<String>();
 
     private HashMap<String,String> name_color_map;
 
@@ -332,27 +336,53 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             mDayList.add(day);
         }
 
-        initCalendarAdapter();
-
+        year = String.valueOf(calendar.get(Calendar.YEAR));
+        month = String.valueOf(Integer.valueOf(calendar.get(Calendar.MONTH)+1));
         //왔다감에서 intent로 보낸 가족코드 받아옴
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
-//        2. 파이어베이스 돌면서 멤버별 사람이름:일정이름 map 형성 //
+
+
+       // 2. 파이어베이스 돌면서 일정이 있는 날짜 배열에 담기 //
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
         reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
-                for(int i=1; i<(thisMonthLastDay);i++){  //이번달에 1일~해당하는 날짜만큼 반복
-                    HashMap<String,String> name_event_map = new HashMap<>();
-                    for(DataSnapshot data : dataSnapshot.getChildren()){ //data는 00일
-                        if(data != null) {
-                            String username = data.child(String.valueOf(i)).getKey();
-                            String event_name = data.child(username).child("time").getValue(String.class);
-                            name_event_map.put(username,event_name); //민정:춤추기 이런식으로 들어감, 파이썬의 dictionary같은 거
-                        }
+                int count = (int) dataSnapshot.getChildrenCount();
+                Iterator<DataSnapshot> day = dataSnapshot.getChildren().iterator(); //날짜 하나씩델고옴
+                have_plan_day.clear();
+                while (day.hasNext()){
+                    int i = 0;
+                    have_plan_day.add(i,day.next().getKey());  //계획이 있는 날짜 담음
+                    Log.i("have_plan",have_plan_day.get(i));
+                    i++;
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
+        // 3. 파이어베이스 돌면서 멤버별 사람이름:일정이름 map 형성해 해당 날짜에 띄우기 //
+        reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
+                for(int i=0; i<have_plan_day.size();i++){
+                    String day_num = String.valueOf(have_plan_day.get(i));
+                    Iterator<DataSnapshot> plan = dataSnapshot.child(day_num).getChildren().iterator();
+                    when_whos_what_plan_arr.clear();
+                    while (plan.hasNext()){
+                        String whos_plan = plan.next().getKey();
+                        String plan_name = dataSnapshot.child(day_num).child(whos_plan).child("time").getValue().toString();
+                        when_whos_what_plan_arr.add(have_plan_day.get(i));  //when = 날짜
+                        when_whos_what_plan_arr.add(whos_plan);   //who's = 누구의
+                        when_whos_what_plan_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
+//                        //arraylist에 [2,민정,연날리기] 이렇게 들어감
+//                        make_bar(when_whos_what_plan_arr);   //날짜 view에 집어 넣는 함수로 이동
                     }
                 }
+
             }
 
 
@@ -361,10 +391,16 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 throw databaseError.toException();
             }
         });
-
         //파이어베이스 돌면서 멤버별 시간: 일정 map 형성 끝//
+
+        initCalendarAdapter(when_whos_what_plan_arr,name_color_map,dayOfMonth);
     }
 
+//    private void make_bar(ArrayList when_whos_what_plan_arr){
+//        String when = when_whos_what_plan_arr.get(0).toString();
+//        String whos = when_whos_what_plan_arr.get(1).toString();
+//        String what = when_whos_what_plan_arr.get(2).toString();
+//    }
     /**
      * 지난달의 Calendar 객체를 반환합니다.
      *
@@ -426,9 +462,9 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     }
 
-    private void initCalendarAdapter()
+    private void initCalendarAdapter(ArrayList when_whos_what_plan_arr,HashMap name_color_map,int dayOfMonth)
     {
-        mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList);
+        mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList,when_whos_what_plan_arr,name_color_map,dayOfMonth);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
     @Override

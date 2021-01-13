@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //question을 선택하는 spinner
-        container = (LinearLayout)findViewById(R.id.answer_view); //answer을 나타내는 textView
+        container = (LinearLayout)findViewById(R.id.answer_view); //answer담는 레이아웃
 
         initDatabase();
 
@@ -103,9 +103,16 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 all_q_arr = new ArrayList<>();
                 all_q_arr.clear();
-                for(int i=1;i<7;i++) {  //질문 추가되면 수정필요 (7은 질문 갯수)
+                int i=1;
+                while(true) {  //질문 추가되면 수정필요 (7은 질문 갯수)
                     String this_question = dataSnapshot.child(String.valueOf(i)).getValue(String.class);
-                    all_q_arr.add(this_question);
+                    if(this_question ==null){
+                        break;
+                    }
+                    else{
+                        all_q_arr.add(this_question);
+                    }
+                    i++;
                 }
             }
 
