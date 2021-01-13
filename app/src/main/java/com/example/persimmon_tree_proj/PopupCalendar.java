@@ -21,13 +21,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
-import com.example.persimmon_tree_proj.adapter.CalendarAdapter;
+import com.example.persimmon_tree_proj.adapter.CalendarAdapter2;
 import com.example.persimmon_tree_proj.domain.DayInfo;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PopupCalendar extends Activity {
+public class PopupCalendar extends Activity implements AdapterView.OnItemClickListener {
 
     private GestureDetectorCompat detector;
     public static int SUNDAY        = 1;
@@ -42,7 +44,7 @@ public class PopupCalendar extends Activity {
     private GridView mGvCalendar;           //그리드뷰
 
     private ArrayList<DayInfo> mDayList; //일 저장할 리스트
-    private CalendarAdapter mCalendarAdapter; //그리드뷰 어댑터
+    private CalendarAdapter2 mCalendarAdapter; //그리드뷰 어댑터
 
     Calendar mLastMonthCalendar;
     Calendar mThisMonthCalendar;
@@ -52,8 +54,10 @@ public class PopupCalendar extends Activity {
 
     private String year;
     private String month;
+    private String day;
     private int set_position;
     private int set_month_lastday;
+    private String plan; //일정
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,26 +236,24 @@ public class PopupCalendar extends Activity {
         else if((set_month_lastday+set_position-2) < position){
             Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
         }
-        //이번달에 포함된 날자
+        //이번달에 포함된 날짜
         else{
-            Intent intent = new Intent(this, PopupcalActivity.class);
-            intent.putExtra("day", String.valueOf(Integer.valueOf(position)-set_position+2));
-            intent.putExtra("year", year);
-            intent.putExtra("month", month);
-            startActivityForResult(intent, 1);
+            day = String.valueOf(Integer.valueOf(position)-set_position+2);
+            TextView txt_View = (TextView) findViewById(R.id.txt_view); //question 을 나타내는 textView
+            txt_View.setText(year+"년"+ month+"월"+day+"일");
+            TextView txt_plan = (TextView) findViewById(R.id.txt_plan);
+            plan = txt_plan.getText().toString();
+
+
         }
-//        Object select_position = Integer.valueOf(mThisMonthCalendar.getItemAtPosition(position));
-//        int select_year = mThisMonthCalendar.get(Calendar.YEAR);
-//        int select_month = mThisMonthCalendar.get(Calendar.MONTH) + 1;
-//        Log.i("value","selected!!!!");
-//        Log.i("value",String.valueOf(select_year));
+//
 
 
     }
 
     private void initCalendarAdapter()
     {
-        mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList);
+        mCalendarAdapter = new CalendarAdapter2(this, R.layout.day, mDayList);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
 
