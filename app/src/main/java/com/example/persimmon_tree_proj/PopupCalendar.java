@@ -167,7 +167,6 @@ public class PopupCalendar extends Activity  {
                 }
                 //이번달에 포함된 날짜
                 else{
-                    mGvCalendar.setSelector();
 
                     day = String.valueOf(Integer.valueOf(position)-set_position+2);
                     TextView txt_View = (TextView) findViewById(R.id.txt_view); //question 을 나타내는 textView
