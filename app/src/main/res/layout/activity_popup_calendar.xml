@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#00ffffff"
     tools:context="com.example.persimmon_tree_proj.PopupCalendar">
 
@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:padding="24dp"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="93dp">
 
 
@@ -138,6 +138,7 @@
             android:stretchMode="columnWidth"
             tools:layout_editor_absoluteX="0dp" />
 
+
         <LinearLayout
             android:layout_width="317dp"
             android:layout_height="61dp"
@@ -146,25 +147,25 @@
 
             <TextView
                 android:id="@+id/txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="날짜를 선택해주세요."
+                android:textColor="#000000" />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_plan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:hint="일정 내용을 입력하세요."
+                android:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="316dp"
+            android:layout_height="48dp"
             android:orientation="horizontal">
-
-
 
 
             <ImageButton
@@ -176,12 +177,11 @@
 
             <Button
                 android:id="@+id/btn_addok"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Button" />
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="일정 추가" />
         </LinearLayout>
-
-
 
 
     </LinearLayout>
