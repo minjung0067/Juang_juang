@@ -1,5 +1,6 @@
 package com.example.persimmon_tree_proj;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
@@ -14,22 +15,33 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.adapter.CalendarAdapter2;
 import com.example.persimmon_tree_proj.domain.DayInfo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
-public class PopupCalendar extends Activity implements AdapterView.OnItemClickListener {
+public class PopupCalendar extends Activity  {
 
     private GestureDetectorCompat detector;
     public static int SUNDAY        = 1;
@@ -59,6 +71,10 @@ public class PopupCalendar extends Activity implements AdapterView.OnItemClickLi
     private int set_month_lastday;
     private String plan; //일정
 
+    //파이어베이스에 올리는 일정 관련
+    private String f_code;
+    private String user_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +82,7 @@ public class PopupCalendar extends Activity implements AdapterView.OnItemClickLi
         setContentView(R.layout.activity_popup_calendar);
         //테두리 둥글게 했을 때 뒤에 깔리는 까만 배경 없애기
         super.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         //취소 버튼
         ImageButton cancel = (ImageButton) findViewById(R.id.btn_cancel);
@@ -81,6 +98,36 @@ public class PopupCalendar extends Activity implements AdapterView.OnItemClickLi
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                EditText txt_plan = (EditText) findViewById(R.id.txt_plan);
+                plan = txt_plan.getText().toString();
+                Log.i("plan",plan);
+
+                //일정 파이어베이스에 올리기
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        f_code = snapshot.child("fcode").getValue().toString();
+                        user_name = snapshot.child("userName").getValue().toString();
+                        Log.i("check",year);
+                        Log.i("check2",month);
+                        Log.i("check3",day);
+
+                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(day).child(user_name).child("time").setValue(plan);
+                        Toast.makeText(PopupCalendar.this, "일정이 추가되었다감", Toast.LENGTH_SHORT).show();
+
+
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
         });
@@ -106,7 +153,39 @@ public class PopupCalendar extends Activity implements AdapterView.OnItemClickLi
 
         mDayList = new ArrayList<DayInfo>(); //일수를 저장하는 리스트
 
+
+        mGvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position < set_position-1){
+                    Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                }
+                //뒤에 회색 부분
+                else if((set_month_lastday+set_position-2) < position){
+                    Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                }
+                //이번달에 포함된 날짜
+                else{
+                    mGvCalendar.setSelector();
+
+                    day = String.valueOf(Integer.valueOf(position)-set_position+2);
+                    TextView txt_View = (TextView) findViewById(R.id.txt_view); //question 을 나타내는 textView
+                    txt_View.setText(year+"년"+ month+"월"+day+"일");
+
+
+
+
+                }
+
+            }
+        });
+
+
     }
+
+
+
 
 
     @Override
@@ -227,29 +306,7 @@ public class PopupCalendar extends Activity implements AdapterView.OnItemClickLi
         return calendar;
     }
 
-    public void onItemClick(AdapterView<?> parent, View v, int position, long arg3)
-    { //앞에 회색 부분
-        if(position < set_position-1){
-            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
-        }
-        //뒤에 회색 부분
-        else if((set_month_lastday+set_position-2) < position){
-            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
-        }
-        //이번달에 포함된 날짜
-        else{
-            day = String.valueOf(Integer.valueOf(position)-set_position+2);
-            TextView txt_View = (TextView) findViewById(R.id.txt_view); //question 을 나타내는 textView
-            txt_View.setText(year+"년"+ month+"월"+day+"일");
-            TextView txt_plan = (TextView) findViewById(R.id.txt_plan);
-            plan = txt_plan.getText().toString();
 
-
-        }
-//
-
-
-    }
 
     private void initCalendarAdapter()
     {
