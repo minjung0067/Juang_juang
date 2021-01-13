@@ -6,7 +6,15 @@
     android:gravity="center"
     android:orientation="vertical"
     android:layout_height="wrap_content">
+    <!-- 일정 바 들어오는 곳-->
+    <LinearLayout
+        android:id="@+id/plan_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:orientation="vertical">
 
+    </LinearLayout>
     <!-- 날짜 -->
     <TextView
         android:id="@+id/day_cell_tv_day"
@@ -19,15 +27,7 @@
         android:textSize="18sp"/>
 
 
-    <!-- 일정 바 들어오는 곳-->
-    <LinearLayout
-        android:id="@+id/plan_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:orientation="vertical">
 
-    </LinearLayout>
 
 
 
