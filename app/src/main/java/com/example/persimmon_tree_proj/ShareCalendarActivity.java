@@ -82,6 +82,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         mGvCalendar.setOnItemClickListener(this);
 
+
+
         mGvCalendar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
