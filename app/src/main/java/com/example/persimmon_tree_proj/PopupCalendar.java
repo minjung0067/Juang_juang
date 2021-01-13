@@ -39,10 +39,10 @@ public class PopupCalendar extends Activity {
     public static int SATURDAY      = 7;
 
     private TextView mTvCalendarTitle;
-    private GridView mGvCalendar;
+    private GridView mGvCalendar;           //그리드뷰
 
-    private ArrayList<DayInfo> mDayList;
-    private CalendarAdapter mCalendarAdapter;
+    private ArrayList<DayInfo> mDayList; //일 저장할 리스트
+    private CalendarAdapter mCalendarAdapter; //그리드뷰 어댑터
 
     Calendar mLastMonthCalendar;
     Calendar mThisMonthCalendar;
@@ -82,8 +82,6 @@ public class PopupCalendar extends Activity {
         });
 
 
-
-
         detector = new GestureDetectorCompat(this, new MyGestureListener());
 
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
@@ -102,54 +100,11 @@ public class PopupCalendar extends Activity {
 
 
 
-        mDayList = new ArrayList<DayInfo>();
+        mDayList = new ArrayList<DayInfo>(); //일수를 저장하는 리스트
 
-
-        //swipe 시작
-        GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener(){
-
-            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                if(e1.getX()-e2.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
-                    Log.i("ss","좌->우");
-                }
-                if(e2.getX()-e1.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
-                    Log.i("ss","우->좌");
-                }
-                return false;
-            }
-
-            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                return false;
-            }
-
-            public void onLongPress(MotionEvent e) {
-            }
-
-            public void onShowPress(MotionEvent e) {
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                return false;
-            }
-
-            public boolean onDown(MotionEvent e) {
-                return false;
-            }
-        };
     }
 
-    //    private FragmentManager getSupportFragmentManager() {
-//    }
-//
-//    public void processDatePickerResult(int year, int month, int day){
-//        String month_string = Integer.toString(month+1);
-//        String day_string = Integer.toString(day);
-//        String year_string = Integer.toString(year);
-//        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
-//
-//        Toast.makeText(this,"Date: "+dateMessage,Toast.LENGTH_SHORT).show();
-//    }
+
     @Override
     protected void onResume()
     {
@@ -338,6 +293,40 @@ public class PopupCalendar extends Activity {
         }
     }
 
+
+    //swipe 시작
+    GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener(){
+
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if(e1.getX()-e2.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
+                Log.i("ss","좌->우");
+            }
+            if(e2.getX()-e1.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
+                Log.i("ss","우->좌");
+            }
+            return false;
+        }
+
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return false;
+        }
+
+        public void onLongPress(MotionEvent e) {
+        }
+
+        public void onShowPress(MotionEvent e) {
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return false;
+        }
+
+        public boolean onDown(MotionEvent e) {
+            return false;
+        }
+    };
+
     private void onSwipeLeft() {
         mThisMonthCalendar = getNextMonth(mThisMonthCalendar);
         getCalendar(mThisMonthCalendar);
@@ -359,7 +348,7 @@ public class PopupCalendar extends Activity {
 
 
 
-
+    //popup 관련
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //바깥레이어 클릭시 안닫히게
