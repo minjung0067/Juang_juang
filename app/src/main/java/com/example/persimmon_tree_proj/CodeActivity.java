@@ -96,6 +96,7 @@ public class CodeActivity extends AppCompatActivity {
                     //토스트 띄우고 화면 전환하기
 
                     Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
+                    intent.putExtra("f_code",str_code);
                     startActivity(intent);
                     finish();
                 }
