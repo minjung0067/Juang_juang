@@ -2,10 +2,14 @@ package com.example.persimmon_tree_proj;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -18,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +33,11 @@ import androidx.fragment.app.FragmentManager;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.adapter.CalendarAdapter;
 import com.example.persimmon_tree_proj.domain.DayInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -68,6 +78,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private int set_position;
     private int set_month_lastday;
 
+    private HashMap<String,String> name_color_map;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -92,7 +104,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         //일정 추가 이미지 버튼
         add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
-
         add_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +164,43 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 finish();
             }
         });
+
+        //왔다감에서 intent로 보낸 가족코드 받아옴
+        Intent intent = getIntent();
+        final String f_code = intent.getStringExtra("f_code");
+        //일정 가져와서 띄우는 부분~~~~~//
+
+        //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
+        //현재 구성원들 데이터베이스 하나씩 돌면서 user_name:color_number
+        reference.child(f_code).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    String user_name = data.getKey();
+                    String color_number = data.child(user_name).child("user_color").getValue(String.class);
+                    if (color_number != null) { //있으면 담기, 없으면 패스
+                        name_color_map = new HashMap<>();
+                        name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                         }
+                    }
+                }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });    //이름:색깔 map 부분 끝
+
+
+        //3. 멤버별 해당 색깔의 동적 imageview형성//
+
+        //동적 imageview형성 끝//
+
+        //~~~일정 가져와서 띄우는 부분 끝//
+
+
+
         mDayList = new ArrayList<DayInfo>();
 
 
@@ -257,6 +305,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         Log.e("DayOfMOnth", dayOfMonth+"");
         set_position = dayOfMonth;
         set_month_lastday = thisMonthLastDay;
+        Log.i("lastday",String.valueOf(thisMonthLastDay));
         for(int i=0; i<dayOfMonth-1; i++)
         {
             int date = lastMonthStartDay+i;
@@ -283,6 +332,35 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         initCalendarAdapter();
 
+        //왔다감에서 intent로 보낸 가족코드 받아옴
+        Intent intent = getIntent();
+        final String f_code = intent.getStringExtra("f_code");
+//        2. 파이어베이스 돌면서 멤버별 사람이름:일정이름 map 형성 //
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
+        reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
+                for(int i=1; i<(thisMonthLastDay);i++){  //이번달에 1일~해당하는 날짜만큼 반복
+                    HashMap<String,String> name_event_map = new HashMap<>();
+                    for(DataSnapshot data : dataSnapshot.getChildren()){ //data는 00일
+                        if(data != null) {
+                            String username = data.child(String.valueOf(i)).getKey();
+                            String event_name = data.child(username).child("time").getValue(String.class);
+                            name_event_map.put(username,event_name); //민정:춤추기 이런식으로 들어감, 파이썬의 dictionary같은 거
+                        }
+
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
+
+        //파이어베이스 돌면서 멤버별 시간: 일정 map 형성 끝//
     }
 
     /**

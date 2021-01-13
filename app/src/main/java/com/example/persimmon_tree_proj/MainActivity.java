@@ -346,6 +346,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
                 finish();
             }
