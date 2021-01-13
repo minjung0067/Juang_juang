@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -62,6 +63,7 @@ public class PopupCalendar extends Activity {
         //테두리 둥글게 했을 때 뒤에 깔리는 까만 배경 없애기
         super.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        //취소 버튼
         ImageButton cancel = (ImageButton) findViewById(R.id.btn_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +72,22 @@ public class PopupCalendar extends Activity {
             }
         });
 
+        //일정 추가 확인 버튼
+        Button add = (Button)findViewById(R.id.btn_addok);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
 
         detector = new GestureDetectorCompat(this, new MyGestureListener());
 
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
-        mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar);
+        mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar); //달력
         GestureDetector gestureDetector = null;
 
 
