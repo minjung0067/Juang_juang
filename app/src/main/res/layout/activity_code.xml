@@ -11,37 +11,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="260dp"
         android:layout_marginEnd="8dp"
         android:text="우리집 감나무를 심었어요!"
+        android:textColor="@color/mainColor"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:src="@drawable/heart_graphic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_ok"
-        android:layout_width="54dp"
-        android:layout_height="38dp"
+        android:layout_width="284dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
-        android:background="#FFFFFF"
-        android:text="공유하기"
-        android:textColor="#616161"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/tv_code"
-        app:layout_constraintStart_toStartOf="@+id/tv_code"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/btn_orange_rounded"
+        android:text="가족정보 입력하기"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_code" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="70dp"
         android:text="우리 가족 코드"
+        android:textColor="#000"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -49,24 +63,24 @@
         android:id="@+id/tv_code"
         android:layout_width="198dp"
         android:layout_height="85dp"
-        android:layout_marginTop="284dp"
-        android:textAlignment="center"
-        android:textSize="36sp"
+        android:layout_marginTop="370dp"
+        android:textColor="@color/pointColor"
+        android:textSize="29dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/ok_btn"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="프로필 만들러감"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#FE8738"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ok" />
+    <!--    <Button-->
+    <!--        android:id="@+id/ok_btn"-->
+    <!--        android:layout_width="280dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="12dp"-->
+    <!--        android:text="프로필 만들러감"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        app:backgroundTint="#FE8738"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/btn_ok" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

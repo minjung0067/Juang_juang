@@ -6,4 +6,5 @@
     <color name="mainColor">#FE8738</color>
     <color name="subColor">#FFE9CB</color>
     <color name="pointColor">#92C44B</color>
+    <color name="greyColor">#B9B3BD</color>
 </resources>
