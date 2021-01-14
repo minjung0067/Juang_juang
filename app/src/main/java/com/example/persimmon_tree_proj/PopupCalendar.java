@@ -420,7 +420,7 @@ public class PopupCalendar extends Activity  {
 
     private void initCalendarAdapter()
     {
-        mCalendarAdapter = new CalendarAdapter2(this, R.layout.day, mDayList);
+        mCalendarAdapter = new CalendarAdapter2(this, R.layout.dayforpopup, mDayList);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
 
