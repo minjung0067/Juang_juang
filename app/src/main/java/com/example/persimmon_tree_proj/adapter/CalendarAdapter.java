@@ -149,7 +149,7 @@ public class CalendarAdapter extends BaseAdapter
                 //테두리 drawable
                 String user_name = String.valueOf(mwhen_whos_what_plan_arr.get(when_index+1));
                 String this_color = String.valueOf(mname_color_map.get(user_name));
-                plan.setBackgroundResource(R.drawable.line_dungle);  //테두리 둥글둥글
+                plan.setBackgroundResource(R.drawable.line_dungle_calendar);  //테두리 둥글둥글
                 GradientDrawable gd1 = (GradientDrawable) plan.getBackground(); //동적으로 배경색 바꿈
                 gd1.setColor(Color.parseColor(this_color)); //사람에 맞는 색깔로 배경 설정
                 plan.setText(mwhen_whos_what_plan_arr.get(when_index+2));//그 bar의 text는 i+2
