@@ -119,7 +119,7 @@ public class CalendarAdapter extends BaseAdapter
         {
             dayViewHolder = (DayViewHolde) convertView.getTag();
         }
-
+        Log.i("where2",String.valueOf(mwhen_whos_what_plan_arr));
         //일정이 있는 부분에 bar 추가하는 부분 !!!!!!!!!
         int when_index=0; //한번 싹 지우고
         int size = mwhen_whos_what_plan_arr.size();
@@ -129,7 +129,9 @@ public class CalendarAdapter extends BaseAdapter
 //                    dayViewHolder.containers.setHasTransientState(true);
             Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
             int day_num = (position - mdayOfMonth + 2); //날짜 번호
-//            Log.i("size nono day_num",String.valueOf(day_num));
+            Log.i("sizdayofmonth",String.valueOf(mdayOfMonth));
+            Log.i("size position day_num",String.valueOf(position));
+            Log.i("size nono day_num",String.valueOf(day_num));
             if(mwhen_whos_what_plan_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
                 //해당 dayViewHolder.에 동적 view추가
                 //arr에 [날짜, 일정 주인이름, 일정이름] 이렇게 들어가 있음
@@ -146,8 +148,6 @@ public class CalendarAdapter extends BaseAdapter
                 String this_color = String.valueOf(mname_color_map.get(user_name));
                 plan.setBackgroundColor(Color.parseColor(this_color));
                 plan.setText(mwhen_whos_what_plan_arr.get(when_index+2));//그 bar의 text는 i+2
-//                if (dayViewHolder.containers.getParent() != null)
-//                    ((ViewGroup) dayViewHolder.containers.getParent()).removeView(dayViewHolder.containers);
                 dayViewHolder.containers.addView(plan);
                 mwhen_whos_what_plan_arr.remove(when_index);
                 mwhen_whos_what_plan_arr.remove(when_index);

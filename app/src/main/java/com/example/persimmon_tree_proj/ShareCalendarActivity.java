@@ -77,9 +77,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     private String year;
     private String month;
-    private String f_code;
     private int set_position;
+    private String f_code;
     private int set_month_lastday;
+    private int dayOfMonth;
     private ArrayList<String> have_plan_day =  new ArrayList<String>();
     private ArrayList<String> when_whos_what_plan_arr =  new ArrayList<String>();
 
@@ -283,7 +284,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private void getCalendar(Calendar calendar)
     {
         int lastMonthStartDay;
-        int dayOfMonth;
         int thisMonthLastDay;
 
         mDayList.clear();
@@ -385,22 +385,21 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                         when_whos_what_plan_arr.add(have_plan_day.get(i));  //when = 날짜
                         when_whos_what_plan_arr.add(whos_plan);   //who's = 누구의
                         when_whos_what_plan_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
+                        Log.i("size2no22",String.valueOf(when_whos_what_plan_arr));
 //                        //arraylist에 [2,민정,연날리기] 이렇게 들어감
 //                        make_bar(when_whos_what_plan_arr);   //날짜 view에 집어 넣는 함수로 이동
                     }
                 }
-
+                //파이어베이스 돌면서 멤버별 시간: 일정 map 형성 끝//
+                Log.i("where1",String.valueOf(when_whos_what_plan_arr));
+                initCalendarAdapter(when_whos_what_plan_arr,name_color_map,dayOfMonth);
             }
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException();
             }
         });
-        //파이어베이스 돌면서 멤버별 시간: 일정 map 형성 끝//
 
-        initCalendarAdapter(when_whos_what_plan_arr,name_color_map,dayOfMonth);
     }
 
 //    private void make_bar(ArrayList when_whos_what_plan_arr){
