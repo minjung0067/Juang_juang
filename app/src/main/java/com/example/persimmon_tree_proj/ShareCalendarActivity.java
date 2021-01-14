@@ -369,7 +369,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 throw databaseError.toException();
             }
         });
-
+        when_whos_what_plan_arr.clear();
         // 3. 파이어베이스 돌면서 멤버별 사람이름:일정이름 map 형성해 해당 날짜에 띄우기 //
         reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
             @Override
@@ -377,10 +377,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 for(int i=0; i<have_plan_day.size();i++){
                     String day_num = String.valueOf(have_plan_day.get(i));
                     Iterator<DataSnapshot> plan = dataSnapshot.child(day_num).getChildren().iterator();
-                    when_whos_what_plan_arr.clear();
                     while (plan.hasNext()){
                         String whos_plan = plan.next().getKey();
                         String plan_name = dataSnapshot.child(day_num).child(whos_plan).child("time").getValue().toString();
+                        Log.i("have_plansss",whos_plan + plan_name);
                         when_whos_what_plan_arr.add(have_plan_day.get(i));  //when = 날짜
                         when_whos_what_plan_arr.add(whos_plan);   //who's = 누구의
                         when_whos_what_plan_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
