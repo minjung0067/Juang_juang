@@ -95,6 +95,12 @@ public class PopupCalendar extends Activity  {
         final TextView text_end = (TextView) findViewById(R.id.text_end); //question 을 나타내는 textView
 
 
+        //onclick
+        click = 0;
+        point_1_index = 0;
+        point_2_index = 0;
+
+
         //취소 버튼
         ImageButton cancel = (ImageButton) findViewById(R.id.btn_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -129,8 +135,14 @@ public class PopupCalendar extends Activity  {
                         user_name = snapshot.child("userName").getValue().toString();
                         Log.i("check",year);
                         Log.i("check2",month);
+                        int i = 0;
 
-                        //FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(day).child(user_name).child("time").setValue(plan);
+                        for(i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
+                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).child("time").setValue(plan);
+
+                        }
+
+
                         Toast.makeText(PopupCalendar.this, "일정이 추가되었다감", Toast.LENGTH_SHORT).show();
 
 
@@ -167,10 +179,7 @@ public class PopupCalendar extends Activity  {
 
         mDayList = new ArrayList<DayInfo>(); //일수를 저장하는 리스트
 
-        //onclick
-        click = 0;
-        point_1_index = 0;
-        point_2_index = 0;
+
         mGvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -198,7 +207,7 @@ public class PopupCalendar extends Activity  {
                             break;
                         }
 
-                    // 2번 클릭
+                        // 2번 클릭
                     case 1:
                         if(position < set_position-1){
                             Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
@@ -235,19 +244,19 @@ public class PopupCalendar extends Activity  {
                             }
 
                         }
-                    //3번 클릭시 reset
+                        //3번 클릭시 reset
                     case 2:
-                            click++;
-                            point_1_index = 0;
-                            point_2_index = 0;
-                            // text_start/end , gridView1 초기화
-                            TextView text_end = (TextView) findViewById(R.id.text_end); //question 을 나타내는 textView
-                            text_start.setBackgroundColor(Color.parseColor("#00000000"));
-                            text_end.setBackgroundColor(Color.parseColor("#00000000"));
-                            for(int i = 0; i < mDayList.size(); i++){
-                                mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
-                            }
-                            break;
+                        click++;
+                        point_1_index = 0;
+                        point_2_index = 0;
+                        // text_start/end , gridView1 초기화
+                        TextView text_end = (TextView) findViewById(R.id.text_end); //question 을 나타내는 textView
+                        text_start.setBackgroundColor(Color.parseColor("#00000000"));
+                        text_end.setBackgroundColor(Color.parseColor("#00000000"));
+                        for(int i = 0; i < mDayList.size(); i++){
+                            mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
+                        }
+                        break;
 
 
 
@@ -269,6 +278,8 @@ public class PopupCalendar extends Activity  {
             }
 
         });
+
+
 
 
     }
