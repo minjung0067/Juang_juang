@@ -16,6 +16,9 @@ public class PopupcalActivity extends Activity {
 
     TextView day_text;
     TextView yearmonth_text;
+    private String f_code;
+
+
 
 
     @Override
@@ -37,6 +40,8 @@ public class PopupcalActivity extends Activity {
         String day = intent.getStringExtra("day");
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
+        f_code = intent.getStringExtra("f_code");
+
         //년 월 보여주기
         yearmonth_text.setText( year + "년 " + month + "월 ");
         //날짜 보여주기
@@ -46,12 +51,14 @@ public class PopupcalActivity extends Activity {
     //확인 버튼 클릭
     public void mOnClose(View v){
         //데이터 전달하기
-        Intent intent = new Intent();
-        intent.putExtra("result", "Close Popup");
+        Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("f_code",f_code);
+        startActivity(intent);
         setResult(RESULT_OK, intent);
-
-        //액티비티(팝업) 닫기
         finish();
+
+
     }
 
     @Override

@@ -458,6 +458,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             intent.putExtra("day", String.valueOf(Integer.valueOf(position)-set_position+2));
             intent.putExtra("year", year);
             intent.putExtra("month", month);
+            intent.putExtra("f_code",f_code);
             startActivityForResult(intent, 1);
         }
 //        Object select_position = Integer.valueOf(mThisMonthCalendar.getItemAtPosition(position));
