@@ -115,7 +115,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/pointColor"
+            android:background="@drawable/btn_green_rounded"
             android:gravity="center_horizontal"
             android:text="답변 하러가기"
             android:textAlignment="center"

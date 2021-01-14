@@ -6,24 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".MakeProfile">
 
-<!--    <Button-->
-<!--        android:id="@+id/go_back"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="164dp"-->
-<!--        android:layout_marginTop="516dp"-->
-<!--        android:background="#00B1A6A6"-->
-<!--        android:src="@android:drawable/btn_dialog"-->
-<!--        android:text="메인페이지로"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/go_back"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="164dp"-->
+    <!--        android:layout_marginTop="516dp"-->
+    <!--        android:background="#00B1A6A6"-->
+    <!--        android:src="@android:drawable/btn_dialog"-->
+    <!--        android:text="메인페이지로"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginBottom="65dp"
+        android:fontFamily="@font/nanumsquare_acr"
         android:maxLength="10"
-        android:text="당신은 누구인감?"
+        android:text="당신은 누구신감?"
+        android:textColor="@color/mainColor"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,54 +37,52 @@
 
     <Button
         android:id="@+id/ok_btn"
-        android:layout_width="262dp"
+        android:layout_width="280dp"
         android:layout_height="43dp"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="460dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="220dp"
-        android:background="#FE8738"
+        android:background="@drawable/btn_orange_rounded"
         android:text="확인"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whoami"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/example"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="159dp"
-        android:text="ex) 귀염둥이 아들, 최고의 엄마"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="한 줄 소개를 입력해주세요!"
+        android:textColor="#000"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/whoami" />
+        app:layout_constraintStart_toStartOf="@+id/whoami"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
     <EditText
         android:id="@+id/whoami"
-        android:layout_width="263dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="370dp"
-        android:layout_marginEnd="74dp"
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
         android:ems="10"
-        android:maxLength="10"
-        android:hint="한 줄 소개 입력"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:hint=" ex) 귀염둥이 아들래미"
         android:inputType="textPersonName"
+        android:maxLength="10"
         android:singleLine="false"
-        android:textColor="#777777"
+        android:textColor="@color/greyColor"
         android:textColorHint="#939393"
-        app:layout_constraintBottom_toTopOf="@+id/example"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/example" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
