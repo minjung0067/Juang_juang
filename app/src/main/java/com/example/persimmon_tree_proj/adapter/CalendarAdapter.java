@@ -123,24 +123,24 @@ public class CalendarAdapter extends BaseAdapter
         //일정이 있는 부분에 bar 추가하는 부분 !!!!!!!!!
         int when_index=0; //한번 싹 지우고
         int size = mwhen_whos_what_plan_arr.size();
-        Log.i("size nono",String.valueOf(size));
+        Log.i("size no2no",String.valueOf(size));
+        Log.i("size no2no22",String.valueOf(mwhen_whos_what_plan_arr));
         while(when_index < size){
 //                    dayViewHolder.containers.setHasTransientState(true);
-//            Log.i("size nono",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
+            Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
             int day_num = (position - mdayOfMonth + 2); //날짜 번호
 //            Log.i("size nono day_num",String.valueOf(day_num));
             if(mwhen_whos_what_plan_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
                 //해당 dayViewHolder.에 동적 view추가
                 //arr에 [날짜, 일정 주인이름, 일정이름] 이렇게 들어가 있음
                 //when에 해당하는 게 날짜(3개씩 건너뜀), when+1에 해당하는게 사람 이름, when+2에 해당하는게 일정이름
-////                plan_bar bar = new plan_bar(dayViewHolder.containers.getContext());  //동적 layout 생성
-//                Button plan = bar.findViewById(R.id.plan);  //각각 ID 찾아서
                 //i+1값으로 hashmap에  접근해서 해당 user의 색깔로 바 만듦
-                Button plan = new Button(dayViewHolder.containers.getContext());
-                plan.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
-                plan.setTextSize(8);
+                TextView plan = new TextView(dayViewHolder.containers.getContext());
+                plan.setGravity(Gravity.BOTTOM|Gravity.CENTER_VERTICAL);
+                plan.setTextSize(14);
                 plan.setGravity(1);
-                plan.setHeight(5);
+                plan.setHeight(45);
+                plan.setMinWidth(120);
                 //테두리 drawable
                 String user_name = String.valueOf(mwhen_whos_what_plan_arr.get(when_index+1));
                 String this_color = String.valueOf(mname_color_map.get(user_name));
