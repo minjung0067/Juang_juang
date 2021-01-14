@@ -100,9 +100,6 @@ public class Registeractivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // login_activity 연결
-                Intent intent = new Intent(getApplicationContext(), log_inactivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 finish();
             }
         });
