@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj.adapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
@@ -84,6 +85,7 @@ public class CalendarAdapter extends BaseAdapter
         return 0;
     }
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
@@ -143,6 +145,7 @@ public class CalendarAdapter extends BaseAdapter
                 plan.setGravity(1);
                 plan.setHeight(44);
                 plan.setMinWidth(120);
+                plan.setTextColor(Color.parseColor("#ffffff"));
                 //테두리 drawable
                 String user_name = String.valueOf(mwhen_whos_what_plan_arr.get(when_index+1));
                 String this_color = String.valueOf(mname_color_map.get(user_name));
@@ -170,20 +173,20 @@ public class CalendarAdapter extends BaseAdapter
             {
                                 if(position % 7 == 0)
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.RED);
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#92C44B"));
                 }
                 else if(position % 7 == 6)
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.BLUE);
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#FE8738"));
                 }
                 else
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.BLACK);
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#B9B3BD"));
                 }
             }
             else
             {
-                dayViewHolder.tvDay.setTextColor(Color.GRAY);
+                dayViewHolder.tvDay.setTextColor(Color.parseColor("#00ffffff"));
             }
 
         }
