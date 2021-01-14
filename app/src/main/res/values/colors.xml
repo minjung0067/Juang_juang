@@ -7,4 +7,5 @@
     <color name="subColor">#FFE9CB</color>
     <color name="pointColor">#92C44B</color>
     <color name="greyColor">#B9B3BD</color>
+    <color name="whiteColor">#FFFFFF</color>
 </resources>

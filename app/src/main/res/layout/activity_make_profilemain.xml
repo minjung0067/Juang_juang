@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MakeProfilemain">
+
+<!--    <Button-->
+<!--        android:id="@+id/go_back"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="164dp"-->
+<!--        android:layout_marginTop="516dp"-->
+<!--        android:background="#00B1A6A6"-->
+<!--        android:src="@android:drawable/btn_dialog"-->
+<!--        android:text="메인페이지로"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="10"
+        android:text="당신은 누구인감?"
+        app:layout_constraintBottom_toTopOf="@+id/profile_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.631" />
+
+    <Button
+        android:id="@+id/ok_btn"
+        android:layout_width="262dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="220dp"
+        android:background="#FE8738"
+        android:text="확인"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/example"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="159dp"
+        android:text="ex) 귀염둥이 아들, 최고의 엄마"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whoami" />
+
+    <EditText
+        android:id="@+id/whoami"
+        android:layout_width="263dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="370dp"
+        android:layout_marginEnd="74dp"
+        android:ems="10"
+        android:maxLength="10"
+        android:hint="한 줄 소개 입력"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        android:textColor="#777777"
+        android:textColorHint="#939393"
+        app:layout_constraintBottom_toTopOf="@+id/example"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="106dp"
+        android:layout_marginBottom="430dp"
+        android:clickable="true"
+        android:src="@drawable/image"
+        app:civ_border_width="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/change_profile"
+        android:layout_width="39dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="120dp"
+        android:background="#00FFFFFF"
+        android:text="+"
+        android:textColor="#FE8738"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
