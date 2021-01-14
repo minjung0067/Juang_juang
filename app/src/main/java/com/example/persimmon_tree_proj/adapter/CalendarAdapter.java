@@ -112,47 +112,54 @@ public class CalendarAdapter extends BaseAdapter
             dayViewHolder.llBackground = (LinearLayout)convertView.findViewById(R.id.day_cell_ll_background);
             dayViewHolder.tvDay = (TextView) convertView.findViewById(R.id.day_cell_tv_day);
             dayViewHolder.containers = (LinearLayout) convertView.findViewById(R.id.plan_view);
-//일정이 있는 부분에 bar 추가하는 부분 !!!!!!!!!
-            int when_index=0;
-            dayViewHolder.containers.removeAllViewsInLayout();  //한번 싹 지우고
-            int size = mwhen_whos_what_plan_arr.size();
-            while(when_index > size){
-//                    dayViewHolder.containers.setHasTransientState(true);
-//                    Log.i("size nono",String.valueOf(mwhen_whos_what_plan_arr.get(when)));
-                int day_num = (position - mdayOfMonth + 2); //날짜 번호
-//                    Log.i("size nono day_num",String.valueOf(day_num));
-                if(mwhen_whos_what_plan_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
-                    //해당 dayViewHolder.에 동적 view추가
-                    //arr에 [날짜, 일정 주인이름, 일정이름] 이렇게 들어가 있음
-                    //when에 해당하는 게 날짜(3개씩 건너뜀), when+1에 해당하는게 사람 이름, when+2에 해당하는게 일정이름
-                    plan_bar bar = new plan_bar(mContext);  //동적 layout 생성
-                    TextView plans = bar.findViewById(R.id.plan);  //각각 ID 찾아서
-                    //i+1값으로 hashmap에  접근해서 해당 user의 색깔로 바 만듦
-                    Button plan = new Button(mContext);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    plan.setLayoutParams(params);
-                    plan.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
-                    plan.setTextSize(8);
-                    plan.setBackgroundColor(Color.parseColor("#808080")); //테두리 drawable
-                    plan.setText(mwhen_whos_what_plan_arr.get(when_index+2));//그 bar의 text는 i+2
-                    dayViewHolder.containers.addView(plan);
-                    mwhen_whos_what_plan_arr.remove(when_index);  //날짜 지우기
-                    mwhen_whos_what_plan_arr.remove(when_index); //이름 지우기 지워지니까 index그대로 when
-                    mwhen_whos_what_plan_arr.remove(when_index); //일정 지우기
-                    //세 값 삭제 해 줘야함
-//                        dayViewHolder.containers.setHasTransientState(false);
-                }
-                else {
-                    when_index += 3; //없으면 그냥 세 칸씩 건너 뛰어야함
-                    //날짜 , 이름 , 일정 이렇게 3개가 한 세트라서!
-                }
-            }
 
             convertView.setTag(dayViewHolder);
         }
         else
         {
             dayViewHolder = (DayViewHolde) convertView.getTag();
+        }
+
+        //일정이 있는 부분에 bar 추가하는 부분 !!!!!!!!!
+        int when_index=0; //한번 싹 지우고
+        int size = mwhen_whos_what_plan_arr.size();
+        Log.i("size nono",String.valueOf(size));
+        while(when_index < size){
+//                    dayViewHolder.containers.setHasTransientState(true);
+//            Log.i("size nono",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
+            int day_num = (position - mdayOfMonth + 2); //날짜 번호
+//            Log.i("size nono day_num",String.valueOf(day_num));
+            if(mwhen_whos_what_plan_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
+                //해당 dayViewHolder.에 동적 view추가
+                //arr에 [날짜, 일정 주인이름, 일정이름] 이렇게 들어가 있음
+                //when에 해당하는 게 날짜(3개씩 건너뜀), when+1에 해당하는게 사람 이름, when+2에 해당하는게 일정이름
+////                plan_bar bar = new plan_bar(dayViewHolder.containers.getContext());  //동적 layout 생성
+//                Button plan = bar.findViewById(R.id.plan);  //각각 ID 찾아서
+                //i+1값으로 hashmap에  접근해서 해당 user의 색깔로 바 만듦
+                Button plan = new Button(dayViewHolder.containers.getContext());
+                plan.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL);
+                plan.setTextSize(8);
+                plan.setGravity(1);
+                plan.setHeight(5);
+                //테두리 drawable
+                String user_name = String.valueOf(mwhen_whos_what_plan_arr.get(when_index+1));
+                String this_color = String.valueOf(mname_color_map.get(user_name));
+                plan.setBackgroundColor(Color.parseColor(this_color));
+                plan.setText(mwhen_whos_what_plan_arr.get(when_index+2));//그 bar의 text는 i+2
+//                if (dayViewHolder.containers.getParent() != null)
+//                    ((ViewGroup) dayViewHolder.containers.getParent()).removeView(dayViewHolder.containers);
+                dayViewHolder.containers.addView(plan);
+                mwhen_whos_what_plan_arr.remove(when_index);
+                mwhen_whos_what_plan_arr.remove(when_index);
+                mwhen_whos_what_plan_arr.remove(when_index);
+                when_index += 3;
+                //세 값 삭제 해 줘야함
+//                        dayViewHolder.containers.setHasTransientState(false);
+            }
+            else {
+                when_index += 3; //없으면 그냥 세 칸씩 건너 뛰어야함
+                //날짜 , 이름 , 일정 이렇게 3개가 한 세트라서!
+            }
         }
 
         if(day != null)
