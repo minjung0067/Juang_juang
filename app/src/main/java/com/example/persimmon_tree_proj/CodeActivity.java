@@ -48,7 +48,8 @@ public class CodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
-        ok = (Button)findViewById(R.id.ok_btn);
+
+        ok = (Button)findViewById(R.id.btn_ok);
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

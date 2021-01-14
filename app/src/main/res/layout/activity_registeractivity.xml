@@ -17,8 +17,9 @@
         android:background="@drawable/btn_orange_rounded"
         android:text="회원가입"
         android:textColor="#FFFFFF"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:textStyle="bold"
+        android:fontFamily="@font/nanumsquare_acdb"
         app:layout_constraintBottom_toBottomOf="@+id/btn_logintop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_logintop"
@@ -36,8 +37,9 @@
         android:background="@android:color/transparent"
         android:text="로그인"
         android:textColor="#B9B3BD"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:textStyle="bold"
+        android:fontFamily="@font/nanumsquare_acb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.279"
@@ -62,18 +64,20 @@
             android:layout_height="40dp"
             android:layout_margin="7dp"
             android:layout_marginLeft="47dp"
+            android:fontFamily="@font/nanumsquare_acr"
             android:ems="10"
             android:gravity="left"
-            android:hint="이메일"
+            android:hint="이메일 주소"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/greyColor"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_email"
             android:layout_width="280dp"
             android:layout_height="40dp"
             android:background="@drawable/btn_white_rounded"
+            android:fontFamily="@font/nanumsquare_acb"
             android:text="이메일 인증" />
 
         <EditText
@@ -84,9 +88,10 @@
             android:ems="10"
             android:gravity="left"
             android:hint="비밀번호"
+            android:fontFamily="@font/nanumsquare_acr"
             android:inputType="textPassword"
             android:textColorHint="@color/greyColor"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/editText_name"
@@ -100,7 +105,8 @@
             android:maxLength="10"
             android:textAllCaps="false"
             android:textColorHint="@color/greyColor"
-            android:textSize="16sp" />
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/edit_birth"
@@ -113,7 +119,8 @@
             android:hint="생년월일(숫자 8개 입력)"
             android:inputType="date"
             android:textColorHint="@color/greyColor"
-            android:textSize="16sp" />
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="12sp" />
 
 
     </LinearLayout>
@@ -128,7 +135,8 @@
         android:buttonTint="@color/pointColor"
         android:text="전체동의(선택항목포함)"
         android:textColor="#5A5A5A"
-        android:textSize="13sp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,6 +187,7 @@
         android:text="(선택) 이벤트, 광고성 정보 안내"
         android:textColor="#000000"
         android:textSize="10sp"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintStart_toStartOf="@+id/check_2"
         app:layout_constraintTop_toBottomOf="@+id/check_2" />
 
@@ -194,6 +203,7 @@
         android:text="(필수)이용약관"
         android:textColor="#000000"
         android:textSize="10sp"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/check_all" />
 
@@ -208,6 +218,7 @@
         android:text="(필수) 개인정보 수집 및 이용에 대한 안내"
         android:textColor="#000000"
         android:textSize="10sp"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintStart_toStartOf="@+id/check_1"
         app:layout_constraintTop_toBottomOf="@+id/check_1" />
 
@@ -221,6 +232,7 @@
         android:text="보기"
         android:textColor="#9E9E9E"
         android:textSize="10sp"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintBottom_toBottomOf="@+id/check_2"
         app:layout_constraintEnd_toEndOf="@+id/btn_view3"
         app:layout_constraintHorizontal_bias="0.487"
@@ -239,6 +251,7 @@
         android:text="보기"
         android:textColor="#9E9E9E"
         android:textSize="10sp"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintBottom_toBottomOf="@+id/check_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/check_3"
@@ -255,6 +268,7 @@
         android:text="보기"
         android:textColor="#9E9E9E"
         android:textSize="10sp"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintBottom_toBottomOf="@+id/check_1"
         app:layout_constraintEnd_toEndOf="@+id/btn_view2"
         app:layout_constraintHorizontal_bias="0.487"
@@ -275,6 +289,8 @@
         android:background="@drawable/btn_orange_rounded"
         android:text="회원가입"
         android:textColor="#FFFFFF"
+        android:fontFamily="@font/nanumsquare_acdb"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
