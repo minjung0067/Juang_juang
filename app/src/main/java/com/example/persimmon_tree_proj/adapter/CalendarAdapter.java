@@ -141,7 +141,7 @@ public class CalendarAdapter extends BaseAdapter
                 plan.setGravity(Gravity.BOTTOM|Gravity.CENTER_VERTICAL);
                 plan.setTextSize(14);
                 plan.setGravity(1);
-                plan.setHeight(45);
+                plan.setHeight(44);
                 plan.setMinWidth(120);
                 //테두리 drawable
                 String user_name = String.valueOf(mwhen_whos_what_plan_arr.get(when_index+1));
