@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile_gam_main">
+
+    <ImageButton
+        android:id="@+id/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="#00B1A6A6"
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/gam"
+        android:layout_width="84dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/shpae"
+        android:foreground="@color/common_google_signin_btn_text_dark_disabled"
+        android:text="감 친구"
+        android:clickable="true"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/color"
+        android:layout_width="84dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/shpae"
+        android:text="색상"
+        android:clickable="true"
+        android:longClickable="true"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/gam"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam1"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="140dp"
+        android:background="@drawable/btn_drawable"
+        android:clickable="true"
+        android:onClick="Click"
+        android:longClickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam3"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/btn_drawable"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam3"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="Click"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam2"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/btn_drawable"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="Click"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam5"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="340dp"
+        android:background="@drawable/btn_drawable"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam5"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="Click"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam4"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/btn_drawable"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="Click"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam6"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/btn_drawable"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="Click"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam7"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/btn_drawable"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam7"
+        android:clickable="true"
+        android:onClick="Click"
+        android:longClickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/gam8"
+        android:layout_width="128dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/btn_drawable"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="Click"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gam7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

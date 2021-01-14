@@ -1,24 +1,18 @@
 package com.example.persimmon_tree_proj;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.widget.ImageViewCompat;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Juang_juang.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MypageActivity extends AppCompatActivity {
+public class MypageActivity_cal extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private TextView my_id;
@@ -58,6 +52,8 @@ public class MypageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        Intent intent = getIntent();
+        myfcode = intent.getStringExtra("f_code");
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -161,7 +157,7 @@ public class MypageActivity extends AppCompatActivity {
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, MakeProfilemain.class);
+                Intent intent = new Intent(MypageActivity_cal.this, MakeProfil_cal.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -171,7 +167,8 @@ public class MypageActivity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                intent.putExtra("f_code",myfcode);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -195,7 +192,7 @@ public class MypageActivity extends AppCompatActivity {
                 //edit.clear()는 파일 auto에 들어있는 모든 정보를 기기에서 지운다.
                 editor.clear();
                 editor.commit(); //저장
-                Toast.makeText(MypageActivity.this, "로그아웃.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MypageActivity_cal.this, "로그아웃.", Toast.LENGTH_SHORT).show();
                 //startActivity(intent);
                 finish();
             }
