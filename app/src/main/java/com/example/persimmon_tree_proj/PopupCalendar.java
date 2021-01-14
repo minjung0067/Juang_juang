@@ -83,12 +83,19 @@ public class PopupCalendar extends Activity  {
         //테두리 둥글게 했을 때 뒤에 깔리는 까만 배경 없애기
         super.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        Intent intent = getIntent();
+        f_code = intent.getStringExtra("f_code");
+
 
         //취소 버튼
         ImageButton cancel = (ImageButton) findViewById(R.id.btn_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
                 finish();
             }
         });
