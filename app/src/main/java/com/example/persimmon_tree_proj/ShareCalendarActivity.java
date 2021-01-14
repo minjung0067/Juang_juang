@@ -77,12 +77,14 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     private String year;
     private String month;
+    private String f_code;
     private int set_position;
     private int set_month_lastday;
     private ArrayList<String> have_plan_day =  new ArrayList<String>();
     private ArrayList<String> when_whos_what_plan_arr =  new ArrayList<String>();
 
-    private HashMap<String,String> name_color_map;
+
+    private HashMap<String,String> name_color_map = new HashMap<String,String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -154,7 +156,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                Intent intentt = getIntent();
+                f_code = intentt.getStringExtra("f_code");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
                 finish();
             }
@@ -173,22 +178,23 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         //왔다감에서 intent로 보낸 가족코드 받아옴
         Intent intent = getIntent();
-        final String f_code = intent.getStringExtra("f_code");
+        f_code = intent.getStringExtra("f_code");
         //일정 가져와서 띄우는 부분~~~~~//
-
         //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
         //현재 구성원들 데이터베이스 하나씩 돌면서 user_name:color_number
         reference.child(f_code).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for(DataSnapshot data : dataSnapshot.getChildren()){
                     String user_name = data.getKey();
-                    String color_number = data.child(user_name).child("user_color").getValue(String.class);
+                    String color_number = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
+                    Log.i("ststw",String.valueOf(color_number));
                     if (color_number != null) { //있으면 담기, 없으면 패스
-                        name_color_map = new HashMap<>();
                         name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                         }
+
+                    }
                     }
                 }
 
