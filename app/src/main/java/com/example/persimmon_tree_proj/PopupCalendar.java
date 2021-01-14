@@ -66,7 +66,8 @@ public class PopupCalendar extends Activity  {
 
     private String year;
     private String month;
-    private String day;
+    private String day1;
+    private String day2;
     private int set_position;
     private int set_month_lastday;
     private String plan; //일정
@@ -74,6 +75,10 @@ public class PopupCalendar extends Activity  {
     //파이어베이스에 올리는 일정 관련
     private String f_code;
     private String user_name;
+    private Integer click;
+    private Integer point_1_index;
+    private Integer point_2_index;
+    private Integer tmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +91,9 @@ public class PopupCalendar extends Activity  {
         Intent intent = getIntent();
         f_code = intent.getStringExtra("f_code");
 
+        final TextView text_start = (TextView) findViewById(R.id.text_start); //question 을 나타내는 textView
+        final TextView text_end = (TextView) findViewById(R.id.text_end); //question 을 나타내는 textView
+
 
         //취소 버튼
         ImageButton cancel = (ImageButton) findViewById(R.id.btn_cancel);
@@ -95,6 +103,7 @@ public class PopupCalendar extends Activity  {
                 Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 startActivity(intent);
                 finish();
             }
@@ -120,9 +129,8 @@ public class PopupCalendar extends Activity  {
                         user_name = snapshot.child("userName").getValue().toString();
                         Log.i("check",year);
                         Log.i("check2",month);
-                        Log.i("check3",day);
 
-                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(day).child(user_name).child("time").setValue(plan);
+                        //FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(day).child(user_name).child("time").setValue(plan);
                         Toast.makeText(PopupCalendar.this, "일정이 추가되었다감", Toast.LENGTH_SHORT).show();
 
 
@@ -157,34 +165,109 @@ public class PopupCalendar extends Activity  {
 
 
 
-
         mDayList = new ArrayList<DayInfo>(); //일수를 저장하는 리스트
 
-
+        //onclick
+        click = 0;
+        point_1_index = 0;
+        point_2_index = 0;
         mGvCalendar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position < set_position-1){
-                    Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                switch (click){
+                    // 1번 클릭
+                    case 0:
+
+                        if(position < set_position-1){
+                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                        }
+                        //뒤에 회색 부분
+                        else if((set_month_lastday+set_position-2) < position){
+                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                        }
+                        //이번달에 포함된 날짜
+                        else{
+                            click++;
+                            point_1_index = position;
+                            // text_start 및 gridView1 배경변경
+                            day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                            text_start.setText(year+"년"+ month+"월"+day1+"일");
+                            text_start.setBackgroundColor(Color.parseColor("#E2E2E2"));
+                            mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#E2E2E2"));
+                            break;
+                        }
+
+                    // 2번 클릭
+                    case 1:
+                        if(position < set_position-1){
+                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                        }
+                        //뒤에 회색 부분
+                        else if((set_month_lastday+set_position-2) < position){
+                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+                        }
+                        //이번달에 포함된 날짜
+                        else{
+                            if(point_1_index > position){
+                                click = 1;
+                                text_start.setBackgroundColor(Color.parseColor("#E2E2E2"));
+
+                            }
+                            else{
+                                click++;
+                                point_2_index = position;
+                                // text_start 및 gridView1 배경변경
+                                //if(point_1_index >= point_2_index){
+                                //    int tmp = point_1_index;
+                                //    point_1_index = point_2_index;
+                                //    point_2_index = tmp;
+                                //}
+                                day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                                text_end.setText(year+"년"+ month+"월"+day2+"일");
+                                text_end.setBackgroundColor(Color.parseColor("#E2E2E2"));
+                                for(int i = point_1_index; i <= point_2_index; i++){
+                                    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#E2E2E2"));
+                                }
+                                break;
+                                // 3번 클릭 => 초기화
+
+                            }
+
+                        }
+                    //3번 클릭시 reset
+                    case 2:
+                            click++;
+                            point_1_index = 0;
+                            point_2_index = 0;
+                            // text_start/end , gridView1 초기화
+                            TextView text_end = (TextView) findViewById(R.id.text_end); //question 을 나타내는 textView
+                            text_start.setBackgroundColor(Color.parseColor("#00000000"));
+                            text_end.setBackgroundColor(Color.parseColor("#00000000"));
+                            for(int i = 0; i < mDayList.size(); i++){
+                                mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
+                            }
+                            break;
+
+
+
+
+                    default :
+                        click = 0;
+                        break;
                 }
-                //뒤에 회색 부분
-                else if((set_month_lastday+set_position-2) < position){
-                    Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
+
+
+
+                if(click == 3){
+                    click = 0;
+                    text_start.setText("날짜를 선택해주세요.");
+                    text_end.setText("날짜를 선택해주세요.");
                 }
-                //이번달에 포함된 날짜
-                else{
 
-                    day = String.valueOf(Integer.valueOf(position)-set_position+2);
-                    TextView txt_View = (TextView) findViewById(R.id.txt_view); //question 을 나타내는 textView
-                    txt_View.setText(year+"년"+ month+"월"+day+"일");
-
-
-
-
-                }
 
             }
+
         });
 
 
