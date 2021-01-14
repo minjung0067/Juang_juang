@@ -57,8 +57,8 @@ public class profile_gam extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), profile_color.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
                 overridePendingTransition(0, 0); //intent시 효과 없애기
+                finish();
             }
         });
 
