@@ -51,11 +51,11 @@ public class PopupcalActivity extends Activity {
     //확인 버튼 클릭
     public void mOnClose(View v){
         //데이터 전달하기
-        Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("f_code",f_code);
-        startActivity(intent);
-        setResult(RESULT_OK, intent);
+//        Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.putExtra("f_code",f_code);
+//        startActivity(intent);
+        //일정은 그냥 창만 닫으면 되는 거라 주석처리 했어용
         finish();
 
 
