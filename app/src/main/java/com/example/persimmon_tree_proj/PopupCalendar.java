@@ -99,6 +99,8 @@ public class PopupCalendar extends Activity  {
         click = 0;
         point_1_index = 0;
         point_2_index = 0;
+        day1 = String.valueOf(0);
+        day2 = String.valueOf(0);
 
 
         //취소 버튼
@@ -137,10 +139,18 @@ public class PopupCalendar extends Activity  {
                         Log.i("check2",month);
                         int i = 0;
 
-                        for(i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
-                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).child("time").setValue(plan);
+                        if(Integer.parseInt(day2)> 0){
+                            for(i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
+                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).child("time").setValue(plan);
+
+                            }
 
                         }
+                        else{
+                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(day1)).child(user_name).child("time").setValue(plan);
+
+                        }
+
 
 
                         Toast.makeText(PopupCalendar.this, "일정이 추가되었다감", Toast.LENGTH_SHORT).show();
