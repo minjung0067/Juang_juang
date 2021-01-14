@@ -72,13 +72,13 @@
             android:textColorHint="@color/greyColor"
             android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/btn_email"
-            android:layout_width="280dp"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_white_rounded"
-            android:fontFamily="@font/nanumsquare_acb"
-            android:text="이메일 인증" />
+<!--        <Button-->
+<!--            android:id="@+id/btn_email"-->
+<!--            android:layout_width="280dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@drawable/btn_white_rounded"-->
+<!--            android:fontFamily="@font/nanumsquare_acb"-->
+<!--            android:text="이메일 인증" />-->
 
         <EditText
             android:id="@+id/editText_passWord"

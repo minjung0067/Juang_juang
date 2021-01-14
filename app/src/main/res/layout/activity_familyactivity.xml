@@ -65,7 +65,6 @@
         android:text="확인"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/nanumsquare_acdb"
-        app:backgroundTint="#FE8738"
         app:layout_constraintEnd_toEndOf="@+id/et_code"
         app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="@+id/et_code"
