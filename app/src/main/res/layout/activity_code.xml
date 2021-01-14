@@ -13,8 +13,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="260dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/nanumsquare_acr"
         android:text="우리집 감나무를 심었어요!"
-        android:fontFamily="@font/nanumsquare_acdb"
         android:textColor="@color/mainColor"
         android:textSize="21dp"
         android:textStyle="bold"
@@ -24,11 +24,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="185dp"
+        android:layout_height="185dp"
         android:layout_marginTop="61dp"
-        android:src="@drawable/heart_graphic"
+        android:src="@drawable/heartgraphic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,13 +37,13 @@
         android:id="@+id/btn_ok"
         android:layout_width="284dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/btn_orange_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="가족정보 입력하기"
         android:textColor="#FFF"
-        android:fontFamily="@font/nanumsquare_acdb"
-        android:textSize="15dp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -53,27 +54,27 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="351dp"
+        android:layout_marginTop="70dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="우리 가족 코드"
         android:textColor="#000"
-        android:textSize="13dp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/tv_code"
         android:layout_width="198dp"
         android:layout_height="85dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/nanumsquare_acdb"
         android:textColor="@color/pointColor"
         android:textSize="29dp"
-        android:fontFamily="@font/nanumsquare_acdb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <!--    <Button-->
     <!--        android:id="@+id/ok_btn"-->
