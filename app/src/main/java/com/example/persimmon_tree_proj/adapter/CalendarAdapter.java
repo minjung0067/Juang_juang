@@ -129,11 +129,11 @@ public class CalendarAdapter extends BaseAdapter
         Log.i("size no2no22",String.valueOf(mwhen_whos_what_plan_arr));
         while(when_index < size){
 //                    dayViewHolder.containers.setHasTransientState(true);
-            Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
+//            Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
             int day_num = (position - mdayOfMonth + 2); //날짜 번호
-            Log.i("sizdayofmonth",String.valueOf(mdayOfMonth));
-            Log.i("size position day_num",String.valueOf(position));
-            Log.i("size nono day_num",String.valueOf(day_num));
+//            Log.i("sizdayofmonth",String.valueOf(mdayOfMonth));
+//            Log.i("size position day_num",String.valueOf(position));
+//            Log.i("size nono day_num",String.valueOf(day_num));
             if(mwhen_whos_what_plan_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
                 //해당 dayViewHolder.에 동적 view추가
                 //arr에 [날짜, 일정 주인이름, 일정이름] 이렇게 들어가 있음
@@ -143,7 +143,7 @@ public class CalendarAdapter extends BaseAdapter
                 plan.setGravity(Gravity.BOTTOM|Gravity.CENTER_VERTICAL);
                 plan.setTextSize(14);
                 plan.setGravity(1);
-                plan.setHeight(44);
+                plan.setHeight(45);
                 plan.setMinWidth(120);
                 plan.setTextColor(Color.parseColor("#ffffff"));
                 //테두리 drawable
@@ -152,9 +152,9 @@ public class CalendarAdapter extends BaseAdapter
                 plan.setBackgroundColor(Color.parseColor(this_color));
                 plan.setText(mwhen_whos_what_plan_arr.get(when_index+2));//그 bar의 text는 i+2
                 dayViewHolder.containers.addView(plan);
-                mwhen_whos_what_plan_arr.remove(when_index);
-                mwhen_whos_what_plan_arr.remove(when_index);
-                mwhen_whos_what_plan_arr.remove(when_index);
+//                mwhen_whos_what_plan_arr.remove(when_index);
+//                mwhen_whos_what_plan_arr.remove(when_index);
+//                mwhen_whos_what_plan_arr.remove(when_index);
                 when_index += 3;
                 //세 값 삭제 해 줘야함
 //                        dayViewHolder.containers.setHasTransientState(false);
