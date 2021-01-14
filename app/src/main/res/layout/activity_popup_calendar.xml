@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/calendar_layout"
-        android:layout_width="360dp"
-        android:layout_height="500dp"
+        android:layout_width="365dp"
+        android:layout_height="524dp"
         android:background="@drawable/line_dungle"
         android:orientation="vertical"
         android:padding="24dp"
@@ -129,8 +129,8 @@
 
         <GridView
             android:id="@+id/gv_calendar_activity_gv_calendar"
-            android:layout_width="305dp"
-            android:layout_height="281dp"
+            android:layout_width="310dp"
+            android:layout_height="243dp"
             android:layout_marginTop="1dp"
             android:background="#FFFFFF"
             android:listSelector="@drawable/grideview_selector"
@@ -146,9 +146,17 @@
 
 
             <TextView
-                android:id="@+id/txt_view"
+                android:id="@+id/text_start"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="날짜를 선택해주세요."
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/text_end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="날짜를 선택해주세요."
                 android:textColor="#000000" />
@@ -156,7 +164,7 @@
             <EditText
                 android:id="@+id/txt_plan"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="일정 내용을 입력하세요."
                 android:visibility="visible" />
