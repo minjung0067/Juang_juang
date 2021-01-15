@@ -49,7 +49,7 @@
         android:layout_gravity="center_vertical"
         android:src="@drawable/delete_plan_btn"
         android:scaleType="fitCenter"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:padding="4dp" />
 
 
