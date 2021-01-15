@@ -18,7 +18,7 @@
         android:padding="4dp" />
 
     <LinearLayout
-        android:layout_width="225dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/member_intro"
-            android:layout_width="221dp"
+            android:layout_width="130dp"
             android:layout_height="20dp"
             android:padding="2dp"
             android:textColor="#B9B3BD"
@@ -35,11 +35,22 @@
 
         <TextView
             android:id="@+id/member_plan"
-            android:layout_width="221dp"
+            android:layout_width="130dp"
             android:layout_height="25dp"
             android:padding="2dp"
             android:textColor="#000000"
             android:textSize="15dp" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/delete_plan_btn"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        android:padding="4dp" />
+
 
 </LinearLayout>
