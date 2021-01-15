@@ -1,28 +1,41 @@
 package com.example.persimmon_tree_proj;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import com.example.Juang_juang.R;
+public class popup_plan {
+    private String coloricon ;
+    private String plan_name ;
+    private String nick_name ;
+    private String user_name;
+    private String plan_id;
 
-//날짜 선택시 뜨는 팝업 속 일정 바 만들기
-public class popup_plan extends LinearLayout{
-
-    public popup_plan(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        init(context);
+    public void setIcon(String icon) {
+        coloricon = icon ;
+    }
+    public void setNick_name(String nickname) {
+        nick_name = nickname ;
+    }
+    public void setPlan_name(String planname) {
+        plan_name = planname ;
+    }
+    public void setUser_name(String username) {
+        user_name = username ;
+    }
+    public void setPlan_id(String planid) {
+        plan_id = planid ;
     }
 
-    public popup_plan(Context context) {
-        super(context);
-
-        init(context);
+    public String getIcon() {
+        return this.coloricon ;
     }
-
-    private void init(Context context){
-        LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.popup_plan,this,true);
+    public String getNick_name() {
+        return this.nick_name ;
+    }
+    public String getPlan_name() {
+        return this.plan_name ;
+    }
+    public String getUser_name() {
+        return this.user_name ;
+    }
+    public String getPlan_id( ) {
+        return this.plan_id;
     }
 }

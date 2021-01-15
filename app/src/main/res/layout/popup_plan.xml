@@ -42,15 +42,15 @@
             android:textSize="15dp" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/delete_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/delete_plan_btn"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
-        android:padding="4dp" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/delete_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:src="@drawable/delete_plan_btn"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:visibility="invisible"-->
+<!--        android:padding="4dp" />-->
 
 
 </LinearLayout>
