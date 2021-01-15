@@ -197,17 +197,23 @@ public class PopupCalendar extends Activity  {
                 switch (click){
                     // 1번 클릭
                     case 0:
+                        //첫번째 클릭 전 달력 초기화
+                        text_start.setText("날짜를 선택해주세요.");
+                        text_end.setVisibility(View.INVISIBLE);
+                        point_1_index = 0;
+                        point_2_index = 0;
+                        for(int i = 0; i < mDayList.size(); i++){
+                            mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
+                        }
 
                         if(position < set_position-1){
-                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
                         }
                         //뒤에 회색 부분
                         else if((set_month_lastday+set_position-2) < position){
-                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
                         }
                         //이번달에 포함된 날짜
                         else{
-                            click++;
+                            click++; //이번달에 포함된 날짜를 클릭했다면, case1로 이동
                             point_1_index = position;
                             // text_start 및 gridView1 배경변경
                             day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
@@ -228,48 +234,32 @@ public class PopupCalendar extends Activity  {
                         //이번달에 포함된 날짜
                         else{
                             if(point_1_index > position){
-                                //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
-                                //point_1_index = position;
-                                //day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
-                                //text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
-                                click = 0;
+                                mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
+                                mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                point_1_index = position;
+                                day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                                text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                                click = 1;
                                 break;
 
                             }
-                            else{
-                                click++;
+                            else{ //이번달에 포함된 날짜와 더 큰 숫자를 선택했다면,
+                                //click++;
                                 point_2_index = position;
-                                // text_start 및 gridView1 배경변경
-                                //if(point_1_index >= point_2_index){
-                                //    int tmp = point_1_index;
-                                //    point_1_index = point_2_index;
-                                //    point_2_index = tmp;
-                                //}
                                 day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                                text_end.setVisibility(View.VISIBLE);
                                 text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
                                 for(int i = point_1_index+1; i <= point_2_index-1; i++){
                                     mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
                                 }
                                 mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                                //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
+                                click=0;
                                 break;
-                                // 3번 클릭 => 초기화
 
                             }
 
                         }
-                        //3번 클릭시 reset
-                    case 2:
-                        click++;
-                        point_1_index = 0;
-                        point_2_index = 0;
-                        // text_start/end , gridView1 초기화
-                        TextView text_end = (TextView) findViewById(R.id.text_end); //question 을 나타내는 textView
-                        text_start.setBackgroundColor(Color.parseColor("#00000000"));
-                        text_end.setBackgroundColor(Color.parseColor("#00000000"));
-                        for(int i = 0; i < mDayList.size(); i++){
-                            mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
-                        }
-                        break;
 
 
 
@@ -277,14 +267,6 @@ public class PopupCalendar extends Activity  {
                     default :
                         click = 0;
                         break;
-                }
-
-
-
-                if(click == 3){
-                    click = 0;
-                    text_start.setText("날짜를 선택해주세요.");
-                    text_end.setText("날짜를 선택해주세요.");
                 }
 
 
@@ -448,6 +430,7 @@ public class PopupCalendar extends Activity  {
                 if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                     if (diffX > 0) {
                         onSwipeRight();
+
                     } else {
                         onSwipeLeft();
                     }
