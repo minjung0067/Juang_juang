@@ -23,8 +23,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="오늘의 일정"
+            android:layout_marginBottom="3dp"
             android:textColor="#B9B3BD"
-            android:textSize="18dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/day_text"
@@ -38,7 +39,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="200dp">
-            <ListView
+            <com.baoyz.swipemenulistview.SwipeMenuListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
@@ -48,7 +49,7 @@
                 android:divider="#ffffff"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            </ListView>
+            </com.baoyz.swipemenulistview.SwipeMenuListView>
 
         </RelativeLayout>
 

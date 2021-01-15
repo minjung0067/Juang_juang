@@ -138,10 +138,11 @@ public class CalendarAdapter extends BaseAdapter
                 //when에 해당하는 게 날짜(3개씩 건너뜀), when+1에 해당하는게 사람 이름, when+2에 해당하는게 일정이름
                 //i+1값으로 hashmap에  접근해서 해당 user의 색깔로 바 만듦
                 TextView plan = new TextView(dayViewHolder.containers.getContext());
-                plan.setGravity(Gravity.BOTTOM|Gravity.CENTER_VERTICAL);
-                plan.setTextSize(14);
+                plan.setGravity(Gravity.TOP);
+                plan.setTextSize(13);
                 plan.setGravity(1);
-                plan.setHeight(45);
+                plan.setHeight(40);
+                plan.setPadding(0,0,0,1);
                 plan.setMinWidth(140);
                 plan.setTextColor(Color.parseColor("#ffffff"));
                 //테두리 drawable
@@ -152,9 +153,12 @@ public class CalendarAdapter extends BaseAdapter
                 gd1.setColor(Color.parseColor(this_color)); //사람에 맞는 색깔로 배경 설정
                 plan.setText(mwhen_whos_what_plan_arr.get(when_index+2));//그 bar의 text는 i+2
                 dayViewHolder.containers.addView(plan);
-//                mwhen_whos_what_plan_arr.remove(when_index);
-//                mwhen_whos_what_plan_arr.remove(when_index);
-//                mwhen_whos_what_plan_arr.remove(when_index);
+
+                //한칸 띄워주기용...
+                TextView blank = new TextView(dayViewHolder.containers.getContext());
+                blank.setHeight(3);
+                blank.setBackgroundColor(android.R.color.white);
+                dayViewHolder.containers.addView(blank);
 
 
                 when_index += 3;
@@ -175,15 +179,15 @@ public class CalendarAdapter extends BaseAdapter
             {
                                 if(position % 7 == 0)
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#92C44B"));
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#FFAB47"));
                 }
                 else if(position % 7 == 6)
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#FE8738"));
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#92C44B"));
                 }
                 else
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#B9B3BD"));
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#000000"));
                 }
             }
             else
