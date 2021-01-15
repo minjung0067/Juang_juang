@@ -38,15 +38,14 @@
     <Button
         android:id="@+id/ok_btn"
         android:layout_width="280dp"
-        android:layout_height="43dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
-        android:layout_marginBottom="220dp"
         android:background="@drawable/btn_orange_rounded"
         android:text="확인"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/whoami"
         app:layout_constraintVertical_bias="0.0" />
@@ -57,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:fontFamily="@font/nanumsquare_acr"
-        android:text="한 줄 소개를 입력해주세요!"
+        android:text="  한 줄 소개를 입력해주세요!"
         android:textColor="#000"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +67,7 @@
     <EditText
         android:id="@+id/whoami"
         android:layout_width="280dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:ems="10"
         android:fontFamily="@font/nanumsquare_acr"
@@ -84,23 +83,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/example" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <!--    <de.hdodenhof.circleimageview.CircleImageView-->
+    <!--        android:id="@+id/profile_image"-->
+    <!--        android:layout_width="120dp"-->
+    <!--        android:layout_height="120dp"-->
+    <!--        android:layout_marginStart="106dp"-->
+    <!--        android:layout_marginTop="170dp"-->
+    <!--        android:layout_marginEnd="106dp"-->
+    <!--        android:layout_marginBottom="430dp"-->
+    <!--        android:clickable="true"-->
+    <!--        android:src="@drawable/image"-->
+    <!--        app:civ_border_width="0dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.493"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.0" />-->
+
+    <ImageView
         android:id="@+id/profile_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="106dp"
         android:layout_marginTop="170dp"
-        android:layout_marginEnd="106dp"
         android:layout_marginBottom="430dp"
+        android:background="@drawable/btn_drawable"
         android:clickable="true"
+        android:padding="2dp"
         android:src="@drawable/image"
-        app:civ_border_width="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+
+        />
+
 
     <Button
         android:id="@+id/change_profile"

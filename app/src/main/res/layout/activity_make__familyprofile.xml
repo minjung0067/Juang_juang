@@ -67,8 +67,8 @@
 
     <TextView
         android:id="@+id/example3"
-        android:layout_width="241dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="*모든 가족구성원이 가입해야 우리집 감나무가 열려요!"
