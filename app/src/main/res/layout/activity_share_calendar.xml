@@ -221,7 +221,7 @@
         <GridView
             android:id="@+id/gv_calendar_activity_gv_calendar"
             android:layout_width="408dp"
-            android:layout_height="448dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:background="#FFFFFF"
             android:listSelector="@drawable/grideview_selector"
