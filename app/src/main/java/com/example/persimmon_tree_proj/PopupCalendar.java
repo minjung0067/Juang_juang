@@ -141,13 +141,13 @@ public class PopupCalendar extends Activity  {
 
                         if(Integer.parseInt(day2)> 0){
                             for(i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
-                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).child("time").setValue(plan);
+                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
                             }
 
                         }
                         else{
-                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(day1)).child(user_name).child("time").setValue(plan);
+                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(day1)).child(user_name).push().setValue(plan);
 
                         }
 
