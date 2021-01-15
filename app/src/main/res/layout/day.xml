@@ -22,7 +22,7 @@
         android:textSize="18sp"
         app:layout_editor_absoluteY="0dp" />
 
-    <LinearLayout
+    <RelativeLayoutLinearLayout
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:orientation="vertical"
@@ -36,7 +36,7 @@
             android:layout_gravity="bottom">
 
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayoutLinearLayout>
 
 
 
