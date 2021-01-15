@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -82,11 +83,25 @@ public class MainActivity extends AppCompatActivity {
     String this_color="";
     String this_gam ="";
 
+//    private Button setting;
+//    private Button calendar;
+//    private Button main;
 
+
+//    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        Button setting = (Button)findViewById(R.id.setting_btn);
+//        Button calendar = (Button)findViewById(R.id.calendar_btn);
+//        Button main = (Button)findViewById(R.id.main_btn);
+//
+//        setting.bringToFront(); //자꾸 버튼 뒤로 묻혀서 제일 상단에 뜨게해주는 메서드 사용
+//        calendar.bringToFront();
+//        main.bringToFront();
+
 
         Intent intent = getIntent();
 

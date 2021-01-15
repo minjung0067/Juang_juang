@@ -51,12 +51,15 @@
 
     <Button
         android:id="@+id/btn_answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:background="#FF9800"
+        android:background="@drawable/btn_orange_rounded"
         android:text="답변완료"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:textSize="14dp"
+        android:textColor="#fff"
         app:layout_constraintBottom_toTopOf="@+id/edit_answer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
