@@ -211,9 +211,8 @@ public class PopupCalendar extends Activity  {
                             point_1_index = position;
                             // text_start 및 gridView1 배경변경
                             day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
-                            text_start.setText(year+"년"+ month+"월"+day1+"일");
-                            text_start.setBackgroundColor(Color.parseColor("#E2E2E2"));
-                            mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#E2E2E2"));
+                            text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                            mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                             break;
                         }
 
@@ -229,8 +228,12 @@ public class PopupCalendar extends Activity  {
                         //이번달에 포함된 날짜
                         else{
                             if(point_1_index > position){
-                                click = 1;
-                                text_start.setBackgroundColor(Color.parseColor("#E2E2E2"));
+                                //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                //point_1_index = position;
+                                //day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                                //text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                                click = 0;
+                                break;
 
                             }
                             else{
@@ -243,11 +246,11 @@ public class PopupCalendar extends Activity  {
                                 //    point_2_index = tmp;
                                 //}
                                 day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
-                                text_end.setText(year+"년"+ month+"월"+day2+"일");
-                                text_end.setBackgroundColor(Color.parseColor("#E2E2E2"));
-                                for(int i = point_1_index; i <= point_2_index; i++){
-                                    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#E2E2E2"));
+                                text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
+                                for(int i = point_1_index+1; i <= point_2_index-1; i++){
+                                    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
                                 }
+                                mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
                                 break;
                                 // 3번 클릭 => 초기화
 

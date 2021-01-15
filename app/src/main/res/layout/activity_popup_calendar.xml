@@ -27,7 +27,7 @@
             android:background="#FFFFFF"
             android:gravity="center"
             android:text="2021년 몇월"
-            android:textColor="#000"
+            android:textColor="#B9B3BD"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -145,6 +145,14 @@
             android:orientation="vertical">
 
 
+            <EditText
+                android:id="@+id/txt_plan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="일정 내용을 입력하세요."
+                android:visibility="visible" />
+
             <TextView
                 android:id="@+id/text_start"
                 android:layout_width="match_parent"
@@ -161,13 +169,6 @@
                 android:text="날짜를 선택해주세요."
                 android:textColor="#000000" />
 
-            <EditText
-                android:id="@+id/txt_plan"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="일정 내용을 입력하세요."
-                android:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
