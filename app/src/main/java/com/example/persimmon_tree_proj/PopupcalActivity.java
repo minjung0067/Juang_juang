@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.adapter.Plan_listview_Adapter;
 import com.google.firebase.database.DataSnapshot;
@@ -99,33 +104,51 @@ public class PopupcalActivity extends Activity {
                 throw databaseError.toException();
             }
         });    //이름:색깔 map 부분 끝
+
         listview = (ListView) findViewById(R.id.plan_vview);
         //intent 받아온 년월일 사용해서 해당 날짜의 일정 한 줄씩 띄우기
-        reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Plan_listview_Adapter adapterr;
                 adapterr = new Plan_listview_Adapter();
-                for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
-                    String user_name = data.getKey();
-                    for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
-                        String plan_id = one_plan.getKey();
-                        String plan_name = one_plan.getValue().toString();
-                        listview.setAdapter(adapterr);
+                //일정 아무것도 없으면
+                if(dataSnapshot.child(day).exists() == false){
+                    adapterr.addItem( "", "", "현재 등록된 일정이 없감..","","");
+                    listview.setAdapter(adapterr);
+                }
+                reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Plan_listview_Adapter adapterr;
+                        adapterr = new Plan_listview_Adapter();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
+                            String user_name = data.getKey();
+                            for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
+                                String plan_id = one_plan.getKey();
+                                String plan_name = one_plan.getValue().toString();
+                                listview.setAdapter(adapterr);
 //                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
 //                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
-                        // 아이템 추가.
-                        adapterr.addItem( name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name,user_name,plan_id);
+                                // 아이템 추가.
+                                adapterr.addItem( name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name,user_name,plan_id);
 
+                            }
+                        }
                     }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+                });
                 }
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException();
             }
-        });    //이름:색깔 map 부분
+        });
 
     }
 
@@ -156,4 +179,5 @@ public class PopupcalActivity extends Activity {
         //안드로이드 백버튼 막기
         return;
     }
+
 }

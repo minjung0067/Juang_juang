@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -53,9 +54,23 @@ public class Plan_listview_Adapter extends BaseAdapter {
 
         // 아이템 내 각 위젯에 데이터 반영
         GradientDrawable gd = (GradientDrawable) color_icon.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
-        gd.setColor(Color.parseColor(listViewItem.getIcon())); //해당 일정의 주인 색깔로 색깔 설정
-        introTextView.setText(listViewItem.getNick_name());
-        planTextView.setText(listViewItem.getPlan_name());
+        if((listViewItem.getIcon().equals("") == false)&&(listViewItem.getNick_name().equals("") == false)){
+            //일정 있는 날
+            gd.setColor(Color.parseColor(listViewItem.getIcon()));
+            introTextView.setText(listViewItem.getNick_name());
+            planTextView.setText(listViewItem.getPlan_name());
+        }
+        else{
+            //일정 없는 날
+            gd.setColor(Color.parseColor("#ffffff"));
+            if(listViewItem.getPlan_name().equals("") == false){
+                planTextView.setText(listViewItem.getPlan_name());
+                planTextView.setTextColor(Color.parseColor("#B9B3BD"));
+                planTextView.setGravity(Gravity.CENTER_VERTICAL);
+                planTextView.setHeight(200);
+                planTextView.setTextSize(21);
+            }
+        }
 
         return convertView;
     }

@@ -10,22 +10,21 @@
 
 
     <!-- 날짜 -->
-    <!-- 일정 바 들어오는 곳-->
     <TextView
         android:id="@+id/day_cell_tv_day"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="23dp"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:paddingLeft="3dp"
+        android:gravity="top"
         android:paddingTop="1dp"
         android:textSize="18sp"
         app:layout_editor_absoluteY="0dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:scrollbars="vertical"
         android:layout_gravity="center_vertical">
 
         <LinearLayout
