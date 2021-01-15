@@ -27,6 +27,7 @@ import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.domain.DayInfo;
 import com.example.persimmon_tree_proj.plan_bar;
 import com.example.persimmon_tree_proj.sub_answer;
+import com.google.firebase.database.DataSnapshot;
 
 
 /**
@@ -131,9 +132,6 @@ public class CalendarAdapter extends BaseAdapter
 //                    dayViewHolder.containers.setHasTransientState(true);
 //            Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
             int day_num = (position - mdayOfMonth + 2); //날짜 번호
-//            Log.i("sizdayofmonth",String.valueOf(mdayOfMonth));
-//            Log.i("size position day_num",String.valueOf(position));
-//            Log.i("size nono day_num",String.valueOf(day_num));
             if(mwhen_whos_what_plan_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
                 //해당 dayViewHolder.에 동적 view추가
                 //arr에 [날짜, 일정 주인이름, 일정이름] 이렇게 들어가 있음
@@ -157,6 +155,8 @@ public class CalendarAdapter extends BaseAdapter
 //                mwhen_whos_what_plan_arr.remove(when_index);
 //                mwhen_whos_what_plan_arr.remove(when_index);
 //                mwhen_whos_what_plan_arr.remove(when_index);
+
+
                 when_index += 3;
                 //세 값 삭제 해 줘야함
 //                        dayViewHolder.containers.setHasTransientState(false);

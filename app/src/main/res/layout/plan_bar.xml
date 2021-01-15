@@ -10,7 +10,6 @@
         android:id="@+id/plan"
         android:padding="1dp"
         android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:text="언제 되냐고"
-        android:textSize="11dp" />
+        android:layout_height="wrap_content"
+        android:textSize="10dp" />
 </LinearLayout>
