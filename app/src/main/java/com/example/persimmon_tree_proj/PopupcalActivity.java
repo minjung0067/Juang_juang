@@ -104,16 +104,16 @@ public class PopupcalActivity extends Activity {
                 for(DataSnapshot data : dataSnapshot.getChildren()){ //data는 사람 이름 각각
                     String user_name = data.getKey();
                     for(DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()){
-                            String plan_name = one_plan.getValue().toString();
-                            popup_plan plan_layout = new popup_plan(getApplicationContext());  //동적 layout 생성
-                            ImageView member_color = plan_layout.findViewById(R.id.member_color); //앞에 뜨는 색깔 동그라미에 해당하는 부분
-                            TextView member_intro = plan_layout.findViewById(R.id.member_intro);  //소개 해당하는 부분
-                            member_intro.setText(name_introduce_map.get(user_name));
-                            TextView member_plan = plan_layout.findViewById(R.id.member_plan);  //일정이름 해당하는 부분
-                            member_plan.setText(plan_name);
-                            GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
-                            gd.setColor(Color.parseColor(name_color_map.get(user_name))); //해당 일정의 주인 색깔로 색깔 설정
-                            plan_view.addView(plan_layout);
+                        String plan_name = one_plan.getValue().toString();
+                        popup_plan plan_layout = new popup_plan(getApplicationContext());  //동적 layout 생성
+                        ImageView member_color = plan_layout.findViewById(R.id.member_color); //앞에 뜨는 색깔 동그라미에 해당하는 부분
+                        TextView member_intro = plan_layout.findViewById(R.id.member_intro);  //소개 해당하는 부분
+                        member_intro.setText(name_introduce_map.get(user_name));
+                        TextView member_plan = plan_layout.findViewById(R.id.member_plan);  //일정이름 해당하는 부분
+                        member_plan.setText(plan_name);
+                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
+                        gd.setColor(Color.parseColor(name_color_map.get(user_name))); //해당 일정의 주인 색깔로 색깔 설정
+                        plan_view.addView(plan_layout);
                     }
                 }
             }

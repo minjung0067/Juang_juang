@@ -35,10 +35,12 @@
             android:textColor="#B9B3BD"
             android:textSize="18dp" />
 
+
         <LinearLayout
             android:id="@+id/plan_view"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
+            android:scrollbarStyle="insideInset"
             android:orientation="vertical"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             app:layout_constraintEnd_toEndOf="parent"

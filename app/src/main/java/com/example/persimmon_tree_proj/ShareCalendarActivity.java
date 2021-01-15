@@ -198,8 +198,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                         name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
 
                     }
-                    }
                 }
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -351,7 +351,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         final String f_code = intent.getStringExtra("f_code");
 
 
-       // 2. 파이어베이스 돌면서 일정이 있는 날짜 배열에 담기 //
+        // 2. 파이어베이스 돌면서 일정이 있는 날짜 배열에 담기 //
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
         reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
             @Override

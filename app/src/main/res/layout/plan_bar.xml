@@ -3,10 +3,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="5dp"
+    android:id="@+id/plan_layout"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/plan"
+        android:padding="1dp"
         android:layout_width="60dp"
         android:layout_height="30dp"
         android:text="언제 되냐고"
