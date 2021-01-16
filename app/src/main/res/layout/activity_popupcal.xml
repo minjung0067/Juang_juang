@@ -16,7 +16,16 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="53dp"
         tools:layout_editor_absoluteY="33dp">
-
+        <ImageButton
+            android:id="@+id/no"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="#ffffff"
+            android:gravity="bottom"
+            android:scaleType="fitCenter"
+            android:onClick="mOnClose"
+            android:src="@drawable/go_backk"
+            android:textColor="#ff7a00"/>
         <TextView
             android:id="@+id/yearmonth_text"
             android:layout_width="310dp"
@@ -64,13 +73,13 @@
             android:layout_gravity="bottom">
 
             <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="#ffffff"
                 android:gravity="bottom"
                 android:scaleType="fitCenter"
                 android:onClick="mOnClose"
-                android:src="@drawable/close_btn"
+                android:src="@drawable/check_icon_big"
                 android:textColor="#ff7a00"
 
                 tools:ignore="RtlCompat" />

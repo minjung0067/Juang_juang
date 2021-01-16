@@ -110,15 +110,15 @@ public class CalendarAdapter2 extends BaseAdapter
             {
                 if(position % 7 == 0)
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#92C44B"));
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#FFAB47"));
                 }
                 else if(position % 7 == 6)
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#FE8738"));
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#92C44B"));
                 }
                 else
                 {
-                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#B9B3BD"));
+                    dayViewHolder.tvDay.setTextColor(Color.parseColor("#000000"));
                 }
             }
             else
