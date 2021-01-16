@@ -72,6 +72,22 @@ public class Waitactivity extends AppCompatActivity {
             }
         });
 
+//        Button share = (Button) findViewById(R.id.btn_copy);
+//        share.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+//            @Override
+//            public void onClick(View v) {
+//                TextView textView= (TextView) findViewById(R.id.tv_code); //텍스트뷰
+//                final String code = textView.getText().toString();//텍스트 뷰 글자 가져옴
+//                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+//                ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
+//                clipboardManager.setPrimaryClip(clipData);
+//
+//                //복사가 되었다면 토스트메시지 노출
+//                Toast.makeText(Waitactivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         Button change = (Button) findViewById(R.id.btn_change);//가족 구성원 수 바꾸기
         change.setOnClickListener(new View.OnClickListener() {
             @Override

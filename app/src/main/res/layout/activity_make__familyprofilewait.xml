@@ -23,7 +23,7 @@
     <Button
         android:id="@+id/ok_btn"
         android:layout_width="280dp"
-        android:layout_height="43dp"
+        android:layout_height="45dp"
         android:layout_marginTop="47dp"
         android:layout_marginBottom="220dp"
         android:background="@drawable/btn_orange_rounded"
@@ -64,7 +64,7 @@
     <EditText
         android:id="@+id/count"
         android:layout_width="280dp"
-        android:layout_height="23dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:digits="0123456789"
         android:ems="10"

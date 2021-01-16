@@ -1,20 +1,26 @@
 package com.example.persimmon_tree_proj;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.adapter.Plan_listview_Adapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,13 +28,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class PopupcalActivity extends Activity {
 
     TextView day_text;
     TextView yearmonth_text;
     LinearLayout plan_view;
+    Context context;
+
+
 
     private String f_code;
     private String day;
@@ -36,6 +44,7 @@ public class PopupcalActivity extends Activity {
     private String year;
     private HashMap<String,String> name_color_map = new HashMap<String,String>();
     private HashMap<String,String> name_introduce_map = new HashMap<String,String>();
+    private ListView listview;
 
 
 
@@ -54,7 +63,6 @@ public class PopupcalActivity extends Activity {
         //UI 객체생성
         yearmonth_text = (TextView)findViewById(R.id.yearmonth_text);
         day_text = (TextView)findViewById(R.id.day_text);
-        plan_view = (LinearLayout) findViewById(R.id.plan_view);
 
         //데이터 가져오기
         Intent intent = getIntent();
@@ -97,32 +105,50 @@ public class PopupcalActivity extends Activity {
             }
         });    //이름:색깔 map 부분 끝
 
+        listview = (ListView) findViewById(R.id.plan_vview);
         //intent 받아온 년월일 사용해서 해당 날짜의 일정 한 줄씩 띄우기
-        reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot data : dataSnapshot.getChildren()){ //data는 사람 이름 각각
-                    String user_name = data.getKey();
-                    for(DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()){
-                            String plan_name = one_plan.getValue().toString();
-                            popup_plan plan_layout = new popup_plan(getApplicationContext());  //동적 layout 생성
-                            ImageView member_color = plan_layout.findViewById(R.id.member_color); //앞에 뜨는 색깔 동그라미에 해당하는 부분
-                            TextView member_intro = plan_layout.findViewById(R.id.member_intro);  //소개 해당하는 부분
-                            member_intro.setText(name_introduce_map.get(user_name));
-                            TextView member_plan = plan_layout.findViewById(R.id.member_plan);  //일정이름 해당하는 부분
-                            member_plan.setText(plan_name);
-                            GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
-                            gd.setColor(Color.parseColor(name_color_map.get(user_name))); //해당 일정의 주인 색깔로 색깔 설정
-                            plan_view.addView(plan_layout);
-                    }
+                Plan_listview_Adapter adapterr;
+                adapterr = new Plan_listview_Adapter();
+                //일정 아무것도 없으면
+                if(dataSnapshot.child(day).exists() == false){
+                    adapterr.addItem( "", "", "현재 등록된 일정이 없감..","","");
+                    listview.setAdapter(adapterr);
                 }
-            }
+                reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Plan_listview_Adapter adapterr;
+                        adapterr = new Plan_listview_Adapter();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
+                            String user_name = data.getKey();
+                            for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
+                                String plan_id = one_plan.getKey();
+                                String plan_name = one_plan.getValue().toString();
+                                listview.setAdapter(adapterr);
+//                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
+//                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
+                                // 아이템 추가.
+                                adapterr.addItem( name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name,user_name,plan_id);
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+                });
+                }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException();
             }
-        });    //이름:색깔 map 부분
+        });
 
     }
 
@@ -153,4 +179,5 @@ public class PopupcalActivity extends Activity {
         //안드로이드 백버튼 막기
         return;
     }
+
 }

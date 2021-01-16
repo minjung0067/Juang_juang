@@ -29,6 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Iterator;
+
 public class MypageActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -42,6 +44,7 @@ public class MypageActivity extends AppCompatActivity {
     private String user_name;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private TextView my_familynum;
 
 
 
@@ -53,6 +56,7 @@ public class MypageActivity extends AppCompatActivity {
         my_introduce = (TextView) findViewById(R.id.my_introduce);
         my_fcode = (TextView) findViewById(R.id.my_fcode);
         my_image = (ImageView) findViewById(R.id.profile_image);
+        my_familynum = (TextView) findViewById(R.id.my_membernum);
 
         //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
         firebaseAuth = FirebaseAuth.getInstance();
@@ -150,6 +154,27 @@ public class MypageActivity extends AppCompatActivity {
                 my_introduce.setText(myintroduce);
                 my_fcode.setText(myfcode);
                 my_id.setText(LoginId);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
+
+        //가족 구성원 수 보여주기 위함
+        DatabaseReference familyreference = FirebaseDatabase.getInstance().getReference("family");
+        final SharedPreferences autologin2 = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
+        reference.child(myfcode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> members = dataSnapshot.child("members").getChildren().iterator();
+                int member_count = 0;
+                while (members.hasNext()) {
+                    String member_num = members.next().getKey();
+                    member_count++;
+                }
+                my_familynum.setText(member_count);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

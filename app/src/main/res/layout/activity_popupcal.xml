@@ -23,8 +23,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="오늘의 일정"
+            android:layout_marginBottom="3dp"
             android:textColor="#B9B3BD"
-            android:textSize="18dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/day_text"
@@ -35,18 +36,23 @@
             android:textColor="#B9B3BD"
             android:textSize="18dp" />
 
-        <LinearLayout
-            android:id="@+id/plan_view"
-            android:layout_width="308dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="200dp">
+            <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:id="@+id/plan_vview"
+                android:background="#ffffff"
+                android:dividerHeight="0px"
+                android:divider="#ffffff"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        </LinearLayout>
+            </com.baoyz.swipemenulistview.SwipeMenuListView>
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +66,6 @@
                 android:background="#ffffff"
                 android:gravity="bottom"
                 android:onClick="mOnClose"
-                android:padding="16dp"
                 android:src="@drawable/close_btn"
                 android:textColor="#ff7a00"
 
