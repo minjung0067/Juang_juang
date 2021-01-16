@@ -353,7 +353,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
         // 2. 파이어베이스 돌면서 일정이 있는 날짜 배열에 담기 //
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
-        reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
+        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
                 int count = (int) dataSnapshot.getChildrenCount();
@@ -373,7 +373,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         });
         when_whos_what_plan_arr.clear();
         // 3. 파이어베이스 돌면서 멤버별 사람이름:일정이름 map 형성해 해당 날짜에 띄우기 //
-        reference.child(f_code).child("calendar").child(year).child(month).addValueEventListener(new ValueEventListener() {
+        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
                 for(int i=0; i<have_plan_day.size();i++){
