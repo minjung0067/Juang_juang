@@ -175,7 +175,7 @@ public class CalendarAdapter extends BaseAdapter
 
             if(day.isInMonth())
             {
-                                if(position % 7 == 0)
+                if(position % 7 == 0)
                 {
                     dayViewHolder.tvDay.setTextColor(Color.parseColor("#FFAB47"));
                 }
@@ -208,7 +208,7 @@ public class CalendarAdapter extends BaseAdapter
 
     private int getCellWidthDP()
     {
-      int width = mContext.getResources().getDisplayMetrics().widthPixels;
+        int width = mContext.getResources().getDisplayMetrics().widthPixels;
         //int cellWidth = 720/7;
         int cellWidth = width/7;
 
@@ -218,7 +218,7 @@ public class CalendarAdapter extends BaseAdapter
 
     private int getRestCellWidthDP()
     {
-      int width = mContext.getResources().getDisplayMetrics().widthPixels;
+        int width = mContext.getResources().getDisplayMetrics().widthPixels;
         //int cellWidth = 720%7;
         int cellWidth = width%7;
 
@@ -228,7 +228,7 @@ public class CalendarAdapter extends BaseAdapter
 
     private int getCellHeightDP()
     {
-       int height = mContext.getResources().getDisplayMetrics().heightPixels;
+        int height = mContext.getResources().getDisplayMetrics().heightPixels;
         //int cellHeight = 1280/6;
         int cellHeight = height/8;
 
