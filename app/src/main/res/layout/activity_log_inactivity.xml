@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/WhiteColor"
     android:orientation="vertical"
     android:outlineSpotShadowColor="#FFFFFF"
-    android:background="@color/WhiteColor"
     tools:context="com.example.persimmon_tree_proj.log_inactivity">
 
     <ImageView
@@ -32,9 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="35.5dp"
+        android:layout_marginTop="39dp"
         android:layout_marginRight="35.5dp"
         android:layout_marginBottom="302dp"
-        android:layout_marginTop="39dp"
         android:ems="10"
         android:fontFamily="@font/nanumsquare_acr"
         android:hint="아이디 입력"
@@ -42,21 +42,21 @@
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logingam" />
+        app:layout_constraintTop_toBottomOf="@+id/image_logingam"
+        app:layout_constraintVertical_bias="0.237" />
 
     <EditText
         android:id="@+id/edittext_password"
         android:layout_width="289dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:ems="10"
-        android:hint="비밀번호 입력"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:textSize="15dp"
         android:layout_marginTop="39dp"
+        android:ems="10"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:hint="비밀번호 입력"
         android:inputType="textPassword"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_email" />
@@ -68,10 +68,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="34dp"
         android:background="@drawable/btn_orange_rounded"
-        android:text="로그인"
         android:fontFamily="@font/nanumsquare_acb"
-        android:textSize="16dp"
+        android:text="로그인"
         android:textColor="#FFFFFF"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,6 +91,59 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
     <!--        app:layout_constraintVertical_bias="0.341" />-->
 
+    <View
+        android:id="@+id/blackline_left"
+        android:layout_width="80dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/greyColor"
+        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="45dp"
+        android:layout_height="9dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="25dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="간편 로그인"
+        android:textColor="@color/greyColor"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <View
+        android:id="@+id/blackline_right"
+        android:layout_width="80dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/greyColor"
+        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="40dp"-->
+    <!--        android:text="가입을 하지 않았는감?"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/btn_signup"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.498"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
+    <!--        app:layout_constraintVertical_bias="1.0" />-->
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_googleSignIn"
         android:layout_width="300dp"
@@ -109,34 +162,26 @@
         android:topLeftRadius="30dp"
         android:topRightRadius="30dp"
         android:visibility="visible"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.276"
         tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginBottom="40dp"-->
-    <!--        android:text="가입을 하지 않았는감?"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/btn_signup"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.498"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
-    <!--        app:layout_constraintVertical_bias="1.0" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
+        android:layout_marginBottom="731dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -145,10 +190,10 @@
         android:layout_height="36dp"
         android:layout_marginRight="73dp"
         android:background="@android:color/transparent"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="회원가입"
         android:textColor="@color/greyColor"
         android:textSize="14dp"
-        android:fontFamily="@font/nanumsquare_acb"
         app:layout_constraintBottom_toBottomOf="@+id/btn_logintop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_logintop"
@@ -164,10 +209,10 @@
         android:layout_marginRight="195dp"
         android:layout_marginBottom="561dp"
         android:background="@drawable/btn_orange_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="로그인"
         android:textColor="#FFF"
         android:textSize="14dp"
-        android:fontFamily="@font/nanumsquare_acb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.308"

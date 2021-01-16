@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -59,10 +60,16 @@ public class log_inactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_inactivity);
 
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         buttonGoogle = findViewById(R.id.btn_googleSignIn); //구글 로그인 버튼
         editTextEmail = (EditText) findViewById(R.id.edittext_email);   //이메일 입력한 거 변수에 저장
         editTextPassword = (EditText) findViewById(R.id.edittext_password);   //비번 저장한 거 pwd에 저장
+
+        //google 로그인 버튼 텍스트 바꾸기
+        TextView textView = (TextView) buttonGoogle.getChildAt(0);
+        textView.setText("Google 계정으로 로그인");
 
         buttonSignUp = (Button) findViewById(R.id.btn_signup);  //회원가입으로 연결하는 버튼
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
