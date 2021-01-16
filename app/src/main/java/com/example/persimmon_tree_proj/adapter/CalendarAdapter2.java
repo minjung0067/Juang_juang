@@ -121,6 +121,10 @@ public class CalendarAdapter2 extends BaseAdapter
                     dayViewHolder.tvDay.setTextColor(Color.parseColor("#000000"));
                 }
             }
+            else
+            {
+                dayViewHolder.tvDay.setTextColor(Color.parseColor("#00ffffff"));
+            }
 
         }
 
