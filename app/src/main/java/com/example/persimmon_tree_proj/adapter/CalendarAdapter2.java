@@ -28,6 +28,7 @@ public class CalendarAdapter2 extends BaseAdapter
     private Context mContext;
     private int mResource;
     private LayoutInflater mLiInflater;
+    private ArrayList<String> mperiod;
 
     /**
      * Adpater 생성자
@@ -39,12 +40,13 @@ public class CalendarAdapter2 extends BaseAdapter
      * @param dayList
      *            날짜정보가 들어있는 리스트
      */
-    public CalendarAdapter2(Context context, int textResource, ArrayList<DayInfo> dayList)
+    public CalendarAdapter2(Context context, int textResource, ArrayList<DayInfo> dayList, ArrayList<String> period)
     {
         this.mContext = context;
         this.mDayList = dayList;
         this.mResource = textResource;
         this.mLiInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.mperiod = period;
     }
 
     @Override

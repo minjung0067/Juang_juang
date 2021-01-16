@@ -76,11 +76,12 @@ public class PopupCalendar extends Activity  {
     private String f_code;
     private String user_name;
     private Integer click;
-    private Integer point_1_index;
-    private Integer point_2_index;
+    private Integer point_1_index;//첫번째 선택한 index
+    private Integer point_2_index;//두번째 선택한 index
     private Integer firstmonth = 0;//일정 추가시 처음 선택한 일의 월
     private Integer firstyear = 0;//일정 추가시 나중에 선택한 일의 월
-    private String firstposition;
+
+    private ArrayList<String> period =  new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +201,7 @@ public class PopupCalendar extends Activity  {
                     // 1번 클릭
                     case 0:
                         //첫번째 클릭 전 달력 초기화
+                        period.clear(); //기간 배열 초기화
                         Log.i("check0","첫번쨰 클릭");
                         text_start.setText("날짜를 선택해주세요.");
                         text_end.setVisibility(View.INVISIBLE);
@@ -258,6 +260,8 @@ public class PopupCalendar extends Activity  {
                                         point_1_index = position;
                                         day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                         text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                                        firstyear = Integer.valueOf(year);
+                                        firstmonth = Integer.valueOf(month);
                                         click = 1;
                                         break;
 
@@ -304,6 +308,8 @@ public class PopupCalendar extends Activity  {
                                     mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                     point_1_index = position;
                                     day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                                    firstmonth = Integer.valueOf(month);
+                                    firstyear = Integer.valueOf(year);
                                     text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
                                     click = 1;
                                     break;
@@ -335,6 +341,8 @@ public class PopupCalendar extends Activity  {
                                 point_1_index = position;
                                 day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                 text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                                firstyear = Integer.valueOf(year);
+                                firstmonth = Integer.valueOf(month);
                                 click = 1;
                                 break;
 
@@ -489,7 +497,7 @@ public class PopupCalendar extends Activity  {
 
     private void initCalendarAdapter()
     {
-        mCalendarAdapter = new CalendarAdapter2(this, R.layout.dayforpopup, mDayList);
+        mCalendarAdapter = new CalendarAdapter2(this, R.layout.dayforpopup, mDayList,period);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
 
