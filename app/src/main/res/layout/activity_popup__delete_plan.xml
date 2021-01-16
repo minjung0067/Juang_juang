@@ -1,0 +1,68 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffffff"
+    tools:context="com.example.persimmon_tree_proj.PopupcalActivity">
+
+    <LinearLayout
+        android:layout_width="358dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/line_dungle"
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="33dp">
+
+        <TextView
+            android:id="@+id/yearmonth_text"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="오늘의 일정"
+            android:layout_marginBottom="3dp"
+            android:textColor="#B9B3BD"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/day_text"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="오늘의 일정"
+            android:textColor="#B9B3BD"
+            android:textSize="18dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="200dp">
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_gravity="bottom">
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:gravity="bottom"
+                android:onClick="mOnClose"
+                android:src="@drawable/close_btn"
+                android:textColor="#ff7a00"
+
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

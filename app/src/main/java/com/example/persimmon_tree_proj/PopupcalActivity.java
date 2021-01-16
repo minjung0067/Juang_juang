@@ -1,6 +1,7 @@
 package com.example.persimmon_tree_proj;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -12,6 +13,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,15 +44,18 @@ public class PopupcalActivity extends Activity {
     Context context;
 
     //swipe하면 수정삭제 생기는 부분
-    private List<ApplicationInfo> mAppList;
+    private ArrayList<Integer> mAppList;
 
     private String f_code;
     private String day;
     private String month;
     private String year;
+    private int indexx=0;
     private HashMap<String,String> name_color_map = new HashMap<String,String>();
     private HashMap<String,String> name_introduce_map = new HashMap<String,String>();
     private SwipeMenuListView listview;
+
+    private Plan_listview_Adapter adapterr = new Plan_listview_Adapter();
 
 
 
@@ -114,8 +120,6 @@ public class PopupcalActivity extends Activity {
         reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Plan_listview_Adapter adapterr;
-                adapterr = new Plan_listview_Adapter();
                 //일정 아무것도 없으면
                 if (dataSnapshot.child(day).exists() == false) {
                     adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "");
@@ -124,8 +128,6 @@ public class PopupcalActivity extends Activity {
                 reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Plan_listview_Adapter adapterr;
-                        adapterr = new Plan_listview_Adapter();
                         for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
                             String user_name = data.getKey();
                             for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
@@ -161,8 +163,9 @@ public class PopupcalActivity extends Activity {
                 // Create different menus depending on the view type
                 createMenu1(menu);
             }
-
             private void createMenu1(SwipeMenu menu) {
+                mAppList.add(indexx);
+                indexx++;
                 SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
                 item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
                 item1.setWidth((130));
@@ -171,7 +174,7 @@ public class PopupcalActivity extends Activity {
                 SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
                 item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
                 item2.setWidth(130);
-                item2.setIcon(R.drawable.close_btn);
+                item2.setIcon(R.drawable.delete_plan_btn_big);
                 menu.addMenuItem(item2);
             }
         };
@@ -183,15 +186,12 @@ public class PopupcalActivity extends Activity {
         listview.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                ApplicationInfo item = mAppList.get(position);
                 switch (index) {
                     case 0:
-                        // open
+                        popup_revise(mAppList.get(position));
                         break;
                     case 1:
-                        // delete
-////					delete(item);
-//                        mAppList.remove(position);
+                        popup_delete(mAppList.get(position));
                         break;
                 }
                 return false;
@@ -199,6 +199,22 @@ public class PopupcalActivity extends Activity {
         });
     }
         //swipe해서 수정/삭제
+
+    public void popup_revise(int position){
+        Intent intent = new Intent(this, popup_RevisePlan.class);
+        ArrayList arr = adapterr.getItem((position));
+        intent.putExtra("arr", arr);
+        startActivityForResult(intent, 1);
+
+    }
+
+    public void popup_delete(int position){
+        Intent intent = new Intent(this, popup_DeletePlan.class);
+        ArrayList arr = adapterr.getItem((position));
+        intent.putExtra("arr", arr);
+        startActivityForResult(intent, 1);
+
+    }
 
 
     //확인 버튼 클릭
