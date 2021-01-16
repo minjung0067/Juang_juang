@@ -21,10 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.popup_DeletePlan"></activity>
-        <activity android:name="com.example.persimmon_tree_proj.popup_RevisePlan" />
         <activity
-            android:name="com.example.persimmon_tree_proj.PopupcalActivity"
+            android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_DeletePlan"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_RevisePlan"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.example.persimmon_tree_proj.Popup_Cal.PopupcalActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="com.example.persimmon_tree_proj.PopupCalendar"
