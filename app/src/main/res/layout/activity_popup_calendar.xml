@@ -133,7 +133,8 @@
             android:layout_height="243dp"
             android:layout_marginTop="1dp"
             android:background="#FFFFFF"
-            android:listSelector="@drawable/grideview_selector"
+            android:listSelector="@drawable/grideview_selectorpop"
+            android:drawSelectorOnTop="true"
             android:numColumns="7"
             android:stretchMode="columnWidth"
             tools:layout_editor_absoluteX="0dp" />

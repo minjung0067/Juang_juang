@@ -175,8 +175,14 @@ public class log_inactivity extends AppCompatActivity {
                     //inputId와 inputPwd에 이메일, 비밀번호 저장
                     autoLogin.putString("inputId", editTextEmail.getText().toString());
                     autoLogin.putString("inputPwd", editTextPassword.getText().toString());
-                    autoLogin.putString("inputUid", firebaseAuth.getCurrentUser().getUid());
-                    autoLogin.commit(); //값 저장
+                    if(user != null){
+                        autoLogin.putString("inputUid", firebaseAuth.getCurrentUser().getUid());
+                        autoLogin.commit(); //값 저장
+                    }
+                    else{
+
+                    }
+
 
                     firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
                         @Override
