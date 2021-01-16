@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 
@@ -69,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> member_color_arr =  new ArrayList<String>();
     ArrayList<String> member_gam_arr =  new ArrayList<String>();
 
+
     //family code 관련
     private String f_code;
-    private String users_color;
     static int count;
     static int member_count;
     static int answer_position;
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //question을 선택하는 spinner
-        container = (LinearLayout)findViewById(R.id.answer_view); //answer담는 레이아웃
+        container = (LinearLayout) findViewById(R.id.answer_view); //answer담는 레이아웃
 
         initDatabase();
 
@@ -424,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                     GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
-                    gd1.setStroke(23,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                    gd1.setStroke(50,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
                     Log.i("member_gam",member_gam_arr.get(i));
                     if (member_gam_arr.get(i).equals("1")){
                         iv.setImageResource(R.drawable.gam1);}
