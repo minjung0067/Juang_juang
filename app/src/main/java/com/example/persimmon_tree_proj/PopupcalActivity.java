@@ -3,14 +3,17 @@ package com.example.persimmon_tree_proj;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class PopupcalActivity extends Activity {
 
@@ -36,7 +40,8 @@ public class PopupcalActivity extends Activity {
     LinearLayout plan_view;
     Context context;
 
-
+    //swipe하면 수정삭제 생기는 부분
+    private List<ApplicationInfo> mAppList;
 
     private String f_code;
     private String day;
@@ -44,7 +49,7 @@ public class PopupcalActivity extends Activity {
     private String year;
     private HashMap<String,String> name_color_map = new HashMap<String,String>();
     private HashMap<String,String> name_introduce_map = new HashMap<String,String>();
-    private ListView listview;
+    private SwipeMenuListView listview;
 
 
 
@@ -61,8 +66,8 @@ public class PopupcalActivity extends Activity {
 
 
         //UI 객체생성
-        yearmonth_text = (TextView)findViewById(R.id.yearmonth_text);
-        day_text = (TextView)findViewById(R.id.day_text);
+        yearmonth_text = (TextView) findViewById(R.id.yearmonth_text);
+        day_text = (TextView) findViewById(R.id.day_text);
 
         //데이터 가져오기
         Intent intent = getIntent();
@@ -72,9 +77,9 @@ public class PopupcalActivity extends Activity {
         f_code = intent.getStringExtra("f_code");
 
         //년 월 보여주기
-        yearmonth_text.setText( year + "년 " + month + "월 ");
+        yearmonth_text.setText(year + "년 " + month + "월 ");
         //날짜 보여주기
-        day_text.setText( day +"일");
+        day_text.setText(day + "일");
 
         //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
@@ -83,18 +88,17 @@ public class PopupcalActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot data : dataSnapshot.getChildren()){
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     String user_name = data.getKey();
                     String color_number = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
                     String introduce = dataSnapshot.child(user_name).child("introduce").getValue(String.class);
                     if (color_number != null) { //있으면 담기, 없으면 패스
-                        name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                        name_introduce_map.put(user_name,introduce);
+                        name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                        name_introduce_map.put(user_name, introduce);
 
-                    }
-                    else if (color_number.equals("")){
-                        name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                        name_introduce_map.put(user_name,"");
+                    } else if (color_number.equals("")) {
+                        name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                        name_introduce_map.put(user_name, "");
                     }
                 }
             }
@@ -105,7 +109,7 @@ public class PopupcalActivity extends Activity {
             }
         });    //이름:색깔 map 부분 끝
 
-        listview = (ListView) findViewById(R.id.plan_vview);
+        listview = (SwipeMenuListView) findViewById(R.id.plan_vview);
         //intent 받아온 년월일 사용해서 해당 날짜의 일정 한 줄씩 띄우기
         reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -113,8 +117,8 @@ public class PopupcalActivity extends Activity {
                 Plan_listview_Adapter adapterr;
                 adapterr = new Plan_listview_Adapter();
                 //일정 아무것도 없으면
-                if(dataSnapshot.child(day).exists() == false){
-                    adapterr.addItem( "", "", "현재 등록된 일정이 없감..","","");
+                if (dataSnapshot.child(day).exists() == false) {
+                    adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "");
                     listview.setAdapter(adapterr);
                 }
                 reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -131,7 +135,7 @@ public class PopupcalActivity extends Activity {
 //                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
 //                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
                                 // 아이템 추가.
-                                adapterr.addItem( name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name,user_name,plan_id);
+                                adapterr.addItem(name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name, user_name, plan_id);
 
                             }
                         }
@@ -142,7 +146,7 @@ public class PopupcalActivity extends Activity {
                         throw databaseError.toException();
                     }
                 });
-                }
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -150,7 +154,52 @@ public class PopupcalActivity extends Activity {
             }
         });
 
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // Create different menus depending on the view type
+                createMenu1(menu);
+            }
+
+            private void createMenu1(SwipeMenu menu) {
+                SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
+                item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                item1.setWidth((130));
+                item1.setIcon(R.drawable.delete_plan_btn_big);
+                menu.addMenuItem(item1);
+                SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
+                item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                item2.setWidth(130);
+                item2.setIcon(R.drawable.close_btn);
+                menu.addMenuItem(item2);
+            }
+        };
+
+        // set creator
+        listview.setMenuCreator(creator);
+
+        // step 2. listener item click event
+        listview.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                ApplicationInfo item = mAppList.get(position);
+                switch (index) {
+                    case 0:
+                        // open
+                        break;
+                    case 1:
+                        // delete
+////					delete(item);
+//                        mAppList.remove(position);
+                        break;
+                }
+                return false;
+            }
+        });
     }
+        //swipe해서 수정/삭제
+
 
     //확인 버튼 클릭
     public void mOnClose(View v){
@@ -178,6 +227,12 @@ public class PopupcalActivity extends Activity {
     public void onBackPressed() {
         //안드로이드 백버튼 막기
         return;
+    }
+
+    //px->dp로 바꾸는 함수가 이건가봐!!!
+    private int dp2px(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics());
     }
 
 }

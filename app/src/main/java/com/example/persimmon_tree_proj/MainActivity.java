@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                     for(int i=0; i<(count-now_size);i++){
                         //부족한 답변 갯수만큼 추가해줘야함
                         member_arr.add("아직"); //member 랑 임의로 답변 추가해줘야함..
-                        member_ans_arr.add("아직 답변하지 않았감 !");
+                        member_ans_arr.add("감감 무소식 ..");
                         member_color_arr.add("#92C44B");
                         member_gam_arr.add("4");
                     }
@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
                         iv.setImageResource(R.drawable.gam8);}
                     else{
                         iv.setImageResource(R.drawable.gam1);}
-                    if(member_ans_arr.get(i) == "아직 답변하지 않았감 !"){ //아직 대답 안된 부분 처리
+                    if(member_ans_arr.get(i) == "감감 무소식.."){ //아직 대답 안된 부분 처리
                         family_answers.setTextColor(Color.parseColor("#808080"));
                     }
                     family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
