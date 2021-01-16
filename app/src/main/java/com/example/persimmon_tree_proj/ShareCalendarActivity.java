@@ -362,7 +362,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 while (day.hasNext()){
                     int i = 0;
                     have_plan_day.add(i,day.next().getKey());  //계획이 있는 날짜 담음
-                    Log.i("have_plan",have_plan_day.get(i));
                     i++;
                 }
             }
@@ -384,11 +383,9 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                         Iterator<DataSnapshot> one_plan = dataSnapshot.child(day_num).child(whos_plan).getChildren().iterator();
                         while (one_plan.hasNext()) {
                             String plan_name = one_plan.next().getValue().toString();
-                            Log.i("have_plansss", whos_plan + plan_name);
                             when_whos_what_plan_arr.add(have_plan_day.get(i));  //when = 날짜
                             when_whos_what_plan_arr.add(whos_plan);   //who's = 누구의
                             when_whos_what_plan_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
-                            Log.i("size2no22", String.valueOf(when_whos_what_plan_arr));
                         }
 //                        //arraylist에 [2,민정,연날리기] 이렇게 들어감
 //                        make_bar(when_whos_what_plan_arr);   //날짜 view에 집어 넣는 함수로 이동

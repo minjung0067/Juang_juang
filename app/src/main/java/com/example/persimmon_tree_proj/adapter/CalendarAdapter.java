@@ -126,8 +126,6 @@ public class CalendarAdapter extends BaseAdapter
         //일정이 있는 부분에 bar 추가하는 부분 !!!!!!!!!
         int when_index=0; //한번 싹 지우고
         int size = mwhen_whos_what_plan_arr.size();
-        Log.i("size no2no",String.valueOf(size));
-        Log.i("size no2no22",String.valueOf(mwhen_whos_what_plan_arr));
         while(when_index < size){
 //                    dayViewHolder.containers.setHasTransientState(true);
 //            Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
@@ -232,7 +230,7 @@ public class CalendarAdapter extends BaseAdapter
     {
        int height = mContext.getResources().getDisplayMetrics().heightPixels;
         //int cellHeight = 1280/6;
-        int cellHeight = height/9;
+        int cellHeight = height/8;
 
         return cellHeight;
     }
