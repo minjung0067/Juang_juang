@@ -166,6 +166,40 @@ public class PopupCalendar extends Activity  {
 
                                         }
                                     }
+                                    else if(j ==2){
+                                        if(Integer.valueOf(year) % 4 == 0){
+                                            if(Integer.valueOf(year)%100 == 0){
+                                                if(Integer.valueOf(year)%400 == 0){
+                                                    //윤년
+                                                    for(int i = Integer.parseInt(day1); i <= 29 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+
+                                                }
+                                                else{
+                                                    //평년
+                                                    for(int i = Integer.parseInt(day1); i <= 28 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+                                                }
+
+                                            }
+                                            else{
+                                                //윤년
+                                                for(int i = Integer.parseInt(day1); i <= 29 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                }
+                                            }
+                                       } else{
+                                            for(int i = Integer.parseInt(day1); i <= 28 ; i++){
+                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                            }
+                                        }
+                                    }
 
                                 }
 
@@ -183,13 +217,40 @@ public class PopupCalendar extends Activity  {
 
                                         }
                                     }
-                                    /*else if((j==2)){
-                                        if(firstyear % 4){
+                                    else if(j ==2){
+                                        if(Integer.valueOf(year) % 4 == 0){
+                                            if(Integer.valueOf(year)%100 == 0){
+                                                if(Integer.valueOf(year)%400 == 0){
+                                                    //윤년
+                                                    for(int i = 1; i <= 29 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
+                                                    }
+
+                                                }
+                                                else{
+                                                    //평년
+                                                    for(int i = 1; i <= 28 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+                                                }
+
+                                            }
+                                            else{
+                                                //윤년
+                                                for(int i = Integer.parseInt(day1); i <= 29 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                }
+                                            }
+                                        }else{
+                                            for(int i = 1; i <= 28 ; i++){
+                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                            }
                                         }
                                     }
-
-                                     */
 
 
                                 }
@@ -217,6 +278,40 @@ public class PopupCalendar extends Activity  {
 
                                         }
                                     }
+                                    else if(j ==2){
+                                        if(Integer.valueOf(year) % 4 == 0){
+                                            if(Integer.valueOf(year)%100 == 0){
+                                                if(Integer.valueOf(year)%400 == 0){
+                                                    //윤년
+                                                    for(int i = Integer.parseInt(day1); i <= 29 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+
+                                                }
+                                                else{
+                                                    //평년
+                                                    for(int i = Integer.parseInt(day1); i <= 28 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+                                                }
+
+                                            }
+                                            else{
+                                                //윤년
+                                                for(int i = Integer.parseInt(day1); i <= 29 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                }
+                                            }
+                                        }else{
+                                            for(int i = Integer.parseInt(day1); i <= 28 ; i++){
+                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                            }
+                                        }
+                                    }
 
                                 }
 
@@ -234,13 +329,42 @@ public class PopupCalendar extends Activity  {
 
                                         }
                                     }
-                                    /*else if((j==2)){
-                                        if(firstyear % 4){
+                                    else if(j ==2){
+                                        if(Integer.valueOf(year) % 4 == 0){
+                                            if(Integer.valueOf(year)%100 == 0){
+                                                if(Integer.valueOf(year)%400 == 0){
+                                                    //윤년
+                                                    for(int i = 1; i <= 29 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+
+                                                }
+                                                else{
+                                                    //평년
+                                                    for(int i = 1; i <= 28 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+                                                }
+
+                                            }
+                                            else{
+                                                //윤년
+                                                for(int i = 1; i <= 29 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                }
+                                            }
+                                        }else{
+                                            for(int i = 1; i <= 28 ; i++){
+                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                            }
 
                                         }
                                     }
 
-                                     */
 
 
                                 }
@@ -260,13 +384,41 @@ public class PopupCalendar extends Activity  {
 
                                         }
                                     }
-                                    /*if((j==2)){
-                                        if(firstyear % 4){
+                                    else if(j ==2){
+                                        if(Integer.valueOf(year) % 4 == 0){
+                                            if(Integer.valueOf(year)%100 == 0){
+                                                if(Integer.valueOf(year)%400 == 0){
+                                                    //윤년
+                                                    for(int i = 1; i <= 29 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
+                                                    }
+
+                                                }
+                                                else{
+                                                    //평년
+                                                    for(int i = 1; i <= 28 ; i++){
+                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                    }
+                                                }
+
+                                            }
+                                            else{
+                                                //윤년
+                                                for(int i = 1; i <= 29 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                }
+                                            }
+                                        }else{
+                                            for(int i = 1; i <= 28 ; i++){
+                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                            }
                                         }
                                     }
 
-                                     */
 
 
                                 }
@@ -286,9 +438,42 @@ public class PopupCalendar extends Activity  {
 
                                     }
                                 }
-                                /*else if(j==2){
+                                else if(j ==2){
+                                    if(Integer.valueOf(year) % 4 == 0){
+                                        if(Integer.valueOf(year)%100 == 0){
+                                            if(Integer.valueOf(year)%400 == 0){
+                                                //윤년
+                                                for(int i = 1; i <= 29 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
-                                 */
+                                                }
+
+                                            }
+                                            else{
+                                                //평년
+                                                for(int i = 1; i <= 28 ; i++){
+                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                                }
+                                            }
+
+                                        }
+                                        else{
+                                            //윤년
+                                            for(int i = 1; i <= 29 ; i++){
+                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                            }
+                                        }
+                                    }else{
+                                        for(int i = 1; i <= 28 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+
+                                    }
+                                }
+
 
                             }
                             //마지막달
