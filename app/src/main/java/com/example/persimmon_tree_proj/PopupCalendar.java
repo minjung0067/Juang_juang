@@ -76,11 +76,12 @@ public class PopupCalendar extends Activity  {
     private String f_code;
     private String user_name;
     private Integer click;
-    private Integer point_1_index;
-    private Integer point_2_index;
+    private Integer point_1_index;//첫번째 선택한 index
+    private Integer point_2_index;//두번째 선택한 index
     private Integer firstmonth = 0;//일정 추가시 처음 선택한 일의 월
     private Integer firstyear = 0;//일정 추가시 나중에 선택한 일의 월
-    private String firstposition;
+
+    private ArrayList<String> period =  new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,14 +201,15 @@ public class PopupCalendar extends Activity  {
                     // 1번 클릭
                     case 0:
                         //첫번째 클릭 전 달력 초기화
+                        period.clear(); //기간 배열 초기화
                         Log.i("check0","첫번쨰 클릭");
                         text_start.setText("날짜를 선택해주세요.");
                         text_end.setVisibility(View.INVISIBLE);
                         point_1_index = 0;
                         point_2_index = 0;
-                        //for(int i = 0; i < mDayList.size(); i++){
-                        //   mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000"));
-                        //}
+                        for(int i = 0; i < mDayList.size(); i++){
+                           mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000")); //색상 초기화
+                        }
 
                         if(position < set_position-1){
                             Toast.makeText(PopupCalendar.this, "일정을 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -218,20 +220,6 @@ public class PopupCalendar extends Activity  {
                         }
                         //이번달에 포함된 날짜
                         else{
-                            /*
-                            if((firstmonth == String.valueOf(0)) && (firstyear == String.valueOf(0))){ //처음 선택하는 경우
-                                click++; //이번달에 포함된 날짜를 클릭했다면, case1로 이동
-                                point_1_index = position;
-                                // text_start 및 gridView1 배경변경
-                                day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
-                                text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
-                                firstmonth = month;
-                                firstyear = year;
-                                mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
-                                break;
-                            }
-
-                             */
                             click++; //이번달에 포함된 날짜를 클릭했다면, case1로 이동
                             point_1_index = position;
                             // text_start 및 gridView1 배경변경
@@ -239,7 +227,7 @@ public class PopupCalendar extends Activity  {
                             text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
                             firstmonth = Integer.valueOf(month);
                             firstyear = Integer.valueOf(year);
-                            //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                            mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E")); //첫번째 선택한 일 표시
                             break;
 
                         }
@@ -265,13 +253,15 @@ public class PopupCalendar extends Activity  {
                             if((year.equals(String.valueOf(firstyear)))){
                                 if((Integer.valueOf(month) == firstmonth)){ //같은 년 같은 달일 경우
                                     Log.i("check","check1");
-                                    if(point_1_index > position){
+                                    if(point_1_index > position){ //선택했던 날짜 보다 더 이전의 날짜일 경우
                                         Log.i("check 어디","요기1");
-                                        //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
-                                        //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                        mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000")); //선택했던 날짜를 초기화시키고
+                                        mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));   //선택한 날짜를 표시
                                         point_1_index = position;
                                         day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                         text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                                        firstyear = Integer.valueOf(year);
+                                        firstmonth = Integer.valueOf(month);
                                         click = 1;
                                         break;
 
@@ -283,10 +273,10 @@ public class PopupCalendar extends Activity  {
                                         day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                         text_end.setVisibility(View.VISIBLE);
                                         text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
-                                        //for(int i = point_1_index+1; i <= point_2_index-1; i++){
-                                        //    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
-                                        //}
-                                        //mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                                        for(int i = point_1_index+1; i <= point_2_index-1; i++){
+                                            mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B")); //기간 표시
+                                        }
+                                        mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E")); //선택한 날짜표시
                                         //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
                                         click=0;
                                         firstyear = 0;
@@ -296,17 +286,15 @@ public class PopupCalendar extends Activity  {
                                     }
 
                                 }
-                                //두번쨰 선택이지만, 다른 달이거나 다른 년도 일 경우
                                 else if( (Integer.valueOf(firstmonth) < Integer.valueOf(month))){ //같은 년인데 더큰 달일 경우
-                                    Log.i("check 어디","요기3");
-                                    Log.i("check","check2");
                                     day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                     text_end.setVisibility(View.VISIBLE);
                                     text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
-                                    //for(int i = set_position ; i <= point_2_index-1; i++){
-                                    //    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
-                                    //}
-                                    //mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                                    point_2_index = position;
+                                    for(int i = set_position-1 ; i <= point_2_index-1; i++){
+                                        mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
+                                    }
+                                    mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
                                     //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
                                     click=0;
                                     firstmonth =0;
@@ -316,10 +304,12 @@ public class PopupCalendar extends Activity  {
                                 }
                                 else if((Integer.valueOf(firstmonth) > Integer.valueOf(month))){ //같은 년인데 더 작은 달일 경우
                                     Log.i("check 어디","요기4");
-                                    //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
-                                    //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                    mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
+                                    mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                     point_1_index = position;
                                     day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                                    firstmonth = Integer.valueOf(month);
+                                    firstyear = Integer.valueOf(year);
                                     text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
                                     click = 1;
                                     break;
@@ -332,10 +322,11 @@ public class PopupCalendar extends Activity  {
                                 day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                 text_end.setVisibility(View.VISIBLE);
                                 text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
-                                //for(int i = set_position ; i <= point_2_index-1; i++){
-                                //    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
-                                //}
-                                //mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                                point_2_index = position;
+                                for(int i = set_position-1 ; i <= point_2_index-1; i++){
+                                    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
+                                }
+                                mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
                                 //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
                                 click=0;
                                 firstmonth = 0;
@@ -345,11 +336,13 @@ public class PopupCalendar extends Activity  {
                             }
                             else if((Integer.valueOf(firstyear) > Integer.valueOf(year)) ){
                                 Log.i("check 어디","요기6");
-                                //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
-                                //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
+                                mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                 point_1_index = position;
                                 day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                 text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                                firstyear = Integer.valueOf(year);
+                                firstmonth = Integer.valueOf(month);
                                 click = 1;
                                 break;
 
@@ -504,7 +497,7 @@ public class PopupCalendar extends Activity  {
 
     private void initCalendarAdapter()
     {
-        mCalendarAdapter = new CalendarAdapter2(this, R.layout.dayforpopup, mDayList);
+        mCalendarAdapter = new CalendarAdapter2(this, R.layout.dayforpopup, mDayList,period);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
 

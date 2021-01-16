@@ -19,6 +19,7 @@
         android:paddingLeft="2dp"
         android:paddingTop="2dp"
         android:textSize="11sp"
+        android:background="@drawable/line_dungle"
         android:fontFamily="@font/nanumsquare_acb"
         app:layout_editor_absoluteY="0dp" />
 
