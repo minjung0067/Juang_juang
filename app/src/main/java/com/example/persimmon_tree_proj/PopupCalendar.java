@@ -80,6 +80,7 @@ public class PopupCalendar extends Activity  {
     private Integer point_2_index;
     private String firstmonth;//일정 추가시 처음 선택한 일의 월
     private String firstyear;//일정 추가시 나중에 선택한 일의 월
+    private String firstposition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
