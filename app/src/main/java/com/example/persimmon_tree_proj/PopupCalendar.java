@@ -124,7 +124,7 @@ public class PopupCalendar extends Activity  {
         });
 
         //일정 추가 확인 버튼
-        Button add = (Button)findViewById(R.id.btn_addok);
+        ImageButton add = (ImageButton)findViewById(R.id.btn_addok);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
