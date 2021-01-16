@@ -66,7 +66,7 @@ public class popup_RevisePlan extends Activity {
         f_code = intent.getStringExtra("f_code");
         user_color = arr.get(0);
         plan_name = arr.get(2);
-        user_name = arr.get(3);
+        user_name = arr.get(1);
         plan_id = arr.get(4);
 
 

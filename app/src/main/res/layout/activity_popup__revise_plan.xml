@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:textColor="#B9B3BD"
-                    android:textSize="13dp" />
+                    android:textSize="15dp" />
 
                 <EditText
                     android:id="@+id/member_plan"
@@ -79,6 +79,7 @@
                     android:padding="2dp"
                     android:textColor="#000000"
                     android:singleLine="false"
+                    android:background="@drawable/for_popup_style"
                     android:layout_gravity="center_horizontal"
                     android:textSize="15dp" />
             </LinearLayout>
@@ -100,6 +101,7 @@
                 android:background="#ffffff"
                 android:gravity="bottom"
                 android:onClick="mOnClose"
+                android:scaleType="fitCenter"
                 android:src="@drawable/close_btn"
                 android:textColor="#ff7a00"/>
 
@@ -110,6 +112,7 @@
                 android:background="#ffffff"
                 android:gravity="bottom"
                 android:src="@drawable/close_btn"
+                android:scaleType="fitCenter"
                 android:textColor="#ff7a00"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
