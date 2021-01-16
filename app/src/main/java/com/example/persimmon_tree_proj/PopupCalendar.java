@@ -74,12 +74,15 @@ public class PopupCalendar extends Activity  {
 
     //파이어베이스에 올리는 일정 관련
     private String f_code;
+    private String plan_code;
     private String user_name;
     private Integer click;
     private Integer point_1_index;//첫번째 선택한 index
     private Integer point_2_index;//두번째 선택한 index
-    private Integer firstmonth = 0;//일정 추가시 처음 선택한 일의 월
-    private Integer firstyear = 0;//일정 추가시 나중에 선택한 일의 월
+    private Integer firstmonth;//일정 추가시 처음 선택한 일의 월
+    private Integer firstyear;//일정 추가시 나중에 선택한 일의 월
+    private Integer endmonth;
+    private Integer endyear;
 
     private ArrayList<String> period =  new ArrayList<String>();
 
@@ -140,19 +143,163 @@ public class PopupCalendar extends Activity  {
                         user_name = snapshot.child("userName").getValue().toString();
                         Log.i("check",year);
                         Log.i("check2",month);
-                        int i = 0;
 
-                        if(Integer.parseInt(day2)> 0){
-                            for(i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
-                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                        if(firstyear.equals(endyear)){//해가 같을 경우
+                            if(firstmonth.equals(endmonth)){ //달이 같을 경우
+                                for(int i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
+                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                }
+                            }
+                            else{ //달이 다를 경우
+                                for(int j = firstmonth ; j<firstmonth+1;j++){//시작하는 달
+                                    if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
+                                        for(int i = Integer.parseInt(day1); i <= 31 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
+                                        for(int i = Integer.parseInt(day1); i <= 30 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+
+                                }
+
+
+                                for(int j = firstmonth+1 ; j <= endmonth-1 ; j++ ){//끼인 달
+                                    if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
+                                        for(int i = 1; i <= 31 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
+                                        for(int i = 1; i <= 30 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    /*else if((j==2)){
+                                        if(firstyear % 4){
+
+                                        }
+                                    }
+
+                                     */
+
+
+                                }
+                                for(int i = 1; i <= Integer.parseInt(day2) ; i++){ //마지막달 추가
+                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                }
+
+
+                            }
+                        }
+                        else if(!(firstyear.equals(endyear))){//년도가 같지 않을 경우
+                            Log.i("come?","년도가 같지 않을 경우");
+                            for(int k = firstyear ; k < firstyear+1 ; k++){ //시작하는 년도
+                                for(int j = firstmonth ; j<firstmonth+1;j++){//시작하는 달
+                                    if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
+                                        for(int i = Integer.parseInt(day1); i <= 31 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
+                                        for(int i = Integer.parseInt(day1); i <= 30 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+
+                                }
+
+
+                                for(int j = firstmonth+1 ; j <= 12 ; j++ ){//년도의 끝까지
+                                    if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
+                                        for(int i = 1; i <= 31 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
+                                        for(int i = 1; i <= 30 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    /*else if((j==2)){
+                                        if(firstyear % 4){
+
+                                        }
+                                    }
+
+                                     */
+
+
+                                }
+                            }
+                            for(int k = firstyear+1 ; k <= endyear -1 ; k++){//끼인 년도
+                                for(int j = 1 ; j<= 12; j++){
+                                    Log.i("comein?","다른 년도 ");
+                                    if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
+                                        for(int i = 1; i <= 31 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
+                                        for(int i = 1; i <= 30 ; i++){
+                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                        }
+                                    }
+                                    /*if((j==2)){
+                                        if(firstyear % 4){
+
+                                        }
+                                    }
+
+                                     */
+
+
+                                }
+
+                            }
+                            //마지막 년도
+                            for(int j = 1 ; j<=endmonth-1;j++){//시작하는 달
+                                if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
+                                    for(int i = 1; i <= 31 ; i++){
+                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                    }
+                                }
+                                else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
+                                    for(int i = 1; i <= 30 ; i++){
+                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+
+                                    }
+                                }
+                                /*else if(j==2){
+
+                                 */
+
+                            }
+                            //마지막달
+                            for(int i = 1; i <= Integer.parseInt(day2) ; i++){
+                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(endmonth)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
                             }
 
-                        }
-                        else{
-                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(day1)).child(user_name).push().setValue(plan);
 
                         }
+
 
 
 
@@ -205,11 +352,15 @@ public class PopupCalendar extends Activity  {
                         Log.i("check0","첫번쨰 클릭");
                         text_start.setText("날짜를 선택해주세요.");
                         text_end.setVisibility(View.INVISIBLE);
+                        firstyear = 0;
+                        firstmonth = 0;
+                        endmonth = 0;
+                        endyear =0;
                         point_1_index = 0;
                         point_2_index = 0;
-                        for(int i = 0; i < mDayList.size(); i++){
-                           mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000")); //색상 초기화
-                        }
+                        //for(int i = 0; i < mDayList.size(); i++){
+                        //   mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#00000000")); //색상 초기화
+                       // }
 
                         if(position < set_position-1){
                             Toast.makeText(PopupCalendar.this, "일정을 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -227,7 +378,7 @@ public class PopupCalendar extends Activity  {
                             text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
                             firstmonth = Integer.valueOf(month);
                             firstyear = Integer.valueOf(year);
-                            mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E")); //첫번째 선택한 일 표시
+                            //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E")); //첫번째 선택한 일 표시
                             break;
 
                         }
@@ -255,8 +406,8 @@ public class PopupCalendar extends Activity  {
                                     Log.i("check","check1");
                                     if(point_1_index > position){ //선택했던 날짜 보다 더 이전의 날짜일 경우
                                         Log.i("check 어디","요기1");
-                                        mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000")); //선택했던 날짜를 초기화시키고
-                                        mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));   //선택한 날짜를 표시
+                                        //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000")); //선택했던 날짜를 초기화시키고
+                                        //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));   //선택한 날짜를 표시
                                         point_1_index = position;
                                         day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                         text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
@@ -273,14 +424,14 @@ public class PopupCalendar extends Activity  {
                                         day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                         text_end.setVisibility(View.VISIBLE);
                                         text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
-                                        for(int i = point_1_index+1; i <= point_2_index-1; i++){
-                                            mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B")); //기간 표시
-                                        }
-                                        mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E")); //선택한 날짜표시
+                                        //for(int i = point_1_index+1; i <= point_2_index-1; i++){
+                                        //    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B")); //기간 표시
+                                        //}
+                                        //mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E")); //선택한 날짜표시
                                         //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
                                         click=0;
-                                        firstyear = 0;
-                                        firstmonth = 0;
+                                        endyear = Integer.valueOf(year);
+                                        endmonth = Integer.valueOf(month);
                                         break;
 
                                     }
@@ -291,21 +442,21 @@ public class PopupCalendar extends Activity  {
                                     text_end.setVisibility(View.VISIBLE);
                                     text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
                                     point_2_index = position;
-                                    for(int i = set_position-1 ; i <= point_2_index-1; i++){
-                                        mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
-                                    }
-                                    mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                                    //for(int i = set_position-1 ; i <= point_2_index-1; i++){
+                                    //    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
+                                    //}
+                                    //mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
                                     //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
                                     click=0;
-                                    firstmonth =0;
-                                    firstyear = 0;
+                                    endyear = Integer.valueOf(year);
+                                    endmonth = Integer.valueOf(month);
                                     break;
 
                                 }
                                 else if((Integer.valueOf(firstmonth) > Integer.valueOf(month))){ //같은 년인데 더 작은 달일 경우
                                     Log.i("check 어디","요기4");
-                                    mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
-                                    mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                    //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
+                                    //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                     point_1_index = position;
                                     day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                     firstmonth = Integer.valueOf(month);
@@ -323,21 +474,21 @@ public class PopupCalendar extends Activity  {
                                 text_end.setVisibility(View.VISIBLE);
                                 text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
                                 point_2_index = position;
-                                for(int i = set_position-1 ; i <= point_2_index-1; i++){
-                                    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
-                                }
-                                mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                                //for(int i = set_position-1 ; i <= point_2_index-1; i++){
+                                //    mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
+                                //}
+                                //mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
                                 //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
                                 click=0;
-                                firstmonth = 0;
-                                firstyear = 0;
+                                endyear = Integer.valueOf(year);
+                                endmonth = Integer.valueOf(month);
                                 break;
 
                             }
                             else if((Integer.valueOf(firstyear) > Integer.valueOf(year)) ){
                                 Log.i("check 어디","요기6");
-                                mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
-                                mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
+                                //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
+                                //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                 point_1_index = position;
                                 day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                 text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
