@@ -21,25 +21,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.PopupcalActivity" android:theme="@android:style/Theme.Dialog"></activity>
-        <activity android:name="com.example.persimmon_tree_proj.PopupCalendar" android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_DeletePlan"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_RevisePlan"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.example.persimmon_tree_proj.Popup_Cal.PopupcalActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="com.example.persimmon_tree_proj.PopupCalendar"
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name="com.example.persimmon_tree_proj.ShareCalendarActivity" />
         <activity android:name="com.example.persimmon_tree_proj.ShowFamilyActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Waitactivity" />
         <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfilewait" />
         <activity android:name="com.example.persimmon_tree_proj.privacyhtml" />
         <activity android:name="com.example.persimmon_tree_proj.profile_color" />
-        <activity android:name="com.example.persimmon_tree_proj.profile_color_main"/>
+        <activity android:name="com.example.persimmon_tree_proj.profile_color_main" />
         <activity android:name="com.example.persimmon_tree_proj.profile_gam" />
-        <activity android:name="com.example.persimmon_tree_proj.profile_gam_main"/>
+        <activity android:name="com.example.persimmon_tree_proj.profile_gam_main" />
         <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfile" />
         <activity android:name="com.example.persimmon_tree_proj.MakeProfile" />
-        <activity android:name="com.example.persimmon_tree_proj.MakeProfilemain"/>
-        <activity android:name="com.example.persimmon_tree_proj.MakeProfil_cal"/>
-        <activity android:name="com.example.persimmon_tree_proj.profile_color_cal"/>
-        <activity android:name="com.example.persimmon_tree_proj.profile_gam_cal"/>
+        <activity android:name="com.example.persimmon_tree_proj.MakeProfilemain" />
+        <activity android:name="com.example.persimmon_tree_proj.MakeProfil_cal" />
+        <activity android:name="com.example.persimmon_tree_proj.profile_color_cal" />
+        <activity android:name="com.example.persimmon_tree_proj.profile_gam_cal" />
         <activity android:name="com.example.persimmon_tree_proj.MypageActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.MypageActivity_cal"/>
+        <activity android:name="com.example.persimmon_tree_proj.MypageActivity_cal" />
         <activity android:name="com.example.persimmon_tree_proj.Answeractivity" />
         <activity android:name="com.example.persimmon_tree_proj.splash">
             <intent-filter>

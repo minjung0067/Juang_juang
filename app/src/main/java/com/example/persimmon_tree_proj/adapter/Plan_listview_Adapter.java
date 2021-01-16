@@ -83,8 +83,17 @@ public class Plan_listview_Adapter extends BaseAdapter {
 
     // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
     @Override
-    public Object getItem(int position) {
-        return listViewItemList.get(position) ;
+    public ArrayList getItem(int position) {
+
+        //일정 수정이나 삭제할 때 정보들 넘겨서 새로운 팝업에서 작동되게 하려고 item 받아서 배열에 넣는 함수 새로 짰습니다!
+        popup_plan item = listViewItemList.get(position);
+        ArrayList c_i_plan_name_id = new ArrayList();
+        c_i_plan_name_id.add(item.getIcon());
+        c_i_plan_name_id.add(item.getNick_name());
+        c_i_plan_name_id.add(item.getPlan_name());
+        c_i_plan_name_id.add(item.getUser_name());
+        c_i_plan_name_id.add(item.getPlan_id());
+        return c_i_plan_name_id;
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
