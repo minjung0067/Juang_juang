@@ -78,7 +78,8 @@ public class PopupCalendar extends Activity  {
     private Integer click;
     private Integer point_1_index;
     private Integer point_2_index;
-    private Integer tmp;
+    private String firstmonth;//일정 추가시 처음 선택한 일의 월
+    private String firstyear;//일정 추가시 나중에 선택한 일의 월
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +219,8 @@ public class PopupCalendar extends Activity  {
                             // text_start 및 gridView1 배경변경
                             day1 = String.valueOf(Integer.valueOf(position)-set_position+2);
                             text_start.setText(" 시작일 : "+year+"년"+ month+"월"+day1+"일");
+                            firstmonth = month;
+                            firstyear = year;
                             mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                             break;
                         }
@@ -225,14 +228,12 @@ public class PopupCalendar extends Activity  {
                         // 2번 클릭
                     case 1:
                         if(position < set_position-1){
-                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
                         }
                         //뒤에 회색 부분
                         else if((set_month_lastday+set_position-2) < position){
-                            Toast.makeText(PopupCalendar.this, "해당 날짜는 이번달이 아닙니다!", Toast.LENGTH_SHORT).show();
                         }
                         //이번달에 포함된 날짜
-                        else{
+                        if((month == firstmonth) && (year == firstyear)){ //같은 년 같은 달일 경우
                             if(point_1_index > position){
                                 mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
                                 mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
@@ -258,6 +259,19 @@ public class PopupCalendar extends Activity  {
                                 break;
 
                             }
+
+                        }
+                        else if((year == firstyear) && (Integer.valueOf(firstmonth) < Integer.valueOf(month))){ //년도는 같은데 뒤에 선택한 일이 더 클 때
+                            day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
+                            text_end.setVisibility(View.VISIBLE);
+                            text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
+                            for(int i = set_position ; i <= point_2_index-1; i++){
+                                mGvCalendar.getChildAt(i).setBackgroundColor(Color.parseColor("#92C44B"));
+                            }
+                            mGvCalendar.getChildAt(point_2_index).setBackgroundColor(Color.parseColor("#52912E"));
+                            //종료일을 나타내고, click = 0을 만들어 다음번에 click을 하게 되다면 새로 시작할 수 있도록 한다.
+                            click=0;
+                            break;
 
                         }
 
