@@ -35,6 +35,7 @@ public class popup_RevisePlan extends Activity {
     private String month;
     private String year;
     private String user_name;
+    private String name;
     private String plan_id;
     private String user_color;
     private String plan_name;
@@ -67,6 +68,7 @@ public class popup_RevisePlan extends Activity {
         user_color = arr.get(0);
         plan_name = arr.get(2);
         user_name = arr.get(1);
+        name = arr.get(3);
         plan_id = arr.get(4);
 
 
@@ -83,7 +85,7 @@ public class popup_RevisePlan extends Activity {
             @Override
             public void onClick(View v) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
-                reference.child(f_code).child("calendar").child(year).child(month).child(day).child(user_name).child(plan_id).setValue(member_plan.getText().toString());
+                reference.child(f_code).child("calendar").child(year).child(month).child(day).child(name).child(plan_id).setValue(member_plan.getText().toString());
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
