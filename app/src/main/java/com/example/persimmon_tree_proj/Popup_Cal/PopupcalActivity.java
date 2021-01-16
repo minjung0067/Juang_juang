@@ -1,21 +1,14 @@
-package com.example.persimmon_tree_proj;
+package com.example.persimmon_tree_proj.Popup_Cal;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -23,6 +16,8 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.Popup_Cal.popup_DeletePlan;
+import com.example.persimmon_tree_proj.Popup_Cal.popup_RevisePlan;
 import com.example.persimmon_tree_proj.adapter.Plan_listview_Adapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,18 +25,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class PopupcalActivity extends Activity {
 
     TextView day_text;
     TextView yearmonth_text;
-    LinearLayout plan_view;
-    Context context;
-
-    //swipe하면 수정삭제 생기는 부분
-    private List<ApplicationInfo> mAppList;
 
     private String f_code;
     private String day;
@@ -50,6 +40,8 @@ public class PopupcalActivity extends Activity {
     private HashMap<String,String> name_color_map = new HashMap<String,String>();
     private HashMap<String,String> name_introduce_map = new HashMap<String,String>();
     private SwipeMenuListView listview;
+
+    private Plan_listview_Adapter adapterr = new Plan_listview_Adapter();
 
 
 
@@ -114,8 +106,6 @@ public class PopupcalActivity extends Activity {
         reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Plan_listview_Adapter adapterr;
-                adapterr = new Plan_listview_Adapter();
                 //일정 아무것도 없으면
                 if (dataSnapshot.child(day).exists() == false) {
                     adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "");
@@ -124,8 +114,6 @@ public class PopupcalActivity extends Activity {
                 reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Plan_listview_Adapter adapterr;
-                        adapterr = new Plan_listview_Adapter();
                         for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
                             String user_name = data.getKey();
                             for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
@@ -134,9 +122,29 @@ public class PopupcalActivity extends Activity {
                                 listview.setAdapter(adapterr);
 //                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
 //                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
-                                // 아이템 추가.
-                                adapterr.addItem(name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name, user_name, plan_id);
+                      SwipeMenuCreator creator = new SwipeMenuCreator() {
 
+                          @Override
+                          public void create(SwipeMenu menu) {
+                              // Create different menus depending on the view type
+                              createMenu1(menu);
+                          }
+                          private void createMenu1(SwipeMenu menu) {
+                              SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
+                              item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                              item1.setWidth((130));
+                              item1.setIcon(R.drawable.delete_plan_btn_big);
+                              menu.addMenuItem(item1);
+                              SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
+                              item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                              item2.setWidth(130);
+                              item2.setIcon(R.drawable.delete_plan_btn_big);
+                              menu.addMenuItem(item2);
+                          }
+                      };
+                      // set creator
+                                listview.setMenuCreator(creator);
+                                adapterr.addItem(name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name, user_name, plan_id);
                             }
                         }
                     }
@@ -154,44 +162,16 @@ public class PopupcalActivity extends Activity {
             }
         });
 
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-
-            @Override
-            public void create(SwipeMenu menu) {
-                // Create different menus depending on the view type
-                createMenu1(menu);
-            }
-
-            private void createMenu1(SwipeMenu menu) {
-                SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
-                item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                item1.setWidth((130));
-                item1.setIcon(R.drawable.delete_plan_btn_big);
-                menu.addMenuItem(item1);
-                SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
-                item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                item2.setWidth(130);
-                item2.setIcon(R.drawable.close_btn);
-                menu.addMenuItem(item2);
-            }
-        };
-
-        // set creator
-        listview.setMenuCreator(creator);
-
         // step 2. listener item click event
         listview.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                ApplicationInfo item = mAppList.get(position);
                 switch (index) {
                     case 0:
-                        // open
+                        popup_revise(position);
                         break;
                     case 1:
-                        // delete
-////					delete(item);
-//                        mAppList.remove(position);
+                        popup_delete(position);
                         break;
                 }
                 return false;
@@ -200,17 +180,35 @@ public class PopupcalActivity extends Activity {
     }
         //swipe해서 수정/삭제
 
+    public void popup_revise(int position){
+        Intent intent = new Intent(this, popup_RevisePlan.class);
+        ArrayList arr = adapterr.getItem((position));
+        intent.putExtra("arr", arr);
+        intent.putExtra("day", day);
+        intent.putExtra("year", year);
+        intent.putExtra("month", month);
+        intent.putExtra("f_code",f_code);
+        startActivityForResult(intent, 1);
+
+    }
+
+    public void popup_delete(int position){
+        Intent intent = new Intent(this, popup_DeletePlan.class);
+        ArrayList<String> arr = adapterr.getItem((position));
+        intent.putExtra("arr", arr);
+        intent.putExtra("day", day);
+        intent.putExtra("year", year);
+        intent.putExtra("month", month);
+        intent.putExtra("f_code",f_code);
+        startActivityForResult(intent, 1);
+
+    }
+
 
     //확인 버튼 클릭
     public void mOnClose(View v){
         //데이터 전달하기
-//        Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.putExtra("f_code",f_code);
-//        startActivity(intent);
-        //일정은 그냥 창만 닫으면 되는 거라 주석처리 했어용
         finish();
-
 
     }
 

@@ -1,38 +1,28 @@
 package com.example.persimmon_tree_proj;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.view.GestureDetectorCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.Popup_Cal.PopupcalActivity;
 import com.example.persimmon_tree_proj.adapter.CalendarAdapter;
 import com.example.persimmon_tree_proj.domain.DayInfo;
 import com.google.firebase.database.DataSnapshot;
@@ -403,11 +393,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     }
 
-//    private void make_bar(ArrayList when_whos_what_plan_arr){
-//        String when = when_whos_what_plan_arr.get(0).toString();
-//        String whos = when_whos_what_plan_arr.get(1).toString();
-//        String what = when_whos_what_plan_arr.get(2).toString();
-//    }
     /**
      * 지난달의 Calendar 객체를 반환합니다.
      *
@@ -461,11 +446,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             intent.putExtra("f_code",f_code);
             startActivityForResult(intent, 1);
         }
-//        Object select_position = Integer.valueOf(mThisMonthCalendar.getItemAtPosition(position));
-//        int select_year = mThisMonthCalendar.get(Calendar.YEAR);
-//        int select_month = mThisMonthCalendar.get(Calendar.MONTH) + 1;
-//        Log.i("value","selected!!!!");
-//        Log.i("value",String.valueOf(select_year));
 
 
     }
