@@ -12,8 +12,8 @@
     <!-- 날짜 -->
     <TextView
         android:id="@+id/day_cell_tv_day"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingLeft="2dp"
