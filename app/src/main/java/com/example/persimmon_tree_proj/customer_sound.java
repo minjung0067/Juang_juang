@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,8 +26,9 @@ public class customer_sound extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private FirebaseAuth firebaseAuth;
-
+    InputMethodManager imm;
     private String msg;
+    EditText edit_answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +91,12 @@ public class customer_sound extends AppCompatActivity {
         });
 
         //답변 올리는 부분~
-        EditText edit_answer = (EditText)findViewById(R.id.edit_answer);
+        edit_answer = (EditText)findViewById(R.id.edit_answer);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+
+
         final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Feedback");  //users에서 현 uid 가진 사람 찾기
         Button answer = (Button)findViewById(R.id.btn_answer);
@@ -119,5 +125,10 @@ public class customer_sound extends AppCompatActivity {
         //안드로이드 백버튼 막기
         finish();
         return;
+    }
+
+    //화면 터치 시 키보드 내려가게
+    public void linearOnClick(View v) {
+        imm.hideSoftInputFromWindow(edit_answer.getWindowToken(), 0);
     }
 }
