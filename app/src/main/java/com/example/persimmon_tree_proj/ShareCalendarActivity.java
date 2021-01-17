@@ -137,6 +137,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
                 finish();
             }
@@ -156,7 +157,21 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 finish();
             }
         });
-        //설정 버튼
+
+        //고객의 소리함
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        go_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShareCalendarActivity.this,customer_sound.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //마이페이지
         ImageButton go_mypage = (ImageButton) findViewById(R.id.btn_mypage);
         go_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
