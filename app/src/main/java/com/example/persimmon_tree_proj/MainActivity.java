@@ -333,10 +333,10 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(getApplicationContext(),MypageActivity_cal.class);
+                Intent intentt = new Intent(MainActivity.this,MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intentt);
-                finish();
             }
         });
 
@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

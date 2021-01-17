@@ -161,11 +161,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         go_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(getApplicationContext(),MypageActivity_cal.class);
+                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
-                finish();
             }
         });
 
