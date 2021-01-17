@@ -3,12 +3,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="name"
         android:textColor="#000"
@@ -16,36 +16,34 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_half_rounded"
-        android:padding="5dp"
         android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp"
+        android:background="@drawable/btn_half_rounded"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
 
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/profile_outline"
+            android:clickable="true"
+            android:padding="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/gam1" />
 
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/gam1"
-        android:scaleType="fitCenter"
-        android:clickable="true"
-        android:padding="4dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/profile_outline"/>
-
-    <TextView
-        android:id="@+id/family_answer"
-        android:layout_width="221dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="2dp"
-        android:padding="4dp"
-        android:layout_marginLeft="20dp"
-        android:gravity="center_vertical"
-        android:textSize="16dp"/>
+        <TextView
+            android:id="@+id/family_answer"
+            android:layout_width="221dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -46,18 +46,6 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="@+id/gam_text" />
 
-    <ImageButton
-        android:id="@+id/btn_mypage2"
-        android:layout_width="31dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        android:background="#FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam1" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
@@ -81,24 +69,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txt_question2"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/btn_half_rounded"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:gravity="center"
-        android:padding="2dp"
-        android:text="질문"
-        android:textColor="#000"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_answer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_orange"
-        app:layout_constraintVertical_bias="1.0" />
-
     <!--    <ImageButton-->
 <!--        android:id="@+id/btn_gallery"-->
 <!--        android:layout_width="30dp"-->
@@ -111,11 +81,30 @@
 <!--        app:layout_constraintStart_toStartOf="@+id/edit_answer" />-->
 
 
+    <TextView
+        android:id="@+id/txt_question2"
+        android:layout_width="190dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/btn_half_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="질문"
+        android:textColor="#000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_answer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_orange"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/edit_answer"
         android:layout_width="300dp"
         android:layout_height="400dp"
-
+        android:padding="15dp"
         android:background="@drawable/btn_grey_rounded"
         android:ems="10"
         android:gravity="start|top"
@@ -128,20 +117,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.694" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:src="@drawable/gam1"
+        app:layout_constraintEnd_toEndOf="@+id/btn_answer"
+        app:layout_constraintStart_toStartOf="@+id/btn_answer"
+        app:layout_constraintTop_toTopOf="@+id/txt_question2" />
+
     <Button
         android:id="@+id/btn_answer"
         android:layout_width="100dp"
         android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/btn_orange_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="답변완료"
         android:textColor="#fff"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_question2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/txt_question2"
-        app:layout_constraintTop_toTopOf="@+id/txt_question2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.544" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
