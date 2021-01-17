@@ -7,9 +7,9 @@
         android:color="@color/greyColor" />
 
     <corners android:bottomRightRadius="40dp"
-        android:bottomLeftRadius="10dp"
+        android:bottomLeftRadius="5dp"
         android:topRightRadius="40dp"
-        android:topLeftRadius="10dp"/>
+        android:topLeftRadius="5dp"/>
 
     <item android:drawable="@drawable/btn_not_clicked"/>
 </selector>

@@ -30,7 +30,7 @@ public class profile_color_cal extends AppCompatActivity {
     private ImageView c_6;
     private ImageView c_7;
     private ImageView c_8;
-    private ImageView c_9;
+    //private ImageView c_9;
     private int[] clicked_arr = {0,0,0,0,0,0,0,0};
 
 
@@ -55,7 +55,7 @@ public class profile_color_cal extends AppCompatActivity {
         gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), profile_gam_cal.class); //코드 생성 activity로 이동
+                Intent intent = new Intent(getApplicationContext(), profile_gam_main.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -67,7 +67,7 @@ public class profile_color_cal extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MakeProfil_cal.class); //makeprofil로 이동
+                Intent intent = new Intent(getApplicationContext(), MakeProfilemain.class); //makeprofil로 이동
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -194,14 +194,14 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[0] == 1){ clicked_arr[0] = 0; } else if(clicked_arr[0] ==0){
                             clicked_arr[0]=1;
                             another_unselected(0);   //그 전에 선택했던 거 취소 시키는 함수
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#9FFFBB33");}
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#FE8189");}
                         make_clicked();
                         break;
                     case R.id.c2:
                         if(clicked_arr[1] == 1){ clicked_arr[1] = 0; } else if(clicked_arr[1] ==0){
                             clicked_arr[1]=1;
                             another_unselected(1);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#A98BC34A");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#FE8E69");
                         }
                         make_clicked();
                         break;
@@ -209,7 +209,7 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[2] == 1){ clicked_arr[2] = 0; } else if(clicked_arr[2] ==0){
                             clicked_arr[2]=1;
                             another_unselected(2);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#9FFFBB33");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#FEC56C");
                         }
                         make_clicked();
                         break;
@@ -217,7 +217,7 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[3] == 1){ clicked_arr[3] = 0; } else if(clicked_arr[3] ==0){
                             clicked_arr[3]=1;
                             another_unselected(3);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#8DFF4B3B");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#B7DB79");
                         }
                         make_clicked();
                         break;
@@ -225,7 +225,7 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[4] == 1){ clicked_arr[4] = 0; } else if(clicked_arr[4] ==0){
                             clicked_arr[4]=1;
                             another_unselected(4);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#C3CDDC39");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#87dade");
                         }
                         make_clicked();
                         break;
@@ -233,7 +233,7 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[5] == 1){ clicked_arr[5] = 0; } else if(clicked_arr[5] ==0){
                             clicked_arr[5]=1;
                             another_unselected(5);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#8D3BC7FF");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#A1AEE5");
                         }
                         make_clicked();
                         break;
@@ -241,7 +241,7 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[6] == 1){ clicked_arr[6] = 0; } else if(clicked_arr[6] ==0){
                             clicked_arr[6]=1;
                             another_unselected(6);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#7CF4C466");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#99CAEB");
                         }
                         make_clicked();
                         break;
@@ -249,7 +249,7 @@ public class profile_color_cal extends AppCompatActivity {
                         if(clicked_arr[7] == 1){ clicked_arr[7] = 0; } else if(clicked_arr[7] ==0){
                             clicked_arr[7]=1;
                             another_unselected(7);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#8A0F371E");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#E89CDA");
                         }
                         make_clicked();
                         break;
