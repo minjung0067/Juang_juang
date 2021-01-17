@@ -190,7 +190,8 @@ public class CalendarAdapter extends BaseAdapter
             }
             else
             {
-                dayViewHolder.tvDay.setTextColor(Color.parseColor("#00ffffff"));
+                dayViewHolder.tvDay.setTextColor(Color.parseColor("#10000000"));
+                dayViewHolder.llBackground.setClickable(false);
             }
 
         }
