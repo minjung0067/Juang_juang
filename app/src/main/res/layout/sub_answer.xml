@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:padding="10dp"
     android:orientation="vertical">
 
     <TextView
@@ -21,7 +22,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/btn_half_rounded"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="10dp">
 
 
         <ImageView
@@ -39,11 +40,12 @@
             android:id="@+id/family_answer"
             android:layout_width="221dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
             android:gravity="center_vertical"
             android:padding="4dp"
-            android:textSize="16dp" />
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="15dp" />
     </LinearLayout>
 
 </LinearLayout>

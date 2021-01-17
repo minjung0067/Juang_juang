@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     String this_color="";
     String this_gam ="";
 
+    String user_gam = "";
+    String user_color = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,11 +149,18 @@ public class MainActivity extends AppCompatActivity {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
                         count = Integer.valueOf(str);
+
+                        //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
+                        if(user_name.equals(snapshot.child("members").getKey())){ //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
+                            user_gam = snapshot.child("members").getChildren()
+                        }
+
                         //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
+
                         }
 
 
