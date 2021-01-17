@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="MainActivity">
+    tools:context="com.example.persimmon_tree_proj.MainActivity">
 
     <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@drawable/top_orange"
         app:layout_constraintEnd_toEndOf="@+id/btn_mypage"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +47,7 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="@+id/gam_text" />
 
+
     <ImageButton
         android:id="@+id/btn_mypage"
         android:layout_width="86dp"
@@ -57,20 +58,19 @@
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:srcCompat="@drawable/gam8" />
 
-
     <Spinner
         android:id="@+id/spinner_question"
-        android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_marginTop="13dp"
         android:gravity="center_vertical"
         android:spinnerMode="dialog"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +104,7 @@
         android:isScrollContainer="true"
         android:orientation="vertical"
         android:scrollbarAlwaysDrawVerticalTrack="true"
+        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,13 +125,13 @@
         android:id="@+id/btn_goanswer"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="70dp"
         android:background="@drawable/btn_green_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="답변 하러가기"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -163,6 +164,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="왔다감"
+        android:layout_marginBottom="8dp"
         android:textColor="#fff"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -175,9 +177,7 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_marginRight="70dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/setting_icon"
+        android:src="@drawable/client_icon"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
@@ -188,6 +188,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="고객의 소리함"
+        android:layout_marginBottom="8dp"
         android:textColor="#fff"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -212,6 +213,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="언제감"
         android:textColor="#fff"

@@ -5,12 +5,20 @@
     android:id="@+id/linearLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/mainColor">
+    android:background="#fff">
 
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
-
+    <TextView
+        android:id="@+id/top_orange"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/top_orange"
+        app:layout_constraintEnd_toEndOf="@+id/btn_mypage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
@@ -250,56 +258,92 @@
     <!--        app:layout_constraintEnd_toEndOf="parent"-->
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
-
-
-    <ImageButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginStart="62dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/mainColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/calender_btn"
-        app:layout_constraintHorizontal_bias="0.155"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/calendar_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="62dp" />
-
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
         android:id="@+id/main_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="126dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/compose_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/setting_btn"
         app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_layout"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="왔다감"
+        android:layout_marginBottom="8dp"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/main_btn"
+        app:layout_constraintStart_toStartOf="@+id/main_btn"
+        app:layout_constraintTop_toBottomOf="@+id/main_btn" />
 
     <ImageButton
         android:id="@+id/setting_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginRight="70dp"
+        android:background="@null"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/setting_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginRight="62dp" />
+        android:src="@drawable/client_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="고객의 소리함"
+        android:layout_marginBottom="8dp"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/setting_btn"
+        app:layout_constraintStart_toStartOf="@+id/setting_btn"
+        app:layout_constraintTop_toBottomOf="@+id/setting_btn" />
+
+    <ImageButton
+        android:id="@+id/calendar_btn"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginLeft="70dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/calendar_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.515" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="언제감"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
+        app:layout_constraintStart_toStartOf="@+id/calendar_btn"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
 
 
 
