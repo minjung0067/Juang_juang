@@ -369,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MypageActivity.class);
+                Intent intent = new Intent(MainActivity.this,customer_sound.class);
                 startActivity(intent);
             }
         });

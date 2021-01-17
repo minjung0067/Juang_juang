@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name="com.example.persimmon_tree_proj.customer_sound"></activity>
         <activity
             android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_DeletePlan"
             android:theme="@android:style/Theme.Dialog" />
