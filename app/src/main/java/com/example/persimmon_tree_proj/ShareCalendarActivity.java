@@ -164,7 +164,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 Intent intent = new Intent(ShareCalendarActivity.this,MypageActivity_cal.class);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
-
             }
         });
 

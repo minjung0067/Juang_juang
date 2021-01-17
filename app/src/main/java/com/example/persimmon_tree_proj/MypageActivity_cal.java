@@ -29,11 +29,13 @@ public class MypageActivity_cal extends AppCompatActivity {
     private TextView my_id;
     private TextView my_introduce;
     private TextView my_fcode;
+    private TextView my_membernum;
     private ImageView my_image;
     private String gam_number;
     private String color_number;
     private String myfcode;
     private String user_name;
+    private String count;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
 
@@ -47,6 +49,7 @@ public class MypageActivity_cal extends AppCompatActivity {
         my_introduce = (TextView) findViewById(R.id.my_introduce);
         my_fcode = (TextView) findViewById(R.id.my_fcode);
         my_image = (ImageView) findViewById(R.id.profile_image);
+        my_membernum = (TextView) findViewById(R.id.my_membernum);
 
         //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
         firebaseAuth = FirebaseAuth.getInstance();
@@ -54,6 +57,7 @@ public class MypageActivity_cal extends AppCompatActivity {
 
         Intent intent = getIntent();
         myfcode = intent.getStringExtra("f_code");
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -65,6 +69,8 @@ public class MypageActivity_cal extends AppCompatActivity {
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        count = dataSnapshot.child(myfcode).child("count").getValue().toString();
+                        my_membernum.setText(count);
                         color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
                         gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
 
