@@ -280,7 +280,7 @@
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/btn_orange_rounded"
         android:fontFamily="@font/nanumsquare_acb"
