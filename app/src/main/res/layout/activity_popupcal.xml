@@ -16,16 +16,17 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="53dp"
         tools:layout_editor_absoluteY="33dp">
+
         <ImageButton
             android:id="@+id/no"
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="16dp"
             android:background="#ffffff"
             android:gravity="bottom"
-            android:scaleType="fitCenter"
             android:onClick="mOnClose"
+            android:scaleType="fitCenter"
             android:src="@drawable/go_backk"
-            android:textColor="#ff7a00"/>
+            android:textColor="#ff7a00" />
         <TextView
             android:id="@+id/yearmonth_text"
             android:layout_width="310dp"
