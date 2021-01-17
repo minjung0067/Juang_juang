@@ -35,7 +35,7 @@ public class profile_color extends AppCompatActivity {
     private ImageView c_7;
     private ImageView c_8;
     //private ImageView c_9;
-    private int[] clicked_arr = {0,0,0,0,0,0,0,0,0};
+    private int[] clicked_arr = {0,0,0,0,0,0,0,0};
 
 
     @Override
@@ -146,21 +146,21 @@ public class profile_color extends AppCompatActivity {
     }
     //사용자가 전에 선택했던 건 1로 가족들이 이미 선택한 색깔 체크해서 이미 선택된 건 2로 바꾸는 함수
     public void make_cannot_select(String family_color_num,int num) {
-        if (family_color_num.equals("#9FFFBB33")) {
+        if (family_color_num.equals("#FE8189")) {
             clicked_arr[0] = num;
-        } else if (family_color_num.equals("#A98BC34A")) {
+        } else if (family_color_num.equals("#FE8E69")) {
             clicked_arr[1] = num;
-        } else if (family_color_num.equals("#9FFFBB34")) {
+        } else if (family_color_num.equals("#FEC56C")) {
             clicked_arr[2] = num;
-        } else if (family_color_num.equals("#8DFF4B3B")) {
+        } else if (family_color_num.equals("#B7DB79")) {
             clicked_arr[3] = num;
-        } else if (family_color_num.equals("#C3CDDC39")) {
+        } else if (family_color_num.equals("#87dade")) {
             clicked_arr[4] = num;
-        } else if (family_color_num.equals("#8D3BC7FF")) {
+        } else if (family_color_num.equals("#A1AEE5")) {
             clicked_arr[5] = num;
-        } else if (family_color_num.equals("#7CF4C466")) {
+        } else if (family_color_num.equals("#99CAEB")) {
             clicked_arr[6] = num;
-        } else if (family_color_num.equals("#8A0F371E")) {
+        } else if (family_color_num.equals("#E89CDA")) {
             clicked_arr[7] = num; }
 //        else if (family_color_num.equals("#527B03F4")) {
 //            clicked_arr[8] = num; }
