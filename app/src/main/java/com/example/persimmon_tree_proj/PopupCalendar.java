@@ -507,6 +507,7 @@ public class PopupCalendar extends Activity  {
 
 
                         Toast.makeText(PopupCalendar.this, "일정이 추가되었다감", Toast.LENGTH_SHORT).show();
+                        finish();
 
 
 

@@ -45,6 +45,7 @@ public class MypageActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private TextView my_familynum;
+    private String count;
 
 
 
@@ -73,7 +74,7 @@ public class MypageActivity extends AppCompatActivity {
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String count = dataSnapshot.child("count").getValue().toString();
+                        count = dataSnapshot.child(myfcode).child("count").getValue().toString();
                         Log.i("counttt",String.valueOf(count));
                         my_familynum.setText(count);
                         color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
