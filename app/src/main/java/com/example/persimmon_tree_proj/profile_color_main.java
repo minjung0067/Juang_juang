@@ -169,7 +169,7 @@ public class profile_color_main extends AppCompatActivity {
 
     //사용자가 어떤 색깔 선택하면 그 전에 선택했던 거 취소 시키는 함수
     public void another_unselected(int clicked_index){
-        for(int i=0; i<9;i++){
+        for(int i=0; i<8;i++){
             if(i!=clicked_index){   //지금 선택한 거 말고
                 if(clicked_arr[i]==1){  //사용자가 한번 선택했다가 다른 거 또 선택해서 1로 남아있는 거
                     clicked_arr[i] =0;
