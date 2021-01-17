@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,7 +29,7 @@ public class Answeractivity extends AppCompatActivity {
     private Button btn_answer;
     private EditText edit_answer;
     private TextView textView;
-    private Button btn_mypage2;
+    InputMethodManager imm;
     public String msg; //edit_answer의 텍스트 값을 받아 msg에 저장
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
@@ -50,6 +51,11 @@ public class Answeractivity extends AppCompatActivity {
         textView =(TextView)findViewById(R.id.txt_question2);
         textView.setText(question); //textView에 question 띄우기
         edit_answer = (EditText)findViewById(R.id.edit_answer);
+
+        //화면 터치하면 키보드 내려가도록 만들었써용~
+        imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+
+
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
@@ -86,5 +92,9 @@ public class Answeractivity extends AppCompatActivity {
             }
         });
 
+    }
+    //화면 터치 시 키보드 내려가게
+    public void linearOnClick(View v) {
+        imm.hideSoftInputFromWindow(edit_answer.getWindowToken(), 0);
     }
 }

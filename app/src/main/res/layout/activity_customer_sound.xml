@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/WhiteColor"
+    android:onClick="linearOnClick"
     tools:context="com.example.persimmon_tree_proj.customer_sound">
 
     <TextView
@@ -34,7 +36,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.292" />
 
-
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/group_icon_2x"
+        app:layout_constraintStart_toEndOf="@+id/gam_text"
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageButton
         android:id="@+id/btn_mypage"
         android:layout_width="35dp"
@@ -44,6 +53,57 @@
         android:background="@drawable/gam8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/edit_answer"
+        android:layout_width="309dp"
+        android:layout_height="251dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/for_popup_style"
+        android:ems="10"
+        android:windowSoftInputMode="stateAlwaysHidden"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:gravity="start|top"
+        android:hint="\n우리집 감나무에 관한 자유로운 의견을 편하게 보내달라감 !
+        \n\n(ex) 감이 귀엽감 !
+\n\n\n\n 여러분들의 소중한 의견을 \n 기다리고 있겠다감 ! \n"
+        android:inputType="textMultiLine"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:onClick="linearOnClick"
+        android:layout_width="133dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/gam8"
+        app:layout_constraintEnd_toEndOf="@+id/btn_answer"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="@+id/btn_answer"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/btn_answer"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_green_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:text="보내기"
+        android:textColor="#fff"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_answer"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView2"

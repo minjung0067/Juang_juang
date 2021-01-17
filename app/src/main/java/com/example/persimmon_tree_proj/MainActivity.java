@@ -401,20 +401,21 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
-                finish();
             }
         });
 
+        //고객의 소리함
         ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,customer_sound.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
             }
         });
 
-        //설정 버튼
     }
     private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
