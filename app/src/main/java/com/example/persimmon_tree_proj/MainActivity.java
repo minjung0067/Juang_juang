@@ -410,7 +410,10 @@ public class MainActivity extends AppCompatActivity {
                 //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
                 container.removeAllViewsInLayout();
                 for(int i=0; i<count; i++){
-                    sub_answer n_layout1 = new sub_answer(getApplicationContext());  //동적 layout 생성
+                    sub_answer n_layout1 = new sub_answer(getApplicationContext());
+                    Log.i("mindjung",String.valueOf(member_arr));
+                    TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
+                    name.setText(member_arr.get(i).toString());//동적 layout 생성
                     ImageView iv = n_layout1.findViewById(R.id.profile_image);
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
@@ -439,8 +442,6 @@ public class MainActivity extends AppCompatActivity {
                         family_answers.setTextColor(Color.parseColor("#808080"));
                     }
                     family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
-                    TextView name = (TextView)findViewById(R.id.tv_name); //각자의 이름
-                    name.setText(member_arr.get(i));
                     container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                 }
             }
