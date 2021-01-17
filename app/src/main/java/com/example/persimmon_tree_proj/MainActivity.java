@@ -386,6 +386,7 @@ public class MainActivity extends AppCompatActivity {
                 member_gam_arr.clear();
                 for(DataSnapshot data : dataSnapshot.child("answer").child(String.valueOf(answer_position+1)).getChildren()){
                     key = data.getKey();
+                    Log.i("iminjung",String.valueOf(key));
                     String value = data.getValue().toString();
                     this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
                     this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
