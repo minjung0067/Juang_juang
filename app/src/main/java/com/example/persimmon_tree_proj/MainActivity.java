@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> member_ans_arr =  new ArrayList<String>();
     ArrayList<String> member_color_arr =  new ArrayList<String>();
     ArrayList<String> member_gam_arr =  new ArrayList<String>();
+    private ArrayList<String> member_name_arr = new ArrayList<String>();
 
 
     //family code 관련
@@ -411,7 +412,10 @@ public class MainActivity extends AppCompatActivity {
                 //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
                 container.removeAllViewsInLayout();
                 for(int i=0; i<count; i++){
-                    sub_answer n_layout1 = new sub_answer(getApplicationContext());  //동적 layout 생성
+                    sub_answer n_layout1 = new sub_answer(getApplicationContext());
+                    Log.i("mindjung",String.valueOf(member_arr));
+                    TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
+                    name.setText(member_arr.get(i).toString());//동적 layout 생성
                     ImageView iv = n_layout1.findViewById(R.id.profile_image);
                     TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
