@@ -371,10 +371,10 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(getApplicationContext(),MypageActivity_cal.class);
+                Intent intentt = new Intent(MainActivity.this,MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intentt);
-                finish();
             }
         });
 
@@ -405,17 +405,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
-//        go_setting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this,MypageActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-        ImageButton go_client = (ImageButton) findViewById(R.id.setting_btn);
-        go_client.setOnClickListener(new View.OnClickListener() {
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,customer_sound.class);
@@ -425,8 +416,6 @@ public class MainActivity extends AppCompatActivity {
 
         //설정 버튼
     }
-
-
     private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
         a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {

@@ -50,7 +50,6 @@
         <activity android:name="com.example.persimmon_tree_proj.profile_color_cal" />
         <activity android:name="com.example.persimmon_tree_proj.profile_gam_cal" />
         <activity android:name="com.example.persimmon_tree_proj.MypageActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.MypageActivity_cal" />
         <activity android:name="com.example.persimmon_tree_proj.Answeractivity" />
         <activity android:name="com.example.persimmon_tree_proj.splash">
             <intent-filter>

@@ -169,6 +169,7 @@ public class MypageActivity extends AppCompatActivity {
 
 
 
+
 //        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
 //        go_setting.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -177,6 +178,16 @@ public class MypageActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        go_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MypageActivity.this,customer_sound.class);
+                startActivity(intent);
+            }
+        });
+
 
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +205,6 @@ public class MypageActivity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 finish();
 
             }
@@ -251,9 +259,6 @@ public class MypageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        return;
+        finish();
     }
 }
