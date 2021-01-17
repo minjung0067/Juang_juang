@@ -10,7 +10,15 @@
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
-
+    <TextView
+        android:id="@+id/top_orange"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/top_orange"
+        app:layout_constraintEnd_toEndOf="@+id/btn_mypage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
@@ -58,7 +66,7 @@
         android:layout_width="35dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:background="@drawable/gam8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +76,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         android:src="@drawable/add_eventt"
@@ -248,8 +256,9 @@
 
     </LinearLayout>
 
+
+
     <LinearLayout
-        app:layout_constraintHorizontal_weight="1"
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="54dp"
@@ -292,6 +301,7 @@
 
 
     </LinearLayout>
+
 
 
 

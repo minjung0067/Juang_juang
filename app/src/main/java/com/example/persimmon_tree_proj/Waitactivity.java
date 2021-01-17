@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -57,6 +59,8 @@ public class Waitactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waitactivity);
 
+        TextView textchange = (TextView)findViewById(R.id.textView6);
+
         Button send = (Button) findViewById(R.id.btn_copy);
         send.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
@@ -68,6 +72,9 @@ public class Waitactivity extends AppCompatActivity {
 
                 //복사가 되었다면 토스트메시지 노출
                 Toast.makeText(Waitactivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
+
+                //텍스트 변환 효과
+                textchange.setText("모두 가입해야\n감나무가 열려요!");
 
             }
         });

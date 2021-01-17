@@ -4,27 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context="com.example.persimmon_tree_proj.Waitactivity">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="160dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="35dp"
-        android:src="@drawable/image"
+        android:layout_width="420dp"
+        android:layout_height="420dp"
+        android:src="@drawable/waiting_gam2x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginRight="95dp"
         android:gravity="center"
-        android:text="가족 구성원을 기다리는 중이에요!"
-        android:textSize="20sp"
-        android:textColor="@color/mainColor"
+        android:text="가족 구성원을\n기다리는 중!"
+        android:textSize="15dp"
+        android:textColor="#fff"
+        android:lineSpacingExtra="5dp"
         android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,18 +38,17 @@
         android:id="@+id/text_familycode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="35dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="우리 가족 코드"
         android:textColor="#000"
         android:textSize="14dp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/txt_fcode"
@@ -67,7 +69,7 @@
         android:id="@+id/btn_copy"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/btn_orange_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="가족 코드 공유하기"
@@ -82,7 +84,7 @@
         android:id="@+id/btn_change"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="27dp"
         android:background="@drawable/btn_green_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="가족 구성원 수 바꾸기"
