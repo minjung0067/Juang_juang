@@ -167,6 +167,9 @@ public class MypageActivity extends AppCompatActivity {
         });
 
 
+
+
+
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,5 +237,13 @@ public class MypageActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        return;
     }
 }

@@ -332,8 +332,10 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(MainActivity.this,MypageActivity_cal.class);
+                Intent intentt = new Intent(getApplicationContext(),MypageActivity_cal.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentt);
+                finish();
             }
         });
 

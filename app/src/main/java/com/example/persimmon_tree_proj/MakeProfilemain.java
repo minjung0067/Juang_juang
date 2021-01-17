@@ -102,8 +102,10 @@ public class MakeProfilemain extends AppCompatActivity {
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MakeProfilemain.this, profile_gam_main.class);
+                Intent intent = new Intent(getApplicationContext(), profile_gam_main.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 

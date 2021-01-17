@@ -111,35 +111,40 @@ public class log_inactivity extends AppCompatActivity {
                                 //myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
                                 //myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                 if (myfcode == null) {//코드가 없으면
-                                    Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
-                                    startActivity(intentt);
+                                    Intent intent = new Intent(getApplicationContext(),familyactivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
                                     Toast.makeText(log_inactivity.this, "아직 가족코드가 없어요!", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } else { //코드 있으면
                                     myfam_count = dataSnapshot.child(myfcode).child("count").getValue(String.class);
                                     myfam_introduce = dataSnapshot.child(myfcode).child("family_name").getValue(String.class);
                                     if (myfam_introduce==null || myfam_count.equals("0")==true){ //코드 만드는 사람이 아예 가족 프로필 안 만들었으면
-                                        Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
+                                        Intent intenttt = new Intent(getApplicationContext(), Make_FamilyProfile.class);
+                                        intenttt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intenttt);
                                         Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                     else{
                                         if (myfam_count.equals("")==true || myfam_introduce.equals("")==true){ //코드 만든 사람이 가족 프로필 안 만들었는데 다른 사람이 코드 치고 들어온 경우
-                                            Intent intenttt = new Intent(log_inactivity.this, Make_FamilyProfile.class);
+                                            Intent intenttt = new Intent(getApplicationContext(), Make_FamilyProfile.class);
+                                            intenttt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(intenttt);
                                             Toast.makeText(log_inactivity.this, "아직 가족 프로필을 만들지 않았어요!!", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
                                         else{
                                             if (introduce == null) {//한줄 소개 없으면
-                                                Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                                                Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
+                                                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 startActivity(intentt);
                                                 Toast.makeText(log_inactivity.this, "아직 소개를 입력하지 않았어요!", Toast.LENGTH_SHORT).show();
                                                 finish();
                                             } else { //한줄소개까지 있으면
-                                                Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                                 //자동로그인이 되었다면, Mainactivity로 바로 이동
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 startActivity(intent);
                                                 Toast.makeText(log_inactivity.this, "자동로그인 성공.", Toast.LENGTH_SHORT).show();
                                                 finish();
@@ -195,18 +200,22 @@ public class log_inactivity extends AppCompatActivity {
                                     myfcode = dataSnapshot.child("fcode").getValue(String.class);
                                     introduce = dataSnapshot.child("introduce").getValue(String.class);
                                     if (myfcode == null) {//코드가 없으면
-                                        Intent intentt = new Intent(log_inactivity.this, familyactivity.class);
+                                        Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
+                                        intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intentt);
                                         finish();
                                     } else { //코드 있으면
                                         if (introduce == null) {//한줄 소개 없으면
-                                            Intent intentt = new Intent(log_inactivity.this, MakeProfile.class);
+                                            Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
+                                            intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(intentt);
                                             finish();
                                         } else { //한줄소개까지 있으면
-                                            Intent intent = new Intent(log_inactivity.this, MainActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                             //자동로그인이 되었다면, Mainactivity로 바로 이동
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(intent);
+                                            finish();
                                         }
                                     }
                                 }
