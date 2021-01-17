@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> member_ans_arr =  new ArrayList<String>();
     ArrayList<String> member_color_arr =  new ArrayList<String>();
     ArrayList<String> member_gam_arr =  new ArrayList<String>();
+    private ArrayList<String> member_name_arr = new ArrayList<String>();
 
 
     //family code 관련
