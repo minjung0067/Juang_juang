@@ -4,6 +4,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginTop="5dp"
     android:layout_height="wrap_content"
+    android:background="@drawable/btn_half_rounded"
     android:padding="5dp"
     android:layout_gravity="center_horizontal"
     android:orientation="horizontal">
