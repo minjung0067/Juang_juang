@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:gravity="top"
         android:paddingTop="1dp"
-        android:textSize="18sp"
+        android:textSize="14dp"
         app:layout_editor_absoluteY="0dp" />
 
     <LinearLayout

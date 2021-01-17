@@ -9,18 +9,21 @@
 
     <LinearLayout
         android:id="@+id/calendar_layout"
-        android:layout_width="365dp"
-        android:layout_height="524dp"
+        android:layout_width="360dp"
+        android:layout_height="520dp"
         android:background="@drawable/line_dungle"
         android:orientation="vertical"
         android:padding="23dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="93dp">
+
         <ImageButton
             android:id="@+id/btn_cancel"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="#ffffff"
             android:gravity="bottom"
             android:scaleType="fitCenter"
@@ -136,15 +139,16 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_begin="20dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <GridView
             android:id="@+id/gv_calendar_activity_gv_calendar"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:layout_marginTop="1dp"
             android:background="#FFFFFF"
-            android:layout_margin="2dp"
-            android:listSelector="@drawable/grideview_selectorpop"
             android:drawSelectorOnTop="true"
+            android:listSelector="@drawable/grideview_selectorpop"
             android:numColumns="7"
             android:stretchMode="columnWidth"
             tools:layout_editor_absoluteX="0dp" />
@@ -153,39 +157,39 @@
         <LinearLayout
             android:layout_width="317dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
 
             <EditText
                 android:id="@+id/txt_plan"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:padding="2dp"
-                android:textColor="#000000"
-                android:singleLine="false"
-                android:textSize="15dp"
                 android:layout_marginBottom="@dimen/space_1x"
                 android:background="@drawable/for_popup_style"
-                android:hint="일정 내용을 입력하세요." />
+                android:hint="일정 내용을 입력하세요."
+                android:padding="2dp"
+                android:singleLine="false"
+                android:textColor="#000000"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/text_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="날짜를 선택해주세요."
-                android:textSize="13dp"
                 android:padding="3dp"
-                android:textColor="#000000" />
+                android:text="날짜를 선택해주세요."
+                android:textColor="#000000"
+                android:textSize="10dp" />
 
             <TextView
                 android:id="@+id/text_end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="13dp"
+                android:padding="3dp"
                 android:text="날짜를 선택해주세요."
                 android:textColor="#000000"
-                android:padding="3dp"
+                android:textSize="10dp"
                 android:visibility="invisible" />
 
         </LinearLayout>
@@ -194,8 +198,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:gravity="right">
 
             <ImageButton
                 android:id="@+id/btn_addok"

@@ -19,10 +19,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:layout_constraintHorizontal_weight="1"
         android:background="@drawable/top_orange"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +66,7 @@
         android:id="@+id/btn_mypage"
         android:layout_width="35dp"
         android:layout_height="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/gam8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,7 @@
         android:id="@+id/btn_addcal"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="8dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
@@ -105,7 +106,7 @@
             <ImageButton
                 android:id="@+id/last_month_btn"
                 android:layout_width="25dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:background="#ffffff"
                 android:scaleType="fitCenter"
                 android:src="@drawable/last_month_big"
@@ -116,15 +117,15 @@
             <TextView
                 android:id="@+id/gv_calendar_activity_tv_title"
                 android:layout_width="127dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/space_3x"
                 android:layout_marginRight="@dimen/space_3x"
                 android:background="#FFFFFF"
-                app:fontFamily="@font/nanumsquare_acb"
                 android:gravity="center"
                 android:text="2021년 몇월"
                 android:textColor="#000000"
-                android:textSize="20dp"
+                android:textSize="16dp"
+                app:fontFamily="@font/nanumsquare_acb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +134,7 @@
             <ImageButton
                 android:id="@+id/next_month_btn"
                 android:layout_width="25dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:background="#ffffff"
                 android:scaleType="fitCenter"
                 android:src="@drawable/next_month_big"
@@ -258,49 +259,91 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@color/mainColor"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        tools:layout_editor_absoluteX="0dp" />
 
-        <ImageButton
-            android:id="@+id/calendar_btn"
-            android:layout_width="54px"
-            android:layout_height="54dp"
-            android:layout_marginHorizontal="@dimen/space_7x"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/calendar_icon"
-            tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/compose_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
+        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="왔다감"
+        android:layout_marginBottom="8dp"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/main_btn"
+        app:layout_constraintStart_toStartOf="@+id/main_btn"
+        app:layout_constraintTop_toBottomOf="@+id/main_btn" />
 
-        <ImageButton
-            android:id="@+id/main_btn"
-            android:layout_width="54px"
-            android:layout_height="54dp"
-            android:layout_marginHorizontal="@dimen/space_7x"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/compose_icon"
-            tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/setting_btn"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginRight="70dp"
+        android:src="@drawable/clientsound_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-        <ImageButton
-            android:id="@+id/setting_btn"
-            android:layout_width="54px"
-            android:layout_height="54dp"
-            android:layout_marginHorizontal="@dimen/space_7x"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/setting_icon"
-            tools:ignore="MissingConstraints" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="고객의 소리함"
+        android:layout_marginBottom="8dp"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/setting_btn"
+        app:layout_constraintStart_toStartOf="@+id/setting_btn"
+        app:layout_constraintTop_toBottomOf="@+id/setting_btn" />
 
+    <ImageButton
+        android:id="@+id/calendar_btn"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="70dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/calendar_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.515" />
 
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="언제감"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
+        app:layout_constraintStart_toStartOf="@+id/calendar_btn"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
 
 
 

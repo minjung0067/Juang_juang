@@ -34,7 +34,7 @@ public class profile_color extends AppCompatActivity {
     private ImageView c_6;
     private ImageView c_7;
     private ImageView c_8;
-    private ImageView c_9;
+    //private ImageView c_9;
     private int[] clicked_arr = {0,0,0,0,0,0,0,0,0};
 
 
@@ -51,7 +51,7 @@ public class profile_color extends AppCompatActivity {
         c_6 = (ImageView) findViewById(R.id.c6);
         c_7 = (ImageView) findViewById(R.id.c7);
         c_8 = (ImageView) findViewById(R.id.c8);
-        c_9 = (ImageView) findViewById(R.id.c9);
+        //c_9 = (ImageView) findViewById(R.id.c9);
 
 
         Button gam = (Button) findViewById(R.id.gam);     //감 프로필 사진 고르기 버튼
@@ -142,7 +142,7 @@ public class profile_color extends AppCompatActivity {
         check_process(clicked_arr[5], c_6);
         check_process(clicked_arr[6], c_7);
         check_process(clicked_arr[7], c_8);
-        check_process(clicked_arr[8], c_9);
+        //check_process(clicked_arr[8], c_9);
     }
     //사용자가 전에 선택했던 건 1로 가족들이 이미 선택한 색깔 체크해서 이미 선택된 건 2로 바꾸는 함수
     public void make_cannot_select(String family_color_num,int num) {
@@ -161,9 +161,9 @@ public class profile_color extends AppCompatActivity {
         } else if (family_color_num.equals("#7CF4C466")) {
             clicked_arr[6] = num;
         } else if (family_color_num.equals("#8A0F371E")) {
-            clicked_arr[7] = num;
-        } else if (family_color_num.equals("#527B03F4")) {
-            clicked_arr[8] = num; }
+            clicked_arr[7] = num; }
+//        else if (family_color_num.equals("#527B03F4")) {
+//            clicked_arr[8] = num; }
         else{
         }
         make_clicked();
@@ -257,14 +257,14 @@ public class profile_color extends AppCompatActivity {
                         }
                         make_clicked();
                         break;
-                    case R.id.c9:
-                        if(clicked_arr[8] == 1){ clicked_arr[8] = 0; } else if(clicked_arr[8] ==0){
-                            clicked_arr[8]=1;
-                            another_unselected(8);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#527B03F4");
-                        }
-                        make_clicked();
-                        break;
+//                    case R.id.c9:
+//                        if(clicked_arr[8] == 1){ clicked_arr[8] = 0; } else if(clicked_arr[8] ==0){
+//                            clicked_arr[8]=1;
+//                            another_unselected(8);
+//                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#527B03F4");
+//                        }
+//                        make_clicked();
+//                        break;
 
                 }
 
