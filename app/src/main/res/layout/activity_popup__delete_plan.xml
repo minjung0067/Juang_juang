@@ -58,8 +58,8 @@
 
             <ImageView
                 android:id="@+id/member_color"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/planpopup_dungle_line"
                 android:clickable="true"
@@ -79,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:textColor="#B9B3BD"
-                    android:textSize="13dp" />
+                    android:fontFamily="@font/nanumsquare_acr"
+                    android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/member_plan"
@@ -89,6 +90,7 @@
                     android:textColor="#000000"
                     android:ems="10"
                     android:singleLine="false"
+                    android:fontFamily="@font/nanumsquare_acr"
                     android:textSize="15dp" />
             </LinearLayout>
 
@@ -104,8 +106,8 @@
 
             <ImageButton
                 android:id="@+id/yes"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:background="#ffffff"
                 android:gravity="bottom"
                 android:scaleType="fitCenter"

@@ -189,6 +189,30 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
+        go_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //공유캘린더 버튼
+        ImageButton go_calendar = (ImageButton) findViewById(R.id.calendar_btn);
+        go_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { //누르면 캘린더로 이동
+                Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",myfcode);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
