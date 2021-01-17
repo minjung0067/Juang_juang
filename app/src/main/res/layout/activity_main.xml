@@ -47,7 +47,7 @@
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="@+id/gam_text" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_mypage2"
         android:layout_width="35dp"
         android:layout_height="40dp"
@@ -182,8 +182,8 @@
 
    <ImageButton
         android:id="@+id/setting_btn"
-       android:layout_width="18dp"
-       android:layout_height="18dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_marginRight="70dp"
         android:src="@drawable/clientsound_icon"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
