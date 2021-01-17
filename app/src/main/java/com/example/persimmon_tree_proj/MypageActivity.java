@@ -184,6 +184,7 @@ public class MypageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this,customer_sound.class);
+                intent.putExtra("f_code",myfcode);
                 startActivity(intent);
             }
         });
@@ -195,6 +196,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MakeProfilemain.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",myfcode);
                 startActivity(intent);
                 finish();
 //                overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -217,6 +219,7 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",myfcode);
                 startActivity(intent);
                 finish();
             }
