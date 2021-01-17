@@ -37,7 +37,7 @@ public class profile_color extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_color_main);
+        setContentView(R.layout.activity_profile_color);
 
         c_1 = (ImageView) findViewById(R.id.c1);
         c_2 = (ImageView) findViewById(R.id.c2);

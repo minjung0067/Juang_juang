@@ -170,8 +170,10 @@ public class MypageActivity_cal extends AppCompatActivity {
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity_cal.this, MakeProfil_cal.class);
+                Intent intent = new Intent(getApplicationContext(), MakeProfil_cal.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
@@ -210,5 +212,14 @@ public class MypageActivity_cal extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("f_code",myfcode);
+        startActivity(intent);
+        return;
     }
 }

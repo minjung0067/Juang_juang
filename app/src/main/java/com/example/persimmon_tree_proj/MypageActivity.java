@@ -166,6 +166,9 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,12 +177,15 @@ public class MypageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, MakeProfilemain.class);
+                Intent intent = new Intent(getApplicationContext(), MakeProfilemain.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
 //                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
@@ -241,5 +247,13 @@ public class MypageActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        return;
     }
 }

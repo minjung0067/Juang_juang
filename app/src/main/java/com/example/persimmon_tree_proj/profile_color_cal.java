@@ -37,7 +37,7 @@ public class profile_color_cal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_color_main);
+        setContentView(R.layout.activity_profile_color);
 
         c_1 = (ImageView) findViewById(R.id.c1);
         c_2 = (ImageView) findViewById(R.id.c2);
@@ -55,7 +55,7 @@ public class profile_color_cal extends AppCompatActivity {
         gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), profile_gam_main.class); //코드 생성 activity로 이동
+                Intent intent = new Intent(getApplicationContext(), profile_gam_cal.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -114,6 +114,17 @@ public class profile_color_cal extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MakeProfil_cal.class); //코드 생성 activity로 이동
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+        //안드로이드 백버튼 막기
+        return;
     }
 
     public void check_process(int clicked_what, ImageView clicked_btn){
