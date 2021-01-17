@@ -73,6 +73,9 @@ public class MypageActivity extends AppCompatActivity {
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        String count = dataSnapshot.child("count").getValue().toString();
+                        Log.i("counttt",String.valueOf(count));
+                        my_familynum.setText(count);
                         color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
                         gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
 
@@ -162,25 +165,6 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
-        //가족 구성원 수 보여주기 위함
-        DatabaseReference familyreference = FirebaseDatabase.getInstance().getReference("family");
-        final SharedPreferences autologin2 = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
-        reference.child(myfcode).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterator<DataSnapshot> members = dataSnapshot.child("members").getChildren().iterator();
-                int member_count = 0;
-                while (members.hasNext()) {
-                    String member_num = members.next().getKey();
-                    member_count++;
-                }
-                my_familynum.setText(member_count);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
 
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
