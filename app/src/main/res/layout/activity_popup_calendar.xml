@@ -17,6 +17,14 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="93dp">
+        <ImageButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
+            android:gravity="bottom"
+            android:scaleType="fitCenter"
+            android:src="@drawable/go_backk" />
 
 
         <TextView
@@ -188,15 +196,6 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:layout_gravity="bottom">
-
-            <ImageButton
-                android:id="@+id/btn_cancel"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ffffff"
-                android:gravity="bottom"
-                android:scaleType="fitCenter"
-                android:src="@drawable/______" />
 
             <ImageButton
                 android:id="@+id/btn_addok"

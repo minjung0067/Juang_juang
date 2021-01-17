@@ -50,19 +50,14 @@
 
     <ImageButton
         android:id="@+id/btn_mypage"
-        android:layout_width="86dp"
-        android:layout_height="52dp"
-        android:layout_marginLeft="360dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="30dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/gam8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Spinner
         android:id="@+id/spinner_question"
@@ -143,6 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@color/mainColor"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -182,46 +178,47 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="고객의 소리함"
-        android:layout_marginBottom="8dp"
-        android:textColor="#fff"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/setting_btn"
-        app:layout_constraintStart_toStartOf="@+id/setting_btn"
-        app:layout_constraintTop_toBottomOf="@+id/setting_btn" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:text="고객의 소리함"
+            android:layout_marginBottom="8dp"
+            android:textColor="#fff"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/setting_btn"
+            app:layout_constraintStart_toStartOf="@+id/setting_btn"
+            app:layout_constraintTop_toBottomOf="@+id/setting_btn" />
 
-    <ImageButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginLeft="70dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/calendar_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.515" />
+        <ImageButton
+            android:id="@+id/calendar_btn"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="70dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.515" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="언제감"
-        android:textColor="#fff"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
-        app:layout_constraintStart_toStartOf="@+id/calendar_btn"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:text="언제감"
+            android:textColor="#fff"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
+            app:layout_constraintStart_toStartOf="@+id/calendar_btn"
+            app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
