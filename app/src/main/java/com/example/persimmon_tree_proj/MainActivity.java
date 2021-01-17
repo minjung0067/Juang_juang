@@ -332,10 +332,12 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(MainActivity.this,MypageActivity.class);
+                Intent intentt = new Intent(MainActivity.this,MypageActivity_cal.class);
                 startActivity(intentt);
             }
         });
+
+
 
         //왔다감 버튼
         ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
@@ -366,10 +368,8 @@ public class MainActivity extends AppCompatActivity {
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MypageActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(MainActivity.this,MypageActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
