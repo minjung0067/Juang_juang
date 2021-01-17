@@ -102,8 +102,10 @@ public class MakeProfilemain extends AppCompatActivity {
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MakeProfilemain.this, profile_gam_main.class);
+                Intent intent = new Intent(getApplicationContext(), profile_gam_main.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -179,6 +181,15 @@ public class MakeProfilemain extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MypageActivity.class); //코드 생성 activity로 이동
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+        //안드로이드 백버튼 막기
+        return;
     }
 }
 //갤러리 열기

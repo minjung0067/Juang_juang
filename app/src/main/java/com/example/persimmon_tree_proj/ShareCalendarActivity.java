@@ -157,13 +157,15 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         });
         //설정 버튼
-        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
-        go_setting.setOnClickListener(new View.OnClickListener() {
+        ImageButton go_mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        go_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(ShareCalendarActivity.this,customer_sound.class);
+                Intent intent = new Intent(getApplicationContext(),MypageActivity_cal.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -513,6 +515,13 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     private void onSwipeBottom() {
 
+    }
+
+    public void onBackPressed() {
+        finish();
+
+        //안드로이드 백버튼 막기
+        return;
     }
 
 }

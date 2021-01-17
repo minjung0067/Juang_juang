@@ -36,7 +36,7 @@ public class profile_gam_main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_gam_main);
+        setContentView(R.layout.activity_profile_gam);
 
         gam_1 = (ImageView) findViewById(R.id.gam1);
         gam_2 = (ImageView) findViewById(R.id.gam2);
@@ -111,6 +111,19 @@ public class profile_gam_main extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MakeProfilemain.class); //코드 생성 activity로 이동
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+        //안드로이드 백버튼 막기
+        return;
+    }
+
+
 
     public void check_process(int clicked_what, ImageView clicked_btn) {
         //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
