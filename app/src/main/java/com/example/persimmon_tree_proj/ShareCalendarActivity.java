@@ -517,4 +517,11 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     }
 
+    public void onBackPressed() {
+        finish();
+
+        //안드로이드 백버튼 막기
+        return;
+    }
+
 }
