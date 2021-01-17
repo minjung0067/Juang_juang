@@ -438,6 +438,8 @@ public class MainActivity extends AppCompatActivity {
                         family_answers.setTextColor(Color.parseColor("#808080"));
                     }
                     family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
+                    TextView name = (TextView)findViewById(R.id.tv_name); //각자의 이름
+                    name.setText(member_arr.get(i));
                     container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                 }
             }
