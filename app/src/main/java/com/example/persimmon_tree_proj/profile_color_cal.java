@@ -55,7 +55,7 @@ public class profile_color_cal extends AppCompatActivity {
         gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), profile_gam_main.class); //코드 생성 activity로 이동
+                Intent intent = new Intent(getApplicationContext(), profile_gam_cal.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

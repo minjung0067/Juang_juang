@@ -182,6 +182,15 @@ public class MakeProfilemain extends AppCompatActivity {
             }
         });
     }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MypageActivity.class); //코드 생성 activity로 이동
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+
+        //안드로이드 백버튼 막기
+        return;
+    }
 }
 //갤러리 열기
 //        imageView = (ImageView)findViewById(R.id.profile_image);
