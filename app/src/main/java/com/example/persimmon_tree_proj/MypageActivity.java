@@ -166,10 +166,21 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
 
 
 
 
+=======
+        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
+        go_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MypageActivity.this,customer_sound.class);
+                startActivity(intent);
+            }
+        });
+>>>>>>> 5d794d0515e18273065cc1d15e591d77f2f7c835
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
