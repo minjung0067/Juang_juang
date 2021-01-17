@@ -464,7 +464,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
 
         private static final int SWIPE_THRESHOLD = 100;
-        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+        private static final int SWIPE_VELOCITY_THRESHOLD = 120;
 
         @Override
         public boolean onDown(MotionEvent event) {
