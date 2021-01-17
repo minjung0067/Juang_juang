@@ -25,7 +25,7 @@ public class customer_sound extends AppCompatActivity {
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(customer_sound.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
@@ -49,9 +49,14 @@ public class customer_sound extends AppCompatActivity {
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(customer_sound.this,customer_sound.class);
+                Intent intent = new Intent(customer_sound.this,MypageActivity.class);
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        //안드로이드 백버튼 막기
+        return;
     }
 }
