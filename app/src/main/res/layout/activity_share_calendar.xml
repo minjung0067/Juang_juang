@@ -5,131 +5,143 @@
     android:id="@+id/linearLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/mainColor">
+    android:background="@color/WhiteColor">
 
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
 
     <TextView
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/top_orange"
+        app:layout_constraintEnd_toEndOf="@+id/btn_mypage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
         android:id="@+id/gam_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="언제"
-        android:textSize="30sp"
-        android:textStyle="bold"
         android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292" />
 
     <TextView
         android:id="@+id/gam_text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_weight="1"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="감"
-        android:textSize="30sp"
-        android:textStyle="bold"
         android:textColor="@color/pointColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gam_text"
         app:layout_constraintStart_toEndOf="@+id/gam_text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/gam_text" />
+
+
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="39dp"
+        android:layout_height="391dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/gam8" />
 
     <ImageButton
         android:id="@+id/btn_addcal"
-        android:layout_width="53dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="3dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         android:src="@drawable/add_eventt"
         app:layout_constraintEnd_toStartOf="@+id/btn_mypage"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="86dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:src="@drawable/gam8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/calendar_layout"
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="6dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/main_btn"
-        app:layout_constraintTop_toBottomOf="@+id/gam_text"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="560dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/button"
+            tools:layout_editor_absoluteX="-2dp">
+
+            <ImageButton
+                android:id="@+id/last_month_btn"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"
+                android:src="@drawable/last_month_big"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/gv_calendar_activity_tv_title"
+                android:layout_width="127dp"
+                android:layout_height="46dp"
+                android:layout_marginLeft="@dimen/space_3x"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="@dimen/space_3x"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="2021년 몇월"
+                android:fontFamily="@font/nanumsquare_acb"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/next_month_btn"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"
+                android:src="@drawable/next_month_big"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:background="#ffffff">
-
-                <ImageButton
-                    android:id="@+id/last_month_btn"
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/last_month_big"
-                    android:scaleType="fitCenter"
-                    android:background="#ffffff"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/gv_calendar_activity_tv_title"
-                    android:layout_width="127dp"
-                    android:layout_height="46dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="@dimen/space_3x"
-                    android:layout_marginRight="@dimen/space_3x"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:text="2021년 몇월"
-                    android:textColor="#000000"
-                    android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/next_month_btn"
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/next_month_big"
-                    android:scaleType="fitCenter"
-                    android:background="#ffffff"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/constraintLayout"
@@ -142,66 +154,73 @@
                     android:id="@+id/tv_Sunday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_2x"
                     android:layout_marginLeft="10dp"
                     android:text="일"
-                    android:textSize="15dp"
+                    android:font="@font/nanumsquare_acb"
                     android:textColor="@color/mainColor"
-                    android:layout_marginHorizontal="@dimen/space_2x"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Monday"
                     android:layout_width="wrap_content"
+                    android:font="@font/nanumsquare_acb"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_3x"
                     android:text="월"
-                    android:textSize="15dp"
                     android:textColor="#000000"
-                    android:layout_marginHorizontal="@dimen/space_3x" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Tuesday"
                     android:layout_width="wrap_content"
+                    android:font="@font/nanumsquare_acb"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_3x"
                     android:text="화"
-                    android:textSize="15dp"
                     android:textColor="#000000"
-                    android:layout_marginHorizontal="@dimen/space_3x" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Wednesday"
+                    android:font="@font/nanumsquare_acb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_3x"
                     android:text="수"
-                    android:textSize="15dp"
                     android:textColor="#000000"
-                    android:layout_marginHorizontal="@dimen/space_3x" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Thursday"
                     android:layout_width="wrap_content"
+                    android:font="@font/nanumsquare_acb"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/space_3x"
                     android:text="목"
-                    android:textSize="15dp"
                     android:textColor="#000000"
-                    android:layout_marginHorizontal="@dimen/space_3x" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Friday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:font="@font/nanumsquare_acb"
+                    android:layout_marginHorizontal="@dimen/space_3x"
                     android:text="금"
                     android:textColor="#000000"
-                    android:textSize="15dp"
-                    android:layout_marginHorizontal="@dimen/space_3x" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Saturday"
                     android:layout_width="wrap_content"
+                    android:font="@font/nanumsquare_acb"
                     android:layout_height="wrap_content"
-                    android:text="토"
-                    android:textSize="15dp"
-                    android:textColor="@color/pointColor"
                     android:layout_marginHorizontal="@dimen/space_2x"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:text="토"
+                    android:textColor="@color/pointColor"
+                    android:textSize="15dp" />
 
 
             </LinearLayout>
@@ -210,97 +229,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
-                android:background="#B9B3BD"/>
-
+                android:background="#B9B3BD" />
             <GridView
                 android:id="@+id/gv_calendar_activity_gv_calendar"
-                android:layout_width="408dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:background="#FFFFFF"
                 android:listSelector="@drawable/grideview_selector"
                 android:numColumns="7"
+                android:font="@font/nanumsquare_acb"
                 android:stretchMode="columnWidth"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                tools:layout_editor_absoluteX="-3dp"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"/>
         </LinearLayout>
 
 
 
+    </LinearLayout>
 
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    <!--    <GridView-->
-    <!--        android:id="@+id/gv_calendar_activity_gv_calendar"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:layout_marginBottom="91dp"-->
-    <!--        android:listSelector="@drawable/grideview_selector"-->
-    <!--        android:numColumns="7"-->
-    <!--        android:stretchMode="columnWidth"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
-
-
-    <ImageButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginStart="62dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/calender_btn"
-        app:layout_constraintHorizontal_bias="0.155"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/calendar_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginLeft="62dp" />
-
-
-    <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="126dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:src="@drawable/compose_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
-        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_layout"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/setting_btn"
-        android:layout_width="70px"
-        android:layout_height="200px"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="4dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/mainColor"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/setting_icon"
-        tools:ignore="MissingConstraints"
-        android:layout_marginRight="62dp" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/calendar_btn"
+            android:layout_width="54px"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_7x"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar_icon"
+            tools:ignore="MissingConstraints" />
 
 
+        <ImageButton
+            android:id="@+id/main_btn"
+            android:layout_width="54px"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_7x"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/compose_icon"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/setting_btn"
+            android:layout_width="54px"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_7x"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/setting_icon"
+            tools:ignore="MissingConstraints" />
+
+
+    </LinearLayout>
 
 
 

@@ -136,51 +136,49 @@
         app:layout_constraintTop_toBottomOf="@+id/_dynamic"
         tools:ignore="UnknownId" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@color/mainColor"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:background="@null"
-        android:layout_marginBottom="16dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/compose_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="36dp"
-        tools:ignore="MissingConstraints" />
+        <ImageButton
+            android:id="@+id/calendar_btn"
+            android:layout_width="54px"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_7x"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar_icon"
+            tools:ignore="MissingConstraints" />
 
-    <ImageButton
-        android:id="@+id/setting_btn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:background="@null"
-        android:layout_marginBottom="16dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/setting_icon"
-        app:layout_constraintTop_toTopOf="@+id/calendar_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="338dp"
-        tools:ignore="MissingConstraints" />
 
-    <ImageButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/calendar_icon"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/main_btn" />
+        <ImageButton
+            android:id="@+id/main_btn"
+            android:layout_width="54px"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_7x"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/compose_icon"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/setting_btn"
+            android:layout_width="54px"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="@dimen/space_7x"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@drawable/setting_icon"
+            tools:ignore="MissingConstraints" />
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
