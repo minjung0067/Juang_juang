@@ -157,7 +157,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         });
         //설정 버튼
-        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
