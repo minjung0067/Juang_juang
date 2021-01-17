@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     String this_color="";
     String this_gam ="";
 
+    String user_gam = "";
+    String user_color = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,11 +149,46 @@ public class MainActivity extends AppCompatActivity {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
                         count = Integer.valueOf(str);
+                        Log.i("user profile",user_name);
+                        //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
+
                         //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
+
+                            if(user_name.equals(snapshot.child("members").getKey())) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
+                                user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
+                                user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
+                                Log.i("user profile","user_gam="+user_gam+"user_color ="+user_color);
+                                ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
+
+                                if (user_gam.equals("1")) {
+                                    profile.setImageResource(R.drawable.gam1);
+                                } else if (user_gam.equals("2")) {
+                                    profile.setImageResource(R.drawable.gam2);
+                                } else if (user_gam.equals("3")) {
+                                    profile.setImageResource(R.drawable.gam3);
+                                } else if (user_gam.equals("4")) {
+                                    profile.setImageResource(R.drawable.gam4);
+                                } else if (user_gam.equals("5")) {
+                                    profile.setImageResource(R.drawable.gam5);
+                                } else if (user_gam.equals("6")) {
+                                    profile.setImageResource(R.drawable.gam6);
+                                } else if (user_gam.equals("7")) {
+                                    profile.setImageResource(R.drawable.gam7);
+                                } else if (user_gam.equals("8")) {
+                                    profile.setImageResource(R.drawable.gam8);
+                                } else {
+                                    profile.setImageResource(R.drawable.gam1);
+                                }
+
+                                profile.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                                GradientDrawable gd1 = (GradientDrawable) profile.getBackground(); //동적으로 테두리 색 바꿈
+                                gd1.setStroke(50, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                            }
+
                         }
 
 
@@ -315,6 +352,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
         //Answeractivity로 이동
         goanswer.setOnClickListener(new View.OnClickListener() {

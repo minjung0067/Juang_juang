@@ -169,6 +169,16 @@ public class MypageActivity extends AppCompatActivity {
 
 
 
+
+//        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
+//        go_setting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MypageActivity.this,customer_sound.class);
+//                startActivity(intent);
+//            }
+//        });
+
         ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +187,7 @@ public class MypageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
         revise.setOnClickListener(new View.OnClickListener() {
