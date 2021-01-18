@@ -129,15 +129,26 @@ public class profile_color_main extends AppCompatActivity {
 
 
 
-    public void check_process(int clicked_what, ImageView clicked_btn){
+//    public void check_process(int clicked_what, ImageView clicked_btn){
+//        //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
+//        if (clicked_what==1){
+//            clicked_btn.setBackgroundResource(R.drawable.btn_yes_clicked);
+//        }
+//        else if(clicked_what==2){
+//            clicked_btn.setBackgroundResource(R.drawable.btn_clicked_color);
+//        }
+//        else{
+//            clicked_btn.setBackgroundResource(R.drawable.btn_not_clicked);
+//        }
+//    }
+
+    public void check_process(int clicked_what, ImageView clicked_btn) {
         //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
-        if (clicked_what==1){
-            clicked_btn.setBackgroundResource(R.drawable.btn_clicked_color);
-        }
-        else if(clicked_what==2){
-            clicked_btn.setBackgroundResource(R.drawable.btn_clicked_color);
-        }
-        else{
+        if (clicked_what == 1) {
+            clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
+        } else if (clicked_what == 2) {
+            clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
+        } else {
             clicked_btn.setBackgroundResource(R.drawable.btn_not_clicked);
         }
     }
@@ -246,7 +257,7 @@ public class profile_color_main extends AppCompatActivity {
                         if(clicked_arr[5] == 1){ clicked_arr[5] = 0; } else if(clicked_arr[5] ==0){
                             clicked_arr[5]=1;
                             another_unselected(5);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#A1AEE5");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#99CAEB");
                         }
                         make_clicked();
                         break;
@@ -254,7 +265,7 @@ public class profile_color_main extends AppCompatActivity {
                         if(clicked_arr[6] == 1){ clicked_arr[6] = 0; } else if(clicked_arr[6] ==0){
                             clicked_arr[6]=1;
                             another_unselected(6);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#99CAEB");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#A1AEE5");
                         }
                         make_clicked();
                         break;
