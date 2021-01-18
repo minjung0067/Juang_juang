@@ -157,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
-
-                            if(user_name.equals(snapshot.child("members").getKey())) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
+                            if(user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
+                                Log.i("profile",member_num);
                                 user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
                                 user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
                                 Log.i("user profile","user_gam="+user_gam+"user_color ="+user_color);
@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                                 profile.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                 GradientDrawable gd1 = (GradientDrawable) profile.getBackground(); //동적으로 테두리 색 바꿈
                                 gd1.setStroke(50, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+
                             }
 
                         }
