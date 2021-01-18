@@ -154,6 +154,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });

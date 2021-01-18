@@ -363,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
 
@@ -388,6 +389,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
@@ -401,6 +403,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
 
@@ -413,6 +416,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
 
