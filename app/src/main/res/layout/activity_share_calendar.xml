@@ -62,13 +62,24 @@
         app:layout_constraintTop_toTopOf="@+id/gam_text" />
 
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="35dp"
+    <ImageView
+        android:id="@+id/btn_mypage2"
+        android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/gam8"
+        android:background="@drawable/profile_outline"
+        android:src="@drawable/gam1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="24dp"
+        android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

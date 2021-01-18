@@ -49,21 +49,22 @@
 
     <ImageView
         android:id="@+id/btn_mypage2"
-        android:layout_width="35dp"
+        android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/gam1"
+        android:background="@drawable/profile_outline"
+        android:src="@drawable/gam1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
-        android:layout_width="35dp"
-        android:layout_height="40dp"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="24dp"
-        android:background="@drawable/gam8"
+        android:background="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,18 +101,16 @@
     <ScrollView
         android:id="@+id/linear_view"
         android:layout_width="wrap_content"
-        android:layout_height="343dp"
-        android:layout_marginStart="48dp"
+        android:layout_height="320dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="48dp"
         android:gravity="center_horizontal"
         android:isScrollContainer="true"
         android:orientation="vertical"
-        android:scrollbarThumbVertical="@color/pointColor"
         android:scrollbarSize="2dp"
+        android:scrollbarThumbVertical="@color/greyColor"
         app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_question"
         tools:ignore="MissingConstraints">
@@ -130,12 +129,12 @@
         android:id="@+id/btn_goanswer"
         android:layout_width="300dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/btn_green_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="답변 하러가기"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -171,9 +170,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="왔다감"
-        android:layout_marginBottom="8dp"
         android:textColor="#fff"
         android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -181,7 +180,7 @@
         app:layout_constraintStart_toStartOf="@+id/main_btn"
         app:layout_constraintTop_toBottomOf="@+id/main_btn" />
 
-   <ImageButton
+    <ImageButton
         android:id="@+id/setting_btn"
         android:layout_width="18dp"
         android:layout_height="18dp"
@@ -191,20 +190,20 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:text="고객의 소리함"
-            android:layout_marginBottom="8dp"
-            android:textColor="#fff"
-            android:textSize="10dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/setting_btn"
-            app:layout_constraintStart_toStartOf="@+id/setting_btn"
-            app:layout_constraintTop_toBottomOf="@+id/setting_btn" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:scaleType="fitCenter"
+        android:text="고객의 소리함"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/setting_btn"
+        app:layout_constraintStart_toStartOf="@+id/setting_btn"
+        app:layout_constraintTop_toBottomOf="@+id/setting_btn" />
 
     <ImageButton
         android:id="@+id/calendar_btn"
@@ -220,19 +219,18 @@
         app:layout_constraintVertical_bias="0.406" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:text="언제감"
-            android:textColor="#fff"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
-            app:layout_constraintStart_toStartOf="@+id/calendar_btn"
-            app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:text="언제감"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
+        app:layout_constraintStart_toStartOf="@+id/calendar_btn"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

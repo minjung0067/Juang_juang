@@ -96,7 +96,6 @@
         android:text="질문"
         android:textColor="#000"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_answer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_orange"
         app:layout_constraintVertical_bias="0.0" />
@@ -105,17 +104,18 @@
         android:id="@+id/edit_answer"
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:padding="15dp"
         android:background="@drawable/btn_grey_rounded"
         android:ems="10"
         android:gravity="start|top"
+        android:layout_marginTop="10dp"
         android:hint="오늘의 감나무에 답변을 입력해달라감"
         android:inputType="textMultiLine"
+        android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_question2"
         app:layout_constraintVertical_bias="0.694" />
 
     <ImageView
