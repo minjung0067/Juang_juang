@@ -67,7 +67,7 @@
         android:gravity="start|top"
         android:hint="\n우리집 감나무에 관한 자유로운 의견을 편하게 보내달라감 !
         \n\n(ex) 감이 귀엽감 !
-\n\n\n\n 여러분들의 소중한 의견을 \n 기다리고 있겠다감 ! \n"
+\n\n\n\n 여러분들의 소중한 의견을 \n 기다리고 있겠감 ! \n"
         android:inputType="textMultiLine"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
