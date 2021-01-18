@@ -69,6 +69,7 @@ public class profile_gam extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MakeProfile.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
+                finish();
             }
         });
 
