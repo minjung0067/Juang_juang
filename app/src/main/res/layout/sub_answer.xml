@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/family_answer"
             android:layout_width="221dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
             android:gravity="center_vertical"
