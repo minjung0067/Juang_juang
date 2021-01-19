@@ -42,17 +42,10 @@ public class Waitactivity extends AppCompatActivity {
 
     private String f_code;
     private String user_name;
-    private int member_count;
-    private int count;
+    private int member_count; //현재 들어와있는 가족 구성원 수 count
+    private int count;        //지정한 가족 구성원 수
 
 
-
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mReference;
-    private ChildEventListener mChild;
-    private FirebaseDatabase a_Database;
-    private DatabaseReference a_Reference;
-    private ChildEventListener a_Child;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,19 +89,16 @@ public class Waitactivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SharedPreferences에 저장된 값들을 로그아웃 버튼을 누르면 삭제하기 위해
-                //SharedPregerences값을 불러온다.
+                //SharedPreferences에 저장된 값들을 로그아웃 버튼을 누르면 삭제하기 위해 SharedPregerences값을 불러온다.
                 Intent intent = new Intent(getApplicationContext(), log_inactivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                //Intent intent = new Intent(MypageActivity.this, log_inactivity.class);
                 SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = auto.edit();
                 //edit.clear()는 파일 auto에 들어있는 모든 정보를 기기에서 지운다.
                 editor.clear();
                 editor.commit(); //저장
                 Toast.makeText(Waitactivity.this, "로그아웃.", Toast.LENGTH_SHORT).show();
-                //startActivity(intent);
                 finish();
             }
         });

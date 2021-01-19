@@ -274,8 +274,6 @@ public class profile_gam extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
-
-        //안드로이드 백버튼 막기
         return;
     }
 }

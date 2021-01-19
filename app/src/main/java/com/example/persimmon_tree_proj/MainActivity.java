@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
                         //count 수 가져오기
                         String str = (String) snapshot.child("count").getValue();
                         count = Integer.valueOf(str);
-                        Log.i("user profile",user_name);
                         //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
 
                         //가져온 f_code에 해당하는 member 수 세기
@@ -161,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                                 Log.i("profile",member_num);
                                 user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
                                 user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
-                                Log.i("user profile","user_gam="+user_gam+"user_color ="+user_color);
                                 ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
 
                                 if (user_gam.equals("1")) {
@@ -258,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(View v) { //누르면 마이페이지로 이동
                                                             Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감", Toast.LENGTH_SHORT).show();
-                                                            Log.i("index무엇인고2", String.valueOf(index));
                                                         }
                                                     });
                                                     goanswer.setClickable(false); //버튼 클릭 못함
@@ -457,7 +454,6 @@ public class MainActivity extends AppCompatActivity {
                 container.removeAllViewsInLayout();
                 for(int i=0; i<count; i++){
                     sub_answer n_layout1 = new sub_answer(getApplicationContext());
-                    Log.i("mindjung",String.valueOf(member_arr));
                     TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
                     name.setText(member_arr.get(i).toString());//동적 layout 생성
                     ImageView iv = n_layout1.findViewById(R.id.profile_image);
@@ -465,7 +461,6 @@ public class MainActivity extends AppCompatActivity {
                     iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                     GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
                     gd1.setStroke(50,Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
-                    Log.i("member_gam",member_gam_arr.get(i));
                     if (member_gam_arr.get(i).equals("1")){
                         iv.setImageResource(R.drawable.gam1);}
                     else if(member_gam_arr.get(i).equals("2")){

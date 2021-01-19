@@ -97,7 +97,6 @@ public class Make_FamilyProfile extends AppCompatActivity {
                         }
                     });
                     Intent intent = new Intent(getApplicationContext(), MakeProfile.class);
-                    //Intent intent = new Intent(Make_FamilyProfile.this, MakeProfile.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
