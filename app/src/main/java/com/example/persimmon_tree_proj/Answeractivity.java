@@ -80,14 +80,6 @@ public class Answeractivity extends AppCompatActivity {
             }
         });
 
-        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage); //마이페이지 버튼
-        mypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { //누르면 마이페이지로 이동
-                Intent intent = new Intent(Answeractivity.this, MypageActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
     //화면 터치 시 키보드 내려가게
