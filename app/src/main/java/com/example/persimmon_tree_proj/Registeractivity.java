@@ -89,7 +89,6 @@ public class Registeractivity extends AppCompatActivity {
 
         btn_view1 = (Button)findViewById(R.id.btn_view1);
         btn_view2 = (Button)findViewById(R.id.btn_view2); //개인정보 확인 버튼튼
-        btn_view3 = (Button)findViewById(R.id.btn_view3);
 
 
 
