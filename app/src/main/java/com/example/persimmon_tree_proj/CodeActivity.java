@@ -91,9 +91,6 @@ public class CodeActivity extends AppCompatActivity {
                     ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
                     clipboardManager.setPrimaryClip(clipData);
 
-                    //복사가 되었다면 토스트메시지 노출
-                    Toast.makeText(CodeActivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
-
                     //토스트 띄우고 화면 전환하기
 
                     Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
