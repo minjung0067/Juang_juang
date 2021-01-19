@@ -48,7 +48,6 @@ public class customer_sound extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
-        Log.i("custo", f_code);
 
 
         //자기 프로필 가져오기
@@ -139,7 +138,6 @@ public class customer_sound extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                Log.i("custommmm",f_code);
                 startActivity(intent);
                 finish();
             }

@@ -32,13 +32,10 @@ public class familyactivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private int exist = 0;
     private FirebaseDatabase mDatabase;
-    private String count;
-    private int member_count;
-    private int family_count2;
 
 
-    //바로 가족코드 만들기 하면 넘어감
-    // 근데 자꾸 intent 생성하고 넘어가는 화면전환으로 인해서 여러개가 생성되는 거 같음 ! 확인 필요함
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +68,13 @@ public class familyactivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //tf = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Log.i("familycheck", String.valueOf(snapshot.getValue()));
                             if ((snapshot.getValue()).equals(str)) {
                                 exist = 1;//str_code랑 원래 기존에 있던 코드에 있다면 exist = 1 , 같지 않다면, exist = 0
-                                Log.i("familycheck1", str);
-                                Log.i("familycheck1", String.valueOf(exist));
                                 break;
 
                             }
                         }
                         if (exist == 0) { //코드가 없는 경우
-                            Log.i("family acitivity", "tf=0");
                             Toast.makeText(familyactivity.this, "올바르지 않은 코드입니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
                         } else if (exist == 1) { //코드가 있는 경우
                             DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
@@ -90,9 +83,6 @@ public class familyactivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     //count 수 가져오기
                                     int tf = 0; //가족 코드 맞는지 표시해줄 int형 변수
-                                    Log.i("test1t", String.valueOf(exist));
-                                    Log.i("testt2", String.valueOf(tf));
-                                    Log.i("familycheck2", "들어왔니?");
                                     String family_count1 = (String) snapshot.child("count").getValue();
                                     Integer family_count2 = Integer.valueOf(family_count1);
                                     //f_code에 해당하는 member수 세기
@@ -103,19 +93,17 @@ public class familyactivity extends AppCompatActivity {
                                         String member_num = members.next().getKey();
                                         member_count++;
                                     }
-                                    Log.i("member_count", String.valueOf(member_count));
-                                    Log.i("count", String.valueOf(family_count2));
                                     //가입할 수 있는가 없는가를 따짐.
-                                    if (member_count >= family_count2) { //이미 가족이 모두 찼을 경우
+                                    //이미 가족이 모두 찼을 경우
+                                    if (member_count >= family_count2) {
                                         tf = 0; //가입 할 수 없음
-                                        Log.i("family_check", String.valueOf(tf));
-                                    } else if (member_count < family_count2) {//member_count < family_count
-                                        tf = 1; //가입 할 수 있음.
-                                        Log.i("family_check", String.valueOf(tf));
-
                                     }
-                                    if (tf == 1) { //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환
-                                        Log.i("family acitivity", "tf=1");
+                                    //member_count < family_count
+                                    else if (member_count < family_count2) {
+                                        tf = 1; //가입 할 수 있음.
+                                    }
+                                    //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환
+                                    if (tf == 1) {
                                         firebaseAuth = FirebaseAuth.getInstance();
                                         FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user\
 
@@ -127,8 +115,6 @@ public class familyactivity extends AppCompatActivity {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 String myfcode = snapshot.child("fcode").getValue(String.class);
                                                 String user_name = snapshot.child("name").getValue().toString();
-                                                //String introduce = snapshot.child("introduce").getValue().toString();
-                                                Log.i("어디있니?", "어디가3");
                                                 HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
                                                 user_info.put("introduce", "");
                                                 user_info.put("user_gam", "1");
@@ -146,19 +132,14 @@ public class familyactivity extends AppCompatActivity {
                                         move = 1;
 
                                     } else if (tf == 0) { //존재는 하지만, 가족이 다 찼을 경우
-                                        Log.i("어디있니?", "어디가2");
-                                        Log.i("family acitivity", "tf=0");
                                         Toast.makeText(familyactivity.this, "가족인원이 다 찼습니다.", Toast.LENGTH_SHORT).show();
                                     }
                                     if (move == 1) {
-                                        Log.i("어디있니?", "어디가1");
                                         Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //코드 생성 activity로 이동
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         finish();
                                         //초대 코드 중복 체크 + 존재하는 것만 담을 수 있게 하고
-
-
                                     }
 
 
@@ -174,7 +155,6 @@ public class familyactivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("family activity", "groups 안에 하위 노드를 읽지 못하였음");
                     }
                 });
 

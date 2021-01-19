@@ -105,7 +105,6 @@ public class CodeActivity extends AppCompatActivity {
 
     public String makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.tv_code); //초기화
-        Log.i("Check function","make code");
         str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
             int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
@@ -122,14 +121,6 @@ public class CodeActivity extends AppCompatActivity {
         GroupFamily groupFamily = new GroupFamily(str_code);
         mReference.child(str_code).setValue(str_code);
 
-        /*//현재 들어온 사람의 fcode 쪽에 fcode들어가게
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
-        mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str_code);
-
-         */
-
     }
 
 
@@ -142,12 +133,10 @@ public class CodeActivity extends AppCompatActivity {
 
             ;     @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("value event function","data upload start");
                 tf = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if ((snapshot.getValue()).equals(str_code)){//str_code랑 원래 기존에 있던 코드랑 같다면
                         tf = 1; //있는지 없는지 true false 알려줌 있으면 1 없으면 0(기존 설정 값)
-                        Log.i("break","----here");
                         break;
 
                     }
@@ -156,7 +145,6 @@ public class CodeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("코드 엑티비티", "groups 안에 하위 노드를 읽지 못하였음");
             }
         });
 
