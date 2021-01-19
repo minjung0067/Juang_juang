@@ -87,6 +87,7 @@
         android:layout_width="340dp"
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
+        android:padding="10dp"
         android:background="@drawable/btn_grey_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:gravity="center"
