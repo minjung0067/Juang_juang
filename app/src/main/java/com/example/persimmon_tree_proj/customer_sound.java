@@ -184,24 +184,30 @@ public class customer_sound extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 msg = edit_answer.getText().toString();//edit_answer에 작성한 text msg에 저장
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        reference.push().setValue(msg);
-                    }
+                if(msg.isEmpty()){
+                    Toast.makeText(customer_sound.this, "아직 아무것도 작성되지 않았다감!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            reference.push().setValue(msg);
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                Intent intent = new Intent(customer_sound.this,customer_sound.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                startActivity(intent);
-                overridePendingTransition(0, 0); //intent시 효과 없애기
-                Toast.makeText(customer_sound.this, "소중한 의견 감사합니감!", Toast.LENGTH_SHORT).show();
-                finish();
+                        }
+                    });
+                    Intent intent = new Intent(customer_sound.this,customer_sound.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("f_code",f_code);
+                    startActivity(intent);
+//                    overridePendingTransition(0, 0); //intent시 효과 없애기
+                    Toast.makeText(customer_sound.this, "소중한 의견 감사합니감!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
             }
         });
     }
