@@ -184,6 +184,14 @@ public class Registeractivity extends AppCompatActivity {
             }
         });
 
+        btn_view1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Registeractivity.this,servicehtml.class);
+                startActivity(intent);
+            }
+        });
+
         btn_view2.setOnClickListener(new View.OnClickListener() {//개인정보 연결
             @Override
             public void onClick(View v) {

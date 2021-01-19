@@ -57,15 +57,6 @@ public class MakeProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_profile);
 
-//        Button go_back = (Button) findViewById(R.id.go_back);    //뒤로가기
-//        go_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MakeProfile.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -116,8 +107,10 @@ public class MakeProfile extends AppCompatActivity {
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
+                Intent intent = new Intent(getApplicationContext(), profile_gam.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 

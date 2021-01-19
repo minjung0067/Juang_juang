@@ -375,7 +375,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentt = new Intent(MainActivity.this,MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
+                intentt.putExtra("f_code",f_code);
                 startActivity(intentt);
             }
         });
