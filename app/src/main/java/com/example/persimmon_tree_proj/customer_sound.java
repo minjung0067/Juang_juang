@@ -203,7 +203,7 @@ public class customer_sound extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("f_code",f_code);
                     startActivity(intent);
-                    overridePendingTransition(0, 0); //intent시 효과 없애기
+//                    overridePendingTransition(0, 0); //intent시 효과 없애기
                     Toast.makeText(customer_sound.this, "소중한 의견 감사합니감!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
