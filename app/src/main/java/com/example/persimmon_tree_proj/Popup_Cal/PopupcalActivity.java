@@ -132,13 +132,13 @@ public class PopupcalActivity extends Activity {
                           private void createMenu1(SwipeMenu menu) {
                               SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
                               item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                              item1.setWidth((140));
-                              item1.setIcon(R.drawable.revise_plan_btn_2x);
+                              item1.setWidth((120));
+                              item1.setIcon(R.drawable.revise_icon_2);
                               menu.addMenuItem(item1);
                               SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
                               item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                              item2.setWidth(140);
-                              item2.setIcon(R.drawable.remove_plan_btn_2x);
+                              item2.setWidth(120);
+                              item2.setIcon(R.drawable.delete_icon_2);
                               menu.addMenuItem(item2);
                           }
                       };
