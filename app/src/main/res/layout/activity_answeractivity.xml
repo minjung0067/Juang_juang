@@ -28,7 +28,7 @@
         android:text="왔다"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="@+id/top_orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,42 +44,17 @@
         android:text="감"
         android:textColor="@color/pointColor"
         android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gam_text"
         app:layout_constraintStart_toEndOf="@+id/gam_text"
         app:layout_constraintTop_toTopOf="@+id/gam_text" />
 
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="86dp"
-        android:layout_height="52dp"
-        android:layout_marginLeft="360dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="30dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/gam8" />
-
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </LinearLayout>
-
-    <!--    <ImageButton-->
-<!--        android:id="@+id/btn_gallery"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="30dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:background="@null"-->
-<!--        android:src="@drawable/orange_gallery"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/edit_answer"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/edit_answer" />-->
 
 
     <TextView
@@ -104,19 +79,19 @@
         android:id="@+id/edit_answer"
         android:layout_width="300dp"
         android:layout_height="400dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_grey_rounded"
         android:ems="10"
         android:gravity="start|top"
-        android:layout_marginTop="10dp"
         android:hint="오늘의 감나무에 답변을 입력해달라감"
         android:inputType="textMultiLine"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_question2"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.231" />
 
     <ImageView
         android:id="@+id/imageView4"

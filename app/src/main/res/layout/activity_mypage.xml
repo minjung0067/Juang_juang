@@ -69,7 +69,7 @@
         android:id="@+id/profile_image"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/profile_outline"
         android:src="@drawable/gam1"
         android:scaleType="fitCenter"
@@ -121,7 +121,7 @@
         android:id="@+id/text_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="한 줄 소개"
         android:textColor="#000"
@@ -253,13 +253,13 @@
         android:id="@+id/setting_btn"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:src="@drawable/clinet_sound_icon2x"
-        android:scaleType="fitXY"
-        android:background="@null"
         android:layout_marginRight="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/clinet_sound_icon2x"
+        app:layout_constraintBottom_toBottomOf="@+id/main_btn"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/main_btn" />
 
 
     <ImageButton
@@ -270,9 +270,9 @@
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/calendar_icon2x"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/main_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/main_btn"
         app:layout_constraintVertical_bias="0.406" />
 
 
