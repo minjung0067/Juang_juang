@@ -14,5 +14,5 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquare_acr"
-        android:textSize="10dp" />
+        android:textSize="8dp" />
 </LinearLayout>
