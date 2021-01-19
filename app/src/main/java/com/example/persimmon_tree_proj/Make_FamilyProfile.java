@@ -87,6 +87,10 @@ public class Make_FamilyProfile extends AppCompatActivity {
                             String about_myfamily = about_familys.getText().toString();
                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
+                            Intent intent = new Intent(getApplicationContext(), MakeProfile.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
 
 
                         }
@@ -96,10 +100,7 @@ public class Make_FamilyProfile extends AppCompatActivity {
 
                         }
                     });
-                    Intent intent = new Intent(getApplicationContext(), MakeProfile.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+
                 }
 
 
