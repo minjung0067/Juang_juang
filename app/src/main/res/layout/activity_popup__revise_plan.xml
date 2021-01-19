@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="오늘의 일정"
             android:textColor="#B9B3BD"
-            android:textSize="15dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/day_text"
@@ -49,7 +49,7 @@
             android:gravity="center"
             android:text="오늘의 일정"
             android:textColor="#B9B3BD"
-            android:textSize="13dp" />
+            android:textSize="15dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     android:padding="2dp"
                     android:fontFamily="@font/nanumsquare_acr"
                     android:textColor="#B9B3BD"
-                    android:textSize="10dp" />
+                    android:textSize="13dp" />
 
                 <EditText
                     android:id="@+id/member_plan"
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/for_popup_style"
-                    android:padding="2dp"
+                    android:padding="3dp"
                     android:singleLine="false"
                     android:textColor="#000000"
                     android:fontFamily="@font/nanumsquare_acr"
