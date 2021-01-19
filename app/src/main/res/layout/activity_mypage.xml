@@ -84,7 +84,7 @@
         android:id="@+id/my_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquare_acdb"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="나의 아이디는?"
         android:textColor="#817889"
         android:textSize="15dp"
@@ -108,7 +108,7 @@
         android:layout_width="99dp"
         android:layout_height="20dp"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/nanumsquare_acdb"
+        android:fontFamily="@font/nanumsquare_acb"
         android:text="우리 가족 코드"
         android:textColor="#817889"
         android:textSize="15dp"
@@ -123,7 +123,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nanumsquare_acb"
-        android:padding="10dp"
         android:text="한 줄 소개"
         android:textColor="#000"
         android:textSize="14dp"
@@ -139,8 +138,9 @@
         android:padding="8dp"
         android:text="나의 별명은?"
         android:textColor="#000"
+        android:fontFamily="@font/nanumsquare_acr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_nickname"
         tools:layout_conversion_absoluteHeight="0dp"
@@ -186,26 +186,27 @@
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="300dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_white_rounded"
         android:text="로그아웃"
         android:textSize="13dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/mun2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_fcode" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/mun2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="문의 : 013-111-0912"
-        app:layout_constraintStart_toStartOf="@+id/gamnamoo_email"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logout"
         android:fontFamily="@font/nanumsquare_acr"
+        android:text="문의 : instagram @juang_juang5"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/gamnamoo_email"
+        app:layout_constraintStart_toStartOf="@+id/gamnamoo_email"
         tools:layout_conversion_absoluteHeight="0dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -213,12 +214,13 @@
         android:id="@+id/gamnamoo_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="gammnamooo@gmail.com"
         android:fontFamily="@font/nanumsquare_acr"
+        android:text="gammnamooo@gmail.com"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mun2"
         tools:layout_conversion_absoluteHeight="0dp"
         tools:layout_conversion_absoluteWidth="0dp" />
 
@@ -233,29 +235,19 @@
 
     <ImageButton
         android:id="@+id/main_btn"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/compose_icon"
+        android:src="@drawable/write_icon2x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/setting_btn"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.266" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="왔다감"
-        android:textColor="#fff"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/main_btn"
-        app:layout_constraintStart_toStartOf="@+id/main_btn"
-        app:layout_constraintTop_toBottomOf="@+id/main_btn" />
 
     <ImageButton
         android:id="@+id/setting_btn"
@@ -269,46 +261,19 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:fontFamily="@font/nanumsquare_acr"-->
-<!--        android:text="고객의 소리함"-->
-<!--        android:textColor="#fff"-->
-<!--        android:textSize="10dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/setting_btn"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/setting_btn"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/setting_btn" />-->
 
     <ImageButton
         android:id="@+id/calendar_btn"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="70dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/calendar_icon"
+        android:src="@drawable/calendar_icon2x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.515" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="언제감"
-        android:textColor="#fff"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/calendar_btn"
-        app:layout_constraintStart_toStartOf="@+id/calendar_btn"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_btn" />
+        app:layout_constraintVertical_bias="0.406" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
