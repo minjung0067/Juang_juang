@@ -9,22 +9,23 @@
     android:outlineSpotShadowColor="#FFFFFF"
     tools:context="com.example.persimmon_tree_proj.log_inactivity">
 
-    <ImageView
-        android:id="@+id/image_logingam"
-        android:layout_width="113dp"
-        android:layout_height="109dp"
-        android:layout_marginLeft="124dp"
-        android:layout_marginTop="122dp"
-        android:layout_marginRight="123dp"
-        android:src="@drawable/login_gambaloon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     ​
 
     ​
 
     <!--    소셜 로그인 용 구글 로그인 버튼 -->
+
+    <ImageView
+        android:id="@+id/image_logingam"
+        android:layout_width="123dp"
+        android:layout_height="119dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginRight="123dp"
+        android:src="@drawable/login_gambaloon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edittext_email"
@@ -44,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_logingam"
-        app:layout_constraintVertical_bias="0.237" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <EditText
         android:id="@+id/edittext_password"
@@ -91,47 +92,47 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
     <!--        app:layout_constraintVertical_bias="0.341" />-->
 
-    <View
-        android:id="@+id/blackline_left"
-        android:layout_width="80dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/greyColor"
-        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+<!--    <View-->
+<!--        android:id="@+id/blackline_left"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginRight="18dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:background="@color/greyColor"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/textView4"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_login" />-->
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="25dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="간편 로그인"
-        android:textColor="@color/greyColor"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginBottom="25dp"-->
+<!--        android:fontFamily="@font/nanumsquare_acr"-->
+<!--        android:text="간편 로그인"-->
+<!--        android:textColor="@color/greyColor"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_login" />-->
 
-    <View
-        android:id="@+id/blackline_right"
-        android:layout_width="80dp"
-        android:layout_height="1dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/greyColor"
-        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+<!--    <View-->
+<!--        android:id="@+id/blackline_right"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginLeft="18dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:background="@color/greyColor"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btn_googleSignIn"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/textView4"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_login" />-->
 
     <!--    <TextView-->
     <!--        android:id="@+id/textView2"-->
@@ -146,32 +147,32 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
     <!--        app:layout_constraintVertical_bias="1.0" />-->
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btn_googleSignIn"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:bottomLeftRadius="30dp"
-        android:bottomRightRadius="30dp"
-        android:longClickable="false"
-        android:screenReaderFocusable="false"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:soundEffectsEnabled="false"
-        android:splitMotionEvents="false"
-        android:topLeftRadius="30dp"
-        android:topRightRadius="30dp"
-        android:visibility="visible"
+<!--    <com.google.android.gms.common.SignInButton-->
+<!--        android:id="@+id/btn_googleSignIn"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:bottomLeftRadius="30dp"-->
+<!--        android:bottomRightRadius="30dp"-->
+<!--        android:longClickable="false"-->
+<!--        android:screenReaderFocusable="false"-->
+<!--        android:scrollbarAlwaysDrawHorizontalTrack="false"-->
+<!--        android:scrollbarAlwaysDrawVerticalTrack="false"-->
+<!--        android:soundEffectsEnabled="false"-->
+<!--        android:splitMotionEvents="false"-->
+<!--        android:topLeftRadius="30dp"-->
+<!--        android:topRightRadius="30dp"-->
+<!--        android:visibility="visible"-->
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:layout_constraintVertical_bias="0.276"
-        tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/btn_login"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btn_login"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_login"-->
+<!--        app:layout_constraintVertical_bias="0.276"-->
+<!--        tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
