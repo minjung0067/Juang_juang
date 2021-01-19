@@ -445,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
                         //부족한 답변 갯수만큼 추가해줘야함
                         member_arr.add("아직"); //member 랑 임의로 답변 추가해줘야함..
                         member_ans_arr.add("감감 무소식 ..");
-                        member_color_arr.add("#92C44B");
+                        member_color_arr.add("#808080");
                         member_gam_arr.add("4");
                     }
                 }
