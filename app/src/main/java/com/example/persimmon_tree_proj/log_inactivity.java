@@ -63,13 +63,13 @@ public class log_inactivity extends AppCompatActivity {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        buttonGoogle = findViewById(R.id.btn_googleSignIn); //구글 로그인 버튼
+//        buttonGoogle = findViewById(R.id.btn_googleSignIn); //구글 로그인 버튼
         editTextEmail = (EditText) findViewById(R.id.edittext_email);   //이메일 입력한 거 변수에 저장
         editTextPassword = (EditText) findViewById(R.id.edittext_password);   //비번 저장한 거 pwd에 저장
 
-        //google 로그인 버튼 텍스트 바꾸기
-        TextView textView = (TextView) buttonGoogle.getChildAt(0);
-        textView.setText("Google 계정으로 로그인");
+//        //google 로그인 버튼 텍스트 바꾸기
+//        TextView textView = (TextView) buttonGoogle.getChildAt(0);
+//        textView.setText("업데이트 예정");
 
         buttonSignUp = (Button) findViewById(R.id.btn_signup);  //회원가입으로 연결하는 버튼
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
@@ -237,22 +237,22 @@ public class log_inactivity extends AppCompatActivity {
         });
 
 
-        // Google 로그인을 앱에 통합
-        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
-
-        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
-            @Override
-            public void onClick(View view) {
-                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
+//        // Google 로그인을 앱에 통합
+//        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
+//        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//
+//        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
+//
+//        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
+//            @Override
+//            public void onClick(View view) {
+//                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
+//                startActivityForResult(signInIntent, RC_SIGN_IN);
+//            }
+//        });
 
     }
 
