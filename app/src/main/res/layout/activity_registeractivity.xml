@@ -232,9 +232,10 @@
         android:textColor="#9E9E9E"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/check_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/check_3"
         app:layout_constraintTop_toTopOf="@+id/check_2"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="280dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_view1"
