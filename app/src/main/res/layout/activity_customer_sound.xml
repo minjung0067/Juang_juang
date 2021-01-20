@@ -94,7 +94,7 @@
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:layout_marginTop="68dp"
-        android:src="@drawable/gam8"
+        android:src="@drawable/group_icon_2x"
         app:layout_constraintEnd_toEndOf="@+id/btn_answer"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@+id/btn_answer"
