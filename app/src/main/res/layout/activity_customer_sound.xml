@@ -18,17 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
+    <ImageView
         android:id="@+id/gam_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="126dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:fontFamily="@font/nanumsquare_acdb"
-        android:text="고객의 소리함"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:src="@drawable/top_cilent2x"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
@@ -36,35 +34,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.292" />
 
-    <ImageButton
-        android:layout_width="35dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/group_icon_2x"
-        app:layout_constraintStart_toEndOf="@+id/gam_text"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageButton-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:background="@drawable/group_icon_2x"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/gam_text"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/btn_mypage2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/profile_outline"
-        android:src="@drawable/gam1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_mypage2"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginRight="24dp"-->
+<!--        android:background="@drawable/profile_outline"-->
+<!--        android:src="@drawable/gam1"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="24dp"
-        android:background="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/btn_mypage"-->
+<!--        android:layout_width="39dp"-->
+<!--        android:layout_height="39dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginRight="24dp"-->
+<!--        android:background="@null"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <EditText
@@ -90,13 +88,12 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:onClick="linearOnClick"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginTop="68dp"
-        android:src="@drawable/gam8"
+        android:layout_marginTop="64dp"
+        android:onClick="linearOnClick"
+        android:src="@drawable/group_icon_2x"
         app:layout_constraintEnd_toEndOf="@+id/btn_answer"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="@+id/btn_answer"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
