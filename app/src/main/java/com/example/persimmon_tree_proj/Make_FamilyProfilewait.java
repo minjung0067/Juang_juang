@@ -57,7 +57,7 @@ public class Make_FamilyProfilewait extends AppCompatActivity {
 
                 Integer fcount2 = Integer.valueOf(counts.getText().toString());
                 if((fcount2< 1) || (fcount2 > 8)){
-                    Toast.makeText(Make_FamilyProfilewait.this, "가족 인원 수는 최소 2명, 최대 8명까지 가능합니다.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Make_FamilyProfilewait.this, "가족 인원 수는 최소 1명, 최대 8명까지 가능합니다.",Toast.LENGTH_LONG).show();
                 }
                 else{
                     firebaseAuth = FirebaseAuth.getInstance();
