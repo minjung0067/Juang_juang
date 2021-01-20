@@ -143,16 +143,6 @@ public class customer_sound extends AppCompatActivity {
             }
         });
 
-        ImageButton go_mypage = (ImageButton) findViewById(R.id.btn_mypage);
-        go_mypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(customer_sound.this,MypageActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                startActivity(intent);
-            }
-        });
 
         //고객의 소리함
         ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
