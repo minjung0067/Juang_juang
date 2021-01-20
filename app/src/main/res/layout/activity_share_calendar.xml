@@ -30,36 +30,21 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
+    <ImageView
         android:id="@+id/gam_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="59dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:fontFamily="@font/nanumsquare_acdb"
-        android:text="언제"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:src="@drawable/top_when2x"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.292" />
-
-    <TextView
-        android:id="@+id/gam_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:fontFamily="@font/nanumsquare_acdb"
-        android:text="감"
-        android:textColor="@color/pointColor"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/gam_text"
-        app:layout_constraintStart_toEndOf="@+id/gam_text"
-        app:layout_constraintTop_toTopOf="@+id/gam_text" />
 
 
     <ImageView

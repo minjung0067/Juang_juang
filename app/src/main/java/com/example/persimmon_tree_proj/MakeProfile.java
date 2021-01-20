@@ -176,7 +176,7 @@ public class MakeProfile extends AppCompatActivity {
                                 case "8":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd8 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd8.setStroke(30, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd8.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam8);
                                     break;
                                 default:
