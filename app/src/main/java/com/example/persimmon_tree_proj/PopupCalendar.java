@@ -1,10 +1,7 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
-<<<<<<< HEAD
-=======
-//import androidx.appcompat.app.AppCompatActivity;
->>>>>>> bb603731a527bfd7cacbc81c9f3b5f6ad451d1ae
+
 import androidx.core.view.GestureDetectorCompat;
 
 import android.app.Activity;
@@ -38,11 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-<<<<<<< HEAD
 
-=======
-//import org.w3c.dom.Text;
->>>>>>> bb603731a527bfd7cacbc81c9f3b5f6ad451d1ae
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -138,7 +131,6 @@ public class PopupCalendar extends Activity  {
 
                 EditText txt_plan = (EditText) findViewById(R.id.txt_plan);
                 plan = txt_plan.getText().toString();
-                Log.i("plan",plan);
 
                 //일정 파이어베이스에 올리기
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
@@ -148,8 +140,6 @@ public class PopupCalendar extends Activity  {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         f_code = snapshot.child("fcode").getValue().toString();
                         user_name = snapshot.child("userName").getValue().toString();
-                        Log.i("확인",day1);
-                        Log.i("확인",day2);
 
 
                         if(plan.equals("")) {
@@ -158,7 +148,6 @@ public class PopupCalendar extends Activity  {
                         else{
                             if(firstyear.equals(endyear)){//해가 같을 경우
                                 if(firstmonth.equals(endmonth)){ //달이 같을 경우
-                                    Log.i("확인2","요기1");
                                     for(int i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
                                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 

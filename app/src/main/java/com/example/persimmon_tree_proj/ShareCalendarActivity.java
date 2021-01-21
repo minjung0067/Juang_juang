@@ -271,7 +271,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 for(DataSnapshot data : dataSnapshot.getChildren()){
                     String user_name = data.getKey();
                     String color_number = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
-                    Log.i("ststw",String.valueOf(color_number));
                     if (color_number != null) { //있으면 담기, 없으면 패스
                         name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
 
