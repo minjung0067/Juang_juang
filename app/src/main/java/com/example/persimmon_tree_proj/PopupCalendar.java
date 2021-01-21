@@ -35,11 +35,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-<<<<<<< HEAD
-
-=======
-//import org.w3c.dom.Text;
->>>>>>> bb603731a527bfd7cacbc81c9f3b5f6ad451d1ae
 
 import java.util.ArrayList;
 import java.util.Calendar;
