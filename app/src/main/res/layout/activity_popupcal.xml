@@ -60,7 +60,7 @@
                 android:dividerHeight="0px"
                 android:listSelector="@color/subColor"
                 android:divider="#ffffff"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                >
 
             </com.baoyz.swipemenulistview.SwipeMenuListView>
 
