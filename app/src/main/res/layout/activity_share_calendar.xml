@@ -114,8 +114,6 @@
                 android:id="@+id/gv_calendar_activity_tv_title"
                 android:layout_width="127dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/space_3x"
-                android:layout_marginRight="@dimen/space_3x"
                 android:background="#FFFFFF"
                 android:gravity="center"
                 android:text="2021년 몇월"
