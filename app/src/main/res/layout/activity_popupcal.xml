@@ -13,9 +13,12 @@
         android:background="@drawable/line_dungle"
         android:orientation="vertical"
         android:padding="24dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="33dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <ImageButton
             android:id="@+id/no"
@@ -27,14 +30,15 @@
             android:scaleType="fitCenter"
             android:src="@drawable/go_backk"
             android:textColor="#ff7a00" />
+
         <TextView
             android:id="@+id/yearmonth_text"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/nanumsquare_acr"
             android:gravity="center"
             android:text="오늘의 일정"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:layout_marginBottom="3dp"
             android:textColor="#B9B3BD"
             android:textSize="20dp" />
 
@@ -42,27 +46,25 @@
             android:id="@+id/day_text"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquare_acr"
             android:gravity="center"
             android:text="오늘의 일정"
-            android:fontFamily="@font/nanumsquare_acr"
             android:textColor="#B9B3BD"
             android:textSize="18dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="200dp">
+
             <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/plan_vview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:id="@+id/plan_vview"
                 android:background="#ffffff"
+                android:divider="#ffffff"
                 android:dividerHeight="0px"
                 android:listSelector="@color/subColor"
-                android:divider="#ffffff"
-                >
-
-            </com.baoyz.swipemenulistview.SwipeMenuListView>
+                android:scrollbars="none"></com.baoyz.swipemenulistview.SwipeMenuListView>
 
         </RelativeLayout>
 
@@ -70,16 +72,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="bottom">
+            android:layout_gravity="bottom"
+            android:gravity="right">
 
             <ImageButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="#ffffff"
                 android:gravity="bottom"
-                android:scaleType="fitCenter"
                 android:onClick="mOnClose"
+                android:scaleType="fitCenter"
                 android:src="@drawable/check_icon_big"
                 android:textColor="#ff7a00"
 
