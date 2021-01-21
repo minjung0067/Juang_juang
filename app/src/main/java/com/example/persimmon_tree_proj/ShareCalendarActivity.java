@@ -111,10 +111,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                         while (members.hasNext()) {
                             String member_num = members.next().getKey();
                             if (user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
-                                Log.i("profile", member_num);
                                 user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
                                 user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
-                                Log.i("user profile", "user_gam=" + user_gam + "user_color =" + user_color);
                                 ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
 
                                 if (user_gam.equals("1")) {
@@ -304,10 +302,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
                 if(e1.getX()-e2.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
-                    Log.i("ss","좌->우");
                 }
                 if(e2.getX()-e1.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
-                    Log.i("ss","우->좌");
                 }
                 return false;
             }
@@ -384,11 +380,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 + (mThisMonthCalendar.get(Calendar.MONTH) + 1) + "월");
 
         DayInfo day;
-
-        Log.e("DayOfMOnth", dayOfMonth+"");
         set_position = dayOfMonth;
         set_month_lastday = thisMonthLastDay;
-        Log.i("lastday",String.valueOf(thisMonthLastDay));
         for(int i=0; i<dayOfMonth-1; i++)
         {
             int date = lastMonthStartDay+i;
