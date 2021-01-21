@@ -1,10 +1,7 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
-<<<<<<< HEAD
-=======
-//import androidx.appcompat.app.AppCompatActivity;
->>>>>>> bb603731a527bfd7cacbc81c9f3b5f6ad451d1ae
+
 import androidx.core.view.GestureDetectorCompat;
 
 import android.app.Activity;
