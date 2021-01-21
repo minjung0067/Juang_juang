@@ -1,7 +1,10 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
+<<<<<<< HEAD
+=======
 //import androidx.appcompat.app.AppCompatActivity;
+>>>>>>> bb603731a527bfd7cacbc81c9f3b5f6ad451d1ae
 import androidx.core.view.GestureDetectorCompat;
 
 import android.app.Activity;
@@ -35,7 +38,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+<<<<<<< HEAD
+
+=======
 //import org.w3c.dom.Text;
+>>>>>>> bb603731a527bfd7cacbc81c9f3b5f6ad451d1ae
 
 import java.util.ArrayList;
 import java.util.Calendar;
