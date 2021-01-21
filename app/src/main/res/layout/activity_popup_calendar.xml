@@ -171,11 +171,11 @@
                 android:id="@+id/txt_plan"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginBottom="@dimen/space_1x"
+                android:layout_marginBottom="20px"
                 android:background="@drawable/for_popup_style"
                 android:fontFamily="@font/nanumsquare_acb"
                 android:hint="일정 내용을 입력하세요."
-                android:padding="2dp"
+                android:padding="4dp"
                 android:singleLine="false"
                 android:textColor="#000000"
                 android:textSize="14dp" />
