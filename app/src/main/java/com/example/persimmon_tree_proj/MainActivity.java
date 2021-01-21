@@ -157,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
                             String member_num = members.next().getKey();
                             member_count++;
                             if(user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
-                                Log.i("profile",member_num);
                                 user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
                                 user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
                                 ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
