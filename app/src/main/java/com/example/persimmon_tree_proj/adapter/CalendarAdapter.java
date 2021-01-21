@@ -122,7 +122,6 @@ public class CalendarAdapter extends BaseAdapter
         {
             dayViewHolder = (DayViewHolde) convertView.getTag();
         }
-        Log.i("where2",String.valueOf(mwhen_whos_what_plan_arr));
         //일정이 있는 부분에 bar 추가하는 부분 !!!!!!!!!
         int when_index=0; //한번 싹 지우고
         int size = mwhen_whos_what_plan_arr.size();
