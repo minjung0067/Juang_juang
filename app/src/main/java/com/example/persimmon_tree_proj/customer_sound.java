@@ -121,7 +121,7 @@ public class customer_sound extends AppCompatActivity {
 
                         }
                     });
-                    Intent intent = new Intent(customer_sound.this,customer_sound.class);
+                    Intent intent = new Intent(customer_sound.this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("f_code",f_code);
                     startActivity(intent);
@@ -136,6 +136,9 @@ public class customer_sound extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //안드로이드 백버튼 막기
+        Intent intent = new Intent(customer_sound.this,MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
         return;
     }
