@@ -1,25 +1,17 @@
 package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.InputStream;
-import java.util.HashMap;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.Juang_juang.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,10 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Text;
 
 
 public class MakeProfile extends AppCompatActivity {
@@ -208,43 +198,3 @@ public class MakeProfile extends AppCompatActivity {
         return;
     }
 }
-//갤러리 열기
-//        imageView = (ImageView)findViewById(R.id.profile_image);
-//        change_photo_btn = (Button)findViewById(R.id.change_photo_btn); //사진 바꾸는 +버튼 누르면
-//        change_photo_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                //아래 3줄 갤러리 열 때 사용 !!
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(intent, 1);
-//            }
-//        });
-//        //이미지 데이터 베이스 삽입
-//        mStorageRef = FirebaseStorage.getInstance().getReference();
-//    }
-//
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //위의 startactivity for result 함수랑 이어짐
-//        // Check which request we're responding to
-//        if (requestCode == 1) {
-//            // Make sure the request was successful
-//            if (resultCode == RESULT_OK) {
-//                try {// 선택한 이미지에서 비트맵 생성
-//                    //data.getData()로 받은 것은 파일 주소
-//                    InputStream in = getContentResolver().openInputStream(data.getData());
-//                    Bitmap img = BitmapFactory.decodeStream(in);
-//                    in.close();
-//                    // 이미지가 너무 크면 못 불러오니까 사이즈를 줄임
-//                    int nh = (int) (img.getHeight() * (1024.0 / img.getWidth()));
-//                    Bitmap scaled = Bitmap.createScaledBitmap(img, 1024, nh, true);
-//                    // 감 그림 대신 선택한 이미지를 imageview 에 띄우기
-//                    imageView.setImageBitmap(img);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
