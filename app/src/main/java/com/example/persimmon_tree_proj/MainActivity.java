@@ -4,12 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +32,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
 
@@ -43,34 +40,23 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
-    private ChildEventListener c_Child;
     private TextView textView; //질문 나오는 textView
-    private TextView textViewcode;
-    private String question;
-    private String question_position;
     //array배열을 생성하고 spinner와 연결
 
     //answer 관련
     private FirebaseDatabase a_Database;
-    private FirebaseDatabase c_Database;
     private DatabaseReference a_Reference;
-    private DatabaseReference c_Reference;
-    private DatabaseReference color_Reference;
     private ChildEventListener a_Child;
-    private ListView a_View;
     private LinearLayout container;
-    private ArrayAdapter<String> a_adapter;
     private Spinner spinner; //질문 목록이 있는 spinner
     private ArrayAdapter<String> arrayAdapter;
     private ArrayAdapter<String> arrayAdapter2;
     private ArrayList<String> all_q_arr; //만들어 놓은 모든 질문 담기는 배열
     private ArrayList<String> our_q_arr; //우리 가족의 질문이 담기는 배열
-    String pst ="";
     private ArrayList<String> member_arr = new ArrayList<String>();
     private ArrayList<String> member_ans_arr =  new ArrayList<String>();
     ArrayList<String> member_color_arr =  new ArrayList<String>();
     ArrayList<String> member_gam_arr =  new ArrayList<String>();
-    private ArrayList<String> member_name_arr = new ArrayList<String>();
 
 
     //family code 관련
@@ -359,7 +345,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
                 intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
                 intent.putExtra("f_code",f_code);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
@@ -369,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(MainActivity.this,MypageActivity.class);
+                Intent intentt = new Intent(getApplicationContext(),MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
                 startActivity(intentt);

@@ -71,6 +71,7 @@ public class profile_color extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //makeprofil로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -119,18 +120,6 @@ public class profile_color extends AppCompatActivity {
         });
     }
 
-//    public void check_process(int clicked_what, ImageView clicked_btn){
-//        //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
-//        if (clicked_what==1){
-//            clicked_btn.setBackgroundResource(R.drawable.btn_yes_clicked);
-//        }
-//        else if(clicked_what==2){
-//            clicked_btn.setBackgroundResource(R.drawable.btn_clicked_color);
-//        }
-//        else{
-//            clicked_btn.setBackgroundResource(R.drawable.btn_not_clicked);
-//        }
-//    }
 
     public void check_process(int clicked_what, ImageView clicked_btn) {
         //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
@@ -267,14 +256,6 @@ public class profile_color extends AppCompatActivity {
                         }
                         make_clicked();
                         break;
-//                    case R.id.c9:
-//                        if(clicked_arr[8] == 1){ clicked_arr[8] = 0; } else if(clicked_arr[8] ==0){
-//                            clicked_arr[8]=1;
-//                            another_unselected(8);
-//                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#527B03F4");
-//                        }
-//                        make_clicked();
-//                        break;
 
                 }
 

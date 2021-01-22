@@ -83,7 +83,6 @@ public class ShowFamilyActivity extends AppCompatActivity {
                             String color_number = members1.next().child("user_color").getValue(String.class);
                             if (color_number != null) { //있으면 담기, 없으면 패스
                                 color_arr.add(count_color++, color_number); //묶인 현재 가족구성원이 선택한 색깔 차례대로 COLOR_ARR 배열에 담기
-//                                Log.i("lala color ", color_arr.get(count_color-1));
                             }
                         }
                         Iterator<DataSnapshot> members2 = dataSnapshot.getChildren().iterator();
@@ -91,7 +90,6 @@ public class ShowFamilyActivity extends AppCompatActivity {
                             String gam_number = members2.next().child("user_gam").getValue(String.class);
                             if (gam_number != null) { //있으면 담기, 없으면 패스
                                 gam_arr.add(count_gam++, gam_number);  //묶인 현재 가족구성원이 선택한 감 프로필 사진 차례대로 GAM_ARR 배열에 담기
-//                                Log.i("lala gam ", gam_arr.get(count_gam-1));
                             }
                         }
                         Iterator<DataSnapshot> members3 = dataSnapshot.getChildren().iterator();
@@ -99,7 +97,6 @@ public class ShowFamilyActivity extends AppCompatActivity {
                             String introduce = members3.next().child("introduce").getValue(String.class);
                             if (introduce != null) {  //있으면 담기, 없으면 패스
                                 introduce_arr.add(count_introduce++, introduce); //묶인 현재 가족구성원이 선택한 소개 메세지 INTRODUCE_ARR 배열에 담기
-//                                Log.i("lala introduce", introduce_arr.get(count_introduce-1));
                             }
 
                         }

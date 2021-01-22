@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -254,6 +253,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -358,13 +358,11 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         thisMonthLastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.MONTH, -1);
-        Log.e("지난달 마지막일", calendar.get(Calendar.DAY_OF_MONTH)+"");
 
         // 지난달의 마지막 일자를 구한다.
         lastMonthStartDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.MONTH, 1);
-        Log.e("이번달 시작일", calendar.get(Calendar.DAY_OF_MONTH)+"");
 
         if(dayOfMonth == SUNDAY)
         {
@@ -453,7 +451,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                     }
                 }
                 //파이어베이스 돌면서 멤버별 시간: 일정 map 형성 끝//
-                Log.i("where1",String.valueOf(when_whos_what_plan_arr));
                 initCalendarAdapter(when_whos_what_plan_arr,name_color_map,dayOfMonth);
             }
             @Override

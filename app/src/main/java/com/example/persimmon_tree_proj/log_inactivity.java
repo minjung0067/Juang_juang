@@ -255,6 +255,12 @@ public class log_inactivity extends AppCompatActivity {
 //        });
 
     }
+    @Override
+    public void onBackPressed() {
+        //안드로이드 백버튼 막기
+        finish();
+        return;
+    }
 
     public void loginUser(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password)   //이메일 패스워드 방식으로 로그인하는 함수

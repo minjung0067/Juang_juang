@@ -2,12 +2,10 @@ package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,11 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 
 public class Answeractivity extends AppCompatActivity {
 
-    private Button btn_answer;
     private EditText edit_answer;
     private TextView textView;
     InputMethodManager imm;
@@ -75,7 +71,9 @@ public class Answeractivity extends AppCompatActivity {
 
                     }
                 });
-
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
             }
         });
@@ -85,5 +83,14 @@ public class Answeractivity extends AppCompatActivity {
     //화면 터치 시 키보드 내려가게
     public void linearOnClick(View v) {
         imm.hideSoftInputFromWindow(edit_answer.getWindowToken(), 0);
+    }
+
+    //뒤로가기 버튼 누르면 Mainactivity로 이동
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

@@ -1,15 +1,11 @@
 package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
+
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,31 +22,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 
 
 public class CodeActivity extends AppCompatActivity {
-    private Button btn_profileok;
     private TextView tv_code;
     private Button ok;
-    private EditText et_introduce;
-    private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-    //private FirebaseDatabase database;
-    //private DatabaseReference mDatabase; //데이터베이스에서 데이터 읽고 쓰기위해 인스턴스 필요
     private String str_code = "";
     private int tf = 0;
-    //code 공유하기 누를때 복사하기 위한 string형 code
-    private String code = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
 
-        ok = (Button)findViewById(R.id.btn_ok);
+        tv_code.setText(str_code);//화면에 code출력하기
 
+        ok = (Button)findViewById(R.id.btn_ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,36 +60,6 @@ public class CodeActivity extends AppCompatActivity {
         }while(tf == 1);
 
         writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
-
-        tv_code.setText(str_code);//화면에 code출력하기
-
-        //----공유하기----
-        //tv_code(text view)에 적혀있는 코드를 가져오는 방식임
-        //오류가 나거나 잘안된다면 str_code(string형)을 바로 사용하는 방식으로 바꾸어도 좋을듯
-        btn_profileok = (Button)findViewById(R.id.btn_ok);//btn과 java연결
-        TextView textView= (TextView) findViewById(R.id.tv_code); //텍스트뷰
-        final String code = textView.getText().toString();//텍스트 뷰 글자 가져옴
-        btn_profileok.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-            @Override
-            public void onClick(View v) {
-                if (code == ""){ //가족 코드 생성 전에 누른다면
-                    Toast.makeText(CodeActivity.this, "가족코드가 생성이 되지 않았습니다. 다시 시도해주세요.",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
-                    clipboardManager.setPrimaryClip(clipData);
-
-                    //토스트 띄우고 화면 전환하기
-
-                    Intent intent = new Intent(CodeActivity.this, Make_FamilyProfile.class);
-                    intent.putExtra("f_code",str_code);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
 
     }
 
@@ -149,36 +109,5 @@ public class CodeActivity extends AppCompatActivity {
         });
 
     }
-
-    public void share(){//공유하기
-        btn_profileok = (Button)findViewById(R.id.btn_ok);//btn과 java연결
-        TextView textView= (TextView) findViewById(R.id.tv_code); //텍스트뷰
-        final String code = textView.getText().toString();//텍스트 뷰 글자 가져옴
-
-        //tv_code(text view)에 적혀있는 코드를 가져오는 방식임
-        //오류가 나거나 잘안된다면 str_code(string형)을 바로 사용하는 방식으로 바꾸어도 좋을듯
-
-        if (code == ""){
-            Toast.makeText(CodeActivity.this, "가족코드가 생성이 되지 않았습니다. 다시 시도해주세요.",Toast.LENGTH_LONG).show();
-        }
-
-        else {
-            View.OnClickListener listener = new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-                @Override
-                public void onClick(View v) {
-                    //클립보드 사용 코드
-                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("family code", code); //클립보드에 ID라는 이름표로 id 값을 복사하여 저장
-                    clipboardManager.setPrimaryClip(clipData);
-
-                    //복사가 되었다면 토스트메시지 노출
-                    Toast.makeText(CodeActivity.this, "가족 코드가 복사되었습니다.", Toast.LENGTH_SHORT).show();
-
-                }
-            };
-        }
-    }
-
 
 }
