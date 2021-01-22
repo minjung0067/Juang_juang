@@ -130,7 +130,6 @@ public class PopupCalendar extends Activity  {
 
                 EditText txt_plan = (EditText) findViewById(R.id.txt_plan);
                 plan = txt_plan.getText().toString();
-                Log.i("plan",plan);
 
                 //일정 파이어베이스에 올리기
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
@@ -140,9 +139,6 @@ public class PopupCalendar extends Activity  {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         f_code = snapshot.child("fcode").getValue().toString();
                         user_name = snapshot.child("userName").getValue().toString();
-                        Log.i("확인",day1);
-                        Log.i("확인",day2);
-
 
                         if(plan.equals("")) {
                             Toast.makeText(PopupCalendar.this, "일정 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
@@ -150,7 +146,6 @@ public class PopupCalendar extends Activity  {
                         else{
                             if(firstyear.equals(endyear)){//해가 같을 경우
                                 if(firstmonth.equals(endmonth)){ //달이 같을 경우
-                                    Log.i("확인2","요기1");
                                     for(int i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
                                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
@@ -158,7 +153,6 @@ public class PopupCalendar extends Activity  {
                                 }
                                 else{ //달이 다를 경우
                                     for(int j = firstmonth ; j<firstmonth+1;j++){//시작하는 달
-                                        Log.i("확인2","요기2");
                                         if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                             for(int i = Integer.parseInt(day1); i <= 31 ; i++){
                                                 FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
@@ -210,7 +204,6 @@ public class PopupCalendar extends Activity  {
 
 
                                     for(int j = firstmonth+1 ; j <= endmonth-1 ; j++ ){//끼인 달
-                                        Log.i("확인2","요기3");
                                         if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                             for(int i = 1; i <= 31 ; i++){
                                                 FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
@@ -261,7 +254,6 @@ public class PopupCalendar extends Activity  {
 
                                     }
                                     for(int i = 1; i <= Integer.parseInt(day2) ; i++){ //마지막달 추가
-                                        Log.i("확인2","요기4");
                                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
                                     }
@@ -270,7 +262,6 @@ public class PopupCalendar extends Activity  {
                                 }
                             }
                             else if(!(firstyear.equals(endyear))){//년도가 같지 않을 경우
-                                Log.i("확인2","요기5");
                                 if(endyear ==0){//단일 선택일 경우
 
                                     FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(day1)).child(user_name).push().setValue(plan);
@@ -279,7 +270,6 @@ public class PopupCalendar extends Activity  {
                                 else{
                                     //기간 선택일 경우
                                     for(int k = firstyear ; k < firstyear+1 ; k++){ //시작하는 년도
-                                        Log.i("확인2","요기6");
                                         for(int j = firstmonth ; j<firstmonth+1;j++){//시작하는 달
                                             if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                                 for(int i = Integer.parseInt(day1); i <= 31 ; i++){
@@ -332,7 +322,6 @@ public class PopupCalendar extends Activity  {
 
 
                                         for(int j = firstmonth+1 ; j <= 12 ; j++ ){//년도의 끝까지
-                                            Log.i("확인2","요기7");
                                             if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                                 for(int i = 1; i <= 31 ; i++){
                                                     FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
@@ -386,9 +375,7 @@ public class PopupCalendar extends Activity  {
                                         }
                                     }
                                     for(int k = firstyear+1 ; k <= endyear -1 ; k++){//끼인 년도
-                                        Log.i("확인2","요기8");
                                         for(int j = 1 ; j<= 12; j++){
-                                            Log.i("comein?","다른 년도 ");
                                             if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                                 for(int i = 1; i <= 31 ; i++){
                                                     FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
@@ -443,7 +430,6 @@ public class PopupCalendar extends Activity  {
                                     }
                                     //마지막 년도
                                     for(int j = 1 ; j<=endmonth-1;j++){//시작하는 달
-                                        Log.i("확인2","요기9");
                                         if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                             for(int i = 1; i <= 31 ; i++){
                                                 FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
@@ -495,7 +481,6 @@ public class PopupCalendar extends Activity  {
 
                                     }
                                     //마지막달
-                                    Log.i("확인2","요기10");
                                     for(int i = 1; i <= Integer.parseInt(day2) ; i++){
                                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(endmonth)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
 
@@ -507,19 +492,7 @@ public class PopupCalendar extends Activity  {
                             }
                             Toast.makeText(PopupCalendar.this, "일정이 추가되었다감", Toast.LENGTH_SHORT).show();
                             finish();
-
-
                         }
-
-
-
-
-
-
-
-
-
-
                     }
 
 
@@ -538,7 +511,6 @@ public class PopupCalendar extends Activity  {
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
         mGvCalendar = (GridView)findViewById(R.id.gv_calendar_activity_gv_calendar); //달력
         GestureDetector gestureDetector = null;
-
 
         mGvCalendar.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -562,7 +534,6 @@ public class PopupCalendar extends Activity  {
                     case 0:
                         //첫번째 클릭 전 달력 초기화
                         period.clear(); //기간 배열 초기화
-                        Log.i("check0","첫번쨰 클릭");
                         text_start.setText("날짜를 선택해주세요.");
                         text_end.setVisibility(View.INVISIBLE);
                         firstyear = 0;
@@ -607,18 +578,9 @@ public class PopupCalendar extends Activity  {
                         }
                         else{
                             //이번달에 포함된 날짜
-                            Log.i("check2",year);
-                            Log.i("check2-1", String.valueOf(firstyear));
-                            Log.i("check3",month);
-                            Log.i("check3-1", String.valueOf(firstmonth));
-                            Log.i("checkcheck", String.valueOf((year.equals(String.valueOf(firstyear)))));
-                            Log.i("checkcheck", String.valueOf((Integer.valueOf(month) == firstmonth)));
-
                             if((year.equals(String.valueOf(firstyear)))){
                                 if((Integer.valueOf(month) == firstmonth)){ //같은 년 같은 달일 경우
-                                    Log.i("check","check1");
                                     if(point_1_index > position){ //선택했던 날짜 보다 더 이전의 날짜일 경우
-                                        Log.i("check 어디","요기1");
                                         //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000")); //선택했던 날짜를 초기화시키고
                                         //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));   //선택한 날짜를 표시
                                         point_1_index = position;
@@ -631,8 +593,6 @@ public class PopupCalendar extends Activity  {
 
                                     }
                                     else{ //이번달에 포함된 날짜와 더 큰 숫자를 선택했다면,
-                                        //click++;
-                                        Log.i("check 어디","요기2");
                                         point_2_index = position;
                                         day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                         text_end.setVisibility(View.VISIBLE);
@@ -667,7 +627,6 @@ public class PopupCalendar extends Activity  {
 
                                 }
                                 else if((Integer.valueOf(firstmonth) > Integer.valueOf(month))){ //같은 년인데 더 작은 달일 경우
-                                    Log.i("check 어디","요기4");
                                     //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
                                     //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                     point_1_index = position;
@@ -682,7 +641,6 @@ public class PopupCalendar extends Activity  {
 
                             }
                             else if((Integer.valueOf(firstyear) < Integer.valueOf(year)) ){
-                                Log.i("check 어디","요기5");
                                 day2 = String.valueOf(Integer.valueOf(position)-set_position+2);
                                 text_end.setVisibility(View.VISIBLE);
                                 text_end.setText(" 종료일 : "+year+"년"+ month+"월"+day2+"일");
@@ -699,7 +657,6 @@ public class PopupCalendar extends Activity  {
 
                             }
                             else if((Integer.valueOf(firstyear) > Integer.valueOf(year)) ){
-                                Log.i("check 어디","요기6");
                                 //mGvCalendar.getChildAt(point_1_index).setBackgroundColor(Color.parseColor("#00000000"));
                                 //mGvCalendar.getChildAt(position).setBackgroundColor(Color.parseColor("#52912E"));
                                 point_1_index = position;
@@ -709,15 +666,10 @@ public class PopupCalendar extends Activity  {
                                 firstmonth = Integer.valueOf(month);
                                 click = 1;
                                 break;
-
-
                             }
 
 
                         }
-
-
-
 
 
                     default :
@@ -770,13 +722,11 @@ public class PopupCalendar extends Activity  {
         thisMonthLastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.MONTH, -1);
-        Log.e("지난달 마지막일", calendar.get(Calendar.DAY_OF_MONTH)+"");
 
-        // 지난달의 마지막 일자를 구한다.
+                // 지난달의 마지막 일자를 구한다.
         lastMonthStartDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         calendar.add(Calendar.MONTH, 1);
-        Log.e("이번달 시작일", calendar.get(Calendar.DAY_OF_MONTH)+"");
 
         if(dayOfMonth == SUNDAY)
         {
@@ -792,7 +742,6 @@ public class PopupCalendar extends Activity  {
 
         DayInfo day;
 
-        Log.e("DayOfMOnth", dayOfMonth+"");
         set_position = dayOfMonth;
         set_month_lastday = thisMonthLastDay;
         for(int i=0; i<dayOfMonth-1; i++)
@@ -910,10 +859,8 @@ public class PopupCalendar extends Activity  {
 
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if(e1.getX()-e2.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
-                Log.i("ss","좌->우");
             }
             if(e2.getX()-e1.getX() < DISTANCE && Math.abs(velocityX) > VELOCITY){
-                Log.i("ss","우->좌");
             }
             return false;
         }
@@ -971,6 +918,7 @@ public class PopupCalendar extends Activity  {
 
     @Override
     public void onBackPressed() {
+        finish();
         //안드로이드 백버튼 막기
         return;
     }

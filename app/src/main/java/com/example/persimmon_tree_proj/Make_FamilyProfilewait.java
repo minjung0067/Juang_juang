@@ -2,7 +2,6 @@ package com.example.persimmon_tree_proj;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,8 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.HashMap;
 
 public class Make_FamilyProfilewait extends AppCompatActivity {
 
@@ -68,7 +65,6 @@ public class Make_FamilyProfilewait extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             myfcode = snapshot.child("fcode").getValue().toString();
                             String fcount = counts.getText().toString();
-                            Log.i("family",myfcode);
                             FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("count").setValue(fcount);
 
 

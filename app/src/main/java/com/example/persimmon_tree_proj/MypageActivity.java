@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Iterator;
 
+import static java.lang.System.runFinalization;
+
 public class MypageActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -192,25 +194,16 @@ public class MypageActivity extends AppCompatActivity {
         });
 
 
-
-
-
-//        ImageButton go_setting = (ImageButton) findViewById(R.id.btn_mypage);
-//        go_setting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MypageActivity.this,customer_sound.class);
-//                startActivity(intent);
-//            }
-//        });
-
+        //고객의 소리함으로 가기
         ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
         go_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MypageActivity.this,customer_sound.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",myfcode);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -233,7 +226,6 @@ public class MypageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-
             }
         });
 
@@ -265,26 +257,27 @@ public class MypageActivity extends AppCompatActivity {
 
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 //SharedPreferences에 저장된 값들을 로그아웃 버튼을 누르면 삭제하기 위해
                 //SharedPregerences값을 불러온다.
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 Intent intent = new Intent(getApplicationContext(), log_inactivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                //Intent intent = new Intent(MypageActivity.this, log_inactivity.class);
                 SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = auto.edit();
                 //edit.clear()는 파일 auto에 들어있는 모든 정보를 기기에서 지운다.
                 editor.clear();
                 editor.commit(); //저장
                 Toast.makeText(MypageActivity.this, "로그아웃.", Toast.LENGTH_SHORT).show();
-                //startActivity(intent);
                 finish();
             }
         });
     }
 
+    //뒤로가기 버튼 누르면, 원래 있었던 곳으로 가기
     @Override
     public void onBackPressed() {
         finish();
