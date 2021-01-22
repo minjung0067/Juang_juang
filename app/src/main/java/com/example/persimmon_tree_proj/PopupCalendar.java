@@ -35,10 +35,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4108d63a5b5c4c1da846c1ba634eff702382eb21
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -143,10 +139,7 @@ public class PopupCalendar extends Activity  {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         f_code = snapshot.child("fcode").getValue().toString();
                         user_name = snapshot.child("userName").getValue().toString();
-<<<<<<< HEAD
-=======
 
->>>>>>> 4108d63a5b5c4c1da846c1ba634eff702382eb21
 
                         if(plan.equals("")) {
                             Toast.makeText(PopupCalendar.this, "일정 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
