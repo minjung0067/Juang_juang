@@ -55,9 +55,9 @@ public class MakeProfile extends AppCompatActivity {
 
         whoami = (EditText) findViewById(R.id.whoami);
 
-        Intent intent = getIntent();
-        String introduce1 = intent.getStringExtra("intro");
-        whoami.setText(introduce1);
+        //Intent intent = getIntent();
+        //String introduce1 = intent.getStringExtra("intro");
+        //whoami.setText(introduce1);
 
 
         introduce = whoami.getText().toString();
@@ -106,7 +106,7 @@ public class MakeProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MakeProfile.this, profile_gam.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("intro",introduce);
+                //intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
             }
