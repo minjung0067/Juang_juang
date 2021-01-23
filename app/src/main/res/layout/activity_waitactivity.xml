@@ -12,6 +12,7 @@
         android:layout_width="420dp"
         android:layout_height="420dp"
         android:src="@drawable/waiting_gam2x"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,15 +21,15 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
         android:layout_marginLeft="180dp"
+        android:layout_marginTop="230dp"
         android:layout_marginRight="95dp"
-        android:gravity="center"
-        android:text="가족 구성원을\n기다리는 중!"
-        android:textSize="15dp"
-        android:textColor="#fff"
-        android:lineSpacingExtra="5dp"
         android:fontFamily="@font/nanumsquare_acr"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="가족 구성원을\n기다리는 중!"
+        android:textColor="#fff"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +39,8 @@
         android:id="@+id/text_familycode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="350dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="우리 가족 코드"
@@ -57,9 +58,9 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/nanumsquare_acdb"
         android:gravity="center"
+        android:text="Family Code"
         android:textColor="@color/pointColor"
         android:textSize="29dp"
-        android:text="Family Code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,13 +98,17 @@
 
     <Button
         android:id="@+id/btn_logout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/btn_grey_rounded"
         android:text="로그아웃"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_change"
-        app:layout_constraintVertical_bias="0.157"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.157" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
