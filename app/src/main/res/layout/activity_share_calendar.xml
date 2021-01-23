@@ -233,17 +233,18 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="2dp"
                 android:background="#B9B3BD" />
+
             <GridView
                 android:id="@+id/gv_calendar_activity_gv_calendar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="520dp"
                 android:background="#FFFFFF"
+                android:fontFamily="@font/nanumsquare_acb"
                 android:listSelector="@drawable/grideview_selector"
                 android:numColumns="7"
-                android:fontFamily="@font/nanumsquare_acb"
                 android:stretchMode="columnWidth"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                tools:ignore="MissingConstraints"/>
+                tools:ignore="MissingConstraints" />
 
         </LinearLayout>
 
