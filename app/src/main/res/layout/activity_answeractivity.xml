@@ -25,7 +25,6 @@
         android:layout_weight="1"
         android:src="@drawable/top_write2x"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="parent"
