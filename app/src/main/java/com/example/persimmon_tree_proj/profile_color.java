@@ -70,10 +70,6 @@ public class profile_color extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //makeprofil로 이동
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
