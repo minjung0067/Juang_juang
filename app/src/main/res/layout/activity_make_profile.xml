@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
         android:fontFamily="@font/nanumsquare_acr"
-        android:text="  한 줄 소개를 입력해주세요!"
+        android:text="  별명을 입력해주세요!"
         android:textColor="#000"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"

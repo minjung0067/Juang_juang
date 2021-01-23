@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private String key;
     String this_color="";
     String this_gam ="";
+    String this_introduce="";
 
     String user_gam = "";
     String user_color = "";
@@ -420,9 +421,10 @@ public class MainActivity extends AppCompatActivity {
                     String value = data.getValue().toString();
                     this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
                     this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
+                    this_introduce = dataSnapshot.child("members").child(key).child("introduce").getValue(String.class);
                     member_color_arr.add(this_color);
                     member_gam_arr.add(this_gam);
-                    member_arr.add(key);
+                    member_arr.add(this_introduce);
                     member_ans_arr.add(value);
                 }
                 int now_size = member_arr.size();
