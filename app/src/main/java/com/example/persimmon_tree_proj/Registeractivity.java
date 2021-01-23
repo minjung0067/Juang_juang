@@ -241,9 +241,9 @@ public class Registeractivity extends AppCompatActivity {
                 // 모든 칸이 공백이 아닐때 = 모든 칸이 입력되어있을 때
                 if (!id.equals("") && !pwd.equals("") && !name.equals("") && !birth.equals("")) {
                     // 전체 약관 체크여부
-                    if (TERMS_AGREE_1 != 1 || TERMS_AGREE_2 == 1) {
+                    if (TERMS_AGREE_1 != 0 || TERMS_AGREE_2 == 0) {
                         // 첫번째 약관 체크여부
-                            Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registeractivity.this, "필수 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                             return;
                     }
                     // 전체 약관 체크된경우
