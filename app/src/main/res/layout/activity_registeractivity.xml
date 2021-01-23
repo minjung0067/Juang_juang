@@ -86,7 +86,7 @@
             android:ems="10"
             android:fontFamily="@font/nanumsquare_acr"
             android:gravity="left"
-            android:hint="비밀번호"
+            android:hint="비밀번호 (영어,숫자,특수문자 포함 8자 이상)"
             android:inputType="textPassword"
             android:textColorHint="@color/greyColor"
             android:textSize="15dp" />
@@ -115,7 +115,7 @@
             android:ems="10"
             android:fontFamily="@font/nanumsquare_acr"
             android:gravity="left"
-            android:hint="생년월일(숫자 8개 입력)"
+            android:hint="생년월일(ex 20190912)"
             android:inputType="date"
             android:textColorHint="@color/greyColor"
             android:textSize="15dp" />
