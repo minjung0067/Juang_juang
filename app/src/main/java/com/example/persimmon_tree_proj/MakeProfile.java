@@ -62,7 +62,7 @@ public class MakeProfile extends AppCompatActivity {
                 introduce = whoami.getText().toString();
                 if(introduce.getBytes().length <= 0){//빈값이 넘어올때의 처리
 
-                    Toast.makeText(MakeProfile.this, "한 줄 소래를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MakeProfile.this, "한 줄 소개를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     mDatabase = FirebaseDatabase.getInstance();
@@ -97,6 +97,7 @@ public class MakeProfile extends AppCompatActivity {
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), profile_gam.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
