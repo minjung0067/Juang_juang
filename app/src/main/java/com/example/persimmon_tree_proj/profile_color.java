@@ -85,14 +85,14 @@ public class profile_color extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
                 final String user_name = dataSnapshot.child("name").getValue(String.class);
                 //이미 다른 가족 구성원이 선택한 색깔이 뭔지 검사하는 부분 시작
                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
-                reference1.child(myfcode).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+                reference1.child(myfcode).child("members").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
@@ -189,7 +189,7 @@ public class profile_color extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String myfcode = dataSnapshot.child("fcode").getValue(String.class);
