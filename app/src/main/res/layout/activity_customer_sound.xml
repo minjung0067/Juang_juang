@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/top_orange"
-        app:layout_constraintEnd_toEndOf="@+id/btn_mypage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
