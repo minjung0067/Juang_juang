@@ -64,6 +64,10 @@ public class Answeractivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String user_name = snapshot.child("userName").getValue(String.class);
                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("answer").child(position).child(user_name).setValue(msg);
+                        Intent intent = new Intent(Answeractivity.this,MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
@@ -71,10 +75,7 @@ public class Answeractivity extends AppCompatActivity {
 
                     }
                 });
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+
             }
         });
 

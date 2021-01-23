@@ -162,7 +162,6 @@ public class profile_color_main extends AppCompatActivity {
         check_process(clicked_arr[5], c_6);
         check_process(clicked_arr[6], c_7);
         check_process(clicked_arr[7], c_8);
-        //check_process(clicked_arr[8], c_9);
     }
     //사용자가 전에 선택했던 건 1로 가족들이 이미 선택한 색깔 체크해서 이미 선택된 건 2로 바꾸는 함수
     public void make_cannot_select(String family_color_num,int num) {
@@ -182,8 +181,6 @@ public class profile_color_main extends AppCompatActivity {
             clicked_arr[6] = num;
         } else if (family_color_num.equals("#E89CDA")) {
             clicked_arr[7] = num; }
-//        else if (family_color_num.equals("#527B03F4")) {
-//            clicked_arr[8] = num; }
         else{
         }
         make_clicked();
