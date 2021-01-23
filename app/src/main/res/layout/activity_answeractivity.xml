@@ -104,7 +104,7 @@
         android:id="@+id/btn_answer"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/btn_orange_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="답변완료"
@@ -113,6 +113,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/txt_question2"
         app:layout_constraintStart_toEndOf="@+id/txt_question2"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="0.544" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
