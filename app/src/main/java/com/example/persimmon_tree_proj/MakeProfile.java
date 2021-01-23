@@ -60,13 +60,12 @@ public class MakeProfile extends AppCompatActivity {
         //whoami.setText(introduce1);
 
 
-        introduce = whoami.getText().toString();
-
         //확인 버튼 누르면 main으로
         ok = (Button) findViewById(R.id.ok_btn);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                introduce = whoami.getText().toString();
                 if(introduce.getBytes().length <= 0){//빈값이 넘어올때의 처리
                     Toast.makeText(MakeProfile.this, "한 줄 소래를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
