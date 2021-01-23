@@ -145,24 +145,24 @@ public class Registeractivity extends AppCompatActivity {
             }
         });
         // 세번째 항 동의
-        check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    TERMS_AGREE_3 = 1;
-                } else {
-                    TERMS_AGREE_3 = 0;
-                }
-                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
-                    checkall.setChecked(true);
-                    TERMS_AGREE_all = 1;
-                }
-                else {
-                    checkall.setChecked(false);
-                    TERMS_AGREE_all = 0;
-                }
-            }
-        });
+//        check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    TERMS_AGREE_3 = 1;
+//                } else {
+//                    TERMS_AGREE_3 = 0;
+//                }
+//                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+//                    checkall.setChecked(true);
+//                    TERMS_AGREE_all = 1;
+//                }
+//                else {
+//                    checkall.setChecked(false);
+//                    TERMS_AGREE_all = 0;
+//                }
+//            }
+//        });
 
 
         // 전체동의
