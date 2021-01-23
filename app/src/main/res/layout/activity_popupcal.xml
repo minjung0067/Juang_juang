@@ -22,8 +22,8 @@
 
         <ImageButton
             android:id="@+id/no"
-            android:layout_width="20dp"
-            android:layout_height="16dp"
+            android:layout_width="30dp"
+            android:layout_height="36dp"
             android:background="#ffffff"
             android:gravity="bottom"
             android:onClick="mOnClose"
