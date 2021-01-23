@@ -55,7 +55,7 @@ public class profile_color extends AppCompatActivity {
         Button gam = (Button) findViewById(R.id.gam);     //감 프로필 사진 고르기 버튼
 
         Intent intent = getIntent();
-        String introduce = intent.getStringExtra("introduce");
+        String introduce = intent.getStringExtra("intro");
 
 
         gam.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +63,7 @@ public class profile_color extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), profile_gam.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -76,7 +76,7 @@ public class profile_color extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
             }

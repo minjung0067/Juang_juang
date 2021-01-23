@@ -51,7 +51,7 @@ public class profile_gam extends AppCompatActivity {
         gam_8 = (ImageView) findViewById(R.id.gam8);
 
         Intent intent = getIntent();
-        String introduce = intent.getStringExtra("introduce");
+        String introduce = intent.getStringExtra("intro");
 
         Button color = (Button) findViewById(R.id.color);   //색상 버튼
         color.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +59,7 @@ public class profile_gam extends AppCompatActivity {
             public void onClick(View v) {  //색상 버튼 누르면 색깔 정하는 곳으로 가게
                 Intent intent = new Intent(getApplicationContext(), profile_color.class); //코드 생성 activity로 이동
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("intro",introduce);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -72,7 +72,7 @@ public class profile_gam extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),MakeProfile.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
             }
