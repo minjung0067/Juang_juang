@@ -54,7 +54,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/profile_outline"
-        android:src="@drawable/gam1"
+        android:src="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -263,8 +263,8 @@
 
     <ImageButton
         android:id="@+id/main_btn"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@null"
         android:scaleType="fitCenter"
@@ -279,8 +279,8 @@
 
     <ImageButton
         android:id="@+id/setting_btn"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
         android:layout_marginRight="70dp"
         android:background="@null"
         android:scaleType="fitXY"
@@ -292,8 +292,8 @@
 
     <ImageButton
         android:id="@+id/calendar_btn"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="70dp"
         android:background="@null"
         android:scaleType="fitCenter"
