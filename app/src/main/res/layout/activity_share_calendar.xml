@@ -83,7 +83,11 @@
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="700dp"
+=======
+        android:layout_height="560dp"
+>>>>>>> 1377e292a32edfd122f0636a54b4a9e1a73368f9
         android:orientation="vertical"
         android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -244,6 +248,10 @@
                 android:stretchMode="columnWidth"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                 tools:ignore="MissingConstraints"/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1377e292a32edfd122f0636a54b4a9e1a73368f9
         </LinearLayout>
 
 
