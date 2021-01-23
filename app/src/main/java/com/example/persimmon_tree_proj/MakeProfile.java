@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,15 +55,20 @@ public class MakeProfile extends AppCompatActivity {
 
         whoami = (EditText) findViewById(R.id.whoami);
 
+        //Intent intent = getIntent();
+        //String introduce1 = intent.getStringExtra("intro");
+        //whoami.setText(introduce1);
+
+
+        introduce = whoami.getText().toString();
+
         //확인 버튼 누르면 main으로
         ok = (Button) findViewById(R.id.ok_btn);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                introduce = whoami.getText().toString();
                 if(introduce.getBytes().length <= 0){//빈값이 넘어올때의 처리
-
-                    Toast.makeText(MakeProfile.this, "한 줄 소개를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MakeProfile.this, "한 줄 소래를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     mDatabase = FirebaseDatabase.getInstance();
@@ -97,9 +103,9 @@ public class MakeProfile extends AppCompatActivity {
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), profile_gam.class);
+                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
             }

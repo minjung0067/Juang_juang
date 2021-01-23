@@ -38,7 +38,6 @@ public class CodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code); //code xml 보여주기
 
-        tv_code.setText(str_code);//화면에 code출력하기
 
         ok = (Button)findViewById(R.id.btn_ok);
         ok.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +59,9 @@ public class CodeActivity extends AppCompatActivity {
         }while(tf == 1);
 
         writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
+
+        tv_code.setText(str_code);//화면에 code출력하기
+
 
     }
 
