@@ -113,14 +113,20 @@ public class Registeractivity extends AppCompatActivity {
                     TERMS_AGREE_1 = 1;    //0을 1로
                 } else {   //이미 체크 되어있으면
                     TERMS_AGREE_1 = 0;    //1을 0으로
+                    if(TERMS_AGREE_2 == 1 && TERMS_AGREE_3== 1){
+                        checkall.setChecked(false);
+                        TERMS_AGREE_all = 0;
+                        check2.setChecked(true);
+                        TERMS_AGREE_2 = 1;
+                        check3.setChecked(true);
+                        TERMS_AGREE_3 = 1;
+                    }
                 }
-                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
-                    checkall.setChecked(true);
-                    TERMS_AGREE_all = 1;
-                }
-                else {
-                    checkall.setChecked(false);
-                    TERMS_AGREE_all = 0;
+                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+                    if( TERMS_AGREE_3==1){
+                        checkall.setChecked(true);
+                        TERMS_AGREE_all = 1;
+                    }
                 }
             }
         });
@@ -133,36 +139,49 @@ public class Registeractivity extends AppCompatActivity {
                     TERMS_AGREE_2 = 1;
                 } else {
                     TERMS_AGREE_2 = 0;
+                    if(TERMS_AGREE_1 == 1 && TERMS_AGREE_3 == 1){
+                        checkall.setChecked(false);
+                        TERMS_AGREE_all = 0;
+                        check1.setChecked(true);
+                        TERMS_AGREE_1 = 1;
+                        check3.setChecked(true);
+                        TERMS_AGREE_3 = 1;
+
+                    }
                 }
-                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
-                    checkall.setChecked(true);
-                    TERMS_AGREE_all = 1;
-                }
-                else {
-                    checkall.setChecked(false);
-                    TERMS_AGREE_all = 0;
+                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+                    if( TERMS_AGREE_3==1){
+                        checkall.setChecked(true);
+                        TERMS_AGREE_all = 1;
+                    }
                 }
             }
         });
-        // 세번째 항 동의
-//        check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    TERMS_AGREE_3 = 1;
-//                } else {
-//                    TERMS_AGREE_3 = 0;
-//                }
-//                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1 && TERMS_AGREE_3==1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
-//                    checkall.setChecked(true);
-//                    TERMS_AGREE_all = 1;
-//                }
-//                else {
-//                    checkall.setChecked(false);
-//                    TERMS_AGREE_all = 0;
-//                }
-//            }
-//        });
+         //세번째 항 동의
+        check3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    TERMS_AGREE_3 = 1;
+                } else {
+                    TERMS_AGREE_3 = 0;
+                    if(TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1){
+                        checkall.setChecked(false);
+                        TERMS_AGREE_all = 0;
+                        check1.setChecked(true);
+                        TERMS_AGREE_1 = 1;
+                        check2.setChecked(true);
+                        TERMS_AGREE_2 = 1;
+                    }
+                }
+                if (TERMS_AGREE_1 == 1 && TERMS_AGREE_2 == 1) { //모두 동의 체크 안 하고 직접 세 개 각각 체크했으면 모두 동의도 체크로 바뀌게
+                    if( TERMS_AGREE_3==1){
+                        checkall.setChecked(true);
+                        TERMS_AGREE_all = 1;
+                    }
+                }
+            }
+        });
 
 
         // 전체동의
@@ -173,11 +192,13 @@ public class Registeractivity extends AppCompatActivity {
                     check1.setChecked(true);   //싹 다 true로 바꾸기
                     check2.setChecked(true);
                     check3.setChecked(true);
+                    checkall.setChecked(true);
                     TERMS_AGREE_all = 1;   //모두 동의 체크 변수를 0에서 1로
                 } else {
                     check1.setChecked(false);    //한번에 싹 다 체크 해제
                     check2.setChecked(false);
                     check3.setChecked(false);
+                    checkall.setChecked(false);
                     TERMS_AGREE_all = 0;  //모두 동의 체크 변수를 1에서 0으로
                 }
             }
@@ -220,31 +241,17 @@ public class Registeractivity extends AppCompatActivity {
                 // 모든 칸이 공백이 아닐때 = 모든 칸이 입력되어있을 때
                 if (!id.equals("") && !pwd.equals("") && !name.equals("") && !birth.equals("")) {
                     // 전체 약관 체크여부
-                    if (TERMS_AGREE_all != 1) {
+                    if (TERMS_AGREE_1 != 1 || TERMS_AGREE_2 == 1) {
                         // 첫번째 약관 체크여부
-                        if (TERMS_AGREE_3 == 1) {
-                            // 두번째 약관 체크 여부
-                            if (TERMS_AGREE_1 == 1) {
-                            } else {
-                                Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        } else {
                             Toast.makeText(Registeractivity.this, "모든 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                             return;
-                        }
                     }
                     // 전체 약관 체크된경우
                     else {
                         check_validation1(pwd);
-                        Log.i("ok1", String.valueOf(ok1));
-                        Log.i("ok2", String.valueOf(ok2));
                         check_validation2(birth);
-                        Log.i("ok1", String.valueOf(ok1));
-                        Log.i("ok2", String.valueOf(ok2));
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
                             if(ok2 == 1){
-                                Log.i("어디얌","여기야");
 
                                 //hashmap 만들기
                                 HashMap result = new HashMap<>();  //database 올릴 때 사용
@@ -264,7 +271,7 @@ public class Registeractivity extends AppCompatActivity {
 
                         }
                         else{//비밀번호 조건에 맞지 않는 경우 ok1 = 0 인 경우
-                            Toast.makeText(Registeractivity.this, "비밀번호는 영어,숫자,특수문자를 포함한 8자 이상 입력해주세요.", Toast.LENGTH_LONG).show();   //비밀번호를 다시 입력하는 알림
+                            Toast.makeText(Registeractivity.this, "비밀번호는 영어,숫자,특수문자($@$!%*#?&.)를 포함한 8자 이상 입력해주세요.", Toast.LENGTH_LONG).show();   //비밀번호를 다시 입력하는 알림
 
                         }
                     }
