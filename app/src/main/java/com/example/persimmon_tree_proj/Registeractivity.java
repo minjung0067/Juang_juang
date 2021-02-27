@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +39,8 @@ public class Registeractivity extends AppCompatActivity {
     private DatabaseReference mDatabase;   //database 사용 시 필요함
     private EditText editTextEmail;   //id 칸
     private EditText editTextPassword; //비번 칸
+    private EditText editTextPassword2; //비번 확인 칸
+    private TextView password2; //비번 일치 확인
     private EditText editTextBirth; //생일 칸
     private EditText editTextName; //이름 칸
     private Button buttonJoin; //회원가입 버튼
@@ -64,6 +69,7 @@ public class Registeractivity extends AppCompatActivity {
     //유효성 판단
     private Integer ok1 = 0; //비밀번호 확인
     private Integer ok2 = 0;
+    private Integer ok3 = 0; // 비밀번호 일치확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,8 @@ public class Registeractivity extends AppCompatActivity {
         //xml 속 id값과 연결 & 변수할당
         editTextEmail = (EditText) findViewById(R.id.editText_id);    //id
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);    //pwd
+        editTextPassword2 = (EditText)findViewById(R.id.editText_passWord2); //pwd 확인
+        password2 = (TextView)findViewById(R.id.checkpwd2);
         editTextName = (EditText) findViewById(R.id.editText_name);   //name
         editTextBirth = (EditText) findViewById(R.id.edit_birth);    //birth
 
@@ -102,6 +110,35 @@ public class Registeractivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        editTextPassword2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
+                    password2.setText("일치합니다.");
+                    //password2.setTextColor(Integer.parseInt("#3CB354"));
+                }
+                else{
+                    password2.setText("일치하지 않습니다.");
+                    //password2.setTextColor(Integer.parseInt("#DB4455"));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+
 
 
 
@@ -235,11 +272,12 @@ public class Registeractivity extends AppCompatActivity {
 
                 String id = editTextEmail.getText().toString();
                 String pwd = editTextPassword.getText().toString();
+                String pwd2 = editTextPassword2.getText().toString();
                 String name = editTextName.getText().toString();
                 String birth = editTextBirth.getText().toString();
 
                 // 모든 칸이 공백이 아닐때 = 모든 칸이 입력되어있을 때
-                if (!id.equals("") && !pwd.equals("") && !name.equals("") && !birth.equals("")) {
+                if (!id.equals("") && !pwd.equals("") && !pwd2.equals("") && !name.equals("") && !birth.equals("")) {
                     // 전체 약관 체크여부
                     if (TERMS_AGREE_1 == 0 || TERMS_AGREE_2 == 0) {
                         // 첫번째 약관 체크여부
@@ -250,18 +288,24 @@ public class Registeractivity extends AppCompatActivity {
                     else {
                         check_validation1(pwd);
                         check_validation2(birth);
+                        check_validation3(pwd,pwd2);
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
                             if(ok2 == 1){
+                                if(ok3 ==1){
+                                    //hashmap 만들기
+                                    HashMap result = new HashMap<>();  //database 올릴 때 사용
+                                    result.put("name", name);
+                                    result.put("birth", birth);
+                                    result.put("fcode", "");
+                                    result.put("introduce","");
 
-                                //hashmap 만들기
-                                HashMap result = new HashMap<>();  //database 올릴 때 사용
-                                result.put("name", name);
-                                result.put("birth", birth);
-                                result.put("fcode", "");
-                                result.put("introduce","");
 
-
-                                createUser(id, pwd, birth, name);   //새로운 유저 만들기 함수로 넘어감!
+                                    createUser(id, pwd, birth, name);   //새로운 유저 만들기 함수로 넘어감!
+                                }
+                                else{
+                                    //비밀번호가 일치하지 않을 경우
+                                    Toast.makeText(Registeractivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                                }
                             }
                             else{
                                 //생년월일 조건에 맞지 않는 경우, ok2 = 0 인 경우
@@ -311,7 +355,7 @@ public class Registeractivity extends AppCompatActivity {
     }
 
     void check_validation2(String birth) {
-        // 비밀번호 유효성 검사식1 : 숫자, 특수문자가 포함되어야 한다.
+        //생일 8자리 수로
         if(birth.length() == 8){
             ok2 = 1;
         }
@@ -319,6 +363,16 @@ public class Registeractivity extends AppCompatActivity {
             ok2 = 0;
         }
 
+    }
+
+    void check_validation3(String password1 ,String password2){
+        //비밀번호 일치 확인
+        if(password1.equals(password2)){
+            ok3 = 1;
+        }
+        else{
+            ok3 = 0;
+        }
     }
 
     //회원가입 로직 : id/pwd는 firebase auth에, 나머지 회원정보는 firebase database에 올리는 함수
