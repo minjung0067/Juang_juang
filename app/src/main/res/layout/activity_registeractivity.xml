@@ -47,14 +47,22 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="409dp"
-        android:layout_height="255dp"
+        android:layout_width="386dp"
+        android:layout_height="308dp"
         android:layout_marginTop="124dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2">
+
+        <!--        <Button-->
+        <!--            android:id="@+id/btn_email"-->
+        <!--            android:layout_width="280dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:background="@drawable/btn_white_rounded"-->
+        <!--            android:fontFamily="@font/nanumsquare_acb"-->
+        <!--            android:text="이메일 인증" />-->
 
         <EditText
             android:id="@+id/editText_id"
@@ -70,14 +78,6 @@
             android:textColorHint="@color/greyColor"
             android:textSize="15dp" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/btn_email"-->
-        <!--            android:layout_width="280dp"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:background="@drawable/btn_white_rounded"-->
-        <!--            android:fontFamily="@font/nanumsquare_acb"-->
-        <!--            android:text="이메일 인증" />-->
-
         <EditText
             android:id="@+id/editText_passWord"
             android:layout_width="266dp"
@@ -86,10 +86,31 @@
             android:ems="10"
             android:fontFamily="@font/nanumsquare_acr"
             android:gravity="left"
-            android:hint="비밀번호 (영어,숫자,특수문자 포함 8자 이상)"
+            android:hint="비밀번호 입력 (영어,숫자,특수문자 포함 8자 이상)"
             android:inputType="textPassword"
             android:textColorHint="@color/greyColor"
             android:textSize="15dp" />
+
+
+        <EditText
+            android:id="@+id/editText_passWord2"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_margin="7dp"
+            android:ems="10"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:gravity="left"
+            android:hint="비밀번호 확인"
+            android:inputType="textPassword"
+            android:textColorHint="@color/greyColor"
+            android:textSize="15dp" />
+
+
+        <TextView
+            android:id="@+id/checkpwd2"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/editText_name"
