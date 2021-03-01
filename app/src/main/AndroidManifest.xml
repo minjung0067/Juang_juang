@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_persimmon_logo"
         android:label="우리집 감나무"
@@ -21,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
         <activity android:name="com.example.persimmon_tree_proj.customer_sound"></activity>
         <activity
             android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_DeletePlan"

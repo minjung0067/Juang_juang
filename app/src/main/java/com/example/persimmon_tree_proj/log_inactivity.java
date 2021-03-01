@@ -1,12 +1,17 @@
 package com.example.persimmon_tree_proj;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +37,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
+import com.kakao.auth.ApiErrorCode;
+import com.kakao.auth.AuthType;
+import com.kakao.auth.Session;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.util.exception.KakaoException;
+import com.nhn.android.naverlogin.OAuthLogin;
+import com.nhn.android.naverlogin.OAuthLoginHandler;
+import com.kakao.auth.ISessionCallback;
+
+
+import com.kakao.auth.ISessionCallback;
 
 public class log_inactivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
@@ -55,21 +75,53 @@ public class log_inactivity extends AppCompatActivity {
     private String introduce;
     private String myfam_count;
     private String myfam_introduce;
+
+
+    //네이버로그인
+    ImageView ll_naver_login;
+    Button btn_logout;
+
+    OAuthLogin mOAuthLoginModule;
+    Context mContext;
+
+
+    //카카오로그인
+    private com.kakao.usermgmt.LoginButton kakao_login;
+    private SessionCallback sessionCallback = new SessionCallback();
+    Session session;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_inactivity);
 
+        //카카오톡 로그인
+        kakao_login = (com.kakao.usermgmt.LoginButton) findViewById(R.id.btn_kakao_login);
+
+        kakao_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                session.open(AuthType.KAKAO_LOGIN_ALL, log_inactivity.this);
+            }
+        });
+
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-//        buttonGoogle = findViewById(R.id.btn_googleSignIn); //구글 로그인 버튼
+        buttonGoogle = findViewById(R.id.btn_googleSignIn); //구글 로그인 버튼
         editTextEmail = (EditText) findViewById(R.id.edittext_email);   //이메일 입력한 거 변수에 저장
         editTextPassword = (EditText) findViewById(R.id.edittext_password);   //비번 저장한 거 pwd에 저장
 
-//        //google 로그인 버튼 텍스트 바꾸기
-//        TextView textView = (TextView) buttonGoogle.getChildAt(0);
-//        textView.setText("업데이트 예정");
+        //google 로그인 버튼 텍스트 바꾸기
+        TextView textView = (TextView) buttonGoogle.getChildAt(0);
+        textView.setText("Google signin");
+
+
 
         buttonSignUp = (Button) findViewById(R.id.btn_signup);  //회원가입으로 연결하는 버튼
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
@@ -237,29 +289,72 @@ public class log_inactivity extends AppCompatActivity {
         });
 
 
-//        // Google 로그인을 앱에 통합
-//        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
-//        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//
-//        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
-//
-//        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
-//            @Override
-//            public void onClick(View view) {
-//                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
-//                startActivityForResult(signInIntent, RC_SIGN_IN);
-//            }
-//        });
+        // Google 로그인을 앱에 통합
+        // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 
-    }
-    @Override
-    public void onBackPressed() {
-        //안드로이드 백버튼 막기
-        finish();
-        return;
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions); // 구글 로그인을 위한 변수지정
+
+        buttonGoogle.setOnClickListener(new View.OnClickListener() {  //구글로그인버튼 클릭하면
+            @Override
+            public void onClick(View view) {
+                Intent signInIntent = googleSignInClient.getSignInIntent();    //구글 창이 띄워짐
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+
+
+
+        mContext = getApplicationContext();
+
+        ll_naver_login = findViewById(R.id.naverlogin);
+        btn_logout = findViewById(R.id.btn_logout);
+
+        ll_naver_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOAuthLoginModule = OAuthLogin.getInstance();
+                mOAuthLoginModule.init(
+                        mContext
+                        ,getString(R.string.naver_client_id)
+                        ,getString(R.string.naver_client_secret)
+                        ,getString(R.string.naver_client_name)
+                        //,OAUTH_CALLBACK_INTENT
+                        // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
+                );
+
+                @SuppressLint("HandlerLeak")
+                OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
+                    @Override
+                    public void run(boolean success) {
+                        if (success) {
+                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+                            String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
+                            long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
+                            String tokenType = mOAuthLoginModule.getTokenType(mContext);
+
+                            Log.i("LoginData","accessToken : "+ accessToken);
+                            Log.i("LoginData","refreshToken : "+ refreshToken);
+                            Log.i("LoginData","expiresAt : "+ expiresAt);
+                            Log.i("LoginData","tokenType : "+ tokenType);
+
+                        } else {
+                            String errorCode = mOAuthLoginModule
+                                    .getLastErrorCode(mContext).getCode();
+                            String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
+                            Toast.makeText(mContext, "errorCode:" + errorCode
+                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+                        }
+                    };
+                };
+
+                mOAuthLoginModule.startOauthLoginActivity(log_inactivity.this, mOAuthLoginHandler);
+            }
+        });
+
     }
 
     public void loginUser(String email, String password) {
@@ -293,23 +388,6 @@ public class log_inactivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {   //구글 로그인함수
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // 구글로그인 버튼 응답
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);   //구글 회원 데이터 가져옴
-            try {
-                // 구글 로그인 성공
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);     //파이어베이스에 로그인한 사람 정보가 올라감!
-
-            } catch (ApiException e) {
-
-            }
-        }
-    }
 
     // 사용자가 정상적으로 로그인한 후에 GoogleSignInAccount 개체에서 ID 토큰을 가져와서
     // Firebase 사용자 인증 정보로 교환하고 Firebase 사용자 인증 정보를 사용해 Firebase에 인증어쩌구,,, 한다
@@ -335,6 +413,46 @@ public class log_inactivity extends AppCompatActivity {
 
                     }
                 });
+
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 세션 콜백 삭제
+        Session.getCurrentSession().removeCallback(sessionCallback);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // 카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        // 구글로그인 버튼 응답
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);   //구글 회원 데이터 가져옴
+            try {
+                // 구글 로그인 성공
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);     //파이어베이스에 로그인한 사람 정보가 올라감!
+
+            } catch (ApiException e) {
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //안드로이드 백버튼 막기
+        finish();
+        return;
     }
 
 }
