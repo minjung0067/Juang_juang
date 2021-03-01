@@ -2,4 +2,12 @@
     <string name="app_name">persimmon_tree_proj</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="naver_client_id">U21iuB2GgTP4ogLbX63x</string>
+    <string name="naver_client_secret">qSDKMjs9L6</string>
+    <string name="naver_client_name">juangjuang</string>
+    <string name="kakao_app_key">c3340acc731a110866459226dedb46e8</string>
+
+
 </resources>
