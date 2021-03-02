@@ -40,6 +40,7 @@ public class Registeractivity extends AppCompatActivity {
     private EditText editTextEmail;   //id 칸
     private EditText editTextPassword; //비번 칸
     private EditText editTextPassword2; //비번 확인 칸
+    private TextView password;
     private TextView password2; //비번 일치 확인
     private EditText editTextBirth; //생일 칸
     private EditText editTextName; //이름 칸
@@ -83,6 +84,7 @@ public class Registeractivity extends AppCompatActivity {
         editTextEmail = (EditText) findViewById(R.id.editText_id);    //id
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);    //pwd
         editTextPassword2 = (EditText)findViewById(R.id.editText_passWord2); //pwd 확인
+        password = (TextView)findViewById(R.id.checkpwd);
         password2 = (TextView)findViewById(R.id.checkpwd2);
         editTextName = (EditText) findViewById(R.id.editText_name);   //name
         editTextBirth = (EditText) findViewById(R.id.edit_birth);    //birth
@@ -111,9 +113,52 @@ public class Registeractivity extends AppCompatActivity {
             }
         });
 
+
+
+        editTextPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String input = editTextPassword.getText().toString();
+                check_validation1(String.valueOf(editTextPassword));
+                Log.i("checkcehck", String.valueOf(ok1));
+                Integer inputcount = input.length();
+                if(inputcount < 8){
+                    password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
+                }
+                else{
+                    if(ok1 == 0){
+                        password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
+                    }
+                    else{
+                        password.setText("사용할 수 있습니다.");
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         editTextPassword2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
+                    password2.setText("일치합니다.");
+                    //password2.setTextColor(Integer.parseInt("#3CB354"));
+                }
+                else{
+                    password2.setText("비밀번호를 확인해주세요.");
+                    //password2.setTextColor(Integer.parseInt("#DB4455"));
+                }
 
             }
 
@@ -132,6 +177,10 @@ public class Registeractivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
+                    password2.setText("일치합니다.");
+                    //password2.setTextColor(Integer.parseInt("#3CB354"));
+                }
 
             }
         });

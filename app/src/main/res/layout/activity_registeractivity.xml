@@ -86,11 +86,17 @@
             android:ems="10"
             android:fontFamily="@font/nanumsquare_acr"
             android:gravity="left"
-            android:hint="비밀번호 입력 (영어,숫자,특수문자 포함 8자 이상)"
+            android:hint="비밀번호 입력"
             android:inputType="textPassword"
             android:textColorHint="@color/greyColor"
             android:textSize="15dp" />
 
+
+        <TextView
+            android:id="@+id/checkpwd"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/editText_passWord2"
