@@ -120,7 +120,6 @@ public class Registeractivity extends AppCompatActivity {
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.i("check1","come in?");
                 password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
             }
 
@@ -129,7 +128,6 @@ public class Registeractivity extends AppCompatActivity {
                 String input = editTextPassword.getText().toString();
                 ok1 = 0;
                 check_validation1(input);
-                Log.i("checkcehck", String.valueOf(ok1));
                 Integer inputcount = input.length();
                 if(inputcount < 8){
                     password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
