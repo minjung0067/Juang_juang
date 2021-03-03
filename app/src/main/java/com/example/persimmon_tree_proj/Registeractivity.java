@@ -115,16 +115,20 @@ public class Registeractivity extends AppCompatActivity {
 
 
 
+
+
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.i("check1","come in?");
                 password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String input = editTextPassword.getText().toString();
-                check_validation1(String.valueOf(editTextPassword));
+                ok1 = 0;
+                check_validation1(input);
                 Log.i("checkcehck", String.valueOf(ok1));
                 Integer inputcount = input.length();
                 if(inputcount < 8){
@@ -136,6 +140,15 @@ public class Registeractivity extends AppCompatActivity {
                     }
                     else{
                         password.setText("사용할 수 있습니다.");
+                        if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
+                            password2.setText("일치합니다.");
+                            //password2.setTextColor(Integer.parseInt("#3CB354"));
+                        }
+                        else{
+                            password2.setText("비밀번호를 확인해주세요.");
+
+                        }
+
                     }
 
                 }
@@ -181,9 +194,14 @@ public class Registeractivity extends AppCompatActivity {
                     password2.setText("일치합니다.");
                     //password2.setTextColor(Integer.parseInt("#3CB354"));
                 }
+                else{
+                    password2.setText("일치하지 않습니다.");
+                }
 
             }
         });
+
+
 
 
 
@@ -336,6 +354,7 @@ public class Registeractivity extends AppCompatActivity {
                     // 전체 약관 체크된경우
                     else {
                         check_validation1(pwd);
+                        Log.i("checkcheck2", String.valueOf(ok1));
                         check_validation2(birth);
                         check_validation3(pwd,pwd2);
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
