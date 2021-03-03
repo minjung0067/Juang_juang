@@ -63,6 +63,7 @@ public class log_inactivity extends AppCompatActivity {
     private String loginUid; //자동 로그인 비밀번호
     private Button buttonLogIn;//로그인 버튼
     private Button buttonSignUp; //회원가입 버튼
+    private Button buttonfind;
     // 구글로그인 result 상수
     private static final int RC_SIGN_IN = 900; //RC_SIGN_IN 상수는 구글로그인 버튼을 클릭하여 startactivityforresult 응답 코드로 사용
     // 구글api클라이언트
@@ -222,6 +223,19 @@ public class log_inactivity extends AppCompatActivity {
 
             }
         }
+
+        buttonfind = (Button)findViewById(R.id.btn_find);
+        buttonfind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), findaccount.class);
+                //계정을 잊어버렸다면 계정 찾기 페이지로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,6 +368,7 @@ public class log_inactivity extends AppCompatActivity {
                 mOAuthLoginModule.startOauthLoginActivity(log_inactivity.this, mOAuthLoginHandler);
             }
         });
+
 
     }
 

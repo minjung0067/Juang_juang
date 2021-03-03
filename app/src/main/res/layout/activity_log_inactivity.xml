@@ -245,5 +245,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.197" />
 
+    <Button
+        android:id="@+id/btn_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="계정을 잊어버리셨나요?"
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="678dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
