@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatCheckBox;
 
 import com.example.Juang_juang.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +32,7 @@ import java.util.HashMap;  //database에 올릴 때 HashMap이란 걸 사용한�
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Registeractivity extends AppCompatActivity {
+public class Registeractivity_3 extends AppCompatActivity {
     private static final String TAG = "Registeractivity";
     private FirebaseAuth firebaseAuth; //회원가입 로직에 사용!
     private DatabaseReference mDatabase;   //database 사용 시 필요함
@@ -72,13 +71,13 @@ public class Registeractivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registeractivity); //registeractivity 와 연결
+        setContentView(R.layout.activity_registeractivity_3); //registeractivity 와 연결
 
         firebaseAuth = FirebaseAuth.getInstance();  //auth 초기화
         mDatabase = FirebaseDatabase.getInstance().getReference(); //database 초기화
 
         //xml 속 id값과 연결 & 변수할당
-        editTextEmail = (EditText) findViewById(R.id.editText_id);    //id
+        editTextEmail = (EditText) findViewById(R.id.editText_email);    //id
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);    //pwd
         editTextPassword2 = (EditText)findViewById(R.id.editText_passWord2); //pwd 확인
         password = (TextView)findViewById(R.id.checkpwd);
@@ -293,7 +292,7 @@ public class Registeractivity extends AppCompatActivity {
         btn_view1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Registeractivity.this,servicehtml.class);
+                Intent intent = new Intent(Registeractivity_3.this,servicehtml.class);
                 startActivity(intent);
             }
         });
@@ -301,7 +300,7 @@ public class Registeractivity extends AppCompatActivity {
         btn_view2.setOnClickListener(new View.OnClickListener() {//개인정보 연결
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Registeractivity.this,privacyhtml.class);
+                Intent intent = new Intent(Registeractivity_3.this,privacyhtml.class);
                 startActivity(intent);
             }
         });
@@ -330,7 +329,7 @@ public class Registeractivity extends AppCompatActivity {
                     // 전체 약관 체크여부
                     if (TERMS_AGREE_1 == 0 || TERMS_AGREE_2 == 0) {
                         // 첫번째 약관 체크여부
-                            Toast.makeText(Registeractivity.this, "필수 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registeractivity_3.this, "필수 약관에 동의해주세요", Toast.LENGTH_SHORT).show();
                             return;
                     }
                     // 전체 약관 체크된경우
@@ -354,18 +353,18 @@ public class Registeractivity extends AppCompatActivity {
                                 }
                                 else{
                                     //비밀번호가 일치하지 않을 경우
-                                    Toast.makeText(Registeractivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Registeractivity_3.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                                 }
                             }
                             else{
                                 //생년월일 조건에 맞지 않는 경우, ok2 = 0 인 경우
-                                Toast.makeText(Registeractivity.this, "생년월일은 8자로 써주세요 (ex)20200912", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Registeractivity_3.this, "생년월일은 8자로 써주세요 (ex)20200912", Toast.LENGTH_LONG).show();
 
                             }
 
                         }
                         else{//비밀번호 조건에 맞지 않는 경우 ok1 = 0 인 경우
-                            Toast.makeText(Registeractivity.this, "비밀번호는 영어,숫자,특수문자($@$!%*#?&.)를 포함한 8자 이상 입력해주세요.", Toast.LENGTH_LONG).show();   //비밀번호를 다시 입력하는 알림
+                            Toast.makeText(Registeractivity_3.this, "비밀번호는 영어,숫자,특수문자($@$!%*#?&.)를 포함한 8자 이상 입력해주세요.", Toast.LENGTH_LONG).show();   //비밀번호를 다시 입력하는 알림
 
                         }
                     }
@@ -374,7 +373,7 @@ public class Registeractivity extends AppCompatActivity {
 
                 } else {
                     // 하나라도 공백이 있는 경우 = 사용자가 입력 안 한 칸이 하나라도 있으면
-                    Toast.makeText(Registeractivity.this, "회원정보를 모두 입력해주세요.", Toast.LENGTH_LONG).show();   //알림 메세지 띄움
+                    Toast.makeText(Registeractivity_3.this, "회원정보를 모두 입력해주세요.", Toast.LENGTH_LONG).show();   //알림 메세지 띄움
                 }
             }
         });
@@ -441,7 +440,7 @@ public class Registeractivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) { //database에 올리기 성공했으면
-                                            Toast.makeText(Registeractivity.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Registeractivity_3.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
 
                                             //activity간에 계속 인텐트로 데이터 주고 받는거보다 이름을 파일에 저장하게 되면 접근하기 쉬울거라고 생각해서 이 방식 채택함 근데 추후에 이름 바꾸는 경우 생각안해봄
                                             SharedPreferences saveprofile = getSharedPreferences("saveprofile",MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
@@ -456,7 +455,7 @@ public class Registeractivity extends AppCompatActivity {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {  //database에 올리기 실패했으면
-                                            Toast.makeText(Registeractivity.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Registeractivity_3.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -465,7 +464,7 @@ public class Registeractivity extends AppCompatActivity {
 
                         } else {
                             // 계정이 중복된 경우
-                            Toast.makeText(Registeractivity.this, "중복되는 계정이 있습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registeractivity_3.this, "중복되는 계정이 있습니다.", Toast.LENGTH_SHORT).show();
 
                         }
                     }

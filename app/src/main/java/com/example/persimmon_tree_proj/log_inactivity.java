@@ -109,7 +109,7 @@ public class log_inactivity extends AppCompatActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(log_inactivity.this, Registeractivity.class);
+                Intent intent = new Intent(log_inactivity.this, Registeractivity_1.class);
                 startActivity(intent);
             }
         });

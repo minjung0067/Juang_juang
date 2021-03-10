@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.example.persimmon_tree_proj.Registeractivity">
+    tools:context="com.example.persimmon_tree_proj.Registeractivity_3">
 
 
     <LinearLayout
@@ -29,7 +29,7 @@
         <!--            android:text="이메일 인증" />-->
 
         <EditText
-            android:id="@+id/editText_id"
+            android:id="@+id/editText_email"
             android:layout_width="266dp"
             android:layout_height="40dp"
             android:layout_margin="7dp"
