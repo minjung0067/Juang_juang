@@ -62,10 +62,7 @@ public class Registeractivity extends AppCompatActivity {
     //약관 확인 html로 이동
     private Button btn_view1;
     private Button btn_view2;
-    private Button btn_view3;
 
-    //로그인 이동용 버튼
-    private Button buttonLogin;
 
     //유효성 판단
     private Integer ok1 = 0; //비밀번호 확인
@@ -99,19 +96,6 @@ public class Registeractivity extends AppCompatActivity {
 
         btn_view1 = (Button)findViewById(R.id.btn_view1);
         btn_view2 = (Button)findViewById(R.id.btn_view2); //개인정보 확인 버튼튼
-
-
-
-
-
-        buttonLogin = (Button) findViewById(R.id.btn_logintop);  //회원가입으로 연결하는 버튼
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // login_activity 연결
-                finish();
-            }
-        });
 
 
 

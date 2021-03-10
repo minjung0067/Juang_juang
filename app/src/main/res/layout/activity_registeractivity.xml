@@ -9,42 +9,6 @@
     tools:context="com.example.persimmon_tree_proj.Registeractivity">
 
 
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="93dp"
-        android:layout_height="36dp"
-        android:layout_marginRight="73dp"
-        android:background="@drawable/btn_orange_rounded"
-        android:text="회원가입"
-        android:textColor="#FFFFFF"
-        android:textSize="14dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_logintop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_logintop"
-        app:layout_constraintTop_toTopOf="@+id/btn_logintop"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_logintop"
-        android:layout_width="93dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginRight="195dp"
-        android:layout_marginBottom="561dp"
-        android:background="@android:color/transparent"
-        android:text="로그인"
-        android:textColor="#B9B3BD"
-        android:textSize="14dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.279"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
-
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="386dp"
