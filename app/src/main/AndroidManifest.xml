@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.findaccount"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_2"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_1" />
+        <activity android:name="com.example.persimmon_tree_proj.findaccount" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -65,7 +67,7 @@
         <activity android:name="com.example.persimmon_tree_proj.familyactivity" />
         <activity android:name="com.example.persimmon_tree_proj.CodeActivity" />
         <activity android:name="com.example.persimmon_tree_proj.MainActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Registeractivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_3" />
         <activity android:name="com.example.persimmon_tree_proj.findaccount" />
     </application>
 
