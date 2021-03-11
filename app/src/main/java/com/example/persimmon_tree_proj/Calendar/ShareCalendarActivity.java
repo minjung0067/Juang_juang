@@ -26,7 +26,7 @@ import androidx.core.view.GestureDetectorCompat;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Main.MainActivity;
-import com.example.persimmon_tree_proj.Profil.MypageActivity;
+import com.example.persimmon_tree_proj.Profile.MypageActivity;
 import com.example.persimmon_tree_proj.Calendar.Popup_Cal.PopupcalActivity;
 import com.example.persimmon_tree_proj.Calendar.adapter.CalendarAdapter;
 import com.example.persimmon_tree_proj.customer_sound;

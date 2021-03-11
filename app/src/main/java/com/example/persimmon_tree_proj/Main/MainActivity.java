@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
-import com.example.persimmon_tree_proj.Profil.MypageActivity;
+import com.example.persimmon_tree_proj.Profile.MypageActivity;
 import com.example.persimmon_tree_proj.Family.Waitactivity;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;

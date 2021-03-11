@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.Juang_juang.R;
-import com.example.persimmon_tree_proj.Profil.MakeProfile;
+import com.example.persimmon_tree_proj.Profile.MakeProfile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

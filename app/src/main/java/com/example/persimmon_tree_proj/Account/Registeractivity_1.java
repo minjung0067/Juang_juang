@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Main.MainActivity;
-import com.example.persimmon_tree_proj.Profil.MakeProfile;
+import com.example.persimmon_tree_proj.Profile.MakeProfile;
 import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

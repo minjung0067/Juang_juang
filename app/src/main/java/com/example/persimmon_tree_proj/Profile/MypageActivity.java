@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj.Profil;
+package com.example.persimmon_tree_proj.Profile;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;

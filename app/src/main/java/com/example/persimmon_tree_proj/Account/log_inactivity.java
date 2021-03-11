@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Main.MainActivity;
-import com.example.persimmon_tree_proj.Profil.MakeProfile;
+import com.example.persimmon_tree_proj.Profile.MakeProfile;
 import com.example.persimmon_tree_proj.Family.Make_FamilyProfile;
 import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
