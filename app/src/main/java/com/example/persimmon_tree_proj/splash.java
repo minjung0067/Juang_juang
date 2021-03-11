@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.Account.log_inactivity;
 
 public class splash extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class splash extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(),log_inactivity.class);
+                Intent intent = new Intent(getApplicationContext(), log_inactivity.class);
                 startActivity(intent);
                 finish();
             }

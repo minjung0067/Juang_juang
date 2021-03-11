@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="linearOnClick"
-    tools:context="com.example.persimmon_tree_proj.Answeractivity">
+    tools:context="com.example.persimmon_tree_proj.Main.Answeractivity">
 
     <TextView
         android:id="@+id/top_orange"

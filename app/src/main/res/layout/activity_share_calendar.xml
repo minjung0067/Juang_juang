@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/WhiteColor"
-    tools:context="com.example.persimmon_tree_proj.ShareCalendarActivity">>
+    tools:context="com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity">>
 
     <!-- Activity Layout XML -->
     <!-- @author croute -->
