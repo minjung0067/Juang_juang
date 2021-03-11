@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.persimmon_tree_proj.Registeractivity_2">
+    tools:context="com.example.persimmon_tree_proj.Account.Registeractivity_2">
 
     <EditText
         android:id="@+id/editText_email"

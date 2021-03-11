@@ -7,7 +7,7 @@
     android:background="@color/WhiteColor"
     android:orientation="vertical"
     android:outlineSpotShadowColor="#FFFFFF"
-    tools:context="com.example.persimmon_tree_proj.log_inactivity">
+    tools:context="com.example.persimmon_tree_proj.Account.log_inactivity">
 
     ​
 

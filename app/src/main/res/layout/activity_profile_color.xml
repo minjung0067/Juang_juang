@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="com.example.persimmon_tree_proj.profile_color">
+    tools:context="com.example.persimmon_tree_proj.Profile.profile_color">
 
     <ImageButton
         android:id="@+id/go_back"
