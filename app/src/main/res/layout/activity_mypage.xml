@@ -8,7 +8,7 @@
     android:background="#fff"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.persimmon_tree_proj.MypageActivity">
+    tools:context="com.example.persimmon_tree_proj.Profil.MypageActivity">
 
 
     <ImageButton

@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".GlobalApplication"
+        android:name="com.example.persimmon_tree_proj.Account.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_persimmon_logo"
         android:label="우리집 감나무"
@@ -20,10 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_3"></activity>
-        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_2" />
-        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_1" />
-        <activity android:name="com.example.persimmon_tree_proj.findaccount" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_3"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_2" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_1" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.findaccount" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -31,32 +31,32 @@
 
         <activity android:name="com.example.persimmon_tree_proj.customer_sound" />
         <activity
-            android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_DeletePlan"
+            android:name="com.example.persimmon_tree_proj.Calendar.Popup_Cal.popup_DeletePlan"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.example.persimmon_tree_proj.Popup_Cal.popup_RevisePlan"
+            android:name="com.example.persimmon_tree_proj.Calendar.Popup_Cal.popup_RevisePlan"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.example.persimmon_tree_proj.Popup_Cal.PopupcalActivity"
+            android:name="com.example.persimmon_tree_proj.Calendar.Popup_Cal.PopupcalActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.example.persimmon_tree_proj.PopupCalendar"
+            android:name="com.example.persimmon_tree_proj.Calendar.PopupCalendar"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name="com.example.persimmon_tree_proj.ShareCalendarActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.ShowFamilyActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Waitactivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfilewait" />
-        <activity android:name="com.example.persimmon_tree_proj.privacyhtml" />
-        <activity android:name="com.example.persimmon_tree_proj.servicehtml" />
-        <activity android:name="com.example.persimmon_tree_proj.profile_color" />
-        <activity android:name="com.example.persimmon_tree_proj.profile_color_main" />
-        <activity android:name="com.example.persimmon_tree_proj.profile_gam" />
-        <activity android:name="com.example.persimmon_tree_proj.profile_gam_main" />
-        <activity android:name="com.example.persimmon_tree_proj.Make_FamilyProfile" />
-        <activity android:name="com.example.persimmon_tree_proj.MakeProfile" />
-        <activity android:name="com.example.persimmon_tree_proj.MakeProfilemain" />
-        <activity android:name="com.example.persimmon_tree_proj.MypageActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Answeractivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Family.ShowFamilyActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Family.Waitactivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Family.Make_FamilyProfilewait" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.html.privacyhtml" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.html.servicehtml" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.profile_color" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.profile_color_main" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.profile_gam" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.profile_gam_main" />
+        <activity android:name="com.example.persimmon_tree_proj.Family.Make_FamilyProfile" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.MakeProfile" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.MakeProfilemain" />
+        <activity android:name="com.example.persimmon_tree_proj.Profil.MypageActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Main.Answeractivity" />
         <activity android:name="com.example.persimmon_tree_proj.splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,12 +64,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.persimmon_tree_proj.log_inactivity" />
-        <activity android:name="com.example.persimmon_tree_proj.familyactivity" />
-        <activity android:name="com.example.persimmon_tree_proj.CodeActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.MainActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Registeractivity_4" />
-        <activity android:name="com.example.persimmon_tree_proj.findaccount" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.log_inactivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Family.familyactivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Family.CodeActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Main.MainActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_4" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.findaccount" />
     </application>
 
 </manifest>

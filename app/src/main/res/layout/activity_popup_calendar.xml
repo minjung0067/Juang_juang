@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#00ffffff"
-    tools:context="com.example.persimmon_tree_proj.PopupCalendar">
+    tools:context="com.example.persimmon_tree_proj.Calendar.PopupCalendar">
 
     <LinearLayout
         android:id="@+id/calendar_layout"
