@@ -82,9 +82,9 @@ public class Registeractivity_4 extends AppCompatActivity {
         //xml 속 id값과 연결 & 변수할당
         editTextEmail = (EditText) findViewById(R.id.editText_email);    //id
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);    //pwd
-        editTextPassword2 = (EditText)findViewById(R.id.editText_passWord2); //pwd 확인
-        password = (TextView)findViewById(R.id.checkpwd);
-        password2 = (TextView)findViewById(R.id.checkpwd2);
+        //editTextPassword2 = (EditText)findViewById(R.id.editText_passWord2); //pwd 확인
+        //password = (TextView)findViewById(R.id.checkpwd);
+        //password2 = (TextView)findViewById(R.id.checkpwd2);
         editTextName = (EditText) findViewById(R.id.editText_name);   //name
         editTextBirth = (EditText) findViewById(R.id.edit_birth);    //birth
 
