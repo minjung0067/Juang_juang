@@ -6,44 +6,8 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.example.persimmon_tree_proj.Registeractivity">
+    tools:context="com.example.persimmon_tree_proj.Registeractivity_4">
 
-
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="93dp"
-        android:layout_height="36dp"
-        android:layout_marginRight="73dp"
-        android:background="@drawable/btn_orange_rounded"
-        android:text="회원가입"
-        android:textColor="#FFFFFF"
-        android:textSize="14dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_logintop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_logintop"
-        app:layout_constraintTop_toTopOf="@+id/btn_logintop"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btn_logintop"
-        android:layout_width="93dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginRight="195dp"
-        android:layout_marginBottom="561dp"
-        android:background="@android:color/transparent"
-        android:text="로그인"
-        android:textColor="#B9B3BD"
-        android:textSize="14dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.279"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -64,59 +28,6 @@
         <!--            android:fontFamily="@font/nanumsquare_acb"-->
         <!--            android:text="이메일 인증" />-->
 
-        <EditText
-            android:id="@+id/editText_id"
-            android:layout_width="266dp"
-            android:layout_height="40dp"
-            android:layout_margin="7dp"
-            android:layout_marginLeft="47dp"
-            android:ems="10"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:gravity="left"
-            android:hint="이메일 주소"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/greyColor"
-            android:textSize="15dp" />
-
-        <EditText
-            android:id="@+id/editText_passWord"
-            android:layout_width="266dp"
-            android:layout_height="40dp"
-            android:layout_margin="7dp"
-            android:ems="10"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:gravity="left"
-            android:hint="비밀번호 입력"
-            android:inputType="textPassword"
-            android:textColorHint="@color/greyColor"
-            android:textSize="15dp" />
-
-
-        <TextView
-            android:id="@+id/checkpwd"
-            android:layout_width="266dp"
-            android:layout_height="wrap_content"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/editText_passWord2"
-            android:layout_width="266dp"
-            android:layout_height="40dp"
-            android:layout_margin="7dp"
-            android:ems="10"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:gravity="left"
-            android:hint="비밀번호 확인"
-            android:inputType="textPassword"
-            android:textColorHint="@color/greyColor"
-            android:textSize="15dp" />
-
-
-        <TextView
-            android:id="@+id/checkpwd2"
-            android:layout_width="266dp"
-            android:layout_height="wrap_content"
-            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/editText_name"

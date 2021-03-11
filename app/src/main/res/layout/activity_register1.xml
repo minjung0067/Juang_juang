@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.persimmon_tree_proj.Registeractivity_1">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="394dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="132dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_margin="7dp"
+            android:layout_marginLeft="47dp"
+            android:ems="10"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:gravity="left"
+            android:hint="이메일 주소"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/greyColor"
+            android:textSize="15dp" />
+
+        <EditText
+            android:id="@+id/editText_passWord"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_margin="7dp"
+            android:ems="10"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:gravity="left"
+            android:hint="비밀번호 입력"
+            android:inputType="textPassword"
+            android:textColorHint="@color/greyColor"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:text="로그인" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="266dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="40dp"
+            android:background="#FFFFFF"
+            android:text="회원가입" />
+
+        <Button
+            android:id="@+id/btn_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#00FFFFFF"
+            android:text="계정을 잃어버리셨나요?" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

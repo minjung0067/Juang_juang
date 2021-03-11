@@ -4,14 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInstaller;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,32 +35,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
-import com.kakao.auth.ApiErrorCode;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.Session;
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeV2ResponseCallback;
-import com.kakao.usermgmt.response.MeV2Response;
-import com.kakao.util.exception.KakaoException;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
-import com.kakao.auth.ISessionCallback;
-
-
-import com.kakao.auth.ISessionCallback;
 
 public class log_inactivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private EditText editTextEmail;   //아이디용
-    private EditText editTextPassword;   //비밀번호용
     private String loginId; //자동 로그인 아이디
     private String loginPwd; //자동 로그인 비밀번호
     private String loginUid; //자동 로그인 비밀번호
-    private Button buttonLogIn;//로그인 버튼
     private Button buttonSignUp; //회원가입 버튼
-    private Button buttonfind;
     // 구글로그인 result 상수
     private static final int RC_SIGN_IN = 900; //RC_SIGN_IN 상수는 구글로그인 버튼을 클릭하여 startactivityforresult 응답 코드로 사용
     // 구글api클라이언트
@@ -115,8 +98,6 @@ public class log_inactivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         buttonGoogle = findViewById(R.id.btn_googleSignIn); //구글 로그인 버튼
-        editTextEmail = (EditText) findViewById(R.id.edittext_email);   //이메일 입력한 거 변수에 저장
-        editTextPassword = (EditText) findViewById(R.id.edittext_password);   //비번 저장한 거 pwd에 저장
 
         //google 로그인 버튼 텍스트 바꾸기
         TextView textView = (TextView) buttonGoogle.getChildAt(0);
@@ -128,7 +109,7 @@ public class log_inactivity extends AppCompatActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(log_inactivity.this, Registeractivity.class);
+                Intent intent = new Intent(log_inactivity.this, Registeractivity_1.class);
                 startActivity(intent);
             }
         });
@@ -224,19 +205,8 @@ public class log_inactivity extends AppCompatActivity {
             }
         }
 
-        buttonfind = (Button)findViewById(R.id.btn_find);
-        buttonfind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), findaccount.class);
-                //계정을 잊어버렸다면 계정 찾기 페이지로 이동
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
 
-        buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
+        /*buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,6 +271,7 @@ public class log_inactivity extends AppCompatActivity {
                 }
             }
         });
+        */
 
 
         // Google 로그인을 앱에 통합
@@ -372,7 +343,7 @@ public class log_inactivity extends AppCompatActivity {
 
     }
 
-    public void loginUser(String email, String password) {
+    /*public void loginUser(String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password)   //이메일 패스워드 방식으로 로그인하는 함수
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -388,6 +359,8 @@ public class log_inactivity extends AppCompatActivity {
                     }
                 });
     }
+
+     */
 
     @Override
     protected void onStart() {
