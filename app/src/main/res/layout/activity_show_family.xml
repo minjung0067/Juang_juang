@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.persimmon_tree_proj.ShowFamilyActivity">
+    tools:context="com.example.persimmon_tree_proj.Family.ShowFamilyActivity">
 
         <LinearLayout
             android:id="@+id/cons"

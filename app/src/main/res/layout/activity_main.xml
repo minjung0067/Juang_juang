@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    tools:context="com.example.persimmon_tree_proj.MainActivity">
+    tools:context="com.example.persimmon_tree_proj.Main.MainActivity">
 
     <TextView
         android:id="@+id/button"

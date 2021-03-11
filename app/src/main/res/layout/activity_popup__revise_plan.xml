@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00ffffff"
-    tools:context="com.example.persimmon_tree_proj.Popup_Cal.popup_RevisePlan">
+    tools:context="com.example.persimmon_tree_proj.Calendar.Popup_Cal.popup_RevisePlan">
 
     <LinearLayout
         android:layout_width="358dp"
