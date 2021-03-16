@@ -41,9 +41,6 @@ public class Registeractivity_1 extends AppCompatActivity {
 
     private String myfcode;
     private String introduce;
-    private String myfam_count;
-    private String myfam_introduce;
-
     private Button buttonRegister;
 
 
