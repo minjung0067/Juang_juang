@@ -18,6 +18,7 @@ import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +51,7 @@ public class Registeractivity_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register1);
 
+        firebaseAuth = firebaseAuth.getInstance();
         editTextEmail = (EditText)findViewById(R.id.editText_email);
         editTextPassword = (EditText)findViewById(R.id.editText_passWord);
 
@@ -92,16 +94,20 @@ public class Registeractivity_1 extends AppCompatActivity {
                                     myfcode = dataSnapshot.child("fcode").getValue(String.class);
                                     introduce = dataSnapshot.child("introduce").getValue(String.class);
                                     if (myfcode == null) {//코드가 없으면
-                                        Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
-                                        intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intentt);
-                                        finish();
+                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                        startActivity(intent);
+                                        //Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
+                                        //intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        //startActivity(intentt);
+                                        //finish();
                                     } else { //코드 있으면
                                         if (introduce == null) {//한줄 소개 없으면
-                                            Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
-                                            intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(intentt);
-                                            finish();
+                                            //Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
+                                            //intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            //startActivity(intentt);
+                                            //finish();
+                                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                            startActivity(intent);
                                         } else { //한줄소개까지 있으면
                                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                             //자동로그인이 되었다면, Mainactivity로 바로 이동
