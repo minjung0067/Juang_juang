@@ -1,16 +1,22 @@
 package com.example.persimmon_tree_proj.Account;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Registeractivity_2 extends AppCompatActivity {
 
@@ -43,10 +49,25 @@ public class Registeractivity_2 extends AppCompatActivity {
             }
         });
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        auth.setLanguageCode("fr"); //인증 인스턴스의 언어 코드를 업데이트 하여 확인 메일을 현지화
+
+
         Emailcheck = (Button)findViewById(R.id.btn_emailcheck); //이메일 발송 버튼
         Emailcheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user.sendEmailVerification()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Log.i("check","Email sent.");
+                                }
+                            }
+                        });
+
                 /*
                 1) 계정이 중복되는 경우
                 checktext.setText("중복되는 계정이 있습니다.");
@@ -62,4 +83,7 @@ public class Registeractivity_2 extends AppCompatActivity {
          });
 
     }
+
+
+
 }
