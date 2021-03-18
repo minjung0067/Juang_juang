@@ -447,7 +447,7 @@ public class Registeractivity_4 extends AppCompatActivity {
 
                                             //activity간에 계속 인텐트로 데이터 주고 받는거보다 이름을 파일에 저장하게 되면 접근하기 쉬울거라고 생각해서 이 방식 채택함 근데 추후에 이름 바꾸는 경우 생각안해봄
                                             SharedPreferences saveprofile = getSharedPreferences("saveprofile",MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
-                                            SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 ditor를 이용하여 값 저장
+                                            SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
                                             editor.putString("name",name);//이름 저장
                                             editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
 

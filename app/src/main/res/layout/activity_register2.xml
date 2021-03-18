@@ -28,22 +28,21 @@
         android:id="@+id/txt_check"
         android:layout_width="266dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_email" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_emailcheck" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_emailcheck"
         android:layout_width="266dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="이메일 인증"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_check" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_email" />
 
     <TextView
         android:id="@+id/txt_index2"
