@@ -222,7 +222,7 @@ public class log_inactivity extends AppCompatActivity {
                         } else {
                             // 구글로그인 실패
                             Toast.makeText(log_inactivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(log_inactivity.this, LodingPage_Activity.class);  //구글 로그인 성공시 familyactivity로 넘어가게
+                            Intent intent = new Intent(log_inactivity.this, log_inactivity.class);  //구글 로그인 성공시 familyactivity로 넘어가게
                             startActivity(intent);
                             finish();
 

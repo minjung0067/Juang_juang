@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.Account.LodingPage_Activity"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Account.more_information_activity"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Account.LodingPage_Activity" />
         <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_3" />
         <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_2" />
         <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_1" />

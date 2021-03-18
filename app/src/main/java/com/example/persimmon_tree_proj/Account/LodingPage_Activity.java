@@ -29,6 +29,7 @@ public class LodingPage_Activity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
     private String check_code;
     private String introduce;
+    private String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,9 @@ public class LodingPage_Activity extends AppCompatActivity {
          *                          이 로딩 페이지에 다시 들어오고, 그때는 case 2로 감
          *
          * case 2 . 내 db에 올라간 가족 코드 있음
-         *       case 2-1. 가족 코드를 입력했는데 내 프로필을 아직 안 만든 사람 =>makeprofile
+         *       case 2-1. 가족 코드를 입력했는데 내 프로필을 아직 안 만든 사람 => makeprofile
+         *       case 2-1-2.  소셜 로그인 -> 가족코드 입력-> 이름이나 생년월일 같은 기본 정보 아직 db에 없음 => more information
+         *
          *       case 2-2. 메인으로 들어갈 준비 완료 (내 프로필 만듦, 이미 메인 넘어간 사람)
          *                   => main
          *  */
@@ -74,23 +77,35 @@ public class LodingPage_Activity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    //case 2-1 : 가족 코드는 있지만 내 프로필 아직 안 만든 사람
                     introduce = snapshot.child("introduce").getValue(String.class); //프로필 만들기 마지막 단계가 되었는지 확인
+                    user_name = snapshot.child("user_name").getValue(String.class); //프로필 만들기 마지막 단계가 되었는지 확인
 
                     // 내 프로필 끝까지 다 만들었는지 확인
-                    if (introduce == null) {
-                        Intent intent = new Intent(LodingPage_Activity.this, MakeProfilemain.class);  //프로필 만들러 가라
+
+                    // case 2-1-2. 이름이나 생년월일 같은 기본 정보 아직 db에 없음 (소셜만 해당) => more information
+                    if (user_name == null) {
+                        Intent intent = new Intent(LodingPage_Activity.this, more_information_activity.class);  //프로필 만들러 가라
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
                     }
-
-                    //프로필까지 다 만들었다 !
                     else{
-                        Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  //대기화면으로 가라 !
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        //case 2-1 : 가족 코드는 있지만 내 프로필 아직 안 만든 사람 (이메일, 소셜 둘 다 해당) => makeprofilemain
+                        if (introduce == null) {
+                            Intent intent = new Intent(LodingPage_Activity.this, MakeProfilemain.class);  //프로필 만들러 가라
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+
+
+                        // case 2-2 . 프로필까지 다 만들었다 ! => wait
+                        else{
+                            Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  //대기화면으로 가라 !
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 }
 
