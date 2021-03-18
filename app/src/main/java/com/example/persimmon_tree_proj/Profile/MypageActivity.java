@@ -78,8 +78,8 @@ public class MypageActivity extends AppCompatActivity {
                         count = dataSnapshot.child(myfcode).child("count").getValue().toString();
                         Log.i("counttt",String.valueOf(count));
                         my_familynum.setText(count);
-                        color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
-                        gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
+                        color_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue(String.class);
+                        gam_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue(String.class);
 
                         //나중에 주석 처리해서 지울 부분
                         if (gam_number == null){

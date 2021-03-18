@@ -95,7 +95,7 @@ public class profile_color extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
                         //원래 사용자가 선택했던 건 다시 선택지 안에 들어가야 하니까
-                        String previous_choice = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
+                        String previous_choice = dataSnapshot.child(user.getUid()).child("user_color").getValue(String.class);
                         if(previous_choice != null){
                             make_cannot_select(previous_choice,1);
                         }
@@ -199,14 +199,14 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[0] == 1){ clicked_arr[0] = 0; } else if(clicked_arr[0] ==0){
                             clicked_arr[0]=1;
                             another_unselected(0);   //그 전에 선택했던 거 취소 시키는 함수
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#FE8189");}
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#FE8189");}
                         make_clicked();
                         break;
                     case R.id.c2:
                         if(clicked_arr[1] == 1){ clicked_arr[1] = 0; } else if(clicked_arr[1] ==0){
                             clicked_arr[1]=1;
                             another_unselected(1);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#FE8E69");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#FE8E69");
                         }
                         make_clicked();
                         break;
@@ -214,7 +214,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[2] == 1){ clicked_arr[2] = 0; } else if(clicked_arr[2] ==0){
                             clicked_arr[2]=1;
                             another_unselected(2);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#FEC56C");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#FEC56C");
                         }
                         make_clicked();
                         break;
@@ -222,7 +222,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[3] == 1){ clicked_arr[3] = 0; } else if(clicked_arr[3] ==0){
                             clicked_arr[3]=1;
                             another_unselected(3);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#B7DB79");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#B7DB79");
                         }
                         make_clicked();
                         break;
@@ -230,7 +230,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[4] == 1){ clicked_arr[4] = 0; } else if(clicked_arr[4] ==0){
                             clicked_arr[4]=1;
                             another_unselected(4);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#87dade");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#87dade");
                         }
                         make_clicked();
                         break;
@@ -238,7 +238,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[5] == 1){ clicked_arr[5] = 0; } else if(clicked_arr[5] ==0){
                             clicked_arr[5]=1;
                             another_unselected(5);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#99CAEB");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#99CAEB");
                         }
                         make_clicked();
                         break;
@@ -246,7 +246,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[6] == 1){ clicked_arr[6] = 0; } else if(clicked_arr[6] ==0){
                             clicked_arr[6]=1;
                             another_unselected(6);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#A1AEE5");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#A1AEE5");
                         }
                         make_clicked();
                         break;
@@ -254,7 +254,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[7] == 1){ clicked_arr[7] = 0; } else if(clicked_arr[7] ==0){
                             clicked_arr[7]=1;
                             another_unselected(7);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#E89CDA");
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#E89CDA");
                         }
                         make_clicked();
                         break;

@@ -85,7 +85,7 @@ public class profile_gam_main extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
-                        String previous_choice = dataSnapshot.child(user_name).child("user_gam").getValue(String.class);
+                        String previous_choice = dataSnapshot.child(user.getUid()).child("user_gam").getValue(String.class);
                         if (previous_choice!=null) {  //처음 가입할 땐 previous 없음
                             clicked_arr[Integer.valueOf(previous_choice) - 1] = 1;    //선택했던 거 먼저 눌러져있게
                         }
@@ -202,7 +202,7 @@ public class profile_gam_main extends AppCompatActivity {
                             } else if (clicked_arr[0] == 0) {
                                 clicked_arr[0] = 1;
                                 another_unselected(0);   //그 전에 선택했던 거 취소 시키는 함수
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("1");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("1");
                             }
                             make_clicked();
                             break;
@@ -212,7 +212,7 @@ public class profile_gam_main extends AppCompatActivity {
                             } else if (clicked_arr[1] == 0) {
                                 clicked_arr[1] = 1;
                                 another_unselected(1);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("2");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("2");
                             }
                             make_clicked();
                             break;
@@ -222,7 +222,7 @@ public class profile_gam_main extends AppCompatActivity {
                             } else if (clicked_arr[2] == 0) {
                                 clicked_arr[2] = 1;
                                 another_unselected(2);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("3");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("3");
                             }
                             make_clicked();
                             break;
@@ -230,7 +230,7 @@ public class profile_gam_main extends AppCompatActivity {
                             if(clicked_arr[3] == 1){ clicked_arr[3] = 0; } else if(clicked_arr[3] ==0){
                                 clicked_arr[3]=1;
                                 another_unselected(3);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("4");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("4");
                             }
                             make_clicked();
                             break;
@@ -238,7 +238,7 @@ public class profile_gam_main extends AppCompatActivity {
                             if(clicked_arr[4] == 1){ clicked_arr[4] = 0; } else if(clicked_arr[4] ==0){
                                 clicked_arr[4]=1;
                                 another_unselected(4);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("5");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("5");
                             }
                             make_clicked();
                             break;
@@ -246,7 +246,7 @@ public class profile_gam_main extends AppCompatActivity {
                             if(clicked_arr[5] == 1){ clicked_arr[5] = 0; } else if(clicked_arr[5] ==0){
                                 clicked_arr[5]=1;
                                 another_unselected(5);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("6");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("6");
                             }
                             make_clicked();
                             break;
@@ -254,7 +254,7 @@ public class profile_gam_main extends AppCompatActivity {
                             if(clicked_arr[6] == 1){ clicked_arr[6] = 0; } else if(clicked_arr[6] ==0){
                                 clicked_arr[6]=1;
                                 another_unselected(6);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("7");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("7");
                             }
                             make_clicked();
                             break;
@@ -262,7 +262,7 @@ public class profile_gam_main extends AppCompatActivity {
                             if(clicked_arr[7] == 1){ clicked_arr[7] = 0; } else if(clicked_arr[7] ==0){
                                 clicked_arr[7]=1;
                                 another_unselected(7);
-                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("8");
+                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_gam").setValue("8");
                             }
                             make_clicked();
                             break;
