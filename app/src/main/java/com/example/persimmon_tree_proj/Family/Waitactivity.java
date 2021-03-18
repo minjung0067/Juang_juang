@@ -105,7 +105,7 @@ public class Waitactivity extends AppCompatActivity {
                 f_code = snapshot.child("fcode").getValue().toString();
                 TextView txt_fcode = (TextView) findViewById(R.id.txt_fcode);
                 txt_fcode.setText(f_code);
-                user_name = snapshot.child("userName").getValue().toString();
+//                user_name = snapshot.child(user.getUid()).getValue().toString();
                 member_count = 0;
                 //지정한 member 수 가져오기
                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");

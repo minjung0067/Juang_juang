@@ -81,8 +81,13 @@ public class Registeractivity_1 extends AppCompatActivity {
                     else{
 
                     }
+                    Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
+                    startActivity(intent);
+                    finish();
 
 
+
+                    /*로딩페이지로 대체
                     firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
                         @Override
                         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
@@ -96,16 +101,8 @@ public class Registeractivity_1 extends AppCompatActivity {
                                     if (myfcode == null) {//코드가 없으면
                                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                         startActivity(intent);
-                                        //Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
-                                        //intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        //startActivity(intentt);
-                                        //finish();
                                     } else { //코드 있으면
                                         if (introduce == null) {//한줄 소개 없으면
-                                            //Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
-                                            //intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            //startActivity(intentt);
-                                            //finish();
                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                             startActivity(intent);
                                         } else { //한줄소개까지 있으면
@@ -127,6 +124,7 @@ public class Registeractivity_1 extends AppCompatActivity {
 
                         }
                     };
+                */
 
                 } else {   //아니라면
                     Toast.makeText(Registeractivity_1.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
@@ -162,4 +160,6 @@ public class Registeractivity_1 extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

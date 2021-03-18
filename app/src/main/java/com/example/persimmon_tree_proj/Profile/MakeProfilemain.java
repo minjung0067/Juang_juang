@@ -84,7 +84,7 @@ public class MakeProfilemain extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             myfcode = dataSnapshot.child("fcode").getValue(String.class);
                             user_name = dataSnapshot.child("name").getValue(String.class);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("introduce").setValue(introduce);
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("introduce").setValue(introduce);
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -123,7 +123,7 @@ public class MakeProfilemain extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             myfcode = dataSnapshot.child("fcode").getValue(String.class);
                             user_name = dataSnapshot.child("name").getValue(String.class);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("introduce").setValue(introduce);
+                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("introduce").setValue(introduce);
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
@@ -154,8 +154,8 @@ public class MakeProfilemain extends AppCompatActivity {
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
-                        gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
+                        color_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue(String.class);
+                        gam_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue(String.class);
                         if(gam_number != null && color_number!=null){
                             switch (gam_number) {
                                 case "1":
