@@ -39,11 +39,6 @@ public class Registeractivity_4 extends AppCompatActivity {
     private static final String TAG = "Registeractivity";
     private FirebaseAuth firebaseAuth; //회원가입 로직에 사용!
     private DatabaseReference mDatabase;   //database 사용 시 필요함
-    private EditText editTextEmail;   //id 칸
-    private EditText editTextPassword; //비번 칸
-    private EditText editTextPassword2; //비번 확인 칸
-    private TextView password;
-    private TextView password2; //비번 일치 확인
     private EditText editTextBirth; //생일 칸
     private EditText editTextName; //이름 칸
     private Button buttonJoin; //회원가입 버튼
@@ -67,24 +62,24 @@ public class Registeractivity_4 extends AppCompatActivity {
 
 
     //유효성 판단
-    private Integer ok1 = 0; //비밀번호 확인
-    private Integer ok2 = 0;
-    private Integer ok3 = 0; // 비밀번호 일치확인
+    private Integer ok1 = 0; //생년월일 확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register4); //registeractivity 와 연결
 
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id"); //register_3에서 받아온 이메일
+        String pwd = intent.getStringExtra("pwd"); //register_3에서 받아온 비밀번호
+        Log.i("eunseocheck",id);
+        Log.i("eunseocheck",pwd);
+
+
         firebaseAuth = FirebaseAuth.getInstance();  //auth 초기화
         mDatabase = FirebaseDatabase.getInstance().getReference(); //database 초기화
 
         //xml 속 id값과 연결 & 변수할당
-        editTextEmail = (EditText) findViewById(R.id.editText_email);    //id
-        editTextPassword = (EditText) findViewById(R.id.editText_passWord);    //pwd
-        //editTextPassword2 = (EditText)findViewById(R.id.editText_passWord2); //pwd 확인
-        //password = (TextView)findViewById(R.id.checkpwd);
-        //password2 = (TextView)findViewById(R.id.checkpwd2);
         editTextName = (EditText) findViewById(R.id.editText_name);   //name
         editTextBirth = (EditText) findViewById(R.id.edit_birth);    //birth
 
@@ -98,99 +93,6 @@ public class Registeractivity_4 extends AppCompatActivity {
 
         btn_view1 = (Button)findViewById(R.id.btn_view1);
         btn_view2 = (Button)findViewById(R.id.btn_view2); //개인정보 확인 버튼튼
-
-
-
-
-
-        editTextPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String input = editTextPassword.getText().toString();
-                ok1 = 0;
-                check_validation1(input);
-                Integer inputcount = input.length();
-                if(inputcount < 8){
-                    password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
-                }
-                else{
-                    if(ok1 == 0){
-                        password.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
-                    }
-                    else{
-                        password.setText("사용할 수 있습니다.");
-                        if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
-                            password2.setText("일치합니다.");
-                            //password2.setTextColor(Integer.parseInt("#3CB354"));
-                        }
-                        else{
-                            password2.setText("비밀번호를 확인해주세요.");
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        editTextPassword2.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
-                    password2.setText("일치합니다.");
-                    //password2.setTextColor(Integer.parseInt("#3CB354"));
-                }
-                else{
-                    password2.setText("비밀번호를 확인해주세요.");
-                    //password2.setTextColor(Integer.parseInt("#DB4455"));
-                }
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
-                    password2.setText("일치합니다.");
-                    //password2.setTextColor(Integer.parseInt("#3CB354"));
-                }
-                else{
-                    password2.setText("일치하지 않습니다.");
-                    //password2.setTextColor(Integer.parseInt("#DB4455"));
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
-                    password2.setText("일치합니다.");
-                    //password2.setTextColor(Integer.parseInt("#3CB354"));
-                }
-                else{
-                    password2.setText("일치하지 않습니다.");
-                }
-
-            }
-        });
-
-
-
-
-
-
-
 
 
         // 첫번째 항 동의
@@ -321,14 +223,11 @@ public class Registeractivity_4 extends AppCompatActivity {
                 editor.clear();
                 editor.commit(); //저장
 
-                String id = editTextEmail.getText().toString();
-                String pwd = editTextPassword.getText().toString();
-                String pwd2 = editTextPassword2.getText().toString();
                 String name = editTextName.getText().toString();
                 String birth = editTextBirth.getText().toString();
 
                 // 모든 칸이 공백이 아닐때 = 모든 칸이 입력되어있을 때
-                if (!id.equals("") && !pwd.equals("") && !pwd2.equals("") && !name.equals("") && !birth.equals("")) {
+                if (!name.equals("") && !birth.equals("")) {
                     // 전체 약관 체크여부
                     if (TERMS_AGREE_1 == 0 || TERMS_AGREE_2 == 0) {
                         // 첫번째 약관 체크여부
@@ -337,37 +236,20 @@ public class Registeractivity_4 extends AppCompatActivity {
                     }
                     // 전체 약관 체크된경우
                     else {
-                        check_validation1(pwd);
-                        Log.i("checkcheck2", String.valueOf(ok1));
-                        check_validation2(birth);
-                        check_validation3(pwd,pwd2);
+                        check_validation(birth);
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
-                            if(ok2 == 1){
-                                if(ok3 ==1){
-                                    //hashmap 만들기
-                                    HashMap result = new HashMap<>();  //database 올릴 때 사용
-                                    result.put("name", name);
-                                    result.put("birth", birth);
-                                    result.put("fcode", "");
-                                    result.put("introduce","");
+                            //hashmap 만들기
+                            HashMap result = new HashMap<>();  //database 올릴 때 사용
+                            result.put("name", name);
+                            result.put("birth", birth);
+                            result.put("fcode", "");
+                            result.put("introduce","");
 
 
-                                    createUser(id, pwd, birth, name);   //새로운 유저 만들기 함수로 넘어감!
-                                }
-                                else{
-                                    //비밀번호가 일치하지 않을 경우
-                                    Toast.makeText(Registeractivity_4.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                            else{
-                                //생년월일 조건에 맞지 않는 경우, ok2 = 0 인 경우
-                                Toast.makeText(Registeractivity_4.this, "생년월일은 8자로 써주세요 (ex)20200912", Toast.LENGTH_LONG).show();
-
-                            }
-
+                            createUser(id, pwd, birth, name);   //새로운 유저 만들기 함수로 넘어감!
                         }
                         else{//비밀번호 조건에 맞지 않는 경우 ok1 = 0 인 경우
-                            Toast.makeText(Registeractivity_4.this, "비밀번호는 영어,숫자,특수문자($@$!%*#?&.)를 포함한 8자 이상 입력해주세요.", Toast.LENGTH_LONG).show();   //비밀번호를 다시 입력하는 알림
+                            Toast.makeText(Registeractivity_4.this, "생년월일은 8자로 써주세요 ex)20200912", Toast.LENGTH_LONG).show();   //비밀번호를 다시 입력하는 알림
 
                         }
                     }
@@ -384,47 +266,17 @@ public class Registeractivity_4 extends AppCompatActivity {
 
 
 
-    //비밀번호 유효성 검사
-    void check_validation1(String password) {
-        // 비밀번호 유효성 검사식1 : 숫자, 특수문자가 포함되어야 한다.
-
-        String val_symbol = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&.]).{8,}";
-        // 정규표현식 컴파일
-        Pattern pattern_symbol = Pattern.compile(val_symbol);
 
 
-        Matcher matcher_symbol = pattern_symbol.matcher(password);
-
-
-        if (matcher_symbol.find()) {
-            // 최소 8자, 특수문자, 숫자, 대소문자 포함.
-            Log.i("matcher_symblo.find()", String.valueOf(matcher_symbol.find()));
+    void check_validation(String birth) {
+        //생일 8자리 수로
+        if(birth.length() == 8){
             ok1 = 1;
-        }else {
+        }
+        else{
             ok1 = 0;
         }
 
-    }
-
-    void check_validation2(String birth) {
-        //생일 8자리 수로
-        if(birth.length() == 8){
-            ok2 = 1;
-        }
-        else{
-            ok2 = 0;
-        }
-
-    }
-
-    void check_validation3(String password1 ,String password2){
-        //비밀번호 일치 확인
-        if(password1.equals(password2)){
-            ok3 = 1;
-        }
-        else{
-            ok3 = 0;
-        }
     }
 
     //회원가입 로직 : id/pwd는 firebase auth에, 나머지 회원정보는 firebase database에 올리는 함수
@@ -436,7 +288,7 @@ public class Registeractivity_4 extends AppCompatActivity {
                         if (task.isSuccessful()) {   //auth에 업로드에 성공했다면
                             // 회원가입 성공
                             final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
-                            Log.i("uid1111111",uid);
+                            Log.i("uid1111111", uid);
                             UserModel usermodel = new UserModel(name, uid, birth);  //usermodel.java에서 새로운 UserModel 만듦
                             Log.i("usermodel", String.valueOf(usermodel));
                             mDatabase.child("users").child(uid).setValue(usermodel)//database에 users 안에 usermodel의 내용으로 업로드
@@ -446,9 +298,9 @@ public class Registeractivity_4 extends AppCompatActivity {
                                             Toast.makeText(Registeractivity_4.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
 
                                             //activity간에 계속 인텐트로 데이터 주고 받는거보다 이름을 파일에 저장하게 되면 접근하기 쉬울거라고 생각해서 이 방식 채택함 근데 추후에 이름 바꾸는 경우 생각안해봄
-                                            SharedPreferences saveprofile = getSharedPreferences("saveprofile",MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
+                                            SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
                                             SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
-                                            editor.putString("name",name);//이름 저장
+                                            editor.putString("name", name);//이름 저장
                                             editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
 
 
