@@ -149,8 +149,8 @@ public class MakeProfile extends AppCompatActivity {
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        color_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_color").getValue(String.class);
-                        gam_number = dataSnapshot.child(myfcode).child("members").child(user_name).child("user_gam").getValue(String.class);
+                        color_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue(String.class);
+                        gam_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue(String.class);
                         if(gam_number != null && color_number!=null){
                             switch (gam_number) {
                                 case "1":

@@ -96,16 +96,8 @@ public class Registeractivity_1 extends AppCompatActivity {
                                     if (myfcode == null) {//코드가 없으면
                                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                         startActivity(intent);
-                                        //Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
-                                        //intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        //startActivity(intentt);
-                                        //finish();
                                     } else { //코드 있으면
                                         if (introduce == null) {//한줄 소개 없으면
-                                            //Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
-                                            //intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            //startActivity(intentt);
-                                            //finish();
                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                             startActivity(intent);
                                         } else { //한줄소개까지 있으면

@@ -106,28 +106,28 @@ public class familyactivity extends AppCompatActivity {
                                         firebaseAuth = FirebaseAuth.getInstance();
                                         FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user\
 
-                                        mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                                        mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 fcode넣기
 
-                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
-                                        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                String myfcode = snapshot.child("fcode").getValue(String.class);
-                                                String user_name = snapshot.child("name").getValue().toString();
-                                                HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
-                                                user_info.put("introduce", "");
-                                                user_info.put("user_gam", "1");
-                                                user_info.put("user_color", "#ffffff");
-                                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
-
-
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                            }
-                                        });
+//                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+//                                        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                                String myfcode = snapshot.child("fcode").getValue(String.class);
+//                                                String user_name = snapshot.child("name").getValue().toString();
+//                                                HashMap user_info = new HashMap<>();  //database 올릴 때 사용 , username이 key값이며, introduce, gam profil, color를 hashmap으로 가짐.
+//                                                user_info.put("introduce", "");
+//                                                user_info.put("user_gam", "1");
+//                                                user_info.put("user_color", "#ffffff");
+//                                                FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).setValue(user_info);
+//
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                            }
+//                                        });
                                         move = 1;
 
                                     } else if (tf == 0) { //존재는 하지만, 가족이 다 찼을 경우
