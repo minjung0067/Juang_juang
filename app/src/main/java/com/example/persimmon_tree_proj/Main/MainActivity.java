@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
-                user_name = snapshot.child("userName").getValue().toString();
                 member_count = 0;
                 //지정한 member 수 가져오기
                 a_Reference = a_Database.getReference("family");
@@ -146,9 +145,9 @@ public class MainActivity extends AppCompatActivity {
                         while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
-                            if(user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
-                                user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
-                                user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
+                            if(user.getUid().equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
+                                user_gam = snapshot.child("members").child(user.getUid()).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
+                                user_color = snapshot.child("members").child(user.getUid()).child("user_color").getValue(String.class);
                                 ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
 
                                 if (user_gam.equals("1")) {
@@ -219,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                                             if(our_q_arr.size() == (q_cnt +1)){
                                                 goanswer.setClickable(true);
                                             }
-                                            if (snapshot.child("answer").child(String.valueOf(q_cnt+1)).hasChild(user_name)) { //사용자가 대답했으면
+                                            if (snapshot.child("answer").child(String.valueOf(q_cnt+1)).hasChild(user.getUid())) { //사용자가 대답했으면
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) { //누르면 마이페이지로 이동
