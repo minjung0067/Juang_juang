@@ -24,6 +24,7 @@ import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
 import com.example.persimmon_tree_proj.Profile.MypageActivity;
 import com.example.persimmon_tree_proj.Family.Waitactivity;
+import com.example.persimmon_tree_proj.To_do_list.Todolist;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -401,6 +402,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, customer_sound.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
+
+        //to do list 페이지로 가는 버튼
+        ImageButton go_todolist = (ImageButton) findViewById(R.id.todolist);
+        go_todolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Todolist.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
