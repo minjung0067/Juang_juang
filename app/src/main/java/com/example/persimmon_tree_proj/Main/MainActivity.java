@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
-                        String str = (String) snapshot.child("count").getValue();
+                        String str = String.valueOf(snapshot.child("count").getValue());
                         count = Integer.valueOf(str);
                         //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
 
@@ -146,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                             String member_num = members.next().getKey();
                             member_count++;
                             if(user.getUid().equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
-                                user_gam = snapshot.child("members").child(user.getUid()).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
-                                user_color = snapshot.child("members").child(user.getUid()).child("user_color").getValue(String.class);
+                                user_gam = String.valueOf(snapshot.child("members").child(user.getUid()).child("user_gam").getValue()); //자신의 gam과 컬러를
+                                user_color = String.valueOf(snapshot.child("members").child(user.getUid()).child("user_color").getValue());
                                 ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
 
                                 if (user_gam.equals("1")) {

@@ -77,12 +77,12 @@ public class LodingPage_Activity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    introduce = snapshot.child("introduce").getValue(String.class); //프로필 만들기 마지막 단계가 되었는지 확인
-                    user_name = snapshot.child("user_name").getValue(String.class); //프로필 만들기 마지막 단계가 되었는지 확인
+                    introduce = String.valueOf(snapshot.child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
+                    user_name = String.valueOf(snapshot.child("user_name").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
 
                     // 내 프로필 끝까지 다 만들었는지 확인
 
-                    // case 2-1-2. 이름이나 생년월일 같은 기본 정보 아직 db에 없음 (소셜만 해당) => more information
+                    // case 2-1-2. 이름이나 생년월일 같은 기본 정보 아직 db에 없음  => more information
                     if (user_name == null) {
                         Intent intent = new Intent(LodingPage_Activity.this, more_information_activity.class);  //프로필 만들러 가라
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
