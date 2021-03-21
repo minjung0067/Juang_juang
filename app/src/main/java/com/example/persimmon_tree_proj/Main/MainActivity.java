@@ -421,9 +421,9 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot data : dataSnapshot.child("answer").child(String.valueOf(answer_position+1)).getChildren()){
                     key = data.getKey();
                     String value = data.getValue().toString();
-                    this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
-                    this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
-                    this_introduce = dataSnapshot.child("members").child(key).child("introduce").getValue(String.class);
+                    this_color = String.valueOf(dataSnapshot.child("members").child(key).child("user_color").getValue());
+                    this_gam = String.valueOf(dataSnapshot.child("members").child(key).child("user_gam").getValue());
+                    this_introduce = String.valueOf(dataSnapshot.child("members").child(key).child("introduce").getValue());
                     member_color_arr.add(this_color);
                     member_gam_arr.add(this_gam);
                     member_arr.add(this_introduce);
