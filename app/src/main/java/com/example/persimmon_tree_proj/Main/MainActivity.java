@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> member_ans_arr =  new ArrayList<String>();
     ArrayList<String> member_color_arr =  new ArrayList<String>();
     ArrayList<String> member_gam_arr =  new ArrayList<String>();
+    private ImageButton nextquestion; //다음 질문으로 넘어가는 메세지
 
 
     //family code 관련
@@ -91,8 +92,12 @@ public class MainActivity extends AppCompatActivity {
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         spinner =(Spinner)findViewById(R.id.spinner_question); //question을 선택하는 spinner
         container = (LinearLayout) findViewById(R.id.answer_view); //answer담는 레이아웃
-
+        nextquestion = (ImageButton) findViewById(R.id.image_next_question);
         initDatabase();
+
+        //모두가 답 O -> 메세지 모양 가지고 옴 누르면 intent로 넘어감
+
+        //모두가 답 X ->
 
         //전체 질문 목록 가져와서 all_q_arr에 넣기
         DatabaseReference reference_q = FirebaseDatabase.getInstance().getReference("question");
@@ -219,6 +224,17 @@ public class MainActivity extends AppCompatActivity {
                                             if(our_q_arr.size() == (q_cnt +1)){
                                                 goanswer.setClickable(true);
                                             }
+
+//                                            nextquestion.setEnabled(true); //새로운 질문으로 넘어가는 버튼 활성화
+//                                            //활성화된 btn 눌러서 이동가능
+//                                            nextquestion.setOnClickListener(new View.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(View v) {
+//                                                    Intent intent = new Intent(this, Answeractivity.class);
+//                                                    startActivity(intent);
+//                                                }
+//                                            });
+
                                             if (snapshot.child("answer").child(String.valueOf(q_cnt+1)).hasChild(user_name)) { //사용자가 대답했으면
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
@@ -238,6 +254,8 @@ public class MainActivity extends AppCompatActivity {
                                         //모두 답변하지 못한 경우
                                         else if(user_count < count) {
                                             //모두가 답변하기 전까지 답변하러가기 버튼 누를 수 없으며, 모두 답변한 경우 다음 질문으로 넘어감.
+
+                                            nextquestion.setEnabled(false); //새로운 질문으로 넘어가는 버튼 비활성화
 
                                             while(user_count == count){
                                                 if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)) { //사용자가 대답했으면

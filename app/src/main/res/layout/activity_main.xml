@@ -17,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <ImageButton
+        android:id="@+id/image_next_question"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="6dp"
+        android:defaultFocusHighlightEnabled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_question"
+        app:layout_constraintEnd_toEndOf="@+id/txt_question"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_question"
+        app:srcCompat="@drawable/heartgraphic2x" />
+
     <ImageView
         android:id="@+id/gam_text"
         android:layout_width="59dp"
@@ -73,10 +84,10 @@
         android:layout_width="340dp"
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
-        android:padding="10dp"
         android:background="@drawable/btn_grey_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:gravity="center"
+        android:padding="10dp"
         android:text="선택된 질문이 나올 자리"
         android:textColor="#000"
         android:textSize="18dp"

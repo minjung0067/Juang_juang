@@ -50,6 +50,12 @@ public class Answeractivity extends AppCompatActivity {
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
 
+        //내가 답 X
+
+        //내가 답 O
+
+        //모두가 답
+
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
