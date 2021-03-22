@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Family.familyactivity;
+import com.example.persimmon_tree_proj.Profile.profile_gam;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -35,8 +36,9 @@ more_information_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_information_activity);
 
-        //소셜로그인 시 이름이나 생년월일 처럼 이메일로 가입할 때 받아야하는 정보
-        //따로 받을 수 있도록 만든 페이지
+        //이름 ,생년월일 받는 페이지
+        //다음 activity는 make_gam
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -57,8 +59,8 @@ more_information_activity extends AppCompatActivity {
                         reference.child(user.getUid()).child("user_name").setValue(name); //이름 넣기
                         reference.child(user.getUid()).child("birth").setValue(birth); //이름 넣기
 
-                        //다시 로딩 페이지로 이동
-                        Intent intent = new Intent(more_information_activity.this, LodingPage_Activity.class);
+                        //다음 페이지인 감 페이지로 이동
+                        Intent intent = new Intent(more_information_activity.this, profile_gam.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
