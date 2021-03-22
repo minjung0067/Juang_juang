@@ -7,6 +7,21 @@
     android:background="#fff"
     tools:context="com.example.persimmon_tree_proj.Family.Waitactivity">
 
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_green_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:text="우리집 감나무 시작하기"
+        android:textColor="#fff"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_copy" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="420dp"
@@ -85,14 +100,14 @@
         android:id="@+id/btn_change"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/btn_green_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="가족 구성원 수 바꾸기"
         android:textColor="#fff"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_copy" />
 
@@ -102,16 +117,16 @@
         android:layout_height="45dp"
         android:layout_marginTop="27dp"
         android:background="@drawable/btn_grey_rounded"
-        android:text="로그아웃"
-        android:textSize="16dp"
-        android:textColor="@color/greyColor"
         android:fontFamily="@font/nanumsquare_acb"
+        android:text="로그아웃"
+        android:textColor="@color/greyColor"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_change"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintVertical_bias="0.346" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

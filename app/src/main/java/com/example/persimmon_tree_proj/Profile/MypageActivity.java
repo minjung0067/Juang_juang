@@ -68,8 +68,8 @@ public class MypageActivity extends AppCompatActivity {
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                user_name = dataSnapshot.child("name").getValue(String.class);
+                myfcode = String.valueOf(dataSnapshot.child("fcode").getValue());
+                user_name = String.valueOf(dataSnapshot.child("name").getValue());
                 DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("family");
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

@@ -77,6 +77,8 @@ public class Waitactivity extends AppCompatActivity {
 
             }
         });
+        
+
 
         Button logout = (Button) findViewById(R.id.btn_logout2); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +107,6 @@ public class Waitactivity extends AppCompatActivity {
                 f_code = snapshot.child("fcode").getValue().toString();
                 TextView txt_fcode = (TextView) findViewById(R.id.txt_fcode);
                 txt_fcode.setText(f_code);
-//                user_name = snapshot.child(user.getUid()).getValue().toString();
                 member_count = 0;
                 //지정한 member 수 가져오기
                 DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
@@ -113,7 +114,7 @@ public class Waitactivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
-                        String str = (String) snapshot.child("count").getValue();
+                        String str = String.valueOf(snapshot.child("count").getValue());
                         count = Integer.valueOf(str);
                         //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
@@ -137,6 +138,17 @@ public class Waitactivity extends AppCompatActivity {
                         }
                         //감나무가 생성되지 않은 경우
                         else if(member_count < count){
+                            //start 버튼 누를 경우, main으로 이동한다.
+                            Button start = (Button) findViewById(R.id.btn_start);
+                            start.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
 
 
                         }

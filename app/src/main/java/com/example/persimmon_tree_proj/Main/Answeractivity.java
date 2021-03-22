@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class Answeractivity extends AppCompatActivity {
 
@@ -31,6 +34,8 @@ public class Answeractivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
     private FirebaseDatabase mDatabase;
     private FirebaseAuth firebaseAuth;
+    private String user_name;
+    private String f_code;
 
 
     @Override
@@ -40,8 +45,9 @@ public class Answeractivity extends AppCompatActivity {
 
         Intent intent = getIntent();//mainactivity에서 받아온 intent 선언
         String question = intent.getStringExtra("question");//mainactivity에서 받아온 question
-        final String f_code = intent.getStringExtra("f_code"); //mainacitivity에서 받아온 f_code
+        //final String f_code = {intent.getStringExtra("f_code")}; //mainacitivity에서 받아온 f_code 순서가 바뀌어야 하니까 intent꼬일까봐 users에서 받아오는 걸로 변경
         final String position = intent.getStringExtra("position");
+        ArrayList<Object> our_q_arr = (ArrayList<Object>) intent.getSerializableExtra("our_q_arr");
         textView =(TextView)findViewById(R.id.txt_question2);
         textView.setText(question); //textView에 question 띄우기
         edit_answer = (EditText)findViewById(R.id.edit_answer);
@@ -49,12 +55,6 @@ public class Answeractivity extends AppCompatActivity {
         //화면 터치하면 키보드 내려가도록 만들었써용~
         imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
-
-        //내가 답 X
-
-        //내가 답 O
-
-        //모두가 답
 
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
@@ -68,6 +68,7 @@ public class Answeractivity extends AppCompatActivity {
                 reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        f_code = String.valueOf(snapshot.child("fcode"));
                         String user_name = snapshot.child("userName").getValue(String.class);
                         FirebaseDatabase.getInstance().getReference("family").child(f_code).child("answer").child(position).child(user_name).setValue(msg);
                         Intent intent = new Intent(Answeractivity.this, MainActivity.class);
@@ -84,6 +85,28 @@ public class Answeractivity extends AppCompatActivity {
 
             }
         });
+
+        //내가 답 X
+        DatabaseReference familyreference = mDatabase.getReference("family");
+        familyreference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)){
+
+                }
+                //내가 답 O
+                else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
     }

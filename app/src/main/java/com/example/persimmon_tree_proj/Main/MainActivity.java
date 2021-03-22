@@ -37,6 +37,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.text.SimpleDateFormat; //시간 날짜 체크를 위함
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,7 +97,15 @@ public class MainActivity extends AppCompatActivity {
         nextquestion = (ImageButton) findViewById(R.id.image_next_question);
         initDatabase();
 
+        /*
+        Date today = new Date(); //today 변수에 Date 부르기
+        SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
+        formatH = new SimpleDateFormat("HH:mm:ss"); //formatH에 현재 시간 넣어줌 대소문자 중요함
+        //사용시 formatH.format(today)라고 부르면서 가져오면 ex) 23:11:56 -> 오후 11시 11분 56초
+        */
+
         //모두가 답 O -> 메세지 모양 가지고 옴 누르면 intent로 넘어감
+
 
         //모두가 답 X ->
 
@@ -128,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //답변 하러 가기
 
+        //화면 윗 상단에 마이페이지 감 캐릭터 및 색상 보여주기
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -142,13 +153,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
-                        String str = (String) snapshot.child("count").getValue();
+                        String str = String.valueOf(snapshot.child("count"));
                         count = Integer.valueOf(str);
                         //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
 
                         //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-                        while (members.hasNext()){
+                        while (members.hasNext()){ //boolean hasNext() 메소드는 읽어 올 요소가 남아있는지 확인하는 메소드. 있으면 true, 없으면 false를 반환
                             String member_num = members.next().getKey();
                             member_count++;
                             if(user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
@@ -189,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //가족 감나무가 만들어졌을 경우
+                        // 이 부분 count가 아니라 captin이 시작하기 누르면 바로 시작으로 들어가기로 조건 바꿔야함
                         if(member_count == count){
                             a_Reference = a_Database.getReference("family");
                             a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
@@ -217,28 +229,34 @@ public class MainActivity extends AppCompatActivity {
                                         }
 
                                         //모두 답변한 경우, 새로운 질문 하나 더 추가
+                                        //모두가 답변 + 시간이 12시가 지났다면 추가해야하는데 이거 들어가려면 그럼 가장 마지막에 대답하는 시간 확인해야함!
                                         if(user_count == count){
                                             //새로운 질문 하나 더 추가
                                             our_q_arr.add(all_q_arr.get(index+1));
                                             index++;
+                                            Date today = new Date(); //today 변수에 Date 부르기
+                                            SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
+                                            formatH = new SimpleDateFormat("HH:mm:ss"); //formatH에 현재 시간 넣어줌
+                                            //사용시 formatH.format(today)라고 부르면서 가져오면 ex) 23:11:56 -> 오후 11시 11분 56초
                                             if(our_q_arr.size() == (q_cnt +1)){
-                                                goanswer.setClickable(true);
+                                                nextquestion.setEnabled(true); //새로운 질문으로 넘어가는 버튼 활성화
+                                                /*
+                                                nextquestion.setOnClickListener(new View.OnClickListener() { //활성화된 btn 눌러서 이동가능 아래에 nextquestion setonclick 함수 적어서
+                                                    @Override //주석 시켜둠 실행되면 삭제될 항목입니다!
+                                                    public void onClick(View v) {
+                                                        Intent intent = new Intent(v.getContext(), Answeractivity.class);
+                                                        startActivity(intent);
+                                                    }
+                                                });*/
+                                                goanswer.setClickable(true); //답변 하러 가기 활성화 이거 나중에 뺄 것임 ! nextquestion누르면 answer로 이어짐!
                                             }
 
-//                                            nextquestion.setEnabled(true); //새로운 질문으로 넘어가는 버튼 활성화
-//                                            //활성화된 btn 눌러서 이동가능
-//                                            nextquestion.setOnClickListener(new View.OnClickListener() {
-//                                                @Override
-//                                                public void onClick(View v) {
-//                                                    Intent intent = new Intent(this, Answeractivity.class);
-//                                                    startActivity(intent);
-//                                                }
-//                                            });
+
 
                                             if (snapshot.child("answer").child(String.valueOf(q_cnt+1)).hasChild(user_name)) { //사용자가 대답했으면
                                                 goanswer.setOnClickListener(new View.OnClickListener() {
                                                     @Override
-                                                    public void onClick(View v) { //누르면 마이페이지로 이동
+                                                    public void onClick(View v) {
                                                         Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감~", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
@@ -256,27 +274,39 @@ public class MainActivity extends AppCompatActivity {
                                             //모두가 답변하기 전까지 답변하러가기 버튼 누를 수 없으며, 모두 답변한 경우 다음 질문으로 넘어감.
 
                                             nextquestion.setEnabled(false); //새로운 질문으로 넘어가는 버튼 비활성화
-
+                                            if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)){ //모두 답변하지 않아서 다음 질문 못넘어감
+                                                //but 내가 답했다면, 스피너는 이번 질문에 대한 화면을 보여줌
+                                                spinner.setSelection(index); //가장 최근 질문 spinner에 자동 선택
+                                            }
+                                            else{ //내가 답 하지 않았다면, 이 직전에 대답한 질문과 답변을 보여줌
+                                                spinner.setSelection(index-1); //가장 최근 질문 spinner에 자동 선택
+                                            }
                                             while(user_count == count){
                                                 if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)) { //사용자가 대답했으면
                                                     goanswer.setOnClickListener(new View.OnClickListener() {
                                                         @Override
-                                                        public void onClick(View v) { //누르면 마이페이지로 이동
+                                                        public void onClick(View v) {
                                                             Toast.makeText(MainActivity.this, "다른 가족들이 안 왔다감", Toast.LENGTH_SHORT).show();
                                                         }
                                                     });
                                                     goanswer.setClickable(false); //버튼 클릭 못함
                                                 }
-
                                             }
-
                                         }
 
                                         //우리 가족 질문 배열에 질문 수 넣기
                                         arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, our_q_arr);
                                         spinner = (Spinner)findViewById(R.id.spinner_question);
                                         spinner.setAdapter(arrayAdapter);
-                                        spinner.setSelection(index); //가장 최근 질문 spinner에 자동 선택
+
+                                        //내가 현재 답을 안했지만, 저번 질문에 대한 스피너는 볼 수 있어야함
+                                        if (snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)) { //내가 답했다면 다 최근 질문을 볼 수 있음
+                                            spinner.setSelection(index);  //현재 답을 했다면 가장 최근 spinner자동 선택
+                                        }
+                                        else{
+                                            spinner.setSelection(index-1); //답했던 질문 중 최근 질문 spinner에 자동 선택
+                                        }
+
                                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //spinner를 선택하면 질문과 함꼐 답변 가져오기
                                             @Override
                                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -350,14 +380,26 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
 
+        //Answeractivity로 이동 이번에 추가 됨 아래 항목 복사 하는 일 똑같음 -수빈
+        nextquestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Answeractivity.class);
+                intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
+                intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
+                intent.putExtra("f_code",f_code);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
 
         //Answeractivity로 이동
         goanswer.setOnClickListener(new View.OnClickListener() {
@@ -505,6 +547,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    Intent intent = new Intent(this, Answeractivity.class);
+    intent.putExtra("our_q_arr",our_q_arr);
+    startActivity(intent);
+
     private void initDatabase(){
         mDatabase = FirebaseDatabase.getInstance();
         a_Database = FirebaseDatabase.getInstance();
@@ -577,4 +623,6 @@ public class MainActivity extends AppCompatActivity {
         mReference.removeEventListener(mChild);
         a_Reference.removeEventListener(a_Child);
     }
+
+
 }

@@ -1,6 +1,5 @@
 package com.example.persimmon_tree_proj.Account;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,9 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
-import com.example.persimmon_tree_proj.Main.MainActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -82,6 +78,8 @@ public class Registeractivity_2 extends AppCompatActivity {
                 //이메일 인증이 된 경우, 클릭할 수 없도록 막아놓기
 
                 Intent intent = new Intent(Registeractivity_2.this,Registeractivity_3.class);
+                intent.putExtra("id", String.valueOf(Email));
+                Log.i("eunseocheck1",String.valueOf(Email));
                 startActivity(intent);
 
 
