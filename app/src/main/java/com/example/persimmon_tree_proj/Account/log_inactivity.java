@@ -46,7 +46,6 @@ public class log_inactivity extends AppCompatActivity {
     private EditText editTextEmail;
 
     private String loginId; //자동 로그인 아이디
-    private String loginPwd; //자동 로그인 비밀번호
     private String loginUid; //자동 로그인 비밀번호
 
 
@@ -87,11 +86,29 @@ public class log_inactivity extends AppCompatActivity {
         SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
         final SharedPreferences.Editor autoLogin = auto.edit();
         //자동로그인을 위한 파일명 auto SharedPreference 선언
-        loginId = auto.getString("inputId", null);
-        loginPwd = auto.getString("inputPwd", null);
+        loginId = auto.getString("inputId", null);;
         loginUid = auto.getString("inputUid", null);
 
-        buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼
+        //자동로그인 구현
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser(); //파이어베이스에서 user를 가져와서
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) { //로그인 안해보았다면, 바로 넘어가게 함.
+            if (user.getUid().equals(loginUid) && (loginId != null)) {
+                /* 한번 로그인 한적 있고, log_inactivity에 들어왔을 때 loginID와 LoginPwd값을 가져와서 null이 아니라면
+                 *현재 로그인한 user uid로 접근해서 fcode랑 한 줄 소개 있는 사람만 자동 로그인 할 수 있도록 함.*/
+                Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                Toast.makeText(log_inactivity.this, "자동 로그인", Toast.LENGTH_SHORT).show();
+                finish();
+
+
+            }
+        }
+
+
+        //로그인
+        buttonLogIn = (Button) findViewById(R.id.btn_login);   //로그인 버튼 연결
         buttonLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,54 +129,17 @@ public class log_inactivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
 
-
-
-                    /*로딩페이지로 대체
-                    firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-                        @Override
-                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
-                            FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
-                            reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                                    introduce = dataSnapshot.child("introduce").getValue(String.class);
-                                    if (myfcode == null) {//코드가 없으면
-                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                        startActivity(intent);
-                                    } else { //코드 있으면
-                                        if (introduce == null) {//한줄 소개 없으면
-                                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                                            startActivity(intent);
-                                        } else { //한줄소개까지 있으면
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            //자동로그인이 되었다면, Mainactivity로 바로 이동
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    throw databaseError.toException();
-                                }
-                            });
-
-
-                        }
-                    };
-                */
-
-                } else {   //아니라면
+                }
+                else {   //아니라면
                     Toast.makeText(log_inactivity.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();   //입력하라고 토스트 띄움
                 }
             }
         });
 
-        buttonRegister = (Button)findViewById(R.id.btn_register);
+
+
+        //회원가입 페이지로 이동
+        buttonRegister = (Button)findViewById(R.id.btn_register); //회원가입 버튼 연결
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,10 +149,6 @@ public class log_inactivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
 
 
         //키 값은 자유, 값은 null
