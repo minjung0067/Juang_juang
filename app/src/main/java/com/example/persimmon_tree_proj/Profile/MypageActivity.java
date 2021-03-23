@@ -78,8 +78,8 @@ public class MypageActivity extends AppCompatActivity {
                         count = dataSnapshot.child(myfcode).child("count").getValue().toString();
                         Log.i("counttt",String.valueOf(count));
                         my_familynum.setText(count);
-                        color_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue(String.class);
-                        gam_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue(String.class);
+                        color_number = String.valueOf(dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue());
+                        gam_number = String.valueOf(dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue());
 
                         //나중에 주석 처리해서 지울 부분
                         if (gam_number == null){
@@ -173,8 +173,8 @@ public class MypageActivity extends AppCompatActivity {
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {  //fcode 랑 소개랑 id 데이터베이스에서 찾아와서 보여주기
-                String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                String myintroduce = dataSnapshot.child("introduce").getValue(String.class);
+                String myfcode = String.valueOf(dataSnapshot.child("fcode").getValue());
+                String myintroduce = String.valueOf(dataSnapshot.child("introduce").getValue());
                 String LoginId = autologin.getString("inputId", "");
                 my_introduce.setText(myintroduce);
                 my_fcode.setText(myfcode);
