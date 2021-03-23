@@ -49,6 +49,7 @@ public class log_inactivity extends AppCompatActivity {
 
     private String loginId; //자동 로그인 아이디
     private String loginUid; //자동 로그인 비밀번호
+    private String loginPwd;
 
 
     // 구글로그인 result 상수
@@ -88,7 +89,8 @@ public class log_inactivity extends AppCompatActivity {
         SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
         final SharedPreferences.Editor autoLogin = auto.edit();
         //자동로그인을 위한 파일명 auto SharedPreference 선언
-        loginId = auto.getString("inputId", null);;
+        loginId = auto.getString("inputId", null);
+        loginPwd = auto.getString("inputPwd",null);
         loginUid = auto.getString("inputUid", null);
 
         //자동로그인 구현
@@ -127,10 +129,26 @@ public class log_inactivity extends AppCompatActivity {
                     else{
 
                     }
+                    /*
+                    비밀번호 일치
+                    firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+                        @Override
+                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                            Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    };
+
+                     */
 
                     Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
                     startActivity(intent);
                     finish();
+
+
+
 
                 }
                 else {   //아니라면
