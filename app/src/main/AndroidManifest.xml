@@ -23,8 +23,6 @@
         <activity android:name="com.example.persimmon_tree_proj.To_do_list.Todolist"></activity>
         <activity android:name="com.example.persimmon_tree_proj.Account.more_information_activity" />
         <activity android:name="com.example.persimmon_tree_proj.Account.LodingPage_Activity" />
-        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_3" />
-        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_2" />
         <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_1" />
         <activity android:name="com.example.persimmon_tree_proj.Account.findaccount" />
 
@@ -71,7 +69,7 @@
         <activity android:name="com.example.persimmon_tree_proj.Family.familyactivity" />
         <activity android:name="com.example.persimmon_tree_proj.Family.CodeActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Main.MainActivity" />
-        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_4" />
+        <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_2" />
         <activity android:name="com.example.persimmon_tree_proj.Account.findaccount" />
     </application>
 

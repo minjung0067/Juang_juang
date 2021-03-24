@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 profile.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                 GradientDrawable gd1 = (GradientDrawable) profile.getBackground(); //동적으로 테두리 색 바꿈
-                                gd1.setStroke(50, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                                //gd1.setStroke(50, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
 
                             }
 

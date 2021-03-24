@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,14 +30,13 @@ import com.google.firebase.storage.StorageReference;
 public class MakeProfile extends AppCompatActivity {
 
     ImageView imageView;
-    ImageButton change_btn; //사진 바꾸기버튼
+    //ImageButton change_btn; //사진 바꾸기버튼
     private StorageReference mStorageRef; //이미지 구글 firebase storage에 업로드 하기 위함임
     Button ok; //확인버튼
     private EditText whoami; //한줄 소개 칸
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
-    private String myfcode;
     private String user_name;
     private String gam_number;
     private String color_number;
@@ -54,13 +54,7 @@ public class MakeProfile extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
 
         whoami = (EditText) findViewById(R.id.whoami);
-
-        //Intent intent = getIntent();
-        //String introduce1 = intent.getStringExtra("intro");
-        //whoami.setText(introduce1);
-
-
-        //확인 버튼 누르면 main으로
+        //확인 버튼 누르면 가족 생성 화면(familyactivity)로 이동.
         ok = (Button) findViewById(R.id.ok_btn);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,19 +70,8 @@ public class MakeProfile extends AppCompatActivity {
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
                     mDatabase.getReference("users").child(user.getUid()).child("introduce").setValue(introduce); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
-                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                            user_name = dataSnapshot.child("name").getValue(String.class);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("introduce").setValue(introduce);
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            throw databaseError.toException();
-                        }
-                    });
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                    Intent intent = new Intent(getApplicationContext(), familyactivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
@@ -98,7 +81,7 @@ public class MakeProfile extends AppCompatActivity {
         });
 
         imageView = (ImageView) findViewById(R.id.profile_image);
-        change_btn = (ImageButton) findViewById(R.id.change_profile);
+        /*change_btn = (ImageButton) findViewById(R.id.change_profile);
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,21 +119,22 @@ public class MakeProfile extends AppCompatActivity {
             }
         });
 
+         */
+
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                myfcode = dataSnapshot.child("fcode").getValue(String.class);
                 user_name = dataSnapshot.child("name").getValue(String.class);
                 introduce = dataSnapshot.child("introduce").getValue(String.class);
                 if (introduce != null){
                     whoami.setText(introduce);
                 }
-                DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("family");
+                DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("users");
                 reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        color_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue(String.class);
-                        gam_number = dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue(String.class);
+                        color_number = dataSnapshot.child(user.getUid()).child("user_color").getValue(String.class);
+                        gam_number = dataSnapshot.child(user.getUid()).child("user_gam").getValue(String.class);
                         if(gam_number != null && color_number!=null){
                             switch (gam_number) {
                                 case "1":

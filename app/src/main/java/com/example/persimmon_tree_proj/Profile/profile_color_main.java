@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj.Profile;
+/*package com.example.persimmon_tree_proj.Profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -295,3 +295,5 @@ public class profile_color_main extends AppCompatActivity {
 
     }
 }
+
+ */
