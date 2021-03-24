@@ -104,7 +104,7 @@ public class Waitactivity extends AppCompatActivity {
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                f_code = snapshot.child("fcode").getValue().toString();
+                f_code = String.valueOf(snapshot.child("fcode").getValue());
                 TextView txt_fcode = (TextView) findViewById(R.id.txt_fcode);
                 txt_fcode.setText(f_code);
                 member_count = 0;
