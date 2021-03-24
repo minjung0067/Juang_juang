@@ -48,7 +48,7 @@ public class LodingPage_Activity extends AppCompatActivity {
          * 개인 프로필 설정(이름, 생년월일) =) 감 색깔 설정 => 감 캐릭터 설정 => 별명 => 가족 코드 (가족 프로필까지 작성해야 코드가 올라간다.) => waitactivity
          * 개인 프로필 : 이름 , 생년월일
          * case 1-1: 개인 프로필을 설정하지 않았음.
-         *
+         *          => more_information_activity로 이동
          * case 1-2: 개인 프로필을 설정하였음.
          *      case 2-1 : 감 캐릭터를 설정하지 않았음. => profile_gam activity로 이동
          *
@@ -77,7 +77,7 @@ public class LodingPage_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user_name = String.valueOf(snapshot.child("user_name").getValue()); //개인 정보를 작성했는지 확인
-                user_color = String.valueOf(snapshot.child("uwer_color").getValue()); //감 색깔을 설정했는지 확인
+                user_color = String.valueOf(snapshot.child("user_color").getValue()); //감 색깔을 설정했는지 확인
                 user_gam = String.valueOf(snapshot.child("user_gam").getValue()); // 감 캐릭터를 설정했는지 확인
                 introduce = String.valueOf(snapshot.child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
                 user_fcode = String.valueOf(snapshot.child("fcode").getValue());
@@ -89,7 +89,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-                //case 1-2 : 이름이나 생년월일 같은 기본 정보 아직 db에 있음
+                //case 1-2 : 이름이나 생년월일 같은 기본 정보 db에 있음
                 else{
                     //case 2-1 감 캐릭터를 설정하지 않았을 경우 => profile_gam로 이동
                     if(user_gam == null){
