@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.LocusId;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Family.Make_FamilyProfile;
@@ -71,19 +72,18 @@ public class LodingPage_Activity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
 
-
-
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user_name = String.valueOf(snapshot.child("user_name").getValue()); //개인 정보를 작성했는지 확인
-                user_color = String.valueOf(snapshot.child("user_color").getValue()); //감 색깔을 설정했는지 확인
-                user_gam = String.valueOf(snapshot.child("user_gam").getValue()); // 감 캐릭터를 설정했는지 확인
-                introduce = String.valueOf(snapshot.child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
-                user_fcode = String.valueOf(snapshot.child("fcode").getValue());
-
+                user_name = String.valueOf(snapshot.child(user.getUid()).child("user_name").getValue()); //개인 정보를 작성했는지 확인
+                user_color = String.valueOf(snapshot.child(user.getUid()).child("user_color").getValue()); //감 색깔을 설정했는지 확인
+                user_gam = String.valueOf(snapshot.child(user.getUid()).child("user_gam").getValue()); // 감 캐릭터를 설정했는지 확인
+                introduce = String.valueOf(snapshot.child(user.getUid()).child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
+                user_fcode = String.valueOf(snapshot.child(user.getUid()).child("fcode").getValue());
+                Log.i("userid1", String.valueOf(user_name));
                 //case 1-1: 이름이나 생년월일 같은 기본 정보 아직 db에 없음 => more_information_activity로 이동
-                if(user_name == null){
+                if(String.valueOf(user_name)==null){
+                    Log.i("userid2", String.valueOf(user.getUid()));
                     Intent intent = new Intent(LodingPage_Activity.this, more_information_activity.class);  //프로필 만들러 가라
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
