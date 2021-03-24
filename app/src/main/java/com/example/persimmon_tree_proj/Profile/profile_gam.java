@@ -52,18 +52,6 @@ public class profile_gam extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        Button color = (Button) findViewById(R.id.color);   //색상 버튼
-        color.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {  //색상 버튼 누르면 색깔 정하는 곳으로 가게
-                Intent intent = new Intent(getApplicationContext(), profile_color.class); //코드 생성 activity로 이동
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.putExtra("intro",introduce);
-                startActivity(intent);
-                overridePendingTransition(0, 0); //intent시 효과 없애기
-                finish();
-            }
-        });
 
 
         ImageButton ok = (ImageButton) findViewById(R.id.ok_btn);  //선택완료 버튼
