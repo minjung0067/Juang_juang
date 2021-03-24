@@ -31,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.annotations.Nullable;
+import com.kakao.auth.AuthType;
+import com.kakao.auth.Session;
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
 
@@ -66,11 +68,11 @@ public class log_inactivity extends AppCompatActivity {
 
 
 
-//    //카카오로그인
-//    private com.kakao.usermgmt.LoginButton kakao_login;
-//    private SessionCallback sessionCallback = new SessionCallback();
-//    Session session;
-//
+    //카카오로그인
+    private com.kakao.usermgmt.LoginButton kakao_login;
+    private SessionCallback sessionCallback = new SessionCallback();
+    Session session;
+
 
 
 
@@ -173,18 +175,18 @@ public class log_inactivity extends AppCompatActivity {
         //키 값은 자유, 값은 null
         //login된 값(설정값을)저장하기 위한 변수
 
-//        //카카오톡 로그인 버튼 선언
-//        kakao_login = (com.kakao.usermgmt.LoginButton) findViewById(R.id.btn_kakao_login);
-//
-//
-//        //카카오톡 로그인 버튼을 눌렀을 때
-//        kakao_login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                session.open(AuthType.KAKAO_LOGIN_ALL, log_inactivity.this);
-//            }
-//        });
-//        //카카오톡 로그인 끝
+        //카카오톡 로그인 버튼 선언
+        kakao_login = (com.kakao.usermgmt.LoginButton) findViewById(R.id.btn_kakao_login);
+
+
+        //카카오톡 로그인 버튼을 눌렀을 때
+        kakao_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                session.open(AuthType.KAKAO_LOGIN_ALL, log_inactivity.this);
+            }
+        });
+        //카카오톡 로그인 끝
 
 
 
@@ -327,20 +329,20 @@ public class log_inactivity extends AppCompatActivity {
                 });
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        // 세션 콜백 삭제
-//        Session.getCurrentSession().removeCallback(sessionCallback);
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 세션 콜백 삭제
+        Session.getCurrentSession().removeCallback(sessionCallback);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // 카카오톡|스토리 간편로그인 실행 결과를 받아서 SDK로 전달
-//        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-//            return;
-//        }
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
         // 구글로그인 버튼 응답
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);   //구글 회원 데이터 가져옴

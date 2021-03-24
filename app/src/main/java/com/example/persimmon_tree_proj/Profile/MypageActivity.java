@@ -269,6 +269,9 @@ public class MypageActivity extends AppCompatActivity {
                 editor.commit(); //저장
                 Toast.makeText(MypageActivity.this, "로그아웃.", Toast.LENGTH_SHORT).show();
 
+                //구글 로그인 시 로그아웃
+                FirebaseAuth.getInstance().signOut();
+
                 //네이버 아이디로 로그인했을 때 로그아웃 용
 //                mOAuthLoginModule.logout(mContext);
 //                Toast.makeText(MypageActivity.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
