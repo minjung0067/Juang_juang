@@ -35,6 +35,7 @@ public class LodingPage_Activity extends AppCompatActivity {
     private String user_color;
     private String user_gam;
     private String user_fcode;
+    private String fcount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,16 +129,35 @@ public class LodingPage_Activity extends AppCompatActivity {
                                 }
                                 //case 5-2
                                 else{
-                                    //if()
-                                    Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    finish();
-                                    //else()
-                                    //Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
-                                    //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    //startActivity(intent);
-                                    //finish();
+                                    firebaseAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
+                                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            fcount = String.valueOf(FirebaseDatabase.getInstance().getReference("family").child(user_fcode).child("fcount").child("count").getKey());
+                                            if(fcount == null) {
+                                                Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                            else{
+                                                Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                startActivity(intent);
+                                                finish();
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
                                 }
 
                             }

@@ -8,15 +8,8 @@ public class UserModel {
     public String fcode;
     public String introduce;
 
-    public UserModel() {
-
-    }
-    public UserModel(String name, String uid, String birth){
-        this.name = name;
+    public UserModel(String uid){
         this.uid = uid;
-        this.birth = birth;
-        this.fcode = fcode;
-        this.introduce = introduce;
     }
 
 

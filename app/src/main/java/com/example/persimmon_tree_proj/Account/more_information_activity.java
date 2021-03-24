@@ -31,6 +31,8 @@ more_information_activity extends AppCompatActivity {
     private EditText editTextBirth; //생일 칸
     private EditText editTextName; //이름 칸
 
+    private Integer ok1 = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,23 +53,33 @@ more_information_activity extends AppCompatActivity {
         buttonok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String name = editTextName.getText().toString();
                 String birth = editTextBirth.getText().toString();
+                check_validation2(birth);
                 if(!name.equals("")) { //이름 o
                     if(!birth.equals("")){ //생일 o
-                        //db에 올리기
-                        reference.child(user.getUid()).child("user_name").setValue(name); //이름 넣기
-                        reference.child(user.getUid()).child("birth").setValue(birth); //이름 넣기
+                        if(ok1 == 1){
+                            //생년월일 조건에 맞는 경우(8자리)
+                            //db에 올리기
+                            reference.child(user.getUid()).child("user_name").setValue(name); //이름 넣기
+                            reference.child(user.getUid()).child("birth").setValue(birth); //이름 넣기
 
-                        //다음 페이지인 감 페이지로 이동
-                        Intent intent = new Intent(more_information_activity.this, profile_gam.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                            //다음 페이지인 감 페이지로 이동
+                            Intent intent = new Intent(more_information_activity.this, profile_gam.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            //생년월일 조건에 맞지 않는 경우, ok2 = 0 인 경우
+                            Toast.makeText(more_information_activity.this, "생년월일은 8자로 작성해주세요 (ex)20200912", Toast.LENGTH_LONG).show();
+                        }
+
 
                     }
                     else{ //이름 o 생일 x
-                        Toast.makeText(more_information_activity.this, "생일을 알려주세요.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(more_information_activity.this, "생년월일 8자리로 작성해주세요.20200925", Toast.LENGTH_LONG).show();
                     }
                 }
                 else{ //이름 x
@@ -76,5 +88,15 @@ more_information_activity extends AppCompatActivity {
 
             }
         });
- }
+    }
+    void check_validation2(String birth) {
+        // 비밀번호 유효성 검사식1 : 숫자, 특수문자가 포함되어야 한다.
+        if(birth.length() == 8){
+            ok1 = 1;
+        }
+        else{
+            ok1 = 0;
+        }
+
+    }
 }
