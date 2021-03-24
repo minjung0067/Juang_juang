@@ -36,7 +36,6 @@ public class Waitactivity extends AppCompatActivity {
     private String f_code;
     private String user_name;
     private int member_count; //현재 들어와있는 가족 구성원 수 count
-    private int count;        //지정한 가족 구성원 수
 
 
 
@@ -67,11 +66,12 @@ public class Waitactivity extends AppCompatActivity {
         });
 
 
-        Button change = (Button) findViewById(R.id.btn_change);//가족 구성원 수 바꾸기
+        Button change = (Button) findViewById(R.id.btn_change);//가족 코드 없애버리기
+        //경고창 구현하면 어떨까
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(Waitactivity.this, Make_FamilyProfilewait.class);
+                Intent intentt = new Intent(Waitactivity.this, familyactivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentt);
 
@@ -98,6 +98,49 @@ public class Waitactivity extends AppCompatActivity {
             }
         });
 
+        Button start = (Button) findViewById(R.id.btn_start);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //경고 메세지 주었으면 좋겠음.
+                //감나무 시작하기를 누르면, 가족
+
+                int move = 0; //파이어베이스에 저장되면 이동하도록 함.
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
+                reference1.child(f_code).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //가져온 f_code에 해당하는 member 수 세기
+                        Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
+                        while (members.hasNext()) {
+                            String member_num = members.next().getKey();
+                            member_count++;
+                        }
+
+
+                        //가족 수 확인하여서 가족 만들어졌는지 확인 member_count 와 count 비교
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+                String fcount = String.valueOf(member_count);
+                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("count").setValue(fcount);
+                move = 1;
+                if (move == 1){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+
+                }
+
+            }
+        });
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -115,7 +158,7 @@ public class Waitactivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //count 수 가져오기
                         String str = String.valueOf(snapshot.child("count").getValue());
-                        count = Integer.valueOf(str);
+                        //count = Integer.valueOf(str);
                         //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                         while (members.hasNext()){
@@ -127,7 +170,8 @@ public class Waitactivity extends AppCompatActivity {
                         //가족 수 확인하여서 가족 만들어졌는지 확인 member_count 와 count 비교
 
 
-                        //가족 감나무가 만들어졌을 경우
+                        //가족 감나무가 만들어졌을 경우\
+                        /*
                         if(member_count == count){
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -156,6 +200,8 @@ public class Waitactivity extends AppCompatActivity {
                         else{//member_count > count
 
                         }
+
+                         */
                     }
 
                     @Override

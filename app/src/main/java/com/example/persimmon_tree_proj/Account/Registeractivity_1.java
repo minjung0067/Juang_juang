@@ -108,7 +108,7 @@ public class Registeractivity_1 extends AppCompatActivity {
 
             }
         });
-        checktext = (TextView)findViewById(R.id.txt_check); //이메일 발송 안내 텍스트
+        checktext = (TextView)findViewById(R.id.txt_check); //이메일 입력 시 안내 텍스트
 
 
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);    //pwd 연결
@@ -331,7 +331,7 @@ public class Registeractivity_1 extends AppCompatActivity {
         buttonJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {  //모든 정보 입력했는지 확인
-                //email, pwd, birth, name 변수에 입력된 내용을 string으로 바꿔서 각각의 변수에 넣기
+                //email, pwd변수에 입력된 내용을 string으로 바꿔서 각각의 변수에 넣기
                 //자동로그인 안되게 기기에 저장된 거 지움
                 SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = auto.edit();
@@ -357,6 +357,12 @@ public class Registeractivity_1 extends AppCompatActivity {
                         check_validation2(pwd,pwd2);
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
                             if(ok2 == 1){
+                                //hashmap 만들기
+                                HashMap result = new HashMap<>();  //database 올릴 때 사용
+                                result.put("name", "");
+                                result.put("birth", "");
+                                result.put("fcode", "");
+                                result.put("introduce","");
                                 createUser(id ,pwd);
                                 autoLogin.putString("inputId", Email.getText().toString());
                                 autoLogin.putString("inputPwd", editTextPassword.getText().toString());
@@ -367,13 +373,13 @@ public class Registeractivity_1 extends AppCompatActivity {
                                 else{
 
                                 }
-                                Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
+                                Intent intent = new Intent(getApplicationContext(),more_information_activity.class);
                                 startActivity(intent);
                                 finish();
                             }
                             else{
                                 //생년월일 조건에 맞지 않는 경우, ok2 = 0 인 경우
-                                Toast.makeText(Registeractivity_1.this, "비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Registeractivity_1.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
 
                             }
 

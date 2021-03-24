@@ -76,11 +76,11 @@ public class LodingPage_Activity extends AppCompatActivity {
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user_name = String.valueOf(snapshot.child("user_name").getValue()); //개인 정보를 작성했는지 확인
-                user_color = String.valueOf(snapshot.child("user_color").getValue()); //감 색깔을 설정했는지 확인
-                user_gam = String.valueOf(snapshot.child("user_gam").getValue()); // 감 캐릭터를 설정했는지 확인
-                introduce = String.valueOf(snapshot.child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
-                user_fcode = String.valueOf(snapshot.child("fcode").getValue());
+                user_name = snapshot.child("user_name").getValue(String.class); //개인 정보를 작성했는지 확인
+                user_color = snapshot.child("user_color").getValue(String.class); //감 색깔을 설정했는지 확인
+                user_gam = snapshot.child("user_gam").getValue(String.class); // 감 캐릭터를 설정했는지 확인
+                introduce = snapshot.child("introduce").getValue(String.class); //프로필 만들기 마지막 단계가 되었는지 확인
+                user_fcode = snapshot.child("fcode").getValue(String.class);
 
                 //case 1-1: 이름이나 생년월일 같은 기본 정보 아직 db에 없음 => more_information_activity로 이동
                 if(user_name == null){

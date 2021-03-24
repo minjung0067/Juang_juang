@@ -134,10 +134,10 @@ public class MakeProfilemain extends AppCompatActivity {
 
 
 
-                Intent intent = new Intent(getApplicationContext(), profile_gam_main.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+                //Intent intent = new Intent(getApplicationContext(), profile_gam_main.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(intent);
+                //finish();
             }
         });
 

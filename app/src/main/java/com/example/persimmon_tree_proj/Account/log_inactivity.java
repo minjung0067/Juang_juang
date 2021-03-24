@@ -127,8 +127,8 @@ public class log_inactivity extends AppCompatActivity {
                     else{
 
                     }
-                    /*
-                    비밀번호 일치
+
+                    //비밀번호 일치
                     firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
                         @Override
                         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -139,7 +139,7 @@ public class log_inactivity extends AppCompatActivity {
                         }
                     };
 
-                     */
+
 
                     Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
                     startActivity(intent);
