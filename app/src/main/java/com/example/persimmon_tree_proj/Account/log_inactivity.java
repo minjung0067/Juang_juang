@@ -282,10 +282,6 @@ public class log_inactivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent(log_inactivity.this, LodingPage_Activity.class);  //구글 로그인 성공시 familyactivity로 넘어가게
-        startActivity(intent);
-        finish();
-
 
     }
 
