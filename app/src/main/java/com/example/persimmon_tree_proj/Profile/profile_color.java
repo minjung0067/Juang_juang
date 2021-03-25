@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,23 +51,7 @@ public class profile_color extends AppCompatActivity {
         //c_9 = (ImageView) findViewById(R.id.c9);
 
 
-        Button gam = (Button) findViewById(R.id.gam);     //감 프로필 사진 고르기 버튼
 
-        //Intent intent = getIntent();
-        //String introduce = intent.getStringExtra("intro");
-
-
-        gam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), profile_gam.class); //코드 생성 activity로 이동
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.putExtra("intro",introduce);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(0, 0); //intent시 효과 없애기
-            }
-        });
 
         ImageButton go_back = (ImageButton) findViewById(R.id.go_back);    //뒤로가기
         go_back.setOnClickListener(new View.OnClickListener() {
@@ -80,56 +65,16 @@ public class profile_color extends AppCompatActivity {
             }
         });
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                final String user_name = dataSnapshot.child("name").getValue(String.class);
-                //이미 다른 가족 구성원이 선택한 색깔이 뭔지 검사하는 부분 시작
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
-                reference1.child(myfcode).child("members").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Iterator<DataSnapshot> members = dataSnapshot.getChildren().iterator();
-                        //원래 사용자가 선택했던 건 다시 선택지 안에 들어가야 하니까
-                        String previous_choice = dataSnapshot.child(user.getUid()).child("user_color").getValue(String.class);
-                        if(previous_choice != null){
-                            make_cannot_select(previous_choice,1);
-                        }
-                        make_clicked();
-                        while(members.hasNext()) {
-                            String family_color_num = members.next().child("user_color").getValue(String.class);
-                            if (family_color_num != null && family_color_num!= previous_choice) {
-                                //family_color_num이 있긴 하면서 이전의 선택과 같지 않은 거 == 나를 제외, 가족들이 선택한 거
-                                make_cannot_select(family_color_num,2);
-                                //각각 체크해서 다른 가족에 의해 선택된 건 2로 바꾸는 함수
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException();
-                    }
-                });
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
+
     }
 
 
     public void check_process(int clicked_what, ImageView clicked_btn) {
         //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
-        if (clicked_what == 1) {
+        if (clicked_what == 1) { //1은 선택한 경우
             clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
-        } else if (clicked_what == 2) {
-            clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
-        } else {
+        }
+        else { //0은 선택하지 않은 경우
             clicked_btn.setBackgroundResource(R.drawable.btn_not_clicked);
         }
     }
@@ -190,8 +135,6 @@ public class profile_color extends AppCompatActivity {
         reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                String user_name = dataSnapshot.child("name").getValue(String.class);
                 //현재 user가 선택한 색깔 확인
                 switch (view.getId()){
                     case R.id.c1:
@@ -199,14 +142,15 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[0] == 1){ clicked_arr[0] = 0; } else if(clicked_arr[0] ==0){
                             clicked_arr[0]=1;
                             another_unselected(0);   //그 전에 선택했던 거 취소 시키는 함수
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#FE8189");}
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#FE8189");
+                            }
                         make_clicked();
                         break;
                     case R.id.c2:
                         if(clicked_arr[1] == 1){ clicked_arr[1] = 0; } else if(clicked_arr[1] ==0){
                             clicked_arr[1]=1;
                             another_unselected(1);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#FE8E69");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#FE8E69");
                         }
                         make_clicked();
                         break;
@@ -214,7 +158,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[2] == 1){ clicked_arr[2] = 0; } else if(clicked_arr[2] ==0){
                             clicked_arr[2]=1;
                             another_unselected(2);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#FEC56C");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#FEC56C");
                         }
                         make_clicked();
                         break;
@@ -222,7 +166,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[3] == 1){ clicked_arr[3] = 0; } else if(clicked_arr[3] ==0){
                             clicked_arr[3]=1;
                             another_unselected(3);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#B7DB79");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#B7DB79");
                         }
                         make_clicked();
                         break;
@@ -230,7 +174,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[4] == 1){ clicked_arr[4] = 0; } else if(clicked_arr[4] ==0){
                             clicked_arr[4]=1;
                             another_unselected(4);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#87dade");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#87dade");
                         }
                         make_clicked();
                         break;
@@ -238,7 +182,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[5] == 1){ clicked_arr[5] = 0; } else if(clicked_arr[5] ==0){
                             clicked_arr[5]=1;
                             another_unselected(5);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#99CAEB");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#99CAEB");
                         }
                         make_clicked();
                         break;
@@ -246,7 +190,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[6] == 1){ clicked_arr[6] = 0; } else if(clicked_arr[6] ==0){
                             clicked_arr[6]=1;
                             another_unselected(6);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#A1AEE5");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#A1AEE5");
                         }
                         make_clicked();
                         break;
@@ -254,7 +198,7 @@ public class profile_color extends AppCompatActivity {
                         if(clicked_arr[7] == 1){ clicked_arr[7] = 0; } else if(clicked_arr[7] ==0){
                             clicked_arr[7]=1;
                             another_unselected(7);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).child("user_color").setValue("#E89CDA");
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#E89CDA");
                         }
                         make_clicked();
                         break;
@@ -272,7 +216,7 @@ public class profile_color extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //코드 생성 activity로 이동
+        Intent intent = new Intent(getApplicationContext(), profile_gam.class); //코드 생성 activity로 이동
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

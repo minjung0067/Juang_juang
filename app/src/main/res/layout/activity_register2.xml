@@ -4,57 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
     tools:context="com.example.persimmon_tree_proj.Account.Registeractivity_2">
 
-    <EditText
-        android:id="@+id/editText_email"
-        android:layout_width="266dp"
-        android:layout_height="40dp"
-        android:layout_margin="7dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:gravity="left"
-        android:hint="이메일 주소"
-        android:inputType="textEmailAddress"
-        android:textColorHint="@color/greyColor"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_index2" />
 
-    <TextView
-        android:id="@+id/txt_check"
-        android:layout_width="266dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_emailcheck" />
 
-    <Button
-        android:id="@+id/btn_emailcheck"
-        android:layout_width="266dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="확인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_email" />
 
-    <TextView
-        android:id="@+id/txt_index2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="이메일을 적어주세요."
-        android:textColor="#000000"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.185"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
