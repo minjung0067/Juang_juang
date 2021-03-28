@@ -254,7 +254,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                textView.setText(our_q_arr.get(Integer.parseInt(showindex)+1));
 //                setanswer(Integer.parseInt(showindex)+1);
-                if ((!meanswer) && ii==qsize){ //내가 답을 안했는데 최신 질문 보려고 누른다면,
+                if ((!meanswer) && ii>=qsize){ //내가 답을 안했는데 최신 질문 보려고 누른다면,
+                    Toast.makeText(MainActivity.this,"지금 질문에 답을 하면 다음 질문으로 넘어갈 수 있어요!",Toast.LENGTH_LONG).show();
                     right.setEnabled(false); //비활성화
                     ii = qsize-1;
                 }
