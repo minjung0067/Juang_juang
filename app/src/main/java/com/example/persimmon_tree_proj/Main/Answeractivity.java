@@ -2,6 +2,7 @@ package com.example.persimmon_tree_proj.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 public class Answeractivity extends AppCompatActivity {
@@ -37,6 +41,8 @@ public class Answeractivity extends AppCompatActivity {
     private String user_name;
     private String f_code;
 
+    private FirebaseDatabase a_Database;
+    private DatabaseReference a_Reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +75,16 @@ public class Answeractivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         f_code = String.valueOf(snapshot.child("fcode"));
-                        String user_name = snapshot.child("userName").getValue(String.class);
-                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("answer").child(position).child(user_name).setValue(msg);
-                        Intent intent = new Intent(Answeractivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        String user_name = snapshot.child("user_name").getValue(String.class);
+                        //FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).setValue(msg);
+                        //답변 올리기
+                        Map<String, Object> answerUpdates = new HashMap<>();
+                        answerUpdates.put(position, msg);
+                        FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).updateChildren(answerUpdates);
+//                        Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//                        finish();
                     }
 
                     @Override
@@ -86,18 +96,27 @@ public class Answeractivity extends AppCompatActivity {
             }
         });
 
-        //내가 답 X
-        DatabaseReference familyreference = mDatabase.getReference("family");
+        //내가 답변 한 것에 따라서 main에서 볼 수 있는게 다름! 그거 넘겨주기위함
+        DatabaseReference familyreference = mDatabase.getReference("answer");
         familyreference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if(snapshot.child("answer").child(String.valueOf(our_q_arr.size())).hasChild(user_name)){
-
+                if(snapshot.child(String.valueOf(position)).hasChild(user_name)){ //내가 답 O 지금 답 한 main화면을 보여주기
+                    Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                    intent.putExtra("showindex",(Integer.parseInt(position))); //바로 직전에 답한 index를 Main으로 넘겨줌
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(0, 0); //intent시 효과 없애기
                 }
-                //내가 답 O
-                else{
 
+                else{ //내가 답 X 경우 이 전의 화면까지만 볼 수 있음
+                    Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                    Intent intent1 = intent.putExtra("showindex", Integer.parseInt(position)-1);//바로 직전에 답한 index를 Main으로 넘겨줌
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(0, 0); //intent시 효과 없애기
                 }
             }
 
@@ -122,5 +141,30 @@ public class Answeractivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+    
+    public void didAnswer(){
+        a_Reference = a_Database.getReference("answer");
+        a_Reference.child(f_code);
+        a_Reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> AnswerorNot = snapshot.child("answer").child(f_code).getChildren().iterator(); //날짜 - uid 와 답변을 참조
+                DataSnapshot let = AnswerorNot.next();
+                Log.i("check Answer", let.toString());
+                if (AnswerorNot.hasNext()) { // 내가 대답 했다면
+                    //String date = AnswerorNot.next();
+                    //snapshot.child(date).child(user.getUid())
+                } else { //안했다면
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
     }
 }

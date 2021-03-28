@@ -7,6 +7,25 @@
     android:background="#fff"
     tools:context="com.example.persimmon_tree_proj.Main.MainActivity">
 
+    <ImageButton
+        android:id="@+id/btn_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_next_question"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_question"
+        app:srcCompat="@drawable/next_month_big" />
+
+    <ImageButton
+        android:id="@+id/btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_question"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_question"
+        app:srcCompat="@drawable/next_month_big" />
+
     <TextView
         android:id="@+id/button"
         android:layout_width="match_parent"
@@ -83,7 +102,7 @@
         android:id="@+id/txt_question"
         android:layout_width="340dp"
         android:layout_height="100dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/btn_grey_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:gravity="center"
@@ -92,7 +111,7 @@
         android:textColor="#000"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_question" />
 

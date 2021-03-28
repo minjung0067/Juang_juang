@@ -39,51 +39,51 @@ public class splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
-        final SharedPreferences.Editor autoLogin = auto.edit();
-        //자동로그인을 위한 파일명 auto SharedPreference 선언
-
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
-                FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
-                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                        introduce = dataSnapshot.child("introduce").getValue(String.class);
-                        if (myfcode == null) {//코드가 없으면
-                            Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
-                            intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intentt);
-                            finish();
-                        } else { //코드 있으면
-                            if (introduce == null) {//한줄 소개 없으면
-                                Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
-                                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intentt);
-                                finish();
-                            } else { //한줄소개까지 있으면
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                //자동로그인이 되었다면, Mainactivity로 바로 이동
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException();
-                        //아니라면?에 대한 것 추가해야함
-                    }
-                });
-
-
-            }
-        };
+//        SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
+//        final SharedPreferences.Editor autoLogin = auto.edit();
+//        //자동로그인을 위한 파일명 auto SharedPreference 선언
+//
+//        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {  //로그인 되는 경우 MainActivity로 이동
+//                FirebaseUser user = firebaseAuth.getCurrentUser();    //파이어베이스에서 user 가져와서
+//                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");//users에서 현 uid 가진 사람 찾기
+//                reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        myfcode = dataSnapshot.child("fcode").getValue(String.class);
+//                        introduce = dataSnapshot.child("introduce").getValue(String.class);
+//                        if (myfcode == null) {//코드가 없으면
+//                            Intent intentt = new Intent(getApplicationContext(), familyactivity.class);
+//                            intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                            startActivity(intentt);
+//                            finish();
+//                        } else { //코드 있으면
+//                            if (introduce == null) {//한줄 소개 없으면
+//                                Intent intentt = new Intent(getApplicationContext(), MakeProfile.class);
+//                                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                startActivity(intentt);
+//                                finish();
+//                            } else { //한줄소개까지 있으면
+//                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                                //자동로그인이 되었다면, Mainactivity로 바로 이동
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        throw databaseError.toException();
+//                        //아니라면?에 대한 것 추가해야함
+//                    }
+//                });
+//
+//
+//            }
+//        };
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
