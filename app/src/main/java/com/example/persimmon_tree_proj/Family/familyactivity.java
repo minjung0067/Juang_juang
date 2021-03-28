@@ -67,7 +67,7 @@ public class familyactivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //tf = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            if ((snapshot.getValue()).equals(str)) {
+                            if ((snapshot.getKey()).equals(str)) {
                                 exist = 1;//str_code랑 원래 기존에 있던 코드에 있다면 exist = 1 , 같지 않다면, exist = 0
                                 break;
 
@@ -87,7 +87,7 @@ public class familyactivity extends AppCompatActivity {
                                     FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user\
 
                                     mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 fcode넣기
-                                    FirebaseDatabase.getInstance().getReference("family").child("fcode").child("members").child(user.getUid());
+                                    FirebaseDatabase.getInstance().getReference("family").child("fcode").child("members").child(user.getUid()).setValue(str);
 
 
                                     //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환

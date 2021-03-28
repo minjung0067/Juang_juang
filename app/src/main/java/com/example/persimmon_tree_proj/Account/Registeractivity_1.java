@@ -364,16 +364,16 @@ public class Registeractivity_1 extends AppCompatActivity {
                                 result.put("fcode", "");
                                 result.put("introduce","");
                                 createUser(id ,pwd);
-                                autoLogin.putString("inputId", Email.getText().toString());
-                                autoLogin.putString("inputPwd", editTextPassword.getText().toString());
-                                if(user != null){
-                                    autoLogin.putString("inputUid", firebaseAuth.getCurrentUser().getUid());
-                                    autoLogin.commit(); //값 저장
-                                }
-                                else{
-
-                                }
-                                Intent intent = new Intent(getApplicationContext(),more_information_activity.class);
+                                //autoLogin.putString("inputId", Email.getText().toString());
+                                //autoLogin.putString("inputPwd", editTextPassword.getText().toString());
+                                //if(user != null){
+                                //    autoLogin.putString("inputUid", firebaseAuth.getCurrentUser().getUid());
+                                //    autoLogin.commit(); //값 저장
+                                //}
+                                //else{
+                                //}
+                                Intent intent = new Intent(getApplicationContext(),log_inactivity.class);
+                                Toast.makeText(Registeractivity_1.this, "회원가입이 되었습니다.", Toast.LENGTH_LONG).show();
                                 startActivity(intent);
                                 finish();
                             }
