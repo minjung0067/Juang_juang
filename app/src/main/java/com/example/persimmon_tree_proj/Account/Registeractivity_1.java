@@ -357,13 +357,14 @@ public class Registeractivity_1 extends AppCompatActivity {
                         check_validation2(pwd,pwd2);
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
                             if(ok2 == 1){
+                                createUser(id ,pwd);
                                 //hashmap 만들기
                                 HashMap result = new HashMap<>();  //database 올릴 때 사용
                                 result.put("name", "");
                                 result.put("birth", "");
                                 result.put("fcode", "");
                                 result.put("introduce","");
-                                createUser(id ,pwd);
+
                                 //autoLogin.putString("inputId", Email.getText().toString());
                                 //autoLogin.putString("inputPwd", editTextPassword.getText().toString());
                                 //if(user != null){
