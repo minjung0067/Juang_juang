@@ -2,8 +2,10 @@ package com.example.persimmon_tree_proj.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 
 public class Answeractivity extends AppCompatActivity {
 
@@ -31,7 +38,11 @@ public class Answeractivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
     private FirebaseDatabase mDatabase;
     private FirebaseAuth firebaseAuth;
+    private String user_name;
+    private String f_code;
 
+    private FirebaseDatabase a_Database;
+    private DatabaseReference a_Reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +51,9 @@ public class Answeractivity extends AppCompatActivity {
 
         Intent intent = getIntent();//mainactivity에서 받아온 intent 선언
         String question = intent.getStringExtra("question");//mainactivity에서 받아온 question
-        final String f_code = intent.getStringExtra("f_code"); //mainacitivity에서 받아온 f_code
+        //final String f_code = {intent.getStringExtra("f_code")}; //mainacitivity에서 받아온 f_code 순서가 바뀌어야 하니까 intent꼬일까봐 users에서 받아오는 걸로 변경
         final String position = intent.getStringExtra("position");
+        ArrayList<Object> our_q_arr = (ArrayList<Object>) intent.getSerializableExtra("our_q_arr");
         textView =(TextView)findViewById(R.id.txt_question2);
         textView.setText(question); //textView에 question 띄우기
         edit_answer = (EditText)findViewById(R.id.edit_answer);
@@ -62,12 +74,17 @@ public class Answeractivity extends AppCompatActivity {
                 reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String user_name = snapshot.child("userName").getValue(String.class);
-                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("answer").child(position).child(user.getUid()).setValue(msg);
-                        Intent intent = new Intent(Answeractivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        f_code = String.valueOf(snapshot.child("fcode"));
+                        String user_name = snapshot.child("user_name").getValue(String.class);
+                        //FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).setValue(msg);
+                        //답변 올리기
+                        Map<String, Object> answerUpdates = new HashMap<>();
+                        answerUpdates.put(position, msg);
+                        FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).updateChildren(answerUpdates);
+//                        Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//                        finish();
                     }
 
                     @Override
@@ -78,6 +95,37 @@ public class Answeractivity extends AppCompatActivity {
 
             }
         });
+
+        //내가 답변 한 것에 따라서 main에서 볼 수 있는게 다름! 그거 넘겨주기위함
+        DatabaseReference familyreference = mDatabase.getReference("answer");
+        familyreference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(String.valueOf(position)).hasChild(user_name)){ //내가 답 O 지금 답 한 main화면을 보여주기
+                    Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                    intent.putExtra("showindex",(Integer.parseInt(position))); //바로 직전에 답한 index를 Main으로 넘겨줌
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(0, 0); //intent시 효과 없애기
+                }
+
+                else{ //내가 답 X 경우 이 전의 화면까지만 볼 수 있음
+                    Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                    Intent intent1 = intent.putExtra("showindex", Integer.parseInt(position)-1);//바로 직전에 답한 index를 Main으로 넘겨줌
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(0, 0); //intent시 효과 없애기
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
     }
@@ -93,5 +141,30 @@ public class Answeractivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+    
+    public void didAnswer(){
+        a_Reference = a_Database.getReference("answer");
+        a_Reference.child(f_code);
+        a_Reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Iterator<DataSnapshot> AnswerorNot = snapshot.child("answer").child(f_code).getChildren().iterator(); //날짜 - uid 와 답변을 참조
+                DataSnapshot let = AnswerorNot.next();
+                Log.i("check Answer", let.toString());
+                if (AnswerorNot.hasNext()) { // 내가 대답 했다면
+                    //String date = AnswerorNot.next();
+                    //snapshot.child(date).child(user.getUid())
+                } else { //안했다면
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
     }
 }
