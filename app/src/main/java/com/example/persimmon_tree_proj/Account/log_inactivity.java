@@ -104,7 +104,6 @@ public class log_inactivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                Toast.makeText(log_inactivity.this, "자동 로그인", Toast.LENGTH_SHORT).show();
                 finish();
 
 
