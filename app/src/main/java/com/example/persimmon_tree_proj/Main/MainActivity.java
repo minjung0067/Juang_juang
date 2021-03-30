@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.Juang_juang.R;
@@ -48,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
             intent로 넘겨 줌
                 => 각 카테고리에선 f_code를 또다시 변수에 담을 필요 없이 바로 사용 가능 !
 
-
-        part 2 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
+        part 2 - 감 인터렉션 관련 코드
+        part 3 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
             - 이동 시 f_code 데리고 감
 
-        part 3 - 감 인터렉션 관련 코드
+
 
         * */
 
@@ -101,6 +102,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //part 2 - 감 인터렉션
+        ImageButton btn_gam = (ImageButton) findViewById(R.id.gam_btn);
+        Button gam_say = (Button) findViewById(R.id.gam_say);
+        btn_gam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gam_say.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+
+        //part 3 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
 
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
