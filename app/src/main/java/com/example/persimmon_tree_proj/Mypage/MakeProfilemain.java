@@ -101,7 +101,7 @@ public class MakeProfilemain extends AppCompatActivity {
         });
 
         imageView = (ImageView) findViewById(R.id.profile_image);
-        change_btn = (ImageButton) findViewById(R.id.change_profile);
+        change_btn = (ImageButton) findViewById(R.id.ok_btn);
         change_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
