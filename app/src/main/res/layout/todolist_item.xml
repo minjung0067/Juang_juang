@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:maxHeight="300dp"
     android:layout_margin="4dp">
 
     <!--For image src we have used ic_launcher
@@ -13,5 +14,35 @@
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        android:visibility="invisible"
+        android:scaleType="fitCenter"
+        android:src="@drawable/close_btn" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="글이 들어갈 자리"
+        android:textSize="11dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="제목이 들어갈 자리"
+        android:textSize="11dp" />
 
 </RelativeLayout>

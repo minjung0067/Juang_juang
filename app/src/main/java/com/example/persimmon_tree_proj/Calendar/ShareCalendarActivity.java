@@ -117,7 +117,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                             if (user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
                                 user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
                                 user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
-                                ImageView profile = (ImageView) findViewById(R.id.btn_mypage2);
+                                ImageView profile = (ImageView) findViewById(R.id.btn_mypage);
 
                                 if (user_gam.equals("1")) {
                                     profile.setImageResource(R.drawable.gam1);
