@@ -98,7 +98,7 @@
         android:gravity="left"
         android:hint="이메일"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/greyColor"
+        android:textColorHint="@color/grayColor"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

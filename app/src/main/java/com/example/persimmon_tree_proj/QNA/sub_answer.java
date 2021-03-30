@@ -1,10 +1,9 @@
-package com.example.persimmon_tree_proj.Main;
+package com.example.persimmon_tree_proj.QNA;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.Juang_juang.R;
 

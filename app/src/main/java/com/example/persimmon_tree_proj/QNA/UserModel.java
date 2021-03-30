@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj.Main;
+package com.example.persimmon_tree_proj.QNA;
 
 public class UserModel {
     //사용자의 정보가 담기는 model
