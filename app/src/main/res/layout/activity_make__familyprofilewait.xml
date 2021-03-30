@@ -56,7 +56,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="3dp"
         android:text="*모든 가족구성원이 가입해야 우리집 감나무가 열려요!"
-        android:textColor="@color/greyColor"
+        android:textColor="@color/grayColor"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="@+id/count"
         app:layout_constraintTop_toBottomOf="@+id/question1" />
@@ -72,7 +72,7 @@
         android:hint="예: 4"
         android:inputType="number"
         android:singleLine="false"
-        android:textColor="@color/greyColor"
+        android:textColor="@color/grayColor"
         android:textColorHint="#939393"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"

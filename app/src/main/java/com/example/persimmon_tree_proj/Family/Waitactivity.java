@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
-import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -132,7 +132,7 @@ public class Waitactivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("family").child(f_code).child("count").setValue(fcount);
                 move = 1;
                 if (move == 1){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
 

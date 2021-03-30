@@ -5,5 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.Account.findaccount">
-
 </androidx.constraintlayout.widget.ConstraintLayout>

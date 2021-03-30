@@ -1,20 +1,19 @@
-package com.example.persimmon_tree_proj.Account;
+package com.example.persimmon_tree_proj;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.LocusId;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.Juang_juang.R;
-import com.example.persimmon_tree_proj.Family.Make_FamilyProfile;
+import com.example.persimmon_tree_proj.Account.more_information_activity;
 import com.example.persimmon_tree_proj.Family.Waitactivity;
 import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.Profile.MakeProfile;
-import com.example.persimmon_tree_proj.Profile.MakeProfilemain;
 import com.example.persimmon_tree_proj.Profile.profile_color;
 import com.example.persimmon_tree_proj.Profile.profile_gam;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,8 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 public class LodingPage_Activity extends AppCompatActivity {
 
@@ -43,6 +40,7 @@ public class LodingPage_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_loding_page_);
 
         //로그인을 거친 사용자가 들어오게 되는 로딩페이지 겸 사용자 분류 용 페이지
+
 
 
         /*

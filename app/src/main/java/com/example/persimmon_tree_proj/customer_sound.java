@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
-import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,7 +51,7 @@ public class customer_sound extends AppCompatActivity {
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(customer_sound.this, MainActivity.class);
+                Intent intent = new Intent(customer_sound.this, QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
@@ -116,7 +116,7 @@ public class customer_sound extends AppCompatActivity {
 
                         }
                     });
-                    Intent intent = new Intent(customer_sound.this,MainActivity.class);
+                    Intent intent = new Intent(customer_sound.this, QNA_Activity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("f_code",f_code);
                     startActivity(intent);
@@ -131,7 +131,7 @@ public class customer_sound extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //안드로이드 백버튼 막기
-        Intent intent = new Intent(customer_sound.this,MainActivity.class);
+        Intent intent = new Intent(customer_sound.this, QNA_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

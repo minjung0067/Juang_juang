@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 
 import com.example.Juang_juang.R;
-import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.Profile.MypageActivity;
 import com.example.persimmon_tree_proj.Calendar.Popup_Cal.PopupcalActivity;
 import com.example.persimmon_tree_proj.Calendar.adapter.CalendarAdapter;
@@ -210,7 +210,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);

@@ -1,11 +1,10 @@
-package com.example.persimmon_tree_proj.Main;
+package com.example.persimmon_tree_proj.QNA;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -102,7 +101,7 @@ public class Answeractivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(String.valueOf(position)).hasChild(user_name)){ //내가 답 O 지금 답 한 main화면을 보여주기
-                    Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                    Intent intent = new Intent(Answeractivity.this, QNA_Activity.class);
                     intent.putExtra("showindex",(Integer.parseInt(position))); //바로 직전에 답한 index를 Main으로 넘겨줌
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -111,7 +110,7 @@ public class Answeractivity extends AppCompatActivity {
                 }
 
                 else{ //내가 답 X 경우 이 전의 화면까지만 볼 수 있음
-                    Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+                    Intent intent = new Intent(Answeractivity.this, QNA_Activity.class);
                     Intent intent1 = intent.putExtra("showindex", Integer.parseInt(position)-1);//바로 직전에 답한 index를 Main으로 넘겨줌
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -137,7 +136,7 @@ public class Answeractivity extends AppCompatActivity {
     //뒤로가기 버튼 누르면 Mainactivity로 이동
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
