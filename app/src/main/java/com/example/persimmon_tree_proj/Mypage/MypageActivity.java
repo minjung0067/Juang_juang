@@ -48,7 +48,6 @@ public class MypageActivity extends AppCompatActivity {
     private String user_name;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-    private TextView my_familynum;
     private String count;
 
 
@@ -57,11 +56,9 @@ public class MypageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
-        my_id = (TextView) findViewById(R.id.my_id);
         my_introduce = (TextView) findViewById(R.id.my_introduce);
         my_fcode = (TextView) findViewById(R.id.my_fcode);
         my_image = (ImageView) findViewById(R.id.profile_image);
-        my_familynum = (TextView) findViewById(R.id.my_membernum);
 
         //현재 로그인한 user uid로 접근해서 현재 유저의 id,fcode,한 줄 소개 가져오기
         firebaseAuth = FirebaseAuth.getInstance();
@@ -81,9 +78,6 @@ public class MypageActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        count = dataSnapshot.child(myfcode).child("count").getValue().toString();
-                        Log.i("counttt",String.valueOf(count));
-                        my_familynum.setText(count);
                         color_number = String.valueOf(dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue());
                         gam_number = String.valueOf(dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue());
 
@@ -181,10 +175,8 @@ public class MypageActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {  //fcode 랑 소개랑 id 데이터베이스에서 찾아와서 보여주기
                 String myfcode = String.valueOf(dataSnapshot.child("fcode").getValue());
                 String myintroduce = String.valueOf(dataSnapshot.child("introduce").getValue());
-                String LoginId = autologin.getString("inputId", "");
                 my_introduce.setText(myintroduce);
                 my_fcode.setText(myfcode);
-                my_id.setText(LoginId);
 
             }
             @Override

@@ -7,42 +7,53 @@
 
     <!--For image src we have used ic_launcher
         it is used only for reference how it will look"-->
+
     <ImageView
         android:id="@+id/imageView"
-        android:padding="@dimen/com_kakao_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/com_kakao_padding"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher" />
 
     <ImageView
         android:id="@+id/close"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="36dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="12dp"
         android:clickable="true"
-        android:visibility="invisible"
         android:scaleType="fitCenter"
         android:src="@drawable/close_btn" />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:text="글이 들어갈 자리"
-        android:textSize="11dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="60dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:text="제목이 들어갈 자리"
-        android:textSize="11dp" />
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/close"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:text="글이 들어갈 자리"
+            android:textSize="11dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:text="제목이 들어갈 자리"
+            android:textSize="11dp" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

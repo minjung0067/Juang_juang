@@ -54,12 +54,19 @@
 
 
 
+    <!--   본문 부분-->
 
-<!--   본문 부분-->
+
+    <!--하단메뉴부분-->
+
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/layout"
+        android:layout_width="373dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="140dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -67,14 +74,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="54dp"
+            android:layout_marginBottom="67dp"
             tools:context=".todolistactivity">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 tools:ignore="MissingClass" />
@@ -82,9 +88,19 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/menu_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/WhiteColor"
+        android:gravity="center"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:textSize="30dp"
+        android:text="뭐할감"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:layout_editor_absoluteX="0dp" />
 
-
-<!--하단메뉴부분-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
