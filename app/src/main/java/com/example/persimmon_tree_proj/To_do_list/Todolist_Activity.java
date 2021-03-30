@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
+import com.example.persimmon_tree_proj.Game_activity;
+import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +23,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Todolist extends AppCompatActivity {
+public class Todolist_Activity extends AppCompatActivity {
 
 
     private FirebaseAuth firebaseAuth;
@@ -42,7 +46,7 @@ public class Todolist extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
-
+        Log.i("myfcode", f_code);
         // Getting reference of recyclerView
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -51,21 +55,50 @@ public class Todolist extends AppCompatActivity {
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
         // Sending reference and data to Adapter
-        RecyclerView.Adapter adapter = new list_adapter(Todolist.this, images);
+        RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this, images);
 
         // Setting Adapter to RecyclerView
         recyclerView.setAdapter(adapter);
 
 
-        //왔다감 버튼
-        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
-        go_main.setOnClickListener(new View.OnClickListener() {
+
+
+        //버튼
+
+
+        //뒤로가기
+        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+        goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Todolist.this, QNA_Activity.class);
+                finish();
+            }
+        });
+
+
+        //마이페이지 버튼
+        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.putExtra("f_code",f_code);
+                startActivity(intentt);
+            }
+        });
+
+
+        //왔다감 버튼
+        ImageButton go_qna = (ImageButton) findViewById(R.id.qna_btn);
+        go_qna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
@@ -75,21 +108,20 @@ public class Todolist extends AppCompatActivity {
         go_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { //누르면 캘린더로 이동
-                Intent intent = new Intent(Todolist.this, ShareCalendarActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
-                finish();
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
 
-
-        //고객의 소리함
-        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
-        go_setting.setOnClickListener(new View.OnClickListener() {
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
+        go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Todolist.this,customer_sound.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
@@ -98,12 +130,25 @@ public class Todolist extends AppCompatActivity {
             }
         });
 
-        //to do list 페이지로 가는 버튼
-        ImageButton go_todolist = (ImageButton) findViewById(R.id.todolist);
-        go_todolist.setOnClickListener(new View.OnClickListener() {
+        //뭐할감
+        ImageButton go_todo = (ImageButton) findViewById(R.id.to_do_btn);
+        go_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Todolist.this, Todolist.class);
+                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
+
+        //게임
+        ImageButton go_game = (ImageButton) findViewById(R.id.game_btn);
+        go_game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
@@ -115,7 +160,7 @@ public class Todolist extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //안드로이드 백버튼 막기
-        Intent intent = new Intent(Todolist.this, QNA_Activity.class);
+        Intent intent = new Intent(Todolist_Activity.this, QNA_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();

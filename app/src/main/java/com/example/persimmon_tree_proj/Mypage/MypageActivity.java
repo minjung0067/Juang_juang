@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj.Profile;
+package com.example.persimmon_tree_proj.Mypage;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +21,10 @@ import android.widget.Toast;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
+import com.example.persimmon_tree_proj.Game_activity;
+import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
+import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +44,7 @@ public class MypageActivity extends AppCompatActivity {
     private String gam_number;
     private String color_number;
     private String myfcode;
+    private String f_code;
     private String user_name;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -63,6 +67,8 @@ public class MypageActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        Intent intent = getIntent();
+        f_code = intent.getStringExtra("f_code"); //main 에서 받아온 f_code
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -144,7 +150,7 @@ public class MypageActivity extends AppCompatActivity {
                                 my_image.setImageResource(R.drawable.gam8);
                                 break;
                             default:
-                                my_image.setBackgroundColor(Color.parseColor("#fff"));
+                                my_image.setBackgroundColor(Color.parseColor("#ffffff"));
                                 my_image.setImageResource(R.drawable.gam1);
                                 break;
                         }
@@ -188,18 +194,6 @@ public class MypageActivity extends AppCompatActivity {
         });
 
 
-        //고객의 소리함으로 가기
-        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
-        go_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MypageActivity.this, customer_sound.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",myfcode);
-                startActivity(intent);
-                finish();
-            }
-        });
 
 
         ImageButton revise = (ImageButton)findViewById(R.id.edit_btn);
@@ -223,15 +217,17 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
+
         //왔다감 버튼
-        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
-        go_main.setOnClickListener(new View.OnClickListener() {
+        ImageButton go_qna = (ImageButton) findViewById(R.id.qna_btn);
+        go_qna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",myfcode);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
@@ -243,11 +239,52 @@ public class MypageActivity extends AppCompatActivity {
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",myfcode);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
+
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
+        go_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
+
+        //뭐할감
+        ImageButton go_todo = (ImageButton) findViewById(R.id.to_do_btn);
+        go_todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
+
+        //게임
+        ImageButton go_game = (ImageButton) findViewById(R.id.game_btn);
+        go_game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Game_activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
+
 
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
 

@@ -7,6 +7,9 @@
     android:background="#ffffff"
     tools:context="com.example.persimmon_tree_proj.Main.MainActivity">
 
+
+
+<!--    상단바-->
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -25,15 +28,32 @@
         app:layout_constraintVertical_bias="0.631" />
 
     <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/mypagefix_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+<!--    본문-->
+
+    <ImageButton
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:src="@drawable/gam1"
         android:scaleType="fitCenter"
+        android:src="@drawable/gam1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
+
 
     <Button
         android:id="@+id/btn_goanswer"
@@ -53,6 +73,12 @@
         tools:ignore="UnknownId" />
 
 
+
+
+
+
+
+<!--   하단 메뉴바-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
@@ -64,7 +90,7 @@
         tools:layout_editor_absoluteX="-28dp" />
 
     <ImageButton
-        android:id="@+id/main_btn"
+        android:id="@+id/calendar_btn"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginBottom="20dp"
@@ -72,11 +98,11 @@
         android:scaleType="fitCenter"
         android:src="@drawable/calendar_icon2x"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/main"
-        app:layout_constraintStart_toEndOf="@+id/calendar_btn" />
+        app:layout_constraintEnd_toStartOf="@+id/main_btn"
+        app:layout_constraintStart_toEndOf="@+id/qna_btn" />
 
     <ImageButton
-        android:id="@+id/main"
+        android:id="@+id/main_btn"
         android:layout_width="70dp"
         android:layout_height="62dp"
         android:layout_marginBottom="12dp"
@@ -85,6 +111,7 @@
         android:src="@drawable/check_icon_big"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.0"
@@ -101,7 +128,7 @@
         android:src="@drawable/clinet_sound_icon2x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/game_btn"
-        app:layout_constraintStart_toEndOf="@+id/main" />
+        app:layout_constraintStart_toEndOf="@+id/main_btn" />
 
     <ImageButton
         android:id="@+id/game_btn"
@@ -116,7 +143,7 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2" />
 
     <ImageButton
-        android:id="@+id/calendar_btn"
+        android:id="@+id/qna_btn"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
