@@ -88,8 +88,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="393dp"
-        android:layout_height="161dp"
+        android:layout_width="412dp"
+        android:layout_height="164dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -110,13 +110,7 @@
             android:gravity="left"
             android:hint="이메일 주소"
             android:inputType="textEmailAddress"
-<<<<<<< HEAD
-            android:singleLine="false"
-            android:textColor="#000000"
-            android:textColorHint="@color/greyColor"
-=======
             android:textColorHint="@color/grayColor"
->>>>>>> ce48a4c07a4c2dab306eeb96c00a8f937be04997
             android:textSize="15dp" />
 
         <EditText
@@ -129,12 +123,7 @@
             android:gravity="left"
             android:hint="비밀번호"
             android:inputType="textPassword"
-<<<<<<< HEAD
-            android:textColor="#000000"
-            android:textColorHint="@color/greyColor"
-=======
             android:textColorHint="@color/grayColor"
->>>>>>> ce48a4c07a4c2dab306eeb96c00a8f937be04997
             android:textSize="15dp" />
 
         <Button
