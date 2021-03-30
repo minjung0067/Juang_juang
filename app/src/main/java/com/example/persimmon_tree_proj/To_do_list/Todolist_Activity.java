@@ -12,6 +12,7 @@ import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
 import com.example.persimmon_tree_proj.Game_activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,17 +62,31 @@ public class Todolist_Activity extends AppCompatActivity {
 
 
 
-//        //마이페이지 버튼
-//        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
-//        mypage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
-//                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intentt.putExtra("f_code",f_code);
-//                startActivity(intentt);
-//            }
-//        });
+
+        //버튼
+
+
+        //뒤로가기
+        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        //마이페이지 버튼
+        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.putExtra("f_code",f_code);
+                startActivity(intentt);
+            }
+        });
 
 
         //왔다감 버튼

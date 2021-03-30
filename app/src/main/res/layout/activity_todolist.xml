@@ -8,6 +8,23 @@
     android:onClick="linearOnClick"
     tools:context="com.example.persimmon_tree_proj.customer_sound">
 
+
+<!--    상단바부분-->
+    <ImageButton
+        android:id="@+id/go_back"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00B1A6A6"
+        android:scaleType="fitCenter"
+        android:src="@drawable/go_backk"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="0dp"
+        tools:layout_conversion_absoluteWidth="0dp" />
+
     <TextView
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -35,6 +52,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+<!--   본문 부분-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,7 +82,7 @@
 
 
 
-
+<!--하단메뉴부분-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
