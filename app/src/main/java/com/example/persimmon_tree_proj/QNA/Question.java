@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj.Main;
+package com.example.persimmon_tree_proj.QNA;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

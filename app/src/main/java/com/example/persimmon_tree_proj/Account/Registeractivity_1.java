@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.html.privacyhtml;
 import com.example.persimmon_tree_proj.Account.html.servicehtml;
-import com.example.persimmon_tree_proj.Main.UserModel;
+import com.example.persimmon_tree_proj.QNA.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
