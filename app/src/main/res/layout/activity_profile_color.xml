@@ -42,6 +42,8 @@
         android:clickable="true"
         android:onClick="Click"
         app:layout_constraintBottom_toBottomOf="@+id/c1"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="250dp" />
 
     <ImageView

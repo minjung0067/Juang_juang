@@ -54,7 +54,7 @@ public class CodeActivity extends AppCompatActivity {
             checkDatabase(str_code);
         }while(tf == 1);
 
-        writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
+        //writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
 
         tv_code.setText(str_code);//화면에 code출력하기
 
