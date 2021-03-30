@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
 import com.example.persimmon_tree_proj.Game_activity;
-import com.example.persimmon_tree_proj.Profile.MypageActivity;
+import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,8 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -51,14 +51,14 @@
         <activity android:name="com.example.persimmon_tree_proj.Family.Make_FamilyProfilewait" />
         <activity android:name="com.example.persimmon_tree_proj.Account.html.privacyhtml" />
         <activity android:name="com.example.persimmon_tree_proj.Account.html.servicehtml" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.profile_color" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.profile_color_main" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.profile_gam" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.profile_gam_main" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.profile_color" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.profile_color_main" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.profile_gam" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.profile_gam_main" />
         <activity android:name="com.example.persimmon_tree_proj.Family.Make_FamilyProfile" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.MakeProfile" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.MakeProfilemain" />
-        <activity android:name="com.example.persimmon_tree_proj.Profile.MypageActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.MakeProfile" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.MakeProfilemain" />
+        <activity android:name="com.example.persimmon_tree_proj.Mypage.MypageActivity" />
         <activity android:name="com.example.persimmon_tree_proj.QNA.Answeractivity" />
         <activity android:name="com.example.persimmon_tree_proj.splash">
             <intent-filter>
