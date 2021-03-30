@@ -22,7 +22,10 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
+import com.example.persimmon_tree_proj.Game_activity;
+import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.Profile.MypageActivity;
+import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -96,6 +99,8 @@ public class QNA_Activity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        f_code = intent.getStringExtra("f_code"); //main 에서 받아온 f_code
+        String question = intent.getStringExtra("question");//qnaactivity에서 받아온 question
         showindex = intent.getStringExtra("showindex");//answer에서 받아온 showindex 이걸로 어느 질문까지 보여줄 지 확인함
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         right = (ImageButton)findViewById(R.id.btn_right);
@@ -119,7 +124,7 @@ public class QNA_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
                 Log.i("myfcode", f_code);
-                user_name = snapshot.child("userName").getValue().toString();
+                user_name = snapshot.child("user_name").getValue().toString();
                 member_count = 0;
                 //지정한 member 수 가져오기
                 a_Reference = a_Database.getReference("family");
@@ -307,6 +312,7 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
 
+
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
@@ -320,14 +326,14 @@ public class QNA_Activity extends AppCompatActivity {
         });
 
 
-
         //왔다감 버튼
-        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
-        go_main.setOnClickListener(new View.OnClickListener() {
+        ImageButton go_qna = (ImageButton) findViewById(R.id.qna_btn);
+        go_qna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -347,12 +353,39 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
 
-        //고객의 소리함
-        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
-        go_setting.setOnClickListener(new View.OnClickListener() {
+        //왔다감 버튼
+        ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
+        go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QNA_Activity.this, customer_sound.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+                finish();
+            }
+        });
+
+        //뭐할감
+        ImageButton go_todo = (ImageButton) findViewById(R.id.to_do_btn);
+        go_todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
+            }
+        });
+
+        //게임
+        ImageButton go_game = (ImageButton) findViewById(R.id.game_btn);
+        go_game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);

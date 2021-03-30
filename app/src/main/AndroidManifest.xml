@@ -20,8 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.Main.MainActivity"></activity>
-        <activity android:name="com.example.persimmon_tree_proj.To_do_list.Todolist" />
+        <activity android:name="com.example.persimmon_tree_proj.Game_activity"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Main.MainActivity" />
+        <activity android:name="com.example.persimmon_tree_proj.To_do_list.Todolist_Activity" />
         <activity android:name="com.example.persimmon_tree_proj.Account.more_information_activity" />
         <activity android:name="com.example.persimmon_tree_proj.LodingPage_Activity" />
         <activity android:name="com.example.persimmon_tree_proj.Account.Registeractivity_1" />
