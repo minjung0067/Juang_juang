@@ -27,15 +27,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.631" />
 
+
     <ImageButton
         android:id="@+id/btn_mypage"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginTop="24dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/mypage_menu_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/my_family_name"
