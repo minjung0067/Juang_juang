@@ -138,49 +138,49 @@ public class MakeProfile extends AppCompatActivity {
                                 case "1":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd1 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd1.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd1.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam1);
                                     break;
                                 case "2":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd2 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd2.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd2.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam2);
                                     break;
                                 case "3":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd3 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd3.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd3.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam3);
                                     break;
                                 case "4":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd4 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd4.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd4.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam4);
                                     break;
                                 case "5":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd5 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd5.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd5.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam5);
                                     break;
                                 case "6":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd6 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd6.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd6.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam6);
                                     break;
                                 case "7":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd7 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd7.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd7.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam7);
                                     break;
                                 case "8":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd8 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
-                                    gd8.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
+                                    gd8.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam8);
                                     break;
                                 default:

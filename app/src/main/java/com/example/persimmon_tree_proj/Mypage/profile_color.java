@@ -49,19 +49,6 @@ public class profile_color extends AppCompatActivity {
 
 
 
-        ImageButton go_back = (ImageButton) findViewById(R.id.go_back);    //뒤로가기
-        go_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MakeProfile.class); //코드 생성 activity로 이동
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.putExtra("intro",introduce);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
     }
 
 

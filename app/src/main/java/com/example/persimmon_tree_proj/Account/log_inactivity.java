@@ -233,54 +233,54 @@ public class log_inactivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-
-        //네이버 로그인
-        ll_naver_login = findViewById(R.id.naverlogin);
-        btn_logout = findViewById(R.id.btn_logout);
-
-        ll_naver_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOAuthLoginModule = OAuthLogin.getInstance();
-                mOAuthLoginModule.init(
-                        mContext
-                        ,getString(R.string.naver_client_id)
-                        ,getString(R.string.naver_client_secret)
-                        ,getString(R.string.naver_client_name)
-                        //,OAUTH_CALLBACK_INTENT
-                        // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다. -> 네...
-                );
-
-                @SuppressLint("HandlerLeak")
-                OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
-                    @Override
-                    public void run(boolean success) {
-                        if (success) {
-                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
-                            String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
-                            long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
-                            String tokenType = mOAuthLoginModule.getTokenType(mContext);
-
-                            Log.i("LoginData","accessToken : "+ accessToken);
-                            Log.i("LoginData","refreshToken : "+ refreshToken);
-                            Log.i("LoginData","expiresAt : "+ expiresAt);
-                            Log.i("LoginData","tokenType : "+ tokenType);
-
-                        } else {
-                            String errorCode = mOAuthLoginModule
-                                    .getLastErrorCode(mContext).getCode();
-                            String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
-                            Toast.makeText(mContext, "errorCode:" + errorCode
-                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
-                        }
-                    };
-                };
-
-                mOAuthLoginModule.startOauthLoginActivity(log_inactivity.this, mOAuthLoginHandler);
-            }
-        });
-
-
+//
+//        //네이버 로그인
+//        ll_naver_login = findViewById(R.id.naverlogin);
+//        btn_logout = findViewById(R.id.btn_logout);
+//
+//        ll_naver_login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mOAuthLoginModule = OAuthLogin.getInstance();
+//                mOAuthLoginModule.init(
+//                        mContext
+//                        ,getString(R.string.naver_client_id)
+//                        ,getString(R.string.naver_client_secret)
+//                        ,getString(R.string.naver_client_name)
+//                        //,OAUTH_CALLBACK_INTENT
+//                        // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다. -> 네...
+//                );
+//
+//                @SuppressLint("HandlerLeak")
+//                OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
+//                    @Override
+//                    public void run(boolean success) {
+//                        if (success) {
+//                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+//                            String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
+//                            long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
+//                            String tokenType = mOAuthLoginModule.getTokenType(mContext);
+//
+//                            Log.i("LoginData","accessToken : "+ accessToken);
+//                            Log.i("LoginData","refreshToken : "+ refreshToken);
+//                            Log.i("LoginData","expiresAt : "+ expiresAt);
+//                            Log.i("LoginData","tokenType : "+ tokenType);
+//
+//                        } else {
+//                            String errorCode = mOAuthLoginModule
+//                                    .getLastErrorCode(mContext).getCode();
+//                            String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
+//                            Toast.makeText(mContext, "errorCode:" + errorCode
+//                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+//                        }
+//                    };
+//                };
+//
+//                mOAuthLoginModule.startOauthLoginActivity(log_inactivity.this, mOAuthLoginHandler);
+//            }
+//        });
+//
+//
     }
 
     //네이버 로그인은 여기까지
