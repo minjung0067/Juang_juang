@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
+import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -103,23 +104,33 @@ public class Waitactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //경고 메세지 주었으면 좋겠음.
-                //감나무 시작하기를 누르면, 가족
+                //감나무 시작하기를 누르면, 가족 int move = 0; //파이어베이스에 저장되면 이동하도록 함.
 
-                int move = 0; //파이어베이스에 저장되면 이동하도록 함.
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
+
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("answer");
                 reference1.child(f_code).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         //가져온 f_code에 해당하는 member 수 세기
                         Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-                        while (members.hasNext()) {
+                        while (members.hasNext()){
                             String member_num = members.next().getKey();
                             member_count++;
                         }
 
+                        int move = 0;
+                        String fcount = String.valueOf(member_count);
+                        FirebaseDatabase.getInstance().getReference("answer").child(f_code).child("count").setValue(fcount);
+                        move = 1;
+                        if (move == 1){
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
 
-                        //가족 수 확인하여서 가족 만들어졌는지 확인 member_count 와 count 비교
+                        }
                     }
+
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -128,15 +139,8 @@ public class Waitactivity extends AppCompatActivity {
                 });
 
 
-                String fcount = String.valueOf(member_count);
-                FirebaseDatabase.getInstance().getReference("answer").child(f_code).child("count").setValue(fcount);
-                move = 1;
-                if (move == 1){
-                    Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent);
 
-                }
+
 
             }
         });
@@ -150,65 +154,6 @@ public class Waitactivity extends AppCompatActivity {
                 f_code = String.valueOf(snapshot.child("fcode").getValue());
                 TextView txt_fcode = (TextView) findViewById(R.id.txt_fcode);
                 txt_fcode.setText(f_code);
-                member_count = 0;
-                //지정한 member 수 가져오기
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("family");
-                reference1.child(f_code).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //count 수 가져오기
-                        String str = String.valueOf(snapshot.child("count").getValue());
-                        //count = Integer.valueOf(str);
-                        //가져온 f_code에 해당하는 member 수 세기
-                        Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-                        while (members.hasNext()){
-                            String member_num = members.next().getKey();
-                            member_count++;
-                        }
-
-
-                        //가족 수 확인하여서 가족 만들어졌는지 확인 member_count 와 count 비교
-
-
-                        //가족 감나무가 만들어졌을 경우\
-                        /*
-                        if(member_count == count){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                            finish();
-
-
-                        }
-                        //감나무가 생성되지 않은 경우
-                        else if(member_count < count){
-                            //start 버튼 누를 경우, main으로 이동한다.
-                            Button start = (Button) findViewById(R.id.btn_start);
-                            start.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
-
-
-                        }
-
-                        else{//member_count > count
-
-                        }
-
-                         */
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
             }
 
