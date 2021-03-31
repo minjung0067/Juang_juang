@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="12dp"
-        android:background="@color/WhiteColor"
+        android:background="@drawable/btn_menu"
         android:fontFamily="@font/nanumsquare_acr"
         android:gravity="center"
         android:text="회원가입 마무리하기"
