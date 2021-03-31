@@ -1,14 +1,19 @@
 package com.example.persimmon_tree_proj.Main;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
@@ -24,13 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
 
     private String f_code;
     static int count;
     static int member_count;
-    private String user_name;
+    private String family_name;
     private DatabaseReference a_Reference;
     private FirebaseDatabase a_Database;
 
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         part 2 - 감 인터렉션 관련 코드
         part 3 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
             - 이동 시 f_code 데리고 감
+        part 4 - 내 가족 이름 띄우기
 
 
 
@@ -68,8 +76,24 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = snapshot.child("fcode").getValue().toString();
                 Log.i("myfcode", f_code);
-                user_name = snapshot.child("user_name").getValue().toString();
                 member_count = 0;
+
+                //part 4 - 가족 이름 띄우기
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");
+                reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        family_name = dataSnapshot.getValue().toString();
+                        TextView my_family_name = (TextView) findViewById(R.id.my_family_name);
+                        my_family_name.setText(family_name);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+                });
 //                //지정한 member 수 가져오기
 //                a_Reference = a_Database.getReference("family");
 //                a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
@@ -196,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
+
+
 
     }
 }

@@ -70,8 +70,11 @@ public class Todolist_Activity extends AppCompatActivity {
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onClick(View v){
+                Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.putExtra("f_code",f_code);
+                startActivity(intentt);
             }
         });
 
