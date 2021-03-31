@@ -39,21 +39,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!--    본문-->
+
+
     <TextView
+        android:padding="10dp"
         android:id="@+id/my_family_name"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/WhiteColor"
         android:gravity="center"
-        android:textSize="30dp"
         android:text="우리 가족 이름은"
         android:textColor="@color/mainColor"
+        android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/gam_say"
+        app:layout_constraintTop_toBottomOf="@+id/menu_name"
         tools:layout_editor_absoluteX="0dp" />
-
-    <!--    본문-->
-
 
     <ImageView
         android:id="@+id/menu_name"
@@ -66,7 +68,7 @@
         android:src="@drawable/gam4"
         android:textSize="30dp"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="-16dp" />
 
     <Button
         android:id="@+id/btn_goanswer"
@@ -106,7 +108,7 @@
         android:id="@+id/gam_say"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/btn_brightgray_rounded"
         android:fontFamily="@font/nanumsquare_acl"
         android:text="오늘도 힘내라감!"
