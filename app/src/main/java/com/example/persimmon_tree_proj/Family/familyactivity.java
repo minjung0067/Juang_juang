@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
 
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
@@ -81,9 +84,33 @@ public class familyactivity extends AppCompatActivity {
 
                                     firebaseAuth = FirebaseAuth.getInstance();
                                     FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user\
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+
+
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
 
                                     mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 fcode넣기
-                                    FirebaseDatabase.getInstance().getReference("family").child("fcode").child("members").child(user.getUid()).setValue(str);
+                                    FirebaseDatabase.getInstance().getReference("answer").child("fcode").child("members").child(user.getUid()).setValue();
 
 
                                     //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환
