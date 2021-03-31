@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.more_information_activity;
@@ -61,7 +62,7 @@ public class LodingPage_Activity extends AppCompatActivity {
          *                          case 6-1 : 가족을 기다리는 중임 => waitactivity로 이동
          *                          case 6-2 : mainactivity에 이미 들어와있음 => mainacitivy로 이동
          *
-         *
+         * // 로딩 메세지 출력하는 부분
          *
          *  */
 
@@ -172,5 +173,23 @@ public class LodingPage_Activity extends AppCompatActivity {
 
             }
         });
+
+
+
+        //로딩 메세지 출력하는 부분
+
+        TextView title = (TextView) findViewById(R.id.title);
+        title.setText("감을 많이\n" +
+                "먹으면,\n" +
+                "\n" +
+                "변비에\n" +
+                "걸릴 수\n" +
+                "있어요.");
+
+        TextView content = (TextView) findViewById(R.id.content);
+        content.setText("감에서 가장 유명한 성분은 타닌산이라감.\n" +
+                "피부를 오그라들게 하는 수렴 작용이 강한 타닌산은\n" +
+                "체내의 점막표면을 수축시켜 설사를 멎게 하고\n" +
+                "배탈에 효과가 있다감.");
     }
 }
