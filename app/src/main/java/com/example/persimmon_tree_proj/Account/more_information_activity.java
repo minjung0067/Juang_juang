@@ -2,9 +2,12 @@ package com.example.persimmon_tree_proj.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -73,7 +76,7 @@ more_information_activity extends AppCompatActivity {
 
                     }
                     else{ //이름 o 생일 x
-                        Toast.makeText(more_information_activity.this, "생년월일 8자리로 작성해주세요.20200925", Toast.LENGTH_LONG).show();
+                        Toast.makeText(more_information_activity.this, "생년월일은 8자로 작성해주세요. (ex)20200925", Toast.LENGTH_LONG).show();
                     }
                 }
                 else{ //이름 x
@@ -83,6 +86,15 @@ more_information_activity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
+    }
+
+
     void check_validation2(String birth) {
         // 비밀번호 유효성 검사식1 : 숫자, 특수문자가 포함되어야 한다.
         if(birth.length() == 8){

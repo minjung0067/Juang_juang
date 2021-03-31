@@ -129,7 +129,7 @@ public class Waitactivity extends AppCompatActivity {
 
 
                 String fcount = String.valueOf(member_count);
-                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("count").setValue(fcount);
+                FirebaseDatabase.getInstance().getReference("answer").child(f_code).child("count").setValue(fcount);
                 move = 1;
                 if (move == 1){
                     Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
