@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,8 +28,7 @@ public class profile_color extends AppCompatActivity {
     private ImageView c_6;
     private ImageView c_7;
     private ImageView c_8;
-    //private ImageView c_9;
-    private int[] clicked_arr = {0,0,0,0,0,0,0,0};
+    private String clicked_color = "";
 
 
     @Override
@@ -44,159 +44,139 @@ public class profile_color extends AppCompatActivity {
         c_6 = (ImageView) findViewById(R.id.c6);
         c_7 = (ImageView) findViewById(R.id.c7);
         c_8 = (ImageView) findViewById(R.id.c8);
-        //c_9 = (ImageView) findViewById(R.id.c9);
 
 
-
-
-    }
-
-
-    public void check_process(int clicked_what, ImageView clicked_btn) {
-        //0과 1은 현재 user가 선택x or 선택 나타내고 2는 다른 사람이 해서 아예 선택 못하는 거
-        if (clicked_what == 1) { //1은 선택한 경우
-            clicked_btn.setBackgroundResource(R.drawable.btn_clicked);
-        }
-        else { //0은 선택하지 않은 경우
-            clicked_btn.setBackgroundResource(R.drawable.btn_not_clicked);
-        }
-    }
-
-    public void make_clicked() {   //선택한 걔빼고는 다 선택해제 되게, 이미 다른 가족이 선택한 애들은 선택 안되게 하는 함수!
-        check_process(clicked_arr[0], c_1);
-        check_process(clicked_arr[1], c_2);
-        check_process(clicked_arr[2], c_3);
-        check_process(clicked_arr[3], c_4);
-        check_process(clicked_arr[4], c_5);
-        check_process(clicked_arr[5], c_6);
-        check_process(clicked_arr[6], c_7);
-        check_process(clicked_arr[7], c_8);
-        //check_process(clicked_arr[8], c_9);
-    }
-    //사용자가 전에 선택했던 건 1로 가족들이 이미 선택한 색깔 체크해서 이미 선택된 건 2로 바꾸는 함수
-    public void make_cannot_select(String family_color_num,int num) {
-        if (family_color_num.equals("#FE8189")) {
-            clicked_arr[0] = num;
-        } else if (family_color_num.equals("#FE8E69")) {
-            clicked_arr[1] = num;
-        } else if (family_color_num.equals("#FEC56C")) {
-            clicked_arr[2] = num;
-        } else if (family_color_num.equals("#B7DB79")) {
-            clicked_arr[3] = num;
-        } else if (family_color_num.equals("#87dade")) {
-            clicked_arr[4] = num;
-        } else if (family_color_num.equals("#A1AEE5")) {
-            clicked_arr[5] = num;
-        } else if (family_color_num.equals("#99CAEB")) {
-            clicked_arr[6] = num;
-        } else if (family_color_num.equals("#E89CDA")) {
-            clicked_arr[7] = num; }
-//        else if (family_color_num.equals("#527B03F4")) {
-//            clicked_arr[8] = num; }
-        else{
-        }
-        make_clicked();
-        //이미 선택된 건 색깔 어둡게 바꿔주세용~ 하는 함수
-    }
-    //이미 다른 가족 구성원이 선택한 색깔이 뭔지 검사하는 부분 끝
-
-    //사용자가 어떤 색깔 선택하면 그 전에 선택했던 거 취소 시키는 함수
-    public void another_unselected(int clicked_index){
-        for(int i=0; i<8;i++){
-            if(i!=clicked_index){   //지금 선택한 거 말고
-                if(clicked_arr[i]==1){  //사용자가 한번 선택했다가 다른 거 또 선택해서 1로 남아있는 거
-                    clicked_arr[i] =0;
-                }
+        c_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_1);
             }
-        }
+        });
+        c_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_2);
+            }
+        });
+        c_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_3);
+            }
+        });
+        c_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_4);
+            }
+        });
+        c_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_5);
+            }
+        });
+        c_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_6);
+            }
+        });
+        c_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_7);
+            }
+        });
+        c_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_8);
+            }
+        });
+
+
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        ImageButton ok = (ImageButton) findViewById(R.id.ok_btn);  //선택완료 버튼
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue(clicked_color);
+                Intent intent = new Intent(profile_color.this, familyactivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
-    public void Click(final View view) {  //버튼 클릭시마다 switch문으로 다른 색깔 선택
+    public void Reset(){
+        c_1.setBackgroundResource(R.drawable.btn_drawable);
+        c_2.setBackgroundResource(R.drawable.btn_drawable);
+        c_3.setBackgroundResource(R.drawable.btn_drawable);
+        c_4.setBackgroundResource(R.drawable.btn_drawable);
+        c_5.setBackgroundResource(R.drawable.btn_drawable);
+        c_6.setBackgroundResource(R.drawable.btn_drawable);
+        c_7.setBackgroundResource(R.drawable.btn_drawable);
+        c_8.setBackgroundResource(R.drawable.btn_drawable);
+    }
+
+    public void Click ( final View view){  //버튼 클릭시마다 switch문으로 다른 감 프로필 선택
+        Reset();
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //현재 user가 선택한 색깔 확인
-                switch (view.getId()){
+                //선택한 감 변수에 담기
+                switch (view.getId()) {
                     case R.id.c1:
-                        //다른 가족이 선택 안했으면서 선택하면 0->1,선택했다가 취소하면 1->0,다른 가족 선택했으면 선택 못하게 하는 함수
-                        if(clicked_arr[0] == 1){ clicked_arr[0] = 0; } else if(clicked_arr[0] ==0){
-                            clicked_arr[0]=1;
-                            another_unselected(0);   //그 전에 선택했던 거 취소 시키는 함수
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#FE8189");
-                            }
-                        make_clicked();
+                        clicked_color = "#FE8189";
+                        c_1.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c2:
-                        if(clicked_arr[1] == 1){ clicked_arr[1] = 0; } else if(clicked_arr[1] ==0){
-                            clicked_arr[1]=1;
-                            another_unselected(1);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#FE8E69");
-                        }
-                        make_clicked();
+                        clicked_color = "#FE8E69";
+                        c_2.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c3:
-                        if(clicked_arr[2] == 1){ clicked_arr[2] = 0; } else if(clicked_arr[2] ==0){
-                            clicked_arr[2]=1;
-                            another_unselected(2);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#FEC56C");
-                        }
-                        make_clicked();
+                        clicked_color = "#FEC56C";
+                        c_3.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c4:
-                        if(clicked_arr[3] == 1){ clicked_arr[3] = 0; } else if(clicked_arr[3] ==0){
-                            clicked_arr[3]=1;
-                            another_unselected(3);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#B7DB79");
-                        }
-                        make_clicked();
+                        clicked_color = "#B7DB79";
+                        c_4.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c5:
-                        if(clicked_arr[4] == 1){ clicked_arr[4] = 0; } else if(clicked_arr[4] ==0){
-                            clicked_arr[4]=1;
-                            another_unselected(4);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#87dade");
-                        }
-                        make_clicked();
+                        clicked_color = "#87dade";
+                        c_5.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c6:
-                        if(clicked_arr[5] == 1){ clicked_arr[5] = 0; } else if(clicked_arr[5] ==0){
-                            clicked_arr[5]=1;
-                            another_unselected(5);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#99CAEB");
-                        }
-                        make_clicked();
+                        clicked_color = "#99CAEB";
+                        c_6.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c7:
-                        if(clicked_arr[6] == 1){ clicked_arr[6] = 0; } else if(clicked_arr[6] ==0){
-                            clicked_arr[6]=1;
-                            another_unselected(6);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#A1AEE5");
-                        }
-                        make_clicked();
+                        clicked_color = "#A1AEE5";
+                        c_7.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                     case R.id.c8:
-                        if(clicked_arr[7] == 1){ clicked_arr[7] = 0; } else if(clicked_arr[7] ==0){
-                            clicked_arr[7]=1;
-                            another_unselected(7);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue("#E89CDA");
-                        }
-                        make_clicked();
+                        clicked_color = "#E89CDA";
+                        c_8.setBackgroundResource(R.drawable.btn_clicked);
                         break;
-
                 }
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 throw databaseError.toException();
             }
         });
-
-
     }
+
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), profile_gam.class); //코드 생성 activity로 이동

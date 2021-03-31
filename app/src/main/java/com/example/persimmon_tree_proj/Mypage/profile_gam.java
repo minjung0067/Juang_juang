@@ -44,8 +44,6 @@ public class profile_gam extends AppCompatActivity {
         gam_7 = (ImageView) findViewById(R.id.gam7);
         gam_8 = (ImageView) findViewById(R.id.gam8);
 
-        //Intent intent = getIntent();
-        //String introduce = intent.getStringExtra("intro");
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -58,7 +56,6 @@ public class profile_gam extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_gam").setValue(clicked_gam);
                 Intent intent = new Intent(profile_gam.this, profile_color.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
             }

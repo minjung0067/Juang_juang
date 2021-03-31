@@ -129,12 +129,12 @@ public class LodingPage_Activity extends AppCompatActivity {
                                 else{
                                     firebaseAuth = FirebaseAuth.getInstance();
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
-                                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("answer");  //users에서 현 uid 가진 사람 찾기
+                                    reference.child(user_fcode).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            fcount = String.valueOf(FirebaseDatabase.getInstance().getReference("family").child(user_fcode).child("fcount").child("count").getKey());
-                                            if(fcount == null) {
+                                            fcount = String.valueOf(snapshot.child("count").getValue());
+                                            if(fcount == "null") {
                                                 Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 startActivity(intent);
