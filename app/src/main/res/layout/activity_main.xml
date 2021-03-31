@@ -42,27 +42,30 @@
     <TextView
         android:id="@+id/my_family_name"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="36dp"
-        android:background="@color/brightgray"
-        android:gravity="center_horizontal"
+        android:background="@color/WhiteColor"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="우리 가족 이름은"
+        android:textColor="@color/mainColor"
         app:layout_constraintBottom_toTopOf="@+id/gam_say"
         tools:layout_editor_absoluteX="0dp" />
 
     <!--    본문-->
 
 
-    <TextView
-        android:id="@+id/my_gam"
+    <ImageView
+        android:id="@+id/menu_name"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/brightgray"
-        android:gravity="center_horizontal"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/my_family_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gam4"
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/button"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
@@ -103,6 +106,7 @@
         android:id="@+id/gam_say"
         android:layout_width="300dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_brightgray_rounded"
         android:fontFamily="@font/nanumsquare_acl"
         android:text="오늘도 힘내라감!"
