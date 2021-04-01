@@ -79,7 +79,7 @@ public class familyactivity extends AppCompatActivity {
                         if (exist == 0) { //코드가 없는 경우
                             Toast.makeText(familyactivity.this, "올바르지 않은 코드입니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
                         } else if (exist == 1) { //코드가 있는 경우
-                            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("answer");
+                            DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("groups");
                             reference1.child(str).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,7 +99,7 @@ public class familyactivity extends AppCompatActivity {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 user_name = snapshot.child("user_name").getValue().toString();
                                                 mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 fcode넣기
-                                                mDatabase.getReference("answer").child(str).child("members").child(user.getUid()).setValue(user_name);
+                                                mDatabase.getReference("groups").child(str).child("members").child(user.getUid()).setValue(user_name);
 
                                                 //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환
                                                 move = 1;

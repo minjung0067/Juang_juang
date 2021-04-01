@@ -107,7 +107,7 @@ public class Waitactivity extends AppCompatActivity {
                 //감나무 시작하기를 누르면, 가족 int move = 0; //파이어베이스에 저장되면 이동하도록 함.
 
 
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("answer");
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("groups");
                 reference1.child(f_code).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -120,7 +120,7 @@ public class Waitactivity extends AppCompatActivity {
 
                         int move = 0;
                         String fcount = String.valueOf(member_count);
-                        FirebaseDatabase.getInstance().getReference("answer").child(f_code).child("count").setValue(fcount);
+                        FirebaseDatabase.getInstance().getReference("groups").child(f_code).child("count").setValue(fcount);
                         move = 1;
                         if (move == 1){
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
