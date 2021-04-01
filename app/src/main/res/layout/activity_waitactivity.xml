@@ -22,12 +22,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <Button
         android:id="@+id/menu_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/btn_menu"
+        android:background="@color/WhiteColor"
         android:fontFamily="@font/nanumsquare_acr"
         android:gravity="center"
         android:text="감 색상 고르기"
