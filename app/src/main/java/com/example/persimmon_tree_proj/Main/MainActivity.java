@@ -33,6 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private String family_name;
     private DatabaseReference a_Reference;
     private FirebaseDatabase a_Database;
+    private Random rnd;
+    private String[] gam_interaction = {"오늘도 화이팅이라감","감 잡았쓰 ~","당신은 다정다감"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
         /*
         part 1
-            - 로딩페이지에서 가져온 intent 값들을 저장해서
-            왔다감, 뭐할감, 투두리스트, 게임, 마이페이지 등의 메뉴로 이동 시
-            intent로 넘겨 줌
+            - 로딩페이지에서 가져온 intent 값들을 저장
                 => f_code, user_gam, user_color, user_name, family_name, introduce
 
-        part 2 - 감 인터렉션 관련 코드
-        part 3 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
-            - 이동 시 f_code 데리고 감
-        part 4 - 내 가족 이름 띄우기
+        part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
+            -
+        part 3 - 감 인터렉션
+
+        part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
 
 
 
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //part 4 - 가족이름, 사용자 이름, 감 프로필 띄우기
+        //part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
 
         TextView my_family_name = (TextView) findViewById(R.id.my_family_name);
         my_family_name.setText(family_name);
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         my_introduce.setText(introduce);
         ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
 
+        //감 + 이름 띄우기
         switch (user_gam) {
             case "1":
                 profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
@@ -139,19 +144,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //part 2 - 감 인터렉션
+        //part 3 - 감 인터렉션
         ImageButton btn_gam = (ImageButton) findViewById(R.id.gam_btn);
         Button gam_say = (Button) findViewById(R.id.gam_say);
+        rnd = new Random(); //랜덤클래스로부터 랜덤 값 받아오는 변수 작성.
         btn_gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gam_say.setVisibility(View.VISIBLE);
+                if(gam_say.getVisibility()== View.VISIBLE){
+                    gam_say.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    int num = rnd.nextInt(3);
+                    gam_say.setText(gam_interaction[num]);
+                    gam_say.setVisibility(View.VISIBLE);
+                }
 
             }
         });
 
 
-        //part 3 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
+
+        //part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
 
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
@@ -196,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //왔다감 버튼
+        //메인 버튼
         ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
