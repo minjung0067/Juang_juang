@@ -145,12 +145,6 @@ public class log_inactivity extends AppCompatActivity {
 
 
 
-                    Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
-                    startActivity(intent);
-                    finish();
-
-
-
 
                 }
                 else {   //아니라면
@@ -389,6 +383,7 @@ public class log_inactivity extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //배경 누르면 키보드 내려가는 함수
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return true;
