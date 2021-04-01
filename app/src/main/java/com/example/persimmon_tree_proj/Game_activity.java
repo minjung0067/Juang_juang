@@ -32,7 +32,7 @@ public class Game_activity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intentt = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intentt = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
                 startActivity(intentt);
@@ -80,12 +80,11 @@ public class Game_activity extends AppCompatActivity {
             }
         });
 
-        //왔다감 버튼
         ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);

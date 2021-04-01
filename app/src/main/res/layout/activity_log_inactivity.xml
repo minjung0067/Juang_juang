@@ -9,9 +9,6 @@
     android:outlineSpotShadowColor="#FFFFFF"
     tools:context="com.example.persimmon_tree_proj.Account.log_inactivity">
 
-    ​
-
-    ​
 
     <!--    소셜 로그인 용 구글 로그인 버튼 -->
 
