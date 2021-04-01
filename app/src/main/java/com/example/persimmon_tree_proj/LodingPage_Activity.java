@@ -66,8 +66,9 @@ public class LodingPage_Activity extends AppCompatActivity {
          *                  case 4-2 : 별명을 설정하였음.
          *                      case 5-1 : 나와 연결된 가족 코드가 없음 => familyactivity로 이동
          *                      case 5-2 : 나와 연결된 가족 코드가 있음
-         *                          case 6-1 : 가족을 기다리는 중임 => waitactivity로 이동
-         *                          case 6-2 : mainactivity에 이미 들어와있음 => mainacitivy로 이동
+         *
+         *                          case 6-1 : mainactivity에 이미 들어와있음 => mainacitivy로 이동
+         *                          case 6-2 : 가족을 기다리는 중임 => waitactivity로 이동
          *
          * // 로딩 메세지 출력하는 부분
          *
