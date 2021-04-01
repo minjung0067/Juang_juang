@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.Family.Waitactivity2"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.To_do_list.TodoList_addlist_activity"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Family.Waitactivity2" />
         <activity android:name="com.example.persimmon_tree_proj.Family.StartpopupActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Game_activity" />
         <activity android:name="com.example.persimmon_tree_proj.Main.MainActivity" />
