@@ -9,7 +9,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorControlActivated">@color/pointColor</item>      //선택된(포커스) 상태의 밑줄 색
-        <item name="colorControlNormal">@color/greyColor</item>          //선택되지 않은 상태의 밑줄 색
+        <item name="colorControlNormal">@color/grayColor</item>          //선택되지 않은 상태의 밑줄 색
         <item name="android:textSelectHandle">@color/mainColor</item>   //손잡이 부분 색상
         <item name="android:textCursorDrawable">@color/mainColor</item> //커서색
         <item name="android:textColorHighlight">@color/subColor</item> //텍스트 선택색

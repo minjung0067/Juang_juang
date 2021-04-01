@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,10 +25,7 @@ import android.widget.Toast;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.html.privacyhtml;
 import com.example.persimmon_tree_proj.Account.html.servicehtml;
-import com.example.persimmon_tree_proj.Main.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,22 +40,20 @@ import java.util.regex.Pattern;
 public class Registeractivity_1 extends AppCompatActivity {
 
 
-    private EditText Email;
-    private TextView checktext;
-
+    //xml 관련
+    private EditText Email; //이메일 입력란
+    private TextView checktext; //이메일 조건 확인 txt
     private EditText editTextPassword; //비번 칸
     private EditText editTextPassword2; //비번 확인 칸
-    private TextView password1;
-    private TextView password2; //비번 일치 확인
+    private TextView password1; //비번 조건 확인 txt
+    private TextView password2; //비번 일치 확인 txt
     private Button buttonJoin; //회원가입 버튼
 
-    private TextView txt_check;
 
+    //회원가입 확인 변수
     private Integer ok1 = 0; //비밀번호 확인
     private Integer ok2 = 0; //비밀번호 일치 확인
 
-    private DatabaseReference mDatabase;   //database 사용 시 필요함
-    private FirebaseAuth firebaseAuth;
 
     //체크박스 체크 여부 확인하는 변수들들 // No Check = 0, Check = 1
     public int TERMS_AGREE_1 = 0;   //첫번째 약관 동의 버튼
@@ -72,15 +71,17 @@ public class Registeractivity_1 extends AppCompatActivity {
     private Button btn_view1;
     private Button btn_view2;
 
-    private String loginId; //자동 로그인 아이디
-    private String loginUid; //자동 로그인 비밀번호
-    private String loginPwd;
+
+    //Database 확인 시 사용함.
+    private DatabaseReference mDatabase;
+    private FirebaseAuth firebaseAuth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register1);
+
 
         firebaseAuth = FirebaseAuth.getInstance();  //auth 초기화
         mDatabase = FirebaseDatabase.getInstance().getReference(); //database 초기화
@@ -105,7 +106,6 @@ public class Registeractivity_1 extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 checktext.setText("이메일은 계정을 잃어버렸을 때 사용되니 정확히 기입해주세요. ");
-
             }
         });
         checktext = (TextView)findViewById(R.id.txt_check); //이메일 입력 시 안내 텍스트
@@ -121,6 +121,8 @@ public class Registeractivity_1 extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 password1.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
+                password1.setTextColor(Color.parseColor("#DB4455"));
+
             }
 
             @Override
@@ -131,18 +133,25 @@ public class Registeractivity_1 extends AppCompatActivity {
                 Integer inputcount = input.length();
                 if(inputcount < 8){
                     password1.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
+                    password1.setTextColor(Color.parseColor("#DB4455"));
                 }
                 else{
                     if(ok1 == 0){
                         password1.setText("영어,숫자,특수문자 포함 8자 이상을 적어주세요.");
+                        password1.setTextColor(Color.parseColor("#DB4455"));
                     }
                     else{
+                        password1.setTextColor(Color.parseColor("#4CAF50"));
                         password1.setText("사용할 수 있습니다.");
+
+
                         if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
                             password2.setText("일치합니다.");
+                            password2.setTextColor(Color.parseColor("#4CAF50"));
                         }
                         else{
                             password2.setText("비밀번호를 확인해주세요.");
+                            password2.setTextColor(Color.parseColor("#DB4455"));
                         }
 
                     }
@@ -163,9 +172,11 @@ public class Registeractivity_1 extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
                     password2.setText("일치합니다.");
+                    password2.setTextColor(Color.parseColor("#4CAF50"));
                 }
                 else{
                     password2.setText("비밀번호를 확인해주세요.");
+                    password2.setTextColor(Color.parseColor("#DB4455"));
                 }
             }
 
@@ -173,9 +184,11 @@ public class Registeractivity_1 extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
                     password2.setText("일치합니다.");
+                    password2.setTextColor(Color.parseColor("#4CAF50"));
                 }
                 else{
                     password2.setText("일치하지 않습니다.");
+                    password2.setTextColor(Color.parseColor("#DB4455"));
                 }
 
             }
@@ -184,9 +197,11 @@ public class Registeractivity_1 extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(editTextPassword.getText().toString().equals(editTextPassword2.getText().toString())){
                     password2.setText("일치합니다.");
+                    password2.setTextColor(Color.parseColor("#4CAF50"));
                 }
                 else{
                     password2.setText("일치하지 않습니다.");
+                    password2.setTextColor(Color.parseColor("#DB4455"));
                 }
             }
         });
@@ -299,10 +314,8 @@ public class Registeractivity_1 extends AppCompatActivity {
             }
         });
 
-
+        //개인 정보 html 연결
         btn_view1 = (Button)findViewById(R.id.btn_view1);
-        btn_view2 = (Button)findViewById(R.id.btn_view2); //개인정보 확인 버튼튼
-
         btn_view1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,7 +324,8 @@ public class Registeractivity_1 extends AppCompatActivity {
             }
         });
 
-        btn_view2.setOnClickListener(new View.OnClickListener() {//개인정보 연결
+        btn_view2 = (Button)findViewById(R.id.btn_view2);
+        btn_view2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Registeractivity_1.this, privacyhtml.class);
@@ -319,19 +333,14 @@ public class Registeractivity_1 extends AppCompatActivity {
             }
         });
 
-        SharedPreferences auto = getSharedPreferences("auto", AppCompatActivity.MODE_PRIVATE);
-        final SharedPreferences.Editor autoLogin = auto.edit();
-        //자동로그인을 위한 파일명 auto SharedPreference 선언
-        loginId = auto.getString("inputId", null);
-        loginPwd = auto.getString("inputPwd",null);
-        loginUid = auto.getString("inputUid", null);
 
         //회원가입 버튼을 누르면
         buttonJoin = (Button)findViewById(R.id.btn_join);
         buttonJoin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {  //모든 정보 입력했는지 확인
-                //email, pwd변수에 입력된 내용을 string으로 바꿔서 각각의 변수에 넣기
+            public void onClick(View v) {
+
+
                 //자동로그인 안되게 기기에 저장된 거 지움
                 SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = auto.edit();
@@ -339,9 +348,11 @@ public class Registeractivity_1 extends AppCompatActivity {
                 editor.clear();
                 editor.commit(); //저장
 
+                //email, pwd변수에 입력된 내용을 string으로 바꿔서 각각의 변수에 넣기
+                String id = Email.getText().toString();
                 String pwd = editTextPassword.getText().toString();
                 String pwd2 = editTextPassword2.getText().toString();
-                String id = Email.getText().toString();
+
 
                 // 모든 칸이 공백이 아닐때 = 모든 칸이 입력되어있을 때
                 if (!id.equals("") && !pwd.equals("") && !pwd2.equals("")) {
@@ -357,25 +368,9 @@ public class Registeractivity_1 extends AppCompatActivity {
                         check_validation2(pwd,pwd2);
                         if(ok1 == 1){//비밀번호가 최소 8자 , 영어 대소문 , 숫자, 특수문자 사용 가능
                             if(ok2 == 1){
-                                //hashmap 만들기
-                                HashMap result = new HashMap<>();  //database 올릴 때 사용
-                                result.put("name", "");
-                                result.put("birth", "");
-                                result.put("fcode", "");
-                                result.put("introduce","");
-                                createUser(id ,pwd);
-                                autoLogin.putString("inputId", Email.getText().toString());
-                                autoLogin.putString("inputPwd", editTextPassword.getText().toString());
-                                if(user != null){
-                                    autoLogin.putString("inputUid", firebaseAuth.getCurrentUser().getUid());
-                                    autoLogin.commit(); //값 저장
-                                }
-                                else{
 
-                                }
-                                Intent intent = new Intent(getApplicationContext(),more_information_activity.class);
-                                startActivity(intent);
-                                finish();
+                                //파이어베이스 auth에 id,pwd 올리기
+                                createUser(id ,pwd);
                             }
                             else{
                                 //생년월일 조건에 맞지 않는 경우, ok2 = 0 인 경우
@@ -389,60 +384,42 @@ public class Registeractivity_1 extends AppCompatActivity {
 
                         }
                     }
-
-                    // 약관 동의 내용 끝
-
                 } else {
                     // 하나라도 공백이 있는 경우 = 사용자가 입력 안 한 칸이 하나라도 있으면
                     Toast.makeText(Registeractivity_1.this, "회원정보를 모두 입력해주세요.", Toast.LENGTH_LONG).show();   //알림 메세지 띄움
                 }
             }
         });
+
     }
 
-    //회원가입 로직 : id/pwd는 firebase auth에, 나머지 회원정보는 firebase database에 올리는 함수
-    private void createUser(String id, String pwd) {
-        firebaseAuth.createUserWithEmailAndPassword(id, pwd)  //id와 pwd는 firebase auth에 업로드
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {  //auth에 올리는 task
-                        if (task.isSuccessful()) {   //auth에 업로드에 성공했다면
-                            // 회원가입 성공
-                            final String uid = task.getResult().getUser().getUid(); //생성된 사람의 id를 uid라는 변수에 저장
-                            UserModel usermodel = new UserModel(uid);  //usermodel.java에서 새로운 UserModel 만듦
-                            mDatabase.child("users").child(uid).setValue(usermodel)//database에 users 안에 usermodel의 내용으로 업로드
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) { //database에 올리기 성공했으면
-                                            Toast.makeText(Registeractivity_1.this, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show();
+    private void createUser(String id, String pwd){
+        firebaseAuth.createUserWithEmailAndPassword(id,pwd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    //auth에 업로드가 성공했다면 -> 회원가입 성공
 
-                                            //activity간에 계속 인텐트로 데이터 주고 받는거보다 이름을 파일에 저장하게 되면 접근하기 쉬울거라고 생각해서 이 방식 채택함 근데 추후에 이름 바꾸는 경우 생각안해봄
-                                            //SharedPreferences saveprofile = getSharedPreferences("saveprofile", MODE_PRIVATE); //sharedpreferences를 saveprofile이름, 기본모드로 설정함
-                                            //SharedPreferences.Editor editor = saveprofile.edit();//저장하기 위해 editor를 이용하여 값 저장
-                                            //editor.putString("name", name);//이름 저장
-                                            //editor.commit(); //최종 커밋 커밋 안하면 저장 안됨
-
-
-                                            finish();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {  //database에 올리기 실패했으면
-                                            Toast.makeText(Registeractivity_1.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    });
-                            // database에 저장
-                            finish();
-
-                        } else {
-                            // 계정이 중복된 경우
-                            Toast.makeText(Registeractivity_1.this, "중복되는 계정이 있습니다.", Toast.LENGTH_SHORT).show();
-
-                        }
+                    //회원가입 완료시 log_in acitivity로 이동
+                    Intent intent = new Intent(getApplicationContext(),log_inactivity.class);
+                    Toast.makeText(Registeractivity_1.this, "회원가입이 되었습니다.", Toast.LENGTH_LONG).show();
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    try{
+                        task.getResult();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Log.d("Fail_register_email",e.getMessage());
+                        //계정이 중복되는 경우
+                        Toast.makeText(Registeractivity_1.this,"중복되는 계정이 있습니다.", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                }
+            }
+
+        });
     }
 
     void check_validation1(String password) {
@@ -476,6 +453,12 @@ public class Registeractivity_1 extends AppCompatActivity {
         }
     }
 
-
+    //배경 선택시 키보드 내려감.
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
+    }
 
 }

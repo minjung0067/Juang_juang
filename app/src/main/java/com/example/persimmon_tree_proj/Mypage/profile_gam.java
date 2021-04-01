@@ -1,11 +1,10 @@
-package com.example.persimmon_tree_proj.Profile;
+package com.example.persimmon_tree_proj.Mypage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -17,8 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Iterator;
 
 public class profile_gam extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
@@ -47,8 +44,6 @@ public class profile_gam extends AppCompatActivity {
         gam_7 = (ImageView) findViewById(R.id.gam7);
         gam_8 = (ImageView) findViewById(R.id.gam8);
 
-        //Intent intent = getIntent();
-        //String introduce = intent.getStringExtra("intro");
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -61,7 +56,6 @@ public class profile_gam extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_gam").setValue(clicked_gam);
                 Intent intent = new Intent(profile_gam.this, profile_color.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.putExtra("intro",introduce);
                 startActivity(intent);
                 finish();
             }

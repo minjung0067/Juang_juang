@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Juang_juang.R;
+import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -103,7 +106,6 @@ public class log_inactivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                Toast.makeText(log_inactivity.this, "자동 로그인", Toast.LENGTH_SHORT).show();
                 finish();
 
 
@@ -140,12 +142,6 @@ public class log_inactivity extends AppCompatActivity {
 
                         }
                     };
-
-
-
-                    Intent intent = new Intent(getApplicationContext(),LodingPage_Activity.class);
-                    startActivity(intent);
-                    finish();
 
 
 
@@ -233,54 +229,54 @@ public class log_inactivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
 
-
-        //네이버 로그인
-        ll_naver_login = findViewById(R.id.naverlogin);
-        btn_logout = findViewById(R.id.btn_logout);
-
-        ll_naver_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOAuthLoginModule = OAuthLogin.getInstance();
-                mOAuthLoginModule.init(
-                        mContext
-                        ,getString(R.string.naver_client_id)
-                        ,getString(R.string.naver_client_secret)
-                        ,getString(R.string.naver_client_name)
-                        //,OAUTH_CALLBACK_INTENT
-                        // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다. -> 네...
-                );
-
-                @SuppressLint("HandlerLeak")
-                OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
-                    @Override
-                    public void run(boolean success) {
-                        if (success) {
-                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
-                            String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
-                            long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
-                            String tokenType = mOAuthLoginModule.getTokenType(mContext);
-
-                            Log.i("LoginData","accessToken : "+ accessToken);
-                            Log.i("LoginData","refreshToken : "+ refreshToken);
-                            Log.i("LoginData","expiresAt : "+ expiresAt);
-                            Log.i("LoginData","tokenType : "+ tokenType);
-
-                        } else {
-                            String errorCode = mOAuthLoginModule
-                                    .getLastErrorCode(mContext).getCode();
-                            String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
-                            Toast.makeText(mContext, "errorCode:" + errorCode
-                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
-                        }
-                    };
-                };
-
-                mOAuthLoginModule.startOauthLoginActivity(log_inactivity.this, mOAuthLoginHandler);
-            }
-        });
-
-
+//
+//        //네이버 로그인
+//        ll_naver_login = findViewById(R.id.naverlogin);
+//        btn_logout = findViewById(R.id.btn_logout);
+//
+//        ll_naver_login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mOAuthLoginModule = OAuthLogin.getInstance();
+//                mOAuthLoginModule.init(
+//                        mContext
+//                        ,getString(R.string.naver_client_id)
+//                        ,getString(R.string.naver_client_secret)
+//                        ,getString(R.string.naver_client_name)
+//                        //,OAUTH_CALLBACK_INTENT
+//                        // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다. -> 네...
+//                );
+//
+//                @SuppressLint("HandlerLeak")
+//                OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
+//                    @Override
+//                    public void run(boolean success) {
+//                        if (success) {
+//                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+//                            String refreshToken = mOAuthLoginModule.getRefreshToken(mContext);
+//                            long expiresAt = mOAuthLoginModule.getExpiresAt(mContext);
+//                            String tokenType = mOAuthLoginModule.getTokenType(mContext);
+//
+//                            Log.i("LoginData","accessToken : "+ accessToken);
+//                            Log.i("LoginData","refreshToken : "+ refreshToken);
+//                            Log.i("LoginData","expiresAt : "+ expiresAt);
+//                            Log.i("LoginData","tokenType : "+ tokenType);
+//
+//                        } else {
+//                            String errorCode = mOAuthLoginModule
+//                                    .getLastErrorCode(mContext).getCode();
+//                            String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
+//                            Toast.makeText(mContext, "errorCode:" + errorCode
+//                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+//                        }
+//                    };
+//                };
+//
+//                mOAuthLoginModule.startOauthLoginActivity(log_inactivity.this, mOAuthLoginHandler);
+//            }
+//        });
+//
+//
     }
 
     //네이버 로그인은 여기까지
@@ -312,7 +308,7 @@ public class log_inactivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {    //구글 로그인 성공과 실패 시 각각에 맞는 toast 띄우는 함수
                         if (task.isSuccessful()) {
                             // 구글로그인 성공
-                            Toast.makeText(log_inactivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(log_inactivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(log_inactivity.this, LodingPage_Activity.class);  //구글 로그인 성공시 familyactivity로 넘어가게
                             startActivity(intent);
                             finish();
@@ -383,6 +379,14 @@ public class log_inactivity extends AppCompatActivity {
         //안드로이드 백버튼 막기
         finish();
         return;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //배경 누르면 키보드 내려가는 함수
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 
 

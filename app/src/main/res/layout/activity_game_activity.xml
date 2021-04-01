@@ -4,29 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context="com.example.persimmon_tree_proj.Main.MainActivity">
+    tools:context="com.example.persimmon_tree_proj.Game_activity">
 
-
-
-<!--    상단바-->
     <TextView
         android:id="@+id/button"
+        android:clickable="false"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginTop="28dp"
-        android:layout_marginBottom="65dp"
         android:fontFamily="@font/nanumsquare_acb"
         android:maxLength="10"
         android:text="우리집 감나무"
-        android:clickable="false"
         android:textColor="@color/darkgray"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/go_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:background="#00B1A6A6"
+        android:scaleType="fitCenter"
+        android:src="@drawable/go_backk"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631" />
-
+        tools:layout_conversion_absoluteHeight="0dp"
+        tools:layout_conversion_absoluteWidth="0dp" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
@@ -39,111 +46,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <!--    본문-->
-
-
-    <TextView
-        android:padding="10dp"
-        android:id="@+id/my_family_name"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/WhiteColor"
-        android:gravity="center"
-        android:text="우리 가족 이름은"
-        android:textColor="@color/mainColor"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/gam_say"
-        app:layout_constraintTop_toBottomOf="@+id/menu_name"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <LinearLayout
+    <Button
+        android:id="@+id/menu_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:scaleType="fitCenter"
+        android:layout_marginTop="24dp"
+        android:background="@color/WhiteColor"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:textSize="30dp"
+        android:text="누가할감"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="-16dp" >
-
-        <ImageView
-            android:padding="@dimen/com_kakao_padding"
-            android:id="@+id/profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/profile_outline"
-            android:scaleType="fitCenter"
-            android:src="@drawable/gam1" />
-
-        <TextView
-            android:layout_marginStart="@dimen/com_kakao_padding"
-            android:id="@+id/my_introduce"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/WhiteColor"
-            android:gravity="center_vertical"
-            android:text="내 이름은"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:textColor="@color/grayColor"
-            android:textSize="18dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
 
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_clickgam"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="52dp"
-        android:background="@drawable/btn_brightgray_rounded"
-        android:fontFamily="@font/nanumsquare_acl"
-        android:text="감 캐릭터를 눌러보세요!"
-        android:textColor="#817889"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic"
-        tools:ignore="UnknownId" />
-
-
-    <!--   하단 메뉴바-->
-
-    <ImageButton
-        android:id="@+id/gam_btn"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:scaleType="fitCenter"
-        android:src="@drawable/gam1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
-
-    <Button
-        android:id="@+id/gam_say"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/btn_brightgray_rounded"
-        android:fontFamily="@font/nanumsquare_acl"
-        android:text="오늘도 힘내라감!"
-        android:textColor="#817889"
-        android:textSize="16dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/gam_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_notice"
-        app:layout_constraintVertical_bias="0.809"
-        tools:ignore="UnknownId" />
 
     <TextView
         android:id="@+id/textView2"
@@ -219,4 +136,5 @@
         android:src="@drawable/qna_menu_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

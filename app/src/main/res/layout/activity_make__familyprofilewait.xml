@@ -7,7 +7,7 @@
     tools:context="com.example.persimmon_tree_proj.Family.Make_FamilyProfilewait">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txt_notice"
         android:layout_width="248dp"
         android:layout_height="22dp"
         android:layout_marginTop="83dp"
@@ -48,7 +48,7 @@
         android:textColor="#000"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@+id/example3"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_notice" />
 
     <TextView
         android:id="@+id/example3"
@@ -56,7 +56,7 @@
         android:layout_height="15dp"
         android:layout_marginTop="3dp"
         android:text="*모든 가족구성원이 가입해야 우리집 감나무가 열려요!"
-        android:textColor="@color/greyColor"
+        android:textColor="@color/grayColor"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="@+id/count"
         app:layout_constraintTop_toBottomOf="@+id/question1" />
@@ -72,7 +72,7 @@
         android:hint="예: 4"
         android:inputType="number"
         android:singleLine="false"
-        android:textColor="@color/greyColor"
+        android:textColor="@color/grayColor"
         android:textColorHint="#939393"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"

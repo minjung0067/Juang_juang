@@ -3,15 +3,17 @@ package com.example.persimmon_tree_proj.Family;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.Juang_juang.R;
-import com.example.persimmon_tree_proj.Profile.MakeProfile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,9 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
-import android.widget.Toast;
 
 public class Make_FamilyProfile extends AppCompatActivity {
 
@@ -61,9 +60,9 @@ public class Make_FamilyProfile extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String user_name = snapshot.child("user_name").getValue().toString();
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user.getUid()).setValue(user_name);
+                        FirebaseDatabase.getInstance().getReference("groups").child(myfcode).child("members").child(user.getUid()).setValue(user_name);
                         String about_myfamily = about_familys.getText().toString();
-                        FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("family_name").setValue(about_myfamily);
+                        FirebaseDatabase.getInstance().getReference("groups").child(myfcode).child("f_name").setValue(about_myfamily);
                         Intent intent = new Intent(getApplicationContext(), Waitactivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -81,6 +80,13 @@ public class Make_FamilyProfile extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 
 

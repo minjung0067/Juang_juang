@@ -10,63 +10,37 @@
     <!-- Activity Layout XML -->
     <!-- @author croute -->
     <!-- @since 2011.03.08 -->
-    <TextView
-        android:id="@+id/top_orange"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/top_orange"
-        app:layout_constraintEnd_toEndOf="@+id/btn_mypage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintHorizontal_weight="1"
-        android:background="@drawable/top_orange"
+        android:clickable="false"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="65dp"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:maxLength="10"
+        android:text="우리집 감나무"
+        android:textColor="@color/darkgray"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/profile_image"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.631" />
 
-    <ImageView
-        android:id="@+id/gam_text"
-        android:layout_width="59dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:src="@drawable/top_when2x"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
-
-
-    <ImageView
-        android:id="@+id/btn_mypage2"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/profile_outline"
-        android:src="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="24dp"
         android:layout_marginRight="24dp"
-        android:background="@null"
+        android:background="@drawable/mypage_menu_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageButton
         android:id="@+id/btn_addcal"
@@ -257,52 +231,76 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:background="@color/mainColor"
+        android:layout_marginBottom="13dp"
+        android:background="@color/brightgray"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/write_icon2x"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.266" />
-
-
-    <ImageButton
-        android:id="@+id/setting_btn"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginRight="70dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        android:src="@drawable/clinet_sound_icon2x"
-        app:layout_constraintBottom_toBottomOf="@+id/main_btn"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/main_btn" />
-
+        tools:layout_editor_absoluteX="-28dp" />
 
     <ImageButton
         android:id="@+id/calendar_btn"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="70dp"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="24dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/calendar_icon2x"
-        app:layout_constraintBottom_toBottomOf="@+id/main_btn"
+        android:src="@drawable/calendar_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_btn"
+        app:layout_constraintStart_toEndOf="@+id/qna_btn" />
+
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="12dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/main_btn"
-        app:layout_constraintVertical_bias="0.406" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.64"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/to_do_btn"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/todo_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/game_btn"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toEndOf="@+id/main_btn" />
+
+    <ImageButton
+        android:id="@+id/game_btn"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/game_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2" />
+
+    <ImageButton
+        android:id="@+id/qna_btn"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/qna_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 

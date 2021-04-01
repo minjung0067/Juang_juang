@@ -8,35 +8,62 @@
     android:onClick="linearOnClick"
     tools:context="com.example.persimmon_tree_proj.customer_sound">
 
+
+<!--    상단바부분-->
     <TextView
         android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/top_orange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"/>
-    <TextView
-        android:id="@+id/profile_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textFontWeight="@android:integer/config_longAnimTime"
-        android:height="50dp"
-        android:fontFamily="@font/nanumsquare_acdb"
-        android:text="주앙이네 게시판"
-        android:textColor="@color/subColor"
+        android:layout_height="22dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:maxLength="10"
+        android:text="우리집 감나무"
+        android:clickable="false"
+        android:textColor="@color/darkgray"
         android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/go_back"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:background="#00B1A6A6"
+        android:scaleType="fitCenter"
+        android:src="@drawable/go_backk"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_conversion_absoluteHeight="0dp"
         tools:layout_conversion_absoluteWidth="0dp" />
+
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/mypage_menu_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <!--   본문 부분-->
+
+
+    <!--하단메뉴부분-->
+
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/layout"
+        android:layout_width="373dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="140dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -44,14 +71,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="54dp"
+            android:layout_marginBottom="67dp"
             tools:context=".todolistactivity">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 tools:ignore="MissingClass" />
@@ -59,69 +85,92 @@
         </RelativeLayout>
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/menu_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:background="@color/WhiteColor"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:textSize="30dp"
+        android:text="뭐할감"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:background="@color/mainColor"
+        android:layout_marginBottom="13dp"
+        android:background="@color/brightgray"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/write_icon2x"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_btn"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toEndOf="@+id/calendar_btn"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.333" />
-
-    <ImageButton
-        android:id="@+id/todolist"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="4dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/check_icon_big"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toEndOf="@+id/setting_btn" />
-
-    <ImageButton
-        android:id="@+id/setting_btn"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="128dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        android:src="@drawable/clinet_sound_icon2x"
-        app:layout_constraintBottom_toBottomOf="@+id/main_btn"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/main_btn"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:layout_editor_absoluteX="-28dp" />
 
     <ImageButton
         android:id="@+id/calendar_btn"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="24dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/calendar_icon2x"
-        app:layout_constraintBottom_toBottomOf="@+id/main_btn"
+        android:src="@drawable/calendar_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_btn"
+        app:layout_constraintStart_toEndOf="@+id/qna_btn" />
+
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="12dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/main_btn"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.64"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/to_do_btn"
+        android:layout_width="33dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/todo_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/game_btn"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toEndOf="@+id/main_btn" />
+
+    <ImageButton
+        android:id="@+id/game_btn"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/game_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2" />
+
+    <ImageButton
+        android:id="@+id/qna_btn"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/qna_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
 
 
 public class CodeActivity extends AppCompatActivity {
@@ -54,32 +55,24 @@ public class CodeActivity extends AppCompatActivity {
             checkDatabase(str_code);
         }while(tf == 1);
 
-        writeGroupFamily(str_code);//새로운 key, value 추가하는 방식으로 writeGroupFamily함수를 불러서 group에 추가함
-
         tv_code.setText(str_code);//화면에 code출력하기
-
-
     }
 
     public String makeCode(){ //코드 만드는 함수
         tv_code = (TextView) findViewById(R.id.tv_code); //초기화
+        Random ran = new Random();
         str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
-            int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
-            str_code += Integer.toString(randomNum);
+            int num1 = (int) 48 + (int) (ran.nextDouble() * 74);
+            str_code = str_code + (char) num1;
+            //int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
+            //char random = ((char)((int)(Math.random()*26)+65)); // 랜덤 한 대문자
+            //str_code += Integer.toString(randomNum);
         }
 
         return str_code;
     }
 
-    //groups라는 루트 노드 아래에 str_code 6자리를 키 값과 value로 가지는 노드 생성
-    private void writeGroupFamily(String str_code){
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference("groups"); //파이어 베이스의 경로 선택함
-        GroupFamily groupFamily = new GroupFamily(str_code);
-        mReference.child(str_code).setValue(str_code);
-
-    }
 
 
     public void checkDatabase(final String str_code) {

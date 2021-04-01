@@ -9,9 +9,6 @@
     android:outlineSpotShadowColor="#FFFFFF"
     tools:context="com.example.persimmon_tree_proj.Account.log_inactivity">
 
-    ​
-
-    ​
 
     <!--    소셜 로그인 용 구글 로그인 버튼 -->
 
@@ -85,11 +82,12 @@
     <!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn"-->
     <!--        app:layout_constraintVertical_bias="1.0" />-->
 
+
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="409dp"
-        android:layout_height="229dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="412dp"
+        android:layout_height="164dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +98,7 @@
 
         <EditText
             android:id="@+id/editText_email"
-            android:layout_width="266dp"
+            android:layout_width="289dp"
             android:layout_height="40dp"
             android:layout_margin="7dp"
             android:layout_marginLeft="47dp"
@@ -109,52 +107,63 @@
             android:gravity="left"
             android:hint="이메일 주소"
             android:inputType="textEmailAddress"
-            android:textColorHint="@color/greyColor"
+            android:textColorHint="@color/grayColor"
             android:textSize="15dp" />
 
         <EditText
             android:id="@+id/editText_passWord"
-            android:layout_width="266dp"
+            android:layout_width="289dp"
             android:layout_height="40dp"
             android:layout_margin="7dp"
             android:ems="10"
             android:fontFamily="@font/nanumsquare_acr"
             android:gravity="left"
-            android:hint="비밀번호 입력"
+            android:hint="비밀번호"
             android:inputType="textPassword"
-            android:textColorHint="@color/greyColor"
+            android:textColorHint="@color/grayColor"
             android:textSize="15dp" />
 
         <Button
             android:id="@+id/btn_login"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="266dp"
+            android:layout_width="289dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="#FFAB47"
+            android:background="@drawable/btn_orange_rounded"
             android:fontFamily="sans-serif"
             android:text="로그인"
             android:textColor="#FFFFFF" />
 
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="266dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="#FFFFFF"
-            android:text="계정이 없나요? 회원가입하기"
-            android:textColor="#2196F3"
-            tools:ignore="MissingConstraints" />
-
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="289dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:textColor="#2196F3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:ignore="MissingConstraints" />
+
+    <!--    <ImageView-->
+<!--        android:id="@+id/naverlogin"-->
+<!--        android:layout_width="289dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:src="@drawable/naverlogin"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.461"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn" />-->
 
     <ImageView
         android:id="@+id/ll_naver_login"
         android:layout_width="189dp"
         android:layout_height="183dp"
         android:layout_marginLeft="124dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="123dp"
         android:src="@drawable/login_gambaloon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,11 +172,11 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_googleSignIn"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_width="293dp"
+        android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:bottomLeftRadius="30dp"
         android:bottomRightRadius="30dp"
         android:longClickable="false"
@@ -175,37 +184,25 @@
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
         android:soundEffectsEnabled="false"
-        android:splitMotionEvents="false"
 
+        android:splitMotionEvents="false"
         android:topLeftRadius="30dp"
         android:topRightRadius="30dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register"
         tools:ignore="MissingConstraints"></com.google.android.gms.common.SignInButton>
-
-    <ImageView
-        android:id="@+id/naverlogin"
-        android:layout_width="307dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/naverlogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn" />
 
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/btn_kakao_login"
-        android:layout_width="wrap_content"
+        android:layout_width="289dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/naverlogin"
-        app:layout_constraintVertical_bias="0.082" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_googleSignIn" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -219,7 +216,17 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
-
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="계정이 없나요? 회원가입하기"
+        android:textColor="#000000"
+        android:textSize="9sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_register"
+        app:layout_constraintStart_toStartOf="@+id/btn_register"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
