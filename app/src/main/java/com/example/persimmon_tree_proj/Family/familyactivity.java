@@ -100,12 +100,13 @@ public class familyactivity extends AppCompatActivity {
                                                 user_name = snapshot.child("user_name").getValue().toString();
                                                 mDatabase.getReference("users").child(user.getUid()).child("fcode").setValue(str); //database user의 정보 부분에 fcode넣기
                                                 mDatabase.getReference("groups").child(str).child("members").child(user.getUid()).setValue(user_name);
+                                                mDatabase.getReference("users").child(user.getUid()).child("captain").setValue("false");
 
                                                 //exist = 1이고, 가입할 수 있는 경우 자기database에 fcode추가하고 화면전환
                                                 move = 1;
 
                                                 if (move == 1) {
-                                                    Intent intent = new Intent(getApplicationContext(), Waitactivity.class); //코드 생성 activity로 이동
+                                                    Intent intent = new Intent(getApplicationContext(), Waitactivity2.class); //코드 생성 activity로 이동
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                     startActivity(intent);
                                                     finish();

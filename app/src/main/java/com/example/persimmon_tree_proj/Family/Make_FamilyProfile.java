@@ -59,14 +59,23 @@ public class Make_FamilyProfile extends AppCompatActivity {
                 reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        int move = 0;
+
                         String user_name = snapshot.child("user_name").getValue().toString();
                         FirebaseDatabase.getInstance().getReference("groups").child(myfcode).child("members").child(user.getUid()).setValue(user_name);
                         String about_myfamily = about_familys.getText().toString();
                         FirebaseDatabase.getInstance().getReference("groups").child(myfcode).child("f_name").setValue(about_myfamily);
-                        Intent intent = new Intent(getApplicationContext(), Waitactivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
+                        FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("captain").setValue("true");
+
+                        move = 1;
+                        if(move ==1){
+                            Intent intent = new Intent(getApplicationContext(), Waitactivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+
 
 
                     }

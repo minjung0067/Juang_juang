@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.more_information_activity;
 import com.example.persimmon_tree_proj.Family.Waitactivity;
+import com.example.persimmon_tree_proj.Family.Waitactivity2;
 import com.example.persimmon_tree_proj.Family.familyactivity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.Mypage.MakeProfile;
@@ -40,6 +41,7 @@ public class LodingPage_Activity extends AppCompatActivity {
     private String user_fcode;
     private String fcount;
     private String family_name;
+    private String captain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +68,9 @@ public class LodingPage_Activity extends AppCompatActivity {
          *                  case 4-2 : 별명을 설정하였음.
          *                      case 5-1 : 나와 연결된 가족 코드가 없음 => familyactivity로 이동
          *                      case 5-2 : 나와 연결된 가족 코드가 있음
-         *                          case 6-1 : 가족을 기다리는 중임 => waitactivity로 이동
-         *                          case 6-2 : mainactivity에 이미 들어와있음 => mainacitivy로 이동
+         *
+         *                          case 6-1 : mainactivity에 이미 들어와있음 => mainacitivy로 이동
+         *                          case 6-2 : 가족을 기다리는 중임 => waitactivity로 이동
          *
          * // 로딩 메세지 출력하는 부분
          *
@@ -88,6 +91,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                 user_gam = String.valueOf(snapshot.child(user.getUid()).child("user_gam").getValue()); // 감 캐릭터를 설정했는지 확인
                 introduce = String.valueOf(snapshot.child(user.getUid()).child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
                 user_fcode = String.valueOf(snapshot.child(user.getUid()).child("fcode").getValue());
+                captain = String.valueOf(snapshot.child(user.getUid()).child("captain").getValue()); //방장 확인
                 firebaseAuth = FirebaseAuth.getInstance();
 
                 //case 1-1: 이름이나 생년월일 같은 기본 정보 아직 db에 없음 => more_information_activity로 이동
@@ -141,11 +145,21 @@ public class LodingPage_Activity extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             fcount = String.valueOf(snapshot.child("count").getValue());
                                             Log.i("fcount",fcount);
+                                            Log.i("captain",captain);
                                             if(fcount == "null") {
-                                                Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
+                                                if(captain.equals("true")){
+                                                    Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                                else if(captain.equals("false")){
+                                                    Intent intent = new Intent(LodingPage_Activity.this, Waitactivity2.class);  // 대기 화면을 설정하러 가라
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+
                                             }
                                             else{
                                                 family_name = String.valueOf(snapshot.child("f_name").getValue());
