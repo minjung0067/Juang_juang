@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                 Log.i("userid", String.valueOf(user.getUid()));
                 Log.i("usergam", String.valueOf(user_gam));
                 //case 1-1: 이름이나 생년월일 같은 기본 정보 아직 db에 없음 => more_information_activity로 이동
-                if(user_name == "null"){
+                if(TextUtils.isEmpty(user_name)){
                     Intent intent = new Intent(LodingPage_Activity.this, more_information_activity.class);  //프로필 만들러 가라
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -98,7 +99,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                 //case 1-2 : 이름이나 생년월일 같은 기본 정보 db에 있음
                 else{
                     //case 2-1 감 캐릭터를 설정하지 않았을 경우 => profile_gam로 이동
-                    if(user_gam == "null"){
+                    if(TextUtils.isEmpty(user_gam)){
                         Intent intent = new Intent(LodingPage_Activity.this, profile_gam.class);  // 감 캐릭터를 설정하러 가라
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -107,7 +108,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                     // case 2-2 :감 캐릭터를 설정한 경우
                     else{
                         // case 3-1 : 감 색깔을 설정하지 않은 경우 => profile_color로 이동
-                        if(user_color == "null"){
+                        if(TextUtils.isEmpty(user_color)){
                             Intent intent = new Intent(LodingPage_Activity.this, profile_color.class);  // 감 색깔을 설정하러 가라
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
@@ -116,7 +117,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                         //case3-2 : 감 색깔을 설정한 경우
                         else{
                             //case 4-1 : 별명을 설정하지 않은 경우 => MakeProfile로 이동
-                            if(introduce == "null"){
+                            if(TextUtils.isEmpty(introduce)){
                                 Intent intent = new Intent(LodingPage_Activity.this, MakeProfile.class);  // 프로필(별명)을 설정하러 가라
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
@@ -125,7 +126,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                             //case 4-2 : 별명을 설정한 경우
                             else{
                                 //case 5-1 : 지정된 가족이 없는 경우 => familyactivity로 이동
-                                if(user_fcode == "null"){
+                                if(TextUtils.isEmpty(user_fcode)){
                                     Intent intent = new Intent(LodingPage_Activity.this,familyactivity.class);  // 가족코드를 설정하러 가라
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);

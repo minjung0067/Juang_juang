@@ -12,14 +12,15 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
-import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class Waitactivity extends AppCompatActivity {
@@ -38,6 +41,11 @@ public class Waitactivity extends AppCompatActivity {
     private String user_name;
     private int member_count; //현재 들어와있는 가족 구성원 수 count
 
+    private ArrayList<String> all_user_arr; //user를 담는 배열
+    private ListView userList;
+    private ArrayAdapter<String> adapter;
+    List<Object> Array = new ArrayList<Object>();
+
 
 
     @Override
@@ -45,9 +53,7 @@ public class Waitactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waitactivity);
 
-        final TextView textchange = (TextView)findViewById(R.id.textView6);
-        //복사가 되었다면 토스트메시지 노출
-
+        final TextView textchange = (TextView)findViewById(R.id.txt_notice);
         Button send = (Button) findViewById(R.id.btn_copy);
         send.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
@@ -146,6 +152,9 @@ public class Waitactivity extends AppCompatActivity {
         });
 
 
+        userList = (ListView)findViewById(R.id.list_user);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, new ArrayList<String>());
+        userList.setAdapter(adapter);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -154,6 +163,34 @@ public class Waitactivity extends AppCompatActivity {
                 f_code = String.valueOf(snapshot.child("fcode").getValue());
                 TextView txt_fcode = (TextView) findViewById(R.id.txt_fcode);
                 txt_fcode.setText(f_code);
+
+
+                DatabaseReference reference2  = FirebaseDatabase.getInstance().getReference("groups");
+                reference2.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        adapter.clear();
+
+                        for(DataSnapshot membersData : dataSnapshot.getChildren()){
+                            String user = membersData.getValue().toString();
+                            Array.add(user);
+                            adapter.add(user);
+                        }
+                        adapter.notifyDataSetChanged(); //리스트뷰 갱신
+                        userList.setSelection(adapter.getCount() -1); //마지막 위치를 카운트해서 보내줌.
+
+                    }
+
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                //전체 user 가져오기
+
+
 
             }
 
@@ -164,6 +201,8 @@ public class Waitactivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 
