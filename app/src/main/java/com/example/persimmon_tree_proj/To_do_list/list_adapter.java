@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,17 +14,25 @@ import com.example.Juang_juang.R;
 
 import java.util.ArrayList;
 
-// Extends the Adapter class to RecyclerView.Adapter 
-// and implement the unimplemented methods
+//  RecyclerView.Adapter
+
 
 public class list_adapter extends RecyclerView.Adapter<list_adapter.ViewHolder> {
-    ArrayList images;
+    ArrayList title;
+    ArrayList contents;
+    ArrayList date;
+    ArrayList writer;
+    ArrayList color;
     Context context;
 
     // Constructor for initialization 
-    public list_adapter(Context context, ArrayList images) {
+    public list_adapter(Context context, ArrayList title, ArrayList contents, ArrayList date, ArrayList writer,ArrayList color) {
         this.context = context;
-        this.images = images;
+        this.title = title;
+        this.contents = contents;
+        this.date = date;
+        this.writer = writer;
+        this.color = color;
     }
 
     @NonNull
@@ -39,24 +49,39 @@ public class list_adapter extends RecyclerView.Adapter<list_adapter.ViewHolder> 
     // Binding data to the into specified position 
     @Override
     public void onBindViewHolder(@NonNull list_adapter.ViewHolder holder, int position) {
-        // TypeCast Object to int type 
-        int res = (int) images.get(position);
-        holder.images.setImageResource(res);
+        // TypeCast Object to int type
+        String res_title = (String) title.get(position);
+        String res_contents = (String) contents.get(position);
+        String res_date = (String) date.get(position);
+        String res_writer = (String) writer.get(position);
+        holder.title.setText(res_title);
+        holder.contents.setText(res_contents);
+        holder.date.setText(res_date);
+        holder.writer.setText(res_writer);
     }
 
     @Override
     public int getItemCount() {
         // Returns number of items currently available in Adapter 
-        return images.size();
+        return writer.size();
     }
 
-    // Initializing the Views 
+    // Initializing the Views
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView images;
+        TextView title;
+        TextView contents;
+        TextView writer;
+        TextView date;
+
 
         public ViewHolder(View view) {
             super(view);
             images = (ImageView) view.findViewById(R.id.imageView);
+            title = (TextView) view.findViewById(R.id.title);
+            contents = (TextView) view.findViewById(R.id.contents);
+            writer = (TextView) view.findViewById(R.id.writer);
+            date = (TextView) view.findViewById(R.id.date);
         }
     }
 }

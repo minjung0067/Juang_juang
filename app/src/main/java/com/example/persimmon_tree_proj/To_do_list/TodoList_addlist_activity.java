@@ -1,4 +1,4 @@
-package com.example.persimmon_tree_proj;
+package com.example.persimmon_tree_proj.To_do_list;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,17 +10,17 @@ import android.widget.ImageButton;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
-import com.example.persimmon_tree_proj.Main.MainActivity;
+import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
 
-public class Game_activity extends AppCompatActivity {
+public class TodoList_addlist_activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_activity);
+        setContentView(R.layout.activity_todo_list_addlist_activity);
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("user_fcode");
@@ -29,6 +29,12 @@ public class Game_activity extends AppCompatActivity {
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
+
+
+
+
+
+
 
 
         //뒤로가기
@@ -102,10 +108,6 @@ public class Game_activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -133,7 +135,7 @@ public class Game_activity extends AppCompatActivity {
         go_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Game_activity.class);
+                Intent intent = new Intent(getApplicationContext(), com.example.persimmon_tree_proj.Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 intent.putExtra("introduce",introduce);

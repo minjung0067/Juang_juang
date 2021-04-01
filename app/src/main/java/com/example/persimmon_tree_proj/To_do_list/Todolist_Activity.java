@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.Juang_juang.R;
@@ -37,8 +38,11 @@ public class Todolist_Activity extends AppCompatActivity {
 
 
     // Using ArrayList to store images data
-    ArrayList images = new ArrayList<>(Arrays.asList(R.drawable.gam1, R.drawable.gam2, R.drawable.gam3,
-            R.drawable.gam4, R.drawable.gam5, R.drawable.gam6, R.drawable.gam7, R.drawable.gam8));
+    ArrayList<String> title = new ArrayList<String>(Arrays.asList("제목","제목2","제목3","#33333333333333333"));
+    ArrayList<String> contents = new ArrayList<String>(Arrays.asList("내용","내용2","d","22222222222222fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2222222"));
+    ArrayList<String> writer = new ArrayList<String>(Arrays.asList("민정","민정2","민정33333333333","adsfasdf"));
+    ArrayList<String> date = new ArrayList<String>(Arrays.asList("2019년 29월 29일","2019년 29월 29일", "2389년 39월 8일","3333333333333333333"));
+    ArrayList<String> color = new ArrayList<String>(Arrays.asList("#dkdkdk ","#dkfdkdk","#dkdkdk","3"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +50,59 @@ public class Todolist_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_todolist);
 
         Intent intent = getIntent();
-        final String f_code = intent.getStringExtra("f_code");
-        // Getting reference of recyclerView
+        final String f_code = intent.getStringExtra("user_fcode");
+        final String user_gam = intent.getStringExtra("user_gam");
+        final String user_color = intent.getStringExtra("user_color");
+        final String user_name = intent.getStringExtra("user_name");
+        final String family_name = intent.getStringExtra("family_name");
+        final String introduce = intent.getStringExtra("introduce");
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        // Setting the layout as Staggered Grid for vertical orientation
+        // 그리드 세로 줄 세팅
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-        // Sending reference and data to Adapter
-        RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this, images);
+        // 어댑터와 연결
+        RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this,title,contents,date,writer,color);
 
-        // Setting Adapter to RecyclerView
+        // 어댑터를 리사이클뷰랑 연결
         recyclerView.setAdapter(adapter);
 
 
 
 
         //버튼
+        //새 메모 추가 버튼
+        Button new_list = (Button) findViewById(R.id.list_add);
+        new_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentt = new Intent(Todolist_Activity.this, TodoList_addlist_activity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
+                startActivity(intentt);
+                finish();
+            }
+        });
+
+        Button edit_list = (Button) findViewById(R.id.list_edit);
+        edit_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentt = new Intent(Todolist_Activity.this, Todolist_Activity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
+                startActivity(intentt);
+            }
+        });
 
 
         //뒤로가기
@@ -86,7 +125,10 @@ public class Todolist_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
+                intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intentt);
             }
         });
@@ -100,7 +142,9 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                startActivity(intent);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
@@ -114,6 +158,9 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -127,6 +174,9 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -141,6 +191,9 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -154,6 +207,9 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }

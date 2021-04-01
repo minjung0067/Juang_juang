@@ -105,47 +105,38 @@ public class MainActivity extends AppCompatActivity {
         //감 + 이름 띄우기
         switch (user_gam) {
             case "1":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd1 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam1);
                 break;
             case "2":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd2 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam2);
                 break;
             case "3":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd3 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam3);
                 break;
             case "4":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd4 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam4);
                 break;
             case "5":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd5 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam5);
                 break;
             case "6":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd6 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam6);
                 break;
             case "7":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd7 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam7);
                 break;
             case "8":
-                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                 GradientDrawable gd8 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam8);
                 break;
             default:
-                profile_image.setBackgroundColor(Color.parseColor("#ffffff"));
                 profile_image.setImageResource(R.drawable.gam1);
                 break;
         }
@@ -205,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -219,6 +213,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -246,6 +243,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
