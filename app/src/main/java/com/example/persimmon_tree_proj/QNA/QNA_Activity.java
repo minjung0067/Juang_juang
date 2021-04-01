@@ -43,6 +43,8 @@ import java.util.Iterator;
 import java.text.SimpleDateFormat; //시간 날짜 체크를 위함
 import java.util.Date;
 
+
+
 public class QNA_Activity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase;
@@ -92,12 +94,14 @@ public class QNA_Activity extends AppCompatActivity {
     String user_gam = "";
     String user_color = "";
     /*
-    part 1 - user_name, f_code, count(파베에서 가져오는 가족 수), member_count(파베에서 직접 세아린 가족 수 필요 없을 것으로 예상 혼돈을 줄 것 같아서 삭제 원함),
+    part 1 - user_name, f_code, count(파베에서 가져오는 가족 수),
     showindex(answer에서 넘어왔을 때 보여줄 질문 인덱스 번호)
 
     part 2 - all_q_arr에 질문 전체 복사
 
     part 3 -
+
+    part 4 - 슬라이드
 
 
     reference_ans = answer에 f_code까지 레퍼런스 함
@@ -139,7 +143,6 @@ public class QNA_Activity extends AppCompatActivity {
                 f_code = snapshot.child("fcode").getValue().toString();
                 Log.i("myfcode", f_code);
                 user_name = snapshot.child("user_name").getValue().toString();
-                member_count = 0;
                 //지정한 member 수 가져오기
                 a_Reference = a_Database.getReference("groups");
                 a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
@@ -149,14 +152,6 @@ public class QNA_Activity extends AppCompatActivity {
                         String str = String.valueOf(snapshot.child("count"));
                         count = Integer.valueOf(str);
                         //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
-
-                        //가져온 f_code에 해당하는 member 수 세기
-                        Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-                        while (members.hasNext()) { //boolean hasNext() 메소드는 읽어 올 요소가 남아있는지 확인하는 메소드. 있으면 true, 없으면 false를 반환
-                            String member_num = members.next().getKey();
-                            member_count++;
-                        }
-
                     }
 
                     @Override
@@ -299,14 +294,19 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
 
-        Button btnClose = (Button)findViewById(R.id.btn_close);
-        btnClose.setOnClickListener(new View.OnClickListener() {
+
+
+        public class ScreenSlidePageFragment extends Fragment {
+
             @Override
-            public void onClick(View v) {
-                SlidingDrawer drawer = (SlidingDrawer)findViewById(R.id.sliding_drawer);
-                drawer.animateClose();
+            public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                     Bundle savedInstanceState) {
+                ViewGroup rootView = (ViewGroup) inflater.inflate(
+                        R.layout.fragment_screen_slide_page, container, false);
+
+                return rootView;
             }
-        });
+        }
 
 
         //Answeractivity로 이동 이번에 추가 됨 아래 항목 복사 하는 일 똑같음 -수빈

@@ -50,7 +50,7 @@ dependencies {
     //네이버 로그인
     implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'// import from jcenter
-
+    implementation "androidx.viewpager2:viewpager2:1.0.0" // swipe fragment 생성을 위함
     // naveridlogin dependencies
     def android_x_version = "1.0.0"
     implementation "androidx.appcompat:appcompat:$android_x_version"

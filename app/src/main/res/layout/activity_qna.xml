@@ -136,51 +136,19 @@
 
     </ScrollView>
 
-    <RelativeLayout
+    <!-- fragment_screen_slide_page.xml -->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent" >
 
-
-        <SlidingDrawer
-            android:id="@+id/sliding_drawer"
+        <TextView style="?android:textAppearanceMedium"
+            android:padding="16dp"
+            android:lineSpacingMultiplier="1.2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:allowSingleTap="true"
-            android:animateOnClick="true"
-            android:bottomOffset="5dp"
-            android:content="@+id/content"
-            android:handle="@+id/handle"
-            android:orientation="vertical"
-            android:topOffset="240dp">
-
-            <Button
-                android:id="@+id/handle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_orange_rounded"
-                android:src="@drawable/ic_launcher_background"
-                android:text="끌어올려주세요" />
-
-            <LinearLayout
-                android:id="@+id/ll_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#000000"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_close"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SlidingDrawer 입니다.\n클릭하면 내려갑니다."
-                    android:textSize="32dp" />
-            </LinearLayout>
-        </SlidingDrawer>
-
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum" />
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_goanswer"
