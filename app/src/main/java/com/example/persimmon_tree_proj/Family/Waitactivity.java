@@ -112,8 +112,19 @@ public class Waitactivity extends AppCompatActivity {
                 //경고 메세지 주었으면 좋겠음.
                 //감나무 시작하기를 누르면, 가족 int move = 0; //파이어베이스에 저장되면 이동하도록 함.
 
+                int move = 0;
+                String fcount = String.valueOf(member_count);
+                FirebaseDatabase.getInstance().getReference("groups").child(f_code).child("count").setValue(fcount);
+                move = 1;
+                if (move == 1){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
 
-                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("groups");
+                }
+
+
+                /*DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("groups");
                 reference1.child(f_code).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -124,16 +135,7 @@ public class Waitactivity extends AppCompatActivity {
                             member_count++;
                         }
 
-                        int move = 0;
-                        String fcount = String.valueOf(member_count);
-                        FirebaseDatabase.getInstance().getReference("groups").child(f_code).child("count").setValue(fcount);
-                        move = 1;
-                        if (move == 1){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            startActivity(intent);
 
-                        }
                     }
 
 
@@ -143,6 +145,8 @@ public class Waitactivity extends AppCompatActivity {
 
                     }
                 });
+
+                 */
 
 
 
@@ -178,6 +182,7 @@ public class Waitactivity extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged(); //리스트뷰 갱신
                         userList.setSelection(adapter.getCount() -1); //마지막 위치를 카운트해서 보내줌.
+                        member_count = adapter.getCount();
 
                     }
 
