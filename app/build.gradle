@@ -43,6 +43,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//    //noinspection GradleCompatible
+//    implementation "com.android.support:support-compat:28.0.0" //notification
+//    //파이어베이스에서 메세지 보내는 방식 FCM
+//    implementation 'com.google.firebase:firebase-messaging:12.0.1'
     //네이버 로그인
     implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'// import from jcenter

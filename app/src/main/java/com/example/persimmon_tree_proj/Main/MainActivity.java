@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj.Main;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 
 import android.content.Intent;
@@ -88,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
     String user_gam = "";
     String user_color = "";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,6 +202,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                .setSmallIcon(R.drawable.notification_icon)
+//                .setContentTitle(textTitle)
+//                .setContentText(textContent)
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         //조건에 맞게 질문 보여주기
         //String showquestion = our_q_arr.get(Integer.parseInt(showindex));
