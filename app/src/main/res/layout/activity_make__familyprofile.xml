@@ -15,6 +15,7 @@
         android:maxLength="10"
         android:text="우리집 감나무"
         android:textColor="@color/darkgray"
+        android:clickable="false"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.53"
@@ -23,12 +24,12 @@
 
 
 
-    <TextView
+    <Button
         android:id="@+id/menu_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/btn_menu"
+        android:background="@color/WhiteColor"
         android:fontFamily="@font/nanumsquare_acr"
         android:gravity="center"
         android:text="감나무 이름 짓기"
