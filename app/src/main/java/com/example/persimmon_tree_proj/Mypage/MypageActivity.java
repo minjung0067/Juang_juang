@@ -22,6 +22,7 @@ import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
 import com.example.persimmon_tree_proj.Game_activity;
+import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
@@ -65,125 +66,71 @@ public class MypageActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         Intent intent = getIntent();
-        f_code = intent.getStringExtra("f_code"); //main 에서 받아온 f_code
+        final String f_code = intent.getStringExtra("f_code");
+        final String user_gam = intent.getStringExtra("user_gam");
+        final String user_color = intent.getStringExtra("user_color");
+        final String user_name = intent.getStringExtra("user_name");
+        final String introduce = intent.getStringExtra("introduce");
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                myfcode = String.valueOf(dataSnapshot.child("fcode").getValue());
-                user_name = String.valueOf(dataSnapshot.child("name").getValue());
-                DatabaseReference reference_family = FirebaseDatabase.getInstance().getReference("family");
-                reference_family.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        color_number = String.valueOf(dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_color").getValue());
-                        gam_number = String.valueOf(dataSnapshot.child(myfcode).child("members").child(user.getUid()).child("user_gam").getValue());
+        my_introduce.setText(introduce);
+        my_fcode.setText(f_code);
 
-                        //나중에 주석 처리해서 지울 부분
-                        if (gam_number == null){
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_gam").setValue("1");
-                        }
-                        if (color_number == null){
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("user_color").setValue("#9FFFBB33");
-                        }
-                        // 나중엔 여기까지 지우기 !
-
-                        //#fff -> int 형으로 바꿔줘야함 Color.parseColor(color_number)
-                        // int형을 backgroundtint colorstatelist형으로 전환
-                        //ColorStateList tint = ColorStateList.valueOf(Color.parseColor(color_number));
-
-                        switch (gam_number) {
-                            case "1":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd1 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd1.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam1);
-                                break;
-                            case "2":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd2 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd2.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam2);
-                                break;
-                            case "3":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd3 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd3.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam3);
-                                break;
-                            case "4":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd4 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd4.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam4);
-                                break;
-                            case "5":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd5 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd5.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam5);
-                                break;
-                            case "6":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd6 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd6.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam6);
-                                break;
-                            case "7":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd7 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd7.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam7);
-                                break;
-                            case "8":
-                                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd8 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
-                                gd8.setStroke(200, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
-                                my_image.setImageResource(R.drawable.gam8);
-                                break;
-                            default:
-                                my_image.setBackgroundColor(Color.parseColor("#ffffff"));
-                                my_image.setImageResource(R.drawable.gam1);
-                                break;
-                        }
-
-                    }
+        switch (user_gam) {
+            case "1":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd1 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd1.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam1);
+                break;
+            case "2":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd2 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd2.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam2);
+                break;
+            case "3":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd3 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd3.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam3);
+                break;
+            case "4":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd4 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd4.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam4);
+                break;
+            case "5":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd5 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd5.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam5);
+                break;
+            case "6":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd6 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd6.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam6);
+                break;
+            case "7":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd7 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd7.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam7);
+                break;
+            case "8":
+                my_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd8 = (GradientDrawable) my_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd8.setStroke(200, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
+                my_image.setImageResource(R.drawable.gam8);
+                break;
+            default:
+                my_image.setBackgroundColor(Color.parseColor("#ffffff"));
+                my_image.setImageResource(R.drawable.gam1);
+                break;
+        }
 
 
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException();
-                    }
-
-
-                });}
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
-
-
-
-
-        final SharedPreferences autologin = getSharedPreferences("auto",AppCompatActivity.MODE_PRIVATE);//users에서 현 uid 가진 사람 찾기
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {  //fcode 랑 소개랑 id 데이터베이스에서 찾아와서 보여주기
-                String myfcode = String.valueOf(dataSnapshot.child("fcode").getValue());
-                String myintroduce = String.valueOf(dataSnapshot.child("introduce").getValue());
-                my_introduce.setText(myintroduce);
-                my_fcode.setText(myfcode);
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
 
 
 
@@ -205,6 +152,11 @@ public class MypageActivity extends AppCompatActivity {
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                startActivity(intent);
+                overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
         });
@@ -237,12 +189,12 @@ public class MypageActivity extends AppCompatActivity {
             }
         });
 
-        //왔다감 버튼
+        //메인 버튼
         ImageButton go_main = (ImageButton) findViewById(R.id.main_btn);
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);

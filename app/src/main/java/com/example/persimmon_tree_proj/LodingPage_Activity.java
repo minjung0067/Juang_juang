@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
@@ -16,6 +17,7 @@ import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.Mypage.MakeProfile;
 import com.example.persimmon_tree_proj.Mypage.profile_color;
 import com.example.persimmon_tree_proj.Mypage.profile_gam;
+import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LodingPage_Activity extends AppCompatActivity {
 
@@ -33,6 +38,7 @@ public class LodingPage_Activity extends AppCompatActivity {
     private String user_gam;
     private String user_fcode;
     private String fcount;
+    private String family_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +134,6 @@ public class LodingPage_Activity extends AppCompatActivity {
                                 //case 5-2
                                 else{
                                     firebaseAuth = FirebaseAuth.getInstance();
-                                    FirebaseUser user = firebaseAuth.getCurrentUser();
                                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("answer");  //users에서 현 uid 가진 사람 찾기
                                     reference.child(user_fcode).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -141,10 +146,39 @@ public class LodingPage_Activity extends AppCompatActivity {
                                                 finish();
                                             }
                                             else{
-                                                Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
+
+                                                firebaseAuth = FirebaseAuth.getInstance();
+                                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");  //users에서 현 uid 가진 사람 찾기
+                                                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        family_name = String.valueOf(snapshot.child(user_fcode).getValue());
+                                                        new Timer().schedule(new TimerTask() {
+                                                            public void run() {
+                                                                Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
+                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                intent.putExtra("user_code",user_fcode);
+                                                                intent.putExtra("user_color",user_color);
+                                                                intent.putExtra("user_gam",user_gam);
+                                                                intent.putExtra("user_name",user_name);
+                                                                intent.putExtra("family_name",family_name);
+                                                                intent.putExtra("introduce",introduce);
+
+                                                                startActivity(intent);
+                                                                overridePendingTransition(0, 0); //intent시 효과 없애기
+                                                                finish();
+                                                            }
+                                                        }, 1500); // 1초후 메세지 사라지게
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+
 
                                             }
                                         }

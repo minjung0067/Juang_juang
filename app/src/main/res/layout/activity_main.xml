@@ -19,9 +19,9 @@
         android:fontFamily="@font/nanumsquare_acb"
         android:maxLength="10"
         android:text="우리집 감나무"
+        android:clickable="false"
         android:textColor="@color/darkgray"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -57,21 +57,43 @@
         app:layout_constraintTop_toBottomOf="@+id/menu_name"
         tools:layout_editor_absoluteX="0dp" />
 
-    <ImageView
-        android:id="@+id/menu_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/nanumsquare_acr"
-        android:gravity="center"
         android:scaleType="fitCenter"
-        android:src="@drawable/gam4"
-        android:textSize="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="-16dp" />
+        tools:layout_editor_absoluteX="-16dp" >
+
+        <ImageView
+            android:padding="@dimen/com_kakao_padding"
+            android:id="@+id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profile_outline"
+            android:scaleType="fitCenter"
+            android:src="@drawable/gam1" />
+
+        <TextView
+            android:layout_marginStart="@dimen/com_kakao_padding"
+            android:id="@+id/my_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/WhiteColor"
+            android:gravity="center_vertical"
+            android:text="내 이름은"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textColor="@color/grayColor"
+            android:textSize="18dp" />
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btn_goanswer"
+        android:id="@+id/btn_clickgam"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginBottom="52dp"

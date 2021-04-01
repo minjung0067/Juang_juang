@@ -33,6 +33,7 @@
         android:layout_marginBottom="65dp"
         android:fontFamily="@font/nanumsquare_acb"
         android:maxLength="10"
+        android:clickable="false"
         android:text="우리집 감나무"
         android:textColor="@color/darkgray"
         android:textSize="20dp"
@@ -42,12 +43,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.631" />
 
-    <TextView
+    <Button
         android:id="@+id/menu_name"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/btn_menu"
+        android:background="@color/WhiteColor"
         android:gravity="center"
         android:fontFamily="@font/nanumsquare_acr"
         android:textSize="30dp"

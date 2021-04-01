@@ -12,6 +12,7 @@
             android:layout_marginTop="28dp"
             android:fontFamily="@font/nanumsquare_acb"
             android:maxLength="10"
+            android:clickable="false"
             android:text="우리집 감나무"
             android:textColor="@color/darkgray"
             android:textSize="20dp"
@@ -22,12 +23,12 @@
 
 
 
-        <TextView
+        <Button
             android:id="@+id/menu_name"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/btn_menu"
+            android:background="@color/WhiteColor"
             android:fontFamily="@font/nanumsquare_acr"
             android:gravity="center"
             android:text="당신은 누구인감?"
