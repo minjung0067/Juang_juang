@@ -26,6 +26,7 @@ import androidx.core.view.GestureDetectorCompat;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Game_activity;
+import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
@@ -253,7 +254,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         go_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 startActivity(intent);
