@@ -35,6 +35,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference a_Reference;
     private FirebaseDatabase a_Database;
     private Random rnd;
-    private String[] gam_interaction = {"오늘도 화이팅이라감","감 잡았쓰 ~","당신은 다정다감"};
+    private String[] gam_interaction = {"오늘도 화이팅이라감","감 잡았쓰 ~","당신은 다정다감","감감 무슨감 쟁반같이 둥근감"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 => f_code, user_gam, user_color, user_name, family_name, introduce
 
         part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
-            -
+
+
         part 3 - 감 인터렉션
+            - 문구 랜덤하게 가져옴
+            - 1초후 문구 사라짐
 
         part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
 
@@ -146,19 +151,24 @@ public class MainActivity extends AppCompatActivity {
 
         //part 3 - 감 인터렉션
         ImageButton btn_gam = (ImageButton) findViewById(R.id.gam_btn);
+        Button click_gam_msg = (Button) findViewById(R.id.btn_clickgam);
         Button gam_say = (Button) findViewById(R.id.gam_say);
         rnd = new Random(); //랜덤클래스로부터 랜덤 값 받아오는 변수 작성.
         btn_gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(gam_say.getVisibility()== View.VISIBLE){
+                    int num = rnd.nextInt(4); //랜덤 숫자 생성
+                    gam_say.setText(""); //초기화
                     gam_say.setVisibility(View.INVISIBLE);
-                }
-                else{
-                    int num = rnd.nextInt(3);
-                    gam_say.setText(gam_interaction[num]);
-                    gam_say.setVisibility(View.VISIBLE);
-                }
+
+                    gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
+                    gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
+
+                    new Timer().schedule(new TimerTask() {
+                        public void run() {
+                            gam_say.setVisibility(View.INVISIBLE);
+                        }
+                    }, 1000); // 1초후 메세지 사라지게
 
             }
         });

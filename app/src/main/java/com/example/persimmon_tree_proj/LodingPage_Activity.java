@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
@@ -24,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LodingPage_Activity extends AppCompatActivity {
 
@@ -149,18 +153,23 @@ public class LodingPage_Activity extends AppCompatActivity {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         family_name = String.valueOf(snapshot.child(user_fcode).getValue());
-                                                        Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                        intent.putExtra("user_code",user_fcode);
-                                                        intent.putExtra("user_color",user_color);
-                                                        intent.putExtra("user_gam",user_gam);
-                                                        intent.putExtra("user_name",user_name);
-                                                        intent.putExtra("family_name",family_name);
-                                                        intent.putExtra("introduce",introduce);
+                                                        new Timer().schedule(new TimerTask() {
+                                                            public void run() {
+                                                                Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
+                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                intent.putExtra("user_code",user_fcode);
+                                                                intent.putExtra("user_color",user_color);
+                                                                intent.putExtra("user_gam",user_gam);
+                                                                intent.putExtra("user_name",user_name);
+                                                                intent.putExtra("family_name",family_name);
+                                                                intent.putExtra("introduce",introduce);
 
-                                                        startActivity(intent);
-                                                        overridePendingTransition(0, 0); //intent시 효과 없애기
-                                                        finish();
+                                                                startActivity(intent);
+                                                                overridePendingTransition(0, 0); //intent시 효과 없애기
+                                                                finish();
+                                                            }
+                                                        }, 1500); // 1초후 메세지 사라지게
+
                                                     }
 
                                                     @Override
