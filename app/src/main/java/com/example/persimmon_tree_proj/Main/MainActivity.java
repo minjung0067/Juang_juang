@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase a_Database;
     private Random rnd;
     private String[] gam_interaction = {"오늘도 화이팅이라감","감 잡았쓰 ~","당신은 다정다감","감감 무슨감 쟁반같이 둥근감"};
+    private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
+    private Runnable mMyTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,18 +160,20 @@ public class MainActivity extends AppCompatActivity {
         btn_gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    int num = rnd.nextInt(4); //랜덤 숫자 생성
-                    gam_say.setText(""); //초기화
-                    gam_say.setVisibility(View.INVISIBLE);
+                int num = rnd.nextInt(4); //랜덤 숫자 생성
+                gam_say.setText(""); //초기화
+                gam_say.setVisibility(View.INVISIBLE);
+                gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
+                gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
 
-                    gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
-                    gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
+                mHandler.postDelayed(mMyTask, 1000); // 1초후에 실행
 
-                    new Timer().schedule(new TimerTask() {
-                        public void run() {
-                            gam_say.setVisibility(View.INVISIBLE);
-                        }
-                    }, 1000); // 1초후 메세지 사라지게
+                mMyTask = new Runnable() {
+                    @Override
+                    public void run() {
+                        gam_say.setVisibility(View.INVISIBLE);
+                    }
+                };
 
             }
         });
