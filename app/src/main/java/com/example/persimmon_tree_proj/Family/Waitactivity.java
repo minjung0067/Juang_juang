@@ -41,7 +41,6 @@ public class Waitactivity extends AppCompatActivity {
 
 
     private String f_code;
-    private String user_name;
     private int member_count; //현재 들어와있는 가족 구성원 수 count
 
     private ArrayList<String> all_user_arr; //user를 담는 배열
