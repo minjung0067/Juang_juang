@@ -105,38 +105,33 @@ public class MainActivity extends AppCompatActivity {
         //감 + 이름 띄우기
         switch (user_gam) {
             case "1":
-                GradientDrawable gd1 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+//                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+//                GradientDrawable gd1 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam1);
                 break;
             case "2":
-                GradientDrawable gd2 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam2);
                 break;
             case "3":
-                GradientDrawable gd3 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam3);
                 break;
             case "4":
-                GradientDrawable gd4 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam4);
                 break;
             case "5":
-                GradientDrawable gd5 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam5);
                 break;
             case "6":
-                GradientDrawable gd6 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam6);
                 break;
             case "7":
-                GradientDrawable gd7 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam7);
                 break;
             case "8":
-                GradientDrawable gd8 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
                 profile_image.setImageResource(R.drawable.gam8);
                 break;
             default:
+                profile_image.setBackgroundColor(Color.parseColor("#ffffff"));
                 profile_image.setImageResource(R.drawable.gam1);
                 break;
         }

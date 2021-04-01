@@ -65,22 +65,22 @@
     <!--    메모끝-->
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="50dp"
         android:background="@drawable/todo_style4"
         android:maxHeight="300dp"
         android:padding="2dp"
-        android:layout_margin="30dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
 
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_name"
         tools:ignore="MissingConstraints">
 
         <!--For image src we have used ic_launcher
             it is used only for reference how it will look"-->
-
 
 
         <LinearLayout
@@ -96,7 +96,7 @@
                 android:layout_below="@+id/close"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:text="제목"
+                android:hint="제목"
                 android:textSize="20dp" />
 
             <LinearLayout
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="글"
+                android:hint="글"
                 android:textSize="15dp" />
 
 
@@ -144,6 +144,55 @@
 
             </LinearLayout>
 
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/list_add"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="130dp"
+        android:foreground="@drawable/heart_graphic2x"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/style1"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#FFDEEF"/>
+            <Button
+                android:id="@+id/style3"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#D8FFCC"/>
+            <Button
+                android:id="@+id/style4"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#FFF3C2"/>
+            <Button
+                android:id="@+id/style2"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="#DFFDFF"/>
         </LinearLayout>
 
 
