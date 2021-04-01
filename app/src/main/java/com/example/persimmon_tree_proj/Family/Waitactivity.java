@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
+import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -117,41 +118,11 @@ public class Waitactivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("groups").child(f_code).child("count").setValue(fcount);
                 move = 1;
                 if (move == 1){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
 
                 }
-
-
-                /*DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("groups");
-                reference1.child(f_code).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //가져온 f_code에 해당하는 member 수 세기
-                        Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-                        while (members.hasNext()){
-                            String member_num = members.next().getKey();
-                            member_count++;
-                        }
-
-
-                    }
-
-
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-                 */
-
-
-
-
-
             }
         });
 
