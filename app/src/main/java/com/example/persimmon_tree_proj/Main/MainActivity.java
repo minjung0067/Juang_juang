@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
-
+        Log.i("fcount",f_code);
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {

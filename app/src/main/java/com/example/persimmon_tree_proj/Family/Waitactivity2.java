@@ -20,10 +20,6 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
-import com.example.persimmon_tree_proj.Calendar.PopupCalendar;
-import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
-import com.example.persimmon_tree_proj.LodingPage_Activity;
-import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,14 +29,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-
-public class Waitactivity extends AppCompatActivity {
+public class Waitactivity2 extends AppCompatActivity {
 
 
     private String f_code;
+    private String user_name;
     private int member_count; //현재 들어와있는 가족 구성원 수 count
 
     private ArrayList<String> all_user_arr; //user를 담는 배열
@@ -48,12 +43,11 @@ public class Waitactivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     List<Object> Array = new ArrayList<Object>();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waitactivity);
+        setContentView(R.layout.activity_waitactivity2);
+
 
         final TextView textchange = (TextView)findViewById(R.id.txt_notice);
         Button send = (Button) findViewById(R.id.btn_copy);
@@ -66,28 +60,13 @@ public class Waitactivity extends AppCompatActivity {
                 clipboardManager.setPrimaryClip(clipData);
 
                 //복사가 되었다면 토스트메시지 노출
-                Toast.makeText(Waitactivity.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Waitactivity2.this, "가족 코드가 복사되었습니다. 가족들에게 공유해주세요 !", Toast.LENGTH_SHORT).show();
 
                 //텍스트 변환 효과
                 textchange.setText("모두 가입해야\n감나무가 열려요!");
 
             }
         });
-
-
-        Button change = (Button) findViewById(R.id.btn_change);//가족 코드 없애버리기
-        //경고창 구현하면 어떨까
-        change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentt = new Intent(Waitactivity.this, familyactivity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentt);
-
-            }
-        });
-        
-
 
         Button logout = (Button) findViewById(R.id.btn_logout2); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
@@ -102,23 +81,8 @@ public class Waitactivity extends AppCompatActivity {
                 //edit.clear()는 파일 auto에 들어있는 모든 정보를 기기에서 지운다.
                 editor.clear();
                 editor.commit(); //저장
-                Toast.makeText(Waitactivity.this, "로그아웃.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Waitactivity2.this, "로그아웃.", Toast.LENGTH_SHORT).show();
                 finish();
-            }
-        });
-
-        Button start = (Button) findViewById(R.id.btn_start);
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //경고 메세지 주었으면 좋겠음.
-                String fcount = String.valueOf(member_count);
-
-                Intent intent = new Intent(Waitactivity.this, StartpopupActivity.class);
-                intent.putExtra("fcount",fcount);
-                intent.putExtra("f_code",f_code);
-                startActivityForResult(intent, 1);
-
             }
         });
 
@@ -172,12 +136,8 @@ public class Waitactivity extends AppCompatActivity {
 
             }
         });
+
+
+
     }
-
-
-
-
-
-
-
 }

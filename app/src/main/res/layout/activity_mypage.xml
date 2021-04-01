@@ -87,7 +87,7 @@
         tools:layout_conversion_absoluteWidth="0dp" />
 
     <TextView
-        android:id="@+id/my_fcode"
+        android:id="@+id/fcode"
         android:layout_width="99dp"
         android:layout_height="20dp"
         android:layout_marginTop="4dp"
