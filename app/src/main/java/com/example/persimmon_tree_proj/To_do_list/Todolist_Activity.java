@@ -50,7 +50,8 @@ public class Todolist_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_todolist);
 
         Intent intent = getIntent();
-        final String f_code = intent.getStringExtra("user_fcode");
+        final String f_code = intent.getStringExtra("f_code");
+        Log.i("checking f_code", f_code);
         final String user_gam = intent.getStringExtra("user_gam");
         final String user_color = intent.getStringExtra("user_color");
         final String user_name = intent.getStringExtra("user_name");
@@ -79,13 +80,14 @@ public class Todolist_Activity extends AppCompatActivity {
         new_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(Todolist_Activity.this, TodoList_addlist_activity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(Todolist_Activity.this, TodoList_addlist_activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
-                startActivity(intentt);
+                startActivity(intent);
                 finish();
             }
         });
@@ -94,13 +96,14 @@ public class Todolist_Activity extends AppCompatActivity {
         edit_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(Todolist_Activity.this, Todolist_Activity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(Todolist_Activity.this, Todolist_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("introduce",introduce);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
-                startActivity(intentt);
+                startActivity(intent);
             }
         });
 
@@ -123,13 +126,13 @@ public class Todolist_Activity extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
-                startActivity(intentt);
+                startActivity(intent);
             }
         });
 
@@ -142,7 +145,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -158,7 +161,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
@@ -174,7 +177,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
@@ -191,7 +194,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
@@ -207,7 +210,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);

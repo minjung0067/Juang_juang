@@ -23,7 +23,7 @@ public class Game_activity extends AppCompatActivity {
         setContentView(R.layout.activity_game_activity);
 
         Intent intent = getIntent();
-        final String f_code = intent.getStringExtra("user_fcode");
+        final String f_code = intent.getStringExtra("f_code");
         final String user_gam = intent.getStringExtra("user_gam");
         final String user_color = intent.getStringExtra("user_color");
         final String user_name = intent.getStringExtra("user_name");

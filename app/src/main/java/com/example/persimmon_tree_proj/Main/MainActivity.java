@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
                 intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
@@ -193,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("f_code",f_code);
                 intent.putExtra("introduce",introduce);
                 intent.putExtra("user_color",user_color);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -210,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("f_code",f_code);
                 intent.putExtra("introduce",introduce);
                 intent.putExtra("user_color",user_color);
+                intent.putExtra("user_name",user_name);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -241,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("introduce",introduce);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
+                intent.putExtra("user_name",user_name);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }

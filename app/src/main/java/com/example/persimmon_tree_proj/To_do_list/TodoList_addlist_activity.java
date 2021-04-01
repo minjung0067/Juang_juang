@@ -1,12 +1,16 @@
 package com.example.persimmon_tree_proj.To_do_list;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
@@ -15,11 +19,23 @@ import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class TodoList_addlist_activity extends AppCompatActivity {
+
+    private String style_num = "4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +43,100 @@ public class TodoList_addlist_activity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_list_addlist_activity);
 
         Intent intent = getIntent();
-        final String f_code = intent.getStringExtra("user_fcode");
+        final String f_code = intent.getStringExtra("f_code");
+        Log.i("checking f_code", f_code);
         final String user_gam = intent.getStringExtra("user_gam");
         final String user_color = intent.getStringExtra("user_color");
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
 
+
         SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
         formatH = new SimpleDateFormat("yyyy년 MM월 dd일"); //formatH에 현재 시간 넣어줌 대소문자 중요함
         Date today = new Date(); //today 변수에 Date 부르기
         String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
 
+        //오늘 날짜와 작성자 setText
         TextView today_date = (TextView) findViewById(R.id.date);
         today_date.setText(strDate);
         TextView writer = (TextView) findViewById(R.id.writer);
-        writer.setText(user_name);
+        writer.setText(introduce);
+        EditText title = (EditText) findViewById(R.id.title);
+        EditText contents = (EditText) findViewById(R.id.contents);
 
+
+
+        //메모 색상 누르면 색상 바뀌게
+        LinearLayout memo = (LinearLayout) findViewById(R.id.memo);
+        Button style1 = (Button) findViewById(R.id.style1);
+        style1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                memo.setBackgroundResource(R.drawable.todo_style1);
+                style_num = "1";
+            }
+        });
+        Button style2 = (Button) findViewById(R.id.style2);
+        style2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                memo.setBackgroundResource(R.drawable.todo_style2);
+                style_num = "2";
+            }
+        });
+        Button style3 = (Button) findViewById(R.id.style3);
+        style3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                memo.setBackgroundResource(R.drawable.todo_style3);
+                style_num = "3";
+            }
+        });
+        Button style4 = (Button) findViewById(R.id.style4);
+        style4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                memo.setBackgroundResource(R.drawable.todo_style4);
+                style_num = "4";
+
+            }
+        });
+
+
+        //새 메모 업로드
+        Button upload = (Button) findViewById(R.id.upload);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
+                formatH = new SimpleDateFormat("yyyy년 MM월 dd일"); //formatH에 현재 시간 넣어줌 대소문자 중요함
+                Date today = new Date(); //today 변수에 Date 부르기
+                String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
+                String title_text = title.getText().toString();
+                String contents_text = title.getText().toString();
+
+
+                //업로드
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
+                Todo_new newtodo = new Todo_new(user.getUid(), introduce,title_text,contents_text,style_num,strDate);
+                Map<String, Object> about_memo = newtodo.toMap();
+                reference.child(f_code).push().setValue(about_memo);
+
+
+                //todo로 이동
+                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_name",user_name);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
 
@@ -158,4 +251,5 @@ public class TodoList_addlist_activity extends AppCompatActivity {
         });
 
     }
+
 }
