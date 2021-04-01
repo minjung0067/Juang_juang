@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
+import com.example.persimmon_tree_proj.Calendar.PopupCalendar;
+import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
 import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -111,18 +113,13 @@ public class Waitactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //경고 메세지 주었으면 좋겠음.
-                //감나무 시작하기를 누르면, 가족 int move = 0; //파이어베이스에 저장되면 이동하도록 함.
-
-                int move = 0;
                 String fcount = String.valueOf(member_count);
-                FirebaseDatabase.getInstance().getReference("groups").child(f_code).child("count").setValue(fcount);
-                move = 1;
-                if (move == 1){
-                    Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent);
 
-                }
+                Intent intent = new Intent(Waitactivity.this, StartpopupActivity.class);
+                intent.putExtra("fcount",fcount);
+                intent.putExtra("f_code",f_code);
+                startActivityForResult(intent, 1);
+
             }
         });
 
