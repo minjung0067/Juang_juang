@@ -78,6 +78,8 @@ public class LodingPage_Activity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
 
+
+
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -86,6 +88,20 @@ public class LodingPage_Activity extends AppCompatActivity {
                 user_gam = String.valueOf(snapshot.child(user.getUid()).child("user_gam").getValue()); // 감 캐릭터를 설정했는지 확인
                 introduce = String.valueOf(snapshot.child(user.getUid()).child("introduce").getValue()); //프로필 만들기 마지막 단계가 되었는지 확인
                 user_fcode = String.valueOf(snapshot.child(user.getUid()).child("fcode").getValue());
+                firebaseAuth = FirebaseAuth.getInstance();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");  //users에서 현 uid 가진 사람 찾기
+                reference.child(user_fcode).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        fcount = String.valueOf(snapshot.child("count").getValue());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 Log.i("user_name", String.valueOf(user_name));
                 Log.i("userid", String.valueOf(user.getUid()));
                 Log.i("usergam", String.valueOf(user_gam));
@@ -134,61 +150,48 @@ public class LodingPage_Activity extends AppCompatActivity {
                                 }
                                 //case 5-2
                                 else{
-                                    firebaseAuth = FirebaseAuth.getInstance();
-                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");  //users에서 현 uid 가진 사람 찾기
-                                    reference.child(user_fcode).addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            fcount = String.valueOf(snapshot.child("count").getValue());
-                                            if(TextUtils.isEmpty(fcount)) {
-                                                Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            else{
+                                    if(TextUtils.isEmpty(fcount)) {
+                                        Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else{
+                                        firebaseAuth = FirebaseAuth.getInstance();
+                                        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("groups");  //users에서 현 uid 가진 사람 찾기
+                                        reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                family_name = String.valueOf(snapshot.child(user_fcode).getValue());
+                                                new Timer().schedule(new TimerTask() {
+                                                    public void run() {
+                                                        Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.putExtra("user_code",user_fcode);
+                                                        intent.putExtra("user_color",user_color);
+                                                        intent.putExtra("user_gam",user_gam);
+                                                        intent.putExtra("user_name",user_name);
+                                                        intent.putExtra("family_name",family_name);
+                                                        intent.putExtra("introduce",introduce);
 
-                                                firebaseAuth = FirebaseAuth.getInstance();
-                                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");  //users에서 현 uid 가진 사람 찾기
-                                                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        family_name = String.valueOf(snapshot.child(user_fcode).getValue());
-                                                        new Timer().schedule(new TimerTask() {
-                                                            public void run() {
-                                                                Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
-                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                                intent.putExtra("user_code",user_fcode);
-                                                                intent.putExtra("user_color",user_color);
-                                                                intent.putExtra("user_gam",user_gam);
-                                                                intent.putExtra("user_name",user_name);
-                                                                intent.putExtra("family_name",family_name);
-                                                                intent.putExtra("introduce",introduce);
-
-                                                                startActivity(intent);
-                                                                overridePendingTransition(0, 0); //intent시 효과 없애기
-                                                                finish();
-                                                            }
-                                                        }, 1500); // 1초후 메세지 사라지게
-
+                                                        startActivity(intent);
+                                                        overridePendingTransition(0, 0); //intent시 효과 없애기
+                                                        finish();
                                                     }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                                    }
-                                                });
-
-
+                                                }, 1500); // 1초후 메세지 사라지게
 
                                             }
-                                        }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                        }
-                                    });
+                                            }
+                                        });
+
+
+
+                                    }
+
 
 
                                 }
