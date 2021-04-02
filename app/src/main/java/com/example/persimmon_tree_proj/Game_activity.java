@@ -24,7 +24,11 @@ public class Game_activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
-        Log.i("myfcode", f_code);
+        final String user_gam = intent.getStringExtra("user_gam");
+        final String user_color = intent.getStringExtra("user_color");
+        final String user_name = intent.getStringExtra("user_name");
+        final String family_name = intent.getStringExtra("family_name");
+        final String introduce = intent.getStringExtra("introduce");
 
 
         //뒤로가기
@@ -35,6 +39,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intentt = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intentt);
             }
         });
@@ -48,6 +55,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intentt);
             }
         });
@@ -61,6 +71,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -75,6 +88,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -87,6 +103,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -101,6 +120,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -114,6 +136,9 @@ public class Game_activity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
+                intent.putExtra("introduce",introduce);
+                intent.putExtra("user_color",user_color);
+                intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
