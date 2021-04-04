@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,10 +55,16 @@ public class list_adapter extends RecyclerView.Adapter<list_adapter.ViewHolder> 
         String res_contents = (String) contents.get(position);
         String res_date = (String) date.get(position);
         String res_writer = (String) writer.get(position);
+        String res_style = (String) color.get(position);
         holder.title.setText(res_title);
         holder.contents.setText(res_contents);
         holder.date.setText(res_date);
         holder.writer.setText(res_writer);
+        if (res_style.equals("1")) { holder.layout.setBackgroundResource(R.drawable.todo_style1);}
+        else if (res_style.equals("2")) { holder.layout.setBackgroundResource(R.drawable.todo_style2);}
+        else if (res_style.equals("3")) { holder.layout.setBackgroundResource(R.drawable.todo_style3);}
+        else{ holder.layout.setBackgroundResource(R.drawable.todo_style4);}
+
     }
 
     @Override
@@ -73,6 +80,7 @@ public class list_adapter extends RecyclerView.Adapter<list_adapter.ViewHolder> 
         TextView contents;
         TextView writer;
         TextView date;
+        RelativeLayout layout;
 
 
         public ViewHolder(View view) {
@@ -82,6 +90,7 @@ public class list_adapter extends RecyclerView.Adapter<list_adapter.ViewHolder> 
             contents = (TextView) view.findViewById(R.id.contents);
             writer = (TextView) view.findViewById(R.id.writer);
             date = (TextView) view.findViewById(R.id.date);
+            layout = (RelativeLayout) view.findViewById(R.id.layout);
         }
     }
 }
