@@ -1,5 +1,6 @@
 package com.example.persimmon_tree_proj.To_do_list;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,12 +19,18 @@ import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class Todolist_Activity extends AppCompatActivity {
 
@@ -37,12 +44,12 @@ public class Todolist_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
 
 
-    // Using ArrayList to store images data
-    ArrayList<String> title = new ArrayList<String>(Arrays.asList("제목","제목2","제목3","#33333333333333333"));
-    ArrayList<String> contents = new ArrayList<String>(Arrays.asList("내용","내용2","d","22222222222222fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2222222"));
-    ArrayList<String> writer = new ArrayList<String>(Arrays.asList("민정","민정2","민정33333333333","adsfasdf"));
-    ArrayList<String> date = new ArrayList<String>(Arrays.asList("2019년 29월 29일","2019년 29월 29일", "2389년 39월 8일","3333333333333333333"));
-    ArrayList<String> color = new ArrayList<String>(Arrays.asList("#dkdkdk ","#dkfdkdk","#dkdkdk","3"));
+    // 배열리스트
+    private ArrayList<String> title = new ArrayList<String>();
+    private ArrayList<String> contents = new ArrayList<String>();
+    private ArrayList<String> writer = new ArrayList<String>();
+    private ArrayList<String> date = new ArrayList<String>();
+    private ArrayList<String> style = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +66,56 @@ public class Todolist_Activity extends AppCompatActivity {
         final String introduce = intent.getStringExtra("introduce");
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        //본문의 메모장 띄우는 부분
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //가져온 f_code에 해당하는 member 수 세기
 
-        // 그리드 세로 줄 세팅
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+                //각 배열 초기화
+                title.clear();
+                contents.clear();
+                writer.clear();
+                date.clear();
+                style.clear();
 
-        // 어댑터와 연결
-        RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this,title,contents,date,writer,color);
+                //차례로 돌면서 메모장에 대한 여러 정보들을 각 배열에 순서대로 담기
+                Iterator<DataSnapshot> memos = dataSnapshot.child(f_code).getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
+                while (memos.hasNext()) { //boolean hasNext() 메소드는 읽어 올 요소가 남아있는지 확인하는 메소드. 있으면 true, 없으면 false를 반환
+                    String this_memo = memos.next().getKey();
+                    String this_title = dataSnapshot.child(f_code).child(this_memo).child("title").getValue(String.class);
+                    String this_contents = dataSnapshot.child(f_code).child(this_memo).child("contents").getValue(String.class);
+                    String this_style = dataSnapshot.child(f_code).child(this_memo).child("style").getValue(String.class);
+                    String this_date = dataSnapshot.child(f_code).child(this_memo).child("date").getValue(String.class);
+                    String this_uid = dataSnapshot.child(f_code).child(this_memo).child("writer").getValue(String.class);
 
-        // 어댑터를 리사이클뷰랑 연결
-        recyclerView.setAdapter(adapter);
+                    title.add(this_title);
+                    contents.add(this_contents);
+                    style.add(this_style);
+                    date.add(this_date);
+                    writer.add(this_uid);
+                }
+
+                recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+                // 그리드 세로 줄 세팅
+                StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+                // 어댑터와 연결
+                RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this,title,contents,date,writer,style);
+
+                // 어댑터를 리사이클뷰랑 연결
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
+        //전체 질문 가져오기 끝
 
 
 
@@ -92,6 +138,7 @@ public class Todolist_Activity extends AppCompatActivity {
             }
         });
 
+        //수정 버튼
         Button edit_list = (Button) findViewById(R.id.list_edit);
         edit_list.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +153,12 @@ public class Todolist_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
+
+
 
 
         //뒤로가기
