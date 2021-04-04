@@ -67,11 +67,11 @@
     <Button
         android:id="@+id/list_edit"
         android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="80dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:foreground="@drawable/revise_plan_btn_2x"
+        android:foreground="@drawable/calendar_delete2x"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <LinearLayout
