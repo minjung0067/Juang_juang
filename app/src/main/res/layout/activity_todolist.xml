@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/WhiteColor"
-    android:onClick="linearOnClick"
     tools:context="com.example.persimmon_tree_proj.customer_sound">
 
 
