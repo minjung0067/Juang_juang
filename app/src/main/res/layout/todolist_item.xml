@@ -30,19 +30,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout"
+        android:fontFamily="@font/nanumsquare_acr"
         android:orientation="vertical"
+        android:padding="5dp"
         android:layout_marginTop="1dp">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/close"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:hint="제목"
+            android:padding="8dp"
+            android:fontFamily="@font/nanumsquare_acb"
             android:textSize="24dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,8 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:padding="1dp"
-                android:text="2021년 4월 1일"
+                android:padding="5dp"
+                android:text=""
+                android:fontFamily="@font/nanumsquare_acl"
                 android:textSize="6dp" />
 
 
@@ -70,7 +75,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:fontFamily="@font/nanumsquare_acr"
             android:hint="글"
+            android:padding="8dp"
             android:textSize="13dp" />
 
 
@@ -85,7 +92,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:text="주앙"
+                android:fontFamily="@font/nanumsquare_acr"
+                android:text=""
+                android:padding="8dp"
                 android:textSize="10dp" />
 
         </LinearLayout>
