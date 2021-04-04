@@ -132,7 +132,7 @@ public class PopupCalendar extends Activity  {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         f_code = snapshot.child("fcode").getValue().toString();
-                        user_name = snapshot.child("userName").getValue().toString();
+
 
 
                         if(plan.equals("")) {
@@ -142,7 +142,7 @@ public class PopupCalendar extends Activity  {
                             if(firstyear.equals(endyear)){//해가 같을 경우
                                 if(firstmonth.equals(endmonth)){ //달이 같을 경우
                                     for(int i = Integer.parseInt(day1); i <= Integer.parseInt(day2) ; i++){
-                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(month).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                     }
                                 }
@@ -150,13 +150,13 @@ public class PopupCalendar extends Activity  {
                                     for(int j = firstmonth ; j<firstmonth+1;j++){//시작하는 달
                                         if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                             for(int i = Integer.parseInt(day1); i <= 31 ; i++){
-                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                             }
                                         }
                                         else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
                                             for(int i = Integer.parseInt(day1); i <= 30 ; i++){
-                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                             }
                                         }
@@ -166,7 +166,7 @@ public class PopupCalendar extends Activity  {
                                                     if(Integer.valueOf(year)%400 == 0){
                                                         //윤년
                                                         for(int i = Integer.parseInt(day1); i <= 29 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
 
@@ -174,7 +174,7 @@ public class PopupCalendar extends Activity  {
                                                     else{
                                                         //평년
                                                         for(int i = Integer.parseInt(day1); i <= 28 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
                                                     }
@@ -183,13 +183,13 @@ public class PopupCalendar extends Activity  {
                                                 else{
                                                     //윤년
                                                     for(int i = Integer.parseInt(day1); i <= 29 ; i++){
-                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                     }
                                                 }
                                             } else{
                                                 for(int i = Integer.parseInt(day1); i <= 28 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
@@ -201,13 +201,13 @@ public class PopupCalendar extends Activity  {
                                     for(int j = firstmonth+1 ; j <= endmonth-1 ; j++ ){//끼인 달
                                         if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                             for(int i = 1; i <= 31 ; i++){
-                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                             }
                                         }
                                         else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
                                             for(int i = 1; i <= 30 ; i++){
-                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                             }
                                         }
@@ -217,7 +217,7 @@ public class PopupCalendar extends Activity  {
                                                     if(Integer.valueOf(year)%400 == 0){
                                                         //윤년
                                                         for(int i = 1; i <= 29 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
 
@@ -225,7 +225,7 @@ public class PopupCalendar extends Activity  {
                                                     else{
                                                         //평년
                                                         for(int i = 1; i <= 28 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
                                                     }
@@ -234,13 +234,13 @@ public class PopupCalendar extends Activity  {
                                                 else{
                                                     //윤년
                                                     for(int i = Integer.parseInt(day1); i <= 29 ; i++){
-                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                     }
                                                 }
                                             }else{
                                                 for(int i = 1; i <= 28 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
@@ -249,7 +249,7 @@ public class PopupCalendar extends Activity  {
 
                                     }
                                     for(int i = 1; i <= Integer.parseInt(day2) ; i++){ //마지막달 추가
-                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(month).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                     }
 
@@ -259,7 +259,7 @@ public class PopupCalendar extends Activity  {
                             else if(!(firstyear.equals(endyear))){//년도가 같지 않을 경우
                                 if(endyear ==0){//단일 선택일 경우
 
-                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(year).child(month).child(String.valueOf(day1)).child(user_name).push().setValue(plan);
+                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(year).child(month).child(String.valueOf(day1)).child(user.getUid()).push().setValue(plan);
 
                                 }
                                 else{
@@ -268,13 +268,13 @@ public class PopupCalendar extends Activity  {
                                         for(int j = firstmonth ; j<firstmonth+1;j++){//시작하는 달
                                             if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                                 for(int i = Integer.parseInt(day1); i <= 31 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
                                             else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
                                                 for(int i = Integer.parseInt(day1); i <= 30 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
@@ -284,7 +284,7 @@ public class PopupCalendar extends Activity  {
                                                         if(Integer.valueOf(year)%400 == 0){
                                                             //윤년
                                                             for(int i = Integer.parseInt(day1); i <= 29 ; i++){
-                                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                             }
 
@@ -292,7 +292,7 @@ public class PopupCalendar extends Activity  {
                                                         else{
                                                             //평년
                                                             for(int i = Integer.parseInt(day1); i <= 28 ; i++){
-                                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                             }
                                                         }
@@ -301,13 +301,13 @@ public class PopupCalendar extends Activity  {
                                                     else{
                                                         //윤년
                                                         for(int i = Integer.parseInt(day1); i <= 29 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
                                                     }
                                                 }else{
                                                     for(int i = Integer.parseInt(day1); i <= 28 ; i++){
-                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                     }
                                                 }
@@ -319,13 +319,13 @@ public class PopupCalendar extends Activity  {
                                         for(int j = firstmonth+1 ; j <= 12 ; j++ ){//년도의 끝까지
                                             if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                                 for(int i = 1; i <= 31 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
                                             else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
                                                 for(int i = 1; i <= 30 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
@@ -335,7 +335,7 @@ public class PopupCalendar extends Activity  {
                                                         if(Integer.valueOf(year)%400 == 0){
                                                             //윤년
                                                             for(int i = 1; i <= 29 ; i++){
-                                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                             }
 
@@ -343,7 +343,7 @@ public class PopupCalendar extends Activity  {
                                                         else{
                                                             //평년
                                                             for(int i = 1; i <= 28 ; i++){
-                                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                             }
                                                         }
@@ -352,13 +352,13 @@ public class PopupCalendar extends Activity  {
                                                     else{
                                                         //윤년
                                                         for(int i = 1; i <= 29 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
                                                     }
                                                 }else{
                                                     for(int i = 1; i <= 28 ; i++){
-                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(firstyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                     }
 
@@ -373,13 +373,13 @@ public class PopupCalendar extends Activity  {
                                         for(int j = 1 ; j<= 12; j++){
                                             if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                                 for(int i = 1; i <= 31 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
                                             else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
                                                 for(int i = 1; i <= 30 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
                                             }
@@ -389,7 +389,7 @@ public class PopupCalendar extends Activity  {
                                                         if(Integer.valueOf(year)%400 == 0){
                                                             //윤년
                                                             for(int i = 1; i <= 29 ; i++){
-                                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                             }
 
@@ -397,7 +397,7 @@ public class PopupCalendar extends Activity  {
                                                         else{
                                                             //평년
                                                             for(int i = 1; i <= 28 ; i++){
-                                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                             }
                                                         }
@@ -406,13 +406,13 @@ public class PopupCalendar extends Activity  {
                                                     else{
                                                         //윤년
                                                         for(int i = 1; i <= 29 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
                                                     }
                                                 }else{
                                                     for(int i = 1; i <= 28 ; i++){
-                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(k)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                     }
                                                 }
@@ -427,13 +427,13 @@ public class PopupCalendar extends Activity  {
                                     for(int j = 1 ; j<=endmonth-1;j++){//시작하는 달
                                         if((j==1)|| (j ==3) || (j==5) || (j==7) ||(j==8) || (j==10) || (j==12)){ //1,3,5,7,8,10,12월은 31일까지 있음.
                                             for(int i = 1; i <= 31 ; i++){
-                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                             }
                                         }
                                         else if((j==4)|| (j ==6) || (j==9) || (j==11) ||(j==8) || (j==10) || (j==12)){ //4,6,9,11월은 30일까지 있음.
                                             for(int i = 1; i <= 30 ; i++){
-                                                FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                             }
                                         }
@@ -443,7 +443,7 @@ public class PopupCalendar extends Activity  {
                                                     if(Integer.valueOf(year)%400 == 0){
                                                         //윤년
                                                         for(int i = 1; i <= 29 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
 
@@ -451,7 +451,7 @@ public class PopupCalendar extends Activity  {
                                                     else{
                                                         //평년
                                                         for(int i = 1; i <= 28 ; i++){
-                                                            FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                            FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                         }
                                                     }
@@ -460,13 +460,13 @@ public class PopupCalendar extends Activity  {
                                                 else{
                                                     //윤년
                                                     for(int i = 1; i <= 29 ; i++){
-                                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                     }
                                                 }
                                             }else{
                                                 for(int i = 1; i <= 28 ; i++){
-                                                    FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                                    FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(j)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                                 }
 
@@ -477,7 +477,7 @@ public class PopupCalendar extends Activity  {
                                     }
                                     //마지막달
                                     for(int i = 1; i <= Integer.parseInt(day2) ; i++){
-                                        FirebaseDatabase.getInstance().getReference("family").child(f_code).child("calendar").child(String.valueOf(endyear)).child(String.valueOf(endmonth)).child(String.valueOf(i)).child(user_name).push().setValue(plan);
+                                        FirebaseDatabase.getInstance().getReference("calendar").child(f_code).child(String.valueOf(endyear)).child(String.valueOf(endmonth)).child(String.valueOf(i)).child(user.getUid()).push().setValue(plan);
 
                                     }
 
