@@ -3,13 +3,17 @@ package com.example.persimmon_tree_proj.To_do_list;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
@@ -31,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Dictionary;
 import java.util.Iterator;
 
 public class Todolist_Activity extends AppCompatActivity {
@@ -67,6 +72,7 @@ public class Todolist_Activity extends AppCompatActivity {
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         //본문의 메모장 띄우는 부분
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
@@ -99,7 +105,6 @@ public class Todolist_Activity extends AppCompatActivity {
                     writer.add(this_uid);
                 }
 
-                recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
                 // 그리드 세로 줄 세팅
                 StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
@@ -110,6 +115,39 @@ public class Todolist_Activity extends AppCompatActivity {
 
                 // 어댑터를 리사이클뷰랑 연결
                 recyclerView.setAdapter(adapter);
+
+
+                // 메모 선택 시 show_select_memo 액티비티로 이동하며
+                // 선택한 메모 상세 보기
+                recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        String this_title = title.get(position);
+                        String this_contents = contents.get(position);
+                        String this_style = style.get(position);
+                        String this_date = date.get(position);
+                        String this_uid = writer.get(position);
+                        Intent intent = new Intent(Todolist_Activity.this, Todolist_show_select_memo.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("f_code",f_code);
+                        intent.putExtra("introduce",introduce);
+                        intent.putExtra("user_name",user_name);
+                        intent.putExtra("user_color",user_color);
+                        intent.putExtra("user_gam",user_gam);
+                        intent.putExtra("this_title",this_title);
+                        intent.putExtra("this_content",this_contents);
+                        intent.putExtra("this_style",this_style);
+                        intent.putExtra("this_date",this_date);
+                        intent.putExtra("this_uid",this_uid);
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+                    }
+                }));
+
             }
 
             @Override
@@ -145,14 +183,7 @@ public class Todolist_Activity extends AppCompatActivity {
         edit_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Todolist_Activity.this, Todolist_Activity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                startActivity(intent);
+
             }
         });
 
@@ -284,6 +315,51 @@ public class Todolist_Activity extends AppCompatActivity {
         return;
     }
 
+    public interface ClickListener {
+        void onClick(View view, int position);
 
+        void onLongClick(View view, int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final Todolist_Activity.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
+    }
 
 }
