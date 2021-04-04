@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -42,6 +43,7 @@ public class Todolist_Activity extends AppCompatActivity {
     String user_gam = "";
     String user_color = "";
     RecyclerView recyclerView;
+    InputMethodManager inputmethodmanager;
 
 
     // 배열리스트
@@ -68,7 +70,7 @@ public class Todolist_Activity extends AppCompatActivity {
 
         //본문의 메모장 띄우는 부분
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //가져온 f_code에 해당하는 member 수 세기
@@ -281,5 +283,7 @@ public class Todolist_Activity extends AppCompatActivity {
         finish();
         return;
     }
+
+
 
 }
