@@ -59,6 +59,8 @@ public class Todolist_edit extends AppCompatActivity {
     private ArrayList<String> writer = new ArrayList<String>();
     private ArrayList<String> date = new ArrayList<String>();
     private ArrayList<String> style = new ArrayList<String>();
+    private ArrayList<String> memo_key_list = new ArrayList<String>();
+    private ArrayList<Integer> position_list = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,9 @@ public class Todolist_edit extends AppCompatActivity {
                 Iterator<DataSnapshot> memos = dataSnapshot.child(f_code).getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                 while (memos.hasNext()) { //boolean hasNext() 메소드는 읽어 올 요소가 남아있는지 확인하는 메소드. 있으면 true, 없으면 false를 반환
                     String this_memo = memos.next().getKey();
+
+                    memo_key_list.add(this_memo);
+
                     String this_title = dataSnapshot.child(f_code).child(this_memo).child("title").getValue(String.class);
                     String this_contents = dataSnapshot.child(f_code).child(this_memo).child("contents").getValue(String.class);
                     String this_style = dataSnapshot.child(f_code).child(this_memo).child("style").getValue(String.class);
@@ -118,27 +123,20 @@ public class Todolist_edit extends AppCompatActivity {
                 // 어댑터를 리사이클뷰랑 연결
                 recyclerView.setAdapter(adapter);
 
+                position_list.clear();
 
-                // 메모 선택 시 show_select_memo 액티비티로 이동하며
-                // 선택한 메모 상세 보기
+
+                //선택한 메모 지우기
+
                 recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-
-                        //삭제 코드
-//                        Intent intent = new Intent(Todolist_edit.this, Todolist_show_select_memo.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        intent.putExtra("f_code",f_code);
-//                        intent.putExtra("introduce",introduce);
-//                        intent.putExtra("user_name",user_name);
-//                        intent.putExtra("user_color",user_color);
-//                        intent.putExtra("user_gam",user_gam);
-//                        intent.putExtra("this_title",this_title);
-//                        intent.putExtra("this_content",this_contents);
-//                        intent.putExtra("this_style",this_style);
-//                        intent.putExtra("this_date",this_date);
-//                        intent.putExtra("this_uid",this_uid);
-//                        startActivity(intent);
+                        if (position_list.contains(position)){
+                            position_list.remove(position);
+                        }
+                        else{
+                            position_list.add(position);
+                        }
 
                     }
 
@@ -156,11 +154,21 @@ public class Todolist_edit extends AppCompatActivity {
         });
 
 
-        //게임
+        //수정 끝
         Button edit_ok = (Button) findViewById(R.id.edit_ok);
         edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int i=0;i<position_list.size();i++){
+                    Integer delete_position = position_list.get(i);
+                    Object memo_key_item = memo_key_list.get(delete_position);
+
+                    //배열에 담아뒀던 삭제 키 값 사용해서 데이터베이스에서 제거
+                    reference.child(f_code).child(String.valueOf(memo_key_item)).removeValue();
+                }
+
+
+                // 다시 이동
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);

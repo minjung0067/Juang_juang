@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
@@ -103,6 +104,16 @@ public class Todolist_Activity extends AppCompatActivity {
                     style.add(this_style);
                     date.add(this_date);
                     writer.add(this_uid);
+
+                }
+
+                Button edit_list = (Button) findViewById(R.id.list_edit);
+                TextView first_memo = (TextView) findViewById(R.id.first_memo);
+                if(title.size()==0){
+                    // 아직 메모를 하나도 작성하지 않았다면,
+                    // 수정 버튼 안 보이게
+                    edit_list.setVisibility(View.INVISIBLE);
+                    first_memo.setVisibility(View.VISIBLE);
                 }
 
 

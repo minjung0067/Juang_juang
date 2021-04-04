@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
                 gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
 
-                mHandler.postDelayed(mMyTask, 1000); // 3초후에 실행
+                mHandler.postDelayed(mMyTask, 2000); // 2초후에 실행
                 mMyTask = new Runnable() {
                     @Override
                     public void run() {
