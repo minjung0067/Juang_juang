@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,8 +12,11 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +46,7 @@ public class MypageActivity extends AppCompatActivity {
     private TextView my_introduce;
     private TextView my_fcode;
     private ImageView my_image;
+    private String my_new_introduce;
     private String gam_number;
     private String color_number;
     private String myfcode;
@@ -57,7 +62,7 @@ public class MypageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
-        my_introduce = (TextView) findViewById(R.id.my_introduce);
+        my_introduce = (EditText) findViewById(R.id.my_introduce);
         my_fcode = (TextView) findViewById(R.id.fcode);
         my_image = (ImageView) findViewById(R.id.profile_image);
 
@@ -129,6 +134,16 @@ public class MypageActivity extends AppCompatActivity {
                 break;
         }
 
+        //별명 수정 버튼
+        ImageButton revisename = (ImageButton)findViewById(R.id.btn_revisename);
+        revisename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                my_new_introduce = my_introduce.getText().toString();
+                FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("introduce").setValue(my_new_introduce); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
+                Toast.makeText(MypageActivity.this, "별명 수정이 완료되었감!", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 
@@ -138,7 +153,7 @@ public class MypageActivity extends AppCompatActivity {
         revise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MakeProfilemain.class);
+                Intent intent = new Intent(getApplicationContext(),profile_gam_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",myfcode);
                 startActivity(intent);
@@ -230,8 +245,6 @@ public class MypageActivity extends AppCompatActivity {
 
 
         Button logout = (Button) findViewById(R.id.btn_logout); //로그아웃 버튼
-
-
         logout.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
@@ -258,6 +271,14 @@ public class MypageActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //배경 누르면 키보드 내려가는 함수
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 
     //뒤로가기 버튼 누르면, 원래 있었던 곳으로 가기
