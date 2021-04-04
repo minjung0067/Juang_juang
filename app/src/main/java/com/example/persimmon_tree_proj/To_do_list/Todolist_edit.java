@@ -22,6 +22,8 @@ import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
+import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
+import com.example.persimmon_tree_proj.To_do_list.list_adapter;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +40,7 @@ import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Iterator;
 
-public class Todolist_Activity extends AppCompatActivity {
+public class Todolist_edit extends AppCompatActivity {
 
 
     private FirebaseAuth firebaseAuth;
@@ -61,7 +63,7 @@ public class Todolist_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todolist);
+        setContentView(R.layout.activity_todolist_edit);
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
@@ -111,7 +113,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
                 // 어댑터와 연결
-                RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this,title,contents,date,writer,style);
+                RecyclerView.Adapter adapter = new list_adapter_edit(Todolist_edit.this,title,contents,date,writer,style);
 
                 // 어댑터를 리사이클뷰랑 연결
                 recyclerView.setAdapter(adapter);
@@ -122,24 +124,21 @@ public class Todolist_Activity extends AppCompatActivity {
                 recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                        String this_title = title.get(position);
-                        String this_contents = contents.get(position);
-                        String this_style = style.get(position);
-                        String this_date = date.get(position);
-                        String this_uid = writer.get(position);
-                        Intent intent = new Intent(Todolist_Activity.this, Todolist_show_select_memo.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("f_code",f_code);
-                        intent.putExtra("introduce",introduce);
-                        intent.putExtra("user_name",user_name);
-                        intent.putExtra("user_color",user_color);
-                        intent.putExtra("user_gam",user_gam);
-                        intent.putExtra("this_title",this_title);
-                        intent.putExtra("this_content",this_contents);
-                        intent.putExtra("this_style",this_style);
-                        intent.putExtra("this_date",this_date);
-                        intent.putExtra("this_uid",this_uid);
-                        startActivity(intent);
+
+                        //삭제 코드
+//                        Intent intent = new Intent(Todolist_edit.this, Todolist_show_select_memo.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        intent.putExtra("f_code",f_code);
+//                        intent.putExtra("introduce",introduce);
+//                        intent.putExtra("user_name",user_name);
+//                        intent.putExtra("user_color",user_color);
+//                        intent.putExtra("user_gam",user_gam);
+//                        intent.putExtra("this_title",this_title);
+//                        intent.putExtra("this_content",this_contents);
+//                        intent.putExtra("this_style",this_style);
+//                        intent.putExtra("this_date",this_date);
+//                        intent.putExtra("this_uid",this_uid);
+//                        startActivity(intent);
 
                     }
 
@@ -155,56 +154,30 @@ public class Todolist_Activity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
-        //전체 질문 가져오기 끝
 
 
-
-
-        //버튼
-        //새 메모 추가 버튼
-        Button new_list = (Button) findViewById(R.id.list_add);
-        new_list.setOnClickListener(new View.OnClickListener() {
+        //게임
+        Button edit_ok = (Button) findViewById(R.id.edit_ok);
+        edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Todolist_Activity.this, TodoList_addlist_activity.class);
+                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
                 intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
-                finish();
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
-
-        //수정 버튼
-        Button edit_list = (Button) findViewById(R.id.list_edit);
-        edit_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Todolist_Activity.this, Todolist_edit.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                startActivity(intent);
-                finish();
-
-            }
-        });
-
-
-
 
         //뒤로가기
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intentt = new Intent(getApplicationContext(), LodingPage_Activity.class);
+                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
                 startActivity(intentt);
@@ -312,8 +285,7 @@ public class Todolist_Activity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        //안드로이드 백버튼 막기
-        Intent intent = new Intent(Todolist_Activity.this, QNA_Activity.class);
+        Intent intent = new Intent(Todolist_edit.this, Todolist_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -331,7 +303,7 @@ public class Todolist_Activity extends AppCompatActivity {
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final Todolist_Activity.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final Todolist_edit.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
