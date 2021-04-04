@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -123,24 +126,38 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 String contents_text = edit_contents.getText().toString();
 
 
-                //업로드
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
-                Todo_new newtodo = new Todo_new(user.getUid(), introduce,title_text,contents_text,style_num,strDate);
-                Map<String, Object> about_memo = newtodo.toMap();
-                reference.child(f_code).push().setValue(about_memo);
+                //제목 입력 안 하고 업로드 버튼 눌렀을 때
+                if(title_text.equals("")) { //제목 X
+                    edit_title.setHint("제목을 입력해주세요");
+                    edit_title.setHintTextColor(Color.parseColor("#FFAB47"));
+                    edit_title.setTextSize(20);
+                }
+                if(contents_text.equals("")){
+                    edit_contents.setHint("메모를 작성해주세요");
+                    edit_contents.setHintTextColor(Color.parseColor("#FFAB47"));
+                }
+                if(!contents_text.equals("")&&!title_text.equals("")) {
 
 
-                //todo로 이동
-                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                startActivity(intent);
-                finish();
+                    //업로드
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
+                    Todo_new newtodo = new Todo_new(user.getUid(), introduce, title_text, contents_text, style_num, strDate);
+                    Map<String, Object> about_memo = newtodo.toMap();
+                    reference.child(f_code).push().setValue(about_memo);
+
+
+                    //todo로 이동
+                    Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("f_code", f_code);
+                    intent.putExtra("introduce", introduce);
+                    intent.putExtra("user_name", user_name);
+                    intent.putExtra("user_color", user_color);
+                    intent.putExtra("user_gam", user_gam);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
