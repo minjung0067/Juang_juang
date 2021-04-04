@@ -11,4 +11,8 @@
     <color name="brightgray">#F1F0F2</color>
     <color name="darkgray">#817889</color>
     <color name="WhiteColor">#FFFFFF</color>
+    <color name="memo_style1">#FFDEEF</color>
+    <color name="memo_style2">#DFFDFF</color>
+    <color name="memo_style3">#D8FFCC</color>
+    <color name="memo_style4">#FFF3C2</color>
 </resources>

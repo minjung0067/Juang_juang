@@ -6,6 +6,7 @@
     android:maxHeight="300dp"
     android:background="@drawable/todo_style1"
     android:padding="4dp"
+    android:id="@+id/layout"
     android:layout_margin="5dp">
 
     <!--For image src we have used ic_launcher

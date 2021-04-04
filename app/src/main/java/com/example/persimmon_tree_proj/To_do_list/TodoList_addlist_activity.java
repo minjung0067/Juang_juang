@@ -3,10 +3,16 @@ package com.example.persimmon_tree_proj.To_do_list;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +42,9 @@ import java.util.Map;
 public class TodoList_addlist_activity extends AppCompatActivity {
 
     private String style_num = "4";
+    InputMethodManager inputmethodmanager;
+    private EditText edit_contents;
+    private EditText edit_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +71,8 @@ public class TodoList_addlist_activity extends AppCompatActivity {
         today_date.setText(strDate);
         TextView writer = (TextView) findViewById(R.id.writer);
         writer.setText(introduce);
-        EditText title = (EditText) findViewById(R.id.title);
-        EditText contents = (EditText) findViewById(R.id.contents);
+        edit_title = (EditText) findViewById(R.id.title);
+        edit_contents = (EditText) findViewById(R.id.contents);
 
 
 
@@ -113,28 +122,42 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 formatH = new SimpleDateFormat("yyyy년 MM월 dd일"); //formatH에 현재 시간 넣어줌 대소문자 중요함
                 Date today = new Date(); //today 변수에 Date 부르기
                 String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
-                String title_text = title.getText().toString();
-                String contents_text = title.getText().toString();
+                String title_text = edit_title.getText().toString();
+                String contents_text = edit_contents.getText().toString();
 
 
-                //업로드
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
-                Todo_new newtodo = new Todo_new(user.getUid(), introduce,title_text,contents_text,style_num,strDate);
-                Map<String, Object> about_memo = newtodo.toMap();
-                reference.child(f_code).push().setValue(about_memo);
+                //제목 입력 안 하고 업로드 버튼 눌렀을 때
+                if(title_text.equals("")) { //제목 X
+                    edit_title.setHint("제목을 입력해주세요");
+                    edit_title.setHintTextColor(Color.parseColor("#FFAB47"));
+                    edit_title.setTextSize(20);
+                }
+                if(contents_text.equals("")){
+                    edit_contents.setHint("메모를 작성해주세요");
+                    edit_contents.setHintTextColor(Color.parseColor("#FFAB47"));
+                }
+                if(!contents_text.equals("")&&!title_text.equals("")) {
 
 
-                //todo로 이동
-                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                startActivity(intent);
-                finish();
+                    //업로드
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
+                    Todo_new newtodo = new Todo_new(user.getUid(), introduce, title_text, contents_text, style_num, strDate);
+                    Map<String, Object> about_memo = newtodo.toMap();
+                    reference.child(f_code).push().setValue(about_memo);
+
+
+                    //todo로 이동
+                    Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("f_code", f_code);
+                    intent.putExtra("introduce", introduce);
+                    intent.putExtra("user_name", user_name);
+                    intent.putExtra("user_color", user_color);
+                    intent.putExtra("user_gam", user_gam);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -252,4 +275,12 @@ public class TodoList_addlist_activity extends AppCompatActivity {
 
     }
 
+
+    //배경 선택시 키보드 내려가도록
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager inputmethodmanager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputmethodmanager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
+    }
 }
