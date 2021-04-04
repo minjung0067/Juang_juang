@@ -1,6 +1,8 @@
 package com.example.persimmon_tree_proj.To_do_list;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +28,7 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
     ArrayList writer;
     ArrayList color;
     Context context;
+    Layout layout;
 
     // Constructor for initialization
     public list_adapter_edit(Context context, ArrayList title, ArrayList contents, ArrayList date, ArrayList writer,ArrayList color) {
@@ -32,6 +36,7 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
         this.title = title;
         this.contents = contents;
         this.date = date;
+        this.layout = layout;
         this.writer = writer;
         this.color = color;
     }
@@ -60,12 +65,41 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
         holder.contents.setText(res_contents);
         holder.date.setText(res_date);
         holder.writer.setText(res_writer);
-        if (res_style.equals("1")) { holder.layout.setBackgroundResource(R.drawable.todo_style1);}
-        else if (res_style.equals("2")) { holder.layout.setBackgroundResource(R.drawable.todo_style2);}
-        else if (res_style.equals("3")) { holder.layout.setBackgroundResource(R.drawable.todo_style3);}
-        else{ holder.layout.setBackgroundResource(R.drawable.todo_style4);}
+        if (res_style.equals("1")) {
+            holder.layout.setBackgroundResource(R.drawable.todo_style1);
+        } else if (res_style.equals("2")) {
+            holder.layout.setBackgroundResource(R.drawable.todo_style2);
+        } else if (res_style.equals("3")) {
+            holder.layout.setBackgroundResource(R.drawable.todo_style3);
+        } else {
+            holder.layout.setBackgroundResource(R.drawable.todo_style4);
+        }
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!holder.layout.getBackground().equals(R.drawable.todo_style_clicked)){
+                    holder.layout.setBackgroundResource(R.drawable.todo_style_clicked);
+                }
+                else {
+                    if (res_style.equals("1")) {
+                        holder.layout.setBackgroundResource(R.drawable.todo_style1);
+                    } else if (res_style.equals("2")) {
+                        holder.layout.setBackgroundResource(R.drawable.todo_style2);
+                    } else if (res_style.equals("3")) {
+                        holder.layout.setBackgroundResource(R.drawable.todo_style3);
+                    } else if (res_style.equals("4")) {
+                        holder.layout.setBackgroundResource(R.drawable.todo_style4);
+                    } else {
+                        holder.layout.setBackgroundResource(R.drawable.todo_style_first);
+                    }
+                }
+            }
+        });
+
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -93,4 +127,6 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
             layout = (RelativeLayout) view.findViewById(R.id.layout);
         }
     }
+
+
 }
