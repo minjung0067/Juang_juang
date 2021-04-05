@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/WhiteColor"
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.To_do_list.TodoList_addlist_activity">
 
@@ -153,7 +154,9 @@
     <Button
         android:id="@+id/upload"
         android:layout_width="50dp"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_height="50dp"
+        android:background="@color/WhiteColor"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="130dp"
         android:foreground="@drawable/heart_graphic2x"
