@@ -9,6 +9,9 @@
     <font
         android:font="@font/nanumsquare_acr"
     />
+    <font
+        android:font="@font/nanumgothic"
+        />
 
     <!--bold-->
     <font
@@ -18,6 +21,13 @@
     <font
         android:font="@font/nanumsquare_acdb"
         />
+    <font
+        android:font="@font/nanumgothicbold"
+        />
+    <font
+        android:font="@font/nanumgothicbold"
+        />
+
 
 
 
