@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -96,6 +97,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_calendar);
+
 
         //자기 프로필 가져오기
         FirebaseUser profileuser = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보

@@ -32,7 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,6 +120,11 @@ public class Waitactivity extends AppCompatActivity {
                 intent.putExtra("fcount",fcount);
                 intent.putExtra("f_code",f_code);
                 startActivityForResult(intent, 1);
+                SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
+                formatH = new SimpleDateFormat("yyyyMMdd"); //formatH에 현재 시간 넣어줌 대소문자 중요함
+                Date today = new Date(); //today 변수에 Date 부르기
+                String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
+                FirebaseDatabase.getInstance().getReference("answer").child(f_code).child("1").child("Date").setValue(strDate); //question번호와 날짜 올리기
 
             }
         });
