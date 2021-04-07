@@ -38,20 +38,21 @@ public class Answeractivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private FirebaseAuth firebaseAuth;
     private String user_name;
-    private String f_code;
 
     private FirebaseDatabase a_Database;
     private DatabaseReference a_Reference;
 
+    Intent intent = getIntent();//mainactivity에서 받아온 intent 선언
+    String question = intent.getStringExtra("question");//mainactivity에서 받아온 question
+    final String f_code = intent.getStringExtra("f_code"); //mainacitivity에서 받아온 f_code 순서가 바뀌어야 하니까 intent꼬일까봐 users에서 받아오는 걸로 변경
+    final String position = intent.getStringExtra("position");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("bin_cycle","Answeractivity onCreat()");
         setContentView(R.layout.activity_answeractivity);
 
-        Intent intent = getIntent();//mainactivity에서 받아온 intent 선언
-        String question = intent.getStringExtra("question");//mainactivity에서 받아온 question
-        //final String f_code = {intent.getStringExtra("f_code")}; //mainacitivity에서 받아온 f_code 순서가 바뀌어야 하니까 intent꼬일까봐 users에서 받아오는 걸로 변경
-        final String position = intent.getStringExtra("position");
         ArrayList<Object> our_q_arr = (ArrayList<Object>) intent.getSerializableExtra("our_q_arr");
         textView =(TextView)findViewById(R.id.txt_question2);
         textView.setText(question); //textView에 question 띄우기
@@ -73,7 +74,7 @@ public class Answeractivity extends AppCompatActivity {
                 reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        f_code = String.valueOf(snapshot.child("fcode"));
+                        //f_code = String.valueOf(snapshot.child("fcode"));
                         String user_name = snapshot.child("user_name").getValue(String.class);
                         //FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).setValue(msg);
                         //답변 올리기
@@ -165,5 +166,44 @@ public class Answeractivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("bin_cycle","Answeractivity onStart()");
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
+        final DatabaseReference reference_ans = FirebaseDatabase.getInstance().getReference("answer");  //users에서 현 uid 가진 사람 찾기
+        mDatabase = FirebaseDatabase.getInstance();
+        Button answer = (Button)findViewById(R.id.btn_answer);
+        answer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                msg = edit_answer.getText().toString();//edit_answer에 작성한 text msg에 저장
+                reference_ans.child(f_code).child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String user_name = snapshot.child("user_name").getValue(String.class);
+                        //FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).setValue(msg);
+                        //답변 올리기
+                        Map<String, Object> answerUpdates = new HashMap<>();
+                        answerUpdates.put(position, msg);
+                        FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).updateChildren(answerUpdates);
+//                        Intent intent = new Intent(Answeractivity.this, MainActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        startActivity(intent);
+//                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+        });
+
     }
 }
