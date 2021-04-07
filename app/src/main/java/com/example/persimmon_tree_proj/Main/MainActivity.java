@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj.Main;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String f_code;
-    static int count;
+    private String count;
     static int member_count;
     private String family_name;
     private DatabaseReference a_Reference;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] gam_interaction = {"오늘도 화이팅이라감","감 잡았쓰 ~","당신은 다정다감","감감 무슨감 쟁반같이 둥근감"};
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +76,14 @@ public class MainActivity extends AppCompatActivity {
             - 문구 랜덤하게 가져옴
             - 1초후 문구 사라짐
 
-        part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
+        part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드 */
 
 
-
-        * */
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                .setSmallIcon(R.drawable.notification_icon)
+//                .setContentTitle(textTitle)
+//                .setContentText(textContent)
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
 
 
@@ -136,6 +142,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");
+        reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                count = (String) snapshot.child("count").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("Firebase_error","fail to loading count");
+            }
+        });
 
 
         //part 3 - 감 인터렉션
@@ -196,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_name",user_name);
                 intent.putExtra("user_gam",user_gam);
+                intent.putExtra("count",count);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();

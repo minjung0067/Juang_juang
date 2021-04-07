@@ -6,24 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.QNA.QNA_Activity">
 
-    <ImageButton
-        android:id="@+id/btn_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_question"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/image_next_question"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_question"
-        app:srcCompat="@drawable/next_month_big" />
-
-    <ImageButton
-        android:id="@+id/btn_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_question"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_question"
-        app:srcCompat="@drawable/next_month_big" />
 
     <TextView
         android:id="@+id/button"
@@ -56,17 +38,6 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         tools:layout_editor_absoluteX="0dp" />
 
-    <ImageButton
-        android:id="@+id/image_next_question"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="6dp"
-        android:defaultFocusHighlightEnabled="false"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_question"
-        app:layout_constraintEnd_toEndOf="@+id/txt_question"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_question"
-        app:srcCompat="@drawable/heartgraphic2x" />
-
 
     <ImageButton
         android:id="@+id/btn_mypage"
@@ -78,25 +49,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_question"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:spinnerMode="dialog"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.504"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/menu_name" />-->
 
-
-    <Spinner
-        android:id="@+id/spinner_question"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center_vertical"
-        android:spinnerMode="dialog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_name" />
+<!--    <fragment-->
+<!--        android:id="@+id/txt_question"-->
+<!--        android:layout_width="340dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:name="com.example.persimmon_tree_proj.QNA.fragment"-->
+<!--        android:background="@drawable/btn_grey_rounded"-->
+<!--        android:fontFamily="@font/nanumsquare_acb"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="선택된 질문이 나올 자리"-->
+<!--        android:textColor="#000"-->
+<!--        android:textSize="18dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.507"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/menu_name"-->
+<!--        />-->
 
     <TextView
         android:id="@+id/txt_question"
         android:layout_width="340dp"
         android:layout_height="100dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/btn_grey_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:gravity="center"
@@ -107,7 +94,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_question" />
+        app:layout_constraintTop_toBottomOf="@+id/menu_name" />
+
 
     <ScrollView
         android:id="@+id/linear_view"
@@ -131,10 +119,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
         </LinearLayout>
 
+
+        <!--        <androidx.viewpager2.widget.ViewPager2-->
+<!--            android:id="@+id/vp_answer_view"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            />-->
+
+<!--        <fragmentlayout-->
+<!--            android:id="@+id/answer_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+<!--        </fragmentlayout>-->
+
     </ScrollView>
+
+    <SlidingDrawer
+        android:id="@+id/slider"
+        android:layout_width="407dp"
+        android:layout_height="50dp"
+        android:content="@id/next_question_page"
+        android:handle="@id/next_question_handle"
+        app:layout_constraintBottom_toBottomOf="@+id/linear_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/next_question_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="땡겨"
+            android:background="@drawable/btn_orange_rounded"
+            android:enabled="false"
+             />
+        <LinearLayout
+            android:id="@+id/next_question_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/tv_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새로운 페이지로 넘어가보자고"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+    </SlidingDrawer>
+
+
 
     <Button
         android:id="@+id/btn_goanswer"
