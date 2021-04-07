@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
@@ -23,6 +22,8 @@ import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
+import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
+import com.example.persimmon_tree_proj.To_do_list.list_adapter;
 import com.example.persimmon_tree_proj.customer_sound;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,7 @@ import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Iterator;
 
-public class Todolist_Activity extends AppCompatActivity {
+public class Todolist_edit extends AppCompatActivity {
 
 
     private FirebaseAuth firebaseAuth;
@@ -58,11 +59,13 @@ public class Todolist_Activity extends AppCompatActivity {
     private ArrayList<String> writer = new ArrayList<String>();
     private ArrayList<String> date = new ArrayList<String>();
     private ArrayList<String> style = new ArrayList<String>();
+    private ArrayList<String> memo_key_list = new ArrayList<String>();
+    private ArrayList<Integer> position_list = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todolist);
+        setContentView(R.layout.activity_todolist_edit);
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
@@ -93,6 +96,9 @@ public class Todolist_Activity extends AppCompatActivity {
                 Iterator<DataSnapshot> memos = dataSnapshot.child(f_code).getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
                 while (memos.hasNext()) { //boolean hasNext() 메소드는 읽어 올 요소가 남아있는지 확인하는 메소드. 있으면 true, 없으면 false를 반환
                     String this_memo = memos.next().getKey();
+
+                    memo_key_list.add(this_memo);
+
                     String this_title = dataSnapshot.child(f_code).child(this_memo).child("title").getValue(String.class);
                     String this_contents = dataSnapshot.child(f_code).child(this_memo).child("contents").getValue(String.class);
                     String this_style = dataSnapshot.child(f_code).child(this_memo).child("style").getValue(String.class);
@@ -104,16 +110,6 @@ public class Todolist_Activity extends AppCompatActivity {
                     style.add(this_style);
                     date.add(this_date);
                     writer.add(this_uid);
-
-                }
-
-                Button edit_list = (Button) findViewById(R.id.list_edit);
-                TextView first_memo = (TextView) findViewById(R.id.first_memo);
-                if(title.size()==0){
-                    // 아직 메모를 하나도 작성하지 않았다면,
-                    // 수정 버튼 안 보이게
-                    edit_list.setVisibility(View.INVISIBLE);
-                    first_memo.setVisibility(View.VISIBLE);
                 }
 
 
@@ -122,35 +118,25 @@ public class Todolist_Activity extends AppCompatActivity {
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
                 // 어댑터와 연결
-                RecyclerView.Adapter adapter = new list_adapter(Todolist_Activity.this,title,contents,date,writer,style);
+                RecyclerView.Adapter adapter = new list_adapter_edit(Todolist_edit.this,title,contents,date,writer,style);
 
                 // 어댑터를 리사이클뷰랑 연결
                 recyclerView.setAdapter(adapter);
 
+                position_list.clear();
 
-                // 메모 선택 시 show_select_memo 액티비티로 이동하며
-                // 선택한 메모 상세 보기
+
+                //선택한 메모 지우기
+
                 recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                        String this_title = title.get(position);
-                        String this_contents = contents.get(position);
-                        String this_style = style.get(position);
-                        String this_date = date.get(position);
-                        String this_uid = writer.get(position);
-                        Intent intent = new Intent(Todolist_Activity.this, Todolist_show_select_memo.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("f_code",f_code);
-                        intent.putExtra("introduce",introduce);
-                        intent.putExtra("user_name",user_name);
-                        intent.putExtra("user_color",user_color);
-                        intent.putExtra("user_gam",user_gam);
-                        intent.putExtra("this_title",this_title);
-                        intent.putExtra("this_content",this_contents);
-                        intent.putExtra("this_style",this_style);
-                        intent.putExtra("this_date",this_date);
-                        intent.putExtra("this_uid",this_uid);
-                        startActivity(intent);
+                        if (position_list.contains(position)){
+                            position_list.remove(position);
+                        }
+                        else{
+                            position_list.add(position);
+                        }
 
                     }
 
@@ -166,56 +152,40 @@ public class Todolist_Activity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
-        //전체 질문 가져오기 끝
 
 
-
-
-        //버튼
-        //새 메모 추가 버튼
-        Button new_list = (Button) findViewById(R.id.list_add);
-        new_list.setOnClickListener(new View.OnClickListener() {
+        //수정 끝
+        Button edit_ok = (Button) findViewById(R.id.edit_ok);
+        edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Todolist_Activity.this, TodoList_addlist_activity.class);
+                for(int i=0;i<position_list.size();i++){
+                    Integer delete_position = position_list.get(i);
+                    Object memo_key_item = memo_key_list.get(delete_position);
+
+                    //배열에 담아뒀던 삭제 키 값 사용해서 데이터베이스에서 제거
+                    reference.child(f_code).child(String.valueOf(memo_key_item)).removeValue();
+                }
+
+
+                // 다시 이동
+                Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
                 intent.putExtra("user_name",user_name);
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
-                finish();
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
-
-        //수정 버튼
-        Button edit_list = (Button) findViewById(R.id.list_edit);
-        edit_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Todolist_Activity.this, Todolist_edit.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                startActivity(intent);
-                finish();
-
-            }
-        });
-
-
-
 
         //뒤로가기
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intentt = new Intent(getApplicationContext(), LodingPage_Activity.class);
+                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
                 startActivity(intentt);
@@ -323,8 +293,7 @@ public class Todolist_Activity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        //안드로이드 백버튼 막기
-        Intent intent = new Intent(Todolist_Activity.this, QNA_Activity.class);
+        Intent intent = new Intent(Todolist_edit.this, Todolist_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
@@ -342,7 +311,7 @@ public class Todolist_Activity extends AppCompatActivity {
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final Todolist_Activity.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final Todolist_edit.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

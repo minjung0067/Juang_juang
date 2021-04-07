@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String f_code;
-    static int count;
+    private String count;
     static int member_count;
     private String family_name;
     private DatabaseReference a_Reference;
@@ -142,6 +142,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");
+        reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                count = (String) snapshot.child("count").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i("Firebase_error","fail to loading count");
+            }
+        });
 
 
         //part 3 - 감 인터렉션
@@ -158,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
                 gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
 
-                mHandler.postDelayed(mMyTask, 1000); // 3초후에 실행
+                mHandler.postDelayed(mMyTask, 2000); // 2초후에 실행
                 mMyTask = new Runnable() {
                     @Override
                     public void run() {
@@ -202,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_name",user_name);
                 intent.putExtra("user_gam",user_gam);
+                intent.putExtra("count",count);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();

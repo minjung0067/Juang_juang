@@ -35,6 +35,7 @@ import com.example.persimmon_tree_proj.Calendar.Popup_Cal.PopupcalActivity;
 import com.example.persimmon_tree_proj.Calendar.adapter.CalendarAdapter;
 import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
 import com.example.persimmon_tree_proj.Calendar.domain.DayInfo;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -97,7 +98,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_calendar);
-
 
         //자기 프로필 가져오기
         FirebaseUser profileuser = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
@@ -163,6 +163,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         });
 
+
         detector = new GestureDetectorCompat(this, new MyGestureListener());
 
         mTvCalendarTitle = (TextView)findViewById(R.id.gv_calendar_activity_tv_title);
@@ -182,10 +183,10 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         });
 
         //일정 추가 이미지 버튼
-        add_calendar = (ImageButton)findViewById(R.id.btn_addcal);
+        FloatingActionButton add_calendar= findViewById(R.id.btn_addcal);
         add_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(ShareCalendarActivity.this, PopupCalendar.class);
                 intent.putExtra("f_code",f_code);
                 startActivityForResult(intent, 1);

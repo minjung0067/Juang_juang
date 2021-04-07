@@ -112,18 +112,18 @@
         app:layout_constraintStart_toStartOf="@+id/my_introduce"
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
-    <TextView
+    <EditText
         android:id="@+id/my_introduce"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
+        android:layout_width="260dp"
+        android:layout_height="39dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/btn_grey_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
         android:padding="10dp"
         android:text="나의 별명은?"
         android:textColor="#000"
-        android:fontFamily="@font/nanumsquare_acb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_nickname"
         tools:layout_conversion_absoluteHeight="0dp"
@@ -261,6 +261,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <ImageButton
+        android:id="@+id/btn_revisename"
+        android:layout_width="26dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="332dp"
+        android:background="#00B1A6A6"
+        android:scaleType="fitCenter"
+        android:src="@drawable/check_icon_big"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

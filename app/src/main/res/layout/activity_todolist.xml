@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/WhiteColor"
-    android:onClick="linearOnClick"
     tools:context="com.example.persimmon_tree_proj.customer_sound">
 
 
@@ -60,18 +59,24 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="80dp"
         android:foreground="@drawable/heart_graphic2x"
+        android:background="@color/WhiteColor"
         android:onClick="linearOnClick"
+        style="?android:attr/borderlessButtonStyle"
+        android:shadowColor="@color/WhiteColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/list_edit"
         android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginStart="20dp"
+        android:background="@color/WhiteColor"
         android:layout_marginBottom="80dp"
+        android:shadowColor="@color/WhiteColor"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintStart_toStartOf="parent"
-        android:foreground="@drawable/revise_plan_btn_2x"
+        android:foreground="@drawable/calendar_delete2x"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <LinearLayout
@@ -112,6 +117,23 @@
         android:fontFamily="@font/nanumsquare_acr"
         android:textSize="30dp"
         android:text="뭐할감"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/first_memo"
+        android:shadowColor="@color/WhiteColor"
+        android:textColor="@color/darkgray"
+        android:clickable="false"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:background="@color/WhiteColor"
+        android:fontFamily="@font/nanumsquare_acl"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        android:text="새로운 메모를 추가해보세요!"
         app:layout_constraintTop_toBottomOf="@+id/button"
         tools:layout_editor_absoluteX="0dp" />
 

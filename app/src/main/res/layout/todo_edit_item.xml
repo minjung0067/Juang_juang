@@ -7,12 +7,26 @@
     android:background="@drawable/todo_style_first"
     android:padding="4dp"
     android:id="@+id/layout"
+    android:onClick="hightlight"
     android:layout_margin="5dp">
 
     <!--For image src we have used ic_launcher
         it is used only for reference how it will look"-->
 
 
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="26dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="2dp"
+        android:clickable="true"
+        android:visibility="visible"
+        android:scaleType="fitCenter"
+        android:src="@drawable/delete_icon_2" />
 
     <LinearLayout
         android:layout_width="match_parent"

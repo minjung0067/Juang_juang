@@ -68,9 +68,11 @@ public class LodingPage_Activity extends AppCompatActivity {
          *                  case 4-2 : 별명을 설정하였음.
          *                      case 5-1 : 나와 연결된 가족 코드가 없음 => familyactivity로 이동
          *                      case 5-2 : 나와 연결된 가족 코드가 있음
-         *
+         *                          case 6-2: 가족을 기다리는 중임
+         *                              case 6-2-1 : captain == true 일 경우에 waitactivity로 이동
+         *                              case 6-2-2 : captain == false 일 경우에 waitactivity2로 이동
          *                          case 6-1 : mainactivity에 이미 들어와있음 => mainacitivy로 이동
-         *                          case 6-2 : 가족을 기다리는 중임 => waitactivity로 이동
+         *
          *
          * // 로딩 메세지 출력하는 부분
          *
@@ -144,8 +146,6 @@ public class LodingPage_Activity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             fcount = String.valueOf(snapshot.child("count").getValue());
-                                            Log.i("fcount",fcount);
-                                            Log.i("captain",captain);
                                             if(fcount == "null") {
                                                 if(captain.equals("true")){
                                                     Intent intent = new Intent(LodingPage_Activity.this, Waitactivity.class);  // 대기 화면을 설정하러 가라

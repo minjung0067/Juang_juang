@@ -105,7 +105,7 @@ public class profile_color extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("user_color").setValue(clicked_color);
-                Intent intent = new Intent(profile_color.this, familyactivity.class);
+                Intent intent = new Intent(profile_color.this, MakeProfile.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

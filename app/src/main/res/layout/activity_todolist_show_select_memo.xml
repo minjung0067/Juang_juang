@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/WhiteColor"
     android:layout_height="match_parent"
-    tools:context="com.example.persimmon_tree_proj.To_do_list.TodoList_addlist_activity">
+    android:background="@color/WhiteColor"
+    tools:context="com.example.persimmon_tree_proj.To_do_list.Todolist_show_select_memo">
 
     <TextView
         android:id="@+id/button"
@@ -61,7 +61,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
 
-<!--메모 작성 부분-->
+    <!--메모 작성 부분-->
 
     <!--    메모끝-->
 
@@ -69,9 +69,9 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:minHeight="200dp"
+        android:layout_margin="30dp"
         android:background="@color/WhiteColor"
-        android:maxHeight="300dp"
         android:padding="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -90,16 +90,19 @@
             android:layout_height="wrap_content"
             android:background="@drawable/todo_style4"
             android:layout_marginTop="1dp"
+            android:padding="10dp"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
                 android:id="@+id/title"
+                android:fontFamily="@font/nanumsquare_acb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/close"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:hint="제목"
+                android:padding="10dp"
                 android:textSize="20dp" />
 
             <LinearLayout
@@ -111,22 +114,25 @@
 
                 <TextView
                     android:id="@+id/date"
+                    android:padding="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:padding="1dp"
+                    android:fontFamily="@font/nanumsquare_acl"
                     android:textSize="10dp" />
 
 
             </LinearLayout>
 
 
-            <EditText
-                android:id="@+id/contents"
+            <TextView
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:fontFamily="@font/nanumsquare_acr"
                 android:hint="글"
+                android:padding="3dp"
                 android:textSize="15dp" />
 
 
@@ -141,7 +147,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/nanumsquare_acr"
                     android:text="주앙"
+                    android:padding="4dp"
                     android:textSize="15dp" />
 
             </LinearLayout>
@@ -151,56 +159,54 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="50dp"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_height="50dp"
-        android:background="@color/WhiteColor"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="130dp"
-        android:foreground="@drawable/heart_graphic2x"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/upload"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginTop="130dp"-->
+<!--        android:foreground="@drawable/heart_graphic2x"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/textView2"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center_horizontal">-->
 
-            <Button
-                android:id="@+id/style1"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="#FFDEEF"/>
-            <Button
-                android:id="@+id/style3"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="#D8FFCC"/>
-            <Button
-                android:id="@+id/style4"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="#FFF3C2"/>
-            <Button
-                android:id="@+id/style2"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:background="#DFFDFF"/>
-        </LinearLayout>
+<!--            <Button-->
+<!--                android:id="@+id/style1"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="#FFDEEF"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/style3"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="#D8FFCC"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/style4"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="#FFF3C2"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/style2"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:background="#DFFDFF"/>-->
+<!--        </LinearLayout>-->
 
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
 
     <TextView
         android:id="@+id/textView2"
