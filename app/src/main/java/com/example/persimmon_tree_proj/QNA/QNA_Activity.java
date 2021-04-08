@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.example.persimmon_tree_proj.QNA;
 
 import androidx.annotation.NonNull;
@@ -445,4 +443,3 @@ public class QNA_Activity extends AppCompatActivity {
         }
 }
 
->>>>>>> 63ff42646503e7b7db059042b0f369bc8d3ffc69
