@@ -103,7 +103,7 @@ public class Todolist_Activity extends AppCompatActivity {
                     contents.add(this_contents);
                     style.add(this_style);
                     date.add(this_date);
-                    writer.add("by " + this_uid);
+                    writer.add(this_uid);
 
                 }
 

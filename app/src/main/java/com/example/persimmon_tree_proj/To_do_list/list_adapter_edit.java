@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -114,7 +115,7 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
         TextView contents;
         TextView writer;
         TextView date;
-        RelativeLayout layout;
+        LinearLayout layout;
 
 
         public ViewHolder2(View view) {
@@ -124,7 +125,7 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
             contents = (TextView) view.findViewById(R.id.contents);
             writer = (TextView) view.findViewById(R.id.writer);
             date = (TextView) view.findViewById(R.id.date);
-            layout = (RelativeLayout) view.findViewById(R.id.layout);
+            layout = (LinearLayout) view.findViewById(R.id.layout);
         }
     }
 
