@@ -20,10 +20,6 @@ import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.log_inactivity;
-import com.example.persimmon_tree_proj.Calendar.PopupCalendar;
-import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
-import com.example.persimmon_tree_proj.LodingPage_Activity;
-import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -77,7 +72,7 @@ public class Waitactivity extends AppCompatActivity {
         });
 
 
-        Button change = (Button) findViewById(R.id.btn_change);//가족 코드 없애버리기
+        Button change = (Button) findViewById(R.id.btn_delete);//가족 코드 없애버리기
         //경고창 구현하면 어떨까
         change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +120,21 @@ public class Waitactivity extends AppCompatActivity {
                 Date today = new Date(); //today 변수에 Date 부르기
                 String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
                 FirebaseDatabase.getInstance().getReference("answer").child(f_code).child("1").child("Date").setValue(strDate); //question번호와 날짜 올리기
+
+            }
+        });
+
+        Button delete = (Button)findViewById(R.id.btn_delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fcount = String.valueOf(member_count);
+                Intent intent = new Intent(Waitactivity.this, DeletepopupActivity.class);
+
+                intent.putExtra("f_count",fcount);
+                intent.putExtra("f_code",f_code);
+                startActivityForResult(intent, 1);
+
 
             }
         });
