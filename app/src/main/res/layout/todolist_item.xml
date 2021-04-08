@@ -4,9 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:maxHeight="300dp"
-    android:background="@drawable/todo_style_first"
     android:padding="4dp"
-    android:id="@+id/layout"
     android:layout_margin="5dp">
 
     <!--For image src we have used ic_launcher
@@ -14,13 +12,16 @@
 
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquare_acr"
+        android:id="@+id/layout"
+        android:background="@drawable/todo_style_first"
         android:orientation="vertical"
         android:padding="5dp"
-        android:layout_marginTop="1dp">
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/title"
@@ -88,5 +89,13 @@
 
     </LinearLayout>
 
-
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="11dp"
+        app:srcCompat="@drawable/todo_sticker" />
 </RelativeLayout>
