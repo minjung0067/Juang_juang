@@ -16,7 +16,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/nanumsquare_acb"
         android:maxLength="10"
-        android:text="우리집 감나무"
+        android:text="뭐할감"
         android:clickable="false"
         android:textColor="@color/darkgray"
         android:textSize="20dp"

@@ -50,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference a_Reference;
     private FirebaseDatabase a_Database;
     private Random rnd;
-    private String[] gam_interaction = {"오늘도 화이팅이라감","감 잡았쓰 ~","당신은 다정다감","감감 무슨감 쟁반같이 둥근감"};
+    private String[] gam_interaction = {"오늘 하루도 행복한 하루 보내요!",
+            "오늘도 와줘서 고마워! 두근두근~" +
+            "당신과 함께 할 수 있어 감사하당!" +
+            "앞으로 꽃길만 걷길 바랄게요~" +
+            "감사합니다 감사합니다" +
+            "감동이야 감동~"};
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
 
