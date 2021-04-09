@@ -54,11 +54,11 @@
 
     <Button
         android:id="@+id/list_add"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="80dp"
-        android:foreground="@drawable/heart_graphic2x"
+        android:foreground="@drawable/add_todo"
         android:background="@color/WhiteColor"
         android:onClick="linearOnClick"
         style="?android:attr/borderlessButtonStyle"
@@ -68,16 +68,20 @@
 
     <Button
         android:id="@+id/list_edit"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:background="@color/WhiteColor"
-        android:layout_marginBottom="80dp"
-        android:shadowColor="@color/WhiteColor"
         style="?android:attr/borderlessButtonStyle"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="600dp"
+        android:background="@drawable/btn_green_noback_rounded"
+        android:shadowColor="@color/WhiteColor"
+        android:text="편집하기"
+        android:textColor="@color/pointColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        android:foreground="@drawable/calendar_delete2x"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.627" />
 
     <LinearLayout
         android:id="@+id/layout"
@@ -107,18 +111,18 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/menu_name"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:background="@color/WhiteColor"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:textSize="30dp"
-        android:text="뭐할감"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="0dp" />
+<!--    <Button-->
+<!--        android:id="@+id/menu_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:gravity="center"-->
+<!--        android:background="@color/WhiteColor"-->
+<!--        android:fontFamily="@font/nanumsquare_acr"-->
+<!--        android:textSize="30dp"-->
+<!--        android:text="뭐할감"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button"-->
+<!--        tools:layout_editor_absoluteX="0dp" />-->
 
     <TextView
         android:id="@+id/first_memo"
