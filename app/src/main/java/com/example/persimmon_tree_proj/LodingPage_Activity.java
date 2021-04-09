@@ -46,14 +46,22 @@ public class LodingPage_Activity extends AppCompatActivity {
     private String family_name;
     private String captain;
     private Random rnd;
-    private String[] loding_message={"자신감 있는 표정을 지으면 \n자신감이 생긴다 \n\n- 찰스 다윈",
-            "세상에는\n세 가지의 감춰질 수 없는 것이 있다. \n해와 달, \n그리고 진실이다. \n\n- 석가모니" ,
-            "우정은 기쁨을 두 배로 하고\n슬픔을 반감시킨다. \n\n- 프리드리히 실러" ,
-            "유감없이 보낸 하루는 \n즐거운 잠을 가져온다. \n\n- 레오나르도 다 빈치" ,
-            "승리는 \n자신감을 가진 사람의 편이다. \n\n- 가토 마사오" ,
-            "기억을 증진하는 \n가장 좋은 약은 \n감탄하는 것이다. \n\n- 탈무드" ,
-            "운명은 \n용감한 자를 사랑한다. \n\n- 베르길리우스" ,
-            "용감한 사람은 \n자기 운명을 창조해 간다. \n\n- 미겔 데 세르반테스"};
+    private String[] loding_message={"자신감 있는 \n표정을 지으면 \n자신감이 생긴다 ",
+            "세상에는 세 가지의 \n감춰질 수 없는 것이 있다. \n해와 달, \n그리고 \n진실이다." ,
+            "우정은 \n기쁨을 두 배로 하고\n\n슬픔을 반감시킨다." ,
+            "유감없이 보낸 하루는 \n즐거운 잠을 가져온다." ,
+            "승리는 \n자신감을 가진 사람의 편이다. " ,
+            "기억을 증진하는 \n가장 좋은 약은 \n감탄하는 것이다." ,
+            "운명은 \n용감한 자를 사랑한다." ,
+            "용감한 사람은 \n자기 운명을 창조해 간다."};
+    private String[] person={"- 찰스 다윈",
+            "- 석가모니" ,
+            "- 프리드리히 실러" ,
+            "- 레오나르도 다 빈치" ,
+            "- 가토 마사오" ,
+            "- 탈무드" ,
+            "- 베르길리우스" ,
+            "- 미겔 데 세르반테스"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,10 +234,12 @@ public class LodingPage_Activity extends AppCompatActivity {
 
         //로딩 메세지 출력하는 부분
 
-        TextView title = (TextView) findViewById(R.id.title);
+        TextView sentence = (TextView) findViewById(R.id.sentence);
+        TextView name = (TextView) findViewById(R.id.name);
         rnd = new Random(); //랜덤클래스로부터 랜덤 값 받아오는 변수 작성.
         int num = rnd.nextInt(loding_message.length); //랜덤 숫자 생성
-        title.setText(loding_message[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
+        sentence.setText(loding_message[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
+        name.setText(person[num]);
 
 
     }
