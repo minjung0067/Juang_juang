@@ -42,7 +42,7 @@ more_information_activity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 로그인한 사람이 user
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
-        buttonok = (Button) findViewById(R.id.btn_ok);  //회원가입 버튼
+        buttonok = (Button) findViewById(R.id.ok_btn);  //회원가입 버튼
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextBirth = (EditText) findViewById(R.id.edit_birth);
 

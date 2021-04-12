@@ -1,27 +1,16 @@
 package com.example.persimmon_tree_proj.Family;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Juang_juang.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class familyactivity extends AppCompatActivity {
     private Button btn_makecode; //가족코드생성 버튼
@@ -47,11 +36,11 @@ public class familyactivity extends AppCompatActivity {
 
 
         //가족 생성 버튼 -> Codeactivity로 이동
-        btn_makecode = findViewById(R.id.btn_makecode);
+        btn_makecode = findViewById(R.id.ok_btn);
         btn_makecode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CodeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Make_FamilyProfile.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

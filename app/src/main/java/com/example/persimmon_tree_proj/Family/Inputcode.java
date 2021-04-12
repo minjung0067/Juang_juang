@@ -3,10 +3,12 @@ package com.example.persimmon_tree_proj.Family;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,7 +43,7 @@ public class Inputcode extends AppCompatActivity {
 
         //가족 코드 확인 버튼
         et_code = findViewById(R.id.et_code); //가족 코드 입력란
-        btn_ok = findViewById(R.id.btn_ok);
+        btn_ok = findViewById(R.id.ok_btn);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,5 +126,12 @@ public class Inputcode extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return true;
     }
 }

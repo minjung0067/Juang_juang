@@ -72,20 +72,6 @@ public class Waitactivity extends AppCompatActivity {
         });
 
 
-        Button change = (Button) findViewById(R.id.btn_delete);//가족 코드 없애버리기
-        //경고창 구현하면 어떨까
-        change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentt = new Intent(Waitactivity.this, familyactivity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentt);
-
-            }
-        });
-        
-
-
         Button logout = (Button) findViewById(R.id.btn_logout2); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
