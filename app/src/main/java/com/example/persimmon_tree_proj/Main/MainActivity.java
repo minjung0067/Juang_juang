@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase a_Database;
     private Random rnd;
     private String[] gam_interaction = {"오늘 하루도 행복한 하루 보내요!",
-            "오늘도 와줘서 고마워! 두근두근~" +
-            "당신과 함께 할 수 있어 감사하당!" +
-            "앞으로 꽃길만 걷길 바랄게요~" +
-            "감사합니다 감사합니다" +
+            "오늘도 와줘서 고마워! 두근두근~" ,
+            "당신과 함께 할 수 있어 감사하당!" ,
+            "앞으로 꽃길만 걷길 바랄게요~" ,
+            "감사합니다 감사합니다" ,
             "감동이야 감동~"};
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         btn_gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int num = rnd.nextInt(4); //랜덤 숫자 생성
+                int num = rnd.nextInt(6); //랜덤 숫자 생성
                 gam_say.setText(""); //초기화
                 gam_say.setVisibility(View.INVISIBLE);
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
