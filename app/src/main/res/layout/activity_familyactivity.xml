@@ -6,99 +6,166 @@
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.Family.familyactivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="124dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:gravity="center"
-        android:text="우리 가족을 찾아보아요."
-        android:textColor="@color/mainColor"
-        android:textSize="14dp"
+    <View
+        android:id="@+id/view6"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="#F1F0F2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_makecode"
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/btn_green_rounded"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:text="가족 초대장 만들기"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
+    <View
+        android:id="@+id/view5"
+        android:layout_width="150dp"
+        android:layout_height="10dp"
+        android:background="#FFAB47"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ifnot" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/nanumgothicbold"
+        android:text="당신은 누구인감?"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="324dp"
+        android:layout_height="1.5dp"
+        android:layout_marginTop="25dp"
+        android:background="#F1F0F2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/txt_ifhave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="61dp"
-        android:layout_marginTop="181dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="61dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="가족에게서 초대코드를 이미 받으셨다면!"
-        android:textColor="#000"
-        android:textSize="14dp"
+        android:fontFamily="@font/nanumgothic"
+        android:text="아직 개설된 우리가족\n감나무가 없다면,"
+        android:textAlignment="center"
+        android:textColor="#132641"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+
+
+    <TextView
+        android:id="@+id/txt_ifhave2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="61dp"
+        android:fontFamily="@font/nanumgothicbold"
+        android:text="우리 가족\n감나무 만들기"
+        android:textAlignment="center"
+        android:textColor="#132641"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ifhave" />
 
     <Button
         android:id="@+id/btn_ok"
         android:layout_width="280dp"
         android:layout_height="45dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/btn_orange_rounded"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:text="확인"
+        android:fontFamily="@font/nanumgothicbold"
+        android:text="우선 이름부터 지어볼까요?"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_code" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_ifhave2" />
 
-    <EditText
-        android:id="@+id/et_code"
-        android:layout_width="280dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:hint="초대코드 입력"
-        android:inputType="textPersonName"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ifhave" />
 
-    <TextView
-        android:id="@+id/txt_ifnot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:text="아직, 우리 가족의 가족코드가 없으시다면!"
-        android:textColor="#000"
-        android:textSize="14dp"
+    <View
+        android:id="@+id/view4"
+        android:layout_width="410dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="33dp"
+        android:background="#F1F0F2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_ok" />
+
+    <TextView
+        android:id="@+id/txt_ifhave3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="61dp"
+        android:fontFamily="@font/nanumgothic"
+        android:text="아직 개설된 우리가족\n감나무가 없다면,"
+        android:textAlignment="center"
+        android:textColor="#132641"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/txt_ifhave4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="61dp"
+        android:fontFamily="@font/nanumgothicbold"
+        android:text="코드 입력하고\n구성원 되기"
+        android:textAlignment="center"
+        android:textColor="#132641"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ifhave3" />
+
+
+    <Button
+        android:id="@+id/btn_makecode"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/btn_green_rounded"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:text="고유 코드 입력하러 가기"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ifhave4"
+        app:layout_constraintVertical_bias="0.241" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
