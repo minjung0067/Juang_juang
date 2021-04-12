@@ -28,7 +28,7 @@ public class servicehtml extends AppCompatActivity {
 
 
 
-        btn_view = (Button) findViewById(R.id.btn_ok);
+        btn_view = (Button) findViewById(R.id.ok_btn);
 
         btn_view.setOnClickListener(new View.OnClickListener() {
             @Override

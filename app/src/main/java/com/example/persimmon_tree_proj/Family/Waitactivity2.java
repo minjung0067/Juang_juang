@@ -68,6 +68,20 @@ public class Waitactivity2 extends AppCompatActivity {
             }
         });
 
+        Button revisecode = (Button)findViewById(R.id.btn_revisecode);
+        revisecode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fcount = String.valueOf(member_count);
+                Intent intent = new Intent(Waitactivity2.this, RevisepopupActivity.class);
+
+                intent.putExtra("f_count",fcount);
+                intent.putExtra("f_code",f_code);
+                startActivityForResult(intent, 1);
+
+            }
+        });
+
         Button logout = (Button) findViewById(R.id.btn_logout2); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

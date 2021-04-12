@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_ok"
+        android:id="@+id/ok_btn"
         android:layout_width="280dp"
         android:layout_height="45dp"
         android:layout_marginTop="62dp"
