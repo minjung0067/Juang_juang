@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Account.more_information_activity;
 import com.example.persimmon_tree_proj.Family.Waitactivity;
@@ -63,6 +68,11 @@ public class LodingPage_Activity extends AppCompatActivity {
             "- 베르길리우스" ,
             "- 미겔 데 세르반테스"};
 
+
+    //로딩 이미지 돌아가는 부분분
+   private ImageView imgAndroid;
+    private Animation anim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +107,11 @@ public class LodingPage_Activity extends AppCompatActivity {
          * // 로딩 메세지 출력하는 부분
          *
          *  */
+
+        //로딩 이미지 돌아가는 부분
+        imgAndroid = (ImageView) findViewById(R.id.loading);
+        anim = AnimationUtils.loadAnimation(this, R.anim.loading);
+        imgAndroid.setAnimation(anim);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
