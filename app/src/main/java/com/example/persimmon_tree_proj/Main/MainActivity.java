@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int num = rnd.nextInt(6); //랜덤 숫자 생성
+                click_gam_msg.setVisibility(View.INVISIBLE);
                 gam_say.setText(""); //초기화
                 gam_say.setVisibility(View.INVISIBLE);
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
@@ -180,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         gam_say.setVisibility(View.INVISIBLE);
+                        click_gam_msg.setVisibility(View.VISIBLE);
                     }
                 };
 

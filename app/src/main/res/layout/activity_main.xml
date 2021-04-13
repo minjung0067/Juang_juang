@@ -4,29 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#ffab47"
     tools:context="com.example.persimmon_tree_proj.Main.MainActivity">
 
 
 
 <!--    상단바-->
+
+
     <TextView
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginTop="28dp"
-        android:layout_marginBottom="65dp"
+        android:clickable="false"
         android:fontFamily="@font/nanumsquare_acb"
         android:maxLength="10"
         android:text="우리집 감나무"
-        android:clickable="false"
-        android:textColor="@color/darkgray"
+        android:textColor="@color/WhiteColor"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_mypage"
@@ -42,33 +42,36 @@
     <!--    본문-->
 
 
+    <!--   하단 메뉴바-->
+
     <TextView
-        android:padding="10dp"
         android:id="@+id/my_family_name"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/WhiteColor"
+        android:layout_height="80dp"
         android:layout_margin="3dp"
-        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/WhiteColor"
         android:fontFamily="@font/nanumsquare_acb"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
         android:text="우리 가족 이름은"
-        android:textColor="@color/mainColor"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/gam_say"
-        app:layout_constraintTop_toBottomOf="@+id/menu_name"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/button"
         tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
+        android:background="#ff8838"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="108dp"
         android:fontFamily="@font/nanumsquare_acr"
-        android:scaleType="fitCenter"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="-16dp" >
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="@id/my_family_name"
+        tools:layout_editor_absoluteX="16dp">
 
         <ImageView
             android:id="@+id/profile_image"
@@ -80,15 +83,14 @@
             android:src="@drawable/gam1" />
 
         <TextView
-            android:layout_marginStart="@dimen/com_kakao_padding"
             android:id="@+id/my_introduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/WhiteColor"
+            android:layout_marginStart="@dimen/com_kakao_padding"
+            android:fontFamily="@font/nanumsquare_acr"
             android:gravity="center_vertical"
             android:text="내 이름은"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:textColor="@color/grayColor"
+            android:textColor="@color/WhiteColor"
             android:textSize="18dp" />
 
 
@@ -98,7 +100,7 @@
         android:id="@+id/btn_clickgam"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="328dp"
         android:background="@drawable/btn_brightgray_rounded"
         android:fontFamily="@font/nanumsquare_acr"
         android:text="감 캐릭터를 눌러보세요!"
@@ -106,33 +108,30 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/_dynamic"
         tools:ignore="UnknownId" />
 
-
-    <!--   하단 메뉴바-->
-
     <ImageButton
         android:id="@+id/gam_btn"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
+        android:layout_width="408dp"
+        android:layout_height="170dp"
         android:background="#ffffff"
         android:scaleType="fitCenter"
         android:src="@drawable/gam1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintVertical_bias="0.667" />
 
     <Button
         android:id="@+id/gam_say"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="44dp"
         android:background="@drawable/btn_brightgray_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="오늘도 힘내라감!"
@@ -141,7 +140,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/gam_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_notice"
         app:layout_constraintVertical_bias="0.809"
@@ -149,9 +148,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginBottom="13dp"
+        android:layout_width="448dp"
+        android:layout_height="69dp"
         android:background="@color/brightgray"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -161,7 +159,7 @@
         android:id="@+id/calendar_btn"
         android:layout_width="35dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/calendar_menu_btn"
@@ -173,7 +171,6 @@
         android:id="@+id/main_btn"
         android:layout_width="70dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="12dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/main_menu_btn"
@@ -189,7 +186,7 @@
         android:id="@+id/to_do_btn"
         android:layout_width="33dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/todo_menu_btn"
@@ -203,7 +200,7 @@
         android:layout_width="35dp"
         android:layout_height="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/game_menu_btn"
@@ -215,7 +212,7 @@
         android:layout_width="35dp"
         android:layout_height="30dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/qna_menu_btn"
