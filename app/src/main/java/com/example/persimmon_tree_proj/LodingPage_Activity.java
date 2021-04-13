@@ -193,7 +193,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                                                         intent.putExtra("user_name",user_name);
                                                         intent.putExtra("family_name",family_name);
                                                         intent.putExtra("introduce",introduce);
-
+                                                        intent.putExtra("count",fcount);
                                                         startActivity(intent);
                                                         overridePendingTransition(0, 0); //intent시 효과 없애기
                                                         finish();

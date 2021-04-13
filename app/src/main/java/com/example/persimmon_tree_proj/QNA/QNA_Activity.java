@@ -95,21 +95,9 @@ public class QNA_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_qna);
 
 
-
-        Intent intent = getIntent();
-        f_code = intent.getStringExtra("f_code");
-        final String user_gam = intent.getStringExtra("user_gam");
-        final String user_color = intent.getStringExtra("user_color");
-        final String user_name = intent.getStringExtra("user_name");
-        final String family_name = intent.getStringExtra("family_name");
-        final String introduce = intent.getStringExtra("introduce");
-        int count = Integer.parseInt(intent.getStringExtra("count"));
-
-
-        Log.i("bin_check",count + "f_code is " + f_code);
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         //spinner =(Spinner)findViewById(R.id.spinner_question); //question을 선택하는 spinner
         container = (LinearLayout) findViewById(R.id.answer_view); //answer담는 레이아웃
@@ -148,26 +136,50 @@ public class QNA_Activity extends AppCompatActivity {
         });
         //전체 질문 가져오기 끝
 
+
+        Intent intent = getIntent();
+        final String f_code = intent.getStringExtra("f_code");
+        final String user_gam = intent.getStringExtra("user_gam");
+        final String user_color = intent.getStringExtra("user_color");
+        final String user_name = intent.getStringExtra("user_name");
+        final String family_name = intent.getStringExtra("family_name");
+        final String introduce = intent.getStringExtra("introduce");
+        final String count2 = intent.getStringExtra("count");
+
         //final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //답변 하러 가기
-
-
-
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
-
+        Log.i("bin_check2",count + "f_code is " + f_code);
         a_Reference = a_Database.getReference();
         a_Reference.child("answer").child(f_code).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
                 if (snapshot.child("1").getChildrenCount()==1){ //첫 질문 배열에 넣음
-                    readData(a_Reference.child("question").child("1"), new OnGetDataListiner(){
+                    readData(a_Reference, new OnGetDataListiner(){
                         @Override
-                        public void onSuccess(DataSnapshot dataSnapshot) {
-                            String this_question =(String) dataSnapshot.child("1").getValue();
+                        public void onSuccess() {
+                            our_q_arr = new ArrayList<>();
+                            String this_question ="첫번째감";
+                            index = our_q_arr.size();
                             questionList.add(new Qlist(this_question));
-                            our_q_arr.add(this_question);   //현재 우리가족이 대답한 question을 배열에 추가
+                            our_q_arr.add(this_question);  //현재 우리가족이 대답한 question을 배열에 추가
                             Log.i("binerror 1st onSuccess",this_question);
+                            Log.i("binerror","plz come here");
+                            Log.i("binerror", "childrencount : "+String.valueOf(snapshot.child("1").getChildrenCount()));
+//                    Log.i("binerror","line 229 our_q_arr size would be one -> "+String.valueOf(our_q_arr.size()));
+                            Toast.makeText(QNA_Activity.this,"첫 질문이 도착했대요 ! 대답하러 가볼까요? ",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("question", this_question); //선택한 question을 갖고 감.
+                            intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
+                            intent.putExtra("f_code",f_code);
+                            intent.putExtra("introduce",introduce);
+                            intent.putExtra("user_name",user_name);
+                            intent.putExtra("user_color",user_color);
+                            intent.putExtra("user_gam",user_gam);
+                            intent.putExtra("count",count2);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(0, 0); //intent시 효과 없애기
                         }
                         @Override
                         public void onStart() {
@@ -188,25 +200,11 @@ public class QNA_Activity extends AppCompatActivity {
                         }
                     });
 
-                    Log.i("binerror","plz come here");
-                    Log.i("binerror", "childrencount : "+String.valueOf(snapshot.child("1").getChildrenCount()));
-//                    Log.i("binerror","line 229 our_q_arr size would be one -> "+String.valueOf(our_q_arr.size()));
-                    Toast.makeText(QNA_Activity.this,"첫 질문이 도착했대요 ! 대답하러 가볼까요? ",Toast.LENGTH_LONG).show();
-                    //처음이라면 메인 안보여주고 바로 answer로 넘김
-                    index = our_q_arr.size();
-                    Intent intent = new Intent(QNA_Activity.this, Answeractivity.class);
-//                    intent.putExtra("question1",);
-//                    intent.putExtra("question",questionList.get(index));
-                    intent.putExtra("question",our_q_arr.get(index-1)); //선택한 question을 갖고 감.
-//                    intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
-                    intent.putExtra("f_code",f_code);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(0, 0); //intent시 효과 없애기
 
                 }
+
                 else{ //처음이 아니라면
+                    count = Integer.getInteger(count2);
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount(); //didanswer 변수에 답한 멤버 수 담기
                     int questionday = (int) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue();
                     Log.i("binerror", "line 244 : "+String.valueOf(our_q_arr.size()));
@@ -349,17 +347,19 @@ public class QNA_Activity extends AppCompatActivity {
 
     private void readData(DatabaseReference question, OnGetDataListiner onGetDataListiner) {
         onGetDataListiner.onStart();
-        question.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshotq) {
-                onGetDataListiner.onSuccess(snapshotq.getValue());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                onGetDataListiner.onFailure();
-            }
-        });
+        onGetDataListiner.onSuccess();
+//        question.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshotq) {
+//                onGetDataListiner.onSuccess(snapshotq);
+//                Log.i("binerror 1st onSuccess", "ㅏㅏ");
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                onGetDataListiner.onFailure();
+//            }
+//        });
     }
 
     private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성

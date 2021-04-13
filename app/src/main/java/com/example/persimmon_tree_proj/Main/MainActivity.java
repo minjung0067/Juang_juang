@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
+        final String count = intent.getStringExtra("count");
 
 
         //part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
@@ -170,19 +171,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");
-        reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                count = (String) snapshot.child("count").getValue();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.i("Firebase_error","fail to loading count");
-            }
-        });
 
 
         //part 3 - 감 인터렉션
