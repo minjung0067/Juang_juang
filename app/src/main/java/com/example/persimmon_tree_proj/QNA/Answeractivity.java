@@ -96,6 +96,7 @@ public class Answeractivity extends AppCompatActivity {
             }
         });
 
+        /*
         //내가 답변 한 것에 따라서 main에서 볼 수 있는게 다름! 그거 넘겨주기위함
         DatabaseReference familyreference = mDatabase.getReference("answer");
         familyreference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -125,7 +126,7 @@ public class Answeractivity extends AppCompatActivity {
 
             }
         });
-
+*/
 
 
     }

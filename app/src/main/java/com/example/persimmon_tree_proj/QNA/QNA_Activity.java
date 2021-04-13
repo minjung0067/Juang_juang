@@ -161,33 +161,12 @@ public class QNA_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
                 if (snapshot.child("1").getChildrenCount()==1){ //첫 질문 배열에 넣음
-                    readData(a_Reference.child("question").child("1"), new OnGetDataListiner(){
-                        @Override
-                        public void onSuccess(DataSnapshot dataSnapshot) {
-                            String this_question =(String) dataSnapshot.child("1").getValue();
-                            questionList.add(new Qlist(this_question));
-                            our_q_arr.add(this_question);   //현재 우리가족이 대답한 question을 배열에 추가
-                            Log.i("binerror 1st onSuccess",this_question);
-                        }
-                        @Override
-                        public void onStart() {
-                            //when starting
-                            Log.d("ONSTART", "Started");
-                        }
-
-                        @Override
-                        public void onFailure() {
-                            Log.d("onFailure", "Failed");
-                        }
-
-                        @Override
-                        public void onSuccess(Object value) {
-                            questionList.add(new Qlist((String) value));
-                            our_q_arr.add((String) value);   //현재 우리가족이 대답한 question을 배열에 추가
-                            Log.i("binerror 2nd onSuccess", (String) value);
-                        }
-                    });
-
+                    our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
+                    our_q_arr.clear();
+                    String this_question = all_q_arr.get(0);
+                    questionList.add(new Qlist(this_question));
+                    our_q_arr.add(this_question);   //현재 우리가족이 대답한 question을 배열에 추가
+                    Log.i("binerror",this_question);
                     Log.i("binerror","plz come here");
                     Log.i("binerror", "childrencount : "+String.valueOf(snapshot.child("1").getChildrenCount()));
 //                    Log.i("binerror","line 229 our_q_arr size would be one -> "+String.valueOf(our_q_arr.size()));
@@ -195,14 +174,12 @@ public class QNA_Activity extends AppCompatActivity {
                     //처음이라면 메인 안보여주고 바로 answer로 넘김
                     index = our_q_arr.size();
                     Intent intent = new Intent(QNA_Activity.this, Answeractivity.class);
-//                    intent.putExtra("question1",);
-//                    intent.putExtra("question",questionList.get(index));
-                    intent.putExtra("question",our_q_arr.get(index-1)); //선택한 question을 갖고 감.
-//                    intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
+                    intent.putExtra("question",our_q_arr.get(0)); //선택한 question을 갖고 감.
+                    intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
                     intent.putExtra("f_code",f_code);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     overridePendingTransition(0, 0); //intent시 효과 없애기
 
                 }
@@ -352,7 +329,7 @@ public class QNA_Activity extends AppCompatActivity {
         question.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshotq) {
-                onGetDataListiner.onSuccess(snapshotq.getValue());
+                onGetDataListiner.onSuccess(snapshotq);
             }
 
             @Override
