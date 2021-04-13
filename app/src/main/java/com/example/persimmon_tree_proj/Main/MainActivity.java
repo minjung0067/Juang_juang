@@ -35,7 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -187,6 +189,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //오늘 시간 띄우는 부분 !
+        SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
+        formatH = new SimpleDateFormat("yyyy년 MM월 dd일"); //formatH에 현재 시간 넣어줌 대소문자 중요함
+        Date today = new Date(); //today 변수에 Date 부르기
+        String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
+        TextView today_date = (TextView) findViewById(R.id.today_date);
+        today_date.setText(strDate);
+
 
 
 
