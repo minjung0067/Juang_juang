@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/WhiteColor">
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WhiteColor"
+        android:fontFamily="@font/nanumgothicbold"
+        android:gravity="center"
+        android:text="모아보기"
+        android:textColor="#000"
+        android:layout_marginTop="83dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+   <TextView
+        android:id="@+id/menu_name"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/WhiteColor"
+        android:fontFamily="@font/nanumgothicbold"
+        android:gravity="center"
+        android:text="왔다감"
+        android:textColor="#000"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/thinline"
+        android:layout_width="327dp"
+        android:layout_height="1.5dp"
+        android:layout_marginTop="62dp"
+        android:background="#F1F0F2"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/menu_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/nanumgothic"
+        android:text="이 곳에서는 역대 질문을 모아볼 수 있다감"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="29dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView9" />
+
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/mypage_menu_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/halfline"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/btn_allgrey"
+        android:text=""
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        -->
+<!--        <ListView-->
+<!--            android:id="@+id/QuestionList"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+<!--        </ListView>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

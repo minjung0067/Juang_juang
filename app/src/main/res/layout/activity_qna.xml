@@ -7,49 +7,9 @@
     tools:context="com.example.persimmon_tree_proj.QNA.QNA_Activity">
 
 
-    <TextView
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="65dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:maxLength="10"
-        android:clickable="false"
-        android:text="우리집 감나무"
-        android:textColor="@color/darkgray"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/profile_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631" />
-
-    <Button
-        android:id="@+id/menu_name"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/WhiteColor"
-        android:gravity="center"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:textSize="30dp"
-        android:text="왔다감"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="0dp" />
 
 
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/mypage_menu_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-<!--    <Spinner-->
+    <!--    <Spinner-->
 <!--        android:id="@+id/spinner_question"-->
 <!--        android:layout_width="300dp"-->
 <!--        android:layout_height="50dp"-->
@@ -81,21 +41,76 @@
 <!--        />-->
 
     <TextView
+        android:id="@+id/tv_questionnum"
+        android:layout_width="135dp"
+        android:layout_height="30dp"
+        android:background="@drawable/btn_allgrey"
+        android:fontFamily="@font/nanumgothicbold"
+        android:layout_marginTop="15dp"
+        android:text="몇번째 감"
+        android:textColor="#8E979C"
+        android:textSize="14dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_name" />
+
+    <TextView
+        android:id="@+id/menu_name"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/WhiteColor"
+        android:fontFamily="@font/nanumgothicbold"
+        android:gravity="center"
+        android:text="왔다감"
+        android:textSize="18dp"
+        android:textColor="#000"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        tools:layout_editor_absoluteX="-2dp" />
+
+    <ImageButton
+        android:id="@+id/btn_mypage"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/mypage_menu_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/menu_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
+
+
+    <TextView
         android:id="@+id/txt_question"
-        android:layout_width="340dp"
+        android:layout_width="300dp"
         android:layout_height="100dp"
         android:background="@drawable/btn_grey_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:gravity="center"
         android:padding="10dp"
+        android:layout_marginTop="16dp"
         android:text="선택된 질문이 나올 자리"
         android:textColor="#000"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_questionnum" />
 
+    <TextView
+        android:id="@+id/halfline"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="25dp"
+        android:text=""
+        android:background="@drawable/btn_allgrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_question" />
 
     <ScrollView
         android:id="@+id/linear_view"
@@ -107,11 +122,10 @@
         android:orientation="vertical"
         android:scrollbarSize="2dp"
         android:scrollbarThumbVertical="@color/grayColor"
-        app:layout_constraintBottom_toTopOf="@+id/btn_goanswer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_question"
+        app:layout_constraintTop_toBottomOf="@id/halfline"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -119,6 +133,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+
+
+
         </LinearLayout>
 
 
@@ -137,56 +156,10 @@
 
     </ScrollView>
 
-    <SlidingDrawer
-        android:id="@+id/slider"
-        android:layout_width="407dp"
-        android:layout_height="50dp"
-        android:content="@id/next_question_page"
-        android:handle="@id/next_question_handle"
-        app:layout_constraintBottom_toBottomOf="@+id/linear_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <Button
-            android:id="@+id/next_question_handle"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="땡겨"
-            android:background="@drawable/btn_orange_rounded"
-            android:enabled="false"
-             />
-        <LinearLayout
-            android:id="@+id/next_question_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#000000"
-            android:orientation="vertical" >
-            <TextView
-                android:id="@+id/tv_page"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="새로운 페이지로 넘어가보자고"
-                tools:ignore="MissingConstraints" />
-        </LinearLayout>
-    </SlidingDrawer>
 
 
 
-    <Button
-        android:id="@+id/btn_goanswer"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_green_rounded"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:text="답변 하러가기"
-        android:textColor="#FFFFFF"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic"
-        tools:ignore="UnknownId" />
+
 
     <TextView
         android:id="@+id/textView2"

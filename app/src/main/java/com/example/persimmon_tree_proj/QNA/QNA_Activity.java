@@ -3,39 +3,31 @@ package com.example.persimmon_tree_proj.QNA;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SlidingDrawer;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
-import com.example.persimmon_tree_proj.Game_activity;
-import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Main.MainActivity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
-import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
-import com.example.persimmon_tree_proj.customer_sound;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -46,7 +38,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import java.text.SimpleDateFormat; //시간 날짜 체크를 위함
 import java.util.Date;
@@ -95,6 +86,12 @@ public class QNA_Activity extends AppCompatActivity {
     //추가
     private int didanswer; //가족 중 몇 명이 대답했는지 +1(Date때문)
     private int count ;
+
+    ArrayList<Qlist> questionList = new ArrayList<Qlist>();  // 질문을 넣을 list adpater
+    private Object Firebase;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +100,7 @@ public class QNA_Activity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        f_code = intent.getStringExtra("user_fcode");
+        f_code = intent.getStringExtra("f_code");
         final String user_gam = intent.getStringExtra("user_gam");
         final String user_color = intent.getStringExtra("user_color");
         final String user_name = intent.getStringExtra("user_name");
@@ -151,39 +148,63 @@ public class QNA_Activity extends AppCompatActivity {
         });
         //전체 질문 가져오기 끝
 
-        final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //답변 하러 가기
+        //final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //답변 하러 가기
+
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
 
-        a_Reference = a_Database.getReference("answer");
-        a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
+        a_Reference = a_Database.getReference();
+        a_Reference.child("answer").child(f_code).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
                 if (snapshot.child("1").getChildrenCount()==1){ //첫 질문 배열에 넣음
-                    long question_cnt = snapshot.child("answer").getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
-                    int q_cnt = Long.valueOf(question_cnt).intValue();
-                    our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
-                    our_q_arr.clear();
-                    for (int i=0; i<q_cnt;i++){
-                        String this_question = String.valueOf(all_q_arr.get(i));
-                        our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
-                        index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
-                    }
+                    readData(a_Reference.child("question").child("1"), new OnGetDataListiner(){
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            String this_question =(String) dataSnapshot.child("1").getValue();
+                            questionList.add(new Qlist(this_question));
+                            our_q_arr.add(this_question);   //현재 우리가족이 대답한 question을 배열에 추가
+                            Log.i("binerror 1st onSuccess",this_question);
+                        }
+                        @Override
+                        public void onStart() {
+                            //when starting
+                            Log.d("ONSTART", "Started");
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            Log.d("onFailure", "Failed");
+                        }
+
+                        @Override
+                        public void onSuccess(Object value) {
+                            questionList.add(new Qlist((String) value));
+                            our_q_arr.add((String) value);   //현재 우리가족이 대답한 question을 배열에 추가
+                            Log.i("binerror 2nd onSuccess", (String) value);
+                        }
+                    });
+
                     Log.i("binerror","plz come here");
                     Log.i("binerror", "childrencount : "+String.valueOf(snapshot.child("1").getChildrenCount()));
-                    Log.i("binerror","line 229 our_q_arr size would be one -> "+String.valueOf(our_q_arr.size()));
+//                    Log.i("binerror","line 229 our_q_arr size would be one -> "+String.valueOf(our_q_arr.size()));
                     Toast.makeText(QNA_Activity.this,"첫 질문이 도착했대요 ! 대답하러 가볼까요? ",Toast.LENGTH_LONG).show();
                     //처음이라면 메인 안보여주고 바로 answer로 넘김
                     index = our_q_arr.size();
                     Intent intent = new Intent(QNA_Activity.this, Answeractivity.class);
-                    intent.putExtra("question",all_q_arr.get(index-1)); //선택한 question을 갖고 감.
-                    intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
+//                    intent.putExtra("question1",);
+//                    intent.putExtra("question",questionList.get(index));
+                    intent.putExtra("question",our_q_arr.get(index-1)); //선택한 question을 갖고 감.
+//                    intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
                     intent.putExtra("f_code",f_code);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(0, 0); //intent시 효과 없애기
+
                 }
                 else{ //처음이 아니라면
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount(); //didanswer 변수에 답한 멤버 수 담기
@@ -229,6 +250,9 @@ public class QNA_Activity extends AppCompatActivity {
 
 
 
+
+
+/*
         //Answeractivity로 이동
         goanswer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -244,6 +268,16 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
 
+        //질문 리스트로 넘어가는 창
+        TextView questionList = (TextView) findViewById(R.id.txt_question);
+        questionList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        */
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
@@ -284,20 +318,50 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
 
-        //고객의 소리함
-        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
-        go_setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QNA_Activity.this, customer_sound.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                startActivity(intent);
-                overridePendingTransition(0, 0); //intent시 효과 없애기
-            }
-        });
+//        //고객의 소리함
+//        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
+//        go_setting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(QNA_Activity.this, customer_sound.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.putExtra("f_code",f_code);
+//                startActivity(intent);
+//                overridePendingTransition(0, 0); //intent시 효과 없애기
+//            }
+//        });
 
     }
+
+//    public void readData(int i, OnGetDataListiner listiner){
+//        FirebaseDatabase.getInstance().getReference("question").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String value = snapshot.child(String.valueOf(i)).getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+
+    private void readData(DatabaseReference question, OnGetDataListiner onGetDataListiner) {
+        onGetDataListiner.onStart();
+        question.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshotq) {
+                onGetDataListiner.onSuccess(snapshotq.getValue());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                onGetDataListiner.onFailure();
+            }
+        });
+    }
+
     private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         a_Reference = a_Database.getReference("family");
         a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
@@ -441,5 +505,60 @@ public class QNA_Activity extends AppCompatActivity {
         mReference.removeEventListener(mChild);
         a_Reference.removeEventListener(a_Child);
         }
+
+    public class MyAdapter extends BaseAdapter { // 리스트 뷰의 아답타
+        Context context;
+        int layout;
+        ArrayList<Qlist> qlist;
+        LayoutInflater inf;
+        public MyAdapter(Context context, int layout, ArrayList<Qlist> al) {
+            this.context = context;
+            this.layout = layout;
+            this.qlist = qlist;
+            inf = (LayoutInflater)context.getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
+        }
+        @Override
+        public int getCount() {
+            return qlist.size();
+        }
+        @Override
+        public Object getItem(int position) {
+            return qlist.get(position);
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView==null) {
+                convertView = inf.inflate(layout, null);
+            }
+            TextView showquestion = (TextView)convertView.findViewById(R.id.txt_question);
+
+            Qlist m = qlist.get(position);
+            showquestion.setText(m.nowquestion);
+
+            return convertView;
+        }
+    }
+
+
+    class Qlist { // 자바빈
+        String nowquestion = ""; // 곡 title
+
+        public Qlist(String question) {
+            super();
+            this.nowquestion = question;
+
+        }
+
+        public Qlist() {
+        }
+    }
+
+
+
 }
 
