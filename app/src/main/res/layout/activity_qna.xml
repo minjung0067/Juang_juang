@@ -112,6 +112,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_question" />
 
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/blurView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/halfline"
+        app:realtimeBlurRadius="50dp"
+        app:realtimeOverlayColor="#8000"
+        />
+
+    <TextView
+        android:id="@+id/txt_blur"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumgothicbold"
+        android:text="모든 가족이
+            답변을 완료해야
+            확인할 수 있어요!"
+        android:textAlignment="center"
+        android:textColor="@color/mainColor"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="@id/blurView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/halfline" />
+
+
+
     <ScrollView
         android:id="@+id/linear_view"
         android:layout_width="wrap_content"
@@ -133,28 +163,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
-
-
-
         </LinearLayout>
 
 
-        <!--        <androidx.viewpager2.widget.ViewPager2-->
-<!--            android:id="@+id/vp_answer_view"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            />-->
-
-<!--        <fragmentlayout-->
-<!--            android:id="@+id/answer_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-<!--        </fragmentlayout>-->
-
     </ScrollView>
+
 
 
 

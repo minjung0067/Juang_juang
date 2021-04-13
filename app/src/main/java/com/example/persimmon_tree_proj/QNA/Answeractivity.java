@@ -73,6 +73,7 @@ public class Answeractivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
+        String uid = user.getUid();
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
         mDatabase = FirebaseDatabase.getInstance();
         Button answer = (Button)findViewById(R.id.btn_answer);
@@ -80,14 +81,15 @@ public class Answeractivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 msg = edit_answer.getText().toString();//edit_answer에 작성한 text msg에 저장
-                Map<String, Object> answerUpdates = new HashMap<>();
-                answerUpdates.put(position, msg);
-                FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(user_name).updateChildren(answerUpdates);
-
+                FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(uid).setValue(msg);
+                Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+                overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
 
-        /*
         //내가 답변 한 것에 따라서 main에서 볼 수 있는게 다름! 그거 넘겨주기위함
         DatabaseReference familyreference = mDatabase.getReference("answer");
         familyreference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -117,7 +119,7 @@ public class Answeractivity extends AppCompatActivity {
 
             }
         });
-*/
+
 
 
     }
@@ -134,7 +136,7 @@ public class Answeractivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-    
+
 //    public void didAnswer(){
 //        a_Reference = a_Database.getReference("answer");
 //        a_Reference.child(f_code);
