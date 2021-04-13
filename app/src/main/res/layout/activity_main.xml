@@ -32,8 +32,8 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         android:clickable="false"
         android:fontFamily="@font/nanumgothic"
         android:maxLength="10"
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_toStartOf="@+id/today_date"
@@ -120,7 +120,7 @@
             android:gravity="center_vertical"
             android:text="내 이름은"
             android:textColor="@color/WhiteColor"
-            android:textSize="18dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/today_date"

@@ -12,13 +12,13 @@
         android:id="@+id/sentence"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="@font/nanumgothicbold"
         android:gravity="left"
         android:text=""
         android:textColor="@color/pointColor"
-        android:textSize="35dp"
+        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -27,24 +27,25 @@
         android:id="@+id/name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/nanumgothicbold"
         android:gravity="left"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="20dp"
         android:text=""
         android:textColor="@color/pointColor"
-        android:textSize="20dp"
+        android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sentence" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="40dp"
         android:src="@drawable/loding_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
