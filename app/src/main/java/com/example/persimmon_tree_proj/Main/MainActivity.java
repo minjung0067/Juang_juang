@@ -35,7 +35,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -98,11 +100,10 @@ public class MainActivity extends AppCompatActivity {
         final String f_code = intent.getStringExtra("user_fcode");
         final String user_gam = intent.getStringExtra("user_gam");
         final String user_color = intent.getStringExtra("user_color");
+        Log.i("user_colorrrrr",user_color);
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
-
-
 
 
         //part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
@@ -112,33 +113,55 @@ public class MainActivity extends AppCompatActivity {
         TextView my_introduce = (TextView) findViewById(R.id.my_introduce);
         my_introduce.setText(introduce);
         ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
-
         //감 + 이름 띄우기
         switch (user_gam) {
             case "1":
-//                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-//                GradientDrawable gd1 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd1 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd1.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam1);
                 break;
             case "2":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd2 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd2.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam2);
                 break;
             case "3":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd3 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd3.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam3);
                 break;
             case "4":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd4 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd4.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam4);
                 break;
             case "5":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd5 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd5.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam5);
                 break;
             case "6":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd6 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd6.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam6);
                 break;
             case "7":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd7 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd7.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam7);
+                profile_image.setTop(1);
                 break;
             case "8":
+                profile_image.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                GradientDrawable gd8 = (GradientDrawable) profile_image.getBackground(); //동적으로 테두리 색 바꿈
+                gd8.setStroke(5, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
                 profile_image.setImageResource(R.drawable.gam8);
                 break;
             default:
@@ -146,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 profile_image.setImageResource(R.drawable.gam1);
                 break;
         }
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");
         reference.child(f_code).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -170,12 +194,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int num = rnd.nextInt(6); //랜덤 숫자 생성
+                click_gam_msg.setVisibility(View.INVISIBLE);
                 gam_say.setText(""); //초기화
                 gam_say.setVisibility(View.INVISIBLE);
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
                 gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
 
-                mHandler.postDelayed(mMyTask, 2000); // 2초후에 실행
+                mHandler.postDelayed(mMyTask, 2000); // 2초후에 감 문구 보이게
                 mMyTask = new Runnable() {
                     @Override
                     public void run() {
@@ -185,6 +210,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //오늘 시간 띄우는 부분 !
+        SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
+        formatH = new SimpleDateFormat("yyyy년 MM월 dd일"); //formatH에 현재 시간 넣어줌 대소문자 중요함
+        Date today = new Date(); //today 변수에 Date 부르기
+        String strDate = formatH.format(today); //오늘 날짜가 strDate 변수에 저장. 20210326
+        TextView today_date = (TextView) findViewById(R.id.today_date);
+        today_date.setText(strDate);
+
 
 
 
