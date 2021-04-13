@@ -185,7 +185,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                                                 family_name = String.valueOf(snapshot.child("f_name").getValue());
                                                 new Timer().schedule(new TimerTask() {
                                                     public void run() {
-                                                        Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);  // 감 캐릭터를 설정하러 가라
+                                                        Intent intent = new Intent(LodingPage_Activity.this, MainActivity.class);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         intent.putExtra("user_fcode",user_fcode);
                                                         intent.putExtra("user_color",user_color);
@@ -198,7 +198,7 @@ public class LodingPage_Activity extends AppCompatActivity {
                                                         overridePendingTransition(0, 0); //intent시 효과 없애기
                                                         finish();
                                                     }
-                                                }, 1500); // 1초후 메세지 사라지게
+                                                }, 1500);
                                             }
 
 
