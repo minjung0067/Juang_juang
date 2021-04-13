@@ -46,14 +46,14 @@ public class LodingPage_Activity extends AppCompatActivity {
     private String family_name;
     private String captain;
     private Random rnd;
-    private String[] loding_message={"자신감 있는 \n표정을 지으면 \n자신감이 생긴다 ",
-            "세상에는 \n세 가지의 \n감춰질 수 없는 것이 있다. \n해와 달, \n그리고 \n진실이다." ,
+    private String[] loding_message={"자신감 있는 \n표정을 지으면 \n\n자신감이 생긴다 ",
+            "세상에는 세 가지의 \n감춰질 수 없는 \n것이 있다. \n\n해와 달, \n\n그리고 \n진실이다." ,
             "우정은 \n기쁨을 두 배로 하고\n\n슬픔을 반감시킨다." ,
             "유감없이 \n보낸 하루는 \n즐거운 잠을 가져온다." ,
-            "승리는 \n자신감을 가진 사람의 편이다. " ,
-            "기억을 증진하는 \n가장 좋은 약은 \n감탄하는 것이다." ,
-            "운명은 \n용감한 자를 사랑한다." ,
-            "용감한 사람은 \n자기 운명을 창조해 간다."};
+            "승리는 \n\n자신감을 가진 \n\n사람의 편이다. " ,
+            "기억을 증진하는 \n가장 좋은 약은 \n\n감탄하는 것이다." ,
+            "운명은 \n\n용감한 자를 사랑한다." ,
+            "용감한 사람은 \n\n자기 운명을 창조해 간다."};
     private String[] person={"- 찰스 다윈",
             "- 석가모니" ,
             "- 프리드리히 실러" ,
