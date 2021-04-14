@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -51,22 +55,30 @@ public class LodingPage_Activity extends AppCompatActivity {
     private String family_name;
     private String captain;
     private Random rnd;
-    private String[] loding_message={"자신감 있는 \n표정을 지으면 \n\n자신감이 생긴다. ",
-            "세상에는 세 가지의 \n감춰질 수 없는 \n것이 있다. \n\n해와 달, \n\n그리고 \n진실이다." ,
-            "우정은 \n기쁨을 두 배로 하고\n\n슬픔을 반감시킨다." ,
+    private String[] loding_message={"자신감 있는 \n\n표정을 지으면 \n\n자신감이 생긴다. ",
+            "우정은 \n\n기쁨을 두 배로 하고\n\n슬픔을 반감시킨다." ,
             "유감없이 \n\n보낸 하루는 \n\n즐거운 잠을 가져온다." ,
             "승리는 \n\n자신감을 가진 \n\n사람의 편이다. " ,
-            "기억을 증진하는 \n가장 좋은 약은 \n\n감탄하는 것이다." ,
-            "운명은 \n\n용감한 자를 사랑한다." ,
-            "용감한 사람은 \n\n자기 운명을 창조해 간다."};
-    private String[] person={"- 찰스 다윈",
-            "- 석가모니" ,
-            "- 프리드리히 실러" ,
-            "- 레오나르도 다 빈치" ,
-            "- 가토 마사오" ,
-            "- 탈무드" ,
-            "- 베르길리우스" ,
-            "- 미겔 데 세르반테스"};
+            "기억을 증진하는 \n\n가장 좋은 약은 \n\n감탄하는 것이다." ,
+            "운명은 \n\n용감한 자를 \n\n사랑한다." ,
+            "용감한 사람은 \n\n자기 운명을 \n\n창조해 간다.",
+            "익은 감을\n\n발효시키면\n\n새콤달콤 맛좋은\n\n감식초를 만들 수 있어요.",
+            "감에는 \n\n비타민이 고루 들어 있어\n\n피로 해소와\n\n감기 예방에 좋아요.",
+            "감은 \n\n혈중 알코올의 \n\n상승률을 낮춰주어 \n\n숙취에 좋아요."
+
+    };
+    private String[] person= {"- 찰스 다윈",
+            "- 석가모니",
+            "- 프리드리히 실러",
+            "- 레오나르도 다 빈치",
+            "- 가토 마사오",
+            "- 탈무드",
+            "- 베르길리우스",
+            "- 미겔 데 세르반테스",
+            "   - 감 이야기 -",
+            "   - 감 이야기 -",
+            "   - 감 이야기 -",
+    };
 
 
     //로딩 이미지 돌아가는 부분분
@@ -253,8 +265,15 @@ public class LodingPage_Activity extends AppCompatActivity {
         TextView name = (TextView) findViewById(R.id.name);
         rnd = new Random(); //랜덤클래스로부터 랜덤 값 받아오는 변수 작성.
         int num = rnd.nextInt(loding_message.length); //랜덤 숫자 생성
-        sentence.setText(loding_message[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
         name.setText(person[num]);
+
+        //감 글씨만 색 바꾸기
+        String str = loding_message[num];
+        Integer index = loding_message[num].indexOf("감");
+        SpannableStringBuilder ssb = new SpannableStringBuilder(str);
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FFAB47")), index, index+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sentence.setText(ssb);
+
 
 
     }

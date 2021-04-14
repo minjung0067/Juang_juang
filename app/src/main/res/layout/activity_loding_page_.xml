@@ -18,7 +18,7 @@
         android:gravity="left"
         android:text=""
         android:textColor="@color/pointColor"
-        android:textSize="25dp"
+        android:textSize="26dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -30,7 +30,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/nanumgothicbold"
         android:gravity="left"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:text=""
         android:textColor="@color/pointColor"
         android:textSize="15dp"
