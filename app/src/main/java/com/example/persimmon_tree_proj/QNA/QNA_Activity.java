@@ -86,10 +86,14 @@ public class QNA_Activity extends AppCompatActivity {
     //추가
     private int didanswer; //가족 중 몇 명이 대답했는지 +1(Date때문)
     private int count ;
-    private int questionNum;
     ArrayList<Qlist> questionList = new ArrayList<Qlist>();  // 질문을 넣을 list adpater
     private Object Firebase;
+    private FirebaseAuth firebaseAuth;
+    private int question_cnt;
 
+    private View blurView;
+    private View linearView;
+    private View answer_view;
 
 
     @Override
@@ -97,12 +101,16 @@ public class QNA_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qna);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseAuth.getCurrentUser(); //현재 user 확인
+        String uid = user.getUid();
 
         textView =(TextView)findViewById(R.id.txt_question); //question 을 나타내는 textView
         //spinner =(Spinner)findViewById(R.id.spinner_question); //question을 선택하는 spinner
         container = (LinearLayout) findViewById(R.id.answer_view); //answer담는 레이아웃
         View blurView = (View) findViewById(R.id.blurView);
         View linearView = (View) findViewById(R.id.linear_view);
+        View answer_vew = (View) findViewById(R.id.answer_view);
         TextView showblur = (TextView)findViewById(R.id.txt_blur);
 
         SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
@@ -149,8 +157,6 @@ public class QNA_Activity extends AppCompatActivity {
         final String introduce = intent.getStringExtra("introduce");
         final String count2 = intent.getStringExtra("count");
 
-        //final Button goanswer = (Button) findViewById(R.id.btn_goanswer);  //답변 하러 가기
-        Log.i("bin_check2",count2 + "f_code is " + f_code);
         a_Reference = a_Database.getReference();
         a_Reference.child("answer").child(f_code).addValueEventListener(new ValueEventListener() {
             @Override
@@ -163,10 +169,12 @@ public class QNA_Activity extends AppCompatActivity {
                             our_q_arr = new ArrayList<>();
                             String this_question = all_q_arr.get(0);
                             questionList.add(new Qlist(this_question));
+                            Log.i("bin_check","What is Qlist : "+ questionList);
                             our_q_arr.add(this_question);  //현재 우리가족이 대답한 question을 배열에 추가
                             index = our_q_arr.size();
-                            Log.i("binerror", String.valueOf(index));
+                            Log.i("bin_error", String.valueOf(index));
                             textView.setText(this_question); //main화면에서 글씨 창 보이기
+
                             Toast.makeText(QNA_Activity.this,"첫 질문이 도착했대요 ! 대답하러 가볼까요? ",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -193,39 +201,62 @@ public class QNA_Activity extends AppCompatActivity {
                             Log.d("onFailure", "Failed");
                         }
 
-                        @Override
-                        public void onSuccess(Object value) {
-                            questionList.add(new Qlist((String) value));
-                            our_q_arr.add((String) value);   //현재 우리가족이 대답한 question을 배열에 추가
-                            Log.i("binerror 2nd onSuccess", (String) value);
-                        }
                     });
-
-
                 }
 
                 else{ //처음이 아니라면
-                    count = Integer.parseInt(count2);
-                    Log.i("user_count", String.valueOf(count));
-                    questionNum = (int) snapshot.getChildrenCount();
-                    didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount(); //didanswer 변수에 답한 멤버 수 담기
-                    int questionday = (int) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue();
-                    Log.i("binerror", "line 244 : "+String.valueOf(our_q_arr.size()));
+                    count = Integer.parseInt(count2);                                                                  //가족 수
+                    question_cnt = (int) snapshot.child("answer").child(f_code).getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                    our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
+                    our_q_arr.clear();
+                    for (int i=0; i<question_cnt;i++){
+                        String this_question = String.valueOf(all_q_arr.get(i));
+                        our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
+                        index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
+                    }
 
-                    if((didanswer-1)==count){ //모두가 답함!
+                    didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
+                    int questionday = (int) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue(); //제일 최근 질문에 올라간 날짜 담기
+                    Log.i("bin_error", "line 244 : "+String.valueOf(our_q_arr.size()));
+
+                    if((didanswer-1)==count && Integer.valueOf(everyToday)>questionday) { //모두가 답함!
+                        Log.i("bin_check", "set answer, none blur");
                         setanswer();
-                        linearView.bringToFront();                          //scroll view맨 앞으로~
-                        setViewInvalidate(blurView,linearView);             //이거 해야 view 재 정렬
-                        showblur.setVisibility(View.INVISIBLE);             //모든 가족이 답해야만 ~ 주황 글씨 숨김
-                        if (Integer.valueOf(everyToday)>questionday){       //질문 업로드 날보다 하루이상 차이가 난다면
-                            String stDate = formatH.format(today);          //오늘 날짜가 stDate 변수에 저장. 20210326
-                            index = our_q_arr.size();                       //2번 질문까지 답했으면 사이즈 = 2
-                            String qq = all_q_arr.get(index);//사이즈로는 3 index상으로 2번 질문이 추가되어야함
-                            our_q_arr.add(qq); //젤 첫 질문 q_arr에 추가
-                            Log.i("bin_check",qq);
-                            FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(String.valueOf(index+1)).child("Date").setValue(stDate); //question번호와 날짜 올리기
-                        }
-                        else{
+                        blurView.setVisibility(View.INVISIBLE);
+//                        linearView.bringToFront();                                         //scroll view맨 앞으로~
+//                        setViewInvalidate(blurView, linearView, answer_view);             //이거 해야 view 재 정렬
+                        showblur.setVisibility(View.INVISIBLE);                           //모든 가족이 답해야만 ~ 주황 글씨 숨김
+
+                        String stDate = formatH.format(today);          //오늘 날짜가 stDate 변수에 저장. 20210326
+                        index = our_q_arr.size();                       //2번 질문까지 답했으면 사이즈 = 2
+                        String qq = all_q_arr.get(index);//사이즈로는 3 index상으로 2번 질문이 추가되어야함
+                        our_q_arr.add(qq); //젤 첫 질문 q_arr에 추가
+                        Log.i("bin_check", qq);
+                        FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(String.valueOf(index + 1)).child("Date").setValue(stDate); //question번호와 날짜 올리기
+
+                        //새로운 질문 보여주는 버튼 보여주기 + 활성화 버튼 누를 시
+
+                        Toast.makeText(QNA_Activity.this,"새 질문 들어옴 ! ",Toast.LENGTH_LONG).show();
+                        /*
+                        String this_question = our_q_arr.get(index);
+                        Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("question", this_question); //선택한 question을 갖고 감.
+                        intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
+                        intent.putExtra("f_code",f_code);
+                        intent.putExtra("introduce",introduce);
+                        intent.putExtra("user_name",user_name);
+                        intent.putExtra("user_color",user_color);
+                        intent.putExtra("user_gam",user_gam);
+                        intent.putExtra("count",count2);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(0, 0); //intent시 효과 없애기
+                        */
+
+
+                    }
+                    else if((didanswer-1)==count && Integer.valueOf(everyToday)<=questionday){
 //                            index = our_q_arr.size();
                             Toast.makeText(QNA_Activity.this,"질문은 하루에 하나씩만 제공한담! 내일의 새 질문을 기대해달라감!",Toast.LENGTH_LONG).show();
                             //원래 이 뒤에 없어야함! 근데 테스트를 위해서 넣겠음.
@@ -236,38 +267,47 @@ public class QNA_Activity extends AppCompatActivity {
                             Log.i("bin_check",qq);
                             FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(String.valueOf(index+1)).child("Date").setValue(stDate); //question번호와 날짜 올리기
                         }
-
-                    }
                     else{ //모두가 답을 안했음 블러 보여주기
-                        blurView.bringToFront();                    //blurview젤 앞으로
-                        setViewInvalidate(blurView,linearView);
+                        Log.i("bin_check", "line 240 blur up");
+                        blurView.setVisibility(View.VISIBLE);
+//                        blurView.bringToFront();                    //blurview젤 앞으로
+//                        setViewInvalidate(blurView,linearView);
                         showblur.setVisibility(View.VISIBLE);       //우리 가족이 웅앵 글씨 보이게
+                        if(snapshot.child(String.valueOf(our_q_arr.size())).child(uid) == null){
+                            //답하러 가는 플로트 버튼 띄우기 + 활성화
+                            Toast.makeText(QNA_Activity.this,"모두가 답 안했고 나도 답 안함",Toast.LENGTH_LONG).show();
+                            String this_question = our_q_arr.get(index);
+                            Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("question", this_question); //선택한 question을 갖고 감.
+                            intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
+                            intent.putExtra("f_code",f_code);
+                            intent.putExtra("introduce",introduce);
+                            intent.putExtra("user_name",user_name);
+                            intent.putExtra("user_color",user_color);
+                            intent.putExtra("user_gam",user_gam);
+                            intent.putExtra("count",count2);
+                            startActivity(intent);
+                            finish();
+                            overridePendingTransition(0, 0); //intent시 효과 없애기
+                        }
+                        else{
+                            //답하러 가는 플로트 버튼 안보이게 + 비활성화 하기
+                            Toast.makeText(QNA_Activity.this,"나 아직 답 안함!",Toast.LENGTH_LONG).show();
+                        }
                     }
 
                 }
 
 
 
-            }
+        }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
 
-
-        a_Reference = a_Database.getReference("answer");
-        a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
 
 
@@ -352,19 +392,6 @@ public class QNA_Activity extends AppCompatActivity {
 
     }
 
-//    public void readData(int i, OnGetDataListiner listiner){
-//        FirebaseDatabase.getInstance().getReference("question").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String value = snapshot.child(String.valueOf(i)).getValue(String.class);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
     private void readData(DatabaseReference question, OnGetDataListiner onGetDataListiner) {
         onGetDataListiner.onStart();
