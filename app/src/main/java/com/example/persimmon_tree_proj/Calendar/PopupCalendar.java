@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class PopupCalendar extends Activity  {
 
@@ -63,7 +65,7 @@ public class PopupCalendar extends Activity  {
     private String day2;
     private int set_position;
     private int set_month_lastday;
-    private String plan; //일정
+    private String plan_name; //일정
 
     //파이어베이스에 올리는 일정 관련
     private String f_code;
@@ -77,6 +79,14 @@ public class PopupCalendar extends Activity  {
     private Integer endmonth;
     private Integer endyear;
 
+    private FirebaseAuth firebaseAuth; //파이어베이스 인증 객체 생성
+    private ImageView c_1;
+    private ImageView c_2;
+    private ImageView c_3;
+    private ImageView c_4;
+    private ImageView c_5;
+    private String clicked_color = "";
+
     private ArrayList<String> period =  new ArrayList<String>();
 
     @Override
@@ -86,6 +96,43 @@ public class PopupCalendar extends Activity  {
         setContentView(R.layout.activity_popup_calendar);
         //테두리 둥글게 했을 때 뒤에 깔리는 까만 배경 없애기
         super.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        c_1 = (ImageView) findViewById(R.id.c1);
+        c_2 = (ImageView) findViewById(R.id.c2);
+        c_3 = (ImageView) findViewById(R.id.c3);
+        c_4 = (ImageView) findViewById(R.id.c4);
+        c_5 = (ImageView) findViewById(R.id.c5);
+
+        c_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_1);
+            }
+        });
+        c_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_2);
+            }
+        });
+        c_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_3);
+            }
+        });
+        c_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_4);
+            }
+        });
+        c_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_5);
+            }
+        });
 
         Intent intent = getIntent();
         f_code = intent.getStringExtra("f_code");
@@ -123,7 +170,7 @@ public class PopupCalendar extends Activity  {
             public void onClick(View v) {
 
                 EditText txt_plan = (EditText) findViewById(R.id.txt_plan);
-                plan = txt_plan.getText().toString();
+                plan_name = txt_plan.getText().toString();
 
                 //일정 파이어베이스에 올리기
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
@@ -133,9 +180,14 @@ public class PopupCalendar extends Activity  {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         f_code = snapshot.child("fcode").getValue().toString();
 
+                        HashMap<String, String> plan = new HashMap<String, String>();
+
+                        plan.put("plan_name",plan_name);
+                        plan.put("color",clicked_color);
 
 
-                        if(plan.equals("")) {
+
+                        if(plan_name.equals("")) {
                             Toast.makeText(PopupCalendar.this, "일정 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
                         }
                         else{
@@ -897,6 +949,40 @@ public class PopupCalendar extends Activity  {
 
     private void onSwipeBottom() {
 
+    }
+
+    public void Reset(){
+        c_1.setBackgroundResource(R.drawable.btn_drawable);
+        c_2.setBackgroundResource(R.drawable.btn_drawable);
+        c_3.setBackgroundResource(R.drawable.btn_drawable);
+        c_4.setBackgroundResource(R.drawable.btn_drawable);
+        c_5.setBackgroundResource(R.drawable.btn_drawable);
+    }
+
+    public void Click ( final View view){  //버튼 클릭시마다 switch문으로 다른 감 프로필 선택
+        Reset();
+        switch (view.getId()) {
+            case R.id.c1:
+                clicked_color = "#F06262";
+                c_1.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c2:
+                clicked_color = "#FFAB47";
+                c_2.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c3:
+                clicked_color = "#F2D256";
+                c_3.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c4:
+                clicked_color = "#92C44B";
+                c_4.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c5:
+                clicked_color = "#4EBDEF";
+                c_5.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+        }
     }
 
 
