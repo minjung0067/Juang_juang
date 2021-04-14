@@ -7,6 +7,7 @@ import androidx.core.app.NotificationCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
 
+    // Frame 단위로 이미지를 바꿔서 그려주는 Drawable 객체
+    AnimationDrawable ani;
 
 
     @Override
@@ -175,20 +178,31 @@ public class MainActivity extends AppCompatActivity {
 
 
         //part 3 - 감 인터렉션
-        ImageButton btn_gam = (ImageButton) findViewById(R.id.gam_btn);
+        ImageView btn_gam = (ImageView) findViewById(R.id.gam_btn);
+
+        ani=(AnimationDrawable)btn_gam.getDrawable();
+
         Button click_gam_msg = (Button) findViewById(R.id.btn_clickgam);
         Button gam_say = (Button) findViewById(R.id.gam_say);
         rnd = new Random(); //랜덤클래스로부터 랜덤 값 받아오는 변수 작성.
         btn_gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //감이 움직이는 애니메이션
+                if(ani.isRunning()) ani.stop();
+                //지금 움직이고 있으면 멈춰
+                ani.setOneShot(true);
+                //AnimationDrawable 객체 Frame 변경을 시작
+                ani.start();
+
                 int num = rnd.nextInt(6); //랜덤 숫자 생성
                 click_gam_msg.setVisibility(View.INVISIBLE);
                 gam_say.setText(""); //초기화
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
                 gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
 
-                mHandler.postDelayed(mMyTask, 4000); // 4초후에 감 문구 보이게
+                mHandler.postDelayed(mMyTask, 4000); // 4초후에 감 문구 안 보이게
                 mMyTask = new Runnable() {
                     @Override
                     public void run() {

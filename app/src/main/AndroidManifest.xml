@@ -19,6 +19,8 @@
         android:roundIcon="@mipmap/ic_persimmon_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:usesCleartextTraffic="true">
         <activity android:name="com.example.persimmon_tree_proj.Family.RevisepopupActivity"></activity>
         <activity android:name="com.example.persimmon_tree_proj.Family.Inputcode" />
