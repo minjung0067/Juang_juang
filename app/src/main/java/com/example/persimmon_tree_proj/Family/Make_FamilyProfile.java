@@ -117,13 +117,44 @@ public class Make_FamilyProfile extends AppCompatActivity {
         str_code = "";
         for(int i=0;i<6;i++){ //총6자리 수 코드 만들기
             int num1 = (int) 48 + (int) (ran.nextDouble() * 74);
-            str_code = str_code + (char) num1;
+            if ((num1>=48 && num1<=57)||(num1>=65 && num1<=90)||(num1>=97 && num1<=122))    // 특수문자 제외시킴
+            {
+                str_code = str_code + (char) num1;
+            }
+
             //int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             //char random = ((char)((int)(Math.random()*26)+65)); // 랜덤 한 대문자
             //str_code += Integer.toString(randomNum);
         }
 
         return str_code;
+    }
+
+    public class GenerateCertCharacter{
+        private int certCharLength = 6;
+        private final char[] characterTable = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+                'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+                'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+
+        public String excuteGenerate() {
+            Random random = new Random(System.currentTimeMillis());
+            int tablelength = characterTable.length;
+            StringBuffer buf = new StringBuffer();
+
+            for(int i = 0; i < certCharLength; i++) {
+                buf.append(characterTable[random.nextInt(tablelength)]);
+            }
+
+            return buf.toString();
+        }
+
+        public int getCertCharLength() {
+            return certCharLength;
+        }
+
+        public void setCertCharLength(int certCharLength) {
+            this.certCharLength = certCharLength;
+        }
     }
 
 

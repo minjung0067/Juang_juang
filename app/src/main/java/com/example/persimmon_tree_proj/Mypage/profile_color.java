@@ -28,6 +28,7 @@ public class profile_color extends AppCompatActivity {
     private ImageView c_6;
     private ImageView c_7;
     private ImageView c_8;
+    private ImageView c_9;
     private String clicked_color = "";
 
 
@@ -44,6 +45,7 @@ public class profile_color extends AppCompatActivity {
         c_6 = (ImageView) findViewById(R.id.c6);
         c_7 = (ImageView) findViewById(R.id.c7);
         c_8 = (ImageView) findViewById(R.id.c8);
+        c_9 = (ImageView) findViewById(R.id.c9);
 
 
         c_1.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +96,12 @@ public class profile_color extends AppCompatActivity {
                 Click(c_8);
             }
         });
+        c_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(c_9);
+            }
+        });
 
 
 
@@ -123,57 +131,49 @@ public class profile_color extends AppCompatActivity {
         c_6.setBackgroundResource(R.drawable.btn_drawable);
         c_7.setBackgroundResource(R.drawable.btn_drawable);
         c_8.setBackgroundResource(R.drawable.btn_drawable);
+        c_9.setBackgroundResource(R.drawable.btn_drawable);
     }
 
     public void Click ( final View view){  //버튼 클릭시마다 switch문으로 다른 감 프로필 선택
         Reset();
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //선택한 감 변수에 담기
-                switch (view.getId()) {
-                    case R.id.c1:
-                        clicked_color = "#FE8189";
-                        c_1.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c2:
-                        clicked_color = "#FE8E69";
-                        c_2.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c3:
-                        clicked_color = "#FEC56C";
-                        c_3.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c4:
-                        clicked_color = "#B7DB79";
-                        c_4.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c5:
-                        clicked_color = "#87dade";
-                        c_5.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c6:
-                        clicked_color = "#99CAEB";
-                        c_6.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c7:
-                        clicked_color = "#A1AEE5";
-                        c_7.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                    case R.id.c8:
-                        clicked_color = "#E89CDA";
-                        c_8.setBackgroundResource(R.drawable.btn_clicked);
-                        break;
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
+        switch (view.getId()) {
+            case R.id.c1:
+                clicked_color = "#F06262";
+                c_1.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c2:
+                clicked_color = "#FFAB47";
+                c_2.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c3:
+                clicked_color = "#F2D256";
+                c_3.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c4:
+                clicked_color = "#92C44B";
+                c_4.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c5:
+                clicked_color = "#4EBDEF";
+                c_5.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c6:
+                clicked_color = "#4F8DCB";
+                c_6.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c7:
+                clicked_color = "#B07DD1";
+                c_7.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c8:
+                clicked_color = "#B9B3BD";
+                c_8.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+            case R.id.c9:
+                clicked_color = "#817889";
+                c_1.setBackgroundResource(R.drawable.btn_clicked);
+                break;
+        }
     }
 
 

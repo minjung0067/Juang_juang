@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -85,13 +86,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private int set_month_lastday;
     private int dayOfMonth;
     private ArrayList<String> have_plan_day =  new ArrayList<String>();
-    private ArrayList<String> when_whos_what_plan_arr =  new ArrayList<String>();
-    private HashMap<String,String> name_color_map = new HashMap<String,String>();
+    private ArrayList<String> when_whos_what_plan_color_arr =  new ArrayList<String>();
 
-    //자기 프로필 표시를 위함
-    String user_name = "";
-    String user_gam = "";
-    String user_color = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -99,69 +95,6 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share_calendar);
 
-        //자기 프로필 가져오기
-        FirebaseUser profileuser = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
-        DatabaseReference referenced = FirebaseDatabase.getInstance().getReference("users");
-        referenced.child(profileuser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user_name = snapshot.child("user_name").getValue().toString();
-                FirebaseDatabase a_Database = FirebaseDatabase.getInstance();
-                DatabaseReference a_Reference = a_Database.getReference("family");
-                a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
-
-                        //가져온 f_code에 해당하는 member 수 세기
-                        Iterator<DataSnapshot> members = snapshot.child("members").getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-                        while (members.hasNext()) {
-                            String member_num = members.next().getKey();
-                            if (user_name.equals(member_num)) { //현재 로그인된 userid의 이름 == 우리가족 fcode > member > 이름 과 같다면
-                                user_gam = snapshot.child("members").child(user_name).child("user_gam").getValue(String.class); //자신의 gam과 컬러를
-                                user_color = snapshot.child("members").child(user_name).child("user_color").getValue(String.class);
-                                ImageView profile = (ImageView) findViewById(R.id.btn_mypage);
-
-                                if (user_gam.equals("1")) {
-                                    profile.setImageResource(R.drawable.gam1);
-                                } else if (user_gam.equals("2")) {
-                                    profile.setImageResource(R.drawable.gam2);
-                                } else if (user_gam.equals("3")) {
-                                    profile.setImageResource(R.drawable.gam3);
-                                } else if (user_gam.equals("4")) {
-                                    profile.setImageResource(R.drawable.gam4);
-                                } else if (user_gam.equals("5")) {
-                                    profile.setImageResource(R.drawable.gam5);
-                                } else if (user_gam.equals("6")) {
-                                    profile.setImageResource(R.drawable.gam6);
-                                } else if (user_gam.equals("7")) {
-                                    profile.setImageResource(R.drawable.gam7);
-                                } else if (user_gam.equals("8")) {
-                                    profile.setImageResource(R.drawable.gam8);
-                                } else {
-                                    profile.setImageResource(R.drawable.gam1);
-                                }
-
-                                profile.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                                GradientDrawable gd1 = (GradientDrawable) profile.getBackground(); //동적으로 테두리 색 바꿈
-                                gd1.setStroke(50, Color.parseColor(user_color)); //배열에 담긴 색깔로 테두리 설정
-
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
 
         detector = new GestureDetectorCompat(this, new MyGestureListener());
@@ -183,7 +116,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         });
 
         //일정 추가 이미지 버튼
-        FloatingActionButton add_calendar= findViewById(R.id.btn_addcal);
+        Button add_calendar= findViewById(R.id.btn_adddate);
         add_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -203,6 +136,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 getCalendar(mThisMonthCalendar);
             }
         });
+
         next_month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,29 +231,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
         f_code = intent.getStringExtra("f_code");
         //일정 가져와서 띄우는 부분~~~~~//
         //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("groups");
         //현재 구성원들 데이터베이스 하나씩 돌면서 user_name:color_number
-        reference.child(f_code).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot data : dataSnapshot.getChildren()){
-                    String user_name = data.getKey();
-                    String color_number = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
-                    if (color_number != null) { //있으면 담기, 없으면 패스
-                        name_color_map.put(user_name,color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });    //이름:색깔 map 부분 끝
-
-
         //3. 멤버별 해당 색깔의 동적 imageview형성//
 
         //동적 imageview형성 끝//
@@ -362,6 +275,9 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
             }
         };
     }
+
+
+
 
     @Override
     protected void onResume()
@@ -446,8 +362,8 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
 
         // 2. 파이어베이스 돌면서 일정이 있는 날짜 배열에 담기 //
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
-        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("calendar");
+        reference.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
                 int count = (int) dataSnapshot.getChildrenCount();
@@ -464,9 +380,9 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                 throw databaseError.toException();
             }
         });
-        when_whos_what_plan_arr.clear();
+        when_whos_what_plan_color_arr.clear();
         // 3. 파이어베이스 돌면서 멤버별 사람이름:일정이름 map 형성해 해당 날짜에 띄우기 //
-        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {  //datasnapshot은 month
                 for(int i=0; i<have_plan_day.size();i++){
@@ -476,17 +392,21 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                         String whos_plan = plan.next().getKey();
                         Iterator<DataSnapshot> one_plan = dataSnapshot.child(day_num).child(whos_plan).getChildren().iterator();
                         while (one_plan.hasNext()) {
-                            String plan_name = one_plan.next().getValue().toString();
-                            when_whos_what_plan_arr.add(have_plan_day.get(i));  //when = 날짜
-                            when_whos_what_plan_arr.add(whos_plan);   //who's = 누구의
-                            when_whos_what_plan_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
+                            Log.i("kescheck",whos_plan);
+                            String what_plan = one_plan.next().getKey();
+                            String plan_name = String.valueOf(dataSnapshot.child(day_num).child(whos_plan).child(String.valueOf(what_plan)).child("plan").getValue());
+                            String color_name = String.valueOf(dataSnapshot.child(day_num).child(whos_plan).child(String.valueOf(what_plan)).child("color").getValue());
+                            when_whos_what_plan_color_arr.add(have_plan_day.get(i));  //when = 날짜
+                            when_whos_what_plan_color_arr.add(whos_plan);   //who's = 누구의
+                            when_whos_what_plan_color_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
+                            when_whos_what_plan_color_arr.add(color_name); //color = 일정의 색깔이 무엇인가?
                         }
-//                        //arraylist에 [2,민정,연날리기] 이렇게 들어감
+//                        //arraylist에 [2,민정,연날리기,색깔] 이렇게 들어감
 //                        make_bar(when_whos_what_plan_arr);   //날짜 view에 집어 넣는 함수로 이동
                     }
                 }
                 //파이어베이스 돌면서 멤버별 시간: 일정 map 형성 끝//
-                initCalendarAdapter(when_whos_what_plan_arr,name_color_map,dayOfMonth);
+                initCalendarAdapter(when_whos_what_plan_color_arr,dayOfMonth);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -553,9 +473,9 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
 
     }
 
-    private void initCalendarAdapter(ArrayList when_whos_what_plan_arr,HashMap name_color_map,int dayOfMonth)
+    private void initCalendarAdapter(ArrayList when_whos_what_plan_color_arr,int dayOfMonth)
     {
-        mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList,when_whos_what_plan_arr,name_color_map,dayOfMonth);
+        mCalendarAdapter = new CalendarAdapter(this, R.layout.day, mDayList,when_whos_what_plan_color_arr,dayOfMonth);
         mGvCalendar.setAdapter(mCalendarAdapter);
     }
     @Override

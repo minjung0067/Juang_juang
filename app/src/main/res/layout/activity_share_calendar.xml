@@ -14,16 +14,16 @@
 
     <TextView
         android:id="@+id/button"
-        android:clickable="false"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="65dp"
-        android:fontFamily="@font/nanumsquare_acb"
+        android:clickable="false"
+        android:fontFamily="@font/nanumgothicbold"
         android:maxLength="10"
-        android:text="우리집 감나무"
-        android:textColor="@color/darkgray"
-        android:textSize="20dp"
+        android:text="언제감"
+        android:textColor="#000000"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +41,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="324dp"
+        android:layout_height="1.5dp"
+        android:layout_marginTop="15dp"
+        android:background="#F1F0F2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="620dp"
-        android:orientation="vertical"
+        android:layout_width="411dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="24dp"
         android:gravity="center_vertical"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button">
@@ -55,9 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="#ffffff"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/button">
+            android:gravity="center_horizontal">
 
             <ImageButton
                 android:id="@+id/last_month_btn"
@@ -112,76 +123,76 @@
                 <TextView
                     android:id="@+id/tv_Sunday"
                     android:layout_width="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:text="일"
+                    android:layout_weight="1"
                     android:font="@font/nanumsquare_acb"
+                    android:gravity="center"
+                    android:text="일"
                     android:textColor="@color/mainColor"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Monday"
                     android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:font="@font/nanumsquare_acb"
-                    android:layout_height="wrap_content"
-                    android:text="월"
                     android:gravity="center"
+                    android:text="월"
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Tuesday"
                     android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:font="@font/nanumsquare_acb"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="화"
                     android:textColor="#000000"
-                    android:gravity="center"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Wednesday"
-                    android:font="@font/nanumsquare_acb"
                     android:layout_width="fill_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="수"
+                    android:layout_weight="1"
+                    android:font="@font/nanumsquare_acb"
                     android:gravity="center"
+                    android:text="수"
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Thursday"
                     android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:font="@font/nanumsquare_acb"
-                    android:layout_height="wrap_content"
-                    android:text="목"
                     android:gravity="center"
+                    android:text="목"
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Friday"
                     android:layout_width="fill_parent"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:font="@font/nanumsquare_acb"
-                    android:text="금"
                     android:gravity="center"
+                    android:text="금"
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_Saturday"
                     android:layout_width="fill_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:font="@font/nanumsquare_acb"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:font="@font/nanumsquare_acb"
+                    android:gravity="center"
                     android:text="토"
                     android:textColor="@color/pointColor"
                     android:textSize="15dp" />
@@ -198,34 +209,39 @@
             <GridView
                 android:id="@+id/gv_calendar_activity_gv_calendar"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="473dp"
                 android:background="#FFFFFF"
-                android:fontFamily="@font/nanumsquare_acb"
+                android:fontFamily="@font/nanumgothicbold"
                 android:listSelector="@drawable/grideview_selector"
                 android:numColumns="7"
                 android:stretchMode="columnWidth"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                tools:ignore="MissingConstraints" >
+                tools:ignore="MissingConstraints">
 
 
             </GridView>
 
 
-
         </LinearLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_addcal"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/add_eventt"
-            tools:ignore="MissingClass,MissingConstraints" />
 
 
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/btn_adddate"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="84dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="88dp"
+        android:background="@color/WhiteColor"
+        android:foreground="@drawable/add_todo"
+        android:onClick="linearOnClick"
+        android:shadowColor="@color/WhiteColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="OnClick" />
 
     <TextView
         android:id="@+id/textView2"
