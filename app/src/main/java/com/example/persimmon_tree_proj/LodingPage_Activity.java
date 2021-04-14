@@ -68,7 +68,6 @@ public class LodingPage_Activity extends AppCompatActivity {
 
     };
     private String[] person= {"- 찰스 다윈",
-            "- 석가모니",
             "- 프리드리히 실러",
             "- 레오나르도 다 빈치",
             "- 가토 마사오",

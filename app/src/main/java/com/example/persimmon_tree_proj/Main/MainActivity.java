@@ -57,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
             "당신과 함께 할 수 있어 감사하당!" ,
             "꽃길만 걷자!" ,
             "감사합니다 감사합니다" ,
-            "감동이야 감동~"};
+            "감동이야 감동~",
+            "당신은 다정다감~",
+    };
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
 
