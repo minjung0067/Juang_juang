@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         final String count = intent.getStringExtra("count");
 
 
+
         //part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
 
         TextView my_family_name = (TextView) findViewById(R.id.my_family_name);
