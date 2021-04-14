@@ -49,13 +49,13 @@ public class CalendarAdapter extends BaseAdapter
      * @param dayList
      *            날짜정보가 들어있는 리스트
      */
-    public CalendarAdapter(Context context, int textResource, ArrayList<DayInfo> dayList, ArrayList<String> when_whos_what_plan_arr, int dayOfMonth)
+    public CalendarAdapter(Context context, int textResource, ArrayList<DayInfo> dayList, ArrayList<String> when_whos_what_plan_color_arr, int dayOfMonth)
     {
         this.mContext = context;
         this.mDayList = dayList;
         this.mResource = textResource;
         this.mLiInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mwhen_whos_what_plan_color_arr = when_whos_what_plan_arr;
+        this.mwhen_whos_what_plan_color_arr = when_whos_what_plan_color_arr;
         //this.mname_color_map = name_color_map;
         this.mdayOfMonth = dayOfMonth;
     }
@@ -120,8 +120,6 @@ public class CalendarAdapter extends BaseAdapter
         int when_index=0; //한번 싹 지우고
         int size = mwhen_whos_what_plan_color_arr.size();
         while(when_index < size){
-//                    dayViewHolder.containers.setHasTransientState(true);
-//            Log.i("size no3no",String.valueOf(mwhen_whos_what_plan_arr.get(when_index)));
             int day_num = (position - mdayOfMonth + 2); //날짜 번호
             if(mwhen_whos_what_plan_color_arr.get(when_index).equals(String.valueOf(day_num))){  //그 position에 일정이 있으면
                 //해당 dayViewHolder.에 동적 view추가
@@ -137,11 +135,11 @@ public class CalendarAdapter extends BaseAdapter
                 plan.setMinWidth(140);
                 plan.setTextColor(Color.parseColor("#ffffff"));
                 //테두리 drawable
-                String user_name = String.valueOf(mwhen_whos_what_plan_color_arr.get(when_index+1));
+                String user_name = mwhen_whos_what_plan_color_arr.get(when_index+1).toString();
                 plan.setBackgroundResource(R.drawable.line_dungle_calendar);  //테두리 둥글둥글
                 GradientDrawable gd1 = (GradientDrawable) plan.getBackground(); //동적으로 배경색 바꿈
-                String color_name = mwhen_whos_what_plan_color_arr.get(when_index+3);
-                gd1.setColor(Color.parseColor(color_name)); //사람에 맞는 색깔로 배경 설정
+                String this_color = mwhen_whos_what_plan_color_arr.get(when_index+3);
+                gd1.setColor(Color.parseColor(this_color)); //사람에 맞는 색깔로 배경 설정
                 plan.setText(mwhen_whos_what_plan_color_arr.get(when_index+2));//그 bar의 text는 i+2
                 dayViewHolder.containers.addView(plan);
 
@@ -153,12 +151,12 @@ public class CalendarAdapter extends BaseAdapter
 
 
                 when_index += 4;
-                //세 값 삭제 해 줘야함
+                //네개 값 삭제 해 줘야함
 //                        dayViewHolder.containers.setHasTransientState(false);
             }
             else {
-                when_index += 4; //없으면 그냥 세 칸씩 건너 뛰어야함
-                //날짜 , 이름 , 일정 이렇게 3개가 한 세트라서!
+                when_index += 4; //없으면 그냥 4 칸씩 건너 뛰어야함
+                //날짜 , 이름 , 일정, 색깔 이렇게 4개가 한 세트라서!
             }
         }
 

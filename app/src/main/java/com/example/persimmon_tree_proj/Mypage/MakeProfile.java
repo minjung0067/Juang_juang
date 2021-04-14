@@ -82,45 +82,6 @@ public class MakeProfile extends AppCompatActivity {
         });
 
         imageView = (ImageView) findViewById(R.id.profile_image);
-        /*change_btn = (ImageButton) findViewById(R.id.change_profile);
-        change_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                introduce = whoami.getText().toString();
-                if(introduce.getBytes().length <= 0){//빈값이 넘어올때의 처리
-                    Toast.makeText(MakeProfile.this, "한 줄 소래를 입력해주세요", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    mDatabase = FirebaseDatabase.getInstance();
-                    //입력한 한줄소개 현재 로그인한 사람 uid 통해서 그 사람 introduce에 넣기
-                    firebaseAuth = FirebaseAuth.getInstance();
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");  //users에서 현 uid 가진 사람 찾기
-                    mDatabase.getReference("users").child(user.getUid()).child("introduce").setValue(introduce); //database user의 정보 부분에 한줄 소개 내용 덮어쓰기
-                    reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            myfcode = dataSnapshot.child("fcode").getValue(String.class);
-                            user_name = dataSnapshot.child("name").getValue(String.class);
-                            FirebaseDatabase.getInstance().getReference("family").child(myfcode).child("members").child(user_name).child("introduce").setValue(introduce);
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            throw databaseError.toException();
-                        }
-                    });
-                }
-
-                Intent intent = new Intent(MakeProfile.this, profile_gam.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.putExtra("intro",introduce);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-         */
 
         reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -147,6 +108,7 @@ public class MakeProfile extends AppCompatActivity {
                                 case "2":
                                     imageView.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
                                     GradientDrawable gd2 = (GradientDrawable) imageView.getBackground(); //동적으로 테두리 색 바꿈
+                                    gd2.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     gd2.setStroke(10, Color.parseColor(color_number)); //배열에 담긴 색깔로 테두리 설정
                                     imageView.setImageResource(R.drawable.gam2);
                                     break;

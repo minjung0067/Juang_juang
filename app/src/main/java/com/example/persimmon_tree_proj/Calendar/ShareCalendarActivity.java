@@ -87,12 +87,7 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
     private int dayOfMonth;
     private ArrayList<String> have_plan_day =  new ArrayList<String>();
     private ArrayList<String> when_whos_what_plan_color_arr =  new ArrayList<String>();
-    private HashMap<String,String> name_color_map = new HashMap<String,String>();
 
-    //자기 프로필 표시를 위함
-    String user_name = "";
-    String user_gam = "";
-    String user_color = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState)
