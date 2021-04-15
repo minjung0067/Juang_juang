@@ -123,6 +123,8 @@
         android:layout_width="300dp"
         android:layout_height="170dp"
         android:layout_marginTop="24dp"
+        android:dividerHeight="20dp"
+        android:divider="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"

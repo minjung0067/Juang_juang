@@ -121,6 +121,9 @@ public class Make_FamilyProfile extends AppCompatActivity {
             {
                 str_code = str_code + (char) num1;
             }
+            else{
+                i--;
+            }
 
             //int randomNum =(int)(Math.random()*10); //일의 자리 수 int 값 난수 생성
             //char random = ((char)((int)(Math.random()*26)+65)); // 랜덤 한 대문자
