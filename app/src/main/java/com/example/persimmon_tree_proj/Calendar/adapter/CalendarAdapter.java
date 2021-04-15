@@ -130,17 +130,19 @@ public class CalendarAdapter extends BaseAdapter
                 plan.setGravity(Gravity.TOP);
                 plan.setTextSize(13);
                 plan.setGravity(1);
-                plan.setHeight(30);
+                plan.setHeight(40);
                 plan.setPadding(0,0,0,1);
                 plan.setMinWidth(140);
                 plan.setTextColor(Color.parseColor("#ffffff"));
                 //테두리 drawable
-                String user_name = mwhen_whos_what_plan_color_arr.get(when_index+1).toString();
+                //String user_name = mwhen_whos_what_plan_color_arr.get(when_index+1).toString();
                 plan.setBackgroundResource(R.drawable.line_dungle_calendar);  //테두리 둥글둥글
+                String plan_name = mwhen_whos_what_plan_color_arr.get(when_index+2);
+                Log.i("plan",plan_name);
+                plan.setText(plan_name);//그 bar의 text는 i+2
                 GradientDrawable gd1 = (GradientDrawable) plan.getBackground(); //동적으로 배경색 바꿈
                 String this_color = mwhen_whos_what_plan_color_arr.get(when_index+3);
                 gd1.setColor(Color.parseColor(this_color)); //사람에 맞는 색깔로 배경 설정
-                plan.setText(mwhen_whos_what_plan_color_arr.get(when_index+2));//그 bar의 text는 i+2
                 dayViewHolder.containers.addView(plan);
 
                 //한칸 띄워주기용...
@@ -221,7 +223,7 @@ public class CalendarAdapter extends BaseAdapter
     private int getCellHeightDP()
     {
         int height = mContext.getResources().getDisplayMetrics().heightPixels;
-        //int cellHeight = 1280/6;
+        //int cellHeight = 1280%6;
         int cellHeight = height/(6);
 
         return cellHeight;
