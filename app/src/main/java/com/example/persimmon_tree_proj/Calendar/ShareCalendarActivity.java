@@ -392,16 +392,15 @@ public class ShareCalendarActivity extends Activity implements OnItemClickListen
                         String whos_plan = plan.next().getKey();
                         Iterator<DataSnapshot> one_plan = dataSnapshot.child(day_num).child(whos_plan).getChildren().iterator();
                         while (one_plan.hasNext()) {
-                            Log.i("kescheck",whos_plan);
                             String what_plan = one_plan.next().getKey();
-                            String plan_name = String.valueOf(dataSnapshot.child(day_num).child(whos_plan).child(String.valueOf(what_plan)).child("plan").getValue());
+                            String plan_name = String.valueOf(dataSnapshot.child(day_num).child(whos_plan).child(String.valueOf(what_plan)).child("plan_name").getValue());
                             String color_name = String.valueOf(dataSnapshot.child(day_num).child(whos_plan).child(String.valueOf(what_plan)).child("color").getValue());
                             when_whos_what_plan_color_arr.add(have_plan_day.get(i));  //when = 날짜
                             when_whos_what_plan_color_arr.add(whos_plan);   //who's = 누구의
                             when_whos_what_plan_color_arr.add(plan_name);   //what_plan = 어떤 일정이냐!
                             when_whos_what_plan_color_arr.add(color_name); //color = 일정의 색깔이 무엇인가?
                         }
-//                        //arraylist에 [2,민정,연날리기,색깔] 이렇게 들어감
+//                        arraylist에 [2,민정,연날리기,색깔] 이렇게 들어감
 //                        make_bar(when_whos_what_plan_arr);   //날짜 view에 집어 넣는 함수로 이동
                     }
                 }
