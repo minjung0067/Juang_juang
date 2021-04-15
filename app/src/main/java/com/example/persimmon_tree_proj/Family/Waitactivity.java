@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj.Family;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,6 +35,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.Juang_juang.R.*;
+import static com.example.Juang_juang.R.drawable.*;
+
 
 public class Waitactivity extends AppCompatActivity {
 
@@ -40,9 +45,9 @@ public class Waitactivity extends AppCompatActivity {
     private String f_code;
     private int member_count; //현재 들어와있는 가족 구성원 수 count
 
-    private ArrayList<String> all_user_arr; //user를 담는 배열
+
     private ListView userList;
-    private ArrayAdapter<String> adapter;
+    private ListViewAdapter userListadapter;
     List<Object> Array = new ArrayList<Object>();
 
 
@@ -50,10 +55,10 @@ public class Waitactivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waitactivity);
+        setContentView(layout.activity_waitactivity);
 
-        final TextView textchange = (TextView)findViewById(R.id.txt_notice);
-        Button send = (Button) findViewById(R.id.btn_copy);
+        final TextView textchange = (TextView)findViewById(id.txt_notice);
+        Button send = (Button) findViewById(id.btn_copy);
         send.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
@@ -72,7 +77,7 @@ public class Waitactivity extends AppCompatActivity {
         });
 
 
-        Button logout = (Button) findViewById(R.id.btn_logout2); //로그아웃 버튼
+        Button logout = (Button) findViewById(id.btn_logout2); //로그아웃 버튼
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +95,7 @@ public class Waitactivity extends AppCompatActivity {
             }
         });
 
-        Button start = (Button) findViewById(R.id.btn_start);
+        Button start = (Button) findViewById(id.btn_start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +115,7 @@ public class Waitactivity extends AppCompatActivity {
             }
         });
 
-        Button delete = (Button)findViewById(R.id.btn_delete);
+        Button delete = (Button)findViewById(id.btn_delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,36 +131,36 @@ public class Waitactivity extends AppCompatActivity {
         });
 
 
-        userList = (ListView)findViewById(R.id.list_user);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, new ArrayList<String>());
-        userList.setAdapter(adapter);
+        userList = (ListView)findViewById(id.list_user);
+        userListadapter = new ListViewAdapter(); //Adapter 생성
+        userList.setAdapter(userListadapter);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = String.valueOf(snapshot.child("fcode").getValue());
-                TextView txt_fcode = (TextView) findViewById(R.id.txt_fcode);
+                TextView txt_fcode = (TextView) findViewById(id.txt_fcode);
                 txt_fcode.setText(f_code);
 
 
-                DatabaseReference reference2  = FirebaseDatabase.getInstance().getReference("groups");
+                DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("groups");
                 reference2.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        adapter.clear();
 
-                        for(DataSnapshot membersData : dataSnapshot.getChildren()){
+
+                        for (DataSnapshot membersData : dataSnapshot.getChildren()) {
                             String user = membersData.getValue().toString();
+                            Log.i("user",user);
                             Array.add(user);
-                            adapter.add(user);
+                            userListadapter.addItem(ContextCompat.getDrawable(getApplicationContext(), btn_brightgray_rounded),ContextCompat.getDrawable(getApplicationContext(),line_dungle),user);
                         }
-                        adapter.notifyDataSetChanged(); //리스트뷰 갱신
-                        userList.setSelection(adapter.getCount() -1); //마지막 위치를 카운트해서 보내줌.
-                        member_count = adapter.getCount();
+                        userListadapter.notifyDataSetChanged(); //리스트뷰 갱신
+                        userList.setSelection(userListadapter.getCount() - 1); //마지막 위치를 카운트해서 보내줌.
+                        member_count = userListadapter.getCount();
 
                     }
-
 
 
                     @Override
@@ -164,7 +169,6 @@ public class Waitactivity extends AppCompatActivity {
                     }
                 });
                 //전체 user 가져오기
-
 
 
             }

@@ -3,6 +3,7 @@ package com.example.persimmon_tree_proj.Family;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.Juang_juang.R.drawable.btn_brightgray_rounded;
+import static com.example.Juang_juang.R.drawable.line_dungle;
+
 public class Waitactivity2 extends AppCompatActivity {
 
 
@@ -38,9 +43,8 @@ public class Waitactivity2 extends AppCompatActivity {
     private String user_name;
     private int member_count; //현재 들어와있는 가족 구성원 수 count
 
-    private ArrayList<String> all_user_arr; //user를 담는 배열
     private ListView userList;
-    private ArrayAdapter<String> adapter;
+    private ListViewAdapter userListadapter;
     List<Object> Array = new ArrayList<Object>();
 
     @Override
@@ -102,11 +106,11 @@ public class Waitactivity2 extends AppCompatActivity {
 
 
         userList = (ListView)findViewById(R.id.list_user);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, new ArrayList<String>());
-        userList.setAdapter(adapter);
+        userListadapter = new ListViewAdapter(); //Adapter 생성
+        userList.setAdapter(userListadapter);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();  //현재 사용자 확보
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 f_code = String.valueOf(snapshot.child("fcode").getValue());
@@ -114,23 +118,23 @@ public class Waitactivity2 extends AppCompatActivity {
                 txt_fcode.setText(f_code);
 
 
-                DatabaseReference reference2  = FirebaseDatabase.getInstance().getReference("groups");
+                DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("groups");
                 reference2.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        adapter.clear();
 
-                        for(DataSnapshot membersData : dataSnapshot.getChildren()){
+
+                        for (DataSnapshot membersData : dataSnapshot.getChildren()) {
                             String user = membersData.getValue().toString();
+                            Log.i("user",user);
                             Array.add(user);
-                            adapter.add(user);
+                            userListadapter.addItem(ContextCompat.getDrawable(getApplicationContext(), btn_brightgray_rounded),ContextCompat.getDrawable(getApplicationContext(),line_dungle),user);
                         }
-                        adapter.notifyDataSetChanged(); //리스트뷰 갱신
-                        userList.setSelection(adapter.getCount() -1); //마지막 위치를 카운트해서 보내줌.
-                        member_count = adapter.getCount();
+                        userListadapter.notifyDataSetChanged(); //리스트뷰 갱신
+                        userList.setSelection(userListadapter.getCount() - 1); //마지막 위치를 카운트해서 보내줌.
+                        member_count = userListadapter.getCount();
 
                     }
-
 
 
                     @Override
@@ -139,7 +143,6 @@ public class Waitactivity2 extends AppCompatActivity {
                     }
                 });
                 //전체 user 가져오기
-
 
 
             }
