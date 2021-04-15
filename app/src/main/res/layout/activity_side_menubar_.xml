@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
+    android:background="@drawable/btn_white_rounded"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -13,12 +14,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:padding="@dimen/activity_vertical_margin"
+        android:fontFamily="@font/nanumgothicbold"
         android:fitsSystemWindows="true"
+        android:background="@drawable/btn_white_rounded"
+        app:itemBackground="@drawable/btn_brightgray_rounded"
+        app:itemHorizontalPadding="@dimen/activity_horizontal_margin"
+        app:itemTextColor="@color/darkgray"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/menu" />
+
+
+
 </androidx.drawerlayout.widget.DrawerLayout>
