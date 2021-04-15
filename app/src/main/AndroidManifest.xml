@@ -13,14 +13,20 @@
     <application
         android:name="com.example.persimmon_tree_proj.Account.GlobalApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_persimmon_logo"
         android:label="우리집 감나무"
+        android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_persimmon_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.persimmon_tree_proj.Family.RevisepopupActivity"></activity>
+        <activity
+            android:name="com.example.side_menubar_Activity"
+            android:label="@string/title_activity_side_menubar_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.example.persimmon_tree_proj.Family.RevisepopupActivity" />
         <activity android:name="com.example.persimmon_tree_proj.Family.Inputcode" />
         <activity android:name="com.example.persimmon_tree_proj.Family.DeletepopupActivity" />
         <activity android:name="com.example.persimmon_tree_proj.To_do_list.Todolist_edit" />

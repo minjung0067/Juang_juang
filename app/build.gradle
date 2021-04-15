@@ -12,6 +12,7 @@ android {
         applicationId "com.example.persimmon_tree_proj"
         minSdkVersion 18
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -52,7 +53,11 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'// import from jcenter
     implementation "androidx.viewpager2:viewpager2:1.0.0" // scroll swipe fragment 생성을 위함
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.android.material:material:1.2.1'// import from jcenter
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'// import from jcenter
     // naveridlogin dependencies
     def android_x_version = "1.0.0"
     implementation "androidx.appcompat:appcompat:$android_x_version"
@@ -69,5 +74,5 @@ dependencies {
     implementation 'com.github.mmin18:realtimeblurview:1.2.1'//blurview
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
-
+    implementation 'com.android.support:design:30.0.0'
 }
