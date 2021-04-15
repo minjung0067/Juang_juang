@@ -200,7 +200,7 @@
         android:layout_marginBottom="15dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/todo_menu_btn"
+        android:src="@drawable/menu_todo_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/game_btn"
         app:layout_constraintHorizontal_bias="0.352"
