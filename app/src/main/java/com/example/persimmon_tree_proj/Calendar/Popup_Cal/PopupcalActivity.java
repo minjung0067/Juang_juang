@@ -71,37 +71,11 @@ public class PopupcalActivity extends Activity {
         //날짜 보여주기
         day_text.setText(day + "일");
 
-        //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
-        //현재 구성원들 데이터베이스 하나씩 돌면서 user_name:color_number
-        reference.child(f_code).child("members").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String user_name = data.getKey();
-                    String color_number = dataSnapshot.child(user_name).child("user_color").getValue(String.class);
-                    String introduce = dataSnapshot.child(user_name).child("introduce").getValue(String.class);
-                    if (color_number != null) { //있으면 담기, 없으면 패스
-                        name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                        name_introduce_map.put(user_name, introduce);
-
-                    } else if (color_number.equals("")) {
-                        name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                        name_introduce_map.put(user_name, "");
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });    //이름:색깔 map 부분 끝
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("calendar");
         listview = (SwipeMenuListView) findViewById(R.id.plan_vview);
         //intent 받아온 년월일 사용해서 해당 날짜의 일정 한 줄씩 띄우기
-        reference.child(f_code).child("calendar").child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //일정 아무것도 없으면
@@ -109,49 +83,39 @@ public class PopupcalActivity extends Activity {
                     adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "");
                     listview.setAdapter(adapterr);
                 }
-                reference.child(f_code).child("calendar").child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
-                            String user_name = data.getKey();
-                            for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
-                                String plan_id = one_plan.getKey();
-                                String plan_name = one_plan.getValue().toString();
-                                listview.setAdapter(adapterr);
+                for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
+                    String user_name = data.getKey();
+                    for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
+                        String plan_id = one_plan.getKey();
+                        String plan_name = String.valueOf(one_plan.child("plan_name").getValue());
+                        listview.setAdapter(adapterr);
 //                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
 //                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
-                      SwipeMenuCreator creator = new SwipeMenuCreator() {
+                        SwipeMenuCreator creator = new SwipeMenuCreator() {
 
-                          @Override
-                          public void create(SwipeMenu menu) {
-                              // Create different menus depending on the view type
-                              createMenu1(menu);
-                          }
-                          private void createMenu1(SwipeMenu menu) {
-                              SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
-                              item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                              item1.setWidth((190));
-                              item1.setIcon(R.drawable.calendar_revise2x);
-                              menu.addMenuItem(item1);
-                              SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
-                              item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                              item2.setWidth(190);
-                              item2.setIcon(R.drawable.calendar_delete2x);
-                              menu.addMenuItem(item2);
-                          }
-                      };
-                      // set creator
-                                listview.setMenuCreator(creator);
-                                adapterr.addItem(name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name, user_name, plan_id);
+                            @Override
+                            public void create(SwipeMenu menu) {
+                                // Create different menus depending on the view type
+                                createMenu1(menu);
                             }
-                        }
+                            private void createMenu1(SwipeMenu menu) {
+                                SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
+                                item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                                item1.setWidth((190));
+                                item1.setIcon(R.drawable.calendar_revise2x);
+                                menu.addMenuItem(item1);
+                                SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
+                                item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                                item2.setWidth(190);
+                                item2.setIcon(R.drawable.calendar_delete2x);
+                                menu.addMenuItem(item2);
+                            }
+                        };
+                        // set creator
+                        listview.setMenuCreator(creator);
+                        adapterr.addItem(name_color_map.get(user_name), name_introduce_map.get(user_name), plan_name, user_name, plan_id);
                     }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException();
-                    }
-                });
+                }
             }
 
             @Override
