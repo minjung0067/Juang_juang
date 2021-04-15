@@ -86,7 +86,6 @@ public class QNA_Activity extends AppCompatActivity {
     //추가
     private int didanswer; //가족 중 몇 명이 대답했는지 +1(Date때문)
     private int count ;
-    ArrayList<Qlist> questionList = new ArrayList<Qlist>();  // 질문을 넣을 list adpater
     private Object Firebase;
     private FirebaseAuth firebaseAuth;
     private int question_cnt;
@@ -95,6 +94,7 @@ public class QNA_Activity extends AppCompatActivity {
     private View linearView;
     private View answer_view;
 
+    private ImageButton newmessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +112,7 @@ public class QNA_Activity extends AppCompatActivity {
         View linearView = (View) findViewById(R.id.linear_view);
         View answer_vew = (View) findViewById(R.id.answer_view);
         TextView showblur = (TextView)findViewById(R.id.txt_blur);
+        ImageButton newmessage = (ImageButton)findViewById(R.id.newmessagecome);
 
         SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
         formatH = new SimpleDateFormat("yyyyMMdd"); //formatH에 현재 시간 넣어줌 대소문자 중요함
@@ -162,14 +163,21 @@ public class QNA_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
+
+                question_cnt = (int) snapshot.child("answer").child(f_code).getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
+                for (int i=0; i<question_cnt;i++){
+                    String this_question = String.valueOf(all_q_arr.get(i));
+                    our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
+                    index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
+                }
+
                 if (snapshot.child("1").getChildrenCount()==1){ //첫 질문 배열에 넣음
                     readData(a_Reference, new OnGetDataListiner(){
                         @Override
                         public void onSuccess() {
                             our_q_arr = new ArrayList<>();
                             String this_question = all_q_arr.get(0);
-                            questionList.add(new Qlist(this_question));
-                            Log.i("bin_check","What is Qlist : "+ questionList);
                             our_q_arr.add(this_question);  //현재 우리가족이 대답한 question을 배열에 추가
                             index = our_q_arr.size();
                             Log.i("bin_error", String.valueOf(index));
@@ -208,7 +216,6 @@ public class QNA_Activity extends AppCompatActivity {
                     count = Integer.parseInt(count2);                                                                  //가족 수
                     question_cnt = (int) snapshot.child("answer").child(f_code).getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
                     our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
-                    our_q_arr.clear();
                     for (int i=0; i<question_cnt;i++){
                         String this_question = String.valueOf(all_q_arr.get(i));
                         our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
@@ -221,10 +228,8 @@ public class QNA_Activity extends AppCompatActivity {
 
                     if((didanswer-1)==count && Integer.valueOf(everyToday)>questionday) { //모두가 답함!
                         Log.i("bin_check", "set answer, none blur");
-                        setanswer();
+                        setanswer(question_cnt);
                         blurView.setVisibility(View.INVISIBLE);
-//                        linearView.bringToFront();                                         //scroll view맨 앞으로~
-//                        setViewInvalidate(blurView, linearView, answer_view);             //이거 해야 view 재 정렬
                         showblur.setVisibility(View.INVISIBLE);                           //모든 가족이 답해야만 ~ 주황 글씨 숨김
 
                         String stDate = formatH.format(today);          //오늘 날짜가 stDate 변수에 저장. 20210326
@@ -237,23 +242,27 @@ public class QNA_Activity extends AppCompatActivity {
                         //새로운 질문 보여주는 버튼 보여주기 + 활성화 버튼 누를 시
 
                         Toast.makeText(QNA_Activity.this,"새 질문 들어옴 ! ",Toast.LENGTH_LONG).show();
-                        /*
-                        String this_question = our_q_arr.get(index);
-                        Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("question", this_question); //선택한 question을 갖고 감.
-                        intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
-                        intent.putExtra("f_code",f_code);
-                        intent.putExtra("introduce",introduce);
-                        intent.putExtra("user_name",user_name);
-                        intent.putExtra("user_color",user_color);
-                        intent.putExtra("user_gam",user_gam);
-                        intent.putExtra("count",count2);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(0, 0); //intent시 효과 없애기
-                        */
 
+                        newmessage.setVisibility(View.VISIBLE);             //새 질문이 왔다는  메세지 팝업 뜸
+                        newmessage.setOnClickListener(new View.OnClickListener() { //클릭시 answer로 이동
+                            @Override
+                            public void onClick(View v) {
+                                String this_question = our_q_arr.get(index);
+                                Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtra("question", this_question); //선택한 question을 갖고 감.
+                                intent.putExtra("position",String.valueOf(index)); //선택한 position값을 갖고 감.
+                                intent.putExtra("f_code",f_code);
+                                intent.putExtra("introduce",introduce);
+                                intent.putExtra("user_name",user_name);
+                                intent.putExtra("user_color",user_color);
+                                intent.putExtra("user_gam",user_gam);
+                                intent.putExtra("count",count2);
+                                startActivity(intent);
+                                finish();
+                                overridePendingTransition(0, 0); //intent시 효과 없애기
+                            }
+                        });
 
                     }
                     else if((didanswer-1)==count && Integer.valueOf(everyToday)<=questionday){
@@ -329,14 +338,20 @@ public class QNA_Activity extends AppCompatActivity {
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
+                */
+
         //질문 리스트로 넘어가는 창
         TextView questionList = (TextView) findViewById(R.id.txt_question);
         questionList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intentt = new Intent(getApplicationContext(),qlistpopup_activity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.putExtra("Qnum",String.valueOf(index));
+                startActivity(intentt);
             }
         });
-        */
+
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
@@ -410,9 +425,9 @@ public class QNA_Activity extends AppCompatActivity {
 //        });
     }
 
-    private void setanswer(){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
+    private void setanswer(int a){   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
             a_Reference = a_Database.getReference("answer");
-            a_Reference.child(f_code).addValueEventListener(new ValueEventListener() {
+            a_Reference.child(f_code).child(String.valueOf(a)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     member_arr.clear();
@@ -554,58 +569,8 @@ public class QNA_Activity extends AppCompatActivity {
         a_Reference.removeEventListener(a_Child);
     }
 
-    public class MyAdapter extends BaseAdapter { // 리스트 뷰의 아답타
-        Context context;
-        int layout;
-        ArrayList<Qlist> qlist;
-        LayoutInflater inf;
-        public MyAdapter(Context context, int layout, ArrayList<Qlist> al) {
-            this.context = context;
-            this.layout = layout;
-            this.qlist = qlist;
-            inf = (LayoutInflater)context.getSystemService
-                    (Context.LAYOUT_INFLATER_SERVICE);
-        }
-        @Override
-        public int getCount() {
-            return qlist.size();
-        }
-        @Override
-        public Object getItem(int position) {
-            return qlist.get(position);
-        }
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView==null) {
-                convertView = inf.inflate(layout, null);
-            }
-            TextView showquestion = (TextView)convertView.findViewById(R.id.txt_question);
 
-            Qlist m = qlist.get(position);
-            showquestion.setText(m.nowquestion);
-
-            return convertView;
-        }
-    }
-
-
-    class Qlist { // 자바빈
-        String nowquestion = ""; // 곡 title
-
-        public Qlist(String question) {
-            super();
-            this.nowquestion = question;
-
-        }
-
-        public Qlist() {
-        }
-    }
-
+}
 
 
 }
