@@ -2,21 +2,30 @@ package com.example.persimmon_tree_proj.Main;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
@@ -25,6 +34,8 @@ import com.example.persimmon_tree_proj.LodingPage_Activity;
 import com.example.persimmon_tree_proj.Mypage.MypageActivity;
 import com.example.persimmon_tree_proj.QNA.QNA_Activity;
 import com.example.persimmon_tree_proj.To_do_list.Todolist_Activity;
+import com.example.persimmon_tree_proj.customer_sound;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,25 +55,30 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private String f_code;
-    private String count;
-    static int member_count;
-    private String family_name;
     private DatabaseReference a_Reference;
     private FirebaseDatabase a_Database;
     private Random rnd;
     private String[] gam_interaction = {"오늘도 행복한 하루 보내!",
-            "와줘서 고마워! 두근두근~" ,
+            "오늘도 와줘서 고마워! 두근두근" ,
             "당신과 함께 할 수 있어 감사하당!" ,
-            "꽃길만 걷자!" ,
+            "앞으로 꽃길만 걷길 바랄게~" ,
             "감사합니다 감사합니다" ,
             "감동이야 감동~",
-            "당신은 다정다감~",
+            "또 만났네! 너무 좋아~",
+            "유후~ 감 잡았다!",
+            "내일도 와줄 거지?",
+            "아잇! 간지러워~",
+            "나 불렀어? 만나서 반가워~",
+            "나들이하기 좋은 날씨다~",
+            "내가 그렇게 좋아?",
+            "자꾸 누르면 나 터질지도 몰라!"
     };
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
 
+    // Frame 단위로 이미지를 바꿔서 그려주는 Drawable 객체
+    AnimationDrawable ani;
+    private ActionBarDrawerToggle toggle;
 
 
     @Override
@@ -95,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
 //                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
 
-
         //part 1 - f_code, 사용자 이름, count 로딩에서 받아오기
 
         Intent intent = getIntent();
@@ -106,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
         final String count = intent.getStringExtra("count");
-
 
 
         //part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
@@ -174,22 +188,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         //part 3 - 감 인터렉션
-        ImageButton btn_gam = (ImageButton) findViewById(R.id.gam_btn);
+        ImageView btn_gam = (ImageView) findViewById(R.id.gam_btn);
+
+        ani = (AnimationDrawable) btn_gam.getDrawable();
+
         Button click_gam_msg = (Button) findViewById(R.id.btn_clickgam);
         Button gam_say = (Button) findViewById(R.id.gam_say);
         rnd = new Random(); //랜덤클래스로부터 랜덤 값 받아오는 변수 작성.
         btn_gam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int num = rnd.nextInt(6); //랜덤 숫자 생성
+
+                //감이 움직이는 애니메이션
+                if (ani.isRunning()) ani.stop();
+                //지금 움직이고 있으면 멈춰
+                ani.setOneShot(true);
+                //AnimationDrawable 객체 Frame 변경을 시작
+                ani.start();
+
+                int num = rnd.nextInt(gam_interaction.length); //랜덤 숫자 생성
                 click_gam_msg.setVisibility(View.INVISIBLE);
                 gam_say.setText(""); //초기화
                 gam_say.setText(gam_interaction[num]); //위에서 담아놓은 문구 중 랜덤하게 가져옴
                 gam_say.setVisibility(View.VISIBLE); //랜덤 문구 보여지게
 
-                mHandler.postDelayed(mMyTask, 4000); // 4초후에 감 문구 보이게
+
+                mHandler.postDelayed(mMyTask, 4000); // 4초후에 감 문구 안 보이게
                 mMyTask = new Runnable() {
                     @Override
                     public void run() {
@@ -209,25 +234,60 @@ public class MainActivity extends AppCompatActivity {
         today_date.setText(strDate);
 
 
-
-
         //part 4 - 각 카테고리에 해당하는 버튼들로 이동하는 코드
-        Log.i("fcount",f_code);
         //마이페이지 버튼
         ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
+
+
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                startActivity(intent);
+                //네비게이션 메뉴 ( 고객의 소리함 , 마이페이지 버튼 담고 있음)
+                if (!drawer.isDrawerOpen(Gravity.RIGHT)) {
+                    drawer.openDrawer(Gravity.RIGHT);
+                }
             }
         });
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        toggle = new ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.setDisplayHomeAsUpEnabled(true);
+//        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            if(menuItem.getItemId()==R.id.mypage) {
+                Log.i("successclick", "nav_mypage");
+                Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
+                startActivity(intent);
+                finish();
+            }
+            else if(menuItem.getItemId()==R.id.customsound){
+                    Log.i("successclick","nav_customersound");
+                    Intent intentt =new Intent(getApplicationContext(), LodingPage_Activity.class);
+                    intentt.putExtra("f_code", f_code);
+                    intentt.putExtra("introduce", introduce);
+                    intentt.putExtra("user_name", user_name);
+                    intentt.putExtra("user_color", user_color);
+                    intentt.putExtra("user_gam", user_gam);
+                    startActivity(intentt);
+                    finish();
+            }
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
+            drawer.closeDrawer(GravityCompat.END);
+            return true;
+        }
+        });
+
 
 
         //왔다감 버튼
@@ -237,12 +297,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_gam",user_gam);
-                intent.putExtra("count",count);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_gam", user_gam);
+                intent.putExtra("count", count);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -256,11 +316,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -273,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
+                intent.putExtra("f_code", f_code);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -287,11 +347,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
-                intent.putExtra("user_name",user_name);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
+                intent.putExtra("user_name", user_name);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -304,13 +364,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
+                intent.putExtra("f_code", f_code);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
-
-
-
     }
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
 }

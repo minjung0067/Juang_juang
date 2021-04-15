@@ -115,6 +115,9 @@ public class Todolist_Activity extends AppCompatActivity {
                     edit_list.setVisibility(View.INVISIBLE);
                     first_memo.setVisibility(View.VISIBLE);
                 }
+                else{
+                    edit_list.setVisibility(View.VISIBLE);
+                }
 
 
                 // 그리드 세로 줄 세팅
@@ -202,6 +205,7 @@ public class Todolist_Activity extends AppCompatActivity {
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
                 finish();
 
             }
@@ -209,18 +213,6 @@ public class Todolist_Activity extends AppCompatActivity {
 
 
 
-
-        //뒤로가기
-        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
-        goback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intentt = new Intent(getApplicationContext(), LodingPage_Activity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
-                startActivity(intentt);
-            }
-        });
 
 
         //마이페이지 버튼
