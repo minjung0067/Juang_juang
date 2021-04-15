@@ -21,7 +21,7 @@
             android:background="@drawable/todo_style_first"
             android:orientation="vertical"
             android:padding="5dp"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/title"
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/nanumsquare_acr"
+                    android:fontFamily="@font/nanumgothic"
                     android:text="by."
                     android:padding="8dp"
                     android:textSize="14dp" />
@@ -91,9 +91,9 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/nanumgothicbold"
                     android:text=""
-                    android:padding="2dp"
+                    android:padding="8dp"
                     android:layout_marginRight="5dp"
-                    android:textSize="10dp" />
+                    android:textSize="14dp" />
 
             </LinearLayout>
 
@@ -105,7 +105,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="2dp"
         android:layout_marginBottom="11dp"
         app:srcCompat="@drawable/todo_sticker" />
 

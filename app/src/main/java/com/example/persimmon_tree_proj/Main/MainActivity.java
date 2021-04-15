@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(menuItem.getItemId()==R.id.customsound){
                     Log.i("successclick","nav_customersound");
-                    Intent intentt =new Intent(getApplicationContext(), LodingPage_Activity.class);
+                    Intent intentt =new Intent(getApplicationContext(), customer_sound.class);
                     intentt.putExtra("f_code", f_code);
                     intentt.putExtra("introduce", introduce);
                     intentt.putExtra("user_name", user_name);

@@ -53,14 +53,14 @@ public class Todolist_show_select_memo extends AppCompatActivity {
         else{ memo.setBackgroundResource(R.drawable.todo_style4);}
 
 
-        //뒤로가기
-        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
-        goback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                finish();
-            }
-        });
+//        //뒤로가기
+//        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+//        goback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v){
+//                finish();
+//            }
+//        });
 
 
         //마이페이지 버튼
