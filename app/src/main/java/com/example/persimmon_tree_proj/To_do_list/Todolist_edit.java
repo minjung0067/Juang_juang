@@ -180,17 +180,17 @@ public class Todolist_edit extends AppCompatActivity {
             }
         });
 
-        //뒤로가기
-        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
-        goback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
-                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
-                startActivity(intentt);
-            }
-        });
+//        //뒤로가기
+//        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+//        goback.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v){
+//                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
+//                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                intentt.putExtra("f_code",f_code);
+//                startActivity(intentt);
+//            }
+//        });
 
 
         //마이페이지 버튼

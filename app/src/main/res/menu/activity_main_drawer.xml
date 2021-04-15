@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -7,15 +8,12 @@
 
         <item
             android:id="@+id/nav_mypage"
-            android:title="프로필 변경" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:background="@color/grayColor"/>
+            android:title="프로필 변경"
+            app:actionViewClass="android.widget.TextView" />
 
         <item
-            android:id="@+id/nav_gallery"
-            android:title="고객의 소리함" />
+            android:id="@+id/nav_customsound"
+            android:title="고객의 소리함"
+            app:actionViewClass="android.widget.TextView" />
     </group>
 </menu>

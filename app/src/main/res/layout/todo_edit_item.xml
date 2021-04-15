@@ -4,9 +4,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:maxHeight="300dp"
-    android:padding="4dp"
+    android:padding="2dp"
     android:onClick="hightlight"
-    android:layout_margin="5dp">
+    android:layout_margin="1dp">
 
     <!--For image src we have used ic_launcher
         it is used only for reference how it will look"-->
@@ -40,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-
                 android:gravity="right">
+
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                     android:padding="5dp"
                     android:text=""
                     android:fontFamily="@font/nanumsquare_acl"
-                    android:textSize="6dp" />
+                    android:textSize="10dp" />
 
 
 
@@ -76,13 +76,23 @@
                 android:layout_gravity="right">
 
                 <TextView
-                    android:id="@+id/writer"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:fontFamily="@font/nanumsquare_acr"
-                    android:text=""
+                    android:text="by."
                     android:padding="8dp"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/writer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/nanumgothicbold"
+                    android:text=""
+                    android:padding="2dp"
+                    android:layout_marginRight="5dp"
                     android:textSize="10dp" />
 
             </LinearLayout>
@@ -91,7 +101,7 @@
 
     <ImageView
         android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -105,8 +115,8 @@
         android:layout_height="28dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="7dp"
         android:clickable="true"
         android:visibility="visible"
         android:scaleType="fitCenter"
