@@ -43,6 +43,7 @@ import java.util.ArrayList;
 
 import java.text.SimpleDateFormat; //시간 날짜 체크를 위함
 import java.util.Date;
+import java.util.Iterator;
 
 
 public class QNA_Activity extends AppCompatActivity {
@@ -296,7 +297,6 @@ public class QNA_Activity extends AppCompatActivity {
                         showblur.setVisibility(View.VISIBLE);       //우리 가족이 웅앵 글씨 보이게
                         textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         Numq.setText(String.valueOf(index)+"번째 감");
-                        //setanswer(index);
                         if (snapshot.child(String.valueOf(our_q_arr.size())).child(uid) == null) {
                             Log.i("bin_check", "3번-1 if 다 답안함 근데 나도 안함 -> floating btn 띄우기");
 
@@ -326,7 +326,6 @@ public class QNA_Activity extends AppCompatActivity {
 
                         } else {
                             Log.i("bin_check", "3번-2 else 다 답안함 근데 난함 -> floating btn 안보이게");
-                            setanswer(index);
                             //답하러 가는 플로트 버튼 안보이게 + 비활성화 하기
                             blurgotoans.setVisibility(View.INVISIBLE);
                             blurView.setVisibility(View.VISIBLE);
@@ -463,11 +462,14 @@ public class QNA_Activity extends AppCompatActivity {
 
                 uid_list = new ArrayList<>();
                 uid_list.clear();
-
-                for (DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
-                    String user = membersData.getKey();
+                Iterator<DataSnapshot> membersData = dataSnapshot.child("groups").child(f_code).child("members").getChildren().iterator();
+                while (membersData.hasNext()){
+                    String user = membersData.next().getKey();
                     uid_list.add(user);
                     Log.i("bin_users", user);
+                    if(uid_list.size()==count){
+                        break;
+                    }
                 }
 
                 member_color_arr.clear();
@@ -491,7 +493,8 @@ public class QNA_Activity extends AppCompatActivity {
                     member_ans_arr.clear();
                     while (count > member_ans_arr.size()) {
                         for (int i = 0; i < count; i++) {
-                            if (uid_list.get(i) == dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).getKey()) {
+                            Iterator<DataSnapshot> whoans = dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).getChildren().iterator();
+                            if (uid_list.get(i) == whoans.next().getKey()) {
                                 member_ans_arr.add(i, String.valueOf(dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).child(uid_list.get(i)).getValue()));
                             }
                         }
