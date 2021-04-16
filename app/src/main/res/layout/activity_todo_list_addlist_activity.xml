@@ -138,7 +138,7 @@
                 android:fontFamily="@font/nanumsquare_acr"
                 android:gravity="top|left"
                 android:hint="내용입력란"
-                android:minHeight="250dp"
+                android:minHeight="300dp"
                 android:padding="5dp"
                 android:textSize="16dp" />
 
