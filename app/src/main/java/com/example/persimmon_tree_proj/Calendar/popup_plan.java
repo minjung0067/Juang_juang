@@ -1,15 +1,24 @@
 package com.example.persimmon_tree_proj.Calendar;
 
+import android.graphics.drawable.Drawable;
+
 public class popup_plan {
     private String coloricon ;
     private String plan_name ;
     private String nick_name ;
+    private String user_gam;
     private String user_name;
     private String plan_id;
+    private Drawable backgrounddrawable;
 
+
+    public void setbackground(Drawable background) {
+        backgrounddrawable = background ;
+    }
     public void setIcon(String icon) {
         coloricon = icon ;
     }
+    public void setUser_gam(String gam) {user_gam = gam ;}
     public void setNick_name(String nickname) {
         nick_name = nickname ;
     }
@@ -23,9 +32,11 @@ public class popup_plan {
         plan_id = planid ;
     }
 
+    public Drawable getbackground() {return this.backgrounddrawable; }
     public String getIcon() {
         return this.coloricon ;
     }
+    public String getUser_gam() {return this.user_gam; }
     public String getNick_name() {
         return this.nick_name ;
     }

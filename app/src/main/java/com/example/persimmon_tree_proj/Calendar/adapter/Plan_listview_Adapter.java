@@ -2,6 +2,7 @@ package com.example.persimmon_tree_proj.Calendar.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -44,7 +45,9 @@ public class Plan_listview_Adapter extends BaseAdapter {
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
+        ImageView background = (ImageView) convertView.findViewById(R.id.image_background);
         ImageView color_icon = (ImageView) convertView.findViewById(R.id.member_color) ;
+        ImageView gam = (ImageView) convertView.findViewById(R.id.member_gam) ;
         TextView introTextView = (TextView) convertView.findViewById(R.id.member_intro) ;
         TextView planTextView = (TextView) convertView.findViewById(R.id.member_plan) ;
 
@@ -55,7 +58,9 @@ public class Plan_listview_Adapter extends BaseAdapter {
         GradientDrawable gd = (GradientDrawable) color_icon.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
         if((listViewItem.getIcon().equals("") == false)&&(listViewItem.getNick_name().equals("") == false)){
             //일정 있는 날
+            background.setImageDrawable(listViewItem.getbackground());
             gd.setColor(Color.parseColor(listViewItem.getIcon()));
+            gam.setImageDrawable(Drawable.createFromPath(listViewItem.getUser_gam()));
             introTextView.setText(listViewItem.getNick_name());
             planTextView.setText(listViewItem.getPlan_name());
         }
@@ -88,6 +93,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
         popup_plan item = listViewItemList.get(position);
         ArrayList c_i_plan_name_id = new ArrayList();
         c_i_plan_name_id.add(item.getIcon());
+        c_i_plan_name_id.add(item.getUser_gam());
         c_i_plan_name_id.add(item.getNick_name());
         c_i_plan_name_id.add(item.getPlan_name());
         c_i_plan_name_id.add(item.getUser_name());
@@ -96,10 +102,11 @@ public class Plan_listview_Adapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String color, String intro, String desc,String username, String planid) {
+    public void addItem(String color,String gam, String intro, String desc,String username, String planid) {
         popup_plan item = new popup_plan();
 
         item.setIcon(color);
+        item.setUser_gam(gam);
         item.setNick_name(intro);
         item.setPlan_name(desc);
         item.setUser_name(username);
