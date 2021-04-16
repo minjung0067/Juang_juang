@@ -51,17 +51,7 @@
 
     <!--   본문 부분-->
 
-    <Button
-        android:id="@+id/all_edit"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="80dp"
-        android:shadowColor="@color/WhiteColor"
-        style="?android:attr/borderlessButtonStyle"
-        android:foreground="@drawable/remove_all_todo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <LinearLayout
         android:id="@+id/layout"
@@ -92,7 +82,17 @@
         </RelativeLayout>
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/all_edit"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp"
+        android:shadowColor="@color/WhiteColor"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/remove_all_todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

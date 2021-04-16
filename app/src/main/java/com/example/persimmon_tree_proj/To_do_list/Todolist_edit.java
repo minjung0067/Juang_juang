@@ -155,7 +155,7 @@ public class Todolist_edit extends AppCompatActivity {
         });
 
 
-        //수정 끝
+        //삭제하기
         Button edit_ok = (Button) findViewById(R.id.edit_ok);
         edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,6 +168,7 @@ public class Todolist_edit extends AppCompatActivity {
                     reference.child(f_code).child(String.valueOf(memo_key_item)).removeValue();
                 }
 
+                Toast.makeText(getApplicationContext(), "메모를 성공적으로 삭제했어요!", Toast.LENGTH_LONG).show();
 
                 // 다시 이동
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
@@ -182,6 +183,30 @@ public class Todolist_edit extends AppCompatActivity {
             }
         });
 
+
+        //전체 삭제
+        Button all_edit = (Button)findViewById(R.id.all_edit);
+        all_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
+                reference.child(f_code).removeValue();
+
+                Toast.makeText(getApplicationContext(), "모든 메모를 성공적으로 삭제했어요!", Toast.LENGTH_LONG).show();
+
+                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.putExtra("f_code",f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
+                startActivity(intentt);
+            }
+        });
+
+
+
         //뒤로가기
         TextView goback = (TextView)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +215,10 @@ public class Todolist_edit extends AppCompatActivity {
                 Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
         });

@@ -79,10 +79,7 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!holder.layout.getBackground().equals(R.drawable.todo_style_clicked)){
-                    holder.layout.setBackgroundResource(R.drawable.todo_style_clicked);
-                }
-                else {
+                if(holder.layout.getBackground().equals(R.drawable.todo_style_clicked)){
                     if (res_style.equals("1")) {
                         holder.layout.setBackgroundResource(R.drawable.todo_style1);
                     } else if (res_style.equals("2")) {
@@ -92,9 +89,13 @@ public class list_adapter_edit extends RecyclerView.Adapter<list_adapter_edit.Vi
                     } else if (res_style.equals("4")) {
                         holder.layout.setBackgroundResource(R.drawable.todo_style4);
                     } else {
-                        holder.layout.setBackgroundResource(R.drawable.todo_style_first);
+                    holder.layout.setBackgroundResource(R.drawable.todo_style_first);
                     }
                 }
+                if (!holder.layout.getBackground().equals(R.drawable.todo_style_clicked)){
+                    holder.layout.setBackgroundResource(R.drawable.todo_style_clicked);
+                }
+
             }
         });
 
