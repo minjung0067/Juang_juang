@@ -57,7 +57,7 @@ public class qlistpopup_activity extends AppCompatActivity {
         reference_q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (int i = 1; i < untilnum ; i++) {
+                for (int i = 1; i <= untilnum ; i++) {
                     String this_question = dataSnapshot.child(String.valueOf(i)).getValue(String.class);
                         if(this_question ==null){
                             break;

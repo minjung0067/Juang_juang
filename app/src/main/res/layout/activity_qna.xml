@@ -137,6 +137,16 @@
 
     </ScrollView>
 
+    <ImageButton
+        android:id="@+id/blur_gotoans"
+        android:visibility="invisible"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/floatbtn_goanswer"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:visibility="invisible"
