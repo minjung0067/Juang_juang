@@ -131,12 +131,14 @@ public class QNA_Activity extends AppCompatActivity {
 
         initDatabase();
 
+        all_q_arr = new ArrayList<>();
+        our_q_arr = new ArrayList<>();
         //전체 질문 목록 가져와서 all_q_arr에 넣기
         DatabaseReference reference_q = FirebaseDatabase.getInstance().getReference("question");
         reference_q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                all_q_arr = new ArrayList<>();
+
                 all_q_arr.clear();
                 int i = 1;
                 while (true) {  //질문 추가되면 수정필요 (7은 질문 갯수)
@@ -175,7 +177,6 @@ public class QNA_Activity extends AppCompatActivity {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
 
                 question_cnt = (int) snapshot.getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
-                our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
                 for (int i = 0; i < question_cnt; i++) {
                     String this_question = String.valueOf(all_q_arr.get(i));
                     our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
@@ -186,12 +187,13 @@ public class QNA_Activity extends AppCompatActivity {
                 if (snapshot.child("1").getChildrenCount() == 1 || snapshot.child("1").child(uid).getValue()==null) { //첫 질문 배열에 넣음
                     Log.i("bin_check", "첫 질문에 아무도 답 안하거나 내가 답 안함");
 
-                    our_q_arr = new ArrayList<>();
                     String this_question = all_q_arr.get(0);
-                    our_q_arr.add(this_question);  //현재 우리가족이 대답한 question을 배열에 추가
+                    our_q_arr.add(0, this_question);  //현재 우리가족이 대답한 question을 배열에 추가
                     index = our_q_arr.size();
                     Log.i("bin_error", "첫 질문 배열에 넣음 index : "+String.valueOf(index));
-                    textView.setText(this_question); //main화면에서 글씨 창 보이기
+                    if(our_q_arr.size()!=0){
+                        textView.setText(our_q_arr.get(index-1)); //main화면에서 글씨 창 보이기
+                    }
                     Numq.setText(String.valueOf(index)+"번째 감");
 
                     readData(a_Reference, new OnGetDataListiner() {
@@ -232,10 +234,9 @@ public class QNA_Activity extends AppCompatActivity {
                     Log.i("bin_error", "처음이 아니라면 question _cnt"+String.valueOf(question_cnt));
 
                     //bin_arr 1,2모두 작동하는 것으로 보아 2는 추후에 삭제해도 될 것이라고 예상
-                    our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
                     for (int i = 0; i < question_cnt; i++) {
                         String this_question = String.valueOf(all_q_arr.get(i));
-                        our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
+                        our_q_arr.add(i,this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
                         index = i;
                         Log.i("bin_arr 2", i + this_question);
                     }
@@ -247,7 +248,9 @@ public class QNA_Activity extends AppCompatActivity {
                     if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답하고 24시간이 지남
                         Log.i("bin_check", "1번 if -> set answer, none blur");
                         setanswer(index+1);
-                        textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
+                        if(our_q_arr.size()!=0){
+                            textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
+                        }
                         blurView.setVisibility(View.INVISIBLE);
                         showblur.setVisibility(View.INVISIBLE);           //모든 가족이 답해야만 ~ 주황 글씨 숨김
                         String stDate = formatH.format(today);          //오늘 날짜가 stDate 변수에 저장. 20210326
@@ -286,7 +289,9 @@ public class QNA_Activity extends AppCompatActivity {
                     } else if ((didanswer - 1) == count && Integer.valueOf(everyToday) <= questionday) {
                         Log.i("bin_check", "2번 else if 24시간 안지남 setanswer + nothing. index = "+index);
                         setanswer(index+1);
-                        textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
+                        if(our_q_arr.size()!=0){
+                            textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
+                        }
                         blurView.setVisibility(View.INVISIBLE);
                         showblur.setVisibility(View.INVISIBLE);
 //                      index = our_q_arr.size();
@@ -295,8 +300,10 @@ public class QNA_Activity extends AppCompatActivity {
                         Log.i("bin_check", "3번 else 다 답안함 몇 번째감 보여주기 blur visible");
                         blurView.setVisibility(View.VISIBLE);       //블러 처리 시킴
                         showblur.setVisibility(View.VISIBLE);       //우리 가족이 웅앵 글씨 보이게
-                        textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
-                        Numq.setText(String.valueOf(index)+"번째 감");
+                        if(our_q_arr.size()!=0){
+                            textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
+                        }
+                        Numq.setText(String.valueOf(index+1)+"번째 감");
                         if (snapshot.child(String.valueOf(our_q_arr.size())).child(uid) == null) {
                             Log.i("bin_check", "3번-1 if 다 답안함 근데 나도 안함 -> floating btn 띄우기");
 
@@ -453,7 +460,9 @@ public class QNA_Activity extends AppCompatActivity {
 
     private void setanswer(int a) {   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         Log.i("bin_error", "setanswer 들어옴");
-        //Numq.setText(Integer.toString(a) + "번째 감");
+        index = a;
+        Log.i("bin_check",""+a);
+//        Numq.setText(String.valueOf(index)+"번째 감");
 
         DatabaseReference referencesetanswer = FirebaseDatabase.getInstance().getReference();
         referencesetanswer.addValueEventListener(new ValueEventListener() {
@@ -462,23 +471,31 @@ public class QNA_Activity extends AppCompatActivity {
 
                 uid_list = new ArrayList<>();
                 uid_list.clear();
-                Iterator<DataSnapshot> membersData = dataSnapshot.child("groups").child(f_code).child("members").getChildren().iterator();
-                while (membersData.hasNext()){
-                    String user = membersData.next().getKey();
+//                Iterator<DataSnapshot> membersData = dataSnapshot.child("groups").child(f_code).child("members").getChildren().iterator();
+//                while (membersData.hasNext()){
+//                    String user = membersData.next().getKey();
+//                    uid_list.add(user);
+//                    Log.i("bin_users", user);
+//                    if(uid_list.size()==count){
+//                        break;
+//                    }
+//                }
+
+                for (DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
+                    String user = membersData.getValue().toString();
                     uid_list.add(user);
-                    Log.i("bin_users", user);
-                    if(uid_list.size()==count){
-                        break;
-                    }
+                    Log.i("bin_user", user);
                 }
+
 
                 member_color_arr.clear();
                 member_gam_arr.clear();
                 member_arr.clear();
-                if (uid_list.size() == count){
-                    Log.i("bin_check","uid 복사 완료");
+                Log.i("bin_check",""+uid_list.size()+ "count"+count);
+                Log.i("bin_check","uid 복사 완료");
+                while(uid_list.size() != member_arr.size()) {
                     for (int i = 0; i < dataSnapshot.child("users").getChildrenCount(); i++) {
-                        if (uid_list.get(i) == dataSnapshot.getKey()) {
+                        if (uid_list.get(i) == dataSnapshot.child("users").getValue(String.class)) {
                             this_color = dataSnapshot.child("users").child(uid_list.get(i)).child("user_color").getValue(String.class);
                             this_gam = dataSnapshot.child("users").child(uid_list.get(i)).child("user_gam").getValue(String.class);
                             this_introduce = dataSnapshot.child("users").child(uid_list.get(i)).child("introduce").getValue(String.class);
@@ -490,6 +507,11 @@ public class QNA_Activity extends AppCompatActivity {
                             member_arr.add(i, this_introduce);
                         }
                     }
+                    if (count == member_ans_arr.size()) {
+                        Log.i("bin_check", "while문 에러 memeber ans arr size 확인" + member_ans_arr.size());
+                        break;
+                    }
+                }
                     member_ans_arr.clear();
                     while (count > member_ans_arr.size()) {
                         for (int i = 0; i < count; i++) {
@@ -547,12 +569,6 @@ public class QNA_Activity extends AppCompatActivity {
                 }
 
 
-                }
-
-
-
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -561,14 +577,6 @@ public class QNA_Activity extends AppCompatActivity {
         //전체 user 가져오기
     }
 
-    /**
-     * View를 다시 그려 준다. * @param views
-     */
-    private void setViewInvalidate(View... views) {
-        for (View v : views) {
-            v.invalidate();
-        }
-    }
 
     private void initDatabase() {
         mDatabase = FirebaseDatabase.getInstance();
