@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.popup_plan;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Plan_listview_Adapter extends BaseAdapter {
@@ -56,7 +58,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
 
         // 아이템 내 각 위젯에 데이터 반영
         GradientDrawable gd = (GradientDrawable) color_icon.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
-        if((listViewItem.getIcon().equals("") == false)&&(listViewItem.getNick_name().equals("")) == false){
+        if((listViewItem.getNick_name().equals("")) == false){
             //일정 있는 날
             background.setImageDrawable(listViewItem.getbackground());
             gd.setColor(Color.parseColor(listViewItem.getIcon()));
@@ -78,6 +80,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
 
         return convertView;
     }
+
 
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
@@ -102,7 +105,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String color,Drawable gam, String intro, String desc,String username, String planid) {
+    public void addItem(String color,String gam, String intro, String desc,String username, String planid) {
         popup_plan item = new popup_plan();
 
         item.setIcon(color);
