@@ -7,58 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.persimmon_tree_proj.To_do_list.TodoList_addlist_activity">
 
-    <TextView
-        android:id="@+id/button"
-        android:clickable="false"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:maxLength="10"
-        android:text="우리집 감나무"
-        android:textColor="@color/darkgray"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <ImageButton
-        android:id="@+id/go_back"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="28dp"
-        android:background="#00B1A6A6"
-        android:scaleType="fitCenter"
-        android:src="@drawable/go_backk"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
-
-    <ImageButton
-        android:id="@+id/btn_mypage"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="24dp"
-        android:background="@drawable/mypage_menu_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--    상단바부분-->
 
 
-    <Button
-        android:id="@+id/menu_name"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/WhiteColor"
-        android:gravity="center"
-        android:fontFamily="@font/nanumsquare_acr"
-        android:textSize="30dp"
-        android:text="뭐할감"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="0dp" />
+    <include
+        android:id="@+id/include2"
+        layout="@layout/todo_fixbar" />
 
 
 <!--메모 작성 부분-->
@@ -67,18 +21,16 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:layout_width="346dp"
+        android:layout_height="394dp"
+        android:layout_margin="30dp"
         android:background="@color/WhiteColor"
-        android:maxHeight="300dp"
+        android:minHeight="200dp"
         android:padding="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_name"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/include2"
+        app:layout_constraintStart_toStartOf="@+id/include2"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!--For image src we have used ic_launcher
             it is used only for reference how it will look"-->
@@ -88,9 +40,10 @@
             android:id="@+id/memo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/todo_style4"
             android:layout_marginTop="1dp"
-            android:orientation="vertical">
+            android:background="@drawable/todo_style4"
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <EditText
                 android:id="@+id/title"
@@ -99,22 +52,36 @@
                 android:layout_below="@+id/close"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:hint="제목"
+                android:fontFamily="@font/nanumsquare_acb"
+                android:hint="제목입력란"
+                android:padding="10dp"
                 android:textSize="20dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
+
+                <View
+                    android:layout_width="200dp"
+                    android:layout_height="1.5dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/darkgray"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.494"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button" />
 
                 <TextView
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:padding="1dp"
+                    android:fontFamily="@font/nanumsquare_acl"
+                    android:padding="10dp"
                     android:textSize="10dp" />
 
 
@@ -126,8 +93,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:hint="글"
+                android:fontFamily="@font/nanumsquare_acr"
+                android:hint="내용입력란"
+                android:minHeight="200dp"
+                android:padding="3dp"
                 android:textSize="15dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/darkgray"
+                android:padding="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
 
 
             <LinearLayout
@@ -141,6 +125,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/nanumsquare_acr"
+                    android:padding="4dp"
                     android:text="주앙"
                     android:textSize="15dp" />
 
@@ -156,7 +142,6 @@
         android:layout_width="50dp"
         style="?android:attr/borderlessButtonStyle"
         android:layout_height="50dp"
-        android:background="@color/WhiteColor"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="130dp"
         android:foreground="@drawable/heart_graphic2x"
@@ -166,114 +151,43 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/style1"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="#FFDEEF"/>
+                android:background="#FFDEEF" />
+
             <Button
                 android:id="@+id/style3"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="#D8FFCC"/>
+                android:background="#D8FFCC" />
+
             <Button
                 android:id="@+id/style4"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="#FFF3C2"/>
+                android:background="#FFF3C2" />
+
             <Button
                 android:id="@+id/style2"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="#DFFDFF"/>
+                android:background="#DFFDFF" />
         </LinearLayout>
 
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="0dp"
-        android:background="@color/brightgray"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="-28dp" />
-
-    <ImageButton
-        android:id="@+id/calendar_btn"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/calendar_menu_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/main_btn"
-        app:layout_constraintStart_toEndOf="@+id/qna_btn" />
-
-    <ImageButton
-        android:id="@+id/main_btn"
-        android:layout_width="70dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="3dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/main_menu_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints" />
-    <ImageButton
-        android:id="@+id/to_do_btn"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/menu_todo_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/game_btn"
-        app:layout_constraintHorizontal_bias="0.352"
-        app:layout_constraintStart_toEndOf="@+id/main_btn" />
-
-    <ImageButton
-        android:id="@+id/game_btn"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/game_menu_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView2" />
-
-    <ImageButton
-        android:id="@+id/qna_btn"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/qna_menu_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
