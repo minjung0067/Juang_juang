@@ -60,7 +60,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
             //일정 있는 날
             background.setImageDrawable(listViewItem.getbackground());
             gd.setColor(Color.parseColor(listViewItem.getIcon()));
-            gam.setImageDrawable(Drawable.createFromPath(listViewItem.getUser_gam()));
+            gam.setImageDrawable((listViewItem.getUser_gam()));
             introTextView.setText(listViewItem.getNick_name());
             planTextView.setText(listViewItem.getPlan_name());
         }
@@ -102,7 +102,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String color,String gam, String intro, String desc,String username, String planid) {
+    public void addItem(String color,Drawable gam, String intro, String desc,String username, String planid) {
         popup_plan item = new popup_plan();
 
         item.setIcon(color);
