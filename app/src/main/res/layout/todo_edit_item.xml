@@ -3,110 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:maxHeight="300dp"
-    android:padding="2dp"
-    android:onClick="hightlight"
-    android:layout_margin="1dp">
+>
 
     <!--For image src we have used ic_launcher
         it is used only for reference how it will look"-->
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:id="@+id/layout"
-            android:background="@drawable/todo_style_first"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/close"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:hint="제목"
-                android:padding="8dp"
-                android:fontFamily="@font/nanumsquare_acb"
-                android:textSize="24dp" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="right">
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:padding="5dp"
-                    android:text=""
-                    android:fontFamily="@font/nanumsquare_acl"
-                    android:textSize="10dp" />
-
-
-
-            </LinearLayout>
-
-
-
-            <TextView
-                android:id="@+id/contents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/nanumsquare_acr"
-                android:hint="글"
-                android:padding="8dp"
-                android:textSize="13dp" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="right">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/nanumgothic"
-                    android:text="by."
-                    android:padding="8dp"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/writer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/nanumgothicbold"
-                    android:text=""
-                    android:padding="8dp"
-                    android:layout_marginRight="5dp"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="11dp"
-        app:srcCompat="@drawable/todo_sticker" />
+    <include layout="@layout/todolist_item" />
 
     <ImageView
         android:id="@+id/close"
