@@ -74,6 +74,7 @@
         <activity android:name="com.example.persimmon_tree_proj.Mypage.MakeProfilemain" />
         <activity android:name="com.example.persimmon_tree_proj.Mypage.MypageActivity" />
         <activity android:name="com.example.persimmon_tree_proj.QNA.Answeractivity" />
+        <activity android:name="com.example.persimmon_tree_proj.QNA.qlistpopup_activity" />
         <activity android:name="com.example.persimmon_tree_proj.splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
