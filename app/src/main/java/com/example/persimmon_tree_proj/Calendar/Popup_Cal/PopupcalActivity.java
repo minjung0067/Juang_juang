@@ -145,6 +145,74 @@ public class PopupcalActivity extends Activity {
                         }
                     });
                 }
+                listview = (SwipeMenuListView) findViewById(R.id.plan_vview);
+                DatabaseReference referencee = FirebaseDatabase.getInstance().getReference("calendar");
+                referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //일정 아무것도 없으면
+                        if (dataSnapshot.child(day).exists() == false) {
+                            adapterr.addItem("","", "현재 등록된 일정이 없감..", "", "" ,"");
+                            listview.setAdapter(adapterr); //리스트뷰에 adapterr 넣기
+                        }
+                        //일정이 있는 경우
+                        referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Iterator<DataSnapshot> plan = dataSnapshot.child(day).getChildren().iterator();
+                                while(plan.hasNext()){
+                                    String user_name = plan.next().getKey();
+                                    Log.i("user1",user_name);
+                                    Iterator<DataSnapshot> one_plan = dataSnapshot.child(day).child(user_name).getChildren().iterator();
+                                    while(one_plan.hasNext()){
+                                        String plan_id = one_plan.next().getKey();
+                                        Log.i("user2",plan_id);
+                                        String plan_name = String.valueOf(dataSnapshot.child(day).child(user_name).child(String.valueOf(plan_id)).child("plan_name").getValue());
+                                        Log.i("user3",plan_name);
+                                        listview.setAdapter(adapterr);
+                                        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+                                            @Override
+                                            public void create(SwipeMenu menu) {
+                                                // Create different menus depending on the view type
+                                                createMenu1(menu);
+                                            }
+                                            private void createMenu1(SwipeMenu menu) {
+                                                SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
+                                                item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                                                item1.setWidth((190));
+                                                item1.setIcon(R.drawable.calendar_revise2x);
+                                                menu.addMenuItem(item1);
+                                                SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
+                                                item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                                                item2.setWidth(190);
+                                                item2.setIcon(R.drawable.calendar_delete2x);
+                                                menu.addMenuItem(item2);
+                                            }
+                                        };
+                                        // set creator
+                                        listview.setMenuCreator(creator);
+                                        String gam_num = name_gam_map.get(user_name);
+                                        String gam_color = name_color_map.get(user_name);
+                                        adapterr.addItem(name_color_map.get(user_name), name_gam_map.get(user_name),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        throw databaseError.toException();
+                    }
+                });
 
             }
             @Override
@@ -160,78 +228,10 @@ public class PopupcalActivity extends Activity {
 
 
 
-        listview = (SwipeMenuListView) findViewById(R.id.plan_vview);
-        DatabaseReference referencee = FirebaseDatabase.getInstance().getReference("calendar");
-        referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //일정 아무것도 없으면
-                if (dataSnapshot.child(day).exists() == false) {
-                    adapterr.addItem("", Drawable.createFromPath(""), "현재 등록된 일정이 없감..", "", "" ,"");
-                    listview.setAdapter(adapterr); //리스트뷰에 adapterr 넣기
-                }
-                //일정이 있는 경우
-                referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Iterator<DataSnapshot> plan = dataSnapshot.child(day).getChildren().iterator();
-                        while(plan.hasNext()){
-                            String user_name = plan.next().getKey();
-                            Log.i("user1",user_name);
-                            Iterator<DataSnapshot> one_plan = dataSnapshot.child(day).child(user_name).getChildren().iterator();
-                            while(one_plan.hasNext()){
-                                String plan_id = one_plan.next().getKey();
-                                Log.i("user2",plan_id);
-                                String plan_name = String.valueOf(dataSnapshot.child(day).child(user_name).child(String.valueOf(plan_id)).child("plan_name").getValue());
-                                Log.i("user3",plan_name);
-                                listview.setAdapter(adapterr);
-                                SwipeMenuCreator creator = new SwipeMenuCreator() {
 
-                                    @Override
-                                    public void create(SwipeMenu menu) {
-                                        // Create different menus depending on the view type
-                                        createMenu1(menu);
-                                    }
-                                    private void createMenu1(SwipeMenu menu) {
-                                        SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
-                                        item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                                        item1.setWidth((190));
-                                        item1.setIcon(R.drawable.calendar_revise2x);
-                                        menu.addMenuItem(item1);
-                                        SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
-                                        item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                                        item2.setWidth(190);
-                                        item2.setIcon(R.drawable.calendar_delete2x);
-                                        menu.addMenuItem(item2);
-                                    }
-                                };
-                                // set creator
-                                listview.setMenuCreator(creator);
-                                String gam_num = name_gam_map.get(user_name);
-                                String gam_color = name_color_map.get(user_name);
-                                Log.i("gam_color",gam_color);
-                                Log.i("gam_num",gam_num);
-                                adapterr.addItem(name_color_map.get(user_name), ContextCompat.getDrawable(getApplicationContext(), Integer.parseInt(gam_num)),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
-
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-        });
 
         // step 2. listener item click event
+        /*
         listview.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
@@ -246,6 +246,8 @@ public class PopupcalActivity extends Activity {
                 return false;
             }
         });
+
+         */
     }
         //swipe해서 수정/삭제
 
@@ -289,6 +291,7 @@ public class PopupcalActivity extends Activity {
         }
         return true;
     }
+
 
     @Override
     public void onBackPressed() {
