@@ -17,7 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.Juang_juang.R;
 import com.example.persimmon_tree_proj.Calendar.ShareCalendarActivity;
@@ -69,11 +71,24 @@ public class TodoList_addlist_activity extends AppCompatActivity {
         //오늘 날짜와 작성자 setText
         TextView today_date = (TextView) findViewById(R.id.date);
         today_date.setText(strDate);
-        TextView writer = (TextView) findViewById(R.id.writer);
-        writer.setText(introduce);
         edit_title = (EditText) findViewById(R.id.title);
-        edit_contents = (EditText) findViewById(R.id.contents);
+        edit_contents = (EditText) findViewById(R.id.content);
 
+        Button color = (Button)findViewById(R.id.color);
+        color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                RelativeLayout color_pan = (RelativeLayout)findViewById(R.id.color_pan);
+                if (color_pan.getVisibility()== View.VISIBLE){
+                    color.setBackgroundResource(R.drawable.color_pan);
+                    color_pan.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    color.setBackgroundResource(R.drawable.color_pan);
+                    color_pan.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
         //메모 색상 누르면 색상 바뀌게
@@ -145,7 +160,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                     Todo_new newtodo = new Todo_new(user.getUid(), introduce, title_text, contents_text, style_num, strDate);
                     Map<String, Object> about_memo = newtodo.toMap();
                     reference.child(f_code).push().setValue(about_memo);
-
+                    Toast.makeText(getApplicationContext(), "메모를 성공적으로 추가했어요!", Toast.LENGTH_LONG).show();
 
                     //todo로 이동
                     Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
@@ -204,10 +219,11 @@ public class TodoList_addlist_activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -221,10 +237,11 @@ public class TodoList_addlist_activity extends AppCompatActivity {
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);;
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -249,10 +266,11 @@ public class TodoList_addlist_activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -265,10 +283,11 @@ public class TodoList_addlist_activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), com.example.persimmon_tree_proj.Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -276,12 +295,16 @@ public class TodoList_addlist_activity extends AppCompatActivity {
 
     }
 
-
     //배경 선택시 키보드 내려가도록
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         InputMethodManager inputmethodmanager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputmethodmanager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        RelativeLayout color_pan = (RelativeLayout)findViewById(R.id.color_pan);
+        Button color = (Button)findViewById(R.id.color);
+        color_pan.setVisibility(View.INVISIBLE);
+        color.setBackgroundResource(R.drawable.color_pan_not);
+
         return true;
     }
 }
