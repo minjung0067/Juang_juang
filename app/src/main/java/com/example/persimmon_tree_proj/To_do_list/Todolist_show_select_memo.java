@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -37,8 +38,8 @@ public class Todolist_show_select_memo extends AppCompatActivity {
         final String this_uid = intent.getStringExtra("this_uid");
 
         //선택한 메모 보여주기
-        TextView title = (TextView) findViewById(R.id.title);
-        TextView content = (TextView) findViewById(R.id.content);
+        EditText title = (EditText) findViewById(R.id.title);
+        EditText content = (EditText) findViewById(R.id.content);
         TextView date = (TextView) findViewById(R.id.date);
         TextView writer = (TextView) findViewById(R.id.writer);
         title.setText(this_title);
@@ -46,12 +47,20 @@ public class Todolist_show_select_memo extends AppCompatActivity {
         date.setText(this_date);
         writer.setText(this_uid);
 
+        //처음엔 수정 안되게, 수정 버튼 누르고 나서 수정되게
+        title.setTag(title.getKeyListener());
+        title.setKeyListener(null);
+        content.setTag(content.getKeyListener());
+        content.setKeyListener(null);
+
         LinearLayout memo = (LinearLayout) findViewById(R.id.memo);
         if (this_style.equals("1")) { memo.setBackgroundResource(R.drawable.todo_style1);}
         else if (this_style.equals("2")) { memo.setBackgroundResource(R.drawable.todo_style2);}
         else if (this_style.equals("3")) { memo.setBackgroundResource(R.drawable.todo_style3);}
         else{ memo.setBackgroundResource(R.drawable.todo_style4);}
 
+
+//        title.setKeyListener((KeyListener) title.getTag());
 
         //뒤로가기
         ImageButton goback = (ImageButton)findViewById(R.id.go_back);
