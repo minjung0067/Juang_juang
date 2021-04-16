@@ -25,7 +25,8 @@
         android:layout_marginBottom="13dp"
         android:background="@drawable/btn_green_noback_rounded"
         android:shadowColor="@color/WhiteColor"
-        android:text="편집하기"
+        android:text="삭제하기"
+        android:textSize="12dp"
         android:textColor="@color/pointColor"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/view4"
@@ -94,9 +95,9 @@
 
     <Button
         android:id="@+id/list_add"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="80dp"
         android:foreground="@drawable/add_todo"
         android:background="@color/WhiteColor"
