@@ -61,6 +61,10 @@ public class PopupcalActivity extends Activity {
     private int i; //user_list index
     private int count; //user_list size
 
+    private String user_name;
+    private String plan_id;
+    private String plan_name;
+
 
 
 
@@ -122,21 +126,19 @@ public class PopupcalActivity extends Activity {
                             Log.i("user_gam",user_gam);
                             Log.i("user_name",user_name);
 
-                            name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                            name_introduce_map.put(user_name, introduce);
-                            name_gam_map.put(user_name,"gam"+user_gam);
-                            /*if (color_number != null) { //있으면 담기, 없으면 패스
+                            //name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                            //name_introduce_map.put(user_name, introduce);
+                            //name_gam_map.put(user_name,"gam"+user_gam);
+                            if (color_number != null) { //있으면 담기, 없으면 패스
                                 name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
                                 name_introduce_map.put(user_name, introduce);
-                                name_gam_map.put(user_name,"gam"+user_gam);
+                                name_gam_map.put(user_name,user_gam);
 
                             } else if (color_number.equals("")) {
                                 name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
                                 name_introduce_map.put(user_name, "");
                                 name_gam_map.put(user_name,user_gam);
                             }
-
-                             */
                         }
 
                         @Override
@@ -152,24 +154,20 @@ public class PopupcalActivity extends Activity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //일정 아무것도 없으면
                         if (dataSnapshot.child(day).exists() == false) {
-                            adapterr.addItem("","", "현재 등록된 일정이 없감..", "", "" ,"");
-                            listview.setAdapter(adapterr); //리스트뷰에 adapterr 넣기
+                            adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "","");
+                            listview.setAdapter(adapterr);
                         }
-                        //일정이 있는 경우
-                        referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+                        reference.child(f_code).child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Iterator<DataSnapshot> plan = dataSnapshot.child(day).getChildren().iterator();
-                                while(plan.hasNext()){
-                                    String user_name = plan.next().getKey();
-                                    Log.i("user1",user_name);
-                                    Iterator<DataSnapshot> one_plan = dataSnapshot.child(day).child(user_name).getChildren().iterator();
-                                    while(one_plan.hasNext()){
-                                        String plan_id = one_plan.next().getKey();
-                                        Log.i("user2",plan_id);
-                                        String plan_name = String.valueOf(dataSnapshot.child(day).child(user_name).child(String.valueOf(plan_id)).child("plan_name").getValue());
-                                        Log.i("user3",plan_name);
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
+                                    String user_name = data.getKey();
+                                    for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
+                                        String plan_id = one_plan.getKey();
+                                        String plan_name = one_plan.child("plan_name").getValue().toString();
                                         listview.setAdapter(adapterr);
+//                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
+//                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
                                         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
                                             @Override
@@ -192,27 +190,30 @@ public class PopupcalActivity extends Activity {
                                         };
                                         // set creator
                                         listview.setMenuCreator(creator);
-                                        String gam_num = name_gam_map.get(user_name);
-                                        String gam_color = name_color_map.get(user_name);
+                                        Log.i("hey","hey1");
                                         adapterr.addItem(name_color_map.get(user_name), name_gam_map.get(user_name),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
-
+                                        Log.i("hey","hey2");
                                     }
                                 }
                             }
 
                             @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
+                            public void onCancelled(DatabaseError databaseError) {
+                                throw databaseError.toException();
                             }
                         });
 
                     }
+
+
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                         throw databaseError.toException();
                     }
                 });
+
+
 
             }
             @Override
@@ -221,6 +222,8 @@ public class PopupcalActivity extends Activity {
             }
         });
         //전체 user 가져오기
+
+
 
 
 
