@@ -106,6 +106,45 @@ public class PopupcalActivity extends Activity {
                     count++;
                     Log.i("users1", String.valueOf(count));
                 }
+                //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
+                //현재 구성원들 데이터베이스 하나씩 돌면서 user_name:color_number
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                for(i = 0 ; i< count ; i++){
+                    reference.child(user_list.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String color_number = snapshot.child("user_color").getValue(String.class);
+                            String user_gam = snapshot.child("user_gam").getValue(String.class);
+                            String user_name = snapshot.child("user_name").getValue(String.class);
+                            String introduce = snapshot.child("introduce").getValue(String.class);
+                            Log.i("color_number",color_number);
+                            Log.i("introduce",introduce);
+                            Log.i("user_gam",user_gam);
+                            Log.i("user_name",user_name);
+
+                            name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                            name_introduce_map.put(user_name, introduce);
+                            name_gam_map.put(user_name,"gam"+user_gam);
+                            /*if (color_number != null) { //있으면 담기, 없으면 패스
+                                name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                                name_introduce_map.put(user_name, introduce);
+                                name_gam_map.put(user_name,"gam"+user_gam);
+
+                            } else if (color_number.equals("")) {
+                                name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
+                                name_introduce_map.put(user_name, "");
+                                name_gam_map.put(user_name,user_gam);
+                            }
+
+                             */
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
 
             }
             @Override
@@ -117,35 +156,7 @@ public class PopupcalActivity extends Activity {
 
 
 
-        //1. 가족들 이름:색깔 map 형성 ex) 민정: #232323 //
-        //현재 구성원들 데이터베이스 하나씩 돌면서 user_name:color_number
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        for(i = 0 ; i< count ; i++){
-            reference.child(user_list.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String color_number = snapshot.child("user_color").getValue(String.class);
-                    String user_gam = snapshot.child("user_gam").getValue(String.class);
-                    String user_name = snapshot.child("user_name").getValue(String.class);
-                    String introduce = snapshot.child("introduce").getValue(String.class);
-                    if (color_number != null) { //있으면 담기, 없으면 패스
-                        name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                        name_introduce_map.put(user_name, introduce);
-                        name_gam_map.put(user_name,"gam"+user_gam);
 
-                    } else if (color_number.equals("")) {
-                        name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
-                        name_introduce_map.put(user_name, "");
-                        name_gam_map.put(user_name,user_gam);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
 
 
 
@@ -166,10 +177,13 @@ public class PopupcalActivity extends Activity {
                         Iterator<DataSnapshot> plan = dataSnapshot.child(day).getChildren().iterator();
                         while(plan.hasNext()){
                             String user_name = plan.next().getKey();
+                            Log.i("user1",user_name);
                             Iterator<DataSnapshot> one_plan = dataSnapshot.child(day).child(user_name).getChildren().iterator();
                             while(one_plan.hasNext()){
                                 String plan_id = one_plan.next().getKey();
+                                Log.i("user2",plan_id);
                                 String plan_name = String.valueOf(dataSnapshot.child(day).child(user_name).child(String.valueOf(plan_id)).child("plan_name").getValue());
+                                Log.i("user3",plan_name);
                                 listview.setAdapter(adapterr);
                                 SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -193,7 +207,11 @@ public class PopupcalActivity extends Activity {
                                 };
                                 // set creator
                                 listview.setMenuCreator(creator);
-                                adapterr.addItem(name_color_map.get(user_name), Drawable.createFromPath(name_gam_map.get(user_name)),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
+                                String gam_num = name_gam_map.get(user_name);
+                                String gam_color = name_color_map.get(user_name);
+                                Log.i("gam_color",gam_color);
+                                Log.i("gam_num",gam_num);
+                                adapterr.addItem(name_color_map.get(user_name), ContextCompat.getDrawable(getApplicationContext(), Integer.parseInt(gam_num)),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
 
                             }
                         }

@@ -3,10 +3,10 @@ package com.example.persimmon_tree_proj.Calendar;
 import android.graphics.drawable.Drawable;
 
 public class popup_plan {
-    private String coloricon ;
-    private String plan_name ;
-    private String nick_name ;
-    private Drawable user_gam;
+    private String coloricon ; //색깔
+    private String plan_name ; //일정 이름
+    private String nick_name ; //userintroduce
+    private Drawable user_gam; //gam
     private String user_name;
     private String plan_id;
     private Drawable backgrounddrawable;
