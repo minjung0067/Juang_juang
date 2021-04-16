@@ -67,6 +67,7 @@ public class QNA_Activity extends AppCompatActivity {
     private ArrayList<String> member_ans_arr = new ArrayList<String>();
     ArrayList<String> member_color_arr = new ArrayList<String>();
     ArrayList<String> member_gam_arr = new ArrayList<String>();
+    ArrayList<String> uid_list = new ArrayList<String>();
 
 
     //family code 관련
@@ -239,6 +240,7 @@ public class QNA_Activity extends AppCompatActivity {
                     }
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
                     questionday = Integer.parseInt((String) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue()); //제일 최근 질문에 올라간 날짜 담기
+                    Log.i("bin_error", "questionday is" + questionday);
                     Log.i("bin_error", "line 244 : " + didanswer + "that is did answer. our q arr is" + String.valueOf(our_q_arr.size()));
 
                     if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답하고 24시간이 지남
@@ -281,7 +283,7 @@ public class QNA_Activity extends AppCompatActivity {
                         });
 
                     } else if ((didanswer - 1) == count && Integer.valueOf(everyToday) <= questionday) {
-                        Log.i("bin_check", "2번 else if 24시간 안지남 setanswer + nothing");
+                        Log.i("bin_check", "2번 else if 24시간 안지남 setanswer + nothing. index = "+index);
                         setanswer(index+1);
                         textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         blurView.setVisibility(View.INVISIBLE);
@@ -451,73 +453,109 @@ public class QNA_Activity extends AppCompatActivity {
     }
 
     private void setanswer(int a) {   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
-        Numq.setText(String.valueOf(a)+"번째 감");
-        a_Reference = a_Database.getReference("answer");
-        a_Reference.child(f_code).child(String.valueOf(a)).addValueEventListener(new ValueEventListener() {
+        Log.i("bin_error", "setanswer 들어옴");
+        //Numq.setText(Integer.toString(a) + "번째 감");
+
+        DatabaseReference referencesetanswer = FirebaseDatabase.getInstance().getReference();
+        referencesetanswer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                member_arr.clear();
-                member_ans_arr.clear();
+
+                uid_list = new ArrayList<>();
+                uid_list.clear();
+
+                for (DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
+                    String user = membersData.getKey();
+                    uid_list.add(user);
+                    Log.i("bin_users", user);
+                }
+
                 member_color_arr.clear();
                 member_gam_arr.clear();
-                for (DataSnapshot data : dataSnapshot.child("answer").child(String.valueOf(answer_position + 1)).getChildren()) {
-                    key = data.getKey();
-                    String value = data.getValue().toString();
-                    this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
-                    this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
-                    this_introduce = dataSnapshot.child("members").child(key).child("introduce").getValue(String.class);
-                    member_color_arr.add(this_color);
-                    member_gam_arr.add(this_gam);
-                    member_arr.add(this_introduce);
-                    member_ans_arr.add(value);
-                }
-                int now_size = member_arr.size();
+                member_arr.clear();
+                if (uid_list.size() == count){
+                    Log.i("bin_check","uid 복사 완료");
+                    for (int i = 0; i < dataSnapshot.child("users").getChildrenCount(); i++) {
+                        if (uid_list.get(i) == dataSnapshot.getKey()) {
+                            this_color = dataSnapshot.child("users").child(uid_list.get(i)).child("user_color").getValue(String.class);
+                            this_gam = dataSnapshot.child("users").child(uid_list.get(i)).child("user_gam").getValue(String.class);
+                            this_introduce = dataSnapshot.child("users").child(uid_list.get(i)).child("introduce").getValue(String.class);
+                            Log.i("bin_check", "" + i + "번째this_intro" + this_introduce);
+                            Log.i("bin_check", "" + i + "this_gam" + this_gam);
+                            Log.i("bin_check", "" + i + "this_Color" + this_color);
+                            member_color_arr.add(i, this_color);
+                            member_gam_arr.add(i, this_gam);
+                            member_arr.add(i, this_introduce);
+                        }
+                    }
+                    member_ans_arr.clear();
+                    while (count > member_ans_arr.size()) {
+                        for (int i = 0; i < count; i++) {
+                            if (uid_list.get(i) == dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).getKey()) {
+                                member_ans_arr.add(i, String.valueOf(dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).child(uid_list.get(i)).getValue()));
+                            }
+                        }
+                        Log.i("bin_check", "memeber ans arr size 확인" + member_ans_arr.size());
+                        if (count == member_ans_arr.size()) {
+                            Log.i("bin_check", "while문 에러 memeber ans arr size 확인" + member_ans_arr.size());
+                            break;
+                        }
+                    }
 
-                //저장해 준 것들 하나씩 꺼내서 대답 표시
-                //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
-                container.removeAllViewsInLayout();
-                for (int i = 0; i < count; i++) {
-                    sub_answer n_layout1 = new sub_answer(getApplicationContext());
-                    TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
-                    name.setText(member_arr.get(i).toString());//동적 layout 생성
-                    ImageView iv = n_layout1.findViewById(R.id.profile_image);
-                    TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
-                    iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                    GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
-                    gd1.setStroke(50, Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
-                    if (member_gam_arr.get(i).equals("1")) {
-                        iv.setImageResource(R.drawable.gam1);
-                    } else if (member_gam_arr.get(i).equals("2")) {
-                        iv.setImageResource(R.drawable.gam2);
-                    } else if (member_gam_arr.get(i).equals("3")) {
-                        iv.setImageResource(R.drawable.gam3);
-                    } else if (member_gam_arr.get(i).equals("4")) {
-                        iv.setImageResource(R.drawable.gam4);
-                    } else if (member_gam_arr.get(i).equals("5")) {
-                        iv.setImageResource(R.drawable.gam5);
-                    } else if (member_gam_arr.get(i).equals("6")) {
-                        iv.setImageResource(R.drawable.gam6);
-                    } else if (member_gam_arr.get(i).equals("7")) {
-                        iv.setImageResource(R.drawable.gam7);
-                    } else if (member_gam_arr.get(i).equals("8")) {
-                        iv.setImageResource(R.drawable.gam8);
-                    } else {
-                        iv.setImageResource(R.drawable.gam1);
+                    int now_size = member_arr.size();
+
+                    //저장해 준 것들 하나씩 꺼내서 대답 표시
+                    //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
+                    container.removeAllViewsInLayout();
+                    for (int i = 0; i < count; i++) {
+                        sub_answer n_layout1 = new sub_answer(getApplicationContext());
+                        TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
+                        name.setText(member_arr.get(i).toString());//동적 layout 생성
+                        ImageView iv = n_layout1.findViewById(R.id.profile_image);
+                        TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
+                        iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                        GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
+                        gd1.setStroke(50, Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                        if (member_gam_arr.get(i).equals("1")) {
+                            iv.setImageResource(R.drawable.gam1);
+                        } else if (member_gam_arr.get(i).equals("2")) {
+                            iv.setImageResource(R.drawable.gam2);
+                        } else if (member_gam_arr.get(i).equals("3")) {
+                            iv.setImageResource(R.drawable.gam3);
+                        } else if (member_gam_arr.get(i).equals("4")) {
+                            iv.setImageResource(R.drawable.gam4);
+                        } else if (member_gam_arr.get(i).equals("5")) {
+                            iv.setImageResource(R.drawable.gam5);
+                        } else if (member_gam_arr.get(i).equals("6")) {
+                            iv.setImageResource(R.drawable.gam6);
+                        } else if (member_gam_arr.get(i).equals("7")) {
+                            iv.setImageResource(R.drawable.gam7);
+                        } else if (member_gam_arr.get(i).equals("8")) {
+                            iv.setImageResource(R.drawable.gam8);
+                        } else {
+                            iv.setImageResource(R.drawable.gam1);
+                        }
+                        if (member_ans_arr.get(i) == null) { //아직 대답 안된 부분 처리
+                            family_answers.setTextColor(Color.parseColor("#808080"));
+                        }
+                        family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
+                        container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                     }
-                    if (member_ans_arr.get(i) == null) { //아직 대답 안된 부분 처리
-                        family_answers.setTextColor(Color.parseColor("#808080"));
-                    }
-                    family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
-                    container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
                 }
-            }
+
+
+                }
+
+
+
+
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-
+        //전체 user 가져오기
     }
 
     /**
