@@ -76,6 +76,7 @@ public class Todolist_edit extends AppCompatActivity {
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
+        final String count = intent.getStringExtra("count");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -177,6 +178,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -196,10 +198,11 @@ public class Todolist_edit extends AppCompatActivity {
 
                 Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
+                intent.putExtra("f_code", f_code);
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
@@ -214,10 +217,11 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v){
                 Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
+                intent.putExtra("f_code", f_code);
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
@@ -235,6 +239,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
             }
@@ -252,6 +257,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -269,6 +275,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -286,6 +293,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -304,6 +312,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -321,6 +330,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기

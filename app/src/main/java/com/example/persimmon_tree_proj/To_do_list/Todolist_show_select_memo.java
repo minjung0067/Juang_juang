@@ -55,6 +55,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
         final String this_key = intent.getStringExtra("this_key");
         final String this_uid = intent.getStringExtra("this_uid");
         final String this_writer = intent.getStringExtra("this_writer");
+        final String count = intent.getStringExtra("count");
 
         style_num = this_style;
         //선택한 메모 보여주기
@@ -227,6 +228,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 finish();
@@ -245,6 +247,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
             }
@@ -262,6 +265,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -279,6 +283,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -296,6 +301,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -314,6 +320,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -331,6 +338,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기

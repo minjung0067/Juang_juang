@@ -61,6 +61,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
+        final String count = intent.getStringExtra("count");
 
 
         SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
@@ -169,6 +170,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                     intent.putExtra("introduce", introduce);
                     intent.putExtra("user_name", user_name);
                     intent.putExtra("user_color", user_color);
+                    intent.putExtra("count", count);
                     intent.putExtra("user_gam", user_gam);
                     startActivity(intent);
                     finish();
@@ -186,10 +188,12 @@ public class TodoList_addlist_activity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
         });
@@ -206,6 +210,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
@@ -223,6 +228,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
@@ -241,7 +247,8 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
-                intent.putExtra("user_gam", user_gam);;
+                intent.putExtra("user_gam", user_gam);
+                intent.putExtra("count", count);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -271,6 +278,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
                 intent.putExtra("user_gam", user_gam);
+                intent.putExtra("count", count);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -288,6 +296,7 @@ public class TodoList_addlist_activity extends AppCompatActivity {
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
                 intent.putExtra("user_gam", user_gam);
+                intent.putExtra("count", count);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }

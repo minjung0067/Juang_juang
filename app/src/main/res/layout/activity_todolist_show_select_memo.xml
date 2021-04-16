@@ -65,14 +65,26 @@
                         android:gravity="right|center_vertical"
                         android:orientation="horizontal">
 
+
                         <Button
-                            android:id="@+id/close"
+                            android:id="@+id/ok"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:background="@drawable/remove_todo"
+                            android:background="@drawable/check_icon_big"
                             android:clickable="true"
                             android:scaleType="fitCenter"
                             android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/upload"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:background="@drawable/check_icon_big"
+                            android:clickable="true"
+                            android:scaleType="fitCenter"
+                            android:visibility="invisible"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </RelativeLayout>
@@ -190,32 +202,19 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/ok"
+                    android:id="@+id/close"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/check_icon_big"
+                    android:background="@drawable/remove_todo"
                     android:clickable="true"
                     android:scaleType="fitCenter"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/upload"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/check_icon_big"
-                    android:clickable="true"
-                    android:scaleType="fitCenter"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
