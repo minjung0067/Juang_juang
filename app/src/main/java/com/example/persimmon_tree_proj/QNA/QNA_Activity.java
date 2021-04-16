@@ -67,6 +67,7 @@ public class QNA_Activity extends AppCompatActivity {
     private ArrayList<String> member_ans_arr = new ArrayList<String>();
     ArrayList<String> member_color_arr = new ArrayList<String>();
     ArrayList<String> member_gam_arr = new ArrayList<String>();
+    ArrayList<String> uid_list = new ArrayList<String>();
 
 
     //family code 관련
@@ -239,6 +240,7 @@ public class QNA_Activity extends AppCompatActivity {
                     }
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
                     questionday = Integer.parseInt((String) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue()); //제일 최근 질문에 올라간 날짜 담기
+                    Log.i("bin_error", "questionday is" + questionday);
                     Log.i("bin_error", "line 244 : " + didanswer + "that is did answer. our q arr is" + String.valueOf(our_q_arr.size()));
 
                     if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답하고 24시간이 지남
@@ -451,26 +453,81 @@ public class QNA_Activity extends AppCompatActivity {
     }
 
     private void setanswer(int a) {   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
-        Numq.setText(String.valueOf(a)+"번째 감");
+        Log.i("bin_error", "setanswer 들어옴");
+        Numq.setText(""+a+"번째 감");
+
+        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("groups");
+        reference2.child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                uid_list = new ArrayList<>();
+                uid_list.clear();
+
+                for (DataSnapshot membersData : dataSnapshot.getChildren()) {
+                    String user = membersData.getKey();
+                    uid_list.add(user);
+                    Log.i("bin_users",user);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //전체 user 가져오기
+
+        DatabaseReference referenceuser = FirebaseDatabase.getInstance().getReference("users");
+        referenceuser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                uid_list = new ArrayList<>();
+                uid_list.clear();
+
+                member_color_arr.clear();
+                member_gam_arr.clear();
+                member_arr.clear();
+                for(int i = 0 ; i<dataSnapshot.getChildrenCount();i++){
+                    if(uid_list.get(i) == dataSnapshot.getKey()){
+                        this_color = dataSnapshot.child(uid_list.get(i)).child("user_color").getValue(String.class);
+                        this_gam = dataSnapshot.child(uid_list.get(i)).child("user_gam").getValue(String.class);
+                        this_introduce = dataSnapshot.child(uid_list.get(i)).child("introduce").getValue(String.class);
+                        Log.i("bin_check","this_intro"+this_introduce);
+                        Log.i("bin_check","this_gam"+this_gam);
+                        Log.i("bin_check","this_Color"+this_color);
+                        member_color_arr.add(this_color);
+                        member_gam_arr.add(this_gam);
+                        member_arr.add(this_introduce);
+                    }
+                }
+
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //전체 user 가져오기
+
         a_Reference = a_Database.getReference("answer");
         a_Reference.child(f_code).child(String.valueOf(a)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                member_arr.clear();
                 member_ans_arr.clear();
-                member_color_arr.clear();
-                member_gam_arr.clear();
-                for (DataSnapshot data : dataSnapshot.child("answer").child(String.valueOf(answer_position + 1)).getChildren()) {
-                    key = data.getKey();
-                    String value = data.getValue().toString();
-                    this_color = dataSnapshot.child("members").child(key).child("user_color").getValue(String.class);
-                    this_gam = dataSnapshot.child("members").child(key).child("user_gam").getValue(String.class);
-                    this_introduce = dataSnapshot.child("members").child(key).child("introduce").getValue(String.class);
-                    member_color_arr.add(this_color);
-                    member_gam_arr.add(this_gam);
-                    member_arr.add(this_introduce);
-                    member_ans_arr.add(value);
+                while(count > member_ans_arr.size()){
+                    for (int i = 0; i < count ; i++){
+                        if(uid_list.get(i)==dataSnapshot.getKey()){
+                            member_ans_arr.add(i, String.valueOf(dataSnapshot.child(uid_list.get(i)).getValue()));
+                        }
+                    }
+                    Log.i("bin_check","memeber ans arr size 확인"+member_ans_arr.size());
+                    if(count == member_ans_arr.size()){
+                        Log.i("bin_check","while문 에러 memeber ans arr size 확인"+member_ans_arr.size());
+                        break;
+                    }
                 }
+
                 int now_size = member_arr.size();
 
                 //저장해 준 것들 하나씩 꺼내서 대답 표시
@@ -534,7 +591,7 @@ public class QNA_Activity extends AppCompatActivity {
         a_Database = FirebaseDatabase.getInstance();
 
         mReference = mDatabase.getReference("question");
-        a_Reference = a_Database.getReference("answer");
+        a_Reference = a_Database.getReference("answer").child(f_code);
 
         mChild = new ChildEventListener() {
 
