@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.Juang_juang.R;
@@ -69,12 +70,19 @@ public class TodoList_addlist_activity extends AppCompatActivity {
         //오늘 날짜와 작성자 setText
         TextView today_date = (TextView) findViewById(R.id.date);
         today_date.setText(strDate);
-        TextView writer = (TextView) findViewById(R.id.writer);
-        writer.setText(introduce);
         edit_title = (EditText) findViewById(R.id.title);
-        edit_contents = (EditText) findViewById(R.id.contents);
+        edit_contents = (EditText) findViewById(R.id.content);
 
+        Button color = (Button)findViewById(R.id.color);
+        color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                edit_contents.setHeight(100);
+                RelativeLayout color_pan = (RelativeLayout)findViewById(R.id.color_pan);
+                color_pan.setVisibility(View.VISIBLE);
+            }
 
+        });
 
         //메모 색상 누르면 색상 바뀌게
         LinearLayout memo = (LinearLayout) findViewById(R.id.memo);
@@ -276,12 +284,13 @@ public class TodoList_addlist_activity extends AppCompatActivity {
 
     }
 
-
     //배경 선택시 키보드 내려가도록
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         InputMethodManager inputmethodmanager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputmethodmanager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        RelativeLayout color_pan = (RelativeLayout)findViewById(R.id.color_pan);
+        color_pan.setVisibility(View.INVISIBLE);
         return true;
     }
 }
