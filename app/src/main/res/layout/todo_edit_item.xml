@@ -10,17 +10,5 @@
 
     <include layout="@layout/todolist_item" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/close"-->
-<!--        android:layout_width="26dp"-->
-<!--        android:layout_height="28dp"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="7dp"-->
-<!--        android:clickable="true"-->
-<!--        android:visibility="visible"-->
-<!--        android:scaleType="fitCenter"-->
-<!--        app:srcCompat="@drawable/delete_icon_2" />-->
 
     </RelativeLayout>

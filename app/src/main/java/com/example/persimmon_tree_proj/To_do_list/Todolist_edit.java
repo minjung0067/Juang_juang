@@ -76,6 +76,7 @@ public class Todolist_edit extends AppCompatActivity {
         final String user_name = intent.getStringExtra("user_name");
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
+        final String count = intent.getStringExtra("count");
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -155,7 +156,7 @@ public class Todolist_edit extends AppCompatActivity {
         });
 
 
-        //수정 끝
+        //삭제하기
         Button edit_ok = (Button) findViewById(R.id.edit_ok);
         edit_ok.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,18 +169,46 @@ public class Todolist_edit extends AppCompatActivity {
                     reference.child(f_code).child(String.valueOf(memo_key_item)).removeValue();
                 }
 
+                Toast.makeText(getApplicationContext(), "메모를 성공적으로 삭제했어요!", Toast.LENGTH_LONG).show();
 
                 // 다시 이동
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
         });
+
+
+        //전체 삭제
+        Button all_edit = (Button)findViewById(R.id.all_edit);
+        all_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("todolist");
+                reference.child(f_code).removeValue();
+
+                Toast.makeText(getApplicationContext(), "모든 메모를 성공적으로 삭제했어요!", Toast.LENGTH_LONG).show();
+
+                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
+                startActivity(intentt);
+            }
+        });
+
+
 
         //뒤로가기
         TextView goback = (TextView)findViewById(R.id.go_back);
@@ -188,7 +217,12 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v){
                 Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
         });
@@ -205,6 +239,7 @@ public class Todolist_edit extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
             }
@@ -218,10 +253,12 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
@@ -234,10 +271,12 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -250,10 +289,12 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -267,10 +308,12 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -283,10 +326,12 @@ public class Todolist_edit extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }

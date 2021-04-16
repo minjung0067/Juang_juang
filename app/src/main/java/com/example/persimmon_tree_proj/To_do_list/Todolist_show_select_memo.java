@@ -55,6 +55,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
         final String this_key = intent.getStringExtra("this_key");
         final String this_uid = intent.getStringExtra("this_uid");
         final String this_writer = intent.getStringExtra("this_writer");
+        final String count = intent.getStringExtra("count");
 
         style_num = this_style;
         //선택한 메모 보여주기
@@ -227,6 +228,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 finish();
@@ -245,6 +247,7 @@ public class Todolist_show_select_memo extends AppCompatActivity {
                 intent.putExtra("introduce", introduce);
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
                 intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
             }
@@ -258,10 +261,12 @@ public class Todolist_show_select_memo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
             }
@@ -274,10 +279,12 @@ public class Todolist_show_select_memo extends AppCompatActivity {
             public void onClick(View v) { //누르면 캘린더로 이동
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -290,10 +297,12 @@ public class Todolist_show_select_memo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LodingPage_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
@@ -307,10 +316,12 @@ public class Todolist_show_select_memo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
@@ -323,10 +334,12 @@ public class Todolist_show_select_memo extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Game_activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("count", count);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
             }
