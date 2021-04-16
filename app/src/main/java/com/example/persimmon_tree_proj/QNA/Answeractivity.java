@@ -84,6 +84,7 @@ public class Answeractivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference("answer").child(f_code).child(position).child(uid).setValue(msg);
                 Intent intent = new Intent(getApplicationContext(), QNA_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("f_code",f_code);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(0, 0); //intent시 효과 없애기

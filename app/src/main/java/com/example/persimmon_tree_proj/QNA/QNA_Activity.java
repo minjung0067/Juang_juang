@@ -95,6 +95,7 @@ public class QNA_Activity extends AppCompatActivity {
     private View answer_view;
 
     private ImageButton newmessage;
+    private int questionday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +139,7 @@ public class QNA_Activity extends AppCompatActivity {
                     }
                     i++;
                 }
+                Log.i("bin_error", "all_q_arr완료다 이놈들아");
             }
 
             @Override
@@ -163,7 +165,7 @@ public class QNA_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
 
-                question_cnt = (int) snapshot.child("answer").child(f_code).getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                question_cnt = (int) snapshot.getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
                 our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
                 for (int i = 0; i < question_cnt; i++) {
                     String this_question = String.valueOf(all_q_arr.get(i));
@@ -171,7 +173,7 @@ public class QNA_Activity extends AppCompatActivity {
                     index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
                 }
 
-                if (snapshot.child("1").getChildrenCount() == 1) { //첫 질문 배열에 넣음
+                if (snapshot.child("1").getChildrenCount() == 1 && snapshot.child("1").child(uid).getValue()==null) { //첫 질문 배열에 넣음
                     readData(a_Reference, new OnGetDataListiner() {
                         @Override
                         public void onSuccess() {
@@ -179,7 +181,7 @@ public class QNA_Activity extends AppCompatActivity {
                             String this_question = all_q_arr.get(0);
                             our_q_arr.add(this_question);  //현재 우리가족이 대답한 question을 배열에 추가
                             index = our_q_arr.size();
-                            Log.i("bin_error", String.valueOf(index));
+                            Log.i("bin_error", "첫 질문 배열에 넣음 index : "+String.valueOf(index));
                             textView.setText(this_question); //main화면에서 글씨 창 보이기
 
                             Toast.makeText(QNA_Activity.this, "첫 질문이 도착했대요 ! 대답하러 가볼까요? ", Toast.LENGTH_LONG).show();
@@ -211,20 +213,25 @@ public class QNA_Activity extends AppCompatActivity {
 
                     });
                 } else { //처음이 아니라면
-                    count = Integer.parseInt(count2);                                                                  //가족 수
-                    question_cnt = (int) snapshot.child("answer").child(f_code).getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                    count = Integer.parseInt(count2);                  //가족 수
+                    question_cnt = (int) snapshot.getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                    Log.i("bin_error", "처음이 아니라면 question _cnt"+String.valueOf(question_cnt));
+//                    if (question_cnt == 0) {
+//                        question_cnt += 1;
+//                    }
                     our_q_arr = new ArrayList<>();                                   //현재 우리가족이 대답한 question을 갖는 배열
+
                     for (int i = 0; i < question_cnt; i++) {
                         String this_question = String.valueOf(all_q_arr.get(i));
                         our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
-                        index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
+                        index = i;
+                        Log.i("bin_error", i + this_question);
                     }
-
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
-                    int questionday = (int) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue(); //제일 최근 질문에 올라간 날짜 담기
-                    Log.i("bin_error", "line 244 : " + String.valueOf(our_q_arr.size()));
+                    questionday = Integer.parseInt((String) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue()); //제일 최근 질문에 올라간 날짜 담기
+                    Log.i("bin_error", "line 244 : " + didanswer + "that is did answer. our q arr is" + String.valueOf(our_q_arr.size()));
 
-                    if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답함!
+                    if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답하고 24시간이 지남
                         Log.i("bin_check", "set answer, none blur");
                         setanswer(question_cnt);
                         blurView.setVisibility(View.INVISIBLE);
@@ -263,7 +270,8 @@ public class QNA_Activity extends AppCompatActivity {
                         });
 
                     } else if ((didanswer - 1) == count && Integer.valueOf(everyToday) <= questionday) {
-//                            index = our_q_arr.size();
+                        setanswer(question_cnt);
+//                      index = our_q_arr.size();
                         Toast.makeText(QNA_Activity.this, "질문은 하루에 하나씩만 제공한담! 내일의 새 질문을 기대해달라감!", Toast.LENGTH_LONG).show();
                         //원래 이 뒤에 없어야함! 근데 테스트를 위해서 넣겠음.
                         String stDate = formatH.format(today);          //오늘 날짜가 stDate 변수에 저장. 20210326
@@ -568,7 +576,6 @@ public class QNA_Activity extends AppCompatActivity {
         mReference.removeEventListener(mChild);
         a_Reference.removeEventListener(a_Child);
     }
-
-
-
 }
+
+
