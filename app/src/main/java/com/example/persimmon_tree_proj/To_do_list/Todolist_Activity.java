@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.constraintlayout.motion.widget.Key;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -53,9 +54,11 @@ public class Todolist_Activity extends AppCompatActivity {
 
 
     // 배열리스트
+    private ArrayList<String> memo_key = new ArrayList<String>();
     private ArrayList<String> title = new ArrayList<String>();
     private ArrayList<String> contents = new ArrayList<String>();
     private ArrayList<String> writer = new ArrayList<String>();
+    private ArrayList<String> uid = new ArrayList<String>();
     private ArrayList<String> date = new ArrayList<String>();
     private ArrayList<String> style = new ArrayList<String>();
 
@@ -83,11 +86,13 @@ public class Todolist_Activity extends AppCompatActivity {
                 //가져온 f_code에 해당하는 member 수 세기
 
                 //각 배열 초기화
+                memo_key.clear();
                 title.clear();
                 contents.clear();
                 writer.clear();
                 date.clear();
                 style.clear();
+                uid.clear();
 
                 //차례로 돌면서 메모장에 대한 여러 정보들을 각 배열에 순서대로 담기
                 Iterator<DataSnapshot> memos = dataSnapshot.child(f_code).getChildren().iterator(); //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
@@ -97,13 +102,17 @@ public class Todolist_Activity extends AppCompatActivity {
                     String this_contents = dataSnapshot.child(f_code).child(this_memo).child("contents").getValue(String.class);
                     String this_style = dataSnapshot.child(f_code).child(this_memo).child("style").getValue(String.class);
                     String this_date = dataSnapshot.child(f_code).child(this_memo).child("date").getValue(String.class);
-                    String this_uid = dataSnapshot.child(f_code).child(this_memo).child("writer").getValue(String.class);
+                    String this_uid = dataSnapshot.child(f_code).child(this_memo).child("uid").getValue(String.class);
+                    String this_writer = dataSnapshot.child(f_code).child(this_memo).child("writer").getValue(String.class);
 
+                    memo_key.add(this_memo);
                     title.add(this_title);
                     contents.add(this_contents);
                     style.add(this_style);
                     date.add(this_date);
-                    writer.add(this_uid);
+                    uid.add(this_uid);
+                    writer.add(this_writer);
+
 
                 }
 
@@ -140,7 +149,9 @@ public class Todolist_Activity extends AppCompatActivity {
                         String this_contents = contents.get(position);
                         String this_style = style.get(position);
                         String this_date = date.get(position);
-                        String this_uid = writer.get(position);
+                        String this_uid = uid.get(position);
+                        String this_key = memo_key.get(position);
+                        String this_writer = writer.get(position);
                         Intent intent = new Intent(Todolist_Activity.this, Todolist_show_select_memo.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("f_code",f_code);
@@ -153,6 +164,8 @@ public class Todolist_Activity extends AppCompatActivity {
                         intent.putExtra("this_style",this_style);
                         intent.putExtra("this_date",this_date);
                         intent.putExtra("this_uid",this_uid);
+                        intent.putExtra("this_key",this_key);
+                        intent.putExtra("this_writer",this_writer);
                         startActivity(intent);
 
                     }
@@ -174,7 +187,7 @@ public class Todolist_Activity extends AppCompatActivity {
 
 
         //뒤로가기
-        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+        TextView goback = (TextView)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -216,7 +229,6 @@ public class Todolist_Activity extends AppCompatActivity {
                 intent.putExtra("user_color",user_color);
                 intent.putExtra("user_gam",user_gam);
                 startActivity(intent);
-                overridePendingTransition(0, 0);
                 finish();
 
             }
@@ -227,16 +239,17 @@ public class Todolist_Activity extends AppCompatActivity {
 
 
         //마이페이지 버튼
-        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        TextView mypage = (TextView) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
             }
         });
