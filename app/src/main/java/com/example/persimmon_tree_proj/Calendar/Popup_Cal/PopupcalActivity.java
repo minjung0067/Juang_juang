@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -130,7 +131,7 @@ public class PopupcalActivity extends Activity {
                     if (color_number != null) { //있으면 담기, 없으면 패스
                         name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
                         name_introduce_map.put(user_name, introduce);
-                        name_gam_map.put(user_name,user_gam);
+                        name_gam_map.put(user_name,"gam"+user_gam);
 
                     } else if (color_number.equals("")) {
                         name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
@@ -155,7 +156,7 @@ public class PopupcalActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //일정 아무것도 없으면
                 if (dataSnapshot.child(day).exists() == false) {
-                    adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "" ,"");
+                    adapterr.addItem("", Drawable.createFromPath(""), "현재 등록된 일정이 없감..", "", "" ,"");
                     listview.setAdapter(adapterr); //리스트뷰에 adapterr 넣기
                 }
                 //일정이 있는 경우
@@ -192,7 +193,7 @@ public class PopupcalActivity extends Activity {
                                 };
                                 // set creator
                                 listview.setMenuCreator(creator);
-                                adapterr.addItem(name_color_map.get(user_name), name_gam_map.get(user_name),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
+                                adapterr.addItem(name_color_map.get(user_name), Drawable.createFromPath(name_gam_map.get(user_name)),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
 
                             }
                         }
