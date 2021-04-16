@@ -165,11 +165,11 @@ public class TodoList_addlist_activity extends AppCompatActivity {
 
 
         //뒤로가기
-        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
+        TextView goback = (TextView)findViewById(R.id.go_back);
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intentt = new Intent(getApplicationContext(), LodingPage_Activity.class);
+                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentt.putExtra("f_code",f_code);
                 intent.putExtra("introduce",introduce);
@@ -181,16 +181,17 @@ public class TodoList_addlist_activity extends AppCompatActivity {
 
 
         //마이페이지 버튼
-        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        TextView mypage = (TextView) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentt = new Intent(getApplicationContext(), MypageActivity.class);
                 intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intentt.putExtra("f_code",f_code);
-                intent.putExtra("introduce",introduce);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intentt);
             }
         });

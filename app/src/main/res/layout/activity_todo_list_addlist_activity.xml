@@ -159,30 +159,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
+            android:background="@color/grayColor"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/style1"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:background="#FFDEEF" />
 
             <Button
                 android:id="@+id/style3"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:background="#D8FFCC" />
 
             <Button
                 android:id="@+id/style4"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:background="#FFF3C2" />
 
             <Button
                 android:id="@+id/style2"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:layout_margin="10dp"
                 android:background="#DFFDFF" />
         </LinearLayout>
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Juang_juang.R;
@@ -180,30 +181,31 @@ public class Todolist_edit extends AppCompatActivity {
             }
         });
 
-//        //뒤로가기
-//        ImageButton goback = (ImageButton)findViewById(R.id.go_back);
-//        goback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v){
-//                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
-//                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intentt.putExtra("f_code",f_code);
-//                startActivity(intentt);
-//            }
-//        });
+        //뒤로가기
+        TextView goback = (TextView)findViewById(R.id.go_back);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intentt = new Intent(getApplicationContext(), Todolist_Activity.class);
+                intentt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentt.putExtra("f_code",f_code);
+                startActivity(intentt);
+            }
+        });
 
 
         //마이페이지 버튼
-        ImageButton mypage = (ImageButton) findViewById(R.id.btn_mypage);
+        TextView mypage = (TextView) findViewById(R.id.btn_mypage);
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MypageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("f_code",f_code);
-                intent.putExtra("user_name",user_name);
-                intent.putExtra("user_color",user_color);
-                intent.putExtra("user_gam",user_gam);
+                intent.putExtra("f_code", f_code);
+                intent.putExtra("introduce", introduce);
+                intent.putExtra("user_name", user_name);
+                intent.putExtra("user_color", user_color);
+                intent.putExtra("user_gam", user_gam);
                 startActivity(intent);
             }
         });
