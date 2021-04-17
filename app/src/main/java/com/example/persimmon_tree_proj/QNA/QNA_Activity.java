@@ -62,7 +62,7 @@ public class QNA_Activity extends AppCompatActivity {
     private Spinner spinner; //질문 목록이 있는 spinner
     private ArrayAdapter<String> arrayAdapter;
     private ArrayAdapter<String> arrayAdapter2;
-    private ArrayList<String> all_q_arr; //만들어 놓은 모든 질문 담기는 배열
+    //private ArrayList<String> all_q_arr; //만들어 놓은 모든 질문 담기는 배열
     private ArrayList<String> our_q_arr; //우리 가족의 질문이 담기는 배열
     private ArrayList<String> member_arr = new ArrayList<String>();
     private ArrayList<String> member_ans_arr = new ArrayList<String>();
@@ -103,6 +103,10 @@ public class QNA_Activity extends AppCompatActivity {
     private TextView Numq;
 
     private int qsize;
+    private int que_cnt; //삭제 될 예쩡
+    String all_q_arr[] = {"가족의 도플갱어가 나타난다면 어떻게 구분 할 것인감?", "내일이 지구종말이라면?",
+            "가족들의 이름을 바꿀 수 있는 능력이 생긴다면?", "나이를 실감할 때는 언제인감?", "미처 전하지 못했던 고마운 일이 있다면 살짝 털어놓아볼감?"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,8 +135,21 @@ public class QNA_Activity extends AppCompatActivity {
 
         initDatabase();
 
-        all_q_arr = new ArrayList<>();
+        Log.i("bin_cycle Qna oncreate", all_q_arr[0]);
+
+//        all_q_arr.add(0,"가족의 도플갱어가 나타난다면 어떻게 구분 할 것인감?");
+//        all_q_arr.add(1,"내일이 지구종말이라면?");
+//        all_q_arr.add(2,"가족들의 이름을 바꿀 수 있는 능력이 생긴다면?");
+//        all_q_arr.add(3,"나이를 실감할 때는 언제인감?");
+//        all_q_arr.add(4,"미처 전하지 못했던 고마운 일이 있다면 털어놓아보라감");
+
+
+
+//        all_q_arr = new ArrayList<>();
         our_q_arr = new ArrayList<>();
+//        our_q_arr = ["가족의 도플갱어가 나타난다면 어떻게 구분 할 것인감?", "내일이 지구종말이라면?"];
+
+        /*
         //전체 질문 목록 가져와서 all_q_arr에 넣기
         DatabaseReference reference_q = FirebaseDatabase.getInstance().getReference("question");
         reference_q.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -159,7 +176,7 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
         //전체 질문 가져오기 끝
-
+        */
 
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
@@ -171,22 +188,31 @@ public class QNA_Activity extends AppCompatActivity {
         final String count2 = intent.getStringExtra("count");
 
         a_Reference = a_Database.getReference();
-        a_Reference.child("answer").child(f_code).addValueEventListener(new ValueEventListener() {
+        a_Reference.child("answer");
+        a_Reference.child(f_code);
+        a_Reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //본인의 감프로필과 컬러 오른쪽 상단 프로필 맵에 띄우기
 
-                question_cnt = (int) snapshot.getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                que_cnt = 0;
+                Iterator<DataSnapshot> questioncount = snapshot.getChildren().iterator();
+                while (questioncount.hasNext()){
+                    que_cnt += 1;
+                }
+                question_cnt = que_cnt;
+                //question_cnt = (int) snapshot.getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
+                Log.i("bin_arr question_cnt", String.valueOf(question_cnt));
                 for (int i = 0; i < question_cnt; i++) {
-                    String this_question = String.valueOf(all_q_arr.get(i));
+                    String this_question = String.valueOf(all_q_arr[i]);
+                    Log.i("bin_arr 1", "" + i + this_question);
                     our_q_arr.add(this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
                     index = i;                                                   //db에 올라간 최신질문이 전체 질문의 몇 번째 index인지
-                    Log.i("bin_arr 1", i + this_question);
                 }
                 qsize = our_q_arr.size();
-                if (snapshot.child("1").getChildrenCount() == 1 || snapshot.child("1").child(uid).getValue()==null) { //첫 질문 배열에 넣음
+                if (snapshot.child("1").getChildrenCount() == 1 || snapshot.child("1").child(uid).getValue() == null) { //첫 질문 배열에 넣음
                     Log.i("bin_check", "첫 질문에 아무도 답 안하거나 내가 답 안함");
-
+                    /*
                     String this_question = all_q_arr.get(0);
                     our_q_arr.add(0, this_question);  //현재 우리가족이 대답한 question을 배열에 추가
                     index = our_q_arr.size();
@@ -194,8 +220,9 @@ public class QNA_Activity extends AppCompatActivity {
                     if(our_q_arr.size()!=0){
                         textView.setText(our_q_arr.get(index-1)); //main화면에서 글씨 창 보이기
                     }
-                    Numq.setText(String.valueOf(index)+"번째 감");
-
+                    Numq.setText(String.valueOf(index)+"번째 감");*/
+                    textView.setText("가족의 도플갱어가 나타난다면 어떻게 구분 할 것인감?");
+                    Numq.setText("1 번째 감");
                     readData(a_Reference, new OnGetDataListiner() {
                         @Override
                         public void onSuccess() {
@@ -203,8 +230,8 @@ public class QNA_Activity extends AppCompatActivity {
                             Toast.makeText(QNA_Activity.this, "첫 질문이 도착했대요 ! 대답하러 가볼까요? ", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.putExtra("question", this_question); //선택한 question을 갖고 감.
-                            intent.putExtra("position", String.valueOf(index)); //선택한 position값을 갖고 감.
+                            intent.putExtra("question", "가족의 도플갱어가 나타난다면 어떻게 구분 할 것인감?"); //선택한 question을 갖고 감.
+                            intent.putExtra("position", String.valueOf(qsize)); //선택한 position값을 갖고 감.
                             intent.putExtra("f_code", f_code);
                             intent.putExtra("introduce", introduce);
                             intent.putExtra("user_name", user_name);
@@ -230,31 +257,29 @@ public class QNA_Activity extends AppCompatActivity {
                     });
                 } else { //처음이 아니라면
                     count = Integer.parseInt(count2);                  //가족 수
-                    question_cnt = (int) snapshot.getChildrenCount();  //현재 데이터베이스에 우리가족이 대답한 question의 갯수
-                    Log.i("bin_error", "처음이 아니라면 question _cnt"+String.valueOf(question_cnt));
+                    //count = 1;
 
-                    //bin_arr 1,2모두 작동하는 것으로 보아 2는 추후에 삭제해도 될 것이라고 예상
-                    for (int i = 0; i < question_cnt; i++) {
-                        String this_question = String.valueOf(all_q_arr.get(i));
-                        our_q_arr.add(i,this_question);                                 //현재 우리가족이 대답한 question을 배열에 추가
-                        index = i;
-                        Log.i("bin_arr 2", i + this_question);
-                    }
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
-                    questionday = Integer.parseInt((String) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue()); //제일 최근 질문에 올라간 날짜 담기
-                    Log.i("bin_error", "questionday is" + questionday);
+                    if (String.valueOf(snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue())==null) {
+                        questionday = 20210418;
+                        Log.i("bin_error", "null questionday is" + questionday);
+                    }
+                    else{
+                        questionday = Integer.parseInt((String) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue()); //제일 최근 질문에 올라간 날짜 담기
+                        Log.i("bin_error", "questionday is" + questionday);
+                    }
                     Log.i("bin_error", "line 244 : " + didanswer + "that is did answer. our q arr is" + String.valueOf(our_q_arr.size()));
 
                     if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답하고 24시간이 지남
                         Log.i("bin_check", "1번 if -> set answer, none blur");
-                        setanswer(index+1);
-                        if(our_q_arr.size()!=0){
+                        setanswer(index + 1);
+                        if (our_q_arr.size() != 0) {
                             textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         }
                         blurView.setVisibility(View.INVISIBLE);
                         showblur.setVisibility(View.INVISIBLE);           //모든 가족이 답해야만 ~ 주황 글씨 숨김
                         String stDate = formatH.format(today);          //오늘 날짜가 stDate 변수에 저장. 20210326
-                        String qq = all_q_arr.get(index);//사이즈로는 3 index상으로 2번 질문이 추가되어야함
+                        String qq = all_q_arr[index];//사이즈로는 3 index상으로 2번 질문이 추가되어야함
                         our_q_arr.add(qq); //젤 첫 질문 q_arr에 추가
                         qsize = our_q_arr.size();
                         Log.i("bin_check", qq);
@@ -269,7 +294,7 @@ public class QNA_Activity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 qsize = our_q_arr.size();
-                                String this_question = our_q_arr.get(qsize-1);
+                                String this_question = our_q_arr.get(qsize - 1);
                                 Intent intent = new Intent(getApplicationContext(), Answeractivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.putExtra("question", this_question); //선택한 question을 갖고 감.
@@ -287,9 +312,9 @@ public class QNA_Activity extends AppCompatActivity {
                         });
 
                     } else if ((didanswer - 1) == count && Integer.valueOf(everyToday) <= questionday) {
-                        Log.i("bin_check", "2번 else if 24시간 안지남 setanswer + nothing. index = "+index);
-                        setanswer(index+1);
-                        if(our_q_arr.size()!=0){
+                        Log.i("bin_check", "2번 else if 24시간 안지남 setanswer + nothing. index = " + index);
+                        setanswer(index + 1);
+                        if (our_q_arr.size() != 0) {
                             textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         }
                         blurView.setVisibility(View.INVISIBLE);
@@ -300,16 +325,16 @@ public class QNA_Activity extends AppCompatActivity {
                         Log.i("bin_check", "3번 else 다 답안함 몇 번째감 보여주기 blur visible");
                         blurView.setVisibility(View.VISIBLE);       //블러 처리 시킴
                         showblur.setVisibility(View.VISIBLE);       //우리 가족이 웅앵 글씨 보이게
-                        if(our_q_arr.size()!=0){
+                        if (our_q_arr.size() != 0) {
                             textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         }
-                        Numq.setText(String.valueOf(index+1)+"번째 감");
+                        Numq.setText(String.valueOf(index + 1) + "번째 감");
                         if (snapshot.child(String.valueOf(our_q_arr.size())).child(uid) == null) {
                             Log.i("bin_check", "3번-1 if 다 답안함 근데 나도 안함 -> floating btn 띄우기");
 
                             //답하러 가는 플로트 버튼 띄우기 + 활성화
                             Toast.makeText(QNA_Activity.this, "모두가 답 안했고 나도 답 안함", Toast.LENGTH_LONG).show();
-                            Numq.setText(String.valueOf(index)+"번째 감");
+                            Numq.setText(String.valueOf(index) + "번째 감");
                             blurgotoans.setVisibility(View.VISIBLE);
                             blurgotoans.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -464,6 +489,7 @@ public class QNA_Activity extends AppCompatActivity {
         Log.i("bin_check",""+a);
 //        Numq.setText(String.valueOf(index)+"번째 감");
 
+
         DatabaseReference referencesetanswer = FirebaseDatabase.getInstance().getReference();
         referencesetanswer.addValueEventListener(new ValueEventListener() {
             @Override
@@ -471,6 +497,7 @@ public class QNA_Activity extends AppCompatActivity {
 
                 uid_list = new ArrayList<>();
                 uid_list.clear();
+//                uid_list.add(0,"tafJnPCmnXSoVjK3F7sKHtRtpXv1");
 //                Iterator<DataSnapshot> membersData = dataSnapshot.child("groups").child(f_code).child("members").getChildren().iterator();
 //                while (membersData.hasNext()){
 //                    String user = membersData.next().getKey();
@@ -482,7 +509,7 @@ public class QNA_Activity extends AppCompatActivity {
 //                }
 
                 for (DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
-                    String user = membersData.getValue().toString();
+                    String user = membersData.getKey().toString();
                     uid_list.add(user);
                     Log.i("bin_user", user);
                 }
