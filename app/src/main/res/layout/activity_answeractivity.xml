@@ -7,83 +7,57 @@
     android:onClick="linearOnClick"
     tools:context="com.example.persimmon_tree_proj.QNA.Answeractivity">
 
-    <TextView
-        android:id="@+id/top_orange"
+    <View
+        android:id="@+id/view9"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/top_orange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/gam_text"
-        android:layout_width="59dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
-        android:src="@drawable/top_write2x"
-        android:scaleType="fitXY"
+        android:layout_height="200dp"
+        android:background="#F1F0F2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
-
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/txt_question2"
         android:layout_width="190dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_half_rounded"
-        android:fontFamily="@font/nanumsquare_acb"
-        android:gravity="center"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:fontFamily="@font/nanumgothicbold"
+        android:gravity="left"
         android:padding="5dp"
         android:text="질문"
-        android:textColor="#000"
-        android:textSize="18dp"
+        android:textColor="#817889"
+        android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_orange" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_answer"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_width="414dp"
+        android:layout_height="378dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_grey_rounded"
+        android:backgroundTint="#FFF2C0"
         android:ems="10"
+        android:fontFamily="@font/nanumgothicbold"
         android:gravity="start|top"
         android:hint="오늘의 감나무에 답변을 입력해달라감"
         android:inputType="textMultiLine"
-        android:fontFamily="@font/nanumsquare_acr"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_question2"
-        app:layout_constraintVertical_bias="0.231" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="93dp"
-        android:layout_height="75dp"
-        android:src="@drawable/gam1"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_answer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_question2"
-        app:layout_constraintTop_toBottomOf="@+id/top_orange" />
+        app:layout_constraintVertical_bias="0.396" />
 
     <Button
         android:id="@+id/btn_answer"
         android:layout_width="300dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="160dp"
         android:background="@drawable/btn_orange_rounded"
         android:fontFamily="@font/nanumsquare_acb"
         android:text="답변완료"
@@ -91,8 +65,116 @@
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/brightgray"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-28dp" />
+
+    <ImageButton
+        android:id="@+id/calendar_btn"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/calendar_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_btn"
+        app:layout_constraintStart_toEndOf="@+id/qna_btn" />
+
+    <ImageButton
+        android:id="@+id/main_btn"
+        android:layout_width="70dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="3dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_answer" />
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/to_do_btn"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/todo_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/game_btn"
+        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintStart_toEndOf="@+id/main_btn" />
+
+    <ImageButton
+        android:id="@+id/game_btn"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/game_menu_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2" />
+
+    <ImageButton
+        android:id="@+id/qna_btn"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/menu_qna_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="20dp"
+        android:text="from. 우리집 감나무"
+        android:textColor="#817889"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view9" />
+
+    <ImageButton
+        android:id="@+id/btn_gam_num"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
+        android:background="#F1F0F2"
+        android:src="@drawable/line_dungle"
+        android:textAlignment="center"
+        android:tint="#B9B3BD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view9" />
+
+    <!--ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_post"
+        tools:layout_editor_absoluteX="253dp"
+        tools:layout_editor_absoluteY="22dp" />
+        -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -192,7 +192,7 @@
         android:clickable="true"
         android:longClickable="true"
         android:onClick="Click"
-        android:src="@drawable/gam8"
+        android:src="@drawable/gam9"
         app:layout_constraintStart_toEndOf="@+id/gam8"
         app:layout_constraintTop_toBottomOf="@+id/gam6"
         app:layout_goneMarginTop="20dp" />

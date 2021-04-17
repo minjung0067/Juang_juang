@@ -27,6 +27,7 @@ public class profile_gam extends AppCompatActivity {
     private ImageView gam_6;
     private ImageView gam_7;
     private ImageView gam_8;
+    private ImageView gam_9;
     private String clicked_gam = "";
 
 
@@ -43,6 +44,7 @@ public class profile_gam extends AppCompatActivity {
         gam_6 = (ImageView) findViewById(R.id.gam6);
         gam_7 = (ImageView) findViewById(R.id.gam7);
         gam_8 = (ImageView) findViewById(R.id.gam8);
+        gam_9 = (ImageView) findViewById(R.id.gam9);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -109,6 +111,12 @@ public class profile_gam extends AppCompatActivity {
                 Click(gam_8);
             }
         });
+        gam_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Click(gam_9);
+            }
+        });
     }
 
     public void Reset(){
@@ -120,6 +128,8 @@ public class profile_gam extends AppCompatActivity {
         gam_6.setBackgroundResource(R.drawable.btn_drawable);
         gam_7.setBackgroundResource(R.drawable.btn_drawable);
         gam_8.setBackgroundResource(R.drawable.btn_drawable);
+        gam_9.setBackgroundResource(R.drawable.btn_drawable);
+
     }
 
     public void Click ( final View view){  //버튼 클릭시마다 switch문으로 다른 감 프로필 선택
@@ -163,6 +173,10 @@ public class profile_gam extends AppCompatActivity {
                     case R.id.gam8:
                         clicked_gam = "8";
                         gam_8.setBackgroundResource(R.drawable.btn_clicked);
+                        break;
+                    case R.id.gam9:
+                        clicked_gam = "9";
+                        gam_9.setBackgroundResource(R.drawable.btn_clicked);
                         break;
                 }
             }

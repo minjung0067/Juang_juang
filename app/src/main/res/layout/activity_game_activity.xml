@@ -140,7 +140,7 @@
 
     <ImageButton
         android:id="@+id/game_btn"
-        android:layout_width="30dp"
+        android:layout_width="70dp"
         android:layout_height="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
