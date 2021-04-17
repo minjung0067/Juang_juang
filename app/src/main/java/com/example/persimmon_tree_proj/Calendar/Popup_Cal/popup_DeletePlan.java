@@ -80,8 +80,8 @@ public class popup_DeletePlan extends Activity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("family");
-                reference.child(f_code).child("calendar").child(year).child(month).child(day).child(user_name).child(plan_id).removeValue();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("calendar");
+                reference.child(f_code).child(year).child(month).child(day).child(user_name).child(plan_id).removeValue();
                 Intent intent = new Intent(getApplicationContext(), ShareCalendarActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("f_code",f_code);
