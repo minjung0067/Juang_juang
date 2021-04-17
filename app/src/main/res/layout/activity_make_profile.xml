@@ -109,7 +109,7 @@
         android:singleLine="false"
         android:textColor="#000"
         android:textColorHint="#939393"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="parent"
