@@ -29,14 +29,14 @@
         android:padding="5dp"
         android:text="질문"
         android:textColor="#817889"
-        android:textSize="30dp"
+        android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_answer"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="414dp"
+        android:layout_height="378dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btn_grey_rounded"
         android:backgroundTint="#FFF2C0"
@@ -48,10 +48,10 @@
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_question2"
-        app:layout_constraintVertical_bias="0.231" />
+        app:layout_constraintVertical_bias="0.396" />
 
     <Button
         android:id="@+id/btn_answer"
@@ -154,12 +154,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view9" />
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/btn_gam_num"
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
+        android:background="#F1F0F2"
+        android:src="@drawable/line_dungle"
+        android:textAlignment="center"
+        android:tint="#B9B3BD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view9" />
+
+    <!--ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/img_post"
         tools:layout_editor_absoluteX="253dp"
         tools:layout_editor_absoluteY="22dp" />
+        -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
