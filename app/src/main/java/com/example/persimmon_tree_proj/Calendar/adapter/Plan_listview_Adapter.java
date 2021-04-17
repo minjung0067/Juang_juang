@@ -58,11 +58,9 @@ public class Plan_listview_Adapter extends BaseAdapter {
 
         // 아이템 내 각 위젯에 데이터 반영
         GradientDrawable gd = (GradientDrawable) color_icon.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
-        if((listViewItem.getNick_name().equals("")) == false){
+        if(!(listViewItem.getIcon().equals(""))&&!(listViewItem.getNick_name().equals(""))){
             //일정 있는 날
-            background.setImageDrawable(listViewItem.getbackground());
             gd.setColor(Color.parseColor(listViewItem.getIcon()));
-            gam.setImageDrawable((listViewItem.getUser_gam()));
             introTextView.setText(listViewItem.getNick_name());
             planTextView.setText(listViewItem.getPlan_name());
         }
@@ -77,6 +75,7 @@ public class Plan_listview_Adapter extends BaseAdapter {
                 planTextView.setTextSize(21);
             }
         }
+
 
         return convertView;
     }
