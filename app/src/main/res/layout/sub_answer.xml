@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
@@ -8,7 +10,7 @@
 
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="311dp"
         android:layout_height="115dp"
         android:layout_gravity="center_horizontal"
@@ -18,16 +20,21 @@
         android:padding="10dp">
 
 
-
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/profile_outline"
             android:clickable="true"
             android:padding="4dp"
+            android:layout_marginBottom="12dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/gam1" />
+            android:src="@drawable/gam1"
+            app:layout_constraintBottom_toTopOf="@+id/thinline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -36,20 +43,37 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumgothic"
             android:text="name"
-            android:textColor="#000"
-            android:textSize="15dp" />
+            android:textColor="#817889"
+            android:textSize="15dp"
+            android:layout_marginLeft="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+        <TextView
+            android:id="@+id/thinline"
+            android:layout_width="280dp"
+            android:layout_height="1dp"
+            android:background="#B9B3BD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/family_answer"
             android:layout_width="221dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center_vertical"
             android:layout_gravity="end"
+            android:fontFamily="@font/nanumgothic"
+            android:gravity="center_vertical"
             android:padding="4dp"
-            android:fontFamily="@font/nanumsquare_acr"
-            android:textSize="15dp" />
-    </LinearLayout>
+            android:textSize="17dp"
+            android:textColor="#817889"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/thinline"
+            app:layout_constraintTop_toBottomOf="@+id/thinline" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
