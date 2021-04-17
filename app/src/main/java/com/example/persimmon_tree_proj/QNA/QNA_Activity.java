@@ -230,9 +230,9 @@ public class QNA_Activity extends AppCompatActivity {
 
                     });
                 } else { //처음이 아니라면
-                    String c = count2;
-                    count = Integer.parseInt(c);                  //가족 수
-                    //count = 1;
+                    //String c = count2;
+                    ///count = Integer.parseInt(c);                  //가족 수
+                    count = 2;
 
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
                     if (String.valueOf(snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue())==null) {
@@ -240,15 +240,20 @@ public class QNA_Activity extends AppCompatActivity {
                     }
                     else{
                         String j = (String) snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue();
+                        Log.i("bin_error questionday", "our_q_size is" + our_q_arr.size());
                         questionday = Integer.parseInt(j); //제일 최근 질문에 올라간 날짜 담기
-                        Log.i("bin_error", "questionday is" + questionday);
+                        Log.i("bin_error questionday", "questionday is" + questionday);
                     }
                     Log.i("bin_error", "line 244 : " + didanswer + "that is did answer. our q arr is" + String.valueOf(our_q_arr.size()));
 
                     if ((didanswer - 1) == count && Integer.valueOf(everyToday) > questionday) { //모두가 답하고 24시간이 지남
                         Log.i("bin_check", "1번 if -> set answer, none blur");
-                        setanswer(index + 1);
+                        index = our_q_arr.size();
+                        Log.i("bin_index", String.valueOf(index));
+                        setanswer(index);
                         if (our_q_arr.size() != 0) {
+                            index = our_q_arr.size();
+                            index -=1;
                             textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         }
                         blurView.setVisibility(View.INVISIBLE);
@@ -461,7 +466,7 @@ public class QNA_Activity extends AppCompatActivity {
     private void setanswer(int a) {   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         Log.i("bin_error", "setanswer 들어옴");
         index = a;
-        Log.i("bin_check",""+a);
+        Log.i("bin_index in setanswer",""+a);
 //        Numq.setText(String.valueOf(index)+"번째 감");
 
 
@@ -483,7 +488,8 @@ public class QNA_Activity extends AppCompatActivity {
 //                    }
 //                }
 
-                for (DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
+                for(DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
+                    Log.i("bin_user membersData", String.valueOf(membersData));
                     String user = membersData.getKey().toString();
                     uid_list.add(user);
                     Log.i("bin_user", user);
