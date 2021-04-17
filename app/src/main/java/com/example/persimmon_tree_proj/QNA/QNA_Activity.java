@@ -449,22 +449,11 @@ public class QNA_Activity extends AppCompatActivity {
         Log.i("bin_index in setanswer",""+a);
 //        Numq.setText(String.valueOf(index)+"번째 감");
 
-
         referencesetanswer = FirebaseDatabase.getInstance().getReference();
-        referencesetanswer.addValueEventListener(new ValueEventListener() {
+        referencesetanswer.child("answer").child(f_code).child(String.valueOf(a)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-//                for(DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
-//                    Log.i("bin_membersData", "plzhere");
-//                    Log.i("bin_user membersData", String.valueOf(membersData));
-//                    String user = membersData.getValue().toString();
-//                    uid_list.add(user);
-//                    Log.i("bin_user", user);
-//                }
-
-
+                Log.i("bin_check","여기까지");
                     member_ans_arr.clear();
                     while (count > member_ans_arr.size()) {
                         for (int i = 0; i < count; i++) {

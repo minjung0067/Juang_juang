@@ -49,6 +49,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     String this_color = "";
     String this_gam = "";
     String this_introduce = "";
+    String this_uid = "";
 
     String user_gam = "";
     String user_color = "";
@@ -151,12 +153,13 @@ public class MainActivity extends AppCompatActivity {
                 member_arr.clear();
                 Log.i("bin_check",""+uid_list.size()+ "count"+count);
                 Log.i("bin_check","uid 복사 완료");
-                while(uid_list.size() != member_arr.size()) {
-                    for (int i = 0; i < snapshot.child("users").getChildrenCount(); i++) {
-                        if (uid_list.get(i) == snapshot.child("users").getValue(String.class)) {
-                            this_color = snapshot.child("users").child(uid_list.get(i)).child("user_color").getValue(String.class);
-                            this_gam = snapshot.child("users").child(uid_list.get(i)).child("user_gam").getValue(String.class);
-                            this_introduce = snapshot.child("users").child(uid_list.get(i)).child("introduce").getValue(String.class);
+                for(DataSnapshot who : snapshot.child("users").getChildren()) {
+                    for (int i = 0; i < uid_list.size() ; i++) {
+                        this_uid = who.getKey().toString();
+                        if (uid_list.get(i).equals(this_uid)) {
+                            this_color = snapshot.child("users").child(this_uid).child("user_color").getValue(String.class);
+                            this_gam = snapshot.child("users").child(this_uid).child("user_gam").getValue(String.class);
+                            this_introduce = snapshot.child("users").child(this_uid).child("introduce").getValue(String.class);
                             Log.i("bin_check", "" + i + "번째this_intro" + this_introduce);
                             Log.i("bin_check", "" + i + "this_gam" + this_gam);
                             Log.i("bin_check", "" + i + "this_Color" + this_color);
@@ -164,8 +167,7 @@ public class MainActivity extends AppCompatActivity {
                             member_gam_arr.add(i, this_gam);
                             member_arr.add(i, this_introduce);
                         }
-                    }
-                    if (count.equals(member_color_arr.size())) {
+                    }if (count.equals(member_color_arr.size())) {
                         Log.i("bin_check", "while문 에러 memeber ans arr size 확인" + member_color_arr.size());
                         break;
                     }
