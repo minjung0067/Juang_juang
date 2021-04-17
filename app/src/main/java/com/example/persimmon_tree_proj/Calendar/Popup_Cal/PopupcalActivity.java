@@ -64,6 +64,9 @@ public class PopupcalActivity extends Activity {
     private String user_name;
     private String plan_id;
     private String plan_name;
+    private String user_color;
+    private String gam;
+    private String user_introduce;
 
 
 
@@ -133,13 +136,92 @@ public class PopupcalActivity extends Activity {
                                 name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
                                 name_introduce_map.put(user_name, introduce);
                                 name_gam_map.put(user_name,user_gam);
+                                user_color = name_color_map.get(user_name);
+                                Log.i("hey11",user_color);
 
                             } else if (color_number.equals("")) {
                                 name_color_map.put(user_name, color_number); //민정:#121212 이런식으로 들어감, 파이썬의 dictionaryr같은 거
                                 name_introduce_map.put(user_name, "");
                                 name_gam_map.put(user_name,user_gam);
+
                             }
+                            user_color = name_color_map.get(user_name);
+                            gam = name_gam_map.get(user_name);
+                            user_introduce = name_introduce_map.get(user_name);
+                            listview = (SwipeMenuListView) findViewById(R.id.plan_vview);
+                            DatabaseReference referencee = FirebaseDatabase.getInstance().getReference("calendar");
+                            referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    //일정 아무것도 없으면
+                                    if (dataSnapshot.child(day).exists() == false) {
+                                        adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "","");
+                                        listview.setAdapter(adapterr);
+                                    }
+                                    referencee.child(f_code).child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
+                                                String user_name = data.getKey();
+                                                for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
+                                                    String plan_id = one_plan.getKey();
+                                                    Log.i("plan_id",plan_id);
+                                                    String plan_name = one_plan.child("plan_name").getValue().toString();
+                                                    Log.i("plan_name",plan_name);
+                                                    listview.setAdapter(adapterr);
+                                                    SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+                                                        @Override
+                                                        public void create(SwipeMenu menu) {
+                                                            Log.i("hey","hey3");
+                                                            // Create different menus depending on the view type
+                                                            createMenu1(menu);
+                                                        }
+                                                        private void createMenu1(SwipeMenu menu) {
+                                                            Log.i("hey","hey4");
+                                                            SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
+                                                            item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                                                            item1.setWidth((190));
+                                                            item1.setIcon(R.drawable.calendar_revise2x);
+                                                            menu.addMenuItem(item1);
+                                                            SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
+                                                            item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
+                                                            item2.setWidth(190);
+                                                            item2.setIcon(R.drawable.calendar_delete2x);
+                                                            menu.addMenuItem(item2);
+                                                        }
+                                                    };
+                                                    // set creator
+                                                    listview.setMenuCreator(creator);
+                                                    Log.i("hey","hey1");
+                                                    adapterr.addItem(user_color,gam,user_introduce, plan_name, user_name, plan_id);
+                                                    Log.i("hey","hey2");
+
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                            throw databaseError.toException();
+                                        }
+                                    });
+
+                                }
+
+
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    throw databaseError.toException();
+                                }
+                            });
+
                         }
+
+
+
+
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -147,71 +229,7 @@ public class PopupcalActivity extends Activity {
                         }
                     });
                 }
-                listview = (SwipeMenuListView) findViewById(R.id.plan_vview);
-                DatabaseReference referencee = FirebaseDatabase.getInstance().getReference("calendar");
-                referencee.child(f_code).child(year).child(month).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //일정 아무것도 없으면
-                        if (dataSnapshot.child(day).exists() == false) {
-                            adapterr.addItem("", "", "현재 등록된 일정이 없감..", "", "","");
-                            listview.setAdapter(adapterr);
-                        }
-                        reference.child(f_code).child(year).child(month).child(day).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot data : dataSnapshot.getChildren()) { //data는 사람 이름 각각
-                                    String user_name = data.getKey();
-                                    for (DataSnapshot one_plan : dataSnapshot.child(user_name).getChildren()) {
-                                        String plan_id = one_plan.getKey();
-                                        String plan_name = one_plan.child("plan_name").getValue().toString();
-                                        listview.setAdapter(adapterr);
-//                        GradientDrawable gd = (GradientDrawable) member_color.getBackground(); //앞에 뜨는 동그라미 부분 색깔 바꾸기
-//                        gd.setColor(Color.parseColor()); //해당 일정의 주인 색깔로 색깔 설정
-                                        SwipeMenuCreator creator = new SwipeMenuCreator() {
 
-                                            @Override
-                                            public void create(SwipeMenu menu) {
-                                                // Create different menus depending on the view type
-                                                createMenu1(menu);
-                                            }
-                                            private void createMenu1(SwipeMenu menu) {
-                                                SwipeMenuItem item1 = new SwipeMenuItem(getApplicationContext());
-                                                item1.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                                                item1.setWidth((190));
-                                                item1.setIcon(R.drawable.calendar_revise2x);
-                                                menu.addMenuItem(item1);
-                                                SwipeMenuItem item2 = new SwipeMenuItem(getApplicationContext());
-                                                item2.setBackground(new ColorDrawable(Color.rgb(255,255,255)));
-                                                item2.setWidth(190);
-                                                item2.setIcon(R.drawable.calendar_delete2x);
-                                                menu.addMenuItem(item2);
-                                            }
-                                        };
-                                        // set creator
-                                        listview.setMenuCreator(creator);
-                                        Log.i("hey","hey1");
-                                        adapterr.addItem(name_color_map.get(user_name), name_gam_map.get(user_name),name_introduce_map.get(user_name), plan_name, user_name, plan_id);
-                                        Log.i("hey","hey2");
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                throw databaseError.toException();
-                            }
-                        });
-
-                    }
-
-
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        throw databaseError.toException();
-                    }
-                });
 
 
 
@@ -222,6 +240,8 @@ public class PopupcalActivity extends Activity {
             }
         });
         //전체 user 가져오기
+
+
 
 
 
