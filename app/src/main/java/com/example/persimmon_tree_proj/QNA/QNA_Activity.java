@@ -105,6 +105,9 @@ public class QNA_Activity extends AppCompatActivity {
     private int qsize;
     private int que_cnt; //삭제 될 예쩡
     private String qu;
+    private DatabaseReference referencesetanswer;
+    private DatabaseReference referencescanfamily;
+
     String all_q_arr[] = {"가족의 도플갱어가 나타난다면 어떻게 구분 할 것인감?", "내일이 지구종말이라면?",
             "가족들의 이름을 바꿀 수 있는 능력이 생긴다면?", "나이를 실감할 때는 언제인감?", "미처 전하지 못했던 고마운 일이 있다면 살짝 털어놓아볼감?"
     };
@@ -144,11 +147,12 @@ public class QNA_Activity extends AppCompatActivity {
 //        all_q_arr.add(3,"나이를 실감할 때는 언제인감?");
 //        all_q_arr.add(4,"미처 전하지 못했던 고마운 일이 있다면 털어놓아보라감");
 
-
+        //DatabaseReference referencescanfamily = FirebaseDatabase.getInstance().getReference();
+        //DatabaseReference referencesetanswer = FirebaseDatabase.getInstance().getReference();
 
 //        all_q_arr = new ArrayList<>();
         our_q_arr = new ArrayList<>();
-
+        //uid_list = new ArrayList<>();
         Intent intent = getIntent();
         final String f_code = intent.getStringExtra("f_code");
         final String user_gam = intent.getStringExtra("user_gam");
@@ -157,6 +161,11 @@ public class QNA_Activity extends AppCompatActivity {
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
         final String count2 = intent.getStringExtra("count");
+        ArrayList<String> uid_list = (ArrayList<String>) intent.getSerializableExtra("uid_list");
+        ArrayList<String> member_gam_arr = (ArrayList<String>) intent.getSerializableExtra("member_gam_arr");
+        ArrayList<String> member_arr = (ArrayList<String>) intent.getSerializableExtra("member_arr");
+        ArrayList<String> member_color_arr = (ArrayList<String>) intent.getSerializableExtra("member_color_arr");
+
 
         a_Reference = a_Database.getReference();
         a_Reference.child("answer").child(f_code).addValueEventListener(new ValueEventListener() {
@@ -362,23 +371,6 @@ public class QNA_Activity extends AppCompatActivity {
 
 
 
-/*
-        //Answeractivity로 이동
-        goanswer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(QNA_Activity.this,Answeractivity.class);
-                intent.putExtra("question",all_q_arr.get(index)); //선택한 question을 갖고 감.
-                intent.putExtra("position",String.valueOf(index+1)); //선택한 position값을 갖고 감.
-                intent.putExtra("f_code",f_code);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(0, 0); //intent시 효과 없애기
-            }
-        });
-                */
-
         //질문 리스트로 넘어가는 창
         TextView questionList = (TextView) findViewById(R.id.txt_question);
         questionList.setOnClickListener(new View.OnClickListener() {
@@ -430,18 +422,6 @@ public class QNA_Activity extends AppCompatActivity {
             }
         });
 
-//        //고객의 소리함
-//        ImageButton go_setting = (ImageButton) findViewById(R.id.setting_btn);
-//        go_setting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(QNA_Activity.this, customer_sound.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.putExtra("f_code",f_code);
-//                startActivity(intent);
-//                overridePendingTransition(0, 0); //intent시 효과 없애기
-//            }
-//        });
 
     }
 
@@ -470,56 +450,21 @@ public class QNA_Activity extends AppCompatActivity {
 //        Numq.setText(String.valueOf(index)+"번째 감");
 
 
-        DatabaseReference referencesetanswer = FirebaseDatabase.getInstance().getReference();
+        referencesetanswer = FirebaseDatabase.getInstance().getReference();
         referencesetanswer.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                uid_list = new ArrayList<>();
-                uid_list.clear();
-//                uid_list.add(0,"tafJnPCmnXSoVjK3F7sKHtRtpXv1");
-//                Iterator<DataSnapshot> membersData = dataSnapshot.child("groups").child(f_code).child("members").getChildren().iterator();
-//                while (membersData.hasNext()){
-//                    String user = membersData.next().getKey();
+
+//                for(DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
+//                    Log.i("bin_membersData", "plzhere");
+//                    Log.i("bin_user membersData", String.valueOf(membersData));
+//                    String user = membersData.getValue().toString();
 //                    uid_list.add(user);
-//                    Log.i("bin_users", user);
-//                    if(uid_list.size()==count){
-//                        break;
-//                    }
+//                    Log.i("bin_user", user);
 //                }
 
-                for(DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
-                    Log.i("bin_user membersData", String.valueOf(membersData));
-                    String user = membersData.getKey().toString();
-                    uid_list.add(user);
-                    Log.i("bin_user", user);
-                }
 
-
-                member_color_arr.clear();
-                member_gam_arr.clear();
-                member_arr.clear();
-                Log.i("bin_check",""+uid_list.size()+ "count"+count);
-                Log.i("bin_check","uid 복사 완료");
-                while(uid_list.size() != member_arr.size()) {
-                    for (int i = 0; i < dataSnapshot.child("users").getChildrenCount(); i++) {
-                        if (uid_list.get(i) == dataSnapshot.child("users").getValue(String.class)) {
-                            this_color = dataSnapshot.child("users").child(uid_list.get(i)).child("user_color").getValue(String.class);
-                            this_gam = dataSnapshot.child("users").child(uid_list.get(i)).child("user_gam").getValue(String.class);
-                            this_introduce = dataSnapshot.child("users").child(uid_list.get(i)).child("introduce").getValue(String.class);
-                            Log.i("bin_check", "" + i + "번째this_intro" + this_introduce);
-                            Log.i("bin_check", "" + i + "this_gam" + this_gam);
-                            Log.i("bin_check", "" + i + "this_Color" + this_color);
-                            member_color_arr.add(i, this_color);
-                            member_gam_arr.add(i, this_gam);
-                            member_arr.add(i, this_introduce);
-                        }
-                    }
-                    if (count == member_ans_arr.size()) {
-                        Log.i("bin_check", "while문 에러 memeber ans arr size 확인" + member_ans_arr.size());
-                        break;
-                    }
-                }
                     member_ans_arr.clear();
                     while (count > member_ans_arr.size()) {
                         for (int i = 0; i < count; i++) {
@@ -585,6 +530,32 @@ public class QNA_Activity extends AppCompatActivity {
         //전체 user 가져오기
     }
 
+    public void scanfamiliy(){
+        Log.i("bin_scan","scanfamiliy 들어옴");
+//        referencescanfamily = FirebaseDatabase.getInstance().getReference();
+//        referencescanfamily.child("groups").child(f_code).child("members").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                uid_list.clear();
+//                for(DataSnapshot membersData : snapshot.getChildren()) {
+//                    Log.i("bin_membersData", "plzhere");
+//                    Log.i("bin_user membersData", String.valueOf(membersData));
+//                    String user = membersData.getValue().toString();
+//                    String user1 = membersData.getKey().toString();
+//                    uid_list.add(user);
+//                    Log.i("bin_user", user);
+//                    Log.i("bin_user 1 ", user1);
+//                }
+//
+//            }
+//
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+    }
 
     private void initDatabase() {
         mDatabase = FirebaseDatabase.getInstance();

@@ -75,11 +75,21 @@ public class MainActivity extends AppCompatActivity {
     };
     private Handler mHandler = new Handler(); //1초후 작동 같은 지연 함수
     private Runnable mMyTask;
+    ArrayList<String> uid_list = new ArrayList<String>();
+    ArrayList<String> member_arr = new ArrayList<String>();
+    ArrayList<String> member_color_arr = new ArrayList<String>();
+    ArrayList<String> member_gam_arr = new ArrayList<String>();
 
+    String this_color = "";
+    String this_gam = "";
+    String this_introduce = "";
+
+    String user_gam = "";
+    String user_color = "";
     // Frame 단위로 이미지를 바꿔서 그려주는 Drawable 객체
     AnimationDrawable ani;
     private ActionBarDrawerToggle toggle;
-
+    private DatabaseReference referencescanfamily;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +131,57 @@ public class MainActivity extends AppCompatActivity {
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
         final String count = intent.getStringExtra("count");
+
+
+
+        referencescanfamily = FirebaseDatabase.getInstance().getReference();
+        referencescanfamily.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                uid_list.clear();
+                for(DataSnapshot membersData : snapshot.child("groups").child(f_code).child("members").getChildren()) {
+                    Log.i("bin_membersData", "plzhere");
+                    Log.i("bin_user membersData", String.valueOf(membersData));
+                    String user1 = membersData.getKey().toString();
+                    uid_list.add(user1);
+                    Log.i("bin_user 1 ", user1);
+                }
+                member_color_arr.clear();
+                member_gam_arr.clear();
+                member_arr.clear();
+                Log.i("bin_check",""+uid_list.size()+ "count"+count);
+                Log.i("bin_check","uid 복사 완료");
+                while(uid_list.size() != member_arr.size()) {
+                    for (int i = 0; i < snapshot.child("users").getChildrenCount(); i++) {
+                        if (uid_list.get(i) == snapshot.child("users").getValue(String.class)) {
+                            this_color = snapshot.child("users").child(uid_list.get(i)).child("user_color").getValue(String.class);
+                            this_gam = snapshot.child("users").child(uid_list.get(i)).child("user_gam").getValue(String.class);
+                            this_introduce = snapshot.child("users").child(uid_list.get(i)).child("introduce").getValue(String.class);
+                            Log.i("bin_check", "" + i + "번째this_intro" + this_introduce);
+                            Log.i("bin_check", "" + i + "this_gam" + this_gam);
+                            Log.i("bin_check", "" + i + "this_Color" + this_color);
+                            member_color_arr.add(i, this_color);
+                            member_gam_arr.add(i, this_gam);
+                            member_arr.add(i, this_introduce);
+                        }
+                    }
+                    if (count.equals(member_color_arr.size())) {
+                        Log.i("bin_check", "while문 에러 memeber ans arr size 확인" + member_color_arr.size());
+                        break;
+                    }
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
 
         //part 2 - 가족이름, 사용자 이름, 감 프로필 띄우기
@@ -303,6 +364,10 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("user_name", user_name);
                 intent.putExtra("user_gam", user_gam);
                 intent.putExtra("count", count);
+                intent.putStringArrayListExtra("uid_list",uid_list);
+                intent.putStringArrayListExtra("member_arr",member_arr);
+                intent.putStringArrayListExtra("member_color_arr",member_color_arr);
+                intent.putStringArrayListExtra("member_gam_arr",member_gam_arr);
                 startActivity(intent);
                 overridePendingTransition(0, 0); //intent시 효과 없애기
                 finish();
