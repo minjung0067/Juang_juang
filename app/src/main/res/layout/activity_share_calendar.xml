@@ -260,7 +260,7 @@
         android:layout_marginBottom="15dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        android:src="@drawable/calendar_menu_btn"
+        android:src="@drawable/menu_calendar_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/main_btn"
         app:layout_constraintStart_toEndOf="@+id/qna_btn" />
