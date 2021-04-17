@@ -83,6 +83,8 @@ public class QNA_Activity extends AppCompatActivity {
     String this_color = "";
     String this_gam = "";
     String this_introduce = "";
+    String this_ans = "";
+    String this_uid = "";
 
     String user_gam = "";
     String user_color = "";
@@ -130,7 +132,7 @@ public class QNA_Activity extends AppCompatActivity {
         TextView showblur = (TextView) findViewById(R.id.txt_blur);
         ImageButton blurgotoans = (ImageButton) findViewById(R.id.blur_gotoans);
         ImageButton newmessage = (ImageButton) findViewById(R.id.newmessagecome);
-        TextView Numq = (TextView) findViewById(R.id.tv_questionnum);
+        Numq = (TextView) findViewById(R.id.tv_questionnum);
 
         SimpleDateFormat formatH; // formatH = 0-23으로 표현하는 시각 포맷 변수 선언
         formatH = new SimpleDateFormat("yyyyMMdd"); //formatH에 현재 시간 넣어줌 대소문자 중요함
@@ -147,7 +149,6 @@ public class QNA_Activity extends AppCompatActivity {
 //        all_q_arr.add(3,"나이를 실감할 때는 언제인감?");
 //        all_q_arr.add(4,"미처 전하지 못했던 고마운 일이 있다면 털어놓아보라감");
 
-        //DatabaseReference referencescanfamily = FirebaseDatabase.getInstance().getReference();
         //DatabaseReference referencesetanswer = FirebaseDatabase.getInstance().getReference();
 
 //        all_q_arr = new ArrayList<>();
@@ -161,10 +162,10 @@ public class QNA_Activity extends AppCompatActivity {
         final String family_name = intent.getStringExtra("family_name");
         final String introduce = intent.getStringExtra("introduce");
         final String count2 = intent.getStringExtra("count");
-        ArrayList<String> uid_list = (ArrayList<String>) intent.getSerializableExtra("uid_list");
-        ArrayList<String> member_gam_arr = (ArrayList<String>) intent.getSerializableExtra("member_gam_arr");
-        ArrayList<String> member_arr = (ArrayList<String>) intent.getSerializableExtra("member_arr");
-        ArrayList<String> member_color_arr = (ArrayList<String>) intent.getSerializableExtra("member_color_arr");
+        uid_list = (ArrayList<String>) intent.getSerializableExtra("uid_list");
+        member_gam_arr = (ArrayList<String>) intent.getSerializableExtra("member_gam_arr");
+        member_arr = (ArrayList<String>) intent.getSerializableExtra("member_arr");
+        member_color_arr = (ArrayList<String>) intent.getSerializableExtra("member_color_arr");
 
 
         a_Reference = a_Database.getReference();
@@ -239,9 +240,9 @@ public class QNA_Activity extends AppCompatActivity {
 
                     });
                 } else { //처음이 아니라면
-                    //String c = count2;
-                    ///count = Integer.parseInt(c);                  //가족 수
-                    count = 2;
+                    String c = count2;
+                    count = Integer.valueOf(c);                  //가족 수
+                    //count = 2;
 
                     didanswer = (int) snapshot.child(String.valueOf(our_q_arr.size())).getChildrenCount();             //didanswer 변수에 답한 멤버 수 담기
                     if (String.valueOf(snapshot.child(String.valueOf(our_q_arr.size())).child("Date").getValue())==null) {
@@ -259,7 +260,7 @@ public class QNA_Activity extends AppCompatActivity {
                         Log.i("bin_check", "1번 if -> set answer, none blur");
                         index = our_q_arr.size();
                         Log.i("bin_index", String.valueOf(index));
-                        setanswer(index);
+                        setanswer(index ,f_code);
                         if (our_q_arr.size() != 0) {
                             index = our_q_arr.size();
                             index -=1;
@@ -302,8 +303,10 @@ public class QNA_Activity extends AppCompatActivity {
 
                     } else if ((didanswer - 1) == count && Integer.valueOf(everyToday) <= questionday) {
                         Log.i("bin_check", "2번 else if 24시간 안지남 setanswer + nothing. index = " + index);
-                        setanswer(index + 1);
+                        setanswer(index + 1,f_code);
                         if (our_q_arr.size() != 0) {
+                            index = our_q_arr.size();
+                            index -=1;
                             textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         }
                         blurView.setVisibility(View.INVISIBLE);
@@ -315,6 +318,8 @@ public class QNA_Activity extends AppCompatActivity {
                         blurView.setVisibility(View.VISIBLE);       //블러 처리 시킴
                         showblur.setVisibility(View.VISIBLE);       //우리 가족이 웅앵 글씨 보이게
                         if (our_q_arr.size() != 0) {
+                            index = our_q_arr.size();
+                            index -=1;
                             textView.setText(our_q_arr.get(index)); //main화면에서 글씨 창 보이기
                         }
                         Numq.setText(String.valueOf(index + 1) + "번째 감");
@@ -443,84 +448,70 @@ public class QNA_Activity extends AppCompatActivity {
 //        });
     }
 
-    private void setanswer(int a) {   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
+    private void setanswer(int a, String b) {   //spinner에서 선택한 질문에 대한 사용쟈의 답 동적으로 생성
         Log.i("bin_error", "setanswer 들어옴");
         index = a;
-        Log.i("bin_index in setanswer",""+a);
-//        Numq.setText(String.valueOf(index)+"번째 감");
-
+        f_code = b;
+        String index1 = String.valueOf(index);
+        String howgam = index1 + "번째 감";
+        Log.i("bin_index uid_list",""+index1);
+        Log.i("bin_index member",""+howgam);
+        Numq.setText(howgam);
 
         referencesetanswer = FirebaseDatabase.getInstance().getReference();
-        referencesetanswer.addValueEventListener(new ValueEventListener() {
+        referencesetanswer.child("answer").child(f_code).child(String.valueOf(index)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-//                for(DataSnapshot membersData : dataSnapshot.child("groups").child(f_code).child("members").getChildren()) {
-//                    Log.i("bin_membersData", "plzhere");
-//                    Log.i("bin_user membersData", String.valueOf(membersData));
-//                    String user = membersData.getValue().toString();
-//                    uid_list.add(user);
-//                    Log.i("bin_user", user);
-//                }
-
-
-                    member_ans_arr.clear();
-                    while (count > member_ans_arr.size()) {
-                        for (int i = 0; i < count; i++) {
-                            Iterator<DataSnapshot> whoans = dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).getChildren().iterator();
-                            if (uid_list.get(i) == whoans.next().getKey()) {
-                                member_ans_arr.add(i, String.valueOf(dataSnapshot.child("answer").child(f_code).child(String.valueOf(a)).child(uid_list.get(i)).getValue()));
-                            }
-                        }
-                        Log.i("bin_check", "memeber ans arr size 확인" + member_ans_arr.size());
-                        if (count == member_ans_arr.size()) {
-                            Log.i("bin_check", "while문 에러 memeber ans arr size 확인" + member_ans_arr.size());
-                            break;
-                        }
-                    }
-
-                    int now_size = member_arr.size();
-
-                    //저장해 준 것들 하나씩 꺼내서 대답 표시
-                    //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
-                    container.removeAllViewsInLayout();
-                    for (int i = 0; i < count; i++) {
-                        sub_answer n_layout1 = new sub_answer(getApplicationContext());
-                        TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
-                        name.setText(member_arr.get(i).toString());//동적 layout 생성
-                        ImageView iv = n_layout1.findViewById(R.id.profile_image);
-                        TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
-                        iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
-                        GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
-                        gd1.setStroke(50, Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
-                        if (member_gam_arr.get(i).equals("1")) {
-                            iv.setImageResource(R.drawable.gam1);
-                        } else if (member_gam_arr.get(i).equals("2")) {
-                            iv.setImageResource(R.drawable.gam2);
-                        } else if (member_gam_arr.get(i).equals("3")) {
-                            iv.setImageResource(R.drawable.gam3);
-                        } else if (member_gam_arr.get(i).equals("4")) {
-                            iv.setImageResource(R.drawable.gam4);
-                        } else if (member_gam_arr.get(i).equals("5")) {
-                            iv.setImageResource(R.drawable.gam5);
-                        } else if (member_gam_arr.get(i).equals("6")) {
-                            iv.setImageResource(R.drawable.gam6);
-                        } else if (member_gam_arr.get(i).equals("7")) {
-                            iv.setImageResource(R.drawable.gam7);
-                        } else if (member_gam_arr.get(i).equals("8")) {
-                            iv.setImageResource(R.drawable.gam8);
-                        } else {
-                            iv.setImageResource(R.drawable.gam1);
-                        }
-                        if (member_ans_arr.get(i) == null) { //아직 대답 안된 부분 처리
-                            family_answers.setTextColor(Color.parseColor("#808080"));
-                        }
-                        family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
-                        container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
-                    }
+                Log.i("bin_check", "여기까지");
+                member_ans_arr.clear();
+                for (int i = 0; i < count; i++) {
+                    this_uid = uid_list.get(i);
+                    this_ans = dataSnapshot.child(this_uid).getValue(String.class);
+                    Log.i("bin_check this ans", this_ans);
+                    member_ans_arr.add(i, this_ans);
                 }
+                Log.i("bin_check", "memeber ans arr size 확인" + member_ans_arr.size());
 
+                int now_size = member_arr.size();
+
+                //저장해 준 것들 하나씩 꺼내서 대답 표시
+                //현재 묶여있는 구성원 수만큼 동적으로 layout 생성
+                container.removeAllViewsInLayout();
+                for (int i = 0; i < count; i++) {
+                    sub_answer n_layout1 = new sub_answer(getApplicationContext());
+                    TextView name = n_layout1.findViewById(R.id.tv_name); //각자의 이름
+                    name.setText(member_arr.get(i).toString());//동적 layout 생성
+                    ImageView iv = n_layout1.findViewById(R.id.profile_image);
+                    TextView family_answers = n_layout1.findViewById(R.id.family_answer);  //각각 ID 찾아서
+                    iv.setBackgroundResource(R.drawable.profile_outline); //테두리 drawable
+                    GradientDrawable gd1 = (GradientDrawable) iv.getBackground(); //동적으로 테두리 색 바꿈
+                    gd1.setStroke(50, Color.parseColor(member_color_arr.get(i))); //배열에 담긴 색깔로 테두리 설정
+                    if (member_gam_arr.get(i).equals("1")) {
+                        iv.setImageResource(R.drawable.gam1);
+                    } else if (member_gam_arr.get(i).equals("2")) {
+                        iv.setImageResource(R.drawable.gam2);
+                    } else if (member_gam_arr.get(i).equals("3")) {
+                        iv.setImageResource(R.drawable.gam3);
+                    } else if (member_gam_arr.get(i).equals("4")) {
+                        iv.setImageResource(R.drawable.gam4);
+                    } else if (member_gam_arr.get(i).equals("5")) {
+                        iv.setImageResource(R.drawable.gam5);
+                    } else if (member_gam_arr.get(i).equals("6")) {
+                        iv.setImageResource(R.drawable.gam6);
+                    } else if (member_gam_arr.get(i).equals("7")) {
+                        iv.setImageResource(R.drawable.gam7);
+                    } else if (member_gam_arr.get(i).equals("8")) {
+                        iv.setImageResource(R.drawable.gam8);
+                    } else {
+                        iv.setImageResource(R.drawable.gam1);
+                    }
+                    if (member_ans_arr.get(i) == null) { //아직 대답 안된 부분 처리
+                        family_answers.setTextColor(Color.parseColor("#808080"));
+                    }
+                    family_answers.setText(member_ans_arr.get(i));   //소개 띄우는 부분
+                    container.addView(n_layout1); // 기존 layout에 방금 동적으로 생성한 n_layout추가
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -530,32 +521,6 @@ public class QNA_Activity extends AppCompatActivity {
         //전체 user 가져오기
     }
 
-    public void scanfamiliy(){
-        Log.i("bin_scan","scanfamiliy 들어옴");
-//        referencescanfamily = FirebaseDatabase.getInstance().getReference();
-//        referencescanfamily.child("groups").child(f_code).child("members").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                uid_list.clear();
-//                for(DataSnapshot membersData : snapshot.getChildren()) {
-//                    Log.i("bin_membersData", "plzhere");
-//                    Log.i("bin_user membersData", String.valueOf(membersData));
-//                    String user = membersData.getValue().toString();
-//                    String user1 = membersData.getKey().toString();
-//                    uid_list.add(user);
-//                    Log.i("bin_user", user);
-//                    Log.i("bin_user 1 ", user1);
-//                }
-//
-//            }
-//
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-    }
 
     private void initDatabase() {
         mDatabase = FirebaseDatabase.getInstance();
